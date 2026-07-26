@@ -30,7 +30,7 @@ jobs:
         with:
           card: stats
           options: >-
-            username=${{ github.repository_owner }}&custom_title=GitHub%20Activity&show_icons=true&hide_rank=true&hide=stars,contribs&show=reviews,prs_merged,prs_merged_percentage&include_all_commits=true&number_format=long&card_width=760&line_height=27&disable_animations=true&hide_border=true&border_radius=12&title_color=24292f&text_color=57606a&icon_color=0969da&bg_color=ffffff&locale=en
+            username=${{ github.repository_owner }}&custom_title=GitHub%20Activity&show_icons=true&hide_rank=true&hide=stars,contribs&show=reviews,prs_merged&include_all_commits=true&number_format=long&card_width=520&line_height=27&disable_animations=true&hide_border=true&border_radius=12&title_color=24292f&text_color=57606a&icon_color=0969da&bg_color=ffffff&locale=en
           path: assets/github-stats-v2-light.svg
           token: ${{ secrets.GITHUB_TOKEN }}
           fail_on_error: true
@@ -40,7 +40,7 @@ jobs:
         with:
           card: stats
           options: >-
-            username=${{ github.repository_owner }}&custom_title=GitHub%20Activity&show_icons=true&hide_rank=true&hide=stars,contribs&show=reviews,prs_merged,prs_merged_percentage&include_all_commits=true&number_format=long&card_width=760&line_height=27&disable_animations=true&hide_border=true&border_radius=12&title_color=f0f6fc&text_color=8b949e&icon_color=58a6ff&bg_color=0d1117&locale=en
+            username=${{ github.repository_owner }}&custom_title=GitHub%20Activity&show_icons=true&hide_rank=true&hide=stars,contribs&show=reviews,prs_merged&include_all_commits=true&number_format=long&card_width=520&line_height=27&disable_animations=true&hide_border=true&border_radius=12&title_color=f0f6fc&text_color=8b949e&icon_color=58a6ff&bg_color=0d1117&locale=en
           path: assets/github-stats-v2-dark.svg
           token: ${{ secrets.GITHUB_TOKEN }}
           fail_on_error: true
