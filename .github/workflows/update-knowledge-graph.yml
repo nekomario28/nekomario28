@@ -1,4 +1,4 @@
-name: Update knowledge graph preview
+name: Update project knowledge graph
 
 on:
   push:
@@ -6,6 +6,9 @@ on:
     paths:
       - ".github/workflows/update-knowledge-graph.yml"
       - "scripts/generate_knowledge_graph.py"
+      - "docs/index.html"
+      - "docs/graph.js"
+      - "docs/styles.css"
   schedule:
     - cron: "41 1,13 * * *"
   workflow_dispatch:
@@ -14,7 +17,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: knowledge-graph-preview
+  group: project-knowledge-graph
   cancel-in-progress: false
 
 jobs:
@@ -26,34 +29,27 @@ jobs:
       - name: Check out profile repository
         uses: actions/checkout@v6
 
-      - name: Check out Civitas documentation
-        uses: actions/checkout@v6
-        with:
-          repository: nekomario28/civitas
-          path: civitas-source
-
-      - name: Generate graph previews
+      - name: Generate project graph data and previews
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python scripts/generate_knowledge_graph.py \
-            civitas-source/docs/KNOWLEDGE_GRAPH.md \
-            assets/knowledge-graph-light.svg \
-            --theme light
-          python scripts/generate_knowledge_graph.py \
-            civitas-source/docs/KNOWLEDGE_GRAPH.md \
-            assets/knowledge-graph-dark.svg \
-            --theme dark
+            --username nekomario28 \
+            --json docs/graph-data.json \
+            --light assets/knowledge-graph-light.svg \
+            --dark assets/knowledge-graph-dark.svg
 
-      - name: Commit updated preview
+      - name: Commit updated graph
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/knowledge-graph-light.svg assets/knowledge-graph-dark.svg
+          git add docs/graph-data.json assets/knowledge-graph-light.svg assets/knowledge-graph-dark.svg
 
           if git diff --cached --quiet; then
-            echo "Knowledge graph preview is already up to date."
+            echo "Project graph is already up to date."
             exit 0
           fi
 
-          git commit -m "update graph preview"
+          git commit -m "update project graph"
           git push
