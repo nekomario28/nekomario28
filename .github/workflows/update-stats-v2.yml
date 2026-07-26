@@ -1,0 +1,74 @@
+name: Test redesigned profile statistics
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/update-stats-v2.yml"
+  schedule:
+    - cron: "23 0,12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-statistics-v2
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out profile repository
+        uses: actions/checkout@v6
+
+      - name: Generate light statistics candidate
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: stats
+          options: >-
+            username=${{ github.repository_owner }}&custom_title=GitHub%20Activity&show_icons=true&hide_rank=true&hide=stars,contribs&show=reviews,prs_merged,prs_merged_percentage&include_all_commits=true&number_format=long&card_width=760&line_height=27&disable_animations=true&hide_border=true&border_radius=12&title_color=24292f&text_color=57606a&icon_color=0969da&bg_color=ffffff&locale=en
+          path: assets/github-stats-v2-light.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_error: true
+
+      - name: Generate dark statistics candidate
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: stats
+          options: >-
+            username=${{ github.repository_owner }}&custom_title=GitHub%20Activity&show_icons=true&hide_rank=true&hide=stars,contribs&show=reviews,prs_merged,prs_merged_percentage&include_all_commits=true&number_format=long&card_width=760&line_height=27&disable_animations=true&hide_border=true&border_radius=12&title_color=f0f6fc&text_color=8b949e&icon_color=58a6ff&bg_color=0d1117&locale=en
+          path: assets/github-stats-v2-dark.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_error: true
+
+      - name: Validate generated SVG files
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in assets/github-stats-v2-light.svg assets/github-stats-v2-dark.svg; do
+            test -s "$file"
+            grep -q '<svg' "$file"
+            if grep -qi 'Something went wrong' "$file"; then
+              echo "Generated error card: $file" >&2
+              exit 1
+            fi
+          done
+
+      - name: Commit candidate cards
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/github-stats-v2-light.svg assets/github-stats-v2-dark.svg
+
+          if git diff --cached --quiet; then
+            echo "Candidate statistics are already up to date."
+            exit 0
+          fi
+
+          git commit -m "update stats v2 candidate"
+          git push
