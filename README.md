@@ -10,9 +10,9 @@
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/github-stats-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="assets/github-stats-light.svg">
-    <img width="760" src="assets/github-stats-light.svg" alt="GitHub statistics">
+    <source media="(prefers-color-scheme: dark)" srcset="assets/github-stats-v2-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="assets/github-stats-v2-light.svg">
+    <img width="520" src="assets/github-stats-v2-light.svg" alt="GitHub activity statistics">
   </picture>
 </p>
 
@@ -31,8 +31,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/nekomario28/nekomario28/actions/workflows/update-stats.yml">
-    <img alt="Statistics update status" src="https://github.com/nekomario28/nekomario28/actions/workflows/update-stats.yml/badge.svg">
+  <a href="https://github.com/nekomario28/nekomario28/actions/workflows/update-stats-v2.yml">
+    <img alt="Statistics update status" src="https://github.com/nekomario28/nekomario28/actions/workflows/update-stats-v2.yml/badge.svg">
   </a>
   <a href="https://github.com/nekomario28/nekomario28/actions/workflows/update-knowledge-graph.yml">
     <img alt="Project graph update status" src="https://github.com/nekomario28/nekomario28/actions/workflows/update-knowledge-graph.yml/badge.svg">
