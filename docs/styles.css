@@ -7,10 +7,12 @@
   --muted: #57606a;
   --border: #d0d7de;
   --shadow: 0 10px 32px rgba(31, 35, 40, 0.12);
-  --owner: #0969da;
+  --owner: #54aeff;
+  --group: #0969da;
   --repository: #2da44e;
   --language: #8250df;
   --topic: #bf8700;
+  --relation: #bc4c00;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,9 +25,11 @@
     --border: #30363d;
     --shadow: 0 10px 32px rgba(0, 0, 0, 0.35);
     --owner: #58a6ff;
+    --group: #1f6feb;
     --repository: #3fb950;
     --language: #a371f7;
     --topic: #d29922;
+    --relation: #f0883e;
   }
 }
 
@@ -228,9 +232,16 @@ button:hover,
 }
 
 .legend .owner { background: var(--owner); }
+.legend .group { background: var(--group); }
 .legend .repository { background: var(--repository); }
 .legend .language { background: var(--language); }
 .legend .topic { background: var(--topic); }
+.legend .relation {
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--relation);
+}
 
 .status {
   position: absolute;
