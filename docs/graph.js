@@ -37,9 +37,11 @@ function palette() {
     return {
       background: "#0d1117",
       edge: "#484f58",
+      relation: "#f0883e",
       text: "#f0f6fc",
       muted: "#8b949e",
       owner: "#58a6ff",
+      group: "#1f6feb",
       repository: "#3fb950",
       fork: "#6e7681",
       language: "#a371f7",
@@ -50,9 +52,11 @@ function palette() {
   return {
     background: "#f6f8fa",
     edge: "#afb8c1",
+    relation: "#bc4c00",
     text: "#24292f",
     muted: "#57606a",
-    owner: "#0969da",
+    owner: "#54aeff",
+    group: "#0969da",
     repository: "#2da44e",
     fork: "#8c959f",
     language: "#8250df",
@@ -72,6 +76,7 @@ function hash(value) {
 
 function nodeRadius(node) {
   if (node.type === "owner") return 28;
+  if (node.type === "group") return 19;
   if (node.type === "repository") return 12 + Math.min(5, Number(node.stars || 0));
   if (node.type === "language") return 9;
   return 7;
@@ -79,6 +84,7 @@ function nodeRadius(node) {
 
 function nodeColor(node, colors) {
   if (node.type === "owner") return colors.owner;
+  if (node.type === "group") return colors.group;
   if (node.type === "repository") return node.fork ? colors.fork : colors.repository;
   if (node.type === "language") return colors.language;
   return colors.topic;
@@ -110,16 +116,17 @@ function screenToWorld(x, y) {
 }
 
 function initializeGraph(data) {
-  const countByType = { owner: 0, repository: 0, language: 0, topic: 0 };
+  const countByType = { owner: 0, group: 0, repository: 0, language: 0, topic: 0 };
 
   state.nodes = data.nodes.map((raw) => {
     const typeIndex = countByType[raw.type] || 0;
     countByType[raw.type] = typeIndex + 1;
     const seed = hash(raw.id);
     let radius = 0;
-    if (raw.type === "repository") radius = 170;
-    if (raw.type === "language") radius = 300;
-    if (raw.type === "topic") radius = 420;
+    if (raw.type === "group") radius = 115;
+    if (raw.type === "repository") radius = 235;
+    if (raw.type === "language") radius = 365;
+    if (raw.type === "topic") radius = 470;
     const angle = ((seed % 3600) / 3600) * Math.PI * 2 + typeIndex * 0.19;
 
     return {
@@ -145,6 +152,20 @@ function initializeGraph(data) {
   resetView();
   state.alpha = 1;
   requestAnimationFrame(tick);
+}
+
+function linkPhysics(link) {
+  if (link.type === "owns") return { preferred: 230, strength: 0.008 };
+  if (link.type === "contains") return { preferred: 110, strength: 0.025 };
+  if (link.type === "member") return { preferred: 145, strength: 0.03 };
+  if (link.type === "language" || link.type === "topic") {
+    return { preferred: 135, strength: 0.018 };
+  }
+  return { preferred: 105, strength: 0.036 };
+}
+
+function isStructuralLink(link) {
+  return ["owns", "contains", "member", "language", "topic"].includes(link.type);
 }
 
 function applyForces() {
@@ -184,9 +205,8 @@ function applyForces() {
     const dx = link.target.x - link.source.x;
     const dy = link.target.y - link.source.y;
     const distance = Math.max(1, Math.hypot(dx, dy));
-    const preferred = link.type === "owns" ? 180 : 125;
-    const strength = link.type === "owns" ? 0.012 : 0.02;
-    const amount = (distance - preferred) * strength * alpha;
+    const physics = linkPhysics(link);
+    const amount = (distance - physics.preferred) * physics.strength * alpha;
     const forceX = (dx / distance) * amount;
     const forceY = (dy / distance) * amount;
     if (!link.source.fixed && state.dragging !== link.source) {
@@ -236,14 +256,15 @@ function draw() {
   context.fillStyle = colors.background;
   context.fillRect(0, 0, state.width, state.height);
 
-  context.lineWidth = 1;
   for (const link of state.links) {
     const source = worldToScreen(link.source.x, link.source.y);
     const target = worldToScreen(link.target.x, link.target.y);
-    let opacity = 0.34;
-    if (state.selected && (link.source === state.selected || link.target === state.selected)) opacity = 0.95;
+    const structural = isStructuralLink(link);
+    let opacity = structural ? 0.3 : 0.72;
+    if (state.selected && (link.source === state.selected || link.target === state.selected)) opacity = 0.98;
     if (state.query && !(matchesQuery(link.source) || matchesQuery(link.target))) opacity = 0.08;
-    context.strokeStyle = colorWithAlpha(colors.edge, opacity);
+    context.lineWidth = structural ? 1 : 2.2;
+    context.strokeStyle = colorWithAlpha(structural ? colors.edge : colors.relation, opacity);
     context.beginPath();
     context.moveTo(source.x, source.y);
     context.lineTo(target.x, target.y);
@@ -271,6 +292,7 @@ function draw() {
 
     const showLabel =
       node.type === "owner" ||
+      node.type === "group" ||
       node.type === "repository" ||
       node === state.selected ||
       node === state.hovered ||
@@ -278,7 +300,8 @@ function draw() {
 
     if (showLabel) {
       context.globalAlpha = opacity;
-      context.font = `${node.type === "owner" ? 600 : 500} ${node.type === "owner" ? 13 : 11}px -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif`;
+      const emphasized = node.type === "owner" || node.type === "group";
+      context.font = `${emphasized ? 600 : 500} ${node.type === "owner" ? 13 : 11}px -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif`;
       context.textAlign = "center";
       context.textBaseline = "top";
       context.fillStyle = colors.text;
@@ -342,6 +365,7 @@ function selectNode(node) {
   if (node.language) rows.push(["Language", node.language]);
   if (node.topics && node.topics.length) rows.push(["Topics", node.topics.join(", ")]);
   if (node.type === "repository") rows.push(["Stars", String(node.stars || 0)]);
+  if (node.type === "group") rows.push(["Projects", String(node.repositoryCount || 0)]);
   if (node.fork) rows.push(["Repository", "Fork"]);
   if (node.archived) rows.push(["Status", "Archived"]);
 
@@ -367,13 +391,14 @@ function selectNode(node) {
 
 function descriptionForType(type) {
   if (type === "owner") return "GitHub account at the center of the public project graph.";
+  if (type === "group") return "A curated group of related public projects.";
   if (type === "language") return "Primary language shared by connected repositories.";
   if (type === "topic") return "GitHub topic shared by connected repositories.";
   return "Public GitHub repository.";
 }
 
 function resetView() {
-  state.scale = Math.min(1, Math.max(0.62, Math.min(state.width / 980, state.height / 720)));
+  state.scale = Math.min(1, Math.max(0.58, Math.min(state.width / 1050, state.height / 780)));
   state.offsetX = 0;
   state.offsetY = 0;
   state.alpha = Math.max(state.alpha, 0.45);
