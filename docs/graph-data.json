@@ -1,8 +1,8 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-07-26T17:26:15.725784+00:00",
+  "generatedAt": "2026-07-26T17:26:31.483542+00:00",
   "repositoryCount": 10,
-  "groupCount": 0,
+  "groupCount": 1,
   "nodes": [
     {
       "id": "user:nekomario28",
@@ -24,6 +24,13 @@
       "id": "language:Rich Text Format",
       "label": "Rich Text Format",
       "type": "language"
+    },
+    {
+      "id": "group:minecraft-neoforge",
+      "label": "Minecraft / NeoForge",
+      "type": "group",
+      "description": "Minecraft mods and supporting projects in the NeoForge and related mod ecosystem.",
+      "repositoryCount": 7
     },
     {
       "id": "repository:civitas",
@@ -159,6 +166,46 @@
   "links": [
     {
       "source": "user:nekomario28",
+      "target": "group:minecraft-neoforge",
+      "type": "contains"
+    },
+    {
+      "source": "group:minecraft-neoforge",
+      "target": "repository:civitas",
+      "type": "member"
+    },
+    {
+      "source": "group:minecraft-neoforge",
+      "target": "repository:civitas-residents",
+      "type": "member"
+    },
+    {
+      "source": "group:minecraft-neoforge",
+      "target": "repository:workers",
+      "type": "member"
+    },
+    {
+      "source": "group:minecraft-neoforge",
+      "target": "repository:recruits",
+      "type": "member"
+    },
+    {
+      "source": "group:minecraft-neoforge",
+      "target": "repository:BuyClaimChunks",
+      "type": "member"
+    },
+    {
+      "source": "group:minecraft-neoforge",
+      "target": "repository:AntiFullbright",
+      "type": "member"
+    },
+    {
+      "source": "group:minecraft-neoforge",
+      "target": "repository:OffHandCombat",
+      "type": "member"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "repository:civitas",
       "type": "owns"
     },
@@ -236,6 +283,12 @@
       "source": "repository:turing-smart-screen-python-owl",
       "target": "language:Rich Text Format",
       "type": "language"
+    },
+    {
+      "source": "repository:civitas",
+      "target": "repository:civitas-residents",
+      "type": "uses-backend",
+      "label": "uses resident backend"
     }
   ]
 }
