@@ -33,7 +33,7 @@ jobs:
           show-border: false
           hide-keys: general, languages, private
           category-order: repositories, contributions
-          locale: ja
+          locale: en
           commit-and-push: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -47,7 +47,7 @@ jobs:
           show-border: false
           hide-keys: general, languages, private
           category-order: repositories, contributions
-          locale: ja
+          locale: en
           commit-and-push: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
