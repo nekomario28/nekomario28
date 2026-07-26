@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "groups": [
+    {
+      "id": "minecraft-neoforge",
+      "label": "Minecraft / NeoForge",
+      "description": "Minecraft mods and supporting projects in the NeoForge and related mod ecosystem.",
+      "repositories": [
+        "civitas",
+        "civitas-residents",
+        "workers",
+        "recruits",
+        "BuyClaimChunks",
+        "AntiFullbright",
+        "OffHandCombat"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "source": "civitas",
+      "target": "civitas-residents",
+      "type": "uses-backend",
+      "label": "uses resident backend"
+    }
+  ]
+}
