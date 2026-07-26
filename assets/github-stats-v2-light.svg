@@ -1,15 +1,15 @@
 
       <svg
-        width="760"
-        height="234"
-        viewBox="0 0 760 234"
+        width="520"
+        height="207"
+        viewBox="0 0 520 207"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         role="img"
         aria-labelledby="descId"
       >
         <title id="titleId">GitHub Activity, Rank: B-</title>
-        <desc id="descId">Total Commits  : 59, Total PRs: 136, Total PRs Merged: 8, Merged PRs Percentage: 5.88, Total PRs Reviewed: 1, Total Issues: 6</desc>
+        <desc id="descId">Total Commits  : 60, Total PRs: 136, Total PRs Merged: 8, Total PRs Reviewed: 1, Total Issues: 6</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -73,7 +73,7 @@
         stroke-dashoffset: 251.32741228718345;
       }
       to {
-        stroke-dashoffset: 176.28323179300068;
+        stroke-dashoffset: 176.25537040205162;
       }
     }
   
@@ -110,7 +110,7 @@
           rx="12"
           height="99%"
           stroke="#e4e2e2"
-          width="759"
+          width="519"
           fill="#ffffff"
           stroke-opacity="0"
         />
@@ -148,10 +148,10 @@
       <text class="stat  bold" x="25" y="12.5">Total Commits:</text>
       <text
         class="stat  bold"
-        x="224.01"
+        x="174.01"
         y="12.5"
         data-testid="commits"
-      >59</text>
+      >60</text>
     </g>
   </g><g transform="translate(0, 27)">
     <g class="stagger" style="animation-delay: 600ms" transform="translate(25, 0)">
@@ -163,7 +163,7 @@
       <text class="stat  bold" x="25" y="12.5">Total PRs:</text>
       <text
         class="stat  bold"
-        x="224.01"
+        x="174.01"
         y="12.5"
         data-testid="prs"
       >136</text>
@@ -178,7 +178,7 @@
       <text class="stat  bold" x="25" y="12.5">Total PRs Merged:</text>
       <text
         class="stat  bold"
-        x="224.01"
+        x="174.01"
         y="12.5"
         data-testid="prs_merged"
       >8</text>
@@ -187,34 +187,19 @@
     <g class="stagger" style="animation-delay: 900ms" transform="translate(25, 0)">
       
     <svg data-testid="icon" class="icon" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-      <path fill-rule="evenodd" d="M13.442 2.558a.625.625 0 0 1 0 .884l-10 10a.625.625 0 1 1-.884-.884l10-10a.625.625 0 0 1 .884 0zM4.5 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm7 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-    </svg>
-  
-      <text class="stat  bold" x="25" y="12.5">Merged PRs Percentage:</text>
-      <text
-        class="stat  bold"
-        x="224.01"
-        y="12.5"
-        data-testid="prs_merged_percentage"
-      >5.88 %</text>
-    </g>
-  </g><g transform="translate(0, 108)">
-    <g class="stagger" style="animation-delay: 1050ms" transform="translate(25, 0)">
-      
-    <svg data-testid="icon" class="icon" viewBox="0 0 16 16" version="1.1" width="16" height="16">
       <path fill-rule="evenodd" d="M8 2c1.981 0 3.671.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.671-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2ZM1.679 7.932a.12.12 0 0 0 0 .136c.411.622 1.241 1.75 2.366 2.717C5.176 11.758 6.527 12.5 8 12.5c1.473 0 2.825-.742 3.955-1.715 1.124-.967 1.954-2.096 2.366-2.717a.12.12 0 0 0 0-.136c-.412-.621-1.242-1.75-2.366-2.717C10.824 4.242 9.473 3.5 8 3.5c-1.473 0-2.825.742-3.955 1.715-1.124.967-1.954 2.096-2.366 2.717ZM8 10a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 10Z"/>
     </svg>
   
       <text class="stat  bold" x="25" y="12.5">Total PRs Reviewed:</text>
       <text
         class="stat  bold"
-        x="224.01"
+        x="174.01"
         y="12.5"
         data-testid="reviews"
       >1</text>
     </g>
-  </g><g transform="translate(0, 135)">
-    <g class="stagger" style="animation-delay: 1200ms" transform="translate(25, 0)">
+  </g><g transform="translate(0, 108)">
+    <g class="stagger" style="animation-delay: 1050ms" transform="translate(25, 0)">
       
     <svg data-testid="icon" class="icon" viewBox="0 0 16 16" version="1.1" width="16" height="16">
       <path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm9 3a1 1 0 11-2 0 1 1 0 012 0zm-.25-6.25a.75.75 0 00-1.5 0v3.5a.75.75 0 001.5 0v-3.5z"/>
@@ -223,7 +208,7 @@
       <text class="stat  bold" x="25" y="12.5">Total Issues:</text>
       <text
         class="stat  bold"
-        x="224.01"
+        x="174.01"
         y="12.5"
         data-testid="issues"
       >6</text>
