@@ -3,8 +3,9 @@
 </p>
 
 <p align="center">
-  大学でコンピュータサイエンスを学びながら、<br>
-  <strong>Minecraft Mod</strong>と<strong>ロボティクス</strong>を触っています。
+  <a href="https://konosuba.com/bakuen/character/">
+    <img src="https://konosuba.com/bakuen/character/img/megmin-2.png" width="260" alt="めぐみん">
+  </a>
 </p>
 
 <p align="center">
@@ -12,8 +13,9 @@
   <code>ROS 2</code> <code>Docker</code> <code>Linux</code>
 </p>
 
-> **最近：** NeoForge と ROS 2 を行き来しています。  
-> 気になったものをまず小さく動かして、挙動を確かめながら直していくのが好きです。
+<p align="center">
+  <sub>Character visual: ©2023 暁なつめ・三嶋くろね／KADOKAWA／このすば爆焔製作委員会</sub>
+</p>
 
 ## GitHub の記録
 
