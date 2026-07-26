@@ -1,0 +1,59 @@
+name: Update knowledge graph preview
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/update-knowledge-graph.yml"
+      - "scripts/generate_knowledge_graph.py"
+  schedule:
+    - cron: "41 1,13 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: knowledge-graph-preview
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out profile repository
+        uses: actions/checkout@v6
+
+      - name: Check out Civitas documentation
+        uses: actions/checkout@v6
+        with:
+          repository: nekomario28/civitas
+          path: civitas-source
+
+      - name: Generate graph previews
+        run: |
+          python scripts/generate_knowledge_graph.py \
+            civitas-source/docs/KNOWLEDGE_GRAPH.md \
+            assets/knowledge-graph-light.svg \
+            --theme light
+          python scripts/generate_knowledge_graph.py \
+            civitas-source/docs/KNOWLEDGE_GRAPH.md \
+            assets/knowledge-graph-dark.svg \
+            --theme dark
+
+      - name: Commit updated preview
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/knowledge-graph-light.svg assets/knowledge-graph-dark.svg
+
+          if git diff --cached --quiet; then
+            echo "Knowledge graph preview is already up to date."
+            exit 0
+          fi
+
+          git commit -m "update graph preview"
+          git push
