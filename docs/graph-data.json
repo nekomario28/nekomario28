@@ -1,0 +1,240 @@
+{
+  "owner": "nekomario28",
+  "generatedAt": "2026-07-26T16:07:49.444082+00:00",
+  "repositoryCount": 10,
+  "nodes": [
+    {
+      "id": "user:nekomario28",
+      "label": "nekomario28",
+      "type": "owner",
+      "url": "https://github.com/nekomario28"
+    },
+    {
+      "id": "language:Java",
+      "label": "Java",
+      "type": "language"
+    },
+    {
+      "id": "language:Python",
+      "label": "Python",
+      "type": "language"
+    },
+    {
+      "id": "language:Rich Text Format",
+      "label": "Rich Text Format",
+      "type": "language"
+    },
+    {
+      "id": "repository:civitas",
+      "label": "civitas",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/civitas",
+      "description": "",
+      "language": "Java",
+      "topics": [],
+      "stars": 0,
+      "fork": false,
+      "archived": false,
+      "updatedAt": "2026-07-26T15:37:32Z"
+    },
+    {
+      "id": "repository:ProjExD_Group10",
+      "label": "ProjExD_Group10",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/ProjExD_Group10",
+      "description": "",
+      "language": "Python",
+      "topics": [],
+      "stars": 1,
+      "fork": false,
+      "archived": false,
+      "updatedAt": "2026-07-26T09:55:48Z"
+    },
+    {
+      "id": "repository:OffHandCombat",
+      "label": "OffHandCombat",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/OffHandCombat",
+      "description": "Allows for double handed fighting styles without breaking the combat\"",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-07-26T05:18:26Z"
+    },
+    {
+      "id": "repository:BuyClaimChunks",
+      "label": "BuyClaimChunks",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/BuyClaimChunks",
+      "description": "",
+      "language": "Java",
+      "topics": [],
+      "stars": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-07-25T17:02:21Z"
+    },
+    {
+      "id": "repository:civitas-residents",
+      "label": "civitas-residents",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/civitas-residents",
+      "description": "",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "fork": false,
+      "archived": false,
+      "updatedAt": "2026-07-24T05:44:33Z"
+    },
+    {
+      "id": "repository:workers",
+      "label": "workers",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/workers",
+      "description": "Mod for Minecraft that adds Villager Workers",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-07-23T14:58:52Z"
+    },
+    {
+      "id": "repository:AntiFullbright",
+      "label": "AntiFullbright",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/AntiFullbright",
+      "description": "Server-side NeoForge mod that detects prolonged mining in complete darkness",
+      "language": "Java",
+      "topics": [],
+      "stars": 0,
+      "fork": false,
+      "archived": false,
+      "updatedAt": "2026-07-23T12:02:17Z"
+    },
+    {
+      "id": "repository:recruits",
+      "label": "recruits",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/recruits",
+      "description": "recruiting villagers",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-07-23T06:30:32Z"
+    },
+    {
+      "id": "repository:lime_tidyup",
+      "label": "lime_tidyup",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/lime_tidyup",
+      "description": "LimeSimulDemoのfork. 音声認識から行き先を指定、画像認識からルービックキューブの角度を取得、掴む。",
+      "language": "Python",
+      "topics": [],
+      "stars": 2,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-07-08T08:23:54Z"
+    },
+    {
+      "id": "repository:turing-smart-screen-python-owl",
+      "label": "turing-smart-screen-python-owl",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/turing-smart-screen-python-owl",
+      "description": "Unofficial Python system monitor and library for small IPS USB-C displays like Turing Smart Screen / TURZX",
+      "language": "Rich Text Format",
+      "topics": [],
+      "stars": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-07-02T08:31:30Z"
+    }
+  ],
+  "links": [
+    {
+      "source": "user:nekomario28",
+      "target": "repository:civitas",
+      "type": "owns"
+    },
+    {
+      "source": "repository:civitas",
+      "target": "language:Java",
+      "type": "language"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:ProjExD_Group10",
+      "type": "owns"
+    },
+    {
+      "source": "repository:ProjExD_Group10",
+      "target": "language:Python",
+      "type": "language"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:OffHandCombat",
+      "type": "owns"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:BuyClaimChunks",
+      "type": "owns"
+    },
+    {
+      "source": "repository:BuyClaimChunks",
+      "target": "language:Java",
+      "type": "language"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:civitas-residents",
+      "type": "owns"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:workers",
+      "type": "owns"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:AntiFullbright",
+      "type": "owns"
+    },
+    {
+      "source": "repository:AntiFullbright",
+      "target": "language:Java",
+      "type": "language"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:recruits",
+      "type": "owns"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:lime_tidyup",
+      "type": "owns"
+    },
+    {
+      "source": "repository:lime_tidyup",
+      "target": "language:Python",
+      "type": "language"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:turing-smart-screen-python-owl",
+      "type": "owns"
+    },
+    {
+      "source": "repository:turing-smart-screen-python-owl",
+      "target": "language:Rich Text Format",
+      "type": "language"
+    }
+  ]
+}
