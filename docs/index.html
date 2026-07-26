@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Interactive knowledge graph of nekomario28's public GitHub projects.">
+  <title>Project Knowledge Graph — nekomario28</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="toolbar">
+      <div>
+        <h1>Project Knowledge Graph</h1>
+        <p>Public repositories, languages and topics</p>
+      </div>
+      <div class="controls">
+        <label class="search">
+          <span>Search</span>
+          <input id="search" type="search" placeholder="Repository, language or topic" autocomplete="off">
+        </label>
+        <button id="reset" type="button">Reset view</button>
+      </div>
+    </header>
+
+    <section class="workspace" aria-label="Interactive project graph">
+      <canvas id="graph" aria-label="Interactive graph of public GitHub projects"></canvas>
+
+      <aside id="details" class="details" aria-live="polite">
+        <h2 id="details-title">Select a node</h2>
+        <p id="details-description">Drag nodes, use the mouse wheel to zoom, and drag the background to pan.</p>
+        <dl id="details-meta" hidden></dl>
+        <a id="details-link" class="open-link" href="#" target="_blank" rel="noopener" hidden>Open on GitHub</a>
+      </aside>
+
+      <div class="legend" aria-label="Graph legend">
+        <span><i class="owner"></i>Owner</span>
+        <span><i class="repository"></i>Repository</span>
+        <span><i class="language"></i>Language</span>
+        <span><i class="topic"></i>Topic</span>
+      </div>
+
+      <div id="status" class="status">Loading graph…</div>
+    </section>
+
+    <footer>
+      <a href="https://github.com/nekomario28" target="_blank" rel="noopener">github.com/nekomario28</a>
+      <span>Only public repositories are included.</span>
+    </footer>
+  </main>
+
+  <script src="graph.js" defer></script>
+</body>
+</html>
