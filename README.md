@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://times.abema.tv/articles/-/10077311">
-    <img src="https://times-abema.ismcdn.jp/mwimgs/2/b/724w/img_2be3df3882b25421296a46a0a85027c690225.jpg" width="700" alt="めぐみん">
+  <a href="https://konosuba.com/bakuen/story/?mode=story4">
+    <img src="https://konosuba.com/bakuen/story/img/pdsfi4/05.jpg" width="700" alt="めぐみん">
   </a>
 </p>
 
