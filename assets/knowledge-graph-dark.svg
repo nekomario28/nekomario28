@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 470" role="img" aria-label="Civitas knowledge graph preview">
+  <rect x="1" y="1" width="758" height="468" rx="12" fill="#0d1117" stroke="#30363d"/>
+  <text x="380" y="210" text-anchor="middle" fill="#f0f6fc" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="20">Knowledge Graph</text>
+  <text x="380" y="250" text-anchor="middle" fill="#8b949e" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="13">The preview is being generated from Civitas documentation.</text>
+</svg>
