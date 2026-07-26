@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/update-knowledge-graph.yml"
+      - "config/project-relations.json"
       - "scripts/generate_knowledge_graph.py"
       - "docs/index.html"
       - "docs/graph.js"
@@ -35,6 +36,7 @@ jobs:
         run: |
           python scripts/generate_knowledge_graph.py \
             --username nekomario28 \
+            --relations config/project-relations.json \
             --json docs/graph-data.json \
             --light assets/knowledge-graph-light.svg \
             --dark assets/knowledge-graph-dark.svg
