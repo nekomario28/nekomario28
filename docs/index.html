@@ -13,12 +13,12 @@
     <header class="toolbar">
       <div>
         <h1>Project Knowledge Graph</h1>
-        <p>Public repositories, languages and topics</p>
+        <p>Public repositories, curated groups, languages and topics</p>
       </div>
       <div class="controls">
         <label class="search">
           <span>Search</span>
-          <input id="search" type="search" placeholder="Repository, language or topic" autocomplete="off">
+          <input id="search" type="search" placeholder="Project, group, language or topic" autocomplete="off">
         </label>
         <button id="reset" type="button">Reset view</button>
       </div>
@@ -36,9 +36,11 @@
 
       <div class="legend" aria-label="Graph legend">
         <span><i class="owner"></i>Owner</span>
+        <span><i class="group"></i>Project group</span>
         <span><i class="repository"></i>Repository</span>
         <span><i class="language"></i>Language</span>
         <span><i class="topic"></i>Topic</span>
+        <span><i class="relation"></i>Verified relation</span>
       </div>
 
       <div id="status" class="status">Loading graph…</div>
@@ -46,7 +48,7 @@
 
     <footer>
       <a href="https://github.com/nekomario28" target="_blank" rel="noopener">github.com/nekomario28</a>
-      <span>Only public repositories are included.</span>
+      <span>Only public repositories and manually verified relations are included.</span>
     </footer>
   </main>
 
