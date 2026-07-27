@@ -1,7 +1,7 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-07-27T05:29:45.275487+00:00",
-  "repositoryCount": 10,
+  "generatedAt": "2026-07-27T16:01:50.347868+00:00",
+  "repositoryCount": 11,
   "groupCount": 1,
   "nodes": [
     {
@@ -31,6 +31,32 @@
       "type": "group",
       "description": "Minecraft mods and supporting projects in the NeoForge and related mod ecosystem.",
       "repositoryCount": 7
+    },
+    {
+      "id": "repository:workers",
+      "label": "workers",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/workers",
+      "description": "Mod for Minecraft that adds Villager Workers",
+      "language": "Java",
+      "topics": [],
+      "stars": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-07-27T15:17:34Z"
+    },
+    {
+      "id": "repository:sable",
+      "label": "sable",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/sable",
+      "description": "Interactive physics moving block structures!",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-07-27T06:28:06Z"
     },
     {
       "id": "repository:civitas",
@@ -96,19 +122,6 @@
       "fork": false,
       "archived": false,
       "updatedAt": "2026-07-24T05:44:33Z"
-    },
-    {
-      "id": "repository:workers",
-      "label": "workers",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/workers",
-      "description": "Mod for Minecraft that adds Villager Workers",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "fork": true,
-      "archived": false,
-      "updatedAt": "2026-07-23T14:58:52Z"
     },
     {
       "id": "repository:AntiFullbright",
@@ -206,6 +219,21 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "repository:workers",
+      "type": "owns"
+    },
+    {
+      "source": "repository:workers",
+      "target": "language:Java",
+      "type": "language"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:sable",
+      "type": "owns"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "repository:civitas",
       "type": "owns"
     },
@@ -242,11 +270,6 @@
     {
       "source": "user:nekomario28",
       "target": "repository:civitas-residents",
-      "type": "owns"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:workers",
       "type": "owns"
     },
     {
