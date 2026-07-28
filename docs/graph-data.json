@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-07-27T16:01:50.347868+00:00",
+  "generatedAt": "2026-07-28T04:47:03.302429+00:00",
   "repositoryCount": 11,
   "groupCount": 1,
   "nodes": [
@@ -33,6 +33,19 @@
       "repositoryCount": 7
     },
     {
+      "id": "repository:recruits",
+      "label": "recruits",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/recruits",
+      "description": "recruiting villagers",
+      "language": "Java",
+      "topics": [],
+      "stars": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-07-27T17:42:00Z"
+    },
+    {
       "id": "repository:workers",
       "label": "workers",
       "type": "repository",
@@ -43,7 +56,7 @@
       "stars": 0,
       "fork": true,
       "archived": false,
-      "updatedAt": "2026-07-27T15:17:34Z"
+      "updatedAt": "2026-07-27T17:40:06Z"
     },
     {
       "id": "repository:sable",
@@ -137,19 +150,6 @@
       "updatedAt": "2026-07-23T12:02:17Z"
     },
     {
-      "id": "repository:recruits",
-      "label": "recruits",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/recruits",
-      "description": "recruiting villagers",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "fork": true,
-      "archived": false,
-      "updatedAt": "2026-07-23T06:30:32Z"
-    },
-    {
       "id": "repository:lime_tidyup",
       "label": "lime_tidyup",
       "type": "repository",
@@ -219,6 +219,16 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "repository:recruits",
+      "type": "owns"
+    },
+    {
+      "source": "repository:recruits",
+      "target": "language:Java",
+      "type": "language"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "repository:workers",
       "type": "owns"
     },
@@ -281,11 +291,6 @@
       "source": "repository:AntiFullbright",
       "target": "language:Java",
       "type": "language"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:recruits",
-      "type": "owns"
     },
     {
       "source": "user:nekomario28",
