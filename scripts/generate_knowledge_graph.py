@@ -313,6 +313,40 @@ def preview_positions(
             values[0] = max(15 + half_width, min(width - 15 - half_width, values[0]))
             values[1] = max(70 + half_height, min(height - 78 - half_height, values[1]))
 
+    # Finish with collision-only passes so anchor attraction cannot reintroduce overlap.
+    for _ in range(80):
+        identifiers = list(mutable)
+        moved = False
+        for first in range(len(identifiers)):
+            first_id = identifiers[first]
+            ax, ay, a_node = mutable[first_id]
+            a_width = node_width(str(a_node["label"]), str(a_node.get("type")))
+            a_height = 42 if a_node.get("type") == "group" else 36
+            for second in range(first + 1, len(identifiers)):
+                second_id = identifiers[second]
+                bx, by, b_node = mutable[second_id]
+                b_width = node_width(str(b_node["label"]), str(b_node.get("type")))
+                b_height = 42 if b_node.get("type") == "group" else 36
+                dx, dy = bx - ax, by - ay
+                overlap_x = (a_width + b_width) / 2 + 10 - abs(dx)
+                overlap_y = (a_height + b_height) / 2 + 10 - abs(dy)
+                if overlap_x <= 0 or overlap_y <= 0:
+                    continue
+                moved = True
+                if overlap_x < overlap_y:
+                    direction = 1 if dx >= 0 else -1
+                    push = overlap_x / 2 + 0.05
+                    mutable[first_id][0] -= direction * push
+                    mutable[second_id][0] += direction * push
+                else:
+                    direction = 1 if dy >= 0 else -1
+                    push = overlap_y / 2 + 0.05
+                    mutable[first_id][1] -= direction * push
+                    mutable[second_id][1] += direction * push
+                ax, ay = mutable[first_id][0], mutable[first_id][1]
+        if not moved:
+            break
+
     return {
         node_id: (values[0], values[1], values[2])
         for node_id, values in mutable.items()
