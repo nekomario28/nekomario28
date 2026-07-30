@@ -1,7 +1,7 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-07-29T15:33:07.657614+00:00",
-  "repositoryCount": 11,
+  "generatedAt": "2026-07-30T04:39:52.063442+00:00",
+  "repositoryCount": 9,
   "groupCount": 1,
   "nodes": [
     {
@@ -35,7 +35,22 @@
       "label": "Minecraft / NeoForge",
       "type": "group",
       "description": "Minecraft mods and supporting projects in the NeoForge and related mod ecosystem.",
-      "repositoryCount": 7
+      "repositoryCount": 5
+    },
+    {
+      "id": "repository:OffHandCombat",
+      "label": "OffHandCombat",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/OffHandCombat",
+      "description": "Allows for double handed fighting styles without breaking the combat\"",
+      "language": "Java",
+      "topics": [
+        "minecraft"
+      ],
+      "stars": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-07-29T20:18:29Z"
     },
     {
       "id": "repository:sable",
@@ -83,21 +98,6 @@
       "updatedAt": "2026-07-28T14:05:51Z"
     },
     {
-      "id": "repository:OffHandCombat",
-      "label": "OffHandCombat",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/OffHandCombat",
-      "description": "Allows for double handed fighting styles without breaking the combat\"",
-      "language": null,
-      "topics": [
-        "minecraft"
-      ],
-      "stars": 0,
-      "fork": true,
-      "archived": false,
-      "updatedAt": "2026-07-28T14:05:44Z"
-    },
-    {
       "id": "repository:recruits",
       "label": "recruits",
       "type": "repository",
@@ -111,36 +111,6 @@
       "fork": true,
       "archived": false,
       "updatedAt": "2026-07-28T14:05:34Z"
-    },
-    {
-      "id": "repository:civitas-residents",
-      "label": "civitas-residents",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/civitas-residents",
-      "description": "",
-      "language": null,
-      "topics": [
-        "minecraft"
-      ],
-      "stars": 0,
-      "fork": false,
-      "archived": false,
-      "updatedAt": "2026-07-28T14:03:53Z"
-    },
-    {
-      "id": "repository:civitas",
-      "label": "civitas",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/civitas",
-      "description": "",
-      "language": "Java",
-      "topics": [
-        "minecraft"
-      ],
-      "stars": 0,
-      "fork": false,
-      "archived": false,
-      "updatedAt": "2026-07-28T14:03:41Z"
     },
     {
       "id": "repository:ProjExD_Group10",
@@ -203,16 +173,6 @@
     },
     {
       "source": "group:minecraft-neoforge",
-      "target": "repository:civitas",
-      "type": "member"
-    },
-    {
-      "source": "group:minecraft-neoforge",
-      "target": "repository:civitas-residents",
-      "type": "member"
-    },
-    {
-      "source": "group:minecraft-neoforge",
       "target": "repository:workers",
       "type": "member"
     },
@@ -235,6 +195,21 @@
       "source": "group:minecraft-neoforge",
       "target": "repository:OffHandCombat",
       "type": "member"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:OffHandCombat",
+      "type": "owns"
+    },
+    {
+      "source": "repository:OffHandCombat",
+      "target": "language:Java",
+      "type": "language"
+    },
+    {
+      "source": "repository:OffHandCombat",
+      "target": "topic:minecraft",
+      "type": "topic"
     },
     {
       "source": "user:nekomario28",
@@ -278,16 +253,6 @@
     },
     {
       "source": "user:nekomario28",
-      "target": "repository:OffHandCombat",
-      "type": "owns"
-    },
-    {
-      "source": "repository:OffHandCombat",
-      "target": "topic:minecraft",
-      "type": "topic"
-    },
-    {
-      "source": "user:nekomario28",
       "target": "repository:recruits",
       "type": "owns"
     },
@@ -298,31 +263,6 @@
     },
     {
       "source": "repository:recruits",
-      "target": "topic:minecraft",
-      "type": "topic"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:civitas-residents",
-      "type": "owns"
-    },
-    {
-      "source": "repository:civitas-residents",
-      "target": "topic:minecraft",
-      "type": "topic"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:civitas",
-      "type": "owns"
-    },
-    {
-      "source": "repository:civitas",
-      "target": "language:Java",
-      "type": "language"
-    },
-    {
-      "source": "repository:civitas",
       "target": "topic:minecraft",
       "type": "topic"
     },
@@ -365,12 +305,6 @@
       "source": "repository:turing-smart-screen-python-owl",
       "target": "language:Rich Text Format",
       "type": "language"
-    },
-    {
-      "source": "repository:civitas",
-      "target": "repository:civitas-residents",
-      "type": "uses-backend",
-      "label": "uses resident backend"
     }
   ]
 }
