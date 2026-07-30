@@ -30,7 +30,7 @@ const state = {
 };
 
 const media = window.matchMedia("(prefers-color-scheme: dark)");
-media.addEventListener("change", () => draw());
+media.addEventListener("change", draw);
 
 function palette() {
   if (media.matches) {
@@ -39,13 +39,10 @@ function palette() {
       edge: "#484f58",
       relation: "#f0883e",
       text: "#f0f6fc",
-      muted: "#8b949e",
       owner: "#58a6ff",
       group: "#1f6feb",
       repository: "#3fb950",
       fork: "#6e7681",
-      language: "#a371f7",
-      topic: "#d29922",
       selected: "#ffffff",
     };
   }
@@ -54,13 +51,10 @@ function palette() {
     edge: "#afb8c1",
     relation: "#bc4c00",
     text: "#24292f",
-    muted: "#57606a",
     owner: "#54aeff",
     group: "#0969da",
     repository: "#2da44e",
     fork: "#8c959f",
-    language: "#8250df",
-    topic: "#bf8700",
     selected: "#24292f",
   };
 }
@@ -75,19 +69,15 @@ function hash(value) {
 }
 
 function nodeRadius(node) {
-  if (node.type === "owner") return 28;
-  if (node.type === "group") return 19;
-  if (node.type === "repository") return 12 + Math.min(5, Number(node.stars || 0));
-  if (node.type === "language") return 9;
-  return 7;
+  if (node.type === "owner") return 29;
+  if (node.type === "group") return 20;
+  return 12 + Math.min(5, Number(node.stars || 0));
 }
 
 function nodeColor(node, colors) {
   if (node.type === "owner") return colors.owner;
   if (node.type === "group") return colors.group;
-  if (node.type === "repository") return node.fork ? colors.fork : colors.repository;
-  if (node.type === "language") return colors.language;
-  return colors.topic;
+  return node.fork ? colors.fork : colors.repository;
 }
 
 function resize() {
@@ -116,23 +106,58 @@ function screenToWorld(x, y) {
 }
 
 function initializeGraph(data) {
-  const countByType = { owner: 0, group: 0, repository: 0, language: 0, topic: 0 };
+  const rawGroups = data.nodes.filter((node) => node.type === "group");
+  const groupPositions = new Map();
+  const memberIdsByGroup = new Map();
+
+  for (const link of data.links) {
+    if (link.type !== "member") continue;
+    if (!memberIdsByGroup.has(link.source)) memberIdsByGroup.set(link.source, []);
+    memberIdsByGroup.get(link.source).push(link.target);
+  }
+
+  rawGroups.forEach((group, index) => {
+    const angle = -Math.PI / 2 + (index * Math.PI * 2) / Math.max(1, rawGroups.length);
+    groupPositions.set(group.id, {
+      x: Math.cos(angle) * 165,
+      y: Math.sin(angle) * 145,
+      angle,
+    });
+  });
 
   state.nodes = data.nodes.map((raw) => {
-    const typeIndex = countByType[raw.type] || 0;
-    countByType[raw.type] = typeIndex + 1;
-    const seed = hash(raw.id);
-    let radius = 0;
-    if (raw.type === "group") radius = 115;
-    if (raw.type === "repository") radius = 235;
-    if (raw.type === "language") radius = 365;
-    if (raw.type === "topic") radius = 470;
-    const angle = ((seed % 3600) / 3600) * Math.PI * 2 + typeIndex * 0.19;
+    let x = 0;
+    let y = 0;
+    if (raw.type === "group") {
+      const position = groupPositions.get(raw.id);
+      x = position.x;
+      y = position.y;
+    } else if (raw.type === "repository") {
+      const membership = data.links.find(
+        (link) => link.type === "member" && link.target === raw.id,
+      );
+      if (membership && groupPositions.has(membership.source)) {
+        const groupPosition = groupPositions.get(membership.source);
+        const members = memberIdsByGroup.get(membership.source) || [];
+        const index = Math.max(0, members.indexOf(raw.id));
+        let angle = groupPosition.angle;
+        if (members.length > 1) {
+          const spread = Math.min(Math.PI * 1.35, 0.55 * (members.length - 1));
+          angle = groupPosition.angle - spread / 2 + (spread * index) / (members.length - 1);
+        }
+        x = groupPosition.x + Math.cos(angle) * 125;
+        y = groupPosition.y + Math.sin(angle) * 105;
+      } else {
+        const angle = ((hash(raw.id) % 3600) / 3600) * Math.PI * 2;
+        x = Math.cos(angle) * 310;
+        y = Math.sin(angle) * 250;
+      }
+    }
 
     return {
       ...raw,
-      x: raw.type === "owner" ? 0 : Math.cos(angle) * radius,
-      y: raw.type === "owner" ? 0 : Math.sin(angle) * radius,
+      x,
+      y,
       vx: 0,
       vy: 0,
       fixed: raw.type === "owner",
@@ -155,28 +180,22 @@ function initializeGraph(data) {
 }
 
 function linkPhysics(link) {
-  if (link.type === "owns") return { preferred: 230, strength: 0.008 };
-  if (link.type === "contains") return { preferred: 110, strength: 0.025 };
-  if (link.type === "member") return { preferred: 145, strength: 0.03 };
-  if (link.type === "language" || link.type === "topic") {
-    return { preferred: 135, strength: 0.018 };
-  }
-  return { preferred: 105, strength: 0.036 };
+  if (link.type === "contains") return { preferred: 155, strength: 0.026 };
+  if (link.type === "member") return { preferred: 125, strength: 0.032 };
+  if (link.type === "owns") return { preferred: 275, strength: 0.012 };
+  return { preferred: 105, strength: 0.04 };
 }
 
 function isStructuralLink(link) {
-  return ["owns", "contains", "member", "language", "topic"].includes(link.type);
+  return ["owns", "contains", "member"].includes(link.type);
 }
 
 function applyForces() {
-  const nodes = state.nodes;
-  const links = state.links;
   const alpha = state.alpha;
-
-  for (let first = 0; first < nodes.length; first += 1) {
-    const a = nodes[first];
-    for (let second = first + 1; second < nodes.length; second += 1) {
-      const b = nodes[second];
+  for (let first = 0; first < state.nodes.length; first += 1) {
+    const a = state.nodes[first];
+    for (let second = first + 1; second < state.nodes.length; second += 1) {
+      const b = state.nodes[second];
       let dx = b.x - a.x;
       let dy = b.y - a.y;
       let distanceSquared = dx * dx + dy * dy;
@@ -186,8 +205,8 @@ function applyForces() {
         distanceSquared = 1;
       }
       const distance = Math.sqrt(distanceSquared);
-      const minimum = nodeRadius(a) + nodeRadius(b) + 28;
-      const repulsion = (distance < minimum ? 9800 : 3400) / distanceSquared;
+      const minimum = nodeRadius(a) + nodeRadius(b) + 34;
+      const repulsion = (distance < minimum ? 11000 : 3900) / distanceSquared;
       const forceX = (dx / distance) * repulsion * alpha;
       const forceY = (dy / distance) * repulsion * alpha;
       if (!a.fixed && state.dragging !== a) {
@@ -201,7 +220,7 @@ function applyForces() {
     }
   }
 
-  for (const link of links) {
+  for (const link of state.links) {
     const dx = link.target.x - link.source.x;
     const dy = link.target.y - link.source.y;
     const distance = Math.max(1, Math.hypot(dx, dy));
@@ -219,16 +238,15 @@ function applyForces() {
     }
   }
 
-  for (const node of nodes) {
+  for (const node of state.nodes) {
     if (node.fixed || state.dragging === node) continue;
-    node.vx += -node.x * 0.0008 * alpha;
-    node.vy += -node.y * 0.0008 * alpha;
+    node.vx += -node.x * 0.00065 * alpha;
+    node.vy += -node.y * 0.00065 * alpha;
     node.vx *= 0.86;
     node.vy *= 0.86;
     node.x += node.vx;
     node.y += node.vy;
   }
-
   state.alpha = Math.max(0.018, state.alpha * 0.992);
 }
 
@@ -243,11 +261,25 @@ function connectedToSelected(node) {
 
 function matchesQuery(node) {
   if (!state.query) return true;
-  const text = [node.label, node.description, node.language, ...(node.topics || [])]
+  const text = [
+    node.label,
+    node.description,
+    node.language,
+    ...(node.topics || []),
+    ...(node.categories || []),
+  ]
     .filter(Boolean)
     .join(" ")
     .toLowerCase();
   return text.includes(state.query);
+}
+
+function colorWithAlpha(hex, alpha) {
+  const value = hex.replace("#", "");
+  const size = value.length === 3 ? 1 : 2;
+  const parts = value.match(new RegExp(`.{${size}}`, "g"));
+  const channels = parts.map((part) => parseInt(size === 1 ? part + part : part, 16));
+  return `rgba(${channels[0]}, ${channels[1]}, ${channels[2]}, ${alpha})`;
 }
 
 function draw() {
@@ -260,10 +292,10 @@ function draw() {
     const source = worldToScreen(link.source.x, link.source.y);
     const target = worldToScreen(link.target.x, link.target.y);
     const structural = isStructuralLink(link);
-    let opacity = structural ? 0.3 : 0.72;
+    let opacity = structural ? 0.34 : 0.76;
     if (state.selected && (link.source === state.selected || link.target === state.selected)) opacity = 0.98;
     if (state.query && !(matchesQuery(link.source) || matchesQuery(link.target))) opacity = 0.08;
-    context.lineWidth = structural ? 1 : 2.2;
+    context.lineWidth = structural ? 1.1 : 2.3;
     context.strokeStyle = colorWithAlpha(structural ? colors.edge : colors.relation, opacity);
     context.beginPath();
     context.moveTo(source.x, source.y);
@@ -275,8 +307,8 @@ function draw() {
     const point = worldToScreen(node.x, node.y);
     const radius = nodeRadius(node) * Math.max(0.74, Math.min(1.2, state.scale));
     let opacity = 1;
-    if (state.selected && !connectedToSelected(node)) opacity = 0.25;
-    if (state.query && !matchesQuery(node)) opacity = 0.14;
+    if (state.selected && !connectedToSelected(node)) opacity = 0.22;
+    if (state.query && !matchesQuery(node)) opacity = 0.12;
 
     context.globalAlpha = opacity;
     context.fillStyle = nodeColor(node, colors);
@@ -290,34 +322,15 @@ function draw() {
       context.stroke();
     }
 
-    const showLabel =
-      node.type === "owner" ||
-      node.type === "group" ||
-      node.type === "repository" ||
-      node === state.selected ||
-      node === state.hovered ||
-      state.scale > 1.35;
-
-    if (showLabel) {
-      context.globalAlpha = opacity;
-      const emphasized = node.type === "owner" || node.type === "group";
-      context.font = `${emphasized ? 600 : 500} ${node.type === "owner" ? 13 : 11}px -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif`;
-      context.textAlign = "center";
-      context.textBaseline = "top";
-      context.fillStyle = colors.text;
-      context.fillText(node.label, point.x, point.y + radius + 5);
-    }
+    context.globalAlpha = opacity;
+    const emphasized = node.type === "owner" || node.type === "group";
+    context.font = `${emphasized ? 600 : 500} ${node.type === "owner" ? 13 : 11}px -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif`;
+    context.textAlign = "center";
+    context.textBaseline = "top";
+    context.fillStyle = colors.text;
+    context.fillText(node.label, point.x, point.y + radius + 5);
   }
-
   context.globalAlpha = 1;
-}
-
-function colorWithAlpha(hex, alpha) {
-  const value = hex.replace("#", "");
-  const size = value.length === 3 ? 1 : 2;
-  const parts = value.match(new RegExp(`.{${size}}`, "g"));
-  const channels = parts.map((part) => parseInt(size === 1 ? part + part : part, 16));
-  return `rgba(${channels[0]}, ${channels[1]}, ${channels[2]}, ${alpha})`;
 }
 
 function tick() {
@@ -346,6 +359,12 @@ function hitTest(screenX, screenY) {
   return nearest;
 }
 
+function descriptionForType(type) {
+  if (type === "owner") return "GitHub account at the center of the public project map.";
+  if (type === "group") return "A manually curated category of related public projects.";
+  return "Public GitHub repository.";
+}
+
 function selectNode(node) {
   state.selected = node;
   if (!node) {
@@ -359,14 +378,13 @@ function selectNode(node) {
 
   detailsTitle.textContent = node.label;
   detailsDescription.textContent = node.description || descriptionForType(node.type);
-
-  const rows = [];
-  rows.push(["Type", node.type]);
+  const rows = [["Type", node.type === "group" ? "category" : node.type]];
+  if (node.categories && node.categories.length) rows.push(["Category", node.categories.join(", ")]);
   if (node.language) rows.push(["Language", node.language]);
   if (node.topics && node.topics.length) rows.push(["Topics", node.topics.join(", ")]);
   if (node.type === "repository") rows.push(["Stars", String(node.stars || 0)]);
   if (node.type === "group") rows.push(["Projects", String(node.repositoryCount || 0)]);
-  if (node.fork) rows.push(["Repository", "Fork"]);
+  if (node.fork) rows.push(["Repository", "Fork / continuation"]);
   if (node.archived) rows.push(["Status", "Archived"]);
 
   detailsMeta.replaceChildren();
@@ -377,7 +395,7 @@ function selectNode(node) {
     dd.textContent = value;
     detailsMeta.append(dt, dd);
   }
-  detailsMeta.hidden = rows.length === 0;
+  detailsMeta.hidden = false;
 
   if (node.url) {
     detailsLink.href = node.url;
@@ -387,14 +405,6 @@ function selectNode(node) {
     detailsLink.hidden = true;
   }
   draw();
-}
-
-function descriptionForType(type) {
-  if (type === "owner") return "GitHub account at the center of the public project graph.";
-  if (type === "group") return "A curated group of related public projects.";
-  if (type === "language") return "Primary language shared by connected repositories.";
-  if (type === "topic") return "GitHub topic shared by connected repositories.";
-  return "Public GitHub repository.";
 }
 
 function resetView() {
@@ -463,8 +473,7 @@ canvas.addEventListener("pointercancel", () => {
 });
 
 canvas.addEventListener("dblclick", (event) => {
-  const point = pointerPosition(event);
-  const node = hitTest(point.x, point.y);
+  const node = hitTest(pointerPosition(event).x, pointerPosition(event).y);
   if (node && node.url) window.open(node.url, "_blank", "noopener");
 });
 
@@ -486,12 +495,7 @@ canvas.addEventListener(
 
 searchInput.addEventListener("input", () => {
   state.query = searchInput.value.trim().toLowerCase();
-  if (state.query) {
-    const match = state.nodes.find((node) => matchesQuery(node));
-    if (match) selectNode(match);
-  } else {
-    selectNode(null);
-  }
+  selectNode(state.query ? state.nodes.find(matchesQuery) || null : null);
   draw();
 });
 
@@ -502,7 +506,6 @@ resetButton.addEventListener("click", () => {
 });
 
 window.addEventListener("resize", resize);
-
 resize();
 fetch("graph-data.json", { cache: "no-store" })
   .then((response) => {
@@ -511,6 +514,6 @@ fetch("graph-data.json", { cache: "no-store" })
   })
   .then(initializeGraph)
   .catch((error) => {
-    statusElement.textContent = `Could not load graph data: ${error.message}`;
+    statusElement.textContent = `Could not load project map: ${error.message}`;
     statusElement.hidden = false;
   });
