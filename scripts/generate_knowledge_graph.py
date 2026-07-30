@@ -229,7 +229,7 @@ def preview_positions(
     width: int,
     height: int,
 ) -> dict[str, tuple[float, float, dict[str, Any]]]:
-    cx, cy = width / 2, 231
+    cx, cy = width / 2, 250
     group_nodes = [node for node in project_map["nodes"] if node.get("type") == "group"]
     repository_nodes = [
         node for node in project_map["nodes"] if node.get("type") == "repository"
@@ -257,7 +257,7 @@ def preview_positions(
     for index, node in enumerate(group_nodes):
         angle = -math.pi / 2 + index * 2 * math.pi / group_count
         x = cx + 175 * math.cos(angle)
-        y = cy + 125 * math.sin(angle)
+        y = cy + 86 * math.sin(angle)
         group_angles[str(node["id"])] = angle
         anchors[str(node["id"])] = (x, y)
         positions[str(node["id"])] = (x, y, node)
@@ -275,7 +275,12 @@ def preview_positions(
             column = index % columns
             items_in_row = min(columns, len(members) - row * columns)
             tangent_offset = (column - (items_in_row - 1) / 2) * 112
-            outward_offset = 84 + row * 54
+            if outward_y < -0.7:
+                outward_offset = max(48, 94 - row * 40)
+            elif outward_y > 0.7:
+                outward_offset = 64 + row * 44
+            else:
+                outward_offset = 110 + row * 48
             x = group_x + outward_x * outward_offset + tangent_x * tangent_offset
             y = group_y + outward_y * outward_offset + tangent_y * tangent_offset
             node_id = str(node["id"])
@@ -288,7 +293,7 @@ def preview_positions(
     for index, node in enumerate(ungrouped):
         angle = -math.pi / 2 + index * 2 * math.pi / max(1, len(ungrouped))
         x = cx + 285 * math.cos(angle)
-        y = cy + 190 * math.sin(angle)
+        y = cy + 175 * math.sin(angle)
         node_id = str(node["id"])
         anchors[node_id] = (x, y)
         positions[node_id] = (x, y, node)
@@ -346,7 +351,7 @@ def preview_positions(
         if not moved:
             break
 
-    for _ in range(80):
+    for _ in range(100):
         identifiers = list(mutable)
         moved = False
         for first in range(len(identifiers)):
@@ -378,6 +383,11 @@ def preview_positions(
                     mutable[first_id][1] -= direction * push * a_share
                     mutable[second_id][1] += direction * push * b_share
                 ax, ay = mutable[first_id][0], mutable[first_id][1]
+
+        for values in mutable.values():
+            node_width, node_height = collision_size(values[2])
+            values[0] = max(20 + node_width / 2, min(width - 20 - node_width / 2, values[0]))
+            values[1] = max(67 + node_height / 2, min(height - 91 - node_height / 2, values[1]))
         if not moved:
             break
 
@@ -416,7 +426,7 @@ def render_preview(project_map: dict[str, Any], output: Path, theme: str) -> Non
         halo = "#0969da"
 
     width, height = 760, 500
-    cx, cy = width / 2, 231
+    cx, cy = width / 2, 250
     owner_id = f"user:{project_map['owner']}"
     positions = preview_positions(project_map, width, height)
     owner = html.escape(str(project_map["owner"]))
