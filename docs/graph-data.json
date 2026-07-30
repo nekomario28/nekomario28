@@ -1,8 +1,8 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-07-30T04:39:52.063442+00:00",
+  "generatedAt": "2026-07-30T11:09:31.779804+00:00",
   "repositoryCount": 9,
-  "groupCount": 1,
+  "groupCount": 4,
   "nodes": [
     {
       "id": "user:nekomario28",
@@ -35,7 +35,43 @@
       "label": "Minecraft / NeoForge",
       "type": "group",
       "description": "Minecraft mods and supporting projects in the NeoForge and related mod ecosystem.",
-      "repositoryCount": 5
+      "repositoryCount": 6
+    },
+    {
+      "id": "group:robotics-ros2",
+      "label": "Robotics / ROS 2",
+      "type": "group",
+      "description": "Robotics, simulation, perception and manipulation projects.",
+      "repositoryCount": 1
+    },
+    {
+      "id": "group:coursework-learning",
+      "label": "Coursework / Learning",
+      "type": "group",
+      "description": "University coursework and learning projects.",
+      "repositoryCount": 1
+    },
+    {
+      "id": "group:utilities-hardware",
+      "label": "Utilities / Hardware",
+      "type": "group",
+      "description": "System utilities and hardware-facing tools.",
+      "repositoryCount": 1
+    },
+    {
+      "id": "repository:sable",
+      "label": "sable",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/sable",
+      "description": "Interactive physics moving block structures!",
+      "language": "Java",
+      "topics": [
+        "minecraft"
+      ],
+      "stars": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-07-30T05:45:57Z"
     },
     {
       "id": "repository:OffHandCombat",
@@ -51,21 +87,6 @@
       "fork": true,
       "archived": false,
       "updatedAt": "2026-07-29T20:18:29Z"
-    },
-    {
-      "id": "repository:sable",
-      "label": "sable",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/sable",
-      "description": "Interactive physics moving block structures!",
-      "language": null,
-      "topics": [
-        "minecraft"
-      ],
-      "stars": 0,
-      "fork": true,
-      "archived": false,
-      "updatedAt": "2026-07-28T14:07:41Z"
     },
     {
       "id": "repository:AntiFullbright",
@@ -173,6 +194,21 @@
     },
     {
       "source": "group:minecraft-neoforge",
+      "target": "repository:OffHandCombat",
+      "type": "member"
+    },
+    {
+      "source": "group:minecraft-neoforge",
+      "target": "repository:sable",
+      "type": "member"
+    },
+    {
+      "source": "group:minecraft-neoforge",
+      "target": "repository:AntiFullbright",
+      "type": "member"
+    },
+    {
+      "source": "group:minecraft-neoforge",
       "target": "repository:workers",
       "type": "member"
     },
@@ -187,14 +223,49 @@
       "type": "member"
     },
     {
-      "source": "group:minecraft-neoforge",
-      "target": "repository:AntiFullbright",
+      "source": "user:nekomario28",
+      "target": "group:robotics-ros2",
+      "type": "contains"
+    },
+    {
+      "source": "group:robotics-ros2",
+      "target": "repository:lime_tidyup",
       "type": "member"
     },
     {
-      "source": "group:minecraft-neoforge",
-      "target": "repository:OffHandCombat",
+      "source": "user:nekomario28",
+      "target": "group:coursework-learning",
+      "type": "contains"
+    },
+    {
+      "source": "group:coursework-learning",
+      "target": "repository:ProjExD_Group10",
       "type": "member"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "group:utilities-hardware",
+      "type": "contains"
+    },
+    {
+      "source": "group:utilities-hardware",
+      "target": "repository:turing-smart-screen-python-owl",
+      "type": "member"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:sable",
+      "type": "owns"
+    },
+    {
+      "source": "repository:sable",
+      "target": "language:Java",
+      "type": "language"
+    },
+    {
+      "source": "repository:sable",
+      "target": "topic:minecraft",
+      "type": "topic"
     },
     {
       "source": "user:nekomario28",
@@ -208,16 +279,6 @@
     },
     {
       "source": "repository:OffHandCombat",
-      "target": "topic:minecraft",
-      "type": "topic"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:sable",
-      "type": "owns"
-    },
-    {
-      "source": "repository:sable",
       "target": "topic:minecraft",
       "type": "topic"
     },
