@@ -186,6 +186,46 @@ function buildInitialLayout(data) {
   return { groupAnchors, repositoryAnchors };
 }
 
+function resolveInitialCollisions(nodes) {
+  for (let iteration = 0; iteration < 180; iteration += 1) {
+    let moved = false;
+    for (let first = 0; first < nodes.length; first += 1) {
+      const a = nodes[first];
+      const aSize = nodeDimensions(a);
+      for (let second = first + 1; second < nodes.length; second += 1) {
+        const b = nodes[second];
+        const bSize = nodeDimensions(b);
+        let dx = b.x - a.x;
+        let dy = b.y - a.y;
+        if (Math.abs(dx) < 0.001 && Math.abs(dy) < 0.001) dx = 1;
+        const overlapX = (aSize.width + bSize.width) / 2 + 22 - Math.abs(dx);
+        const overlapY = (aSize.height + bSize.height) / 2 + 20 - Math.abs(dy);
+        if (overlapX <= 0 || overlapY <= 0) continue;
+        moved = true;
+        const pushX = overlapX < overlapY;
+        const overlap = pushX ? overlapX : overlapY;
+        const direction = pushX ? Math.sign(dx || 1) : Math.sign(dy || 1);
+        const aShare = a.fixed ? 0 : b.fixed ? 1 : 0.5;
+        const bShare = b.fixed ? 0 : a.fixed ? 1 : 0.5;
+        if (pushX) {
+          a.x -= direction * overlap * aShare;
+          b.x += direction * overlap * bShare;
+        } else {
+          a.y -= direction * overlap * aShare;
+          b.y += direction * overlap * bShare;
+        }
+      }
+    }
+    if (!moved) break;
+  }
+
+  for (const node of nodes) {
+    if (node.fixed) continue;
+    node.anchorX = node.x;
+    node.anchorY = node.y;
+  }
+}
+
 function initializeGraph(data) {
   const { groupAnchors, repositoryAnchors } = buildInitialLayout(data);
   let appearanceIndex = 0;
@@ -210,6 +250,7 @@ function initializeGraph(data) {
     return node;
   });
 
+  resolveInitialCollisions(state.nodes);
   state.nodeById = new Map(state.nodes.map((node) => [node.id, node]));
   state.links = data.links
     .map((link, index) => ({
@@ -255,7 +296,8 @@ function applyForces() {
       const overlapY = (aSize.height + bSize.height) / 2 + 18 - Math.abs(dy);
       if (overlapX > 0 && overlapY > 0) {
         const pushX = overlapX < overlapY;
-        const amount = (pushX ? overlapX : overlapY) * 0.055 * alpha;
+        const collisionStrength = Math.max(alpha, 0.18);
+        const amount = (pushX ? overlapX : overlapY) * 0.12 * collisionStrength;
         const direction = pushX ? Math.sign(dx || 1) : Math.sign(dy || 1);
         if (!a.fixed && state.dragging !== a) {
           if (pushX) a.vx -= direction * amount;
