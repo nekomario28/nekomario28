@@ -196,47 +196,28 @@ def build_map(
 
 
 def node_width(label: str, node_type: str) -> int:
-    minimum = 132 if node_type == "group" else 76
-    maximum = 190 if node_type == "group" else 156
-    return max(minimum, min(maximum, 24 + len(label) * 6))
+    estimated = 38 + len(label) * 7
+    if node_type == "group":
+        return max(148, min(218, estimated))
+    return max(100, min(202, estimated))
 
 
-def render_preview(project_map: dict[str, Any], output: Path, theme: str) -> None:
-    if theme == "dark":
-        background = "#0d1117"
-        border = "#30363d"
-        edge = "#484f58"
-        relation = "#f0883e"
-        node_fill = "#161b22"
-        node_text = "#f0f6fc"
-        fork_fill = "#21262d"
-        group_fill = "#1f6feb"
-        center_fill = "#58a6ff"
-        muted = "#8b949e"
-    else:
-        background = "#ffffff"
-        border = "#d0d7de"
-        edge = "#afb8c1"
-        relation = "#bc4c00"
-        node_fill = "#f6f8fa"
-        node_text = "#24292f"
-        fork_fill = "#eaeef2"
-        group_fill = "#0969da"
-        center_fill = "#54aeff"
-        muted = "#57606a"
-
-    width, height = 760, 560
-    cx, cy = width / 2, 290
-    owner_id = f"user:{project_map['owner']}"
+def preview_positions(
+    project_map: dict[str, Any],
+    width: int,
+    height: int,
+) -> dict[str, tuple[float, float, dict[str, Any]]]:
+    cx, cy = width / 2, 248
     group_nodes = [node for node in project_map["nodes"] if node.get("type") == "group"]
     repository_nodes = [
         node for node in project_map["nodes"] if node.get("type") == "repository"
     ]
     repository_by_id = {str(node["id"]): node for node in repository_nodes}
-    member_links = [link for link in project_map["links"] if link.get("type") == "member"]
     members_by_group: dict[str, list[dict[str, Any]]] = {}
     grouped_repository_ids: set[str] = set()
-    for link in member_links:
+    for link in project_map["links"]:
+        if link.get("type") != "member":
+            continue
         group_id = str(link["source"])
         repository_id = str(link["target"])
         repository = repository_by_id.get(repository_id)
@@ -246,52 +227,156 @@ def render_preview(project_map: dict[str, Any], output: Path, theme: str) -> Non
         grouped_repository_ids.add(repository_id)
 
     positions: dict[str, tuple[float, float, dict[str, Any]]] = {}
+    anchors: dict[str, tuple[float, float]] = {}
     group_angles: dict[str, float] = {}
     group_count = max(1, len(group_nodes))
+
     for index, node in enumerate(group_nodes):
         angle = -math.pi / 2 + index * 2 * math.pi / group_count
+        x = cx + 205 * math.cos(angle)
+        y = cy + 142 * math.sin(angle)
         group_angles[str(node["id"])] = angle
-        positions[str(node["id"])] = (
-            cx + 145 * math.cos(angle),
-            cy + 120 * math.sin(angle),
-            node,
-        )
+        anchors[str(node["id"])] = (x, y)
+        positions[str(node["id"])] = (x, y, node)
 
     for group in group_nodes:
         group_id = str(group["id"])
         group_x, group_y, _ = positions[group_id]
+        angle = group_angles[group_id]
+        outward_x, outward_y = math.cos(angle), math.sin(angle)
+        tangent_x, tangent_y = -outward_y, outward_x
         members = members_by_group.get(group_id, [])
-        base_angle = group_angles[group_id]
+        columns = min(3, max(1, math.ceil(math.sqrt(len(members)))))
         for index, node in enumerate(members):
-            if len(members) == 1:
-                angle = base_angle
-            else:
-                spread = min(math.pi * 1.35, 0.55 * (len(members) - 1))
-                angle = base_angle - spread / 2 + spread * index / (len(members) - 1)
-            positions[str(node["id"])] = (
-                group_x + 112 * math.cos(angle),
-                group_y + 92 * math.sin(angle),
-                node,
-            )
+            row = index // columns
+            column = index % columns
+            items_in_row = min(columns, len(members) - row * columns)
+            tangent_offset = (column - (items_in_row - 1) / 2) * 132
+            outward_offset = 102 + row * 58
+            x = group_x + outward_x * outward_offset + tangent_x * tangent_offset
+            y = group_y + outward_y * outward_offset + tangent_y * tangent_offset
+            node_id = str(node["id"])
+            anchors[node_id] = (x, y)
+            positions[node_id] = (x, y, node)
 
-    ungrouped = [node for node in repository_nodes if str(node["id"]) not in grouped_repository_ids]
+    ungrouped = [
+        node for node in repository_nodes if str(node["id"]) not in grouped_repository_ids
+    ]
     for index, node in enumerate(ungrouped):
         angle = -math.pi / 2 + index * 2 * math.pi / max(1, len(ungrouped))
-        positions[str(node["id"])] = (
-            cx + 285 * math.cos(angle),
-            cy + 210 * math.sin(angle),
-            node,
-        )
+        x = cx + 310 * math.cos(angle)
+        y = cy + 205 * math.sin(angle)
+        node_id = str(node["id"])
+        anchors[node_id] = (x, y)
+        positions[node_id] = (x, y, node)
 
+    mutable = {
+        node_id: [position[0], position[1], position[2]]
+        for node_id, position in positions.items()
+    }
+    for _ in range(180):
+        identifiers = list(mutable)
+        for first in range(len(identifiers)):
+            first_id = identifiers[first]
+            ax, ay, a_node = mutable[first_id]
+            a_width = node_width(str(a_node["label"]), str(a_node.get("type")))
+            a_height = 42 if a_node.get("type") == "group" else 36
+            for second in range(first + 1, len(identifiers)):
+                second_id = identifiers[second]
+                bx, by, b_node = mutable[second_id]
+                b_width = node_width(str(b_node["label"]), str(b_node.get("type")))
+                b_height = 42 if b_node.get("type") == "group" else 36
+                dx, dy = bx - ax, by - ay
+                overlap_x = (a_width + b_width) / 2 + 10 - abs(dx)
+                overlap_y = (a_height + b_height) / 2 + 10 - abs(dy)
+                if overlap_x <= 0 or overlap_y <= 0:
+                    continue
+                if overlap_x < overlap_y:
+                    direction = 1 if dx >= 0 else -1
+                    push = overlap_x * 0.52
+                    mutable[first_id][0] -= direction * push
+                    mutable[second_id][0] += direction * push
+                else:
+                    direction = 1 if dy >= 0 else -1
+                    push = overlap_y * 0.52
+                    mutable[first_id][1] -= direction * push
+                    mutable[second_id][1] += direction * push
+                ax, ay = mutable[first_id][0], mutable[first_id][1]
+
+        for node_id, values in mutable.items():
+            node = values[2]
+            anchor_x, anchor_y = anchors[node_id]
+            values[0] += (anchor_x - values[0]) * 0.035
+            values[1] += (anchor_y - values[1]) * 0.035
+            half_width = node_width(str(node["label"]), str(node.get("type"))) / 2
+            half_height = 21 if node.get("type") == "group" else 18
+            values[0] = max(15 + half_width, min(width - 15 - half_width, values[0]))
+            values[1] = max(70 + half_height, min(height - 78 - half_height, values[1]))
+
+    return {
+        node_id: (values[0], values[1], values[2])
+        for node_id, values in mutable.items()
+    }
+
+
+def render_preview(project_map: dict[str, Any], output: Path, theme: str) -> None:
+    if theme == "dark":
+        background = "#0d1117"
+        panel = "#161b22"
+        border = "#30363d"
+        edge = "#484f58"
+        relation = "#f0883e"
+        node_text = "#f0f6fc"
+        fork = "#8b949e"
+        repository = "#3fb950"
+        group = "#1f6feb"
+        owner_fill = "#58a6ff"
+        muted = "#8b949e"
+        halo = "#58a6ff"
+    else:
+        background = "#f6f8fa"
+        panel = "#ffffff"
+        border = "#d0d7de"
+        edge = "#afb8c1"
+        relation = "#bc4c00"
+        node_text = "#24292f"
+        fork = "#8c959f"
+        repository = "#2da44e"
+        group = "#0969da"
+        owner_fill = "#54aeff"
+        muted = "#57606a"
+        halo = "#0969da"
+
+    width, height = 760, 500
+    cx, cy = width / 2, 248
+    owner_id = f"user:{project_map['owner']}"
+    positions = preview_positions(project_map, width, height)
     owner = html.escape(str(project_map["owner"]))
+
     parts = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-label="Interactive public project map preview">',
-        f'<rect x="1" y="1" width="{width - 2}" height="{height - 2}" rx="12" fill="{background}" stroke="{border}"/>',
-        f'<text x="{cx}" y="34" text-anchor="middle" fill="{node_text}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="18" font-weight="600">Interactive Project Map</text>',
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-label="Animated preview of the interactive public project map">',
+        "<defs>",
+        f'<radialGradient id="background" cx="50%" cy="45%" r="72%"><stop offset="0" stop-color="{panel}"/><stop offset="1" stop-color="{background}"/></radialGradient>',
+        f'<filter id="shadow" x="-20%" y="-30%" width="140%" height="170%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="{border}" flood-opacity="0.45"/></filter>',
+        "</defs>",
+        "<style>",
+        ".flow{stroke-dasharray:6 9;animation:flow 7s linear infinite}",
+        ".halo{transform-origin:center;animation:pulse 3.2s ease-in-out infinite}",
+        ".cta{animation:lift 2.4s ease-in-out infinite}",
+        ".arrow{animation:nudge 1.6s ease-in-out infinite}",
+        "@keyframes flow{to{stroke-dashoffset:-60}}",
+        "@keyframes pulse{0%,100%{opacity:.16;transform:scale(.92)}50%{opacity:.04;transform:scale(1.16)}}",
+        "@keyframes lift{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}",
+        "@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}",
+        "@media(prefers-reduced-motion:reduce){*{animation:none!important}}",
+        "</style>",
+        f'<rect x="1" y="1" width="{width - 2}" height="{height - 2}" rx="16" fill="url(#background)" stroke="{border}"/>',
+        f'<text x="{cx}" y="32" text-anchor="middle" fill="{node_text}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="19" font-weight="650">Interactive Project Map</text>',
+        f'<text x="{cx}" y="52" text-anchor="middle" fill="{muted}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="11.5">Explore public projects by area — drag, zoom and open repositories</text>',
     ]
 
     structural_types = {"owns", "contains", "member"}
-    for link in project_map["links"]:
+    for index, link in enumerate(project_map["links"]):
         source_id = str(link["source"])
         target_id = str(link["target"])
         source = (cx, cy) if source_id == owner_id else positions.get(source_id, (None, None, None))[:2]
@@ -299,37 +384,61 @@ def render_preview(project_map: dict[str, Any], output: Path, theme: str) -> Non
         if source[0] is None or target[0] is None:
             continue
         structural = link.get("type") in structural_types
+        stroke = edge if structural else relation
+        stroke_width = 1.25 if structural else 2.3
+        opacity = 0.58 if structural else 0.92
         parts.append(
-            f'<line x1="{source[0]:.1f}" y1="{source[1]:.1f}" x2="{target[0]:.1f}" y2="{target[1]:.1f}" stroke="{edge if structural else relation}" stroke-width="{1.15 if structural else 2.2}" opacity="{0.52 if structural else 0.9}"/>'
+            f'<line class="flow" style="animation-delay:-{index * 0.31:.2f}s" x1="{source[0]:.1f}" y1="{source[1]:.1f}" x2="{target[0]:.1f}" y2="{target[1]:.1f}" stroke="{stroke}" stroke-width="{stroke_width}" opacity="{opacity}"/>'
         )
+
+    parts.append(
+        f'<circle class="halo" cx="{cx}" cy="{cy}" r="62" fill="{halo}" opacity="0.12"/>'
+    )
+    parts.append(
+        f'<rect x="{cx - 64}" y="{cy - 24}" width="128" height="48" rx="15" fill="{owner_fill}" filter="url(#shadow)"/>'
+    )
+    parts.append(
+        f'<text x="{cx}" y="{cy + 5}" text-anchor="middle" fill="#ffffff" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="14" font-weight="700">{owner}</text>'
+    )
 
     for x, y, node in positions.values():
         label = html.escape(str(node["label"]))
         node_type = str(node.get("type", "repository"))
         box_width = node_width(str(node["label"]), node_type)
+        box_height = 42 if node_type == "group" else 36
+        left = x - box_width / 2
+        top = y - box_height / 2
         if node_type == "group":
-            fill = group_fill
-            text_fill = "#ffffff"
-            height_px = 34
+            parts.append(
+                f'<rect x="{left:.1f}" y="{top:.1f}" width="{box_width}" height="{box_height}" rx="14" fill="{group}" stroke="{border}" filter="url(#shadow)"/>'
+            )
+            parts.append(
+                f'<text x="{x:.1f}" y="{y + 4:.1f}" text-anchor="middle" fill="#ffffff" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="11.5" font-weight="650">{label}</text>'
+            )
         else:
-            fill = fork_fill if node.get("fork") else node_fill
-            text_fill = node_text
-            height_px = 30
-        parts.append(
-            f'<rect x="{x - box_width / 2:.1f}" y="{y - height_px / 2:.1f}" width="{box_width}" height="{height_px}" rx="{height_px / 2:.1f}" fill="{fill}" stroke="{border}"/>'
-        )
-        parts.append(
-            f'<text x="{x:.1f}" y="{y + 4:.1f}" text-anchor="middle" fill="{text_fill}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="{11.5 if node_type == "group" else 10.5}" font-weight="{600 if node_type == "group" else 400}">{label}</text>'
-        )
+            marker = fork if node.get("fork") else repository
+            parts.append(
+                f'<rect x="{left:.1f}" y="{top:.1f}" width="{box_width}" height="{box_height}" rx="12" fill="{panel}" stroke="{border}" filter="url(#shadow)"/>'
+            )
+            parts.append(
+                f'<circle cx="{left + 17:.1f}" cy="{y:.1f}" r="5" fill="{marker}"/>'
+            )
+            parts.append(
+                f'<text x="{left + 29:.1f}" y="{y + 4:.1f}" fill="{node_text}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="10.5" font-weight="500">{label}</text>'
+            )
 
-    parts.append(f'<circle cx="{cx}" cy="{cy}" r="48" fill="{center_fill}"/>')
-    parts.append(
-        f'<text x="{cx}" y="{cy + 5}" text-anchor="middle" fill="#ffffff" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="15" font-weight="700">{owner}</text>'
+    cta_x, cta_y, cta_width, cta_height = 246, 443, 268, 40
+    parts.extend(
+        [
+            '<g class="cta">',
+            f'<rect x="{cta_x}" y="{cta_y}" width="{cta_width}" height="{cta_height}" rx="20" fill="{group}" filter="url(#shadow)"/>',
+            f'<text x="{cta_x + 126}" y="{cta_y + 25}" text-anchor="middle" fill="#ffffff" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="12.5" font-weight="650">Open the interactive map</text>',
+            f'<text class="arrow" x="{cta_x + 235}" y="{cta_y + 25}" text-anchor="middle" fill="#ffffff" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="16" font-weight="700">→</text>',
+            "</g>",
+            f'<text x="24" y="{height - 17}" fill="{muted}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="10.5">{len([node for node in project_map["nodes"] if node.get("type") == "repository"])} public projects · {len([node for node in project_map["nodes"] if node.get("type") == "group"])} curated areas</text>',
+            "</svg>",
+        ]
     )
-    parts.append(
-        f'<text x="{cx}" y="{height - 18}" text-anchor="middle" fill="{muted}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="11">{len(repository_nodes)} public projects • {len(group_nodes)} curated categories • click to explore</text>'
-    )
-    parts.append("</svg>")
 
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text("\n".join(parts) + "\n", encoding="utf-8")
