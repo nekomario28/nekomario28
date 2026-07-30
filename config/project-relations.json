@@ -1,27 +1,43 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "groups": [
     {
       "id": "minecraft-neoforge",
       "label": "Minecraft / NeoForge",
       "description": "Minecraft mods and supporting projects in the NeoForge and related mod ecosystem.",
       "repositories": [
-        "civitas",
-        "civitas-residents",
+        "OffHandCombat",
+        "sable",
+        "AntiFullbright",
         "workers",
         "recruits",
-        "BuyClaimChunks",
-        "AntiFullbright",
-        "OffHandCombat"
+        "BuyClaimChunks"
+      ]
+    },
+    {
+      "id": "robotics-ros2",
+      "label": "Robotics / ROS 2",
+      "description": "Robotics, simulation, perception and manipulation projects.",
+      "repositories": [
+        "lime_tidyup"
+      ]
+    },
+    {
+      "id": "coursework-learning",
+      "label": "Coursework / Learning",
+      "description": "University coursework and learning projects.",
+      "repositories": [
+        "ProjExD_Group10"
+      ]
+    },
+    {
+      "id": "utilities-hardware",
+      "label": "Utilities / Hardware",
+      "description": "System utilities and hardware-facing tools.",
+      "repositories": [
+        "turing-smart-screen-python-owl"
       ]
     }
   ],
-  "relations": [
-    {
-      "source": "civitas",
-      "target": "civitas-residents",
-      "type": "uses-backend",
-      "label": "uses resident backend"
-    }
-  ]
+  "relations": []
 }
