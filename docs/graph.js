@@ -44,7 +44,6 @@ function palette() {
     return {
       background: "#0d1117",
       panel: "#161b22",
-      panelStrong: "#21262d",
       edge: "#484f58",
       relation: "#f0883e",
       text: "#f0f6fc",
@@ -55,13 +54,12 @@ function palette() {
       repository: "#3fb950",
       fork: "#8b949e",
       selected: "#ffffff",
-      shadow: "rgba(0, 0, 0, 0.28)",
+      shadow: "rgba(0, 0, 0, 0.34)",
     };
   }
   return {
     background: "#f6f8fa",
     panel: "#ffffff",
-    panelStrong: "#f6f8fa",
     edge: "#afb8c1",
     relation: "#bc4c00",
     text: "#24292f",
@@ -72,12 +70,21 @@ function palette() {
     repository: "#2da44e",
     fork: "#8c959f",
     selected: "#24292f",
-    shadow: "rgba(31, 35, 40, 0.14)",
+    shadow: "rgba(31, 35, 40, 0.18)",
   };
 }
 
 function clamp(value, minimum, maximum) {
   return Math.max(minimum, Math.min(maximum, value));
+}
+
+function hash(value) {
+  let result = 2166136261;
+  for (let index = 0; index < value.length; index += 1) {
+    result ^= value.charCodeAt(index);
+    result = Math.imul(result, 16777619);
+  }
+  return result >>> 0;
 }
 
 function easeOutBack(value) {
@@ -86,13 +93,28 @@ function easeOutBack(value) {
   return 1 + c3 * Math.pow(value - 1, 3) + c1 * Math.pow(value - 1, 2);
 }
 
+function displayLabel(node) {
+  const label = String(node.label || "");
+  return label.length <= 30 ? label : `${label.slice(0, 29)}…`;
+}
+
+function nodeRadius(node) {
+  if (node.type === "owner") return 36;
+  if (node.type === "group") return 24;
+  return 12 + Math.min(4, Number(node.stars || 0));
+}
+
+function labelWidth(node) {
+  const label = displayLabel(node);
+  const multiplier = node.type === "group" ? 6.8 : node.type === "owner" ? 7 : 6.2;
+  return clamp(18 + label.length * multiplier, 58, node.type === "owner" ? 150 : 194);
+}
+
 function nodeDimensions(node) {
-  if (node.type === "owner") return { width: 128, height: 48 };
-  const estimated = 38 + String(node.label || "").length * 7;
-  if (node.type === "group") {
-    return { width: clamp(estimated, 148, 218), height: 42 };
-  }
-  return { width: clamp(estimated, 100, 202), height: 36 };
+  const radius = nodeRadius(node);
+  const width = Math.max(radius * 2 + 18, labelWidth(node));
+  const height = radius * 2 + (node.type === "group" ? 34 : 31);
+  return { width, height };
 }
 
 function nodeColor(node, colors) {
@@ -143,8 +165,8 @@ function buildInitialLayout(data) {
   groups.forEach((group, index) => {
     const angle = -Math.PI / 2 + (index * Math.PI * 2) / Math.max(1, groups.length);
     groupAnchors.set(group.id, {
-      x: Math.cos(angle) * 225,
-      y: Math.sin(angle) * 175,
+      x: Math.cos(angle) * 220,
+      y: Math.sin(angle) * 170,
       angle,
     });
   });
@@ -163,8 +185,8 @@ function buildInitialLayout(data) {
       const row = Math.floor(index / columns);
       const column = index % columns;
       const itemsInRow = Math.min(columns, members.length - row * columns);
-      const tangentOffset = (column - (itemsInRow - 1) / 2) * 172;
-      const outwardOffset = 142 + row * 72;
+      const tangentOffset = (column - (itemsInRow - 1) / 2) * 145;
+      const outwardOffset = 118 + row * 68;
       repositoryAnchors.set(repositoryId, {
         x: anchor.x + outwardX * outwardOffset + tangentX * tangentOffset,
         y: anchor.y + outwardY * outwardOffset + tangentY * tangentOffset,
@@ -187,7 +209,7 @@ function buildInitialLayout(data) {
 }
 
 function resolveInitialCollisions(nodes) {
-  for (let iteration = 0; iteration < 180; iteration += 1) {
+  for (let iteration = 0; iteration < 220; iteration += 1) {
     let moved = false;
     for (let first = 0; first < nodes.length; first += 1) {
       const a = nodes[first];
@@ -198,8 +220,8 @@ function resolveInitialCollisions(nodes) {
         let dx = b.x - a.x;
         let dy = b.y - a.y;
         if (Math.abs(dx) < 0.001 && Math.abs(dy) < 0.001) dx = 1;
-        const overlapX = (aSize.width + bSize.width) / 2 + 22 - Math.abs(dx);
-        const overlapY = (aSize.height + bSize.height) / 2 + 20 - Math.abs(dy);
+        const overlapX = (aSize.width + bSize.width) / 2 + 24 - Math.abs(dx);
+        const overlapY = (aSize.height + bSize.height) / 2 + 22 - Math.abs(dy);
         if (overlapX <= 0 || overlapY <= 0) continue;
         moved = true;
         const pushX = overlapX < overlapY;
@@ -245,6 +267,7 @@ function initializeGraph(data) {
       vy: 0,
       fixed: raw.type === "owner",
       appearDelay: appearanceIndex * 55,
+      phase: (hash(raw.id) % 1000) / 1000,
     };
     appearanceIndex += 1;
     return node;
@@ -269,10 +292,10 @@ function initializeGraph(data) {
 }
 
 function linkPhysics(link) {
-  if (link.type === "contains") return { preferred: 210, strength: 0.018 };
-  if (link.type === "member") return { preferred: 175, strength: 0.018 };
-  if (link.type === "owns") return { preferred: 360, strength: 0.008 };
-  return { preferred: 145, strength: 0.03 };
+  if (link.type === "contains") return { preferred: 205, strength: 0.018 };
+  if (link.type === "member") return { preferred: 160, strength: 0.019 };
+  if (link.type === "owns") return { preferred: 355, strength: 0.008 };
+  return { preferred: 140, strength: 0.03 };
 }
 
 function isStructuralLink(link) {
@@ -292,12 +315,12 @@ function applyForces() {
       let dy = b.y - a.y;
       if (Math.abs(dx) < 0.001 && Math.abs(dy) < 0.001) dx = 1;
 
-      const overlapX = (aSize.width + bSize.width) / 2 + 20 - Math.abs(dx);
-      const overlapY = (aSize.height + bSize.height) / 2 + 18 - Math.abs(dy);
+      const overlapX = (aSize.width + bSize.width) / 2 + 22 - Math.abs(dx);
+      const overlapY = (aSize.height + bSize.height) / 2 + 20 - Math.abs(dy);
       if (overlapX > 0 && overlapY > 0) {
         const pushX = overlapX < overlapY;
-        const collisionStrength = Math.max(alpha, 0.18);
-        const amount = (pushX ? overlapX : overlapY) * 0.12 * collisionStrength;
+        const collisionStrength = Math.max(alpha, 0.2);
+        const amount = (pushX ? overlapX : overlapY) * 0.14 * collisionStrength;
         const direction = pushX ? Math.sign(dx || 1) : Math.sign(dy || 1);
         if (!a.fixed && state.dragging !== a) {
           if (pushX) a.vx -= direction * amount;
@@ -311,7 +334,7 @@ function applyForces() {
 
       const distanceSquared = Math.max(900, dx * dx + dy * dy);
       const distance = Math.sqrt(distanceSquared);
-      const repulsion = 1800 / distanceSquared;
+      const repulsion = 1650 / distanceSquared;
       const forceX = (dx / distance) * repulsion * alpha;
       const forceY = (dy / distance) * repulsion * alpha;
       if (!a.fixed && state.dragging !== a) {
@@ -345,10 +368,10 @@ function applyForces() {
 
   for (const node of state.nodes) {
     if (node.fixed || state.dragging === node) continue;
-    node.vx += (node.anchorX - node.x) * 0.012 * alpha;
-    node.vy += (node.anchorY - node.y) * 0.012 * alpha;
-    node.vx *= 0.82;
-    node.vy *= 0.82;
+    node.vx += (node.anchorX - node.x) * 0.011 * alpha;
+    node.vy += (node.anchorY - node.y) * 0.011 * alpha;
+    node.vx *= 0.83;
+    node.vy *= 0.83;
     node.x += node.vx;
     node.y += node.vy;
   }
@@ -388,17 +411,6 @@ function colorWithAlpha(hex, alpha) {
   return `rgba(${channels[0]}, ${channels[1]}, ${channels[2]}, ${alpha})`;
 }
 
-function roundedRect(x, y, width, height, radius) {
-  const r = Math.min(radius, width / 2, height / 2);
-  context.beginPath();
-  context.moveTo(x + r, y);
-  context.arcTo(x + width, y, x + width, y + height, r);
-  context.arcTo(x + width, y + height, x, y + height, r);
-  context.arcTo(x, y + height, x, y, r);
-  context.arcTo(x, y, x + width, y, r);
-  context.closePath();
-}
-
 function nodeAppearance(node) {
   if (motionMedia.matches) return 1;
   const elapsed = state.time - state.startedAt - node.appearDelay;
@@ -409,14 +421,15 @@ function drawBackground(colors) {
   context.fillStyle = colors.background;
   context.fillRect(0, 0, state.width, state.height);
 
-  context.fillStyle = colorWithAlpha(colors.edge, themeMedia.matches ? 0.16 : 0.2);
-  const spacing = 34;
+  const spacing = 38;
   const offsetX = ((state.offsetX % spacing) + spacing) % spacing;
   const offsetY = ((state.offsetY % spacing) + spacing) % spacing;
   for (let x = offsetX; x < state.width; x += spacing) {
     for (let y = offsetY; y < state.height; y += spacing) {
+      const variation = ((Math.floor(x / spacing) * 17 + Math.floor(y / spacing) * 31) % 7) / 7;
+      context.fillStyle = colorWithAlpha(colors.edge, 0.12 + variation * 0.09);
       context.beginPath();
-      context.arc(x, y, 0.8, 0, Math.PI * 2);
+      context.arc(x, y, variation > 0.72 ? 1.05 : 0.7, 0, Math.PI * 2);
       context.fill();
     }
   }
@@ -427,14 +440,14 @@ function drawLinks(colors) {
     const source = worldToScreen(link.source.x, link.source.y);
     const target = worldToScreen(link.target.x, link.target.y);
     const structural = isStructuralLink(link);
-    let opacity = structural ? 0.38 : 0.82;
+    let opacity = structural ? 0.36 : 0.82;
     if (state.selected && (link.source === state.selected || link.target === state.selected)) opacity = 1;
     if (state.query && !(matchesQuery(link.source) || matchesQuery(link.target))) opacity = 0.07;
 
     const stroke = structural ? colors.edge : colors.relation;
-    context.lineWidth = structural ? 1.25 : 2.4;
+    context.lineWidth = structural ? 1.15 : 2.35;
     context.strokeStyle = colorWithAlpha(stroke, opacity);
-    context.setLineDash(structural ? [5, 7] : []);
+    context.setLineDash(structural ? [4, 8] : []);
     context.lineDashOffset = motionMedia.matches ? 0 : -(state.time / 90 + index * 3);
     context.beginPath();
     context.moveTo(source.x, source.y);
@@ -443,12 +456,12 @@ function drawLinks(colors) {
     context.setLineDash([]);
 
     if (!motionMedia.matches && opacity > 0.15) {
-      const progress = (state.time / 2600 + index / Math.max(1, state.links.length)) % 1;
+      const progress = (state.time / 2800 + index / Math.max(1, state.links.length)) % 1;
       const x = source.x + (target.x - source.x) * progress;
       const y = source.y + (target.y - source.y) * progress;
-      context.fillStyle = colorWithAlpha(stroke, structural ? 0.72 : 0.95);
+      context.fillStyle = colorWithAlpha(stroke, structural ? 0.7 : 0.95);
       context.beginPath();
-      context.arc(x, y, structural ? 2 : 2.7, 0, Math.PI * 2);
+      context.arc(x, y, structural ? 1.8 : 2.6, 0, Math.PI * 2);
       context.fill();
     }
   });
@@ -456,57 +469,79 @@ function drawLinks(colors) {
 
 function drawNode(node, colors) {
   const point = worldToScreen(node.x, node.y);
-  const dimensions = nodeDimensions(node);
   const appearance = nodeAppearance(node);
   const highlighted = node === state.selected || node === state.hovered;
-  const scale = appearance * (highlighted ? 1.045 : 1);
-  const width = dimensions.width * scale * state.scale;
-  const height = dimensions.height * scale * state.scale;
-  const x = point.x - width / 2;
-  const y = point.y - height / 2;
+  const breathing =
+    !motionMedia.matches && (node.type === "owner" || node.type === "group")
+      ? 1 + Math.sin(state.time / 850 + node.phase * Math.PI * 2) * 0.025
+      : 1;
+  const radius = nodeRadius(node) * appearance * breathing * (highlighted ? 1.12 : 1) * state.scale;
 
   let opacity = 1;
-  if (state.selected && !connectedToSelected(node)) opacity = 0.2;
-  if (state.query && !matchesQuery(node)) opacity = 0.1;
+  if (state.selected && !connectedToSelected(node)) opacity = 0.18;
+  if (state.query && !matchesQuery(node)) opacity = 0.09;
   opacity *= clamp(appearance, 0, 1);
 
   context.save();
   context.globalAlpha = opacity;
   context.shadowColor = colors.shadow;
-  context.shadowBlur = highlighted ? 14 : 8;
-  context.shadowOffsetY = 3;
-
-  if (node.type === "owner" || node.type === "group") {
-    context.fillStyle = nodeColor(node, colors);
-    context.strokeStyle = highlighted ? colors.selected : colorWithAlpha(colors.selected, 0.22);
-  } else {
-    context.fillStyle = colors.panel;
-    context.strokeStyle = highlighted ? colors.selected : colors.border;
-  }
-  context.lineWidth = highlighted ? 2.4 : 1;
-  roundedRect(x, y, width, height, Math.min(14, height / 2));
+  context.shadowBlur = highlighted ? 18 : node.type === "owner" ? 14 : 8;
+  context.shadowOffsetY = 2;
+  context.fillStyle = nodeColor(node, colors);
+  context.beginPath();
+  context.arc(point.x, point.y, radius, 0, Math.PI * 2);
   context.fill();
   context.shadowColor = "transparent";
+
+  context.lineWidth = node.type === "owner" ? 2.6 : node.type === "group" ? 2.1 : 1.4;
+  context.strokeStyle = colorWithAlpha(colors.panel, 0.96);
   context.stroke();
 
-  const fontSize = clamp(12 * state.scale, 10, 15);
-  context.font = `${node.type === "repository" ? 500 : 650} ${fontSize}px -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif`;
-  context.textBaseline = "middle";
-
-  if (node.type === "repository") {
-    const markerX = x + 18 * state.scale;
-    context.fillStyle = nodeColor(node, colors);
+  if (node.type === "group") {
+    context.lineWidth = highlighted ? 2 : 1;
+    context.strokeStyle = colorWithAlpha(nodeColor(node, colors), highlighted ? 0.88 : 0.35);
     context.beginPath();
-    context.arc(markerX, point.y, clamp(5.2 * state.scale, 4.2, 6.4), 0, Math.PI * 2);
-    context.fill();
-    context.fillStyle = colors.text;
-    context.textAlign = "left";
-    context.fillText(node.label, x + 31 * state.scale, point.y + 0.5);
-  } else {
-    context.fillStyle = "#ffffff";
-    context.textAlign = "center";
-    context.fillText(node.label, point.x, point.y + 0.5);
+    context.arc(point.x, point.y, radius + 7 * state.scale, 0, Math.PI * 2);
+    context.stroke();
   }
+
+  if (node === state.selected) {
+    context.lineWidth = 2.4;
+    context.strokeStyle = colors.selected;
+    context.beginPath();
+    context.arc(point.x, point.y, radius + 9 * state.scale, 0, Math.PI * 2);
+    context.stroke();
+  } else if (node === state.hovered) {
+    context.lineWidth = 1.7;
+    context.strokeStyle = colorWithAlpha(colors.selected, 0.78);
+    context.beginPath();
+    context.arc(point.x, point.y, radius + 6 * state.scale, 0, Math.PI * 2);
+    context.stroke();
+  }
+
+  if (node.type === "owner") {
+    context.fillStyle = "rgba(255,255,255,0.88)";
+    context.beginPath();
+    context.arc(point.x - radius * 0.24, point.y - radius * 0.24, Math.max(2, radius * 0.13), 0, Math.PI * 2);
+    context.fill();
+  }
+
+  const showLabel = node.type !== "repository" || state.scale > 0.44 || highlighted;
+  if (showLabel) {
+    const label = displayLabel(node);
+    const fontSize = clamp((node.type === "group" ? 12 : node.type === "owner" ? 12.5 : 11) * state.scale, 9.5, 15);
+    const labelY = point.y + radius + clamp(13 * state.scale, 9, 17);
+    context.font = `${node.type === "repository" ? 500 : 650} ${fontSize}px -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif`;
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.lineJoin = "round";
+    context.strokeStyle = colorWithAlpha(colors.background, 0.96);
+    context.lineWidth = clamp(4 * state.scale, 3, 5.5);
+    context.strokeText(label, point.x, labelY);
+    context.fillStyle = highlighted ? colors.selected : colors.text;
+    context.fillText(label, point.x, labelY);
+  }
+
   context.restore();
 }
 
@@ -536,14 +571,17 @@ function hitTest(screenX, screenY) {
   for (let index = state.nodes.length - 1; index >= 0; index -= 1) {
     const node = state.nodes[index];
     const point = worldToScreen(node.x, node.y);
-    const dimensions = nodeDimensions(node);
-    const width = dimensions.width * state.scale;
-    const height = dimensions.height * state.scale;
+    const radius = nodeRadius(node) * state.scale;
+    if (Math.hypot(screenX - point.x, screenY - point.y) <= radius + 9) return node;
+
+    const width = labelWidth(node) * state.scale;
+    const labelTop = point.y + radius + 5;
+    const labelHeight = clamp(24 * state.scale, 18, 30);
     if (
-      screenX >= point.x - width / 2 - 6 &&
-      screenX <= point.x + width / 2 + 6 &&
-      screenY >= point.y - height / 2 - 6 &&
-      screenY <= point.y + height / 2 + 6
+      screenX >= point.x - width / 2 &&
+      screenX <= point.x + width / 2 &&
+      screenY >= labelTop &&
+      screenY <= labelTop + labelHeight
     ) {
       return node;
     }
@@ -567,7 +605,7 @@ function selectNode(node) {
   state.selected = node;
   if (!node) {
     detailsTitle.textContent = "Explore the map";
-    detailsDescription.textContent = "Select a project or category. Drag to rearrange, scroll to zoom, and double-click a repository to open it.";
+    detailsDescription.textContent = "Select a circle. Drag nodes, scroll to zoom, and double-click a repository to open it.";
     detailsMeta.hidden = true;
     detailsLink.hidden = true;
     draw();
@@ -614,14 +652,14 @@ function fitView(resetSelection = true) {
   let maxY = -Infinity;
   for (const node of state.nodes) {
     const size = nodeDimensions(node);
-    minX = Math.min(minX, node.x - size.width / 2 - 30);
-    maxX = Math.max(maxX, node.x + size.width / 2 + 30);
-    minY = Math.min(minY, node.y - size.height / 2 - 30);
-    maxY = Math.max(maxY, node.y + size.height / 2 + 30);
+    minX = Math.min(minX, node.x - size.width / 2 - 32);
+    maxX = Math.max(maxX, node.x + size.width / 2 + 32);
+    minY = Math.min(minY, node.y - size.height / 2 - 32);
+    maxY = Math.max(maxY, node.y + size.height / 2 + 32);
   }
   const availableWidth = Math.max(320, state.width - (state.width > 900 ? 360 : 36));
   const availableHeight = Math.max(260, state.height - 56);
-  state.scale = clamp(Math.min(availableWidth / (maxX - minX), availableHeight / (maxY - minY)), 0.42, 1.15);
+  state.scale = clamp(Math.min(availableWidth / (maxX - minX), availableHeight / (maxY - minY)), 0.42, 1.18);
   const centerX = (minX + maxX) / 2;
   const centerY = (minY + maxY) / 2;
   state.offsetX = -centerX * state.scale + (state.width > 900 ? -135 : 0);
