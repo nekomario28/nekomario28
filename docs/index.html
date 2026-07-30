@@ -11,16 +11,17 @@
 <body>
   <main class="app">
     <header class="toolbar">
-      <div>
+      <div class="title-block">
+        <span class="eyebrow">Live public portfolio</span>
         <h1>Interactive Project Map</h1>
-        <p>Curated categories, public repositories and verified project relations</p>
+        <p>Explore curated project areas, public repositories and verified relations.</p>
       </div>
       <div class="controls">
         <label class="search">
-          <span>Search</span>
-          <input id="search" type="search" placeholder="Project, category, language or topic" autocomplete="off">
+          <span>Search projects</span>
+          <input id="search" type="search" placeholder="Name, category, language or topic" autocomplete="off">
         </label>
-        <button id="reset" type="button">Reset view</button>
+        <button id="reset" type="button">Fit map</button>
       </div>
     </header>
 
@@ -28,17 +29,22 @@
       <canvas id="graph" aria-label="Interactive map of public GitHub projects"></canvas>
 
       <aside id="details" class="details" aria-live="polite">
-        <h2 id="details-title">Select a node</h2>
-        <p id="details-description">Drag nodes, use the mouse wheel to zoom, and drag the background to pan.</p>
+        <h2 id="details-title">Explore the map</h2>
+        <p id="details-description">Select a project or category. Drag to rearrange, scroll to zoom, and double-click a repository to open it.</p>
         <dl id="details-meta" hidden></dl>
-        <a id="details-link" class="open-link" href="#" target="_blank" rel="noopener" hidden>Open on GitHub</a>
+        <a id="details-link" class="open-link" href="#" target="_blank" rel="noopener" hidden>Open on GitHub →</a>
       </aside>
+
+      <div id="interaction-hint" class="interaction-hint" aria-hidden="true">
+        <strong>Start exploring</strong>
+        <span>Drag a project · Scroll to zoom · Double-click to open</span>
+      </div>
 
       <div class="legend" aria-label="Map legend">
         <span><i class="owner"></i>Owner</span>
         <span><i class="group"></i>Category</span>
         <span><i class="repository"></i>Original project</span>
-        <span><i style="background: var(--muted)"></i>Fork / continuation</span>
+        <span><i class="fork"></i>Fork / continuation</span>
         <span><i class="relation"></i>Verified relation</span>
       </div>
 
