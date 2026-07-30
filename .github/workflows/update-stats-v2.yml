@@ -6,7 +6,7 @@ on:
     paths:
       - ".github/workflows/update-stats-v2.yml"
   schedule:
-    - cron: "23 0,12 * * *"
+    - cron: "29 0,12 * * *"
   workflow_dispatch:
 
 permissions:
