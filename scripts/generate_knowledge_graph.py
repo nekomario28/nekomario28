@@ -305,33 +305,41 @@ def preview_positions(
             first_id = identifiers[first]
             ax, ay, a_node = mutable[first_id]
             a_width, a_height = collision_size(a_node)
+            a_fixed = a_node.get("type") == "group"
             for second in range(first + 1, len(identifiers)):
                 second_id = identifiers[second]
                 bx, by, b_node = mutable[second_id]
                 b_width, b_height = collision_size(b_node)
+                b_fixed = b_node.get("type") == "group"
                 dx, dy = bx - ax, by - ay
                 overlap_x = (a_width + b_width) / 2 + 12 - abs(dx)
                 overlap_y = (a_height + b_height) / 2 + 12 - abs(dy)
                 if overlap_x <= 0 or overlap_y <= 0:
                     continue
                 moved = True
+                a_share = 0 if a_fixed else (1 if b_fixed else 0.5)
+                b_share = 0 if b_fixed else (1 if a_fixed else 0.5)
                 if overlap_x < overlap_y:
                     direction = 1 if dx >= 0 else -1
-                    push = overlap_x / 2 + 0.1
-                    mutable[first_id][0] -= direction * push
-                    mutable[second_id][0] += direction * push
+                    push = overlap_x + 0.1
+                    mutable[first_id][0] -= direction * push * a_share
+                    mutable[second_id][0] += direction * push * b_share
                 else:
                     direction = 1 if dy >= 0 else -1
-                    push = overlap_y / 2 + 0.1
-                    mutable[first_id][1] -= direction * push
-                    mutable[second_id][1] += direction * push
+                    push = overlap_y + 0.1
+                    mutable[first_id][1] -= direction * push * a_share
+                    mutable[second_id][1] += direction * push * b_share
                 ax, ay = mutable[first_id][0], mutable[first_id][1]
 
         for node_id, values in mutable.items():
+            node = values[2]
             anchor_x, anchor_y = anchors[node_id]
-            values[0] += (anchor_x - values[0]) * 0.018
-            values[1] += (anchor_y - values[1]) * 0.018
-            node_width, node_height = collision_size(values[2])
+            if node.get("type") == "group":
+                values[0], values[1] = anchor_x, anchor_y
+            else:
+                values[0] += (anchor_x - values[0]) * 0.018
+                values[1] += (anchor_y - values[1]) * 0.018
+            node_width, node_height = collision_size(node)
             values[0] = max(20 + node_width / 2, min(width - 20 - node_width / 2, values[0]))
             values[1] = max(67 + node_height / 2, min(height - 91 - node_height / 2, values[1]))
 
@@ -345,26 +353,30 @@ def preview_positions(
             first_id = identifiers[first]
             ax, ay, a_node = mutable[first_id]
             a_width, a_height = collision_size(a_node)
+            a_fixed = a_node.get("type") == "group"
             for second in range(first + 1, len(identifiers)):
                 second_id = identifiers[second]
                 bx, by, b_node = mutable[second_id]
                 b_width, b_height = collision_size(b_node)
+                b_fixed = b_node.get("type") == "group"
                 dx, dy = bx - ax, by - ay
                 overlap_x = (a_width + b_width) / 2 + 12 - abs(dx)
                 overlap_y = (a_height + b_height) / 2 + 12 - abs(dy)
                 if overlap_x <= 0 or overlap_y <= 0:
                     continue
                 moved = True
+                a_share = 0 if a_fixed else (1 if b_fixed else 0.5)
+                b_share = 0 if b_fixed else (1 if a_fixed else 0.5)
                 if overlap_x < overlap_y:
                     direction = 1 if dx >= 0 else -1
-                    push = overlap_x / 2 + 0.1
-                    mutable[first_id][0] -= direction * push
-                    mutable[second_id][0] += direction * push
+                    push = overlap_x + 0.1
+                    mutable[first_id][0] -= direction * push * a_share
+                    mutable[second_id][0] += direction * push * b_share
                 else:
                     direction = 1 if dy >= 0 else -1
-                    push = overlap_y / 2 + 0.1
-                    mutable[first_id][1] -= direction * push
-                    mutable[second_id][1] += direction * push
+                    push = overlap_y + 0.1
+                    mutable[first_id][1] -= direction * push * a_share
+                    mutable[second_id][1] += direction * push * b_share
                 ax, ay = mutable[first_id][0], mutable[first_id][1]
         if not moved:
             break
