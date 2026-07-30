@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-07-30T11:09:31.779804+00:00",
+  "generatedAt": "2026-07-30T11:10:42.003158+00:00",
   "repositoryCount": 9,
   "groupCount": 4,
   "nodes": [
@@ -9,26 +9,6 @@
       "label": "nekomario28",
       "type": "owner",
       "url": "https://github.com/nekomario28"
-    },
-    {
-      "id": "language:Java",
-      "label": "Java",
-      "type": "language"
-    },
-    {
-      "id": "language:Python",
-      "label": "Python",
-      "type": "language"
-    },
-    {
-      "id": "language:Rich Text Format",
-      "label": "Rich Text Format",
-      "type": "language"
-    },
-    {
-      "id": "topic:minecraft",
-      "label": "#minecraft",
-      "type": "topic"
     },
     {
       "id": "group:minecraft-neoforge",
@@ -68,6 +48,12 @@
       "topics": [
         "minecraft"
       ],
+      "categories": [
+        "Minecraft / NeoForge"
+      ],
+      "categoryIds": [
+        "minecraft-neoforge"
+      ],
       "stars": 0,
       "fork": true,
       "archived": false,
@@ -82,6 +68,12 @@
       "language": "Java",
       "topics": [
         "minecraft"
+      ],
+      "categories": [
+        "Minecraft / NeoForge"
+      ],
+      "categoryIds": [
+        "minecraft-neoforge"
       ],
       "stars": 0,
       "fork": true,
@@ -98,6 +90,12 @@
       "topics": [
         "minecraft"
       ],
+      "categories": [
+        "Minecraft / NeoForge"
+      ],
+      "categoryIds": [
+        "minecraft-neoforge"
+      ],
       "stars": 0,
       "fork": false,
       "archived": false,
@@ -112,6 +110,12 @@
       "language": "Java",
       "topics": [
         "minecraft"
+      ],
+      "categories": [
+        "Minecraft / NeoForge"
+      ],
+      "categoryIds": [
+        "minecraft-neoforge"
       ],
       "stars": 0,
       "fork": true,
@@ -128,6 +132,12 @@
       "topics": [
         "minecraft"
       ],
+      "categories": [
+        "Minecraft / NeoForge"
+      ],
+      "categoryIds": [
+        "minecraft-neoforge"
+      ],
       "stars": 0,
       "fork": true,
       "archived": false,
@@ -141,6 +151,12 @@
       "description": "",
       "language": "Python",
       "topics": [],
+      "categories": [
+        "Coursework / Learning"
+      ],
+      "categoryIds": [
+        "coursework-learning"
+      ],
       "stars": 1,
       "fork": false,
       "archived": false,
@@ -154,6 +170,12 @@
       "description": "",
       "language": "Java",
       "topics": [],
+      "categories": [
+        "Minecraft / NeoForge"
+      ],
+      "categoryIds": [
+        "minecraft-neoforge"
+      ],
       "stars": 0,
       "fork": true,
       "archived": false,
@@ -167,6 +189,12 @@
       "description": "LimeSimulDemoのfork. 音声認識から行き先を指定、画像認識からルービックキューブの角度を取得、掴む。",
       "language": "Python",
       "topics": [],
+      "categories": [
+        "Robotics / ROS 2"
+      ],
+      "categoryIds": [
+        "robotics-ros2"
+      ],
       "stars": 2,
       "fork": true,
       "archived": false,
@@ -180,6 +208,12 @@
       "description": "Unofficial Python system monitor and library for small IPS USB-C displays like Turing Smart Screen / TURZX",
       "language": "Rich Text Format",
       "topics": [],
+      "categories": [
+        "Utilities / Hardware"
+      ],
+      "categoryIds": [
+        "utilities-hardware"
+      ],
       "stars": 0,
       "fork": true,
       "archived": false,
@@ -251,121 +285,6 @@
       "source": "group:utilities-hardware",
       "target": "repository:turing-smart-screen-python-owl",
       "type": "member"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:sable",
-      "type": "owns"
-    },
-    {
-      "source": "repository:sable",
-      "target": "language:Java",
-      "type": "language"
-    },
-    {
-      "source": "repository:sable",
-      "target": "topic:minecraft",
-      "type": "topic"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:OffHandCombat",
-      "type": "owns"
-    },
-    {
-      "source": "repository:OffHandCombat",
-      "target": "language:Java",
-      "type": "language"
-    },
-    {
-      "source": "repository:OffHandCombat",
-      "target": "topic:minecraft",
-      "type": "topic"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:AntiFullbright",
-      "type": "owns"
-    },
-    {
-      "source": "repository:AntiFullbright",
-      "target": "language:Java",
-      "type": "language"
-    },
-    {
-      "source": "repository:AntiFullbright",
-      "target": "topic:minecraft",
-      "type": "topic"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:workers",
-      "type": "owns"
-    },
-    {
-      "source": "repository:workers",
-      "target": "language:Java",
-      "type": "language"
-    },
-    {
-      "source": "repository:workers",
-      "target": "topic:minecraft",
-      "type": "topic"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:recruits",
-      "type": "owns"
-    },
-    {
-      "source": "repository:recruits",
-      "target": "language:Java",
-      "type": "language"
-    },
-    {
-      "source": "repository:recruits",
-      "target": "topic:minecraft",
-      "type": "topic"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:ProjExD_Group10",
-      "type": "owns"
-    },
-    {
-      "source": "repository:ProjExD_Group10",
-      "target": "language:Python",
-      "type": "language"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:BuyClaimChunks",
-      "type": "owns"
-    },
-    {
-      "source": "repository:BuyClaimChunks",
-      "target": "language:Java",
-      "type": "language"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:lime_tidyup",
-      "type": "owns"
-    },
-    {
-      "source": "repository:lime_tidyup",
-      "target": "language:Python",
-      "type": "language"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:turing-smart-screen-python-owl",
-      "type": "owns"
-    },
-    {
-      "source": "repository:turing-smart-screen-python-owl",
-      "target": "language:Rich Text Format",
-      "type": "language"
     }
   ]
 }
