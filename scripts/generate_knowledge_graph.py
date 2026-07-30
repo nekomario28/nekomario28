@@ -10,13 +10,12 @@ import math
 import os
 import sys
 import urllib.request
-from collections import Counter
 from pathlib import Path
 from typing import Any
 
 
-EMPTY_RELATIONS: dict[str, Any] = {
-    "schemaVersion": 1,
+EMPTY_CONFIG: dict[str, Any] = {
+    "schemaVersion": 2,
     "groups": [],
     "relations": [],
 }
@@ -25,7 +24,7 @@ EMPTY_RELATIONS: dict[str, Any] = {
 def github_get(url: str) -> Any:
     headers = {
         "Accept": "application/vnd.github+json",
-        "User-Agent": "nekomario28-profile-graph",
+        "User-Agent": "nekomario28-profile-map",
         "X-GitHub-Api-Version": "2022-11-28",
     }
     token = os.environ.get("GITHUB_TOKEN")
@@ -40,7 +39,6 @@ def github_get(url: str) -> Any:
 def fetch_public_repositories(username: str) -> list[dict[str, Any]]:
     repositories: list[dict[str, Any]] = []
     page = 1
-
     while True:
         url = (
             f"https://api.github.com/users/{username}/repos"
@@ -61,10 +59,9 @@ def fetch_public_repositories(username: str) -> list[dict[str, Any]]:
     ]
 
 
-def load_relations(path: Path | None) -> dict[str, Any]:
+def load_config(path: Path | None) -> dict[str, Any]:
     if path is None:
-        return dict(EMPTY_RELATIONS)
-
+        return dict(EMPTY_CONFIG)
     try:
         raw = json.loads(path.read_text(encoding="utf-8"))
         if not isinstance(raw, dict):
@@ -74,23 +71,21 @@ def load_relations(path: Path | None) -> dict[str, Any]:
         if not isinstance(groups, list) or not isinstance(relations, list):
             raise ValueError("groups and relations must be arrays")
         return {
-            "schemaVersion": raw.get("schemaVersion", 1),
+            "schemaVersion": raw.get("schemaVersion", 2),
             "groups": groups,
             "relations": relations,
         }
     except (OSError, json.JSONDecodeError, ValueError) as error:
-        print(
-            f"warning: ignoring project relation config {path}: {error}",
-            file=sys.stderr,
-        )
-        return dict(EMPTY_RELATIONS)
+        print(f"warning: ignoring project map config {path}: {error}", file=sys.stderr)
+        return dict(EMPTY_CONFIG)
 
 
-def build_graph(
+def build_map(
     username: str,
     repositories: list[dict[str, Any]],
-    relation_config: dict[str, Any],
+    config: dict[str, Any],
 ) -> dict[str, Any]:
+    repository_names = {str(repository["name"]) for repository in repositories}
     nodes: list[dict[str, Any]] = [
         {
             "id": f"user:{username}",
@@ -107,50 +102,16 @@ def build_graph(
         if key in link_keys:
             return
         link_keys.add(key)
-        link: dict[str, str] = {
-            "source": source,
-            "target": target,
-            "type": link_type,
-        }
+        link: dict[str, str] = {"source": source, "target": target, "type": link_type}
         if label:
             link["label"] = label
         links.append(link)
 
-    language_counts = Counter(
-        repository.get("language")
-        for repository in repositories
-        if repository.get("language")
-    )
-    topic_counts = Counter(
-        topic
-        for repository in repositories
-        for topic in repository.get("topics", [])
-    )
-
-    visible_languages = {language for language, _ in language_counts.most_common(10)}
-    visible_topics = {topic for topic, _ in topic_counts.most_common(16)}
-    repository_names = {str(repository["name"]) for repository in repositories}
-
-    for language in sorted(visible_languages):
-        nodes.append(
-            {
-                "id": f"language:{language}",
-                "label": language,
-                "type": "language",
-            }
-        )
-
-    for topic in sorted(visible_topics):
-        nodes.append(
-            {
-                "id": f"topic:{topic}",
-                "label": f"#{topic}",
-                "type": "topic",
-            }
-        )
-
     valid_groups: list[dict[str, Any]] = []
-    for raw_group in relation_config.get("groups", []):
+    member_group_ids: dict[str, list[str]] = {name: [] for name in repository_names}
+    member_group_labels: dict[str, list[str]] = {name: [] for name in repository_names}
+
+    for raw_group in config.get("groups", []):
         if not isinstance(raw_group, dict):
             continue
         group_id = str(raw_group.get("id", "")).strip()
@@ -158,13 +119,10 @@ def build_graph(
         raw_members = raw_group.get("repositories", [])
         if not group_id or not label or not isinstance(raw_members, list):
             continue
-        members = [
-            str(member)
-            for member in raw_members
-            if str(member) in repository_names
-        ]
+        members = [str(member) for member in raw_members if str(member) in repository_names]
         if not members:
             continue
+
         group = {
             "id": group_id,
             "label": label,
@@ -184,13 +142,13 @@ def build_graph(
         )
         add_link(f"user:{username}", group_node_id, "contains")
         for member in members:
+            member_group_ids[member].append(group_id)
+            member_group_labels[member].append(label)
             add_link(group_node_id, f"repository:{member}", "member")
 
     for repository in repositories:
         name = str(repository["name"])
         node_id = f"repository:{name}"
-        language = repository.get("language")
-        topics = [topic for topic in repository.get("topics", []) if topic in visible_topics]
         nodes.append(
             {
                 "id": node_id,
@@ -198,23 +156,20 @@ def build_graph(
                 "type": "repository",
                 "url": repository.get("html_url"),
                 "description": repository.get("description") or "",
-                "language": language,
-                "topics": topics,
+                "language": repository.get("language"),
+                "topics": repository.get("topics", []),
+                "categories": member_group_labels[name],
+                "categoryIds": member_group_ids[name],
                 "stars": repository.get("stargazers_count", 0),
                 "fork": bool(repository.get("fork")),
                 "archived": bool(repository.get("archived")),
                 "updatedAt": repository.get("updated_at"),
             }
         )
-        add_link(f"user:{username}", node_id, "owns")
+        if not member_group_ids[name]:
+            add_link(f"user:{username}", node_id, "owns")
 
-        if language in visible_languages:
-            add_link(node_id, f"language:{language}", "language")
-
-        for topic in topics:
-            add_link(node_id, f"topic:{topic}", "topic")
-
-    for raw_relation in relation_config.get("relations", []):
+    for raw_relation in config.get("relations", []):
         if not isinstance(raw_relation, dict):
             continue
         source = str(raw_relation.get("source", "")).strip()
@@ -241,16 +196,17 @@ def build_graph(
 
 
 def node_width(label: str, node_type: str) -> int:
-    minimum = 126 if node_type == "group" else 76
-    maximum = 190 if node_type == "group" else 150
+    minimum = 132 if node_type == "group" else 76
+    maximum = 190 if node_type == "group" else 156
     return max(minimum, min(maximum, 24 + len(label) * 6))
 
 
-def render_preview(graph: dict[str, Any], output: Path, theme: str) -> None:
+def render_preview(project_map: dict[str, Any], output: Path, theme: str) -> None:
     if theme == "dark":
         background = "#0d1117"
         border = "#30363d"
         edge = "#484f58"
+        relation = "#f0883e"
         node_fill = "#161b22"
         node_text = "#f0f6fc"
         fork_fill = "#21262d"
@@ -261,6 +217,7 @@ def render_preview(graph: dict[str, Any], output: Path, theme: str) -> None:
         background = "#ffffff"
         border = "#d0d7de"
         edge = "#afb8c1"
+        relation = "#bc4c00"
         node_fill = "#f6f8fa"
         node_text = "#24292f"
         fork_fill = "#eaeef2"
@@ -268,67 +225,82 @@ def render_preview(graph: dict[str, Any], output: Path, theme: str) -> None:
         center_fill = "#54aeff"
         muted = "#57606a"
 
+    width, height = 760, 560
+    cx, cy = width / 2, 290
+    owner_id = f"user:{project_map['owner']}"
+    group_nodes = [node for node in project_map["nodes"] if node.get("type") == "group"]
     repository_nodes = [
-        node for node in graph["nodes"] if node.get("type") == "repository"
+        node for node in project_map["nodes"] if node.get("type") == "repository"
     ]
-    group_nodes = [node for node in graph["nodes"] if node.get("type") == "group"]
-    width, height = 760, 520
-    cx, cy = width / 2, 270
+    repository_by_id = {str(node["id"]): node for node in repository_nodes}
+    member_links = [link for link in project_map["links"] if link.get("type") == "member"]
+    members_by_group: dict[str, list[dict[str, Any]]] = {}
+    grouped_repository_ids: set[str] = set()
+    for link in member_links:
+        group_id = str(link["source"])
+        repository_id = str(link["target"])
+        repository = repository_by_id.get(repository_id)
+        if repository is None:
+            continue
+        members_by_group.setdefault(group_id, []).append(repository)
+        grouped_repository_ids.add(repository_id)
+
     positions: dict[str, tuple[float, float, dict[str, Any]]] = {}
-
+    group_angles: dict[str, float] = {}
+    group_count = max(1, len(group_nodes))
     for index, node in enumerate(group_nodes):
-        angle = -math.pi / 2 + index * (2 * math.pi / max(len(group_nodes), 1))
+        angle = -math.pi / 2 + index * 2 * math.pi / group_count
+        group_angles[str(node["id"])] = angle
         positions[str(node["id"])] = (
-            cx + 110 * math.cos(angle),
-            cy + 85 * math.sin(angle),
+            cx + 145 * math.cos(angle),
+            cy + 120 * math.sin(angle),
             node,
         )
 
-    inner_count = min(8, len(repository_nodes))
-    outer_nodes = repository_nodes[inner_count:]
-    for index, node in enumerate(repository_nodes[:inner_count]):
-        angle = -math.pi / 2 + index * (2 * math.pi / max(inner_count, 1))
+    for group in group_nodes:
+        group_id = str(group["id"])
+        group_x, group_y, _ = positions[group_id]
+        members = members_by_group.get(group_id, [])
+        base_angle = group_angles[group_id]
+        for index, node in enumerate(members):
+            if len(members) == 1:
+                angle = base_angle
+            else:
+                spread = min(math.pi * 1.35, 0.55 * (len(members) - 1))
+                angle = base_angle - spread / 2 + spread * index / (len(members) - 1)
+            positions[str(node["id"])] = (
+                group_x + 112 * math.cos(angle),
+                group_y + 92 * math.sin(angle),
+                node,
+            )
+
+    ungrouped = [node for node in repository_nodes if str(node["id"]) not in grouped_repository_ids]
+    for index, node in enumerate(ungrouped):
+        angle = -math.pi / 2 + index * 2 * math.pi / max(1, len(ungrouped))
         positions[str(node["id"])] = (
-            cx + 205 * math.cos(angle),
-            cy + 155 * math.sin(angle),
+            cx + 285 * math.cos(angle),
+            cy + 210 * math.sin(angle),
             node,
         )
 
-    for index, node in enumerate(outer_nodes):
-        angle = -math.pi / 2 + (index + 0.5) * (2 * math.pi / max(len(outer_nodes), 1))
-        positions[str(node["id"])] = (
-            cx + 295 * math.cos(angle),
-            cy + 215 * math.sin(angle),
-            node,
-        )
-
-    owner_id = f"user:{graph['owner']}"
-    owner = html.escape(str(graph["owner"]))
+    owner = html.escape(str(project_map["owner"]))
     parts = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-label="Public project knowledge graph preview">',
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-label="Interactive public project map preview">',
         f'<rect x="1" y="1" width="{width - 2}" height="{height - 2}" rx="12" fill="{background}" stroke="{border}"/>',
-        f'<text x="{cx}" y="34" text-anchor="middle" fill="{node_text}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="18" font-weight="600">Project Knowledge Graph</text>',
+        f'<text x="{cx}" y="34" text-anchor="middle" fill="{node_text}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="18" font-weight="600">Interactive Project Map</text>',
     ]
 
-    for link in graph["links"]:
+    structural_types = {"owns", "contains", "member"}
+    for link in project_map["links"]:
         source_id = str(link["source"])
         target_id = str(link["target"])
-        if source_id == owner_id:
-            source = (cx, cy)
-        elif source_id in positions:
-            source = positions[source_id][:2]
-        else:
+        source = (cx, cy) if source_id == owner_id else positions.get(source_id, (None, None, None))[:2]
+        target = (cx, cy) if target_id == owner_id else positions.get(target_id, (None, None, None))[:2]
+        if source[0] is None or target[0] is None:
             continue
-        if target_id == owner_id:
-            target = (cx, cy)
-        elif target_id in positions:
-            target = positions[target_id][:2]
-        else:
-            continue
-        opacity = 0.9 if link.get("type") not in {"owns", "contains", "member"} else 0.58
-        stroke_width = 2.1 if link.get("type") not in {"owns", "contains", "member"} else 1.15
+        structural = link.get("type") in structural_types
         parts.append(
-            f'<line x1="{source[0]:.1f}" y1="{source[1]:.1f}" x2="{target[0]:.1f}" y2="{target[1]:.1f}" stroke="{edge}" stroke-width="{stroke_width}" opacity="{opacity}"/>'
+            f'<line x1="{source[0]:.1f}" y1="{source[1]:.1f}" x2="{target[0]:.1f}" y2="{target[1]:.1f}" stroke="{edge if structural else relation}" stroke-width="{1.15 if structural else 2.2}" opacity="{0.52 if structural else 0.9}"/>'
         )
 
     for x, y, node in positions.values():
@@ -350,12 +322,12 @@ def render_preview(graph: dict[str, Any], output: Path, theme: str) -> None:
             f'<text x="{x:.1f}" y="{y + 4:.1f}" text-anchor="middle" fill="{text_fill}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="{11.5 if node_type == "group" else 10.5}" font-weight="{600 if node_type == "group" else 400}">{label}</text>'
         )
 
-    parts.append(f'<circle cx="{cx}" cy="{cy}" r="50" fill="{center_fill}"/>')
+    parts.append(f'<circle cx="{cx}" cy="{cy}" r="48" fill="{center_fill}"/>')
     parts.append(
         f'<text x="{cx}" y="{cy + 5}" text-anchor="middle" fill="#ffffff" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="15" font-weight="700">{owner}</text>'
     )
     parts.append(
-        f'<text x="{cx}" y="{height - 18}" text-anchor="middle" fill="{muted}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="11">{len(repository_nodes)} public projects • {len(group_nodes)} curated group • click to explore</text>'
+        f'<text x="{cx}" y="{height - 18}" text-anchor="middle" fill="{muted}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="11">{len(repository_nodes)} public projects • {len(group_nodes)} curated categories • click to explore</text>'
     )
     parts.append("</svg>")
 
@@ -373,13 +345,16 @@ def main() -> None:
     args = parser.parse_args()
 
     repositories = fetch_public_repositories(args.username)
-    relation_config = load_relations(args.relations)
-    graph = build_graph(args.username, repositories, relation_config)
+    config = load_config(args.relations)
+    project_map = build_map(args.username, repositories, config)
 
     args.json.parent.mkdir(parents=True, exist_ok=True)
-    args.json.write_text(json.dumps(graph, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    render_preview(graph, args.light, "light")
-    render_preview(graph, args.dark, "dark")
+    args.json.write_text(
+        json.dumps(project_map, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    render_preview(project_map, args.light, "light")
+    render_preview(project_map, args.dark, "dark")
 
 
 if __name__ == "__main__":
