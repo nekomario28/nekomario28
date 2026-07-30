@@ -1,4 +1,4 @@
-name: Update profile statistics
+name: Update profile statistics and featured projects
 
 on:
   push:
@@ -45,11 +45,59 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fail_on_error: true
 
+      - name: Generate AntiFullbright light card
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: pin
+          options: >-
+            username=${{ github.repository_owner }}&repo=AntiFullbright&show_owner=false&description_lines_count=2&card_width=360&hide_border=true&border_radius=12&title_color=24292f&text_color=57606a&icon_color=0969da&bg_color=ffffff
+          path: assets/featured-antifullbright-light.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_error: true
+
+      - name: Generate AntiFullbright dark card
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: pin
+          options: >-
+            username=${{ github.repository_owner }}&repo=AntiFullbright&show_owner=false&description_lines_count=2&card_width=360&hide_border=true&border_radius=12&title_color=f0f6fc&text_color=8b949e&icon_color=58a6ff&bg_color=0d1117
+          path: assets/featured-antifullbright-dark.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_error: true
+
+      - name: Generate Lime robotics light card
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: pin
+          options: >-
+            username=${{ github.repository_owner }}&repo=lime_tidyup&show_owner=false&description_lines_count=2&card_width=360&hide_border=true&border_radius=12&title_color=24292f&text_color=57606a&icon_color=0969da&bg_color=ffffff
+          path: assets/featured-lime-light.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_error: true
+
+      - name: Generate Lime robotics dark card
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: pin
+          options: >-
+            username=${{ github.repository_owner }}&repo=lime_tidyup&show_owner=false&description_lines_count=2&card_width=360&hide_border=true&border_radius=12&title_color=f0f6fc&text_color=8b949e&icon_color=58a6ff&bg_color=0d1117
+          path: assets/featured-lime-dark.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_error: true
+
       - name: Validate generated SVG files
         shell: bash
         run: |
           set -euo pipefail
-          for file in assets/github-stats-v2-light.svg assets/github-stats-v2-dark.svg; do
+          files=(
+            assets/github-stats-v2-light.svg
+            assets/github-stats-v2-dark.svg
+            assets/featured-antifullbright-light.svg
+            assets/featured-antifullbright-dark.svg
+            assets/featured-lime-light.svg
+            assets/featured-lime-dark.svg
+          )
+          for file in "${files[@]}"; do
             test -s "$file"
             grep -q '<svg' "$file"
             if grep -qi 'Something went wrong' "$file"; then
@@ -58,17 +106,23 @@ jobs:
             fi
           done
 
-      - name: Commit updated statistics
+      - name: Commit updated profile cards
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/github-stats-v2-light.svg assets/github-stats-v2-dark.svg
+          git add \
+            assets/github-stats-v2-light.svg \
+            assets/github-stats-v2-dark.svg \
+            assets/featured-antifullbright-light.svg \
+            assets/featured-antifullbright-dark.svg \
+            assets/featured-lime-light.svg \
+            assets/featured-lime-dark.svg
 
           if git diff --cached --quiet; then
-            echo "Statistics are already up to date."
+            echo "Profile cards are already up to date."
             exit 0
           fi
 
-          git commit -m "update stats"
+          git commit -m "update profile cards"
           git push
