@@ -20,12 +20,12 @@
 <text x="380.0" y="31" text-anchor="middle" fill="#24292f" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="19" font-weight="650">Interactive Project Map</text>
 <text x="380.0" y="51" text-anchor="middle" fill="#57606a" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="11.5">An Obsidian-style constellation of public projects</text>
 <line class="flow" style="animation-delay:-0.00s" x1="380.0" y1="275.0" x2="380.0" y2="175.0" stroke="#afb8c1" stroke-width="1.15" opacity="0.55"/>
-<line class="flow" style="animation-delay:-0.31s" x1="380.0" y1="175.0" x2="268.0" y2="91.5" stroke="#afb8c1" stroke-width="1.15" opacity="0.55"/>
-<line class="flow" style="animation-delay:-0.62s" x1="380.0" y1="175.0" x2="380.0" y2="91.5" stroke="#afb8c1" stroke-width="1.15" opacity="0.55"/>
+<line class="flow" style="animation-delay:-0.31s" x1="380.0" y1="175.0" x2="232.7" y2="91.5" stroke="#afb8c1" stroke-width="1.15" opacity="0.55"/>
+<line class="flow" style="animation-delay:-0.62s" x1="380.0" y1="175.0" x2="388.8" y2="91.5" stroke="#afb8c1" stroke-width="1.15" opacity="0.55"/>
 <line class="flow" style="animation-delay:-0.93s" x1="380.0" y1="175.0" x2="492.0" y2="91.5" stroke="#afb8c1" stroke-width="1.15" opacity="0.55"/>
-<line class="flow" style="animation-delay:-1.24s" x1="380.0" y1="175.0" x2="267.0" y2="152.5" stroke="#afb8c1" stroke-width="1.15" opacity="0.55"/>
-<line class="flow" style="animation-delay:-1.55s" x1="380.0" y1="175.0" x2="380.0" y2="126.0" stroke="#afb8c1" stroke-width="1.15" opacity="0.55"/>
-<line class="flow" style="animation-delay:-1.86s" x1="380.0" y1="175.0" x2="514.1" y2="152.5" stroke="#afb8c1" stroke-width="1.15" opacity="0.55"/>
+<line class="flow" style="animation-delay:-1.24s" x1="380.0" y1="175.0" x2="320.7" y2="99.4" stroke="#afb8c1" stroke-width="1.15" opacity="0.55"/>
+<line class="flow" style="animation-delay:-1.55s" x1="380.0" y1="175.0" x2="459.9" y2="126.0" stroke="#afb8c1" stroke-width="1.15" opacity="0.55"/>
+<line class="flow" style="animation-delay:-1.86s" x1="380.0" y1="175.0" x2="553.9" y2="125.9" stroke="#afb8c1" stroke-width="1.15" opacity="0.55"/>
 <line class="flow" style="animation-delay:-2.17s" x1="380.0" y1="275.0" x2="555.0" y2="275.0" stroke="#afb8c1" stroke-width="1.15" opacity="0.55"/>
 <line class="flow" style="animation-delay:-2.48s" x1="555.0" y1="275.0" x2="667.3" y2="275.0" stroke="#afb8c1" stroke-width="1.15" opacity="0.55"/>
 <line class="flow" style="animation-delay:-2.79s" x1="380.0" y1="275.0" x2="380.0" y2="375.0" stroke="#afb8c1" stroke-width="1.15" opacity="0.55"/>
@@ -48,18 +48,18 @@
 <circle class="category" style="animation-delay:-0.69s" cx="205.0" cy="275.0" r="24.0" fill="#0969da" stroke="#ffffff" stroke-width="2.2"/>
 <circle cx="205.0" cy="275.0" r="30.0" fill="none" stroke="#0969da" stroke-width="1" opacity="0.26"/>
 <text x="205.0" y="316.0" text-anchor="middle" fill="#24292f" stroke="#f6f8fa" stroke-width="4" paint-order="stroke" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="11" font-weight="650">Utilities / Hardware</text>
-<circle cx="268.0" cy="91.5" r="11.0" fill="#8c959f" stroke="#ffffff" stroke-width="1.5"/>
-<text x="268.0" y="117.5" text-anchor="middle" fill="#24292f" stroke="#f6f8fa" stroke-width="4" paint-order="stroke" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="10.2" font-weight="500">OffHandCombat</text>
-<circle cx="380.0" cy="91.5" r="11.0" fill="#8c959f" stroke="#ffffff" stroke-width="1.5"/>
-<text x="380.0" y="117.5" text-anchor="middle" fill="#24292f" stroke="#f6f8fa" stroke-width="4" paint-order="stroke" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="10.2" font-weight="500">sable</text>
+<circle cx="232.7" cy="91.5" r="11.0" fill="#8c959f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="232.7" y="117.5" text-anchor="middle" fill="#24292f" stroke="#f6f8fa" stroke-width="4" paint-order="stroke" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="10.2" font-weight="500">OffHandCombat</text>
+<circle cx="388.8" cy="91.5" r="11.0" fill="#8c959f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="388.8" y="117.5" text-anchor="middle" fill="#24292f" stroke="#f6f8fa" stroke-width="4" paint-order="stroke" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="10.2" font-weight="500">sable</text>
 <circle cx="492.0" cy="91.5" r="11.0" fill="#2da44e" stroke="#ffffff" stroke-width="1.5"/>
 <text x="492.0" y="117.5" text-anchor="middle" fill="#24292f" stroke="#f6f8fa" stroke-width="4" paint-order="stroke" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="10.2" font-weight="500">AntiFullbright</text>
-<circle cx="267.0" cy="152.5" r="11.0" fill="#8c959f" stroke="#ffffff" stroke-width="1.5"/>
-<text x="267.0" y="178.5" text-anchor="middle" fill="#24292f" stroke="#f6f8fa" stroke-width="4" paint-order="stroke" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="10.2" font-weight="500">workers</text>
-<circle cx="380.0" cy="126.0" r="11.0" fill="#8c959f" stroke="#ffffff" stroke-width="1.5"/>
-<text x="380.0" y="152.0" text-anchor="middle" fill="#24292f" stroke="#f6f8fa" stroke-width="4" paint-order="stroke" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="10.2" font-weight="500">recruits</text>
-<circle cx="514.1" cy="152.5" r="11.0" fill="#8c959f" stroke="#ffffff" stroke-width="1.5"/>
-<text x="514.1" y="178.5" text-anchor="middle" fill="#24292f" stroke="#f6f8fa" stroke-width="4" paint-order="stroke" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="10.2" font-weight="500">BuyClaimChunks</text>
+<circle cx="320.7" cy="99.4" r="11.0" fill="#8c959f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="320.7" y="125.4" text-anchor="middle" fill="#24292f" stroke="#f6f8fa" stroke-width="4" paint-order="stroke" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="10.2" font-weight="500">workers</text>
+<circle cx="459.9" cy="126.0" r="11.0" fill="#8c959f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="459.9" y="152.0" text-anchor="middle" fill="#24292f" stroke="#f6f8fa" stroke-width="4" paint-order="stroke" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="10.2" font-weight="500">recruits</text>
+<circle cx="553.9" cy="125.9" r="11.0" fill="#8c959f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="553.9" y="151.9" text-anchor="middle" fill="#24292f" stroke="#f6f8fa" stroke-width="4" paint-order="stroke" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="10.2" font-weight="500">BuyClaimChunks</text>
 <circle cx="667.3" cy="275.0" r="13.0" fill="#8c959f" stroke="#ffffff" stroke-width="1.5"/>
 <text x="667.3" y="303.0" text-anchor="middle" fill="#24292f" stroke="#f6f8fa" stroke-width="4" paint-order="stroke" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="10.2" font-weight="500">lime_tidyup</text>
 <circle cx="380.0" cy="443.5" r="12.0" fill="#2da44e" stroke="#ffffff" stroke-width="1.5"/>
