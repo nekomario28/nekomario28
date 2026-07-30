@@ -275,6 +275,8 @@ def preview_positions(
             column = index % columns
             items_in_row = min(columns, len(members) - row * columns)
             tangent_offset = (column - (items_in_row - 1) / 2) * 112
+            if outward_y < -0.7 and row > 0:
+                tangent_offset += 56
             if outward_y < -0.7:
                 outward_offset = max(58, 94 - row * 32)
             elif outward_y > 0.7:
