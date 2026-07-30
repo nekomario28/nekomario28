@@ -8,8 +8,8 @@
         role="img"
         aria-labelledby="descId"
       >
-        <title id="titleId">GitHub Activity, Rank: B</title>
-        <desc id="descId">Total Commits  : 64, Total PRs: 272, Total PRs Merged: 8, Total PRs Reviewed: 39, Total Issues: 9</desc>
+        <title id="titleId">GitHub Activity, Rank: C+</title>
+        <desc id="descId">Total Commits  : 59, Total PRs: 66, Total PRs Merged: 9, Total PRs Reviewed: 0, Total Issues: 3</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -73,7 +73,7 @@
         stroke-dashoffset: 251.32741228718345;
       }
       to {
-        stroke-dashoffset: 150.83289375169272;
+        stroke-dashoffset: 198.58850285995328;
       }
     }
   
@@ -151,7 +151,7 @@
         x="174.01"
         y="12.5"
         data-testid="commits"
-      >64</text>
+      >59</text>
     </g>
   </g><g transform="translate(0, 27)">
     <g class="stagger" style="animation-delay: 600ms" transform="translate(25, 0)">
@@ -166,7 +166,7 @@
         x="174.01"
         y="12.5"
         data-testid="prs"
-      >272</text>
+      >66</text>
     </g>
   </g><g transform="translate(0, 54)">
     <g class="stagger" style="animation-delay: 750ms" transform="translate(25, 0)">
@@ -181,7 +181,7 @@
         x="174.01"
         y="12.5"
         data-testid="prs_merged"
-      >8</text>
+      >9</text>
     </g>
   </g><g transform="translate(0, 81)">
     <g class="stagger" style="animation-delay: 900ms" transform="translate(25, 0)">
@@ -196,7 +196,7 @@
         x="174.01"
         y="12.5"
         data-testid="reviews"
-      >39</text>
+      >0</text>
     </g>
   </g><g transform="translate(0, 108)">
     <g class="stagger" style="animation-delay: 1050ms" transform="translate(25, 0)">
@@ -211,7 +211,7 @@
         x="174.01"
         y="12.5"
         data-testid="issues"
-      >9</text>
+      >3</text>
     </g>
   </g>
     </svg>
