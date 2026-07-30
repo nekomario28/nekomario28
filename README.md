@@ -16,12 +16,33 @@
   </picture>
 </p>
 
+<h3 align="center">Featured Projects</h3>
+
+<p align="center">
+  <a href="https://github.com/nekomario28/AntiFullbright">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/featured-antifullbright-dark.svg">
+      <source media="(prefers-color-scheme: light)" srcset="assets/featured-antifullbright-light.svg">
+      <img width="360" src="assets/featured-antifullbright-light.svg" alt="AntiFullbright featured project">
+    </picture>
+  </a>
+  <a href="https://github.com/nekomario28/lime_tidyup">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/featured-lime-dark.svg">
+      <source media="(prefers-color-scheme: light)" srcset="assets/featured-lime-light.svg">
+      <img width="360" src="assets/featured-lime-light.svg" alt="Lime robotics featured project">
+    </picture>
+  </a>
+</p>
+
+<h3 align="center">Interactive Project Map</h3>
+
 <p align="center">
   <a href="https://nekomario28.github.io/nekomario28/">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="assets/knowledge-graph-dark.svg">
-      <source media="(prefers-color-scheme: light)" srcset="assets/knowledge-graph-light.svg">
-      <img width="760" src="assets/knowledge-graph-light.svg" alt="Interactive public project knowledge graph">
+      <source media="(prefers-color-scheme: dark)" srcset="assets/project-map-dark.svg">
+      <source media="(prefers-color-scheme: light)" srcset="assets/project-map-light.svg">
+      <img width="760" src="assets/project-map-light.svg" alt="Interactive public project map">
     </picture>
   </a>
 </p>
@@ -32,10 +53,10 @@
 
 <p align="center">
   <a href="https://github.com/nekomario28/nekomario28/actions/workflows/update-stats-v2.yml">
-    <img alt="Statistics update status" src="https://github.com/nekomario28/nekomario28/actions/workflows/update-stats-v2.yml/badge.svg">
+    <img alt="Statistics and featured projects update status" src="https://github.com/nekomario28/nekomario28/actions/workflows/update-stats-v2.yml/badge.svg">
   </a>
   <a href="https://github.com/nekomario28/nekomario28/actions/workflows/update-knowledge-graph.yml">
-    <img alt="Project graph update status" src="https://github.com/nekomario28/nekomario28/actions/workflows/update-knowledge-graph.yml/badge.svg">
+    <img alt="Project map update status" src="https://github.com/nekomario28/nekomario28/actions/workflows/update-knowledge-graph.yml/badge.svg">
   </a>
   <a href="https://hits.sh/github.com/nekomario28/">
     <img alt="Profile views" src="https://hits.sh/github.com/nekomario28.svg?view=today-total&style=flat-square&label=views">
