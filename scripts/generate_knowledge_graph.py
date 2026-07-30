@@ -229,7 +229,7 @@ def preview_positions(
     width: int,
     height: int,
 ) -> dict[str, tuple[float, float, dict[str, Any]]]:
-    cx, cy = width / 2, 250
+    cx, cy = width / 2, 275
     group_nodes = [node for node in project_map["nodes"] if node.get("type") == "group"]
     repository_nodes = [
         node for node in project_map["nodes"] if node.get("type") == "repository"
@@ -257,7 +257,7 @@ def preview_positions(
     for index, node in enumerate(group_nodes):
         angle = -math.pi / 2 + index * 2 * math.pi / group_count
         x = cx + 175 * math.cos(angle)
-        y = cy + 86 * math.sin(angle)
+        y = cy + 100 * math.sin(angle)
         group_angles[str(node["id"])] = angle
         anchors[str(node["id"])] = (x, y)
         positions[str(node["id"])] = (x, y, node)
@@ -276,7 +276,7 @@ def preview_positions(
             items_in_row = min(columns, len(members) - row * columns)
             tangent_offset = (column - (items_in_row - 1) / 2) * 112
             if outward_y < -0.7:
-                outward_offset = max(48, 94 - row * 40)
+                outward_offset = max(58, 94 - row * 32)
             elif outward_y > 0.7:
                 outward_offset = 64 + row * 44
             else:
@@ -293,7 +293,7 @@ def preview_positions(
     for index, node in enumerate(ungrouped):
         angle = -math.pi / 2 + index * 2 * math.pi / max(1, len(ungrouped))
         x = cx + 285 * math.cos(angle)
-        y = cy + 175 * math.sin(angle)
+        y = cy + 190 * math.sin(angle)
         node_id = str(node["id"])
         anchors[node_id] = (x, y)
         positions[node_id] = (x, y, node)
@@ -425,8 +425,8 @@ def render_preview(project_map: dict[str, Any], output: Path, theme: str) -> Non
         muted = "#57606a"
         halo = "#0969da"
 
-    width, height = 760, 500
-    cx, cy = width / 2, 250
+    width, height = 760, 560
+    cx, cy = width / 2, 275
     owner_id = f"user:{project_map['owner']}"
     positions = preview_positions(project_map, width, height)
     owner = html.escape(str(project_map["owner"]))
@@ -504,7 +504,7 @@ def render_preview(project_map: dict[str, Any], output: Path, theme: str) -> Non
             f'<text x="{x:.1f}" y="{label_y:.1f}" text-anchor="middle" fill="{node_text}" stroke="{background}" stroke-width="4" paint-order="stroke" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="{11 if node_type == "group" else 10.2}" font-weight="{650 if node_type == "group" else 500}">{label}</text>'
         )
 
-    cta_x, cta_y, cta_width, cta_height = 246, 443, 268, 40
+    cta_x, cta_y, cta_width, cta_height = 246, 503, 268, 40
     parts.extend(
         [
             '<g class="cta">',
