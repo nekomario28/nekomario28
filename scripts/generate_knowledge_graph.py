@@ -195,11 +195,33 @@ def build_map(
     }
 
 
-def node_width(label: str, node_type: str) -> int:
-    estimated = 38 + len(label) * 7
+def display_label(label: str, maximum: int = 28) -> str:
+    if len(label) <= maximum:
+        return label
+    return f"{label[: maximum - 1]}…"
+
+
+def node_radius(node: dict[str, Any]) -> float:
+    node_type = str(node.get("type", "repository"))
+    if node_type == "owner":
+        return 35.0
     if node_type == "group":
-        return max(148, min(218, estimated))
-    return max(100, min(202, estimated))
+        return 24.0
+    return 11.0 + min(3.0, float(node.get("stars", 0) or 0))
+
+
+def label_width(node: dict[str, Any]) -> float:
+    label = display_label(str(node.get("label", "")))
+    node_type = str(node.get("type", "repository"))
+    estimated = 16 + len(label) * (6.4 if node_type == "group" else 6.0)
+    return max(54.0, min(178.0, estimated))
+
+
+def collision_size(node: dict[str, Any]) -> tuple[float, float]:
+    radius = node_radius(node)
+    width = max(radius * 2 + 16, label_width(node))
+    height = radius * 2 + (30 if node.get("type") == "group" else 27)
+    return width, height
 
 
 def preview_positions(
@@ -207,7 +229,7 @@ def preview_positions(
     width: int,
     height: int,
 ) -> dict[str, tuple[float, float, dict[str, Any]]]:
-    cx, cy = width / 2, 248
+    cx, cy = width / 2, 231
     group_nodes = [node for node in project_map["nodes"] if node.get("type") == "group"]
     repository_nodes = [
         node for node in project_map["nodes"] if node.get("type") == "repository"
@@ -215,6 +237,7 @@ def preview_positions(
     repository_by_id = {str(node["id"]): node for node in repository_nodes}
     members_by_group: dict[str, list[dict[str, Any]]] = {}
     grouped_repository_ids: set[str] = set()
+
     for link in project_map["links"]:
         if link.get("type") != "member":
             continue
@@ -233,8 +256,8 @@ def preview_positions(
 
     for index, node in enumerate(group_nodes):
         angle = -math.pi / 2 + index * 2 * math.pi / group_count
-        x = cx + 205 * math.cos(angle)
-        y = cy + 142 * math.sin(angle)
+        x = cx + 175 * math.cos(angle)
+        y = cy + 125 * math.sin(angle)
         group_angles[str(node["id"])] = angle
         anchors[str(node["id"])] = (x, y)
         positions[str(node["id"])] = (x, y, node)
@@ -251,8 +274,8 @@ def preview_positions(
             row = index // columns
             column = index % columns
             items_in_row = min(columns, len(members) - row * columns)
-            tangent_offset = (column - (items_in_row - 1) / 2) * 132
-            outward_offset = 102 + row * 58
+            tangent_offset = (column - (items_in_row - 1) / 2) * 112
+            outward_offset = 84 + row * 54
             x = group_x + outward_x * outward_offset + tangent_x * tangent_offset
             y = group_y + outward_y * outward_offset + tangent_y * tangent_offset
             node_id = str(node["id"])
@@ -264,8 +287,8 @@ def preview_positions(
     ]
     for index, node in enumerate(ungrouped):
         angle = -math.pi / 2 + index * 2 * math.pi / max(1, len(ungrouped))
-        x = cx + 310 * math.cos(angle)
-        y = cy + 205 * math.sin(angle)
+        x = cx + 285 * math.cos(angle)
+        y = cy + 190 * math.sin(angle)
         node_id = str(node["id"])
         anchors[node_id] = (x, y)
         positions[node_id] = (x, y, node)
@@ -274,73 +297,72 @@ def preview_positions(
         node_id: [position[0], position[1], position[2]]
         for node_id, position in positions.items()
     }
-    for _ in range(180):
+
+    for _ in range(160):
         identifiers = list(mutable)
+        moved = False
         for first in range(len(identifiers)):
             first_id = identifiers[first]
             ax, ay, a_node = mutable[first_id]
-            a_width = node_width(str(a_node["label"]), str(a_node.get("type")))
-            a_height = 42 if a_node.get("type") == "group" else 36
+            a_width, a_height = collision_size(a_node)
             for second in range(first + 1, len(identifiers)):
                 second_id = identifiers[second]
                 bx, by, b_node = mutable[second_id]
-                b_width = node_width(str(b_node["label"]), str(b_node.get("type")))
-                b_height = 42 if b_node.get("type") == "group" else 36
+                b_width, b_height = collision_size(b_node)
                 dx, dy = bx - ax, by - ay
-                overlap_x = (a_width + b_width) / 2 + 10 - abs(dx)
-                overlap_y = (a_height + b_height) / 2 + 10 - abs(dy)
+                overlap_x = (a_width + b_width) / 2 + 12 - abs(dx)
+                overlap_y = (a_height + b_height) / 2 + 12 - abs(dy)
                 if overlap_x <= 0 or overlap_y <= 0:
                     continue
+                moved = True
                 if overlap_x < overlap_y:
                     direction = 1 if dx >= 0 else -1
-                    push = overlap_x * 0.52
+                    push = overlap_x / 2 + 0.1
                     mutable[first_id][0] -= direction * push
                     mutable[second_id][0] += direction * push
                 else:
                     direction = 1 if dy >= 0 else -1
-                    push = overlap_y * 0.52
+                    push = overlap_y / 2 + 0.1
                     mutable[first_id][1] -= direction * push
                     mutable[second_id][1] += direction * push
                 ax, ay = mutable[first_id][0], mutable[first_id][1]
 
         for node_id, values in mutable.items():
-            node = values[2]
             anchor_x, anchor_y = anchors[node_id]
-            values[0] += (anchor_x - values[0]) * 0.035
-            values[1] += (anchor_y - values[1]) * 0.035
-            half_width = node_width(str(node["label"]), str(node.get("type"))) / 2
-            half_height = 21 if node.get("type") == "group" else 18
-            values[0] = max(15 + half_width, min(width - 15 - half_width, values[0]))
-            values[1] = max(70 + half_height, min(height - 78 - half_height, values[1]))
+            values[0] += (anchor_x - values[0]) * 0.018
+            values[1] += (anchor_y - values[1]) * 0.018
+            node_width, node_height = collision_size(values[2])
+            values[0] = max(20 + node_width / 2, min(width - 20 - node_width / 2, values[0]))
+            values[1] = max(67 + node_height / 2, min(height - 91 - node_height / 2, values[1]))
 
-    # Finish with collision-only passes so anchor attraction cannot reintroduce overlap.
+        if not moved:
+            break
+
     for _ in range(80):
         identifiers = list(mutable)
         moved = False
         for first in range(len(identifiers)):
             first_id = identifiers[first]
             ax, ay, a_node = mutable[first_id]
-            a_width = node_width(str(a_node["label"]), str(a_node.get("type")))
-            a_height = 42 if a_node.get("type") == "group" else 36
+            a_width, a_height = collision_size(a_node)
             for second in range(first + 1, len(identifiers)):
                 second_id = identifiers[second]
                 bx, by, b_node = mutable[second_id]
-                b_width = node_width(str(b_node["label"]), str(b_node.get("type")))
-                b_height = 42 if b_node.get("type") == "group" else 36
+                b_width, b_height = collision_size(b_node)
                 dx, dy = bx - ax, by - ay
-                overlap_x = (a_width + b_width) / 2 + 10 - abs(dx)
-                overlap_y = (a_height + b_height) / 2 + 10 - abs(dy)
+                overlap_x = (a_width + b_width) / 2 + 12 - abs(dx)
+                overlap_y = (a_height + b_height) / 2 + 12 - abs(dy)
                 if overlap_x <= 0 or overlap_y <= 0:
                     continue
                 moved = True
                 if overlap_x < overlap_y:
                     direction = 1 if dx >= 0 else -1
-                    push = overlap_x / 2 + 0.05
+                    push = overlap_x / 2 + 0.1
                     mutable[first_id][0] -= direction * push
                     mutable[second_id][0] += direction * push
                 else:
                     direction = 1 if dy >= 0 else -1
-                    push = overlap_y / 2 + 0.05
+                    push = overlap_y / 2 + 0.1
                     mutable[first_id][1] -= direction * push
                     mutable[second_id][1] += direction * push
                 ax, ay = mutable[first_id][0], mutable[first_id][1]
@@ -382,31 +404,33 @@ def render_preview(project_map: dict[str, Any], output: Path, theme: str) -> Non
         halo = "#0969da"
 
     width, height = 760, 500
-    cx, cy = width / 2, 248
+    cx, cy = width / 2, 231
     owner_id = f"user:{project_map['owner']}"
     positions = preview_positions(project_map, width, height)
     owner = html.escape(str(project_map["owner"]))
 
     parts = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-label="Animated preview of the interactive public project map">',
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-label="Animated Obsidian-style preview of the interactive public project map">',
         "<defs>",
-        f'<radialGradient id="background" cx="50%" cy="45%" r="72%"><stop offset="0" stop-color="{panel}"/><stop offset="1" stop-color="{background}"/></radialGradient>',
-        f'<filter id="shadow" x="-20%" y="-30%" width="140%" height="170%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="{border}" flood-opacity="0.45"/></filter>',
+        f'<radialGradient id="background" cx="50%" cy="43%" r="74%"><stop offset="0" stop-color="{panel}"/><stop offset="1" stop-color="{background}"/></radialGradient>',
+        f'<filter id="glow" x="-120%" y="-120%" width="340%" height="340%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>',
         "</defs>",
         "<style>",
-        ".flow{stroke-dasharray:6 9;animation:flow 7s linear infinite}",
+        ".flow{stroke-dasharray:4 9;animation:flow 7s linear infinite}",
         ".halo{transform-origin:center;animation:pulse 3.2s ease-in-out infinite}",
         ".cta{animation:lift 2.4s ease-in-out infinite}",
         ".arrow{animation:nudge 1.6s ease-in-out infinite}",
-        "@keyframes flow{to{stroke-dashoffset:-60}}",
-        "@keyframes pulse{0%,100%{opacity:.16;transform:scale(.92)}50%{opacity:.04;transform:scale(1.16)}}",
+        ".category{animation:breathe 4.8s ease-in-out infinite}",
+        "@keyframes flow{to{stroke-dashoffset:-52}}",
+        "@keyframes pulse{0%,100%{opacity:.2;transform:scale(.92)}50%{opacity:.05;transform:scale(1.18)}}",
         "@keyframes lift{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}",
         "@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}",
+        "@keyframes breathe{0%,100%{opacity:1}50%{opacity:.82}}",
         "@media(prefers-reduced-motion:reduce){*{animation:none!important}}",
         "</style>",
         f'<rect x="1" y="1" width="{width - 2}" height="{height - 2}" rx="16" fill="url(#background)" stroke="{border}"/>',
-        f'<text x="{cx}" y="32" text-anchor="middle" fill="{node_text}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="19" font-weight="650">Interactive Project Map</text>',
-        f'<text x="{cx}" y="52" text-anchor="middle" fill="{muted}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="11.5">Explore public projects by area — drag, zoom and open repositories</text>',
+        f'<text x="{cx}" y="31" text-anchor="middle" fill="{node_text}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="19" font-weight="650">Interactive Project Map</text>',
+        f'<text x="{cx}" y="51" text-anchor="middle" fill="{muted}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="11.5">An Obsidian-style constellation of public projects</text>',
     ]
 
     structural_types = {"owns", "contains", "member"}
@@ -419,53 +443,50 @@ def render_preview(project_map: dict[str, Any], output: Path, theme: str) -> Non
             continue
         structural = link.get("type") in structural_types
         stroke = edge if structural else relation
-        stroke_width = 1.25 if structural else 2.3
-        opacity = 0.58 if structural else 0.92
+        stroke_width = 1.15 if structural else 2.2
+        opacity = 0.55 if structural else 0.9
         parts.append(
             f'<line class="flow" style="animation-delay:-{index * 0.31:.2f}s" x1="{source[0]:.1f}" y1="{source[1]:.1f}" x2="{target[0]:.1f}" y2="{target[1]:.1f}" stroke="{stroke}" stroke-width="{stroke_width}" opacity="{opacity}"/>'
         )
 
     parts.append(
-        f'<circle class="halo" cx="{cx}" cy="{cy}" r="62" fill="{halo}" opacity="0.12"/>'
+        f'<circle class="halo" cx="{cx}" cy="{cy}" r="56" fill="{halo}" opacity="0.14"/>'
     )
     parts.append(
-        f'<rect x="{cx - 64}" y="{cy - 24}" width="128" height="48" rx="15" fill="{owner_fill}" filter="url(#shadow)"/>'
+        f'<circle cx="{cx}" cy="{cy}" r="35" fill="{owner_fill}" stroke="{panel}" stroke-width="3" filter="url(#glow)"/>'
     )
     parts.append(
-        f'<text x="{cx}" y="{cy + 5}" text-anchor="middle" fill="#ffffff" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="14" font-weight="700">{owner}</text>'
+        f'<text x="{cx}" y="{cy + 5}" text-anchor="middle" fill="#ffffff" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="15" font-weight="750">N</text>'
+    )
+    parts.append(
+        f'<text x="{cx}" y="{cy + 56}" text-anchor="middle" fill="{node_text}" stroke="{background}" stroke-width="4" paint-order="stroke" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="11.5" font-weight="650">{owner}</text>'
     )
 
-    for x, y, node in positions.values():
-        label = html.escape(str(node["label"]))
+    for index, (x, y, node) in enumerate(positions.values()):
+        label = html.escape(display_label(str(node["label"])))
         node_type = str(node.get("type", "repository"))
-        box_width = node_width(str(node["label"]), node_type)
-        box_height = 42 if node_type == "group" else 36
-        left = x - box_width / 2
-        top = y - box_height / 2
+        radius = node_radius(node)
+        fill = group if node_type == "group" else (fork if node.get("fork") else repository)
+        class_name = ' class="category"' if node_type == "group" else ""
+        delay = f' style="animation-delay:-{index * 0.23:.2f}s"' if node_type == "group" else ""
+        stroke_width = 2.2 if node_type == "group" else 1.5
+        parts.append(
+            f'<circle{class_name}{delay} cx="{x:.1f}" cy="{y:.1f}" r="{radius:.1f}" fill="{fill}" stroke="{panel}" stroke-width="{stroke_width}"/>'
+        )
         if node_type == "group":
             parts.append(
-                f'<rect x="{left:.1f}" y="{top:.1f}" width="{box_width}" height="{box_height}" rx="14" fill="{group}" stroke="{border}" filter="url(#shadow)"/>'
+                f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{radius + 6:.1f}" fill="none" stroke="{fill}" stroke-width="1" opacity="0.26"/>'
             )
-            parts.append(
-                f'<text x="{x:.1f}" y="{y + 4:.1f}" text-anchor="middle" fill="#ffffff" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="11.5" font-weight="650">{label}</text>'
-            )
-        else:
-            marker = fork if node.get("fork") else repository
-            parts.append(
-                f'<rect x="{left:.1f}" y="{top:.1f}" width="{box_width}" height="{box_height}" rx="12" fill="{panel}" stroke="{border}" filter="url(#shadow)"/>'
-            )
-            parts.append(
-                f'<circle cx="{left + 17:.1f}" cy="{y:.1f}" r="5" fill="{marker}"/>'
-            )
-            parts.append(
-                f'<text x="{left + 29:.1f}" y="{y + 4:.1f}" fill="{node_text}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="10.5" font-weight="500">{label}</text>'
-            )
+        label_y = y + radius + (17 if node_type == "group" else 15)
+        parts.append(
+            f'<text x="{x:.1f}" y="{label_y:.1f}" text-anchor="middle" fill="{node_text}" stroke="{background}" stroke-width="4" paint-order="stroke" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="{11 if node_type == "group" else 10.2}" font-weight="{650 if node_type == "group" else 500}">{label}</text>'
+        )
 
     cta_x, cta_y, cta_width, cta_height = 246, 443, 268, 40
     parts.extend(
         [
             '<g class="cta">',
-            f'<rect x="{cta_x}" y="{cta_y}" width="{cta_width}" height="{cta_height}" rx="20" fill="{group}" filter="url(#shadow)"/>',
+            f'<rect x="{cta_x}" y="{cta_y}" width="{cta_width}" height="{cta_height}" rx="20" fill="{group}"/>',
             f'<text x="{cta_x + 126}" y="{cta_y + 25}" text-anchor="middle" fill="#ffffff" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="12.5" font-weight="650">Open the interactive map</text>',
             f'<text class="arrow" x="{cta_x + 235}" y="{cta_y + 25}" text-anchor="middle" fill="#ffffff" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="16" font-weight="700">→</text>',
             "</g>",
