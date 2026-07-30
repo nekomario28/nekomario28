@@ -1,4 +1,4 @@
-name: Update project knowledge graph
+name: Update interactive project map
 
 on:
   push:
@@ -18,7 +18,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: project-knowledge-graph
+  group: interactive-project-map
   cancel-in-progress: false
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
       - name: Check out profile repository
         uses: actions/checkout@v6
 
-      - name: Generate project graph data and previews
+      - name: Generate project map data and previews
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -38,20 +38,20 @@ jobs:
             --username nekomario28 \
             --relations config/project-relations.json \
             --json docs/graph-data.json \
-            --light assets/knowledge-graph-light.svg \
-            --dark assets/knowledge-graph-dark.svg
+            --light assets/project-map-light.svg \
+            --dark assets/project-map-dark.svg
 
-      - name: Commit updated graph
+      - name: Commit updated project map
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/graph-data.json assets/knowledge-graph-light.svg assets/knowledge-graph-dark.svg
+          git add docs/graph-data.json assets/project-map-light.svg assets/project-map-dark.svg
 
           if git diff --cached --quiet; then
-            echo "Project graph is already up to date."
+            echo "Project map is already up to date."
             exit 0
           fi
 
-          git commit -m "update project graph"
+          git commit -m "update project map"
           git push
