@@ -1,0 +1,112 @@
+name: C2f-R encrypted comment bridge v4
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches:
+      - ci/c2fr-comment-bridge
+    paths:
+      - .github/c2fr-comment-bridge-trigger.txt
+
+permissions:
+  actions: read
+  contents: read
+  issues: read
+
+concurrency:
+  group: c2fr-comment-bridge-v4-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  dedicated-server-evidence:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.head.ref == 'ci/c2fr-comment-bridge-trigger'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      TARGET_SHA: ccbb0db23ec33cf8b71687051ab01dcade9b9e7c
+      EXPECTED_JAR_SHA256: 78efb131dffb9a042bae3b22d1c8f6b022e8af93c2230503a3fe057ecf98dc0e
+      PRIOR_EVIDENCE_SHA256: 96a1ad7d73aa7861ab34d4045d1c568de25a6463415e21410b7bf504bdf793de
+      NEOFORGE_VERSION: 21.1.242
+      MINECRAFT_VERSION: 1.21.1
+      NEOFORGE_INSTALLER_SHA256: f11bef99d86dc424a93117ddf33507e5eaeb78173375741f70d2962e39a66787
+      EVIDENCE_DIR: bridge-evidence
+      BRIDGE_SOURCE_SHA: 3d9fe6a27dbfbd61219f3150893e054aa65370ca
+
+    steps:
+      - name: Generate one-run encryption key
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/c2fr-bridge" "$EVIDENCE_DIR" public-key
+          chmod 700 "$RUNNER_TEMP/c2fr-bridge"
+          openssl genpkey -algorithm RSA \
+            -pkeyopt rsa_keygen_bits:3072 \
+            -out "$RUNNER_TEMP/c2fr-bridge/private.pem" >/dev/null 2>&1
+          openssl pkey -in "$RUNNER_TEMP/c2fr-bridge/private.pem" \
+            -pubout -out "$RUNNER_TEMP/c2fr-bridge/public.pem"
+          chmod 600 "$RUNNER_TEMP/c2fr-bridge/private.pem"
+          cp "$RUNNER_TEMP/c2fr-bridge/public.pem" public-key/public.pem
+          PUB_B64="$(base64 -w0 "$RUNNER_TEMP/c2fr-bridge/public.pem")"
+          printf 'C2FR_BRIDGE_PUBLIC_KEY_V4 run_id=%s public_key_base64=%s\n' \
+            "$GITHUB_RUN_ID" "$PUB_B64"
+          printf 'key_algorithm=RSA-3072-OAEP-SHA256\nrun_id=%s\ntransport=ordered-pr-comments\nbridge_source_sha=%s\n' \
+            "$GITHUB_RUN_ID" "$BRIDGE_SOURCE_SHA" > "$EVIDENCE_DIR/key-exchange.txt"
+
+      - name: Upload one-run public key
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: c2fr-comment-bridge-public-key-${{ github.run_id }}
+          path: public-key/public.pem
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Select runner-provided Java 21
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -x "${JAVA_HOME_21_X64:?}/bin/java"
+          printf 'JAVA_HOME=%s\n' "$JAVA_HOME_21_X64" >> "$GITHUB_ENV"
+          printf '%s/bin\n' "$JAVA_HOME_21_X64" >> "$GITHUB_PATH"
+          "$JAVA_HOME_21_X64/bin/java" -version
+
+      - name: Download pinned bridge implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --retry-all-errors \
+            -o "$RUNNER_TEMP/c2fr-comment-parser-v4.py" \
+            "https://raw.githubusercontent.com/nekomario28/nekomario28/$BRIDGE_SOURCE_SHA/.github/scripts/c2fr-comment-parser-v4.py"
+          curl --fail --location --retry 3 --retry-all-errors \
+            -o "$RUNNER_TEMP/c2fr-comment-bridge-v4b.sh" \
+            "https://raw.githubusercontent.com/nekomario28/nekomario28/$BRIDGE_SOURCE_SHA/.github/scripts/c2fr-comment-bridge-v4b.sh"
+          chmod 700 "$RUNNER_TEMP/c2fr-comment-parser-v4.py" \
+            "$RUNNER_TEMP/c2fr-comment-bridge-v4b.sh"
+          printf 'PARSER_PATH=%s\n' "$RUNNER_TEMP/c2fr-comment-parser-v4.py" >> "$GITHUB_ENV"
+
+      - name: Run encrypted exact-JAR bridge
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          bash "$RUNNER_TEMP/c2fr-comment-bridge-v4b.sh"
+
+      - name: Remove plaintext payload on all outcomes
+        if: always()
+        shell: bash
+        run: |
+          rm -rf "$RUNNER_TEMP/c2fr-bridge" "$RUNNER_TEMP/c2fr-server" \
+            "$RUNNER_TEMP/c2fr-comment-parser-v4.py" \
+            "$RUNNER_TEMP/c2fr-comment-bridge-v4b.sh" public-key
+
+      - name: Upload text-only supplemental evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: c2fr-m4-supplemental-${{ env.TARGET_SHA }}-${{ github.run_id }}
+          path: bridge-evidence
+          if-no-files-found: error
+          retention-days: 7
