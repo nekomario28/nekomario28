@@ -1,7 +1,7 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-07-31T05:05:23.876854+00:00",
-  "repositoryCount": 9,
+  "generatedAt": "2026-07-31T15:47:39.923961+00:00",
+  "repositoryCount": 10,
   "groupCount": 4,
   "nodes": [
     {
@@ -37,6 +37,21 @@
       "type": "group",
       "description": "System utilities and hardware-facing tools.",
       "repositoryCount": 1
+    },
+    {
+      "id": "repository:FTBPublicClaims",
+      "label": "FTBPublicClaims",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/FTBPublicClaims",
+      "description": "",
+      "language": "Java",
+      "topics": [],
+      "categories": [],
+      "categoryIds": [],
+      "stars": 0,
+      "fork": false,
+      "archived": false,
+      "updatedAt": "2026-07-31T14:31:49Z"
     },
     {
       "id": "repository:OffHandCombat",
@@ -285,6 +300,11 @@
       "source": "group:utilities-hardware",
       "target": "repository:turing-smart-screen-python-owl",
       "type": "member"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:FTBPublicClaims",
+      "type": "owns"
     }
   ]
 }
