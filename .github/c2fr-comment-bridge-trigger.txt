@@ -1,0 +1,4 @@
+purpose=encrypted hosted supplemental dedicated-server evidence for Civitas Residents PR 138
+target_sha=ccbb0db23ec33cf8b71687051ab01dcade9b9e7c
+expected_jar_sha256=78efb131dffb9a042bae3b22d1c8f6b022e8af93c2230503a3fe057ecf98dc0e
+transport=ordered-pr-comments
