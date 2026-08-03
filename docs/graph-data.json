@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-08-02T14:48:53.747130+00:00",
+  "generatedAt": "2026-08-03T05:21:34.512483+00:00",
   "repositoryCount": 10,
   "groupCount": 4,
   "nodes": [
@@ -15,7 +15,7 @@
       "label": "Minecraft / NeoForge",
       "type": "group",
       "description": "Minecraft mods and supporting projects in the NeoForge and related mod ecosystem.",
-      "repositoryCount": 6
+      "repositoryCount": 5
     },
     {
       "id": "group:robotics-ros2",
@@ -39,25 +39,21 @@
       "repositoryCount": 1
     },
     {
-      "id": "repository:AntiFullbright",
-      "label": "AntiFullbright",
+      "id": "repository:antifullbright",
+      "label": "antifullbright",
       "type": "repository",
-      "url": "https://github.com/nekomario28/AntiFullbright",
+      "url": "https://github.com/nekomario28/antifullbright",
       "description": "Server-side NeoForge mod that detects prolonged mining in complete darkness",
       "language": "Java",
       "topics": [
         "minecraft"
       ],
-      "categories": [
-        "Minecraft / NeoForge"
-      ],
-      "categoryIds": [
-        "minecraft-neoforge"
-      ],
+      "categories": [],
+      "categoryIds": [],
       "stars": 0,
       "fork": false,
       "archived": false,
-      "updatedAt": "2026-08-02T14:46:59Z"
+      "updatedAt": "2026-08-02T16:29:37Z"
     },
     {
       "id": "repository:OffHandCombat",
@@ -253,11 +249,6 @@
     },
     {
       "source": "group:minecraft-neoforge",
-      "target": "repository:AntiFullbright",
-      "type": "member"
-    },
-    {
-      "source": "group:minecraft-neoforge",
       "target": "repository:workers",
       "type": "member"
     },
@@ -300,6 +291,11 @@
       "source": "group:utilities-hardware",
       "target": "repository:turing-smart-screen-python-owl",
       "type": "member"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:antifullbright",
+      "type": "owns"
     },
     {
       "source": "user:nekomario28",
