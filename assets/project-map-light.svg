@@ -2,6 +2,31 @@
 <defs>
 <radialGradient id="background" cx="50%" cy="43%" r="74%"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f6f8fa"/></radialGradient>
 <filter id="glow" x="-120%" y="-120%" width="340%" height="340%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+
+<radialGradient id="cosmic-nebula-0" cx="50%" cy="50%" r="50%">
+  <stop offset="0" stop-color="#0969da" stop-opacity="0.075"/>
+  <stop offset="45%" stop-color="#54aeff" stop-opacity="0.04"/>
+  <stop offset="78%" stop-color="#0969da" stop-opacity="0.015"/>
+  <stop offset="100%" stop-color="#0969da" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="cosmic-nebula-1" cx="50%" cy="50%" r="50%">
+  <stop offset="0" stop-color="#0969da" stop-opacity="0.075"/>
+  <stop offset="45%" stop-color="#54aeff" stop-opacity="0.04"/>
+  <stop offset="78%" stop-color="#0969da" stop-opacity="0.015"/>
+  <stop offset="100%" stop-color="#0969da" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="cosmic-nebula-2" cx="50%" cy="50%" r="50%">
+  <stop offset="0" stop-color="#0969da" stop-opacity="0.075"/>
+  <stop offset="45%" stop-color="#54aeff" stop-opacity="0.04"/>
+  <stop offset="78%" stop-color="#0969da" stop-opacity="0.015"/>
+  <stop offset="100%" stop-color="#0969da" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="cosmic-nebula-3" cx="50%" cy="50%" r="50%">
+  <stop offset="0" stop-color="#0969da" stop-opacity="0.075"/>
+  <stop offset="45%" stop-color="#54aeff" stop-opacity="0.04"/>
+  <stop offset="78%" stop-color="#0969da" stop-opacity="0.015"/>
+  <stop offset="100%" stop-color="#0969da" stop-opacity="0"/>
+</radialGradient>
 </defs>
 <style>
 .flow{stroke-dasharray:4 9;animation:flow 7s linear infinite}
@@ -15,8 +40,86 @@
 @keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
 @keyframes breathe{0%,100%{opacity:1}50%{opacity:.82}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+
+.cosmic-star{animation:cosmicTwinkle 5.6s ease-in-out infinite}
+@keyframes cosmicTwinkle{0%,100%{opacity:.55}50%{opacity:1}}
 </style>
 <rect x="1" y="1" width="758" height="558" rx="16" fill="url(#background)" stroke="#d0d7de"/>
+<g id="cosmic-preview" pointer-events="none">
+<circle class="cosmic-star" cx="332.6" cy="457.0" r="1.05" fill="#57606a" opacity="0.196" style="animation-delay:-2.88s"/>
+<circle class="cosmic-star" cx="431.5" cy="306.3" r="1.05" fill="#57606a" opacity="0.297" style="animation-delay:-1.07s"/>
+<circle class="cosmic-star" cx="578.6" cy="109.8" r="0.70" fill="#57606a" opacity="0.104" style="animation-delay:-4.25s"/>
+<circle class="cosmic-star" cx="664.7" cy="153.0" r="0.85" fill="#57606a" opacity="0.102" style="animation-delay:-2.61s"/>
+<circle class="cosmic-star" cx="220.3" cy="278.7" r="0.85" fill="#57606a" opacity="0.141" style="animation-delay:-2.84s"/>
+<circle class="cosmic-star" cx="64.1" cy="486.1" r="1.30" fill="#57606a" opacity="0.290" style="animation-delay:-3.90s"/>
+<circle class="cosmic-star" cx="232.2" cy="313.9" r="0.70" fill="#57606a" opacity="0.110" style="animation-delay:-4.51s"/>
+<circle class="cosmic-star" cx="601.7" cy="412.8" r="0.55" fill="#57606a" opacity="0.195" style="animation-delay:-4.44s"/>
+<circle class="cosmic-star" cx="526.3" cy="173.7" r="0.55" fill="#57606a" opacity="0.129" style="animation-delay:-2.90s"/>
+<circle class="cosmic-star" cx="46.4" cy="356.8" r="0.70" fill="#57606a" opacity="0.293" style="animation-delay:-0.00s"/>
+<circle class="cosmic-star" cx="388.1" cy="455.8" r="0.55" fill="#57606a" opacity="0.208" style="animation-delay:-4.07s"/>
+<circle class="cosmic-star" cx="28.7" cy="91.5" r="1.05" fill="#57606a" opacity="0.282" style="animation-delay:-4.41s"/>
+<circle class="cosmic-star" cx="475.0" cy="428.9" r="0.70" fill="#57606a" opacity="0.167" style="animation-delay:-3.11s"/>
+<circle class="cosmic-star" cx="604.1" cy="484.2" r="0.70" fill="#57606a" opacity="0.282" style="animation-delay:-1.98s"/>
+<circle class="cosmic-star" cx="665.6" cy="162.1" r="0.85" fill="#57606a" opacity="0.271" style="animation-delay:-2.37s"/>
+<circle class="cosmic-star" cx="362.5" cy="420.2" r="0.85" fill="#57606a" opacity="0.288" style="animation-delay:-2.97s"/>
+<circle class="cosmic-star" cx="649.4" cy="416.1" r="1.30" fill="#57606a" opacity="0.298" style="animation-delay:-3.89s"/>
+<circle class="cosmic-star" cx="411.4" cy="102.3" r="0.55" fill="#57606a" opacity="0.146" style="animation-delay:-2.88s"/>
+<circle class="cosmic-star" cx="389.9" cy="432.3" r="1.05" fill="#57606a" opacity="0.166" style="animation-delay:-2.70s"/>
+<circle class="cosmic-star" cx="591.0" cy="161.5" r="1.05" fill="#57606a" opacity="0.252" style="animation-delay:-2.74s"/>
+<circle class="cosmic-star" cx="476.9" cy="432.5" r="1.05" fill="#57606a" opacity="0.149" style="animation-delay:-3.87s"/>
+<circle class="cosmic-star" cx="698.3" cy="375.9" r="0.85" fill="#57606a" opacity="0.268" style="animation-delay:-3.81s"/>
+<circle class="cosmic-star" cx="115.6" cy="259.9" r="1.05" fill="#57606a" opacity="0.274" style="animation-delay:-5.49s"/>
+<circle class="cosmic-star" cx="202.6" cy="293.1" r="1.30" fill="#57606a" opacity="0.243" style="animation-delay:-3.43s"/>
+<circle class="cosmic-star" cx="357.1" cy="401.0" r="1.05" fill="#57606a" opacity="0.298" style="animation-delay:-4.25s"/>
+<circle class="cosmic-star" cx="88.9" cy="355.3" r="0.55" fill="#57606a" opacity="0.188" style="animation-delay:-0.85s"/>
+<circle class="cosmic-star" cx="481.7" cy="280.5" r="0.70" fill="#57606a" opacity="0.106" style="animation-delay:-4.02s"/>
+<circle class="cosmic-star" cx="246.2" cy="250.9" r="0.85" fill="#57606a" opacity="0.233" style="animation-delay:-4.29s"/>
+<circle class="cosmic-star" cx="715.4" cy="137.5" r="0.55" fill="#57606a" opacity="0.201" style="animation-delay:-0.03s"/>
+<circle class="cosmic-star" cx="273.1" cy="447.4" r="1.05" fill="#57606a" opacity="0.148" style="animation-delay:-4.36s"/>
+<circle class="cosmic-star" cx="657.6" cy="306.6" r="1.05" fill="#57606a" opacity="0.288" style="animation-delay:-4.14s"/>
+<circle class="cosmic-star" cx="37.7" cy="399.0" r="0.85" fill="#57606a" opacity="0.154" style="animation-delay:-0.82s"/>
+<circle class="cosmic-star" cx="312.6" cy="285.1" r="0.55" fill="#57606a" opacity="0.128" style="animation-delay:-4.71s"/>
+<circle class="cosmic-star" cx="51.7" cy="399.3" r="0.55" fill="#57606a" opacity="0.143" style="animation-delay:-4.35s"/>
+<circle class="cosmic-star" cx="696.6" cy="73.4" r="0.55" fill="#57606a" opacity="0.135" style="animation-delay:-0.56s"/>
+<circle class="cosmic-star" cx="155.8" cy="420.3" r="1.05" fill="#57606a" opacity="0.235" style="animation-delay:-1.16s"/>
+<circle class="cosmic-star" cx="405.6" cy="317.9" r="1.05" fill="#57606a" opacity="0.278" style="animation-delay:-1.71s"/>
+<circle class="cosmic-star" cx="497.2" cy="343.2" r="1.30" fill="#57606a" opacity="0.205" style="animation-delay:-0.01s"/>
+<circle class="cosmic-star" cx="600.5" cy="349.9" r="1.30" fill="#57606a" opacity="0.226" style="animation-delay:-4.40s"/>
+<circle class="cosmic-star" cx="253.7" cy="271.4" r="0.55" fill="#57606a" opacity="0.118" style="animation-delay:-2.95s"/>
+<circle class="cosmic-star" cx="519.2" cy="167.5" r="1.05" fill="#57606a" opacity="0.131" style="animation-delay:-1.95s"/>
+<circle class="cosmic-star" cx="560.9" cy="307.4" r="1.30" fill="#57606a" opacity="0.184" style="animation-delay:-0.69s"/>
+<circle class="cosmic-star" cx="633.8" cy="229.4" r="1.05" fill="#57606a" opacity="0.235" style="animation-delay:-5.08s"/>
+<circle class="cosmic-star" cx="42.2" cy="122.0" r="0.55" fill="#57606a" opacity="0.114" style="animation-delay:-1.52s"/>
+<circle class="cosmic-star" cx="53.8" cy="255.0" r="0.55" fill="#57606a" opacity="0.147" style="animation-delay:-0.57s"/>
+<circle class="cosmic-star" cx="171.7" cy="400.3" r="0.85" fill="#57606a" opacity="0.139" style="animation-delay:-1.06s"/>
+<circle class="cosmic-star" cx="551.1" cy="85.1" r="0.55" fill="#57606a" opacity="0.186" style="animation-delay:-1.90s"/>
+<circle class="cosmic-star" cx="22.1" cy="172.7" r="0.85" fill="#57606a" opacity="0.113" style="animation-delay:-2.67s"/>
+<circle class="cosmic-star" cx="55.1" cy="455.1" r="0.85" fill="#57606a" opacity="0.105" style="animation-delay:-3.55s"/>
+<circle class="cosmic-star" cx="76.7" cy="372.9" r="0.85" fill="#57606a" opacity="0.130" style="animation-delay:-3.59s"/>
+<circle class="cosmic-star" cx="440.5" cy="269.1" r="1.30" fill="#57606a" opacity="0.264" style="animation-delay:-1.68s"/>
+<circle class="cosmic-star" cx="452.7" cy="310.7" r="1.05" fill="#57606a" opacity="0.131" style="animation-delay:-5.26s"/>
+<circle class="cosmic-star" cx="326.5" cy="324.3" r="0.85" fill="#57606a" opacity="0.191" style="animation-delay:-0.29s"/>
+<circle class="cosmic-star" cx="496.4" cy="270.8" r="1.05" fill="#57606a" opacity="0.131" style="animation-delay:-1.08s"/>
+<circle class="cosmic-star" cx="57.5" cy="198.3" r="0.85" fill="#57606a" opacity="0.127" style="animation-delay:-3.52s"/>
+<circle class="cosmic-star" cx="496.1" cy="195.3" r="0.70" fill="#57606a" opacity="0.224" style="animation-delay:-0.40s"/>
+<circle class="cosmic-star" cx="450.7" cy="174.0" r="0.85" fill="#57606a" opacity="0.205" style="animation-delay:-3.32s"/>
+<circle class="cosmic-star" cx="648.5" cy="96.0" r="0.55" fill="#57606a" opacity="0.165" style="animation-delay:-1.05s"/>
+<circle class="cosmic-star" cx="597.2" cy="288.5" r="1.05" fill="#57606a" opacity="0.241" style="animation-delay:-2.65s"/>
+<circle class="cosmic-star" cx="200.8" cy="160.8" r="1.05" fill="#57606a" opacity="0.180" style="animation-delay:-3.83s"/>
+<circle class="cosmic-star" cx="438.4" cy="143.1" r="0.55" fill="#57606a" opacity="0.112" style="animation-delay:-5.26s"/>
+<circle class="cosmic-star" cx="274.9" cy="74.8" r="0.55" fill="#57606a" opacity="0.137" style="animation-delay:-3.36s"/>
+<circle class="cosmic-star" cx="590.2" cy="311.0" r="0.85" fill="#57606a" opacity="0.237" style="animation-delay:-1.68s"/>
+<circle class="cosmic-star" cx="330.2" cy="128.7" r="0.85" fill="#57606a" opacity="0.254" style="animation-delay:-1.40s"/>
+<circle class="cosmic-star" cx="109.8" cy="393.4" r="0.85" fill="#57606a" opacity="0.246" style="animation-delay:-5.19s"/>
+<circle class="cosmic-star" cx="718.5" cy="460.3" r="1.30" fill="#57606a" opacity="0.193" style="animation-delay:-3.40s"/>
+<ellipse cx="380.0" cy="275.0" rx="154" ry="58" transform="rotate(-18 380.0 275.0)" fill="none" stroke="#0969da" stroke-width="1" opacity="0.042" stroke-dasharray="2 9"/>
+<ellipse cx="380.0" cy="275.0" rx="154" ry="58" transform="rotate(102 380.0 275.0)" fill="none" stroke="#0969da" stroke-width="1" opacity="0.039" stroke-dasharray="2 9"/>
+<ellipse cx="380.0" cy="275.0" rx="154" ry="58" transform="rotate(222 380.0 275.0)" fill="none" stroke="#0969da" stroke-width="1" opacity="0.035" stroke-dasharray="2 9"/>
+<ellipse cx="380.0" cy="175.0" rx="94" ry="55" transform="rotate(18 380.0 175.0)" fill="url(#cosmic-nebula-0)"/>
+<ellipse cx="555.0" cy="275.0" rx="94" ry="55" transform="rotate(55 555.0 275.0)" fill="url(#cosmic-nebula-1)"/>
+<ellipse cx="380.0" cy="375.0" rx="94" ry="55" transform="rotate(92 380.0 375.0)" fill="url(#cosmic-nebula-2)"/>
+<ellipse cx="205.0" cy="275.0" rx="94" ry="55" transform="rotate(129 205.0 275.0)" fill="url(#cosmic-nebula-3)"/>
+</g>
 <text x="380.0" y="31" text-anchor="middle" fill="#24292f" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="19" font-weight="650">Interactive Project Map</text>
 <text x="380.0" y="51" text-anchor="middle" fill="#57606a" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans JP,sans-serif" font-size="11.5">An Obsidian-style constellation of public projects</text>
 <line class="flow" style="animation-delay:-0.00s" x1="380.0" y1="275.0" x2="380.0" y2="175.0" stroke="#afb8c1" stroke-width="1.15" opacity="0.55"/>
