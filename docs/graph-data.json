@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-08-07T04:14:02.586221+00:00",
+  "generatedAt": "2026-08-07T14:36:53.376886+00:00",
   "repositoryCount": 10,
   "groupCount": 4,
   "nodes": [
@@ -39,23 +39,6 @@
       "repositoryCount": 1
     },
     {
-      "id": "repository:antifullbright",
-      "label": "antifullbright",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/antifullbright",
-      "description": "Server-side NeoForge mod that detects prolonged mining in complete darkness",
-      "language": "Java",
-      "topics": [
-        "minecraft"
-      ],
-      "categories": [],
-      "categoryIds": [],
-      "stars": 0,
-      "fork": false,
-      "archived": false,
-      "updatedAt": "2026-08-02T16:29:37Z"
-    },
-    {
       "id": "repository:OffHandCombat",
       "label": "OffHandCombat",
       "type": "repository",
@@ -74,7 +57,24 @@
       "stars": 0,
       "fork": true,
       "archived": false,
-      "updatedAt": "2026-08-02T11:02:53Z"
+      "updatedAt": "2026-08-07T06:33:33Z"
+    },
+    {
+      "id": "repository:antifullbright",
+      "label": "antifullbright",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/antifullbright",
+      "description": "Server-side NeoForge mod that detects prolonged mining in complete darkness",
+      "language": "Java",
+      "topics": [
+        "minecraft"
+      ],
+      "categories": [],
+      "categoryIds": [],
+      "stars": 0,
+      "fork": false,
+      "archived": false,
+      "updatedAt": "2026-08-02T16:29:37Z"
     },
     {
       "id": "repository:FTBPublicClaims",
