@@ -89,18 +89,19 @@ function drawCategoryNebulae(colors) {
     const radius = clamp(112 * state.scale, 58, 150);
     let intensity = selected ? 1 : 0.62;
     if (faded || queryFaded) intensity = 0.20;
-
-    const gradient = context.createRadialGradient(point.x, point.y, 4, point.x, point.y, radius);
     const coreAlpha = (themeMedia.matches ? 0.105 : 0.065) * intensity;
-    gradient.addColorStop(0, colorWithAlpha(colors.group, coreAlpha));
-    gradient.addColorStop(0.42, colorWithAlpha(colors.owner, coreAlpha * 0.58));
-    gradient.addColorStop(0.76, colorWithAlpha(colors.group, coreAlpha * 0.16));
-    gradient.addColorStop(1, colorWithAlpha(colors.group, 0));
 
     context.save();
     context.translate(point.x, point.y);
     context.rotate((index * 0.83 + node.phase * Math.PI) % Math.PI);
     context.scale(1.42, 0.78);
+
+    const gradient = context.createRadialGradient(0, 0, 4, 0, 0, radius);
+    gradient.addColorStop(0, colorWithAlpha(colors.group, coreAlpha));
+    gradient.addColorStop(0.42, colorWithAlpha(colors.owner, coreAlpha * 0.58));
+    gradient.addColorStop(0.76, colorWithAlpha(colors.group, coreAlpha * 0.16));
+    gradient.addColorStop(1, colorWithAlpha(colors.group, 0));
+
     context.fillStyle = gradient;
     context.beginPath();
     context.arc(0, 0, radius, 0, Math.PI * 2);
