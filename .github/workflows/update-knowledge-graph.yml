@@ -7,8 +7,10 @@ on:
       - ".github/workflows/update-knowledge-graph.yml"
       - "config/project-relations.json"
       - "scripts/generate_knowledge_graph.py"
+      - "scripts/enhance_project_map_preview.py"
       - "docs/index.html"
       - "docs/graph.js"
+      - "docs/cosmic.js"
       - "docs/styles.css"
   schedule:
     - cron: "41 1,13 * * *"
@@ -40,6 +42,9 @@ jobs:
             --json docs/graph-data.json \
             --light assets/project-map-light.svg \
             --dark assets/project-map-dark.svg
+          python scripts/enhance_project_map_preview.py \
+            assets/project-map-light.svg \
+            assets/project-map-dark.svg
 
       - name: Commit updated project map
         shell: bash
