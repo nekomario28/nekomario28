@@ -25,14 +25,14 @@
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="assets/project-map-dark.svg">
       <source media="(prefers-color-scheme: light)" srcset="assets/project-map-light.svg">
-      <img width="760" src="assets/project-map-light.svg" alt="Animated preview of the interactive public project map">
+      <img width="760" src="assets/project-map-light.svg" alt="Animated galaxy-style preview of the interactive public project map">
     </picture>
   </a>
 </p>
 
 <p align="center">
   <a href="https://nekomario28.github.io/nekomario28/"><strong>Open the interactive map →</strong></a><br>
-  <sub>Drag projects, zoom through categories, and open repositories from the live map.</sub>
+  <sub>Inspect projects, focus clusters, drag nodes, zoom, and open repositories from the live map.</sub>
 </p>
 
 <p align="center">
