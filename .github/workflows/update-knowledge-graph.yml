@@ -14,6 +14,7 @@ on:
       - "docs/index.html"
       - "docs/graph.js"
       - "docs/galaxy-layout.js"
+      - "docs/galaxy-controls.js"
       - "docs/cosmic.js"
       - "docs/styles.css"
   schedule:
@@ -40,6 +41,7 @@ jobs:
         run: |
           node --check docs/graph.js
           node --check docs/galaxy-layout.js
+          node --check docs/galaxy-controls.js
           node --check docs/cosmic.js
 
       - name: Generate project map data
