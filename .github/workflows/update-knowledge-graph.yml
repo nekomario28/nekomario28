@@ -69,6 +69,7 @@ jobs:
         run: |
           python scripts/validate_project_map.py \
             --json docs/graph-data.json \
+            --config config/project-relations.json \
             --html docs/index.html \
             --light assets/project-map-light.svg \
             --dark assets/project-map-dark.svg
