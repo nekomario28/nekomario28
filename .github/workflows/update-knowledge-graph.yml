@@ -8,6 +8,7 @@ on:
       - "config/project-relations.json"
       - "scripts/generate_knowledge_graph.py"
       - "scripts/enhance_project_map_preview.py"
+      - "scripts/validate_project_map.py"
       - "docs/index.html"
       - "docs/graph.js"
       - "docs/galaxy-layout.js"
@@ -52,6 +53,14 @@ jobs:
           python scripts/enhance_project_map_preview.py \
             assets/project-map-light.svg \
             assets/project-map-dark.svg
+
+      - name: Validate generated project map
+        run: |
+          python scripts/validate_project_map.py \
+            --json docs/graph-data.json \
+            --html docs/index.html \
+            --light assets/project-map-light.svg \
+            --dark assets/project-map-dark.svg
 
       - name: Commit updated project map
         shell: bash
