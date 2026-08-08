@@ -14,6 +14,7 @@ on:
       - "docs/index.html"
       - "docs/graph.js"
       - "docs/galaxy-layout.js"
+      - "docs/galaxy-motion.js"
       - "docs/galaxy-controls.js"
       - "docs/cosmic.js"
       - "docs/styles.css"
@@ -42,10 +43,12 @@ jobs:
         run: |
           node --check docs/graph.js
           node --check docs/galaxy-layout.js
+          node --check docs/galaxy-motion.js
           node --check docs/galaxy-controls.js
           node --check docs/cosmic.js
           test -s docs/responsive.css
           grep -q 'href="responsive.css"' docs/index.html
+          grep -q 'src="galaxy-motion.js"' docs/index.html
 
       - name: Generate project map data
         env:
