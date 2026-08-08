@@ -8,6 +8,7 @@ on:
       - "config/project-relations.json"
       - "scripts/generate_knowledge_graph.py"
       - "scripts/render_galaxy_project_map.py"
+      - "scripts/render_project_map.py"
       - "scripts/enhance_project_map_preview.py"
       - "scripts/validate_project_map.py"
       - "docs/index.html"
@@ -54,7 +55,7 @@ jobs:
 
       - name: Render galaxy previews
         run: |
-          python scripts/render_galaxy_project_map.py \
+          python scripts/render_project_map.py \
             --json docs/graph-data.json \
             --light assets/project-map-light.svg \
             --dark assets/project-map-dark.svg
