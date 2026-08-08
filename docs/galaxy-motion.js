@@ -80,11 +80,8 @@ function galaxyMotionStep(now = performance.now()) {
     if (pausedClusters.has(parent.id)) continue;
 
     orbit.phase += orbit.angularSpeed * dt;
-    const targetX = parent.x + Math.cos(orbit.phase) * orbit.radius;
-    const targetY = parent.y + Math.sin(orbit.phase) * orbit.radius * orbit.flatten;
-
-    node.anchorX = targetX;
-    node.anchorY = targetY;
+    node.anchorX = parent.x + Math.cos(orbit.phase) * orbit.radius;
+    node.anchorY = parent.y + Math.sin(orbit.phase) * orbit.radius * orbit.flatten;
   }
 }
 
@@ -115,19 +112,22 @@ canvas.addEventListener("pointercancel", () => {
   galaxyMotion.dragCandidate = null;
 });
 
-// Pause orbital advance while a pointer gesture is active. This prevents targets
-// from sliding under a mouse/finger during click, drag or pinch interactions.
-canvas.addEventListener("pointerdown", (event) => {
+// Capture-phase bookkeeping runs before the pinch handler in galaxy-controls.js,
+// so even a gesture that stops propagation cannot leave orbital motion paused.
+function galaxyMotionPointerStart(event) {
   galaxyMotion.activePointers.add(event.pointerId);
-});
-canvas.addEventListener("pointerup", (event) => {
+  if (galaxyMotion.activePointers.size >= 2) galaxyMotion.dragCandidate = null;
+}
+
+function galaxyMotionPointerEnd(event) {
   galaxyMotion.activePointers.delete(event.pointerId);
   galaxyMotion.lastTime = performance.now();
-});
-canvas.addEventListener("pointercancel", (event) => {
-  galaxyMotion.activePointers.delete(event.pointerId);
-  galaxyMotion.lastTime = performance.now();
-});
+  if (galaxyMotion.activePointers.size === 0) galaxyMotion.dragCandidate = null;
+}
+
+canvas.addEventListener("pointerdown", galaxyMotionPointerStart, { capture: true, passive: true });
+canvas.addEventListener("pointerup", galaxyMotionPointerEnd, { capture: true, passive: true });
+canvas.addEventListener("pointercancel", galaxyMotionPointerEnd, { capture: true, passive: true });
 
 const galaxyMotionReflowBase = galaxyReflow;
 galaxyReflow = function galaxyReflowWithOrbitReset() {
