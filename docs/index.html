@@ -31,14 +31,14 @@
 
       <aside id="details" class="details" aria-live="polite">
         <h2 id="details-title">Explore the map</h2>
-        <p id="details-description">Select a circle. Drag individual nodes, drag empty space to pan, scroll or pinch to zoom, and double-click a repository to open it.</p>
+        <p id="details-description">Categories drift slowly around the owner while their repositories orbit independently. Drag individual nodes, pan empty space, and scroll or pinch to zoom.</p>
         <dl id="details-meta" hidden></dl>
         <a id="details-link" class="open-link" href="#" target="_blank" rel="noopener" hidden>Open on GitHub →</a>
       </aside>
 
       <div id="interaction-hint" class="interaction-hint" aria-hidden="true">
-        <strong>Explore the graph</strong>
-        <span>Drag nodes · Pan empty space · Scroll or pinch to zoom</span>
+        <strong>Explore the double-orbit graph</strong>
+        <span>Categories orbit slowly · Projects orbit categories · Drag nodes · Pinch to zoom</span>
       </div>
 
       <div class="legend" aria-label="Map legend">
@@ -54,12 +54,13 @@
 
     <footer>
       <a href="https://github.com/nekomario28" target="_blank" rel="noopener">github.com/nekomario28</a>
-      <span>Only public repositories and manually curated categories are included.</span>
+      <span>Only public repositories and manually curated categories are included. Add ?plain=1 for the base Obsidian-style graph.</span>
     </footer>
   </main>
 
   <script src="graph.js" defer></script>
   <script src="obsidian-controls.js" defer></script>
+  <script src="galaxy-orbits.js" defer></script>
   <script src="cosmic.js" defer></script>
 </body>
 </html>
