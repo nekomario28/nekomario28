@@ -77,6 +77,67 @@ def validate_graph(data: dict[str, Any]) -> None:
             fail(f"{group_id}: repositoryCount={declared}, membership links={actual}")
 
 
+def validate_public_config(data: dict[str, Any], config_path: Path) -> None:
+    config = load_json(config_path)
+    public_names = {
+        str(node.get("label", ""))
+        for node in data.get("nodes", [])
+        if isinstance(node, dict) and node.get("type") == "repository"
+    }
+    public_casefold = {name.casefold(): name for name in public_names}
+    group_ids: set[str] = set()
+
+    groups = config.get("groups", [])
+    relations = config.get("relations", [])
+    if not isinstance(groups, list) or not isinstance(relations, list):
+        fail(f"{config_path}: groups and relations must be arrays")
+
+    def require_public_repository(name: str, location: str) -> None:
+        if name in public_names:
+            return
+        canonical = public_casefold.get(name.casefold())
+        if canonical:
+            fail(
+                f"{config_path}: {location} uses {name!r}, but the public repository is "
+                f"{canonical!r}; update the exact spelling/case"
+            )
+        fail(
+            f"{config_path}: {location} references {name!r}, which is not in the generated "
+            "public repository set; public profile config must not retain private/stale names"
+        )
+
+    for index, group in enumerate(groups):
+        if not isinstance(group, dict):
+            fail(f"{config_path}: groups[{index}] must be an object")
+        group_id = str(group.get("id", "")).strip()
+        label = str(group.get("label", "")).strip()
+        if not group_id or not label:
+            fail(f"{config_path}: groups[{index}] needs non-empty id and label")
+        if group_id in group_ids:
+            fail(f"{config_path}: duplicate group id {group_id!r}")
+        group_ids.add(group_id)
+        repositories = group.get("repositories", [])
+        if not isinstance(repositories, list) or not repositories:
+            fail(f"{config_path}: group {group_id!r} must list at least one repository")
+        seen: set[str] = set()
+        for repo_index, raw_name in enumerate(repositories):
+            name = str(raw_name)
+            if name in seen:
+                fail(f"{config_path}: group {group_id!r} contains duplicate repository {name!r}")
+            seen.add(name)
+            require_public_repository(name, f"group {group_id!r} repositories[{repo_index}]")
+
+    for index, relation in enumerate(relations):
+        if not isinstance(relation, dict):
+            fail(f"{config_path}: relations[{index}] must be an object")
+        source = str(relation.get("source", "")).strip()
+        target = str(relation.get("target", "")).strip()
+        if not source or not target:
+            fail(f"{config_path}: relations[{index}] needs source and target")
+        require_public_repository(source, f"relations[{index}].source")
+        require_public_repository(target, f"relations[{index}].target")
+
+
 def rect_for(node: dict[str, Any], x: float, y: float) -> tuple[float, float, float, float]:
     width, height = collision_size(node)
     return (x - width / 2, y - height / 2, x + width / 2, y + height / 2)
@@ -177,6 +238,7 @@ def validate_svg(path: Path, expected_groups: int) -> None:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Validate generated interactive project map artifacts")
     parser.add_argument("--json", type=Path, required=True)
+    parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--html", type=Path, required=True)
     parser.add_argument("--light", type=Path, required=True)
     parser.add_argument("--dark", type=Path, required=True)
@@ -187,6 +249,7 @@ def main() -> int:
     args = parse_args()
     data = load_json(args.json)
     validate_graph(data)
+    validate_public_config(data, args.config)
     validate_preview_layout(data)
     validate_html(args.html)
     expected_groups = int(data.get("groupCount", 0))
@@ -195,7 +258,7 @@ def main() -> int:
     print(
         "project map validation passed: "
         f"{data.get('repositoryCount', 0)} repositories, "
-        f"{expected_groups} categories, no preview overlaps"
+        f"{expected_groups} categories, no preview overlaps, public config clean"
     )
     return 0
 
