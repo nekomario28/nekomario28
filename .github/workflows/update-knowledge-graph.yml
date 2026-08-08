@@ -33,6 +33,12 @@ jobs:
       - name: Check out profile repository
         uses: actions/checkout@v6
 
+      - name: Validate interactive map JavaScript
+        run: |
+          node --check docs/graph.js
+          node --check docs/galaxy-layout.js
+          node --check docs/cosmic.js
+
       - name: Generate project map data and previews
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
