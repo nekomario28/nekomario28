@@ -2,7 +2,7 @@
 
 // Optional double-orbit motion layered on top of the Obsidian-style force graph.
 // graph.js remains the behavioral baseline. Add ?plain=1 to disable this layer.
-const galaxyOrbitDisabled = new URLSearchParams(window.location.search).has("plain") || motionMedia.matches;
+const galaxyPlainMode = new URLSearchParams(window.location.search).has("plain");
 
 const galaxyOrbits = {
   initialized: false,
@@ -10,6 +10,23 @@ const galaxyOrbits = {
   groups: new Map(),
   repositories: new Map(),
 };
+
+function galaxyOrbitMotionDisabled() {
+  return galaxyPlainMode || motionMedia.matches;
+}
+
+function galaxyOrbitSyncCopy() {
+  if (!galaxyOrbitMotionDisabled()) return;
+  if (detailsDescription) {
+    detailsDescription.textContent = galaxyPlainMode
+      ? "Base Obsidian-style force graph. Drag individual nodes, drag empty space to pan, and scroll or pinch to zoom."
+      : "Motion is reduced by your system preference. Drag individual nodes, drag empty space to pan, and scroll or pinch to zoom.";
+  }
+  const hintTitle = interactionHint?.querySelector("strong");
+  const hintText = interactionHint?.querySelector("span");
+  if (hintTitle) hintTitle.textContent = "Explore the graph";
+  if (hintText) hintText.textContent = "Drag nodes · Pan empty space · Scroll or pinch to zoom";
+}
 
 function galaxyOrbitClusterId(node) {
   if (!node) return null;
@@ -81,8 +98,7 @@ function galaxyOrbitPausedClusters() {
 }
 
 function galaxyOrbitUpdateDraggedGeometry() {
-  // If a user drags a node, reinterpret the new position as a new point on its
-  // orbit rather than snapping it back to the old phase/radius after release.
+  // Reinterpret a manual drag as a new orbit radius/phase instead of snapping back.
   const node = state.dragging;
   if (!node) return;
 
@@ -111,7 +127,7 @@ function galaxyOrbitUpdateDraggedGeometry() {
 }
 
 function galaxyOrbitStep(now = performance.now()) {
-  if (galaxyOrbitDisabled) return;
+  if (galaxyOrbitMotionDisabled()) return;
   if (!galaxyOrbits.initialized && !galaxyOrbitInitialize()) return;
 
   const dt = clamp(now - galaxyOrbits.lastTime, 0, 50);
@@ -130,8 +146,8 @@ function galaxyOrbitStep(now = performance.now()) {
     node.anchorY = owner.y + Math.sin(orbit.phase) * orbit.radius * orbit.flatten;
   }
 
-  // Then orbit repositories around the category's *current* location. This gives
-  // the visible two-level motion: the whole system travels while its projects spin.
+  // Then orbit repositories around the category's current location. The category
+  // therefore carries the whole local system while each repository has its own orbit.
   for (const orbit of galaxyOrbits.repositories.values()) {
     const { node, parent } = orbit;
     if (state.dragging === node || paused.has(parent.id)) continue;
@@ -149,4 +165,7 @@ applyForces = function applyForcesWithDoubleOrbit() {
 
 motionMedia.addEventListener("change", () => {
   galaxyOrbits.lastTime = performance.now();
+  galaxyOrbitSyncCopy();
 });
+
+requestAnimationFrame(galaxyOrbitSyncCopy);
