@@ -129,17 +129,28 @@ def validate_preview_layout(data: dict[str, Any], width: int = 760, height: int 
 
 def validate_html(path: Path) -> None:
     text = path.read_text(encoding="utf-8")
-    required_ids = ["graph", "search", "reflow", "reset", "details", "interaction-hint"]
+    required_ids = [
+        "graph",
+        "search",
+        "reflow",
+        "reset",
+        "details",
+        "focus-selected",
+        "interaction-hint",
+    ]
     for element_id in required_ids:
         if f'id="{element_id}"' not in text:
             fail(f"{path}: missing required element id={element_id}")
 
-    scripts = ["graph.js", "galaxy-layout.js", "cosmic.js"]
+    scripts = ["graph.js", "galaxy-layout.js", "galaxy-controls.js", "cosmic.js"]
     positions = [text.find(f'src="{script}"') for script in scripts]
     if any(position < 0 for position in positions):
         fail(f"{path}: missing required map script")
     if positions != sorted(positions):
-        fail(f"{path}: scripts must load in order graph.js -> galaxy-layout.js -> cosmic.js")
+        fail(
+            f"{path}: scripts must load in order "
+            "graph.js -> galaxy-layout.js -> galaxy-controls.js -> cosmic.js"
+        )
 
 
 def validate_svg(path: Path, expected_groups: int) -> None:
