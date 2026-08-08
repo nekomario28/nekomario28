@@ -110,6 +110,43 @@ function drawCategoryNebulae(colors) {
   });
 }
 
+function drawProjectOrbits(colors) {
+  if (typeof galaxyMotion === "undefined" || !galaxyMotion.initialized) return;
+
+  const seen = new Set();
+  context.save();
+  context.lineWidth = 1;
+  context.setLineDash([2.5, 8]);
+  context.lineDashOffset = motionMedia.matches ? 0 : -(state.time / 90) % 18;
+
+  for (const orbit of galaxyMotion.repositories.values()) {
+    if (orbit.detached || !orbit.parent) continue;
+    const roundedRadius = Math.round(orbit.radius / 36) * 36;
+    const key = `${orbit.parent.id}:${roundedRadius}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+
+    const center = worldToScreen(orbit.parent.x, orbit.parent.y);
+    const selectedCluster = state.selected === orbit.parent || galaxyMotionClusterId(state.selected) === orbit.parent.id;
+    const opacity = selectedCluster ? (themeMedia.matches ? 0.24 : 0.16) : (themeMedia.matches ? 0.105 : 0.07);
+
+    context.strokeStyle = colorWithAlpha(colors.group, opacity);
+    context.beginPath();
+    context.ellipse(
+      center.x,
+      center.y,
+      roundedRadius * state.scale,
+      roundedRadius * orbit.flatten * state.scale,
+      0,
+      0,
+      Math.PI * 2,
+    );
+    context.stroke();
+  }
+
+  context.restore();
+}
+
 // Replace only the presentation functions from graph.js. Graph physics and state
 // remain owned by graph.js, which keeps this layer easy to remove or tune later.
 drawBackground = function drawCosmicBackground(colors) {
@@ -125,6 +162,7 @@ draw = function drawCosmicMap() {
   context.clearRect(0, 0, state.width, state.height);
   drawBackground(colors);
   drawCategoryNebulae(colors);
+  drawProjectOrbits(colors);
   drawLinks(colors);
   for (const node of state.nodes) drawNode(node, colors);
   context.globalAlpha = 1;
