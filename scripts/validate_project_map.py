@@ -10,7 +10,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Any
 
-from generate_knowledge_graph import collision_size, preview_positions
+from render_galaxy_project_map import collision_size, preview_positions
 
 
 def fail(message: str) -> None:
@@ -93,18 +93,16 @@ def overlap_amount(
 
 
 def validate_preview_layout(data: dict[str, Any], width: int = 760, height: int = 560) -> None:
-    first = preview_positions(data, width, height)
-    second = preview_positions(data, width, height)
+    first = preview_positions(data)
+    second = preview_positions(data)
     signature_a = [(key, round(value[0], 4), round(value[1], 4)) for key, value in sorted(first.items())]
     signature_b = [(key, round(value[0], 4), round(value[1], 4)) for key, value in sorted(second.items())]
     if signature_a != signature_b:
         fail("preview layout must be deterministic")
 
-    owner = next(node for node in data["nodes"] if node.get("type") == "owner")
-    placed: list[tuple[str, float, float, dict[str, Any]]] = [
-        (str(owner["id"]), width / 2, 275.0, owner)
-    ]
-    placed.extend((node_id, x, y, node) for node_id, (x, y, node) in first.items())
+    placed = [(node_id, x, y, node) for node_id, (x, y, node) in first.items()]
+    if len(placed) != len(data["nodes"]):
+        fail("preview layout must place every graph node exactly once")
 
     left_limit, right_limit = 12.0, width - 12.0
     top_limit, bottom_limit = 60.0, 490.0
@@ -159,6 +157,8 @@ def validate_svg(path: Path, expected_groups: int) -> None:
     nebula_count = text.count('id="cosmic-nebula-')
     if nebula_count != expected_groups:
         fail(f"{path}: expected {expected_groups} category nebulae, found {nebula_count}")
+    if "A galaxy-style constellation of public projects" not in text:
+        fail(f"{path}: galaxy preview subtitle is missing")
     if "Open the interactive map" not in text:
         fail(f"{path}: CTA is missing")
 
