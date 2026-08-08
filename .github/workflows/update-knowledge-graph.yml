@@ -13,6 +13,7 @@ on:
       - "docs/index.html"
       - "docs/graph.js"
       - "docs/obsidian-controls.js"
+      - "docs/galaxy-orbits.js"
       - "docs/cosmic.js"
       - "docs/styles.css"
       - "docs/responsive.css"
@@ -36,19 +37,22 @@ jobs:
       - name: Check out profile repository
         uses: actions/checkout@v6
 
-      - name: Validate Obsidian-style graph boundary
+      - name: Validate Obsidian baseline and galaxy layers
         shell: bash
         run: |
           node --check docs/graph.js
           node --check docs/obsidian-controls.js
+          node --check docs/galaxy-orbits.js
           node --check docs/cosmic.js
           test -s docs/responsive.css
           grep -q 'href="responsive.css"' docs/index.html
           grep -q 'src="obsidian-controls.js"' docs/index.html
+          grep -q 'src="galaxy-orbits.js"' docs/index.html
+          grep -q 'plain' docs/galaxy-orbits.js
+          grep -q 'plain' docs/cosmic.js
           ! grep -q 'src="galaxy-layout.js"' docs/index.html
           ! grep -q 'src="galaxy-motion.js"' docs/index.html
           ! grep -q 'src="galaxy-controls.js"' docs/index.html
-          ! grep -q 'galaxyMotion' docs/cosmic.js
           ! grep -q 'applyForces[[:space:]]*=' docs/cosmic.js
           ! grep -q 'buildInitialLayout[[:space:]]*=' docs/cosmic.js
 
