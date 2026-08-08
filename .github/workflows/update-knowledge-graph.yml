@@ -17,6 +17,7 @@ on:
       - "docs/galaxy-controls.js"
       - "docs/cosmic.js"
       - "docs/styles.css"
+      - "docs/responsive.css"
   schedule:
     - cron: "41 1,13 * * *"
   workflow_dispatch:
@@ -43,6 +44,8 @@ jobs:
           node --check docs/galaxy-layout.js
           node --check docs/galaxy-controls.js
           node --check docs/cosmic.js
+          test -s docs/responsive.css
+          grep -q 'href="responsive.css"' docs/index.html
 
       - name: Generate project map data
         env:
