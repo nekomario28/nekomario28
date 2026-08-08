@@ -7,15 +7,12 @@ on:
       - ".github/workflows/update-knowledge-graph.yml"
       - "config/project-relations.json"
       - "scripts/generate_knowledge_graph.py"
-      - "scripts/render_galaxy_project_map.py"
       - "scripts/render_project_map.py"
       - "scripts/enhance_project_map_preview.py"
       - "scripts/validate_project_map.py"
       - "docs/index.html"
       - "docs/graph.js"
-      - "docs/galaxy-layout.js"
-      - "docs/galaxy-motion.js"
-      - "docs/galaxy-controls.js"
+      - "docs/obsidian-controls.js"
       - "docs/cosmic.js"
       - "docs/styles.css"
       - "docs/responsive.css"
@@ -39,16 +36,21 @@ jobs:
       - name: Check out profile repository
         uses: actions/checkout@v6
 
-      - name: Validate interactive map JavaScript
+      - name: Validate Obsidian-style graph boundary
+        shell: bash
         run: |
           node --check docs/graph.js
-          node --check docs/galaxy-layout.js
-          node --check docs/galaxy-motion.js
-          node --check docs/galaxy-controls.js
+          node --check docs/obsidian-controls.js
           node --check docs/cosmic.js
           test -s docs/responsive.css
           grep -q 'href="responsive.css"' docs/index.html
-          grep -q 'src="galaxy-motion.js"' docs/index.html
+          grep -q 'src="obsidian-controls.js"' docs/index.html
+          ! grep -q 'src="galaxy-layout.js"' docs/index.html
+          ! grep -q 'src="galaxy-motion.js"' docs/index.html
+          ! grep -q 'src="galaxy-controls.js"' docs/index.html
+          ! grep -q 'galaxyMotion' docs/cosmic.js
+          ! grep -q 'applyForces[[:space:]]*=' docs/cosmic.js
+          ! grep -q 'buildInitialLayout[[:space:]]*=' docs/cosmic.js
 
       - name: Generate project map data
         env:
@@ -61,7 +63,7 @@ jobs:
             --light assets/project-map-light.svg \
             --dark assets/project-map-dark.svg
 
-      - name: Render galaxy previews
+      - name: Render project map previews
         run: |
           python scripts/render_project_map.py \
             --json docs/graph-data.json \
