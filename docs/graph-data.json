@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-08-08T07:02:45.305178+00:00",
+  "generatedAt": "2026-08-08T11:17:10.917565+00:00",
   "repositoryCount": 10,
   "groupCount": 4,
   "nodes": [
@@ -12,10 +12,10 @@
     },
     {
       "id": "group:minecraft-neoforge",
-      "label": "Minecraft / NeoForge",
+      "label": "Minecraft Modding",
       "type": "group",
-      "description": "Minecraft mods and supporting projects in the NeoForge and related mod ecosystem.",
-      "repositoryCount": 5
+      "description": "Minecraft mods and supporting projects across Forge, NeoForge and related mod ecosystems.",
+      "repositoryCount": 7
     },
     {
       "id": "group:robotics-ros2",
@@ -49,7 +49,7 @@
         "minecraft"
       ],
       "categories": [
-        "Minecraft / NeoForge"
+        "Minecraft Modding"
       ],
       "categoryIds": [
         "minecraft-neoforge"
@@ -69,8 +69,12 @@
       "topics": [
         "minecraft"
       ],
-      "categories": [],
-      "categoryIds": [],
+      "categories": [
+        "Minecraft Modding"
+      ],
+      "categoryIds": [
+        "minecraft-neoforge"
+      ],
       "stars": 0,
       "fork": false,
       "archived": false,
@@ -84,8 +88,12 @@
       "description": "",
       "language": "Java",
       "topics": [],
-      "categories": [],
-      "categoryIds": [],
+      "categories": [
+        "Minecraft Modding"
+      ],
+      "categoryIds": [
+        "minecraft-neoforge"
+      ],
       "stars": 0,
       "fork": false,
       "archived": false,
@@ -121,7 +129,7 @@
         "minecraft"
       ],
       "categories": [
-        "Minecraft / NeoForge"
+        "Minecraft Modding"
       ],
       "categoryIds": [
         "minecraft-neoforge"
@@ -142,7 +150,7 @@
         "minecraft"
       ],
       "categories": [
-        "Minecraft / NeoForge"
+        "Minecraft Modding"
       ],
       "categoryIds": [
         "minecraft-neoforge"
@@ -163,7 +171,7 @@
         "minecraft"
       ],
       "categories": [
-        "Minecraft / NeoForge"
+        "Minecraft Modding"
       ],
       "categoryIds": [
         "minecraft-neoforge"
@@ -182,7 +190,7 @@
       "language": "Java",
       "topics": [],
       "categories": [
-        "Minecraft / NeoForge"
+        "Minecraft Modding"
       ],
       "categoryIds": [
         "minecraft-neoforge"
@@ -249,6 +257,11 @@
     },
     {
       "source": "group:minecraft-neoforge",
+      "target": "repository:antifullbright",
+      "type": "member"
+    },
+    {
+      "source": "group:minecraft-neoforge",
       "target": "repository:workers",
       "type": "member"
     },
@@ -260,6 +273,11 @@
     {
       "source": "group:minecraft-neoforge",
       "target": "repository:BuyClaimChunks",
+      "type": "member"
+    },
+    {
+      "source": "group:minecraft-neoforge",
+      "target": "repository:FTBPublicClaims",
       "type": "member"
     },
     {
@@ -291,16 +309,6 @@
       "source": "group:utilities-hardware",
       "target": "repository:turing-smart-screen-python-owl",
       "type": "member"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:antifullbright",
-      "type": "owns"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:FTBPublicClaims",
-      "type": "owns"
     }
   ]
 }
