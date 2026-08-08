@@ -33,12 +33,13 @@
         <h2 id="details-title">Explore the map</h2>
         <p id="details-description">Select a circle. Drag nodes, scroll to zoom, double-click a category to focus it, or double-click a repository to open it.</p>
         <dl id="details-meta" hidden></dl>
+        <button id="focus-selected" class="open-link" type="button" hidden>Focus this cluster</button>
         <a id="details-link" class="open-link" href="#" target="_blank" rel="noopener" hidden>Open on GitHub →</a>
       </aside>
 
       <div id="interaction-hint" class="interaction-hint" aria-hidden="true">
         <strong>Explore the constellation</strong>
-        <span>Click to inspect · Double-click a category to focus · Drag to rearrange</span>
+        <span>Click to inspect · Focus from details · Drag to rearrange</span>
       </div>
 
       <div class="legend" aria-label="Map legend">
@@ -60,6 +61,7 @@
 
   <script src="graph.js" defer></script>
   <script src="galaxy-layout.js" defer></script>
+  <script src="galaxy-controls.js" defer></script>
   <script src="cosmic.js" defer></script>
 </body>
 </html>
