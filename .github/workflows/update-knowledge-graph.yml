@@ -10,6 +10,7 @@ on:
       - "scripts/enhance_project_map_preview.py"
       - "docs/index.html"
       - "docs/graph.js"
+      - "docs/galaxy-layout.js"
       - "docs/cosmic.js"
       - "docs/styles.css"
   schedule:
