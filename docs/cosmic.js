@@ -2,6 +2,9 @@
 
 // Presentation-only layer. This file may change how the force graph looks, but it
 // deliberately does not touch node positions, anchors, forces, dragging, or zoom.
+// Add ?plain=1 to compare against the untouched Obsidian-style presentation.
+const cosmicDisabled = new URLSearchParams(window.location.search).has("plain");
+
 const cosmicLayer = {
   stars: [],
   seed: 0x6e656b6f,
@@ -110,22 +113,24 @@ function drawCategoryNebulae(colors) {
   });
 }
 
-// Only replace presentation functions from graph.js. Physics and interaction remain
-// entirely owned by graph.js + obsidian-controls.js.
-drawBackground = function drawCosmicBackground(colors) {
-  context.fillStyle = colors.background;
-  context.fillRect(0, 0, state.width, state.height);
-  drawCosmicStarField(colors);
-  drawGalaxyArms(colors);
-};
+if (!cosmicDisabled) {
+  // Only replace presentation functions from graph.js. Physics and interaction remain
+  // entirely owned by graph.js + obsidian-controls.js + optional galaxy-orbits.js.
+  drawBackground = function drawCosmicBackground(colors) {
+    context.fillStyle = colors.background;
+    context.fillRect(0, 0, state.width, state.height);
+    drawCosmicStarField(colors);
+    drawGalaxyArms(colors);
+  };
 
-draw = function drawCosmicMap() {
-  if (!context) return;
-  const colors = palette();
-  context.clearRect(0, 0, state.width, state.height);
-  drawBackground(colors);
-  drawCategoryNebulae(colors);
-  drawLinks(colors);
-  for (const node of state.nodes) drawNode(node, colors);
-  context.globalAlpha = 1;
-};
+  draw = function drawCosmicMap() {
+    if (!context) return;
+    const colors = palette();
+    context.clearRect(0, 0, state.width, state.height);
+    drawBackground(colors);
+    drawCategoryNebulae(colors);
+    drawLinks(colors);
+    for (const node of state.nodes) drawNode(node, colors);
+    context.globalAlpha = 1;
+  };
+}
