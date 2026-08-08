@@ -3,15 +3,16 @@
   "groups": [
     {
       "id": "minecraft-neoforge",
-      "label": "Minecraft / NeoForge",
-      "description": "Minecraft mods and supporting projects in the NeoForge and related mod ecosystem.",
+      "label": "Minecraft Modding",
+      "description": "Minecraft mods and supporting projects across Forge, NeoForge and related mod ecosystems.",
       "repositories": [
         "OffHandCombat",
         "sable",
-        "AntiFullbright",
+        "antifullbright",
         "workers",
         "recruits",
-        "BuyClaimChunks"
+        "BuyClaimChunks",
+        "FTBPublicClaims"
       ]
     },
     {
