@@ -10,7 +10,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Any
 
-from render_galaxy_project_map import collision_size, preview_positions
+from render_project_map import collision_size, preview_positions
 
 
 def fail(message: str) -> None:
