@@ -1,5 +1,5 @@
-/* Responsive interaction layer for the galaxy map. Kept separate from the base
-   theme so it can be tuned or removed without changing the visual foundation. */
+/* Responsive interaction layer for the force graph. Kept separate from the base
+   theme so it can be tuned or removed without changing graph physics. */
 html,
 body {
   overscroll-behavior: none;
@@ -42,11 +42,6 @@ button:focus-visible,
   line-height: 1;
 }
 
-#focus-selected {
-  border-color: color-mix(in srgb, var(--group) 60%, var(--border));
-  background: color-mix(in srgb, var(--group) 8%, var(--panel-solid));
-}
-
 @media (max-width: 720px) {
   .toolbar {
     gap: 8px;
@@ -68,7 +63,7 @@ button:focus-visible,
 
   .controls {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     gap: 7px;
   }
 
@@ -184,10 +179,6 @@ button:focus-visible,
     display: none;
   }
 
-  .controls {
-    grid-template-columns: minmax(0, 1fr) auto auto;
-  }
-
   .controls button {
     padding-inline: 9px;
     font-size: 12px;
@@ -223,7 +214,7 @@ button:focus-visible,
   .controls {
     display: grid;
     flex: 1;
-    grid-template-columns: minmax(150px, 1fr) auto auto;
+    grid-template-columns: minmax(150px, 1fr) auto;
     gap: 7px;
   }
 
