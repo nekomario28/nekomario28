@@ -22,25 +22,23 @@
           <span>Search projects</span>
           <input id="search" type="search" placeholder="Name, category, language or topic" autocomplete="off">
         </label>
-        <button id="reflow" type="button" title="Restore the curated galaxy layout">Reflow</button>
         <button id="reset" type="button">Fit all</button>
       </div>
     </header>
 
     <section class="workspace" aria-label="Interactive project map">
-      <canvas id="graph" aria-label="Interactive map of public GitHub projects"></canvas>
+      <canvas id="graph" aria-label="Interactive force graph of public GitHub projects"></canvas>
 
       <aside id="details" class="details" aria-live="polite">
         <h2 id="details-title">Explore the map</h2>
-        <p id="details-description">Projects slowly orbit their categories. Select a circle to inspect it, drag to rearrange, or focus a cluster from the details panel.</p>
+        <p id="details-description">Select a circle. Drag individual nodes, drag empty space to pan, scroll or pinch to zoom, and double-click a repository to open it.</p>
         <dl id="details-meta" hidden></dl>
-        <button id="focus-selected" class="open-link" type="button" hidden>Focus this cluster</button>
         <a id="details-link" class="open-link" href="#" target="_blank" rel="noopener" hidden>Open on GitHub →</a>
       </aside>
 
       <div id="interaction-hint" class="interaction-hint" aria-hidden="true">
-        <strong>Explore the moving constellation</strong>
-        <span>Projects orbit slowly · Click to inspect · Drag to detach · Pinch to zoom</span>
+        <strong>Explore the graph</strong>
+        <span>Drag nodes · Pan empty space · Scroll or pinch to zoom</span>
       </div>
 
       <div class="legend" aria-label="Map legend">
@@ -61,9 +59,7 @@
   </main>
 
   <script src="graph.js" defer></script>
-  <script src="galaxy-layout.js" defer></script>
-  <script src="galaxy-motion.js" defer></script>
-  <script src="galaxy-controls.js" defer></script>
+  <script src="obsidian-controls.js" defer></script>
   <script src="cosmic.js" defer></script>
 </body>
 </html>
