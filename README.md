@@ -32,7 +32,7 @@
 
 <p align="center">
   <a href="https://nekomario28.github.io/nekomario28/"><strong>Open the interactive map →</strong></a><br>
-  <sub>Inspect projects, focus clusters, drag nodes, zoom, and open repositories from the live map.</sub>
+  <sub>Drag individual nodes, pan, zoom, inspect projects, and open repositories from the live force graph.</sub>
 </p>
 
 <p align="center">
