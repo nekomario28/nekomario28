@@ -195,17 +195,23 @@ def validate_html(path: Path) -> None:
         if f'id="{element_id}"' not in text:
             fail(f"{path}: missing required element id={element_id}")
 
-    scripts = ["graph.js", "obsidian-controls.js", "cosmic.js"]
+    scripts = ["graph.js", "obsidian-controls.js", "galaxy-orbits.js", "cosmic.js"]
     positions = [text.find(f'src="{script}"') for script in scripts]
     if any(position < 0 for position in positions):
         fail(f"{path}: missing required map script")
     if positions != sorted(positions):
-        fail(f"{path}: scripts must load in order graph.js -> obsidian-controls.js -> cosmic.js")
+        fail(
+            f"{path}: scripts must load in order "
+            "graph.js -> obsidian-controls.js -> galaxy-orbits.js -> cosmic.js"
+        )
 
     forbidden = ["galaxy-layout.js", "galaxy-motion.js", "galaxy-controls.js"]
     for script in forbidden:
         if f'src="{script}"' in text:
-            fail(f"{path}: behavior-changing galaxy script must not be loaded: {script}")
+            fail(f"{path}: obsolete galaxy behavior script must not be loaded: {script}")
+
+    if "?plain=1" not in text:
+        fail(f"{path}: plain Obsidian-style comparison route must remain documented")
 
 
 def validate_svg(path: Path, expected_groups: int) -> None:
