@@ -1,7 +1,7 @@
 "use strict";
 
-// Optional presentation layer for the project map. It deliberately leaves graph
-// layout, collision handling, selection, search and interaction logic untouched.
+// Presentation-only layer. This file may change how the force graph looks, but it
+// deliberately does not touch node positions, anchors, forces, dragging, or zoom.
 const cosmicLayer = {
   stars: [],
   seed: 0x6e656b6f,
@@ -59,7 +59,7 @@ function drawGalaxyArms(colors) {
   const owner = state.nodes.find((node) => node.type === "owner");
   if (!owner) return;
   const point = worldToScreen(owner.x, owner.y);
-  const baseOpacity = themeMedia.matches ? 0.10 : 0.055;
+  const baseOpacity = themeMedia.matches ? 0.085 : 0.045;
 
   context.save();
   context.translate(point.x, point.y);
@@ -70,7 +70,7 @@ function drawGalaxyArms(colors) {
     context.save();
     context.rotate((arm * Math.PI * 2) / 3);
     context.strokeStyle = colorWithAlpha(colors.owner, baseOpacity * (1 - arm * 0.08));
-    context.lineWidth = 1.1;
+    context.lineWidth = 1;
     context.beginPath();
     context.ellipse(0, 0, 155 * state.scale, 62 * state.scale, 0, -0.65, 1.55);
     context.stroke();
@@ -86,20 +86,20 @@ function drawCategoryNebulae(colors) {
     const selected = node === state.selected;
     const faded = state.selected && !connectedToSelected(node);
     const queryFaded = state.query && !matchesQuery(node);
-    const radius = clamp(112 * state.scale, 58, 150);
-    let intensity = selected ? 1 : 0.62;
-    if (faded || queryFaded) intensity = 0.20;
-    const coreAlpha = (themeMedia.matches ? 0.105 : 0.065) * intensity;
+    const radius = clamp(108 * state.scale, 56, 145);
+    let intensity = selected ? 1 : 0.52;
+    if (faded || queryFaded) intensity = 0.16;
+    const coreAlpha = (themeMedia.matches ? 0.09 : 0.052) * intensity;
 
     context.save();
     context.translate(point.x, point.y);
     context.rotate((index * 0.83 + node.phase * Math.PI) % Math.PI);
-    context.scale(1.42, 0.78);
+    context.scale(1.38, 0.8);
 
     const gradient = context.createRadialGradient(0, 0, 4, 0, 0, radius);
     gradient.addColorStop(0, colorWithAlpha(colors.group, coreAlpha));
-    gradient.addColorStop(0.42, colorWithAlpha(colors.owner, coreAlpha * 0.58));
-    gradient.addColorStop(0.76, colorWithAlpha(colors.group, coreAlpha * 0.16));
+    gradient.addColorStop(0.42, colorWithAlpha(colors.owner, coreAlpha * 0.55));
+    gradient.addColorStop(0.76, colorWithAlpha(colors.group, coreAlpha * 0.14));
     gradient.addColorStop(1, colorWithAlpha(colors.group, 0));
 
     context.fillStyle = gradient;
@@ -110,45 +110,8 @@ function drawCategoryNebulae(colors) {
   });
 }
 
-function drawProjectOrbits(colors) {
-  if (typeof galaxyMotion === "undefined" || !galaxyMotion.initialized) return;
-
-  const seen = new Set();
-  context.save();
-  context.lineWidth = 1;
-  context.setLineDash([2.5, 8]);
-  context.lineDashOffset = motionMedia.matches ? 0 : -(state.time / 90) % 18;
-
-  for (const orbit of galaxyMotion.repositories.values()) {
-    if (orbit.detached || !orbit.parent) continue;
-    const roundedRadius = Math.round(orbit.radius / 36) * 36;
-    const key = `${orbit.parent.id}:${roundedRadius}`;
-    if (seen.has(key)) continue;
-    seen.add(key);
-
-    const center = worldToScreen(orbit.parent.x, orbit.parent.y);
-    const selectedCluster = state.selected === orbit.parent || galaxyMotionClusterId(state.selected) === orbit.parent.id;
-    const opacity = selectedCluster ? (themeMedia.matches ? 0.24 : 0.16) : (themeMedia.matches ? 0.105 : 0.07);
-
-    context.strokeStyle = colorWithAlpha(colors.group, opacity);
-    context.beginPath();
-    context.ellipse(
-      center.x,
-      center.y,
-      roundedRadius * state.scale,
-      roundedRadius * orbit.flatten * state.scale,
-      0,
-      0,
-      Math.PI * 2,
-    );
-    context.stroke();
-  }
-
-  context.restore();
-}
-
-// Replace only the presentation functions from graph.js. Graph physics and state
-// remain owned by graph.js, which keeps this layer easy to remove or tune later.
+// Only replace presentation functions from graph.js. Physics and interaction remain
+// entirely owned by graph.js + obsidian-controls.js.
 drawBackground = function drawCosmicBackground(colors) {
   context.fillStyle = colors.background;
   context.fillRect(0, 0, state.width, state.height);
@@ -162,7 +125,6 @@ draw = function drawCosmicMap() {
   context.clearRect(0, 0, state.width, state.height);
   drawBackground(colors);
   drawCategoryNebulae(colors);
-  drawProjectOrbits(colors);
   drawLinks(colors);
   for (const node of state.nodes) drawNode(node, colors);
   context.globalAlpha = 1;
