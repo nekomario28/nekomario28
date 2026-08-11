@@ -74,6 +74,31 @@ if (!cosmicPlainMode) {
     }
   }
 
+  function mergeNearbyOrbitRadii(radii, threshold = 26) {
+    const sorted = radii.filter(Number.isFinite).sort((a, b) => a - b);
+    const clusters = [];
+    for (const radius of sorted) {
+      const cluster = clusters[clusters.length - 1];
+      if (!cluster || Math.abs(radius - cluster.average) > threshold) {
+        clusters.push({ total: radius, count: 1, average: radius });
+      } else {
+        cluster.total += radius;
+        cluster.count += 1;
+        cluster.average = cluster.total / cluster.count;
+      }
+    }
+    return clusters.map((cluster) => cluster.average);
+  }
+
+  function strokeOrbit(center, radius, color) {
+    if (!Number.isFinite(radius) || radius < 8) return;
+    context.strokeStyle = color;
+    context.lineWidth = 0.65;
+    context.beginPath();
+    context.arc(center.x, center.y, radius, 0, Math.PI * 2);
+    context.stroke();
+  }
+
   function drawOrbitGuides(colors) {
     if (typeof galaxyOrbits === "undefined" || !galaxyOrbits.initialized || galaxyOrbitMotionDisabled()) return;
     const owner = galaxyOrbits.owner;
@@ -81,28 +106,31 @@ if (!cosmicPlainMode) {
     const ownerPoint = worldToScreen(owner.x, owner.y);
 
     context.save();
-    context.setLineDash([2, 7]);
-    context.lineWidth = 0.8;
-    context.strokeStyle = colorWithAlpha(colors.owner, themeMedia.matches ? 0.12 : 0.075);
+    context.setLineDash([]);
 
-    for (const target of galaxyOrbits.groupTargets.values()) {
-      const radius = target.targetRadius * state.scale;
-      if (radius < 8) continue;
-      context.beginPath();
-      context.arc(ownerPoint.x, ownerPoint.y, radius, 0, Math.PI * 2);
-      context.stroke();
-    }
+    const categoryRadii = mergeNearbyOrbitRadii(
+      Array.from(galaxyOrbits.groupTargets.values(), (target) => target.targetRadius),
+      22,
+    );
+    const categoryColor = colorWithAlpha(colors.owner, themeMedia.matches ? 0.16 : 0.105);
+    for (const radius of categoryRadii) strokeOrbit(ownerPoint, radius * state.scale, categoryColor);
 
-    context.strokeStyle = colorWithAlpha(colors.group, themeMedia.matches ? 0.105 : 0.065);
+    const localSystems = new Map();
     for (const target of galaxyOrbits.repositoryTargets.values()) {
       if (!target.parent) continue;
-      const center = worldToScreen(target.parent.x, target.parent.y);
-      const radius = target.targetRadius * state.scale;
-      if (radius < 8) continue;
-      context.beginPath();
-      context.arc(center.x, center.y, radius, 0, Math.PI * 2);
-      context.stroke();
+      if (!localSystems.has(target.parent.id)) {
+        localSystems.set(target.parent.id, { parent: target.parent, radii: [] });
+      }
+      localSystems.get(target.parent.id).radii.push(target.targetRadius);
     }
+
+    const localColor = colorWithAlpha(colors.group, themeMedia.matches ? 0.135 : 0.085);
+    for (const system of localSystems.values()) {
+      const center = worldToScreen(system.parent.x, system.parent.y);
+      const radii = mergeNearbyOrbitRadii(system.radii, 28);
+      for (const radius of radii) strokeOrbit(center, radius * state.scale, localColor);
+    }
+
     context.restore();
   }
 
