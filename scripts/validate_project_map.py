@@ -232,6 +232,8 @@ def validate_svg(path: Path, expected_groups: int) -> None:
         fail(f"{path}: unexpected viewBox {root.attrib.get('viewBox')!r}")
     if 'id="cosmic-preview"' not in text:
         fail(f"{path}: cosmic preview layer is missing")
+    if 'id="stellar-associations"' not in text:
+        fail(f"{path}: stellar association layer is missing")
     sector_count = text.count('id="spiral-sector-')
     if sector_count != expected_groups:
         fail(f"{path}: expected {expected_groups} spiral sectors, found {sector_count}")
