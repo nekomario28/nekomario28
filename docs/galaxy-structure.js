@@ -157,19 +157,24 @@ function positionCategoryAtCentroid(category, immediate = false) {
   vx /= members.length;
   vy /= members.length;
 
+  // A category is a sector label, not a body. Keep its marker slightly inside the
+  // member centroid so it remains readable without sitting directly on a project.
+  const owner = galaxyStructure.owner;
+  const targetX = owner ? owner.x + (x - owner.x) * 0.78 : x;
+  const targetY = owner ? owner.y + (y - owner.y) * 0.78 : y;
+
   if (immediate) {
-    group.x = x;
-    group.y = y;
-    group.vx = vx;
-    group.vy = vy;
+    group.x = targetX;
+    group.y = targetY;
+    group.vx = vx * 0.78;
+    group.vy = vy * 0.78;
     return;
   }
 
-  // Category nodes are labels for moving sectors, not bodies that repositories orbit.
-  group.vx += (x - group.x) * 0.0011;
-  group.vy += (y - group.y) * 0.0011;
-  group.vx += (vx - group.vx) * 0.012;
-  group.vy += (vy - group.vy) * 0.012;
+  group.vx += (targetX - group.x) * 0.0011;
+  group.vy += (targetY - group.y) * 0.0011;
+  group.vx += (vx * 0.78 - group.vx) * 0.012;
+  group.vy += (vy * 0.78 - group.vy) * 0.012;
 }
 
 function steerOwnerHome(frameScale) {
