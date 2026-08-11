@@ -129,17 +129,67 @@ if (!cosmicPlainMode) {
     context.lineCap = "round";
     context.lineJoin = "round";
     for (const category of galaxyStructure.categories.values()) {
+      // A broad, almost imperceptible density band makes the category read as a
+      // region of the galaxy rather than a line or a planet-like object.
       traceSpiralArm(category);
-      context.strokeStyle = colorWithAlpha(colors.group, themeMedia.matches ? 0.024 : 0.014);
-      context.lineWidth = clamp(24 * state.scale, 8, 28);
+      context.strokeStyle = colorWithAlpha(colors.group, themeMedia.matches ? 0.018 : 0.010);
+      context.lineWidth = clamp(70 * state.scale, 22, 78);
       context.stroke();
 
       traceSpiralArm(category);
-      context.strokeStyle = colorWithAlpha(colors.group, themeMedia.matches ? 0.105 : 0.06);
+      context.strokeStyle = colorWithAlpha(colors.group, themeMedia.matches ? 0.035 : 0.021);
+      context.lineWidth = clamp(28 * state.scale, 10, 34);
+      context.stroke();
+
+      traceSpiralArm(category);
+      context.strokeStyle = colorWithAlpha(colors.group, themeMedia.matches ? 0.115 : 0.067);
       context.lineWidth = 0.65;
       context.stroke();
     }
     context.restore();
+  }
+
+  function drawCategoryAssociations(colors) {
+    if (typeof galaxyStructure === "undefined" || !galaxyStructure.initialized || galaxyStructureMotionDisabled()) return;
+    const owner = galaxyStructure.owner;
+    if (!owner) return;
+
+    for (const category of galaxyStructure.categories.values()) {
+      const group = category.node;
+      if (!group) continue;
+      const point = worldToScreen(group.x, group.y);
+      const memberCount = Math.max(1, category.members.length);
+      const major = clamp((112 + Math.sqrt(memberCount) * 30) * state.scale, 72, 205);
+      const minor = clamp((42 + Math.sqrt(memberCount) * 11) * state.scale, 30, 78);
+      const tangentAngle = Math.atan2(group.y - owner.y, group.x - owner.x) + Math.PI / 2;
+
+      context.save();
+      context.translate(point.x, point.y);
+      context.rotate(tangentAngle);
+      context.scale(1, minor / major);
+      const gradient = context.createRadialGradient(0, 0, 0, 0, 0, major);
+      gradient.addColorStop(0, colorWithAlpha(colors.group, themeMedia.matches ? 0.060 : 0.036));
+      gradient.addColorStop(0.35, colorWithAlpha(colors.group, themeMedia.matches ? 0.034 : 0.021));
+      gradient.addColorStop(0.72, colorWithAlpha(colors.owner, themeMedia.matches ? 0.012 : 0.008));
+      gradient.addColorStop(1, colorWithAlpha(colors.group, 0));
+      context.fillStyle = gradient;
+      context.beginPath();
+      context.arc(0, 0, major, 0, Math.PI * 2);
+      context.fill();
+      context.restore();
+
+      // A barely visible association boundary gives the eye something to follow
+      // without turning the category into a UI card or a literal celestial body.
+      context.save();
+      context.translate(point.x, point.y);
+      context.rotate(tangentAngle);
+      context.strokeStyle = colorWithAlpha(colors.group, themeMedia.matches ? 0.095 : 0.055);
+      context.lineWidth = 0.55;
+      context.beginPath();
+      context.ellipse(0, 0, major * 0.82, minor * 0.82, 0, 0, Math.PI * 2);
+      context.stroke();
+      context.restore();
+    }
   }
 
   function drawGalaxyLinks(colors) {
@@ -169,27 +219,37 @@ if (!cosmicPlainMode) {
   function drawCategorySectorNode(node, colors) {
     const point = worldToScreen(node.x, node.y);
     const highlighted = node === state.selected || node === state.hovered;
-    let opacity = 0.82;
+    let opacity = 0.90;
     if (state.selected && !connectedToSelected(node)) opacity = 0.16;
     if (state.query && !matchesQuery(node)) opacity = 0.09;
 
     context.save();
     context.globalAlpha = opacity;
-    context.strokeStyle = highlighted ? colors.selected : colorWithAlpha(colors.group, 0.82);
-    context.lineWidth = highlighted ? 1.6 : 1;
-    context.beginPath();
-    context.arc(point.x, point.y, highlighted ? 6.5 : 5, 0, Math.PI * 2);
-    context.stroke();
 
-    const fontSize = clamp(11.5 * state.scale, 9, 13);
+    // The category itself is not a body. A tiny star-like anchor locates the label;
+    // the large diffuse association behind it carries the actual category shape.
+    context.fillStyle = highlighted ? colors.selected : colorWithAlpha(colors.group, 0.72);
+    context.beginPath();
+    context.arc(point.x, point.y, highlighted ? 2.8 : 1.7, 0, Math.PI * 2);
+    context.fill();
+
+    if (highlighted) {
+      context.strokeStyle = colorWithAlpha(colors.selected, 0.72);
+      context.lineWidth = 1;
+      context.beginPath();
+      context.arc(point.x, point.y, 7, 0, Math.PI * 2);
+      context.stroke();
+    }
+
+    const fontSize = clamp(11.8 * state.scale, 9.2, 13.5);
     context.font = `600 ${fontSize}px -apple-system,BlinkMacSystemFont,Segoe UI,sans-serif`;
     context.textAlign = "center";
     context.textBaseline = "middle";
-    const labelY = point.y + clamp(17 * state.scale, 13, 20);
-    context.strokeStyle = colorWithAlpha(colors.background, 0.94);
+    const labelY = point.y + clamp(16 * state.scale, 12, 19);
+    context.strokeStyle = colorWithAlpha(colors.background, 0.92);
     context.lineWidth = 3;
     context.strokeText(displayLabel(node), point.x, labelY);
-    context.fillStyle = colors.text;
+    context.fillStyle = highlighted ? colors.selected : colorWithAlpha(colors.text, 0.92);
     context.fillText(displayLabel(node), point.x, labelY);
     context.restore();
   }
@@ -241,6 +301,7 @@ if (!cosmicPlainMode) {
       drawGalacticNucleus(colors);
       drawGalactocentricRings(colors);
       drawSpiralSectors(colors);
+      drawCategoryAssociations(colors);
     } catch (error) {
       console.warn("Galaxy decoration layer failed; rendering the core graph without decorations.", error);
       context.clearRect(0, 0, state.width, state.height);
