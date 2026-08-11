@@ -13,16 +13,15 @@
   <main class="app">
     <header class="toolbar">
       <div class="title-block">
-        <span class="eyebrow">Live public portfolio</span>
         <h1>Interactive Project Map</h1>
-        <p>A force-directed project graph with an optional galaxy motion layer.</p>
+        <p>Public projects as a force-directed graph.</p>
       </div>
       <div class="controls">
         <label class="search">
-          <span>Search projects</span>
-          <input id="search" type="search" placeholder="Name, category, language or topic" autocomplete="off">
+          <span>Search</span>
+          <input id="search" type="search" placeholder="Project, category, language or topic" autocomplete="off">
         </label>
-        <button id="reset" type="button">Reset graph</button>
+        <button id="reset" type="button">Reset</button>
       </div>
     </header>
 
@@ -30,15 +29,15 @@
       <canvas id="graph" aria-label="Interactive force graph of public GitHub projects"></canvas>
 
       <aside id="details" class="details" aria-live="polite">
-        <h2 id="details-title">Explore the map</h2>
-        <p id="details-description">Categories rotate around the owner while repositories rotate around their categories. Drag any node, pan empty space, and scroll or pinch to zoom.</p>
+        <h2 id="details-title">Project map</h2>
+        <p id="details-description">Drag nodes, pan empty space, and scroll or pinch to zoom.</p>
         <dl id="details-meta" hidden></dl>
         <a id="details-link" class="open-link" href="#" target="_blank" rel="noopener" hidden>Open on GitHub →</a>
       </aside>
 
       <div id="interaction-hint" class="interaction-hint" aria-hidden="true">
-        <strong>Explore the double-orbit graph</strong>
-        <span>Projects visibly orbit categories · Categories drift around the owner · Drag nodes · Pinch to zoom</span>
+        <strong>Explore</strong>
+        <span>Drag nodes · Pan · Zoom</span>
       </div>
 
       <div class="legend" aria-label="Map legend">
@@ -54,12 +53,13 @@
 
     <footer>
       <a href="https://github.com/nekomario28" target="_blank" rel="noopener">github.com/nekomario28</a>
-      <span><a href="?plain=1">Force-only baseline</a> uses center, repel, link force and link distance without galaxy motion or cosmic rendering.</span>
+      <span><a href="?plain=1">Force-only view</a></span>
     </footer>
   </main>
 
   <script src="graph.js" defer></script>
   <script src="obsidian-controls.js" defer></script>
+  <script src="natural-motion.js" defer></script>
   <script src="galaxy-orbits.js" defer></script>
   <script src="cosmic.js" defer></script>
 </body>
