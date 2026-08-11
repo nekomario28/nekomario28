@@ -1,17 +1,16 @@
 "use strict";
 
-// Optional galaxy-motion layer. The force graph remains graph.js; this layer only
-// adds continuous coordinate rotation after the force step. ?plain=1 disables it.
+// Optional galaxy-motion layer. Motion is continuous force steering rather than
+// direct coordinate rotation: nodes keep inertia, avoid one another, and gently
+// return toward their orbital bands. ?plain=1 disables this layer.
 const galaxyPlainMode = new URLSearchParams(window.location.search).has("plain");
 
 const galaxyOrbits = {
   initialized: false,
   lastTime: performance.now(),
   owner: null,
-  membersByGroup: new Map(),
-  parentByRepository: new Map(),
-  repositorySpeeds: new Map(),
-  lastGroupPositions: new Map(),
+  groupTargets: new Map(),
+  repositoryTargets: new Map(),
 };
 
 function galaxyOrbitMotionDisabled() {
@@ -20,34 +19,45 @@ function galaxyOrbitMotionDisabled() {
 
 function galaxyOrbitInitialize() {
   if (!state.nodes.length) return false;
-  galaxyOrbits.owner = state.nodes.find((node) => node.type === "owner") || null;
-  if (!galaxyOrbits.owner) return false;
-  galaxyOrbits.membersByGroup.clear();
-  galaxyOrbits.parentByRepository.clear();
-  galaxyOrbits.repositorySpeeds.clear();
-  galaxyOrbits.lastGroupPositions.clear();
+  // Let the ordinary force graph establish its shape before orbital steering learns
+  // the local radii. This keeps the galaxy layer subordinate to the graph structure.
+  if (performance.now() - state.startedAt < 140) return false;
 
-  for (const node of state.nodes) {
-    if (node.type === "group") {
-      galaxyOrbits.membersByGroup.set(node.id, []);
-      galaxyOrbits.lastGroupPositions.set(node.id, { x: node.x, y: node.y });
-    }
+  const owner = state.nodes.find((node) => node.type === "owner") || null;
+  if (!owner) return false;
+
+  galaxyOrbits.owner = owner;
+  galaxyOrbits.groupTargets.clear();
+  galaxyOrbits.repositoryTargets.clear();
+
+  for (const group of state.nodes.filter((node) => node.type === "group")) {
+    const currentRadius = Math.hypot(group.x - owner.x, group.y - owner.y);
+    const preferred = 285 + (hash(`${group.id}:galaxy-radius`) % 96);
+    const targetRadius = clamp(Math.max(currentRadius, preferred), 270, 430);
+    const periodSeconds = 420 + (hash(`${group.id}:galaxy-period`) % 81); // 7.0–8.3 min.
+    galaxyOrbits.groupTargets.set(group.id, {
+      node: group,
+      targetRadius,
+      angularSpeed: (Math.PI * 2) / periodSeconds,
+    });
   }
 
   for (const link of state.links) {
     if (link.type !== "member" || link.source?.type !== "group" || link.target?.type !== "repository") continue;
-    const members = galaxyOrbits.membersByGroup.get(link.source.id) || [];
-    members.push(link.target);
-    galaxyOrbits.membersByGroup.set(link.source.id, members);
-    if (!galaxyOrbits.parentByRepository.has(link.target.id)) {
-      galaxyOrbits.parentByRepository.set(link.target.id, link.source);
-    }
-  }
+    if (galaxyOrbits.repositoryTargets.has(link.target.id)) continue;
 
-  for (const [repositoryId] of galaxyOrbits.parentByRepository) {
-    const seconds = 60 + (hash(`${repositoryId}:orbit-period`) % 37); // 60–96 s.
-    const direction = hash(`${repositoryId}:orbit-direction`) % 2 === 0 ? 1 : -1;
-    galaxyOrbits.repositorySpeeds.set(repositoryId, direction * (Math.PI * 2) / (seconds * 1000));
+    const repository = link.target;
+    const parent = link.source;
+    const currentRadius = Math.hypot(repository.x - parent.x, repository.y - parent.y);
+    const preferred = 155 + (hash(`${repository.id}:local-radius`) % 121);
+    const targetRadius = clamp(Math.max(currentRadius, preferred), 150, 300);
+    const periodSeconds = 120 + (hash(`${repository.id}:local-period`) % 61); // 2–3 min.
+    galaxyOrbits.repositoryTargets.set(repository.id, {
+      node: repository,
+      parent,
+      targetRadius,
+      angularSpeed: (Math.PI * 2) / periodSeconds,
+    });
   }
 
   galaxyOrbits.lastTime = performance.now();
@@ -55,26 +65,50 @@ function galaxyOrbitInitialize() {
   return true;
 }
 
-function rotatePoint(node, centerX, centerY, angle) {
-  const dx = node.x - centerX;
-  const dy = node.y - centerY;
-  const cosine = Math.cos(angle);
-  const sine = Math.sin(angle);
-  node.x = centerX + dx * cosine - dy * sine;
-  node.y = centerY + dx * sine + dy * cosine;
-  const vx = node.vx || 0;
-  const vy = node.vy || 0;
-  node.vx = vx * cosine - vy * sine;
-  node.vy = vx * sine + vy * cosine;
+function steerOrbit(node, center, targetRadius, angularSpeed, frameScale, options = {}) {
+  if (!node || !center || state.dragging === node) return;
+
+  let dx = node.x - center.x;
+  let dy = node.y - center.y;
+  let radius = Math.hypot(dx, dy);
+  if (radius < 1) {
+    const angle = (hash(`${node.id}:orbit-seed`) % 6283) / 1000;
+    dx = Math.cos(angle);
+    dy = Math.sin(angle);
+    radius = 1;
+  }
+
+  const ux = dx / radius;
+  const uy = dy / radius;
+  const tx = -uy;
+  const ty = ux;
+  const radialVelocity = (node.vx || 0) * ux + (node.vy || 0) * uy;
+  const tangentialVelocity = (node.vx || 0) * tx + (node.vy || 0) * ty;
+
+  // angularSpeed is radians/second; graph velocity is effectively world-units/frame.
+  const desiredTangentialVelocity = (angularSpeed * radius) / 60;
+  const radialError = targetRadius - radius;
+  const radialStiffness = options.radialStiffness ?? 0.00055;
+  const radialDamping = options.radialDamping ?? 0.035;
+  const tangentialGain = options.tangentialGain ?? 0.018;
+
+  const radialAcceleration =
+    (radialError * radialStiffness - radialVelocity * radialDamping) * frameScale;
+  const tangentialAcceleration =
+    (desiredTangentialVelocity - tangentialVelocity) * tangentialGain * frameScale;
+
+  node.vx += ux * radialAcceleration + tx * tangentialAcceleration;
+  node.vy += uy * radialAcceleration + ty * tangentialAcceleration;
 }
 
-function translateGroupMembers(group, dx, dy) {
-  if (Math.abs(dx) < 1e-9 && Math.abs(dy) < 1e-9) return;
-  for (const member of galaxyOrbits.membersByGroup.get(group.id) || []) {
-    if (state.dragging === member) continue;
-    member.x += dx;
-    member.y += dy;
-  }
+function limitGalaxySpeed(node) {
+  if (!node || state.dragging === node) return;
+  const speed = Math.hypot(node.vx || 0, node.vy || 0);
+  const maximum = node.type === "group" ? 0.62 : node.type === "repository" ? 1.05 : 0.45;
+  if (speed <= maximum || speed < 0.001) return;
+  const scale = maximum / speed;
+  node.vx *= scale;
+  node.vy *= scale;
 }
 
 function galaxyOrbitStep(now = performance.now()) {
@@ -84,44 +118,48 @@ function galaxyOrbitStep(now = performance.now()) {
   const dt = clamp(now - galaxyOrbits.lastTime, 0, 50);
   galaxyOrbits.lastTime = now;
   if (dt <= 0) return;
+  const frameScale = dt / (1000 / 60);
 
-  const owner = galaxyOrbits.owner;
-  const categoryAngularSpeed = (Math.PI * 2) / (300 * 1000); // 5-minute revolution.
-
-  // First level: each category rotates around the owner's current position. Moving
-  // the category translates its repositories by the exact same delta, so the whole
-  // local system travels together.
-  for (const group of state.nodes.filter((node) => node.type === "group")) {
-    const previous = galaxyOrbits.lastGroupPositions.get(group.id) || { x: group.x, y: group.y };
-
-    if (state.dragging === group) {
-      translateGroupMembers(group, group.x - previous.x, group.y - previous.y);
-      galaxyOrbits.lastGroupPositions.set(group.id, { x: group.x, y: group.y });
-      continue;
-    }
-
-    const beforeX = group.x;
-    const beforeY = group.y;
-    rotatePoint(group, owner.x, owner.y, categoryAngularSpeed * dt);
-    translateGroupMembers(group, group.x - beforeX, group.y - beforeY);
-    galaxyOrbits.lastGroupPositions.set(group.id, { x: group.x, y: group.y });
+  for (const target of galaxyOrbits.groupTargets.values()) {
+    steerOrbit(target.node, galaxyOrbits.owner, target.targetRadius, target.angularSpeed, frameScale, {
+      radialStiffness: 0.00042,
+      radialDamping: 0.030,
+      tangentialGain: 0.014,
+    });
   }
 
-  // Second level: every repository independently rotates around the category after
-  // the category itself has moved. This is direct coordinate motion, not an anchor,
-  // so it remains visible even after the force simulation has cooled completely.
-  for (const [repositoryId, parent] of galaxyOrbits.parentByRepository) {
-    const node = state.nodeById.get(repositoryId);
-    if (!node || state.dragging === node || state.dragging === parent) continue;
-    rotatePoint(node, parent.x, parent.y, (galaxyOrbits.repositorySpeeds.get(repositoryId) || 0) * dt);
+  for (const target of galaxyOrbits.repositoryTargets.values()) {
+    if (state.dragging === target.parent) continue;
+    steerOrbit(target.node, target.parent, target.targetRadius, target.angularSpeed, frameScale, {
+      radialStiffness: 0.00072,
+      radialDamping: 0.040,
+      tangentialGain: 0.022,
+    });
+  }
+
+  // Predictive avoidance bends trajectories before nodes overlap. It never teleports
+  // or zeroes velocity, so close encounters look like flowing paths rather than stops.
+  if (typeof applyNaturalAvoidance === "function") applyNaturalAvoidance(1, 1);
+
+  for (const node of state.nodes) limitGalaxySpeed(node);
+
+  // Once the baseline force simulation has cooled, this layer becomes the integrator
+  // so the graph keeps moving indefinitely without reheating or snapping.
+  if (state.alpha < 0.001) {
+    for (const node of state.nodes) {
+      if (node.fixed || state.dragging === node) continue;
+      node.vx *= node.type === "repository" ? 0.9985 : 0.9975;
+      node.vy *= node.type === "repository" ? 0.9985 : 0.9975;
+      node.x += node.vx * frameScale;
+      node.y += node.vy * frameScale;
+    }
   }
 }
 
 const galaxyOrbitBaseApplyForces = applyForces;
-applyForces = function applyForcesWithDoubleOrbit() {
+applyForces = function applyForcesWithContinuousGalaxyMotion() {
   galaxyOrbitBaseApplyForces();
   galaxyOrbitStep();
-  if (!galaxyOrbitMotionDisabled()) resolveNodeCollisions(0.92, 3);
 };
 
 function syncGalaxyCopy() {
@@ -136,6 +174,11 @@ function syncGalaxyCopy() {
   if (title) title.textContent = "Explore the force graph";
   if (text) text.textContent = "Drag nodes · Pan empty space · Scroll or pinch to zoom";
 }
+
+resetButton.addEventListener("click", () => {
+  galaxyOrbits.initialized = false;
+  galaxyOrbits.lastTime = performance.now();
+});
 
 motionMedia.addEventListener("change", () => {
   galaxyOrbits.lastTime = performance.now();
