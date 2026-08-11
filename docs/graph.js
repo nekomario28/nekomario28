@@ -18,11 +18,12 @@ const themeMedia = window.matchMedia("(prefers-color-scheme: dark)");
 const motionMedia = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 const forceSettings = {
-  center: 0.0026,
-  repel: 9200,
-  link: 0.022,
-  linkDistance: 138,
-  damping: 0.855,
+  center: 0.0018,
+  repel: 16000,
+  link: 0.018,
+  linkDistance: 190,
+  damping: 0.86,
+  collisionPadding: 14,
 };
 
 const state = {
@@ -125,6 +126,11 @@ function nodeDimensions(node) {
   };
 }
 
+function nodeCollisionRadius(node) {
+  const dimensions = nodeDimensions(node);
+  return Math.max(nodeRadius(node) + 18, Math.min(74, dimensions.width * 0.36 + 18));
+}
+
 function nodeColor(node, colors) {
   if (node.type === "owner") return colors.owner;
   if (node.type === "group") return colors.group;
@@ -149,7 +155,7 @@ function deterministicScatter(raw, index, count) {
   const golden = Math.PI * (3 - Math.sqrt(5));
   const jitter = (hash(String(raw.id)) % 1000) / 1000;
   const angle = index * golden + jitter * 0.7;
-  const radius = 42 + Math.sqrt((index + 1) / Math.max(1, count)) * 265;
+  const radius = 58 + Math.sqrt((index + 1) / Math.max(1, count)) * 360;
   return {
     x: Math.cos(angle) * radius,
     y: Math.sin(angle) * radius,
@@ -183,7 +189,8 @@ function initializeGraph(data) {
 
   // Let the graph settle briefly before fitting. This changes no semantics; it only
   // avoids showing the deterministic seed scatter as the final arrangement.
-  for (let index = 0; index < 120; index += 1) applyForces();
+  for (let index = 0; index < 160; index += 1) applyForces();
+  resolveNodeCollisions(1, 6);
   fitView(false);
 }
 
@@ -191,10 +198,60 @@ function reheat(value = 0.72) {
   state.alpha = Math.max(state.alpha, value);
 }
 
+function resolveNodeCollisions(strength = 1, passes = 2) {
+  if (state.nodes.length < 2) return;
+
+  for (let pass = 0; pass < passes; pass += 1) {
+    for (let first = 0; first < state.nodes.length; first += 1) {
+      const a = state.nodes[first];
+      for (let second = first + 1; second < state.nodes.length; second += 1) {
+        const b = state.nodes[second];
+        let dx = b.x - a.x;
+        let dy = b.y - a.y;
+        let distance = Math.hypot(dx, dy);
+        if (distance < 0.001) {
+          const angle = (hash(`${a.id}:${b.id}:collision`) % 6283) / 1000;
+          dx = Math.cos(angle);
+          dy = Math.sin(angle);
+          distance = 1;
+        }
+
+        const minimum = nodeCollisionRadius(a) + nodeCollisionRadius(b) + forceSettings.collisionPadding;
+        if (distance >= minimum) continue;
+
+        const overlap = (minimum - distance) * clamp(strength, 0, 1);
+        const ux = dx / distance;
+        const uy = dy / distance;
+        const aMovable = !a.fixed && state.dragging !== a;
+        const bMovable = !b.fixed && state.dragging !== b;
+        if (!aMovable && !bMovable) continue;
+
+        const aShare = aMovable ? (bMovable ? 0.5 : 1) : 0;
+        const bShare = bMovable ? (aMovable ? 0.5 : 1) : 0;
+        if (aMovable) {
+          a.x -= ux * overlap * aShare;
+          a.y -= uy * overlap * aShare;
+          a.vx *= 0.6;
+          a.vy *= 0.6;
+        }
+        if (bMovable) {
+          b.x += ux * overlap * bShare;
+          b.y += uy * overlap * bShare;
+          b.vx *= 0.6;
+          b.vy *= 0.6;
+        }
+      }
+    }
+  }
+}
+
 function applyForces() {
   if (!state.nodes.length) return;
   const alpha = state.alpha;
-  if (alpha < 0.001) return;
+  if (alpha < 0.001) {
+    resolveNodeCollisions(0.55, 1);
+    return;
+  }
 
   // Repel force. All node types use the same law; radius only prevents circles from
   // collapsing into each other at very short distances.
@@ -206,14 +263,14 @@ function applyForces() {
       let dy = b.y - a.y;
       let distanceSquared = dx * dx + dy * dy;
       if (distanceSquared < 1) {
-        const angle = ((hash(`${a.id}:${b.id}`) % 6283) / 1000);
+        const angle = (hash(`${a.id}:${b.id}`) % 6283) / 1000;
         dx = Math.cos(angle);
         dy = Math.sin(angle);
         distanceSquared = 1;
       }
       const distance = Math.sqrt(distanceSquared);
-      const minimum = nodeRadius(a) + nodeRadius(b) + 18;
-      const effectiveSquared = Math.max(distanceSquared, minimum * minimum * 0.28);
+      const minimum = nodeCollisionRadius(a) + nodeCollisionRadius(b) + forceSettings.collisionPadding;
+      const effectiveSquared = Math.max(distanceSquared, minimum * minimum * 0.34);
       const force = (forceSettings.repel * alpha) / effectiveSquared;
       const fx = (dx / distance) * force;
       const fy = (dy / distance) * force;
@@ -258,6 +315,7 @@ function applyForces() {
     node.y += node.vy;
   }
 
+  resolveNodeCollisions(0.82, 2);
   state.alpha *= 0.986;
 }
 
@@ -443,7 +501,7 @@ function fitView(resetSelection = true) {
   let maxX = -Infinity;
   let maxY = -Infinity;
   for (const node of state.nodes) {
-    const radius = nodeRadius(node) + 28;
+    const radius = nodeCollisionRadius(node) + 18;
     minX = Math.min(minX, node.x - radius);
     maxX = Math.max(maxX, node.x + radius);
     minY = Math.min(minY, node.y - radius);
@@ -453,7 +511,7 @@ function fitView(resetSelection = true) {
   const height = Math.max(120, maxY - minY);
   const availableWidth = Math.max(280, state.width - (state.width > 900 ? 350 : 34));
   const availableHeight = Math.max(240, state.height - 42);
-  state.scale = clamp(Math.min(availableWidth / width, availableHeight / height), 0.35, 1.5);
+  state.scale = clamp(Math.min(availableWidth / width, availableHeight / height), 0.30, 1.5);
   const centerX = (minX + maxX) / 2;
   const centerY = (minY + maxY) / 2;
   state.offsetX = -centerX * state.scale + (state.width > 900 ? -130 : 0);
@@ -473,7 +531,8 @@ function reseedGraph() {
     node.fixed = false;
   });
   reheat(1);
-  for (let index = 0; index < 80; index += 1) applyForces();
+  for (let index = 0; index < 120; index += 1) applyForces();
+  resolveNodeCollisions(1, 6);
   fitView(true);
 }
 
