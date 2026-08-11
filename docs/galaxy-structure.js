@@ -259,9 +259,8 @@ function galaxyStructureStep(now = performance.now()) {
   for (const target of galaxyStructure.repositories.values()) steerRepository(target, frameScale);
   for (const category of galaxyStructure.categories.values()) positionCategoryAtCentroid(category, false);
 
-  // The planned radial lanes and phases carry almost all collision prevention. Keep
-  // only a weak predictive safety force for temporary disturbances caused by dragging.
-  if (typeof applyNaturalAvoidance === "function") applyNaturalAvoidance(0.22, 1);
+  // Spacing is solved in orbital phase, long before circles or labels touch.
+  if (typeof applyOrbitalSpacing === "function") applyOrbitalSpacing(0.82);
 
   for (const node of state.nodes) limitGalaxyStructureSpeed(node);
 
