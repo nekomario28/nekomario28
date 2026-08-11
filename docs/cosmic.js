@@ -5,41 +5,43 @@
 const cosmicPlainMode = new URLSearchParams(window.location.search).has("plain");
 
 if (!cosmicPlainMode) {
-  const cosmicLayer = { stars: [], seed: 0x6e656b6f };
+  const cosmicLayer = { particles: [], seed: 0x6e656b6f };
 
   function cosmicRandom() {
     cosmicLayer.seed = (Math.imul(cosmicLayer.seed, 1664525) + 1013904223) >>> 0;
     return cosmicLayer.seed / 0x100000000;
   }
 
-  const starLayers = [
-    { count: 58, radius: [0.4, 0.9], depth: 0.04, alpha: [0.08, 0.18] },
-    { count: 34, radius: [0.65, 1.15], depth: 0.08, alpha: [0.10, 0.24] },
-    { count: 14, radius: [0.9, 1.45], depth: 0.12, alpha: [0.14, 0.30] },
-  ];
-  for (const layer of starLayers) {
-    for (let index = 0; index < layer.count; index += 1) {
-      cosmicLayer.stars.push({
-        x: cosmicRandom(),
-        y: cosmicRandom(),
-        radius: layer.radius[0] + cosmicRandom() * (layer.radius[1] - layer.radius[0]),
-        depth: layer.depth,
-        alpha: layer.alpha[0] + cosmicRandom() * (layer.alpha[1] - layer.alpha[0]),
-        phase: cosmicRandom() * Math.PI * 2,
-      });
-    }
+  for (let index = 0; index < 190; index += 1) {
+    cosmicLayer.particles.push({
+      radius: 70 + Math.sqrt(cosmicRandom()) * 500,
+      armSeed: Math.floor(cosmicRandom() * 16),
+      armOffset: (cosmicRandom() - 0.5) * 0.62,
+      size: 0.38 + cosmicRandom() * 0.92,
+      alpha: 0.045 + cosmicRandom() * 0.14,
+      phase: cosmicRandom() * Math.PI * 2,
+    });
   }
 
-  function drawStars(colors) {
-    for (const star of cosmicLayer.stars) {
-      const parallaxX = motionMedia.matches ? 0 : state.offsetX * star.depth;
-      const parallaxY = motionMedia.matches ? 0 : state.offsetY * star.depth;
-      const x = ((star.x * state.width + parallaxX) % state.width + state.width) % state.width;
-      const y = ((star.y * state.height + parallaxY) % state.height + state.height) % state.height;
-      const twinkle = motionMedia.matches ? 1 : 0.91 + Math.sin(state.time / 1900 + star.phase) * 0.09;
-      context.fillStyle = colorWithAlpha(colors.text, star.alpha * twinkle);
+  function drawDiskParticles(colors) {
+    if (typeof galaxyStructure === "undefined" || !galaxyStructure.initialized || !galaxyStructure.owner) return;
+    const owner = galaxyStructure.owner;
+    const categories = Array.from(galaxyStructure.categories.values());
+    if (!categories.length) return;
+
+    for (const particle of cosmicLayer.particles) {
+      const category = categories[particle.armSeed % categories.length];
+      const spiral = ((particle.radius - 220) / 285) * 0.42;
+      const angle = category.armPhase + spiral + particle.armOffset;
+      const point = worldToScreen(
+        owner.x + Math.cos(angle) * particle.radius,
+        owner.y + Math.sin(angle) * particle.radius,
+      );
+      if (point.x < -4 || point.y < -4 || point.x > state.width + 4 || point.y > state.height + 4) continue;
+      const twinkle = motionMedia.matches ? 1 : 0.94 + Math.sin(state.time / 2400 + particle.phase) * 0.06;
+      context.fillStyle = colorWithAlpha(colors.text, particle.alpha * twinkle);
       context.beginPath();
-      context.arc(x, y, star.radius, 0, Math.PI * 2);
+      context.arc(point.x, point.y, Math.max(0.35, particle.size * Math.sqrt(state.scale)), 0, Math.PI * 2);
       context.fill();
     }
   }
@@ -50,8 +52,8 @@ if (!cosmicPlainMode) {
     const point = worldToScreen(owner.x, owner.y);
     const radius = clamp(150 * state.scale, 74, 220);
     const gradient = context.createRadialGradient(point.x, point.y, 4, point.x, point.y, radius);
-    gradient.addColorStop(0, colorWithAlpha(colors.owner, themeMedia.matches ? 0.12 : 0.07));
-    gradient.addColorStop(0.18, colorWithAlpha(colors.owner, themeMedia.matches ? 0.055 : 0.032));
+    gradient.addColorStop(0, colorWithAlpha(colors.owner, themeMedia.matches ? 0.13 : 0.075));
+    gradient.addColorStop(0.18, colorWithAlpha(colors.owner, themeMedia.matches ? 0.06 : 0.034));
     gradient.addColorStop(0.62, colorWithAlpha(colors.owner, 0.012));
     gradient.addColorStop(1, colorWithAlpha(colors.owner, 0));
     context.fillStyle = gradient;
@@ -88,8 +90,8 @@ if (!cosmicPlainMode) {
 
     context.save();
     context.setLineDash([]);
-    context.lineWidth = 0.55;
-    context.strokeStyle = colorWithAlpha(colors.muted, themeMedia.matches ? 0.095 : 0.07);
+    context.lineWidth = 0.5;
+    context.strokeStyle = colorWithAlpha(colors.muted, themeMedia.matches ? 0.075 : 0.052);
     for (const radius of radii) {
       const screenRadius = radius * state.scale;
       if (screenRadius < 18) continue;
@@ -103,11 +105,9 @@ if (!cosmicPlainMode) {
   function traceSpiralArm(category) {
     const owner = galaxyStructure.owner;
     if (!owner) return;
-    const inner = 175;
-    const outer = 535;
     let first = true;
     context.beginPath();
-    for (let radius = inner; radius <= outer; radius += 10) {
+    for (let radius = 165; radius <= 545; radius += 9) {
       const angle = category.armPhase + ((radius - 220) / 285) * 0.42;
       const point = worldToScreen(
         owner.x + Math.cos(angle) * radius,
@@ -129,26 +129,115 @@ if (!cosmicPlainMode) {
     context.lineCap = "round";
     context.lineJoin = "round";
     for (const category of galaxyStructure.categories.values()) {
-      // Broad low-alpha density band first, then one restrained centerline. The band
-      // encodes a semantic sector without turning the category into a separate body.
       traceSpiralArm(category);
-      context.strokeStyle = colorWithAlpha(colors.group, themeMedia.matches ? 0.028 : 0.018);
-      context.lineWidth = clamp(22 * state.scale, 8, 26);
+      context.strokeStyle = colorWithAlpha(colors.group, themeMedia.matches ? 0.024 : 0.014);
+      context.lineWidth = clamp(24 * state.scale, 8, 28);
       context.stroke();
 
       traceSpiralArm(category);
-      context.strokeStyle = colorWithAlpha(colors.group, themeMedia.matches ? 0.13 : 0.075);
-      context.lineWidth = 0.7;
+      context.strokeStyle = colorWithAlpha(colors.group, themeMedia.matches ? 0.105 : 0.06);
+      context.lineWidth = 0.65;
       context.stroke();
     }
     context.restore();
+  }
+
+  function drawGalaxyLinks(colors) {
+    for (const link of state.links) {
+      const source = worldToScreen(link.source.x, link.source.y);
+      const target = worldToScreen(link.target.x, link.target.y);
+      const structural = link.type !== "relation";
+      let opacity = structural ? 0.045 : 0.72;
+
+      if (state.selected && (link.source === state.selected || link.target === state.selected)) {
+        opacity = structural ? 0.34 : 0.94;
+      } else if (state.selected) {
+        opacity = structural ? 0.018 : 0.10;
+      }
+      if (state.query && !(matchesQuery(link.source) || matchesQuery(link.target))) opacity *= 0.35;
+
+      context.strokeStyle = colorWithAlpha(link.type === "relation" ? colors.relation : colors.edge, opacity);
+      context.lineWidth = link.type === "relation" ? 1.45 : 0.65;
+      context.setLineDash([]);
+      context.beginPath();
+      context.moveTo(source.x, source.y);
+      context.lineTo(target.x, target.y);
+      context.stroke();
+    }
+  }
+
+  function drawCategorySectorNode(node, colors) {
+    const point = worldToScreen(node.x, node.y);
+    const highlighted = node === state.selected || node === state.hovered;
+    let opacity = 0.82;
+    if (state.selected && !connectedToSelected(node)) opacity = 0.16;
+    if (state.query && !matchesQuery(node)) opacity = 0.09;
+
+    context.save();
+    context.globalAlpha = opacity;
+    context.strokeStyle = highlighted ? colors.selected : colorWithAlpha(colors.group, 0.82);
+    context.lineWidth = highlighted ? 1.6 : 1;
+    context.beginPath();
+    context.arc(point.x, point.y, highlighted ? 6.5 : 5, 0, Math.PI * 2);
+    context.stroke();
+
+    const fontSize = clamp(11.5 * state.scale, 9, 13);
+    context.font = `600 ${fontSize}px -apple-system,BlinkMacSystemFont,Segoe UI,sans-serif`;
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    const labelY = point.y + clamp(17 * state.scale, 13, 20);
+    context.strokeStyle = colorWithAlpha(colors.background, 0.94);
+    context.lineWidth = 3;
+    context.strokeText(displayLabel(node), point.x, labelY);
+    context.fillStyle = colors.text;
+    context.fillText(displayLabel(node), point.x, labelY);
+    context.restore();
+  }
+
+  function drawOwnerNucleusNode(node, colors) {
+    const point = worldToScreen(node.x, node.y);
+    const highlighted = node === state.selected || node === state.hovered;
+    context.save();
+    context.fillStyle = colors.owner;
+    context.beginPath();
+    context.arc(point.x, point.y, highlighted ? 8 : 6.5, 0, Math.PI * 2);
+    context.fill();
+    context.strokeStyle = colorWithAlpha(colors.owner, highlighted ? 0.95 : 0.58);
+    context.lineWidth = 1;
+    context.beginPath();
+    context.arc(point.x, point.y, highlighted ? 14 : 11.5, 0, Math.PI * 2);
+    context.stroke();
+
+    const fontSize = clamp(12 * state.scale, 9.5, 14);
+    context.font = `600 ${fontSize}px -apple-system,BlinkMacSystemFont,Segoe UI,sans-serif`;
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    const labelY = point.y + clamp(23 * state.scale, 17, 27);
+    context.strokeStyle = colorWithAlpha(colors.background, 0.95);
+    context.lineWidth = 3.5;
+    context.strokeText(displayLabel(node), point.x, labelY);
+    context.fillStyle = colors.text;
+    context.fillText(displayLabel(node), point.x, labelY);
+    context.restore();
+  }
+
+  function drawGalaxyNode(node, colors) {
+    if (node.type === "group") {
+      drawCategorySectorNode(node, colors);
+      return;
+    }
+    if (node.type === "owner") {
+      drawOwnerNucleusNode(node, colors);
+      return;
+    }
+    drawNode(node, colors);
   }
 
   function drawSafeGalaxyDecorations(colors) {
     try {
       context.fillStyle = colors.background;
       context.fillRect(0, 0, state.width, state.height);
-      drawStars(colors);
+      drawDiskParticles(colors);
       drawGalacticNucleus(colors);
       drawGalactocentricRings(colors);
       drawSpiralSectors(colors);
@@ -167,8 +256,8 @@ if (!cosmicPlainMode) {
     const colors = palette();
     context.clearRect(0, 0, state.width, state.height);
     drawSafeGalaxyDecorations(colors);
-    drawLinks(colors);
-    for (const node of state.nodes) drawNode(node, colors);
+    drawGalaxyLinks(colors);
+    for (const node of state.nodes) drawGalaxyNode(node, colors);
     context.globalAlpha = 1;
   };
 }
