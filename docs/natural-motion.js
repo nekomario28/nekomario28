@@ -10,6 +10,14 @@ const naturalMotionSettings = {
   sidestepStrength: 0.018,
 };
 
+function naturalMotionResponsiveness(node) {
+  // The owner behaves like a much heavier central body, categories have medium
+  // inertia, and repositories remain the most agile objects in close encounters.
+  if (node?.type === "owner") return 0.18;
+  if (node?.type === "group") return 0.68;
+  return 1;
+}
+
 function naturalMotionPair(a, b, strength = 1) {
   let dx = b.x - a.x;
   let dy = b.y - a.y;
@@ -47,13 +55,15 @@ function naturalMotionPair(a, b, strength = 1) {
   const bMovable = !b.fixed && state.dragging !== b;
   if (!aMovable && !bMovable) return;
 
+  const aResponse = naturalMotionResponsiveness(a);
+  const bResponse = naturalMotionResponsiveness(b);
   if (aMovable) {
-    a.vx -= ux * radial;
-    a.vy -= uy * radial;
+    a.vx -= ux * radial * aResponse;
+    a.vy -= uy * radial * aResponse;
   }
   if (bMovable) {
-    b.vx += ux * radial;
-    b.vy += uy * radial;
+    b.vx += ux * radial * bResponse;
+    b.vy += uy * radial * bResponse;
   }
 
   // Predictive sideways steering makes approaching nodes flow around each other
@@ -64,12 +74,12 @@ function naturalMotionPair(a, b, strength = 1) {
     const ty = ux * sign;
     const side = predicted * Math.min(1, closingSpeed * 0.5 + 0.18) * naturalMotionSettings.sidestepStrength * scale;
     if (aMovable) {
-      a.vx += tx * side;
-      a.vy += ty * side;
+      a.vx += tx * side * aResponse;
+      a.vy += ty * side * aResponse;
     }
     if (bMovable) {
-      b.vx -= tx * side;
-      b.vy -= ty * side;
+      b.vx -= tx * side * bResponse;
+      b.vy -= ty * side * bResponse;
     }
   }
 }
