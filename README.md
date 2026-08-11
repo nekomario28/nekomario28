@@ -18,22 +18,30 @@
 
 <!-- Featured Projects slot reserved. Generated card assets and workflow support are retained for later use. -->
 
-<h3 align="center">Interactive Project Map</h3>
+<br>
+
+<h2 align="center">Interactive Project Map</h2>
+
+<p align="center">
+  <sub>Public projects arranged as a living galaxy.</sub>
+</p>
 
 <p align="center">
   <a href="https://nekomario28.github.io/nekomario28/">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="assets/project-map-dark.svg">
       <source media="(prefers-color-scheme: light)" srcset="assets/project-map-light.svg">
-      <img width="760" src="assets/project-map-light.svg" alt="Animated galaxy-style preview of the interactive public project map">
+      <img width="740" src="assets/project-map-light.svg" alt="Galaxy map of nekomario28 public projects">
     </picture>
   </a>
 </p>
 
 <p align="center">
-  <a href="https://nekomario28.github.io/nekomario28/"><strong>Open the interactive map →</strong></a><br>
-  <sub>Drag individual nodes, pan, zoom, inspect projects, and open repositories from the live force graph.</sub>
+  <a href="https://nekomario28.github.io/nekomario28/"><strong>Explore the live map ↗</strong></a><br>
+  <sub>Select projects · drag nodes · pan · zoom</sub>
 </p>
+
+<br>
 
 <p align="center">
   <img width="100%" src="https://github-readme-activity-graph.vercel.app/graph?username=nekomario28&theme=github-compact&hide_border=true&area=true" alt="GitHub activity graph">
