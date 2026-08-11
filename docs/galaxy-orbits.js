@@ -9,6 +9,7 @@ const galaxyOrbits = {
   initialized: false,
   lastTime: performance.now(),
   owner: null,
+  ownerHome: null,
   groupTargets: new Map(),
   repositoryTargets: new Map(),
 };
@@ -27,6 +28,7 @@ function galaxyOrbitInitialize() {
   if (!owner) return false;
 
   galaxyOrbits.owner = owner;
+  galaxyOrbits.ownerHome = { x: owner.x, y: owner.y };
   galaxyOrbits.groupTargets.clear();
   galaxyOrbits.repositoryTargets.clear();
 
@@ -63,6 +65,32 @@ function galaxyOrbitInitialize() {
   galaxyOrbits.lastTime = performance.now();
   galaxyOrbits.initialized = true;
   return true;
+}
+
+function steerOwnerHome(frameScale) {
+  const owner = galaxyOrbits.owner;
+  if (!owner) return;
+
+  // Dragging the central node deliberately moves the galaxy's center. On release,
+  // that location becomes the new equilibrium rather than snapping back.
+  if (state.dragging === owner) {
+    galaxyOrbits.ownerHome = { x: owner.x, y: owner.y };
+    return;
+  }
+
+  if (!galaxyOrbits.ownerHome) galaxyOrbits.ownerHome = { x: owner.x, y: owner.y };
+  const dx = galaxyOrbits.ownerHome.x - owner.x;
+  const dy = galaxyOrbits.ownerHome.y - owner.y;
+  const distance = Math.hypot(dx, dy);
+  const adaptiveSpring = 0.00072 * (1 + clamp(distance / 180, 0, 1.6));
+
+  owner.vx += dx * adaptiveSpring * frameScale;
+  owner.vy += dy * adaptiveSpring * frameScale;
+
+  // A heavy body still moves, but it does not accumulate an endless drift velocity.
+  const damping = Math.pow(0.988, frameScale);
+  owner.vx *= damping;
+  owner.vy *= damping;
 }
 
 function steerOrbit(node, center, targetRadius, angularSpeed, frameScale, options = {}) {
@@ -104,7 +132,7 @@ function steerOrbit(node, center, targetRadius, angularSpeed, frameScale, option
 function limitGalaxySpeed(node) {
   if (!node || state.dragging === node) return;
   const speed = Math.hypot(node.vx || 0, node.vy || 0);
-  const maximum = node.type === "group" ? 0.62 : node.type === "repository" ? 1.05 : 0.45;
+  const maximum = node.type === "owner" ? 0.24 : node.type === "group" ? 0.62 : node.type === "repository" ? 1.05 : 0.45;
   if (speed <= maximum || speed < 0.001) return;
   const scale = maximum / speed;
   node.vx *= scale;
@@ -119,6 +147,8 @@ function galaxyOrbitStep(now = performance.now()) {
   galaxyOrbits.lastTime = now;
   if (dt <= 0) return;
   const frameScale = dt / (1000 / 60);
+
+  steerOwnerHome(frameScale);
 
   for (const target of galaxyOrbits.groupTargets.values()) {
     steerOrbit(target.node, galaxyOrbits.owner, target.targetRadius, target.angularSpeed, frameScale, {
@@ -177,6 +207,7 @@ function syncGalaxyCopy() {
 
 resetButton.addEventListener("click", () => {
   galaxyOrbits.initialized = false;
+  galaxyOrbits.ownerHome = null;
   galaxyOrbits.lastTime = performance.now();
 });
 
