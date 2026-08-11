@@ -12,6 +12,10 @@ if (!cosmicPlainMode) {
     return cosmicLayer.seed / 0x100000000;
   }
 
+  function associationUnit(groupId, key) {
+    return (hash(`${groupId}:${key}`) % 10000) / 9999;
+  }
+
   for (let index = 0; index < 190; index += 1) {
     cosmicLayer.particles.push({
       radius: 70 + Math.sqrt(cosmicRandom()) * 500,
@@ -162,32 +166,59 @@ if (!cosmicPlainMode) {
       const major = clamp((112 + Math.sqrt(memberCount) * 30) * state.scale, 72, 205);
       const minor = clamp((42 + Math.sqrt(memberCount) * 11) * state.scale, 30, 78);
       const tangentAngle = Math.atan2(group.y - owner.y, group.x - owner.x) + Math.PI / 2;
+      const lobeCount = Math.round(clamp(3 + Math.floor(Math.sqrt(memberCount)), 3, 5));
+      const focus = state.selected === group ? 1.32 : state.hovered === group ? 1.14 : 1;
 
+      // The logical envelope stays elliptical for sizing and placement, but the
+      // visible association is several deterministic diffuse lobes. This makes the
+      // edge ambiguous like a stellar association instead of drawing a UI boundary.
+      for (let index = 0; index < lobeCount; index += 1) {
+        const along = (associationUnit(group.id, `lobe-${index}-x`) - 0.5) * major * 0.72;
+        const across = (associationUnit(group.id, `lobe-${index}-y`) - 0.5) * minor * 0.78;
+        const lobeMajor = major * (0.42 + associationUnit(group.id, `lobe-${index}-major`) * 0.26);
+        const lobeMinor = minor * (0.50 + associationUnit(group.id, `lobe-${index}-minor`) * 0.34);
+        const tilt = (associationUnit(group.id, `lobe-${index}-tilt`) - 0.5) * 0.42;
+
+        context.save();
+        context.translate(point.x, point.y);
+        context.rotate(tangentAngle);
+        context.translate(along, across);
+        context.rotate(tilt);
+        context.scale(1, lobeMinor / lobeMajor);
+        const gradient = context.createRadialGradient(0, 0, 0, 0, 0, lobeMajor);
+        gradient.addColorStop(0, colorWithAlpha(colors.group, (themeMedia.matches ? 0.043 : 0.026) * focus));
+        gradient.addColorStop(0.42, colorWithAlpha(colors.group, (themeMedia.matches ? 0.025 : 0.015) * focus));
+        gradient.addColorStop(0.78, colorWithAlpha(colors.owner, (themeMedia.matches ? 0.008 : 0.005) * focus));
+        gradient.addColorStop(1, colorWithAlpha(colors.group, 0));
+        context.fillStyle = gradient;
+        context.beginPath();
+        context.arc(0, 0, lobeMajor, 0, Math.PI * 2);
+        context.fill();
+        context.restore();
+      }
+
+      // A few fixed micro-stars give the eye local density cues without creating a
+      // hard outline. Positions are hash-derived, so the association never writhes.
+      const associationStars = Math.min(12, 5 + memberCount);
       context.save();
       context.translate(point.x, point.y);
       context.rotate(tangentAngle);
-      context.scale(1, minor / major);
-      const gradient = context.createRadialGradient(0, 0, 0, 0, 0, major);
-      gradient.addColorStop(0, colorWithAlpha(colors.group, themeMedia.matches ? 0.060 : 0.036));
-      gradient.addColorStop(0.35, colorWithAlpha(colors.group, themeMedia.matches ? 0.034 : 0.021));
-      gradient.addColorStop(0.72, colorWithAlpha(colors.owner, themeMedia.matches ? 0.012 : 0.008));
-      gradient.addColorStop(1, colorWithAlpha(colors.group, 0));
-      context.fillStyle = gradient;
-      context.beginPath();
-      context.arc(0, 0, major, 0, Math.PI * 2);
-      context.fill();
-      context.restore();
-
-      // A barely visible association boundary gives the eye something to follow
-      // without turning the category into a UI card or a literal celestial body.
-      context.save();
-      context.translate(point.x, point.y);
-      context.rotate(tangentAngle);
-      context.strokeStyle = colorWithAlpha(colors.group, themeMedia.matches ? 0.095 : 0.055);
-      context.lineWidth = 0.55;
-      context.beginPath();
-      context.ellipse(0, 0, major * 0.82, minor * 0.82, 0, 0, Math.PI * 2);
-      context.stroke();
+      for (let index = 0; index < associationStars; index += 1) {
+        let x = (associationUnit(group.id, `star-${index}-x`) - 0.5) * major * 1.34;
+        let y = (associationUnit(group.id, `star-${index}-y`) - 0.5) * minor * 1.38;
+        const normalized = Math.hypot(x / major, y / minor);
+        if (normalized > 0.92) {
+          const scale = 0.92 / normalized;
+          x *= scale;
+          y *= scale;
+        }
+        const radius = 0.38 + associationUnit(group.id, `star-${index}-size`) * 0.72;
+        const alpha = (0.065 + associationUnit(group.id, `star-${index}-alpha`) * 0.085) * focus;
+        context.fillStyle = colorWithAlpha(colors.text, alpha);
+        context.beginPath();
+        context.arc(x, y, radius, 0, Math.PI * 2);
+        context.fill();
+      }
       context.restore();
     }
   }
