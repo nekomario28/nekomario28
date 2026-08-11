@@ -46,6 +46,7 @@ jobs:
           node --check docs/orbital-spacing.js
           node --check docs/galaxy-structure.js
           node --check docs/cosmic.js
+          python -m py_compile scripts/render_project_map.py scripts/enhance_project_map_preview.py scripts/validate_project_map.py
           test -s docs/responsive.css
           grep -q 'href="responsive.css"' docs/index.html
 
@@ -96,6 +97,27 @@ jobs:
           ! grep -q 'galaxyOrbits' docs/cosmic.js
           ! grep -q 'parentByRepository' docs/cosmic.js
           ! grep -q 'applyForces[[:space:]]*=' docs/cosmic.js
+
+          # Preview renderer must be self-contained; the removed helper module must
+          # never become an implicit runtime dependency again.
+          ! grep -q 'render_galaxy_project_map' scripts/render_project_map.py
+          grep -q 'spiral-sector-' scripts/render_project_map.py
+
+      - name: Smoke test current project map offline
+        shell: bash
+        run: |
+          tmpdir="$(mktemp -d)"
+          python scripts/render_project_map.py \
+            --json docs/graph-data.json \
+            --light "$tmpdir/light.svg" \
+            --dark "$tmpdir/dark.svg"
+          python scripts/enhance_project_map_preview.py "$tmpdir/light.svg" "$tmpdir/dark.svg"
+          python scripts/validate_project_map.py \
+            --json docs/graph-data.json \
+            --config config/project-relations.json \
+            --html docs/index.html \
+            --light "$tmpdir/light.svg" \
+            --dark "$tmpdir/dark.svg"
 
       - name: Generate project map data
         env:
