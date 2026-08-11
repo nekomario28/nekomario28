@@ -195,23 +195,29 @@ def validate_html(path: Path) -> None:
         if f'id="{element_id}"' not in text:
             fail(f"{path}: missing required element id={element_id}")
 
-    scripts = ["graph.js", "obsidian-controls.js", "galaxy-orbits.js", "cosmic.js"]
+    scripts = ["graph.js", "obsidian-controls.js", "orbital-spacing.js", "galaxy-structure.js", "cosmic.js"]
     positions = [text.find(f'src="{script}"') for script in scripts]
     if any(position < 0 for position in positions):
         fail(f"{path}: missing required map script")
     if positions != sorted(positions):
         fail(
             f"{path}: scripts must load in order "
-            "graph.js -> obsidian-controls.js -> galaxy-orbits.js -> cosmic.js"
+            "graph.js -> obsidian-controls.js -> orbital-spacing.js -> galaxy-structure.js -> cosmic.js"
         )
 
-    forbidden = ["galaxy-layout.js", "galaxy-motion.js", "galaxy-controls.js"]
+    forbidden = [
+        "natural-motion.js",
+        "galaxy-orbits.js",
+        "galaxy-layout.js",
+        "galaxy-motion.js",
+        "galaxy-controls.js",
+    ]
     for script in forbidden:
         if f'src="{script}"' in text:
             fail(f"{path}: obsolete galaxy behavior script must not be loaded: {script}")
 
     if "?plain=1" not in text:
-        fail(f"{path}: plain Obsidian-style comparison route must remain documented")
+        fail(f"{path}: plain force-graph comparison route must remain documented")
 
 
 def validate_svg(path: Path, expected_groups: int) -> None:
@@ -226,11 +232,13 @@ def validate_svg(path: Path, expected_groups: int) -> None:
         fail(f"{path}: unexpected viewBox {root.attrib.get('viewBox')!r}")
     if 'id="cosmic-preview"' not in text:
         fail(f"{path}: cosmic preview layer is missing")
-    nebula_count = text.count('id="cosmic-nebula-')
-    if nebula_count != expected_groups:
-        fail(f"{path}: expected {expected_groups} category nebulae, found {nebula_count}")
-    if "A galaxy-style constellation of public projects" not in text:
-        fail(f"{path}: galaxy preview subtitle is missing")
+    if 'id="stellar-associations"' not in text:
+        fail(f"{path}: stellar association layer is missing")
+    sector_count = text.count('id="spiral-sector-')
+    if sector_count != expected_groups:
+        fail(f"{path}: expected {expected_groups} spiral sectors, found {sector_count}")
+    if "A common-center galaxy of public projects" not in text:
+        fail(f"{path}: common-center galaxy preview subtitle is missing")
     if "Open the interactive map" not in text:
         fail(f"{path}: CTA is missing")
 

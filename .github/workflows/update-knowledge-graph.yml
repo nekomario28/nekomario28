@@ -13,8 +13,8 @@ on:
       - "docs/index.html"
       - "docs/graph.js"
       - "docs/obsidian-controls.js"
-      - "docs/natural-motion.js"
-      - "docs/galaxy-orbits.js"
+      - "docs/orbital-spacing.js"
+      - "docs/galaxy-structure.js"
       - "docs/cosmic.js"
       - "docs/styles.css"
       - "docs/responsive.css"
@@ -26,7 +26,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: interactive-project-map
+  group: interactive-project-map-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -43,59 +43,76 @@ jobs:
         run: |
           node --check docs/graph.js
           node --check docs/obsidian-controls.js
-          node --check docs/natural-motion.js
-          node --check docs/galaxy-orbits.js
+          node --check docs/orbital-spacing.js
+          node --check docs/galaxy-structure.js
           node --check docs/cosmic.js
+          python -m py_compile scripts/render_project_map.py scripts/enhance_project_map_preview.py scripts/validate_project_map.py
           test -s docs/responsive.css
           grep -q 'href="responsive.css"' docs/index.html
 
-          # Force-only baseline: the public Obsidian Graph concepts, without
-          # category anchors, owner pinning, or semantic initial geometry.
+          # Force-only baseline remains independently usable.
           grep -q 'center:' docs/graph.js
           grep -q 'repel:' docs/graph.js
           grep -q 'link:' docs/graph.js
           grep -q 'linkDistance:' docs/graph.js
           ! grep -q 'anchorX' docs/graph.js
           ! grep -q 'anchorY' docs/graph.js
-          ! grep -q 'groupAnchors' docs/graph.js
-          ! grep -q 'repositoryAnchors' docs/graph.js
           ! grep -q 'fixed: raw.type' docs/graph.js
-          ! grep -q 'anchorX' docs/obsidian-controls.js
-          ! grep -q 'anchorY' docs/obsidian-controls.js
 
-          # Natural motion may steer velocity but must not hard-snap coordinates.
-          grep -q 'src="natural-motion.js"' docs/index.html
-          grep -q 'applyNaturalAvoidance' docs/natural-motion.js
-          grep -q 'lookAheadFrames' docs/natural-motion.js
-          ! grep -q 'a.x -=' docs/natural-motion.js
-          ! grep -q 'b.x +=' docs/natural-motion.js
-          ! grep -q 'a.y -=' docs/natural-motion.js
-          ! grep -q 'b.y +=' docs/natural-motion.js
+          # Galaxy mode separates nearby projects in orbital phase, not with
+          # last-moment collision snaps or fish-like sidestep steering.
+          grep -q 'src="orbital-spacing.js"' docs/index.html
+          ! grep -q 'src="natural-motion.js"' docs/index.html
+          grep -q 'applyOrbitalSpacing' docs/orbital-spacing.js
+          grep -q 'radialGap' docs/orbital-spacing.js
+          grep -q 'comfortAngle' docs/orbital-spacing.js
+          grep -q 'phasePush' docs/orbital-spacing.js
+          ! grep -q '\.x[[:space:]]*[+-]=' docs/orbital-spacing.js
+          ! grep -q '\.y[[:space:]]*[+-]=' docs/orbital-spacing.js
 
-          # Galaxy motion is persistent steering around orbital bands and removable.
-          grep -q 'src="graph.js"' docs/index.html
-          grep -q 'src="obsidian-controls.js"' docs/index.html
-          grep -q 'src="galaxy-orbits.js"' docs/index.html
-          grep -q 'src="cosmic.js"' docs/index.html
-          grep -q 'plain' docs/galaxy-orbits.js
+          # Redesign contract: one galactic center, differential rotation, categories
+          # are semantic sector labels rather than local orbit centers.
+          grep -q 'src="galaxy-structure.js"' docs/index.html
+          ! grep -q 'src="galaxy-orbits.js"' docs/index.html
+          grep -q 'galaxyAngularSpeedForRadius' docs/galaxy-structure.js
+          grep -q 'repositoryPlannedRadius' docs/galaxy-structure.js
+          grep -q 'positionCategoryAtCentroid' docs/galaxy-structure.js
+          grep -q 'node.x - owner.x' docs/galaxy-structure.js
+          grep -q 'node.y - owner.y' docs/galaxy-structure.js
+          grep -q 'target.targetRadius - radius' docs/galaxy-structure.js
+          grep -q 'target.category.armPhase + target.phaseOffset' docs/galaxy-structure.js
+          ! grep -q 'target.parent' docs/galaxy-structure.js
+          ! grep -q 'applyNaturalAvoidance' docs/galaxy-structure.js
+
+          # Category presentation is an irregular but stable stellar association:
+          # logical ellipse envelope, several deterministic lobes, no animated noise
+          # or hard visible boundary.
+          grep -q 'drawCategoryAssociations' docs/cosmic.js
+          grep -q 'associationUnit' docs/cosmic.js
+          grep -q 'lobeCount' docs/cosmic.js
+          grep -q 'no closed boundary' docs/cosmic.js
+          grep -q 'id="stellar-associations"' scripts/enhance_project_map_preview.py
+
+          # Plain mode must remain independent of galaxy presentation.
+          grep -q 'plain' docs/galaxy-structure.js
           grep -q 'plain' docs/cosmic.js
-          grep -q 'steerOrbit' docs/galaxy-orbits.js
-          grep -q 'targetRadius' docs/galaxy-orbits.js
-          grep -q 'applyNaturalAvoidance' docs/galaxy-orbits.js
-          grep -q 'galaxyOrbitBaseApplyForces();' docs/galaxy-orbits.js
-          grep -q 'galaxyOrbitStep();' docs/galaxy-orbits.js
-          ! grep -q 'rotatePoint' docs/galaxy-orbits.js
-          ! grep -q 'anchorX' docs/galaxy-orbits.js
-          ! grep -q 'anchorY' docs/galaxy-orbits.js
-          ! grep -q 'src="galaxy-layout.js"' docs/index.html
-          ! grep -q 'src="galaxy-motion.js"' docs/index.html
-          ! grep -q 'src="galaxy-controls.js"' docs/index.html
           ! grep -q 'applyForces[[:space:]]*=' docs/cosmic.js
 
-          # Rendering and motion layers must share the same current orbit interface.
-          grep -q 'groupTargets' docs/cosmic.js
-          grep -q 'repositoryTargets' docs/cosmic.js
-          ! grep -q 'parentByRepository' docs/cosmic.js
+          # Offline smoke render catches renderer/enhancer/validator regressions
+          # before network-backed repository generation starts.
+          tmpdir="$(mktemp -d)"
+          python scripts/render_project_map.py \
+            --json docs/graph-data.json \
+            --light "$tmpdir/light.svg" \
+            --dark "$tmpdir/dark.svg"
+          python scripts/enhance_project_map_preview.py "$tmpdir/light.svg" "$tmpdir/dark.svg"
+          python scripts/validate_project_map.py \
+            --json docs/graph-data.json \
+            --config config/project-relations.json \
+            --html docs/index.html \
+            --light "$tmpdir/light.svg" \
+            --dark "$tmpdir/dark.svg"
+          rm -rf "$tmpdir"
 
       - name: Generate project map data
         env:

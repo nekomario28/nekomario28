@@ -1,7 +1,8 @@
 "use strict";
 
 // Accessibility and touch layer only. It does not modify force settings, node
-// positions, graph grouping, or drag semantics beyond coordinating pinch gestures.
+// positions, graph grouping, or drag semantics beyond coordinating gestures and
+// preventing a simple selection click from being mistaken for a forceful drag.
 const detailsPanel = document.getElementById("details");
 
 function syncSelectionUi() {
@@ -35,6 +36,87 @@ canvas.setAttribute(
   "Force graph. Drag a node to move it, drag empty space to pan, pinch or scroll to zoom, press zero to fit all, and press Enter to open a selected repository.",
 );
 
+function canvasPoint(event) {
+  const rect = canvas.getBoundingClientRect();
+  return { x: event.clientX - rect.left, y: event.clientY - rect.top };
+}
+
+// graph.js starts a drag as soon as pointerdown lands on a node. Preserve that
+// baseline behavior for compatibility, but distinguish a click from a real drag at
+// the control layer. A click must only select: it must not reheat the entire force
+// simulation or erase the node's orbital velocity.
+const selectionGesture = {
+  pointerId: null,
+  start: null,
+  candidate: null,
+  velocity: null,
+  moved: false,
+};
+
+function clearSelectionGesture() {
+  selectionGesture.pointerId = null;
+  selectionGesture.start = null;
+  selectionGesture.candidate = null;
+  selectionGesture.velocity = null;
+  selectionGesture.moved = false;
+}
+
+const responsiveReheatBase = reheat;
+reheat = function reheatWithoutClickShock(value = 0.72) {
+  if (selectionGesture.pointerId !== null) {
+    if (!selectionGesture.moved) return;
+    return responsiveReheatBase(Math.min(value, 0.12));
+  }
+  return responsiveReheatBase(value);
+};
+
+canvas.addEventListener(
+  "pointerdown",
+  (event) => {
+    if (!event.isPrimary) return;
+    const point = canvasPoint(event);
+    const candidate = hitTest(point.x, point.y);
+    selectionGesture.pointerId = event.pointerId;
+    selectionGesture.start = point;
+    selectionGesture.candidate = candidate;
+    selectionGesture.velocity = candidate ? { vx: candidate.vx || 0, vy: candidate.vy || 0 } : null;
+    selectionGesture.moved = false;
+  },
+  { capture: true, passive: true },
+);
+
+canvas.addEventListener(
+  "pointermove",
+  (event) => {
+    if (event.pointerId !== selectionGesture.pointerId || !selectionGesture.start) return;
+    const point = canvasPoint(event);
+    if (Math.hypot(point.x - selectionGesture.start.x, point.y - selectionGesture.start.y) >= 6) {
+      selectionGesture.moved = true;
+    }
+  },
+  { capture: true, passive: true },
+);
+
+function finishSelectionGesture(event, cancelled = false) {
+  if (event.pointerId !== selectionGesture.pointerId) return;
+  const candidate = selectionGesture.candidate;
+  const velocity = selectionGesture.velocity;
+  const wasClick = !cancelled && !selectionGesture.moved;
+
+  // This listener is registered after graph.js, so the base pointerup handler has
+  // already cleared the temporary drag and zeroed velocity. Restore the velocity for
+  // a true click so selecting a project does not visibly interrupt its orbit.
+  if (wasClick && candidate && velocity) {
+    candidate.vx = velocity.vx;
+    candidate.vy = velocity.vy;
+  }
+
+  clearSelectionGesture();
+}
+
+canvas.addEventListener("pointerup", (event) => finishSelectionGesture(event, false));
+canvas.addEventListener("pointercancel", (event) => finishSelectionGesture(event, true));
+
 const touchState = {
   pointers: new Map(),
   pinching: false,
@@ -42,11 +124,6 @@ const touchState = {
   lastDistance: 0,
   lastMidpoint: null,
 };
-
-function canvasPoint(event) {
-  const rect = canvas.getBoundingClientRect();
-  return { x: event.clientX - rect.left, y: event.clientY - rect.top };
-}
 
 function touchPair() {
   const values = [...touchState.pointers.values()];
