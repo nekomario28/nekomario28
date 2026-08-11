@@ -2,7 +2,7 @@ name: Update interactive project map
 
 on:
   push:
-    branches: [main, galaxy-structure-redesign]
+    branches: [main]
     paths:
       - ".github/workflows/update-knowledge-graph.yml"
       - "config/project-relations.json"
