@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/update-stats-v2.yml"
+      - "scripts/render_contribution_graph.py"
   schedule:
     - cron: "29 0,12 * * *"
   workflow_dispatch:
@@ -44,6 +45,16 @@ jobs:
           path: assets/github-stats-v2-dark.svg
           token: ${{ secrets.GITHUB_TOKEN }}
           fail_on_error: true
+
+      - name: Generate contribution graphs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python -m py_compile scripts/render_contribution_graph.py
+          python scripts/render_contribution_graph.py \
+            --username "${{ github.repository_owner }}" \
+            --light assets/github-contributions-light.svg \
+            --dark assets/github-contributions-dark.svg
 
       - name: Generate AntiFullbright light card
         uses: stats-organization/github-readme-stats-action@v2
@@ -92,6 +103,8 @@ jobs:
           files=(
             assets/github-stats-v2-light.svg
             assets/github-stats-v2-dark.svg
+            assets/github-contributions-light.svg
+            assets/github-contributions-dark.svg
             assets/featured-antifullbright-light.svg
             assets/featured-antifullbright-dark.svg
             assets/featured-lime-light.svg
@@ -105,6 +118,8 @@ jobs:
               exit 1
             fi
           done
+          grep -q 'Contributions · last 31 days' assets/github-contributions-light.svg
+          grep -q 'Contributions · last 31 days' assets/github-contributions-dark.svg
 
       - name: Commit updated profile cards
         shell: bash
@@ -114,6 +129,8 @@ jobs:
           git add \
             assets/github-stats-v2-light.svg \
             assets/github-stats-v2-dark.svg \
+            assets/github-contributions-light.svg \
+            assets/github-contributions-dark.svg \
             assets/featured-antifullbright-light.svg \
             assets/featured-antifullbright-dark.svg \
             assets/featured-lime-light.svg \
