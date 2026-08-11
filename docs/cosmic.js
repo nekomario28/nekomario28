@@ -106,6 +106,21 @@ if (!cosmicPlainMode) {
     context.restore();
   }
 
+  function drawSafeGalaxyDecorations(colors) {
+    try {
+      drawBackground(colors);
+      drawCategoryNebulae(colors);
+      drawOrbitGuides(colors);
+    } catch (error) {
+      console.warn("Galaxy decoration layer failed; rendering the core graph without decorations.", error);
+      context.clearRect(0, 0, state.width, state.height);
+      context.fillStyle = colors.background;
+      context.fillRect(0, 0, state.width, state.height);
+      context.setLineDash([]);
+      context.globalAlpha = 1;
+    }
+  }
+
   drawBackground = function drawGalaxyBackground(colors) {
     context.fillStyle = colors.background;
     context.fillRect(0, 0, state.width, state.height);
@@ -117,9 +132,7 @@ if (!cosmicPlainMode) {
     if (!context) return;
     const colors = palette();
     context.clearRect(0, 0, state.width, state.height);
-    drawBackground(colors);
-    drawCategoryNebulae(colors);
-    drawOrbitGuides(colors);
+    drawSafeGalaxyDecorations(colors);
     drawLinks(colors);
     for (const node of state.nodes) drawNode(node, colors);
     context.globalAlpha = 1;
