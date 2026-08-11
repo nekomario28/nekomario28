@@ -92,6 +92,11 @@ jobs:
           ! grep -q 'src="galaxy-controls.js"' docs/index.html
           ! grep -q 'applyForces[[:space:]]*=' docs/cosmic.js
 
+          # Rendering and motion layers must share the same current orbit interface.
+          grep -q 'groupTargets' docs/cosmic.js
+          grep -q 'repositoryTargets' docs/cosmic.js
+          ! grep -q 'parentByRepository' docs/cosmic.js
+
       - name: Generate project map data
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
