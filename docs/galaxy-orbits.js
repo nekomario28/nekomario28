@@ -45,7 +45,7 @@ function galaxyOrbitInitialize() {
   }
 
   for (const [repositoryId] of galaxyOrbits.parentByRepository) {
-    const seconds = 30 + (hash(`${repositoryId}:orbit-period`) % 19); // 30–48 s.
+    const seconds = 60 + (hash(`${repositoryId}:orbit-period`) % 37); // 60–96 s.
     const direction = hash(`${repositoryId}:orbit-direction`) % 2 === 0 ? 1 : -1;
     galaxyOrbits.repositorySpeeds.set(repositoryId, direction * (Math.PI * 2) / (seconds * 1000));
   }
@@ -86,7 +86,7 @@ function galaxyOrbitStep(now = performance.now()) {
   if (dt <= 0) return;
 
   const owner = galaxyOrbits.owner;
-  const categoryAngularSpeed = (Math.PI * 2) / (150 * 1000); // 2.5-minute revolution.
+  const categoryAngularSpeed = (Math.PI * 2) / (300 * 1000); // 5-minute revolution.
 
   // First level: each category rotates around the owner's current position. Moving
   // the category translates its repositories by the exact same delta, so the whole
@@ -121,6 +121,7 @@ const galaxyOrbitBaseApplyForces = applyForces;
 applyForces = function applyForcesWithDoubleOrbit() {
   galaxyOrbitBaseApplyForces();
   galaxyOrbitStep();
+  if (!galaxyOrbitMotionDisabled()) resolveNodeCollisions(0.92, 3);
 };
 
 function syncGalaxyCopy() {
