@@ -78,34 +78,28 @@ jobs:
           grep -q 'repositoryPlannedRadius' docs/galaxy-structure.js
           grep -q 'positionCategoryAtCentroid' docs/galaxy-structure.js
           grep -q 'node.x - owner.x' docs/galaxy-structure.js
-          grep -q 'target.category.armPhase' docs/galaxy-structure.js
-          grep -q 'applyOrbitalSpacing' docs/galaxy-structure.js
-          ! grep -q 'applyNaturalAvoidance' docs/galaxy-structure.js
-          grep -q 'galaxyStructureBaseApplyForces();' docs/galaxy-structure.js
-          grep -q 'galaxyStructureStep();' docs/galaxy-structure.js
-          ! grep -q 'parentByRepository' docs/galaxy-structure.js
+          grep -q 'node.y - owner.y' docs/galaxy-structure.js
+          grep -q 'target.targetRadius - radius' docs/galaxy-structure.js
+          grep -q 'target.category.armPhase + target.phaseOffset' docs/galaxy-structure.js
           ! grep -q 'target.parent' docs/galaxy-structure.js
-          ! grep -q 'steerOrbit' docs/galaxy-structure.js
+          ! grep -q 'applyNaturalAvoidance' docs/galaxy-structure.js
 
-          # Presentation uses global rings and spiral sectors; no category-centered
-          # circular orbit system is allowed back into the redesign.
-          grep -q 'src="cosmic.js"' docs/index.html
-          grep -q 'galaxyStructure' docs/cosmic.js
-          grep -q 'drawGalactocentricRings' docs/cosmic.js
-          grep -q 'drawSpiralSectors' docs/cosmic.js
-          grep -q 'traceSpiralArm' docs/cosmic.js
-          ! grep -q 'galaxyOrbits' docs/cosmic.js
-          ! grep -q 'parentByRepository' docs/cosmic.js
+          # Category presentation is an irregular but stable stellar association:
+          # logical ellipse envelope, several deterministic lobes, no animated noise
+          # or hard visible boundary.
+          grep -q 'drawCategoryAssociations' docs/cosmic.js
+          grep -q 'associationUnit' docs/cosmic.js
+          grep -q 'lobeCount' docs/cosmic.js
+          grep -q 'no closed boundary' docs/cosmic.js
+          grep -q 'id="stellar-associations"' scripts/enhance_project_map_preview.py
+
+          # Plain mode must remain independent of galaxy presentation.
+          grep -q 'plain' docs/galaxy-structure.js
+          grep -q 'plain' docs/cosmic.js
           ! grep -q 'applyForces[[:space:]]*=' docs/cosmic.js
 
-          # Preview renderer must be self-contained; the removed helper module must
-          # never become an implicit runtime dependency again.
-          ! grep -q 'render_galaxy_project_map' scripts/render_project_map.py
-          grep -q 'spiral-sector-' scripts/render_project_map.py
-
-      - name: Smoke test current project map offline
-        shell: bash
-        run: |
+          # Offline smoke render catches renderer/enhancer/validator regressions
+          # before network-backed repository generation starts.
           tmpdir="$(mktemp -d)"
           python scripts/render_project_map.py \
             --json docs/graph-data.json \
@@ -118,6 +112,7 @@ jobs:
             --html docs/index.html \
             --light "$tmpdir/light.svg" \
             --dark "$tmpdir/dark.svg"
+          rm -rf "$tmpdir"
 
       - name: Generate project map data
         env:
