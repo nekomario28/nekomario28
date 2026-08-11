@@ -96,9 +96,11 @@ def enhance(path: Path) -> None:
 
     association_shapes.append("</g>")
 
-    text = text.replace("</defs>", "\n" + "\n".join(gradients) + "\n</defs>", 1)
+    # Replace the matched cosmic group while its offsets still refer to the original
+    # text. Only after that is it safe to change the length of the <defs> section.
     enhanced_cosmic = cosmic.group(1) + cosmic.group("body") + "\n" + "\n".join(association_shapes) + "\n" + cosmic.group(3)
     text = text[: cosmic.start()] + enhanced_cosmic + text[cosmic.end() :]
+    text = text.replace("</defs>", "\n" + "\n".join(gradients) + "\n</defs>", 1)
 
     # Category remains a tiny location anchor for its label rather than a celestial
     # body. The diffuse association behind it carries the category's visual extent.
