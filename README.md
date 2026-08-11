@@ -44,7 +44,11 @@
 <br>
 
 <p align="center">
-  <img width="100%" src="https://github-readme-activity-graph.vercel.app/graph?username=nekomario28&theme=github-compact&hide_border=true&area=true" alt="GitHub activity graph">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/github-contributions-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="assets/github-contributions-light.svg">
+    <img width="760" src="assets/github-contributions-light.svg" alt="GitHub contribution activity for the last 31 days">
+  </picture>
 </p>
 
 <p align="center">
