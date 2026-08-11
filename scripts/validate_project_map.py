@@ -232,11 +232,11 @@ def validate_svg(path: Path, expected_groups: int) -> None:
         fail(f"{path}: unexpected viewBox {root.attrib.get('viewBox')!r}")
     if 'id="cosmic-preview"' not in text:
         fail(f"{path}: cosmic preview layer is missing")
-    nebula_count = text.count('id="cosmic-nebula-')
-    if nebula_count != expected_groups:
-        fail(f"{path}: expected {expected_groups} category nebulae, found {nebula_count}")
-    if "A galaxy-style constellation of public projects" not in text:
-        fail(f"{path}: galaxy preview subtitle is missing")
+    sector_count = text.count('id="spiral-sector-')
+    if sector_count != expected_groups:
+        fail(f"{path}: expected {expected_groups} spiral sectors, found {sector_count}")
+    if "A common-center galaxy of public projects" not in text:
+        fail(f"{path}: common-center galaxy preview subtitle is missing")
     if "Open the interactive map" not in text:
         fail(f"{path}: CTA is missing")
 
