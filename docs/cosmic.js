@@ -169,9 +169,9 @@ if (!cosmicPlainMode) {
       const lobeCount = Math.round(clamp(3 + Math.floor(Math.sqrt(memberCount)), 3, 5));
       const focus = state.selected === group ? 1.32 : state.hovered === group ? 1.14 : 1;
 
-      // The logical envelope stays elliptical for sizing and placement, but the
-      // visible association is several deterministic diffuse lobes. This makes the
-      // edge ambiguous like a stellar association instead of drawing a UI boundary.
+      // Contract: the ellipse above is only the logical envelope. The rendered
+      // category has no closed boundary, no animated deformation, and no random
+      // per-frame noise. Hash-derived lobes make it irregular but visually stable.
       for (let index = 0; index < lobeCount; index += 1) {
         const along = (associationUnit(group.id, `lobe-${index}-x`) - 0.5) * major * 0.72;
         const across = (associationUnit(group.id, `lobe-${index}-y`) - 0.5) * minor * 0.78;
