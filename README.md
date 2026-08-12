@@ -10,9 +10,9 @@
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/github-stats-v2-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="assets/github-stats-v2-light.svg">
-    <img width="520" src="assets/github-stats-v2-light.svg" alt="GitHub activity statistics">
+    <source media="(prefers-color-scheme: dark)" srcset="assets/recent-work-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="assets/recent-work-light.svg">
+    <img width="700" src="assets/recent-work-light.svg" alt="Recent public work by project area, releases, and external merges">
   </picture>
 </p>
 
