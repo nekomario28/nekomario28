@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="296" viewBox="0 0 760 296" role="img" aria-labelledby="title desc">
+<title id="title">Recent Work</title>
+<desc id="desc">Output-oriented public GitHub activity from the last 90 days. Commit, pull request and review totals are intentionally omitted.</desc>
+<rect width="760" height="296" rx="8" fill="#ffffff"/>
+<text x="28" y="27" fill="#24292f" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="16" font-weight="600">Recent Work</text>
+<text x="28" y="48" fill="#57606a" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11">Last 90 days · outcomes and project areas, not activity volume</text>
+<text x="28" y="73" fill="#0969da" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="9" font-weight="600" letter-spacing="0.7">FOCUS</text>
+<text x="116" y="73" fill="#24292f" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="12.5" font-weight="600">Robotics / ROS 2</text>
+<text x="116" y="91" fill="#57606a" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11.5">lime_tidyup</text>
+<line x1="28" y1="96" x2="732" y2="96" stroke="#d8dee4" stroke-width="1"/>
+<text x="28" y="115" fill="#0969da" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="9" font-weight="600" letter-spacing="0.7">FOCUS</text>
+<text x="116" y="115" fill="#24292f" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="12.5" font-weight="600">Minecraft Modding</text>
+<text x="116" y="133" fill="#57606a" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11.5">sable · OffHandCombat</text>
+<line x1="28" y1="138" x2="732" y2="138" stroke="#d8dee4" stroke-width="1"/>
+<text x="28" y="157" fill="#0969da" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="9" font-weight="600" letter-spacing="0.7">FOCUS</text>
+<text x="116" y="157" fill="#24292f" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="12.5" font-weight="600">Coursework / Learning</text>
+<text x="116" y="175" fill="#57606a" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11.5">ProjExD_Group10</text>
+<line x1="28" y1="180" x2="732" y2="180" stroke="#d8dee4" stroke-width="1"/>
+<text x="28" y="199" fill="#0969da" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="9" font-weight="600" letter-spacing="0.7">SHIPPED</text>
+<text x="116" y="199" fill="#24292f" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="12.5" font-weight="600">Public releases</text>
+<text x="116" y="217" fill="#57606a" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11.5">BuyClaimChunks v1.1.1</text>
+<line x1="28" y1="222" x2="732" y2="222" stroke="#d8dee4" stroke-width="1"/>
+<text x="28" y="241" fill="#0969da" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="9" font-weight="600" letter-spacing="0.7">UPSTREAM</text>
+<text x="116" y="241" fill="#24292f" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="12.5" font-weight="600">Merged outside my repos</text>
+<text x="116" y="259" fill="#57606a" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11.5">c0c25034/ProjExD_4 #2</text>
+<text x="732" y="286" text-anchor="end" fill="#57606a" opacity="0.72" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="9">public GitHub data</text>
+</svg>
