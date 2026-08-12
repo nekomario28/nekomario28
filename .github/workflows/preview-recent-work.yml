@@ -1,0 +1,68 @@
+name: Preview output-oriented recent work
+
+on:
+  push:
+    branches: [meaningful-activity-profile]
+    paths:
+      - ".github/workflows/preview-recent-work.yml"
+      - "scripts/render_recent_work.py"
+      - "config/project-relations.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: recent-work-preview-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out profile repository
+        uses: actions/checkout@v6
+
+      - name: Render recent work cards
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/render_recent_work.py
+          python scripts/render_recent_work.py \
+            --username "${{ github.repository_owner }}" \
+            --relations config/project-relations.json \
+            --days 90 \
+            --light assets/recent-work-light.svg \
+            --dark assets/recent-work-dark.svg
+
+      - name: Validate output-oriented card
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in assets/recent-work-light.svg assets/recent-work-dark.svg; do
+            test -s "$file"
+            grep -q '<svg' "$file"
+            grep -q '<title id="title">Recent Work</title>' "$file"
+            grep -q 'outcomes and project areas, not activity volume' "$file"
+            ! grep -qi 'total commits' "$file"
+            ! grep -qi 'total prs' "$file"
+            ! grep -qi 'total reviews' "$file"
+          done
+
+      - name: Commit preview cards
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/recent-work-light.svg assets/recent-work-dark.svg
+
+          if git diff --cached --quiet; then
+            echo "Recent Work cards are already up to date."
+            exit 0
+          fi
+
+          git commit -m "update recent work preview"
+          git push
