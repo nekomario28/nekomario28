@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-08-15T02:37:08.249527+00:00",
+  "generatedAt": "2026-08-15T13:56:08.716204+00:00",
   "repositoryCount": 10,
   "groupCount": 4,
   "nodes": [
@@ -37,6 +37,25 @@
       "type": "group",
       "description": "System utilities and hardware-facing tools.",
       "repositoryCount": 1
+    },
+    {
+      "id": "repository:lime_tidyup",
+      "label": "lime_tidyup",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/lime_tidyup",
+      "description": "LimeSimulDemoのfork. 音声認識から行き先を指定、画像認識からルービックキューブの角度を取得、掴む。",
+      "language": "Python",
+      "topics": [],
+      "categories": [
+        "Robotics / ROS 2"
+      ],
+      "categoryIds": [
+        "robotics-ros2"
+      ],
+      "stars": 2,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-08-15T10:36:45Z"
     },
     {
       "id": "repository:sable",
@@ -199,25 +218,6 @@
       "fork": true,
       "archived": false,
       "updatedAt": "2026-07-25T17:02:21Z"
-    },
-    {
-      "id": "repository:lime_tidyup",
-      "label": "lime_tidyup",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/lime_tidyup",
-      "description": "LimeSimulDemoのfork. 音声認識から行き先を指定、画像認識からルービックキューブの角度を取得、掴む。",
-      "language": "Python",
-      "topics": [],
-      "categories": [
-        "Robotics / ROS 2"
-      ],
-      "categoryIds": [
-        "robotics-ros2"
-      ],
-      "stars": 2,
-      "fork": true,
-      "archived": false,
-      "updatedAt": "2026-07-08T08:23:54Z"
     },
     {
       "id": "repository:turing-smart-screen-python-owl",
