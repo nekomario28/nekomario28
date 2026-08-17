@@ -1,12 +1,31 @@
-<p align="center">
-  <a href="https://konosuba.com/bakuen/story/?mode=story4">
-    <img src="https://konosuba.com/bakuen/story/img/pdsfi4/05.jpg" width="700" alt="めぐみん">
-  </a>
-</p>
+# Yuu / nekomario28
 
-<p align="center">
-  <sub>©2023 暁なつめ・三嶋くろね／KADOKAWA／このすば爆焔製作委員会</sub>
-</p>
+Computer Science undergraduate (2nd year) at Tokyo University of Technology.
+
+Interested in **robotics software, ROS 2, simulation, and real-robot development**. I use ROS 2 / Gazebo / Nav2 in coursework and personal projects, and also work with Linux, Git, and Docker.
+
+### Robotics / Development
+
+- **ROS 2** — robot software and integration
+- **Gazebo** — simulation and validation
+- **Nav2** — navigation experiments
+- **Linux / Docker / Git** — development environments and reproducible workflows
+- **Python** — tooling and robotics experiments
+
+### Current work
+
+- **Real-to-Gazebo tooling** — ROS 2 capture, Gazebo world generation, rosbag validation, and Real↔Sim behavioral evaluation *(ongoing / private)*
+- **Dual-arm robot simulation & learning** — simulation, policy evaluation, and failure-analysis tooling *(ongoing / private)*
+- **[Lime ROS 2 / Gazebo experiments](https://github.com/nekomario28/lime_tidyup)** — navigation, manipulation, Behavior Trees, and Docker-based simulation
+
+I am especially interested in gaining more experience with **real-robot bringup, control, navigation, sensors, and simulation-to-real workflows**.
+
+---
+
+<details>
+<summary><strong>GitHub activity & project map</strong></summary>
+
+<br>
 
 <p align="center">
   <picture>
@@ -15,10 +34,6 @@
     <img width="520" src="assets/github-stats-v2-light.svg" alt="GitHub activity statistics">
   </picture>
 </p>
-
-<!-- Featured Projects slot reserved. Generated card assets and workflow support are retained for later use. -->
-
-<br>
 
 <h2 align="center">Interactive Project Map</h2>
 
@@ -41,8 +56,6 @@
   <sub>Select projects · drag nodes · pan · zoom</sub>
 </p>
 
-<br>
-
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/github-contributions-dark.svg">
@@ -62,3 +75,22 @@
     <img alt="Profile views" src="https://hits.sh/github.com/nekomario28.svg?view=today-total&style=flat-square&label=views">
   </a>
 </p>
+
+</details>
+
+<details>
+<summary><strong>Personal</strong></summary>
+
+<br>
+
+<p align="center">
+  <a href="https://konosuba.com/bakuen/story/?mode=story4">
+    <img src="https://konosuba.com/bakuen/story/img/pdsfi4/05.jpg" width="700" alt="めぐみん">
+  </a>
+</p>
+
+<p align="center">
+  <sub>©2023 暁なつめ・三嶋くろね／KADOKAWA／このすば爆焔製作委員会</sub>
+</p>
+
+</details>
