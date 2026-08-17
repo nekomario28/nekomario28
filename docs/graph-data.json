@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-08-17T02:45:45.296684+00:00",
+  "generatedAt": "2026-08-17T14:04:08.460482+00:00",
   "repositoryCount": 10,
   "groupCount": 4,
   "nodes": [
@@ -37,6 +37,25 @@
       "type": "group",
       "description": "System utilities and hardware-facing tools.",
       "repositoryCount": 1
+    },
+    {
+      "id": "repository:turing-smart-screen-python-owl",
+      "label": "turing-smart-screen-python-owl",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/turing-smart-screen-python-owl",
+      "description": "Unofficial Python system monitor and library for small IPS USB-C displays like Turing Smart Screen / TURZX",
+      "language": "Rich Text Format",
+      "topics": [],
+      "categories": [
+        "Utilities / Hardware"
+      ],
+      "categoryIds": [
+        "utilities-hardware"
+      ],
+      "stars": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-08-17T12:38:51Z"
     },
     {
       "id": "repository:lime_tidyup",
@@ -218,25 +237,6 @@
       "fork": true,
       "archived": false,
       "updatedAt": "2026-07-25T17:02:21Z"
-    },
-    {
-      "id": "repository:turing-smart-screen-python-owl",
-      "label": "turing-smart-screen-python-owl",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/turing-smart-screen-python-owl",
-      "description": "Unofficial Python system monitor and library for small IPS USB-C displays like Turing Smart Screen / TURZX",
-      "language": "Rich Text Format",
-      "topics": [],
-      "categories": [
-        "Utilities / Hardware"
-      ],
-      "categoryIds": [
-        "utilities-hardware"
-      ],
-      "stars": 0,
-      "fork": true,
-      "archived": false,
-      "updatedAt": "2026-07-02T08:31:30Z"
     }
   ],
   "links": [
