@@ -41,6 +41,8 @@ jobs:
           python "${work}/harness/tools/dual_scorpion_mesh_components.py" "${work}/upstream"
           echo '--- hybrid old-kinematics/new-mesh transforms ---'
           python "${work}/harness/tools/dual_scorpion_hybrid_import.py" "${work}/upstream" --output "${work}/hybrid.json"
+          echo '--- canonical-vs-full axis geometry A/B ---'
+          python "${work}/harness/tools/dual_scorpion_axis_ab_geometry.py" "${work}/upstream"
 
           echo '--- LFS mesh sizes ---'
           find "${work}/upstream/dual_scorpion_Full_urdf/meshes" -maxdepth 1 -type f -printf '%f %s bytes\n' | sort
