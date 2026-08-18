@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - tmp-dual-scorpion-full-urdf-audit
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
