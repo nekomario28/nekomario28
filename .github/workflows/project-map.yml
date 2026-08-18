@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Generate project map
-        uses: nekomario28/interactive-project-map@2f36693be8abe27e7db755d90042dbcde9a52bf5
+        uses: nekomario28/interactive-project-map@f9bf4b1117b596bf1fdc005722008f43a1e66077
         with:
           github_token: ${{ github.token }}
           username: ${{ github.repository_owner }}
