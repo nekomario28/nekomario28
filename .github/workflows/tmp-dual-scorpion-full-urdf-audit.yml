@@ -37,6 +37,8 @@ jobs:
           python "${work}/harness/tools/dual_scorpion_mesh_mirror_fit.py" "${work}/upstream"
           echo '--- raw STL shape invariants ---'
           python "${work}/harness/tools/dual_scorpion_shape_invariants.py" "${work}/upstream"
+          echo '--- suspicious mesh connected components ---'
+          python "${work}/harness/tools/dual_scorpion_mesh_components.py" "${work}/upstream"
           echo '--- hybrid old-kinematics/new-mesh transforms ---'
           python "${work}/harness/tools/dual_scorpion_hybrid_import.py" "${work}/upstream" --output "${work}/hybrid.json"
 
