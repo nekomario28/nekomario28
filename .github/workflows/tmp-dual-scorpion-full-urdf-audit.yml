@@ -24,13 +24,15 @@ jobs:
           rm -rf "${work}"
           mkdir -p "${work}"
 
+          git clone --depth 1 --branch tmp-dual-scorpion-full-urdf-audit https://github.com/nekomario28/nekomario28.git "${work}/harness"
+
           git lfs install --skip-repo
           GIT_LFS_SKIP_SMUDGE=1 git clone --no-checkout https://github.com/momoiorg-repository/dual_scorpion.git "${work}/upstream"
           git -C "${work}/upstream" checkout --detach 36e7fc907a0295f9a4fe8a986eac1ef66002b190
           git -C "${work}/upstream" lfs pull
 
           python -m pip install --disable-pip-version-check --quiet 'numpy>=1.26,<3'
-          python "${GITHUB_WORKSPACE}/tools/dual_scorpion_full_urdf_audit.py" "${work}/upstream" --output "${work}/report.json"
+          python "${work}/harness/tools/dual_scorpion_full_urdf_audit.py" "${work}/upstream" --output "${work}/report.json"
 
           echo '--- LFS mesh sizes ---'
           find "${work}/upstream/dual_scorpion_Full_urdf/meshes" -maxdepth 1 -type f -printf '%f %s bytes\n' | sort
