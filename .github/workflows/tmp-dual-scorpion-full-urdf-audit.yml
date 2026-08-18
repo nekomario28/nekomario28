@@ -43,6 +43,8 @@ jobs:
           python "${work}/harness/tools/dual_scorpion_hybrid_import.py" "${work}/upstream" --output "${work}/hybrid.json"
           echo '--- canonical-vs-full axis geometry A/B ---'
           python "${work}/harness/tools/dual_scorpion_axis_ab_geometry.py" "${work}/upstream"
+          echo '--- provisional control-q adapter and common validation ranges ---'
+          python "${work}/harness/tools/dual_scorpion_control_adapter_candidate.py" "${work}/upstream"
 
           echo '--- LFS mesh sizes ---'
           find "${work}/upstream/dual_scorpion_Full_urdf/meshes" -maxdepth 1 -type f -printf '%f %s bytes\n' | sort
