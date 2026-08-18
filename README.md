@@ -35,6 +35,18 @@
 
 <br>
 
+
+
+
+<p align="center">
+  <a href="https://nekomario28.github.io/interactive-project-map/u/?username=nekomario28">
+    <img width="740" src="https://raw.githubusercontent.com/nekomario28/nekomario28/HEAD/project-map/galaxy.svg" alt="nekomario28 project galaxy" />
+  </a>
+</p>
+
+
+
+
 <p align="center">
   <img width="760" src="assets/github-contributions-dark.svg" alt="GitHub contribution activity for the last 31 days">
 </p>
