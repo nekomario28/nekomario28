@@ -45,6 +45,8 @@ jobs:
           python "${work}/harness/tools/dual_scorpion_axis_ab_geometry.py" "${work}/upstream"
           echo '--- provisional control-q adapter and common validation ranges ---'
           python "${work}/harness/tools/dual_scorpion_control_adapter_candidate.py" "${work}/upstream"
+          echo '--- canonicalized full URDF random FK equivalence ---'
+          python "${work}/harness/tools/dual_scorpion_canonical_full_fk.py" "${work}/upstream" --samples 256 --seed 57057 --output-urdf "${work}/dual_scorpion_full_canonical_candidate.urdf"
 
           echo '--- LFS mesh sizes ---'
           find "${work}/upstream/dual_scorpion_Full_urdf/meshes" -maxdepth 1 -type f -printf '%f %s bytes\n' | sort
