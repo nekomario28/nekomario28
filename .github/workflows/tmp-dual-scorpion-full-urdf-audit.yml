@@ -1,0 +1,44 @@
+name: Temporary Dual Scorpion full URDF audit
+
+on:
+  push:
+    branches:
+      - tmp-dual-scorpion-full-urdf-audit
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Audit upstream sim full URDF and LFS meshes
+        run: |
+          set -euo pipefail
+          work="${RUNNER_TEMP}/dual-scorpion-full-urdf"
+          rm -rf "${work}"
+          mkdir -p "${work}"
+
+          git lfs install --skip-repo
+          GIT_LFS_SKIP_SMUDGE=1 git clone --no-checkout https://github.com/momoiorg-repository/dual_scorpion.git "${work}/upstream"
+          git -C "${work}/upstream" checkout --detach 36e7fc907a0295f9a4fe8a986eac1ef66002b190
+          git -C "${work}/upstream" lfs pull
+
+          python -m pip install --disable-pip-version-check --quiet 'numpy>=1.26,<3'
+          python "${GITHUB_WORKSPACE}/tools/dual_scorpion_full_urdf_audit.py" "${work}/upstream" --output "${work}/report.json"
+
+          echo '--- LFS mesh sizes ---'
+          find "${work}/upstream/dual_scorpion_Full_urdf/meshes" -maxdepth 1 -type f -printf '%f %s bytes\n' | sort
+
+          echo '--- key summary ---'
+          python - "${work}/report.json" <<'PY'
+          import json,sys
+          r=json.load(open(sys.argv[1]))
+          print(json.dumps(r['summary'], indent=2, sort_keys=True))
+          print('package_xml_exists=', r['package_xml_exists'])
+          print('launch_urdf_reference=', r['launch_urdf_reference'])
+          print('actual_urdf_relative_path=', r['actual_urdf_relative_path'])
+          print('launch_path_matches_actual_filename=', r['launch_path_matches_actual_filename'])
+          PY
