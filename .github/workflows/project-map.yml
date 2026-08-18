@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "37 3 * * *"
+  pull_request:
+    paths:
+      - ".github/workflows/project-map.yml"
 
 permissions:
   contents: read
@@ -18,11 +21,12 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Generate project map
-        uses: nekomario28/interactive-project-map@5f62155e586dce5d49280e3ca07446c0a201229f
+        uses: nekomario28/interactive-project-map@2f36693be8abe27e7db755d90042dbcde9a52bf5
         with:
           github_token: ${{ github.token }}
           username: ${{ github.repository_owner }}
           theme: dark
+          style: radial
           max_repos: "100"
           forks: "true"
           archived: "false"
@@ -37,6 +41,7 @@ jobs:
           retention-days: 1
 
   publish:
+    if: github.event_name != 'pull_request'
     needs: generate
     runs-on: ubuntu-latest
     permissions:
