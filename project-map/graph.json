@@ -1,0 +1,333 @@
+{
+  "owner": "nekomario28",
+  "generatedAt": "2026-08-18T07:30:56.608Z",
+  "repositoryCount": 12,
+  "groupCount": 5,
+  "nodes": [
+    {
+      "id": "user:nekomario28",
+      "label": "nekomario28",
+      "type": "owner",
+      "url": "https://github.com/nekomario28"
+    },
+    {
+      "id": "group:minecraft",
+      "label": "Minecraft Modding",
+      "type": "group",
+      "repositoryCount": 5
+    },
+    {
+      "id": "repository:sable",
+      "label": "sable",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/sable",
+      "description": "Interactive physics moving block structures!",
+      "language": "Java",
+      "topics": [
+        "minecraft"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-08-12T17:36:01Z",
+      "groupId": "minecraft",
+      "groupLabel": "Minecraft Modding"
+    },
+    {
+      "id": "repository:OffHandCombat",
+      "label": "OffHandCombat",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/OffHandCombat",
+      "description": "Allows for double handed fighting styles without breaking the combat\"",
+      "language": "Java",
+      "topics": [
+        "minecraft"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-08-07T06:33:33Z",
+      "groupId": "minecraft",
+      "groupLabel": "Minecraft Modding"
+    },
+    {
+      "id": "repository:antifullbright",
+      "label": "antifullbright",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/antifullbright",
+      "description": "Server-side NeoForge mod that detects prolonged mining in complete darkness",
+      "language": "Java",
+      "topics": [
+        "minecraft"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "updatedAt": "2026-08-02T16:29:37Z",
+      "groupId": "minecraft",
+      "groupLabel": "Minecraft Modding"
+    },
+    {
+      "id": "repository:workers",
+      "label": "workers",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/workers",
+      "description": "Mod for Minecraft that adds Villager Workers",
+      "language": "Java",
+      "topics": [
+        "minecraft"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-07-28T14:05:51Z",
+      "groupId": "minecraft",
+      "groupLabel": "Minecraft Modding"
+    },
+    {
+      "id": "repository:recruits",
+      "label": "recruits",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/recruits",
+      "description": "recruiting villagers",
+      "language": "Java",
+      "topics": [
+        "minecraft"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-07-28T14:05:34Z",
+      "groupId": "minecraft",
+      "groupLabel": "Minecraft Modding"
+    },
+    {
+      "id": "group:lang-python",
+      "label": "Python Projects",
+      "type": "group",
+      "repositoryCount": 3
+    },
+    {
+      "id": "repository:lime_tidyup",
+      "label": "lime_tidyup",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/lime_tidyup",
+      "description": "LimeSimulDemoのfork. 音声認識から行き先を指定、画像認識からルービックキューブの角度を取得、掴む。",
+      "language": "Python",
+      "topics": [],
+      "stars": 2,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-08-15T14:38:08Z",
+      "groupId": "lang-python",
+      "groupLabel": "Python Projects"
+    },
+    {
+      "id": "repository:ProjExD_Group10",
+      "label": "ProjExD_Group10",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/ProjExD_Group10",
+      "description": "",
+      "language": "Python",
+      "topics": [],
+      "stars": 1,
+      "forks": 5,
+      "fork": false,
+      "archived": false,
+      "updatedAt": "2026-07-30T14:30:30Z",
+      "groupId": "lang-python",
+      "groupLabel": "Python Projects"
+    },
+    {
+      "id": "repository:nekomario28",
+      "label": "nekomario28",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/nekomario28",
+      "description": "",
+      "language": "Python",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "updatedAt": "2026-08-18T07:30:50Z",
+      "groupId": "lang-python",
+      "groupLabel": "Python Projects"
+    },
+    {
+      "id": "group:lang-java",
+      "label": "Java Projects",
+      "type": "group",
+      "repositoryCount": 2
+    },
+    {
+      "id": "repository:FTBPublicClaims",
+      "label": "FTBPublicClaims",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/FTBPublicClaims",
+      "description": "",
+      "language": "Java",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "updatedAt": "2026-07-31T14:31:49Z",
+      "groupId": "lang-java",
+      "groupLabel": "Java Projects"
+    },
+    {
+      "id": "repository:BuyClaimChunks",
+      "label": "BuyClaimChunks",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/BuyClaimChunks",
+      "description": "",
+      "language": "Java",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-07-25T17:02:21Z",
+      "groupId": "lang-java",
+      "groupLabel": "Java Projects"
+    },
+    {
+      "id": "group:lang-javascript",
+      "label": "JavaScript Projects",
+      "type": "group",
+      "repositoryCount": 1
+    },
+    {
+      "id": "repository:interactive-project-map",
+      "label": "interactive-project-map",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/interactive-project-map",
+      "description": "",
+      "language": "JavaScript",
+      "topics": [],
+      "stars": 1,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "updatedAt": "2026-08-18T07:25:27Z",
+      "groupId": "lang-javascript",
+      "groupLabel": "JavaScript Projects"
+    },
+    {
+      "id": "group:lang-rich-u20-text-u20-format",
+      "label": "Rich Text Format Projects",
+      "type": "group",
+      "repositoryCount": 1
+    },
+    {
+      "id": "repository:turing-smart-screen-python-owl",
+      "label": "turing-smart-screen-python-owl",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/turing-smart-screen-python-owl",
+      "description": "Unofficial Python system monitor and library for small IPS USB-C displays like Turing Smart Screen / TURZX",
+      "language": "Rich Text Format",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-08-17T18:28:02Z",
+      "groupId": "lang-rich-u20-text-u20-format",
+      "groupLabel": "Rich Text Format Projects"
+    }
+  ],
+  "edges": [
+    {
+      "source": "user:nekomario28",
+      "target": "group:minecraft",
+      "type": "ownership"
+    },
+    {
+      "source": "group:minecraft",
+      "target": "repository:sable",
+      "type": "membership"
+    },
+    {
+      "source": "group:minecraft",
+      "target": "repository:OffHandCombat",
+      "type": "membership"
+    },
+    {
+      "source": "group:minecraft",
+      "target": "repository:antifullbright",
+      "type": "membership"
+    },
+    {
+      "source": "group:minecraft",
+      "target": "repository:workers",
+      "type": "membership"
+    },
+    {
+      "source": "group:minecraft",
+      "target": "repository:recruits",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "group:lang-python",
+      "type": "ownership"
+    },
+    {
+      "source": "group:lang-python",
+      "target": "repository:lime_tidyup",
+      "type": "membership"
+    },
+    {
+      "source": "group:lang-python",
+      "target": "repository:ProjExD_Group10",
+      "type": "membership"
+    },
+    {
+      "source": "group:lang-python",
+      "target": "repository:nekomario28",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "group:lang-java",
+      "type": "ownership"
+    },
+    {
+      "source": "group:lang-java",
+      "target": "repository:FTBPublicClaims",
+      "type": "membership"
+    },
+    {
+      "source": "group:lang-java",
+      "target": "repository:BuyClaimChunks",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "group:lang-javascript",
+      "type": "ownership"
+    },
+    {
+      "source": "group:lang-javascript",
+      "target": "repository:interactive-project-map",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "group:lang-rich-u20-text-u20-format",
+      "type": "ownership"
+    },
+    {
+      "source": "group:lang-rich-u20-text-u20-format",
+      "target": "repository:turing-smart-screen-python-owl",
+      "type": "membership"
+    }
+  ]
+}
