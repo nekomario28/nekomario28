@@ -35,17 +35,23 @@ jobs:
           python "${work}/harness/tools/dual_scorpion_full_urdf_audit.py" "${work}/upstream" --output "${work}/report.json"
           echo '--- fitted mirror plane diagnostics ---'
           python "${work}/harness/tools/dual_scorpion_mesh_mirror_fit.py" "${work}/upstream"
+          echo '--- raw STL shape invariants ---'
+          python "${work}/harness/tools/dual_scorpion_shape_invariants.py" "${work}/upstream"
+          echo '--- hybrid old-kinematics/new-mesh transforms ---'
+          python "${work}/harness/tools/dual_scorpion_hybrid_import.py" "${work}/upstream" --output "${work}/hybrid.json"
 
           echo '--- LFS mesh sizes ---'
           find "${work}/upstream/dual_scorpion_Full_urdf/meshes" -maxdepth 1 -type f -printf '%f %s bytes\n' | sort
 
           echo '--- key summary ---'
-          python - "${work}/report.json" <<'PY'
+          python - "${work}/report.json" "${work}/hybrid.json" <<'PY'
           import json,sys
-          r=json.load(open(sys.argv[1]))
+          r=json.load(open(sys.argv[1])); h=json.load(open(sys.argv[2]))
           print(json.dumps(r['summary'], indent=2, sort_keys=True))
           print('package_xml_exists=', r['package_xml_exists'])
           print('launch_urdf_reference=', r['launch_urdf_reference'])
           print('actual_urdf_relative_path=', r['actual_urdf_relative_path'])
           print('launch_path_matches_actual_filename=', r['launch_path_matches_actual_filename'])
+          print('hybrid_transform_count=', len(h['transforms']))
+          print('hybrid_max_zero_pose_matrix_residual=', h['max_zero_pose_reconstruction_max_abs'])
           PY
