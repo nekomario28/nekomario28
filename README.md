@@ -23,29 +23,14 @@
 </p>
 
 <p align="center">
-  <a href="https://nekomario28.github.io/nekomario28/">
-    <img width="740" src="assets/project-map-dark.svg" alt="Galaxy map of nekomario28 public projects">
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://nekomario28.github.io/nekomario28/"><strong>Explore the live map ↗</strong></a><br>
-  <sub>Select projects · drag nodes · pan · zoom</sub>
+  <a href="https://nekomario28.github.io/interactive-project-map/u/?username=nekomario28&style=galaxy">
+    <img width="740" src="assets/project-map-dark.svg" alt="Galaxy map of nekomario28 public projects"><br>
+    <strong>Explore the live map ↗</strong>
+  </a><br>
+  <sub>Select projects · drag nodes · pan · zoom · switch styles</sub>
 </p>
 
 <br>
-
-
-
-
-<p align="center">
-  <a href="https://nekomario28.github.io/interactive-project-map/u/?username=nekomario28">
-    <img width="740" src="https://raw.githubusercontent.com/nekomario28/nekomario28/HEAD/project-map/galaxy.svg" alt="nekomario28 project galaxy" />
-  </a>
-</p>
-
-
-
 
 <p align="center">
   <img width="760" src="assets/github-contributions-dark.svg" alt="GitHub contribution activity for the last 31 days">
