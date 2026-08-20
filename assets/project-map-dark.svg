@@ -159,7 +159,7 @@
 <circle cx="-39.5" cy="11.7" r="0.88" fill="#f0f6fc" opacity="0.101"/>
 <circle cx="22.9" cy="-13.5" r="0.63" fill="#f0f6fc" opacity="0.169"/>
 </g>
-<g transform="translate(382.2 335.8) rotate(177.9)">
+<g transform="translate(382.2 335.4) rotate(177.9)">
 <ellipse cx="-14.9" cy="9.3" rx="34.6" ry="20.1" transform="rotate(1.1 -14.9 9.3)" fill="url(#association-2-0)"/>
 <ellipse cx="13.3" cy="4.2" rx="39.8" ry="21.2" transform="rotate(7.4 13.3 4.2)" fill="url(#association-2-1)"/>
 <ellipse cx="8.6" cy="5.9" rx="30.7" ry="22.3" transform="rotate(-3.2 8.6 5.9)" fill="url(#association-2-2)"/>
@@ -189,19 +189,21 @@
 </g>
 <line class="structural" x1="380.0" y1="275.0" x2="521.2" y2="308.6" stroke="#8b949e" opacity="0.075"/>
 <line class="structural" x1="521.2" y1="308.6" x2="661.0" y2="311.7" stroke="#8b949e" opacity="0.075"/>
-<line class="structural" x1="521.2" y1="308.6" x2="597.6" y2="414.1" stroke="#8b949e" opacity="0.075"/>
-<line class="structural" x1="521.2" y1="308.6" x2="529.7" y2="203.0" stroke="#8b949e" opacity="0.075"/>
-<line class="structural" x1="521.2" y1="308.6" x2="504.1" y2="359.7" stroke="#8b949e" opacity="0.075"/>
+<line class="structural" x1="521.2" y1="308.6" x2="597.6" y2="414.0" stroke="#8b949e" opacity="0.075"/>
+<line class="structural" x1="521.2" y1="308.6" x2="529.7" y2="202.9" stroke="#8b949e" opacity="0.075"/>
+<line class="structural" x1="521.2" y1="308.6" x2="504.1" y2="359.6" stroke="#8b949e" opacity="0.075"/>
 <line class="structural" x1="521.2" y1="308.6" x2="573.9" y2="360.0" stroke="#8b949e" opacity="0.075"/>
 <line class="structural" x1="521.2" y1="308.6" x2="491.7" y2="148.9" stroke="#8b949e" opacity="0.075"/>
 <line class="structural" x1="521.2" y1="308.6" x2="571.7" y2="257.1" stroke="#8b949e" opacity="0.075"/>
-<line class="structural" x1="380.0" y1="275.0" x2="382.2" y2="335.8" stroke="#8b949e" opacity="0.075"/>
-<line class="structural" x1="382.2" y1="335.8" x2="379.7" y2="389.4" stroke="#8b949e" opacity="0.075"/>
+<line class="structural" x1="380.0" y1="275.0" x2="382.2" y2="335.4" stroke="#8b949e" opacity="0.075"/>
+<line class="structural" x1="382.2" y1="335.4" x2="379.7" y2="389.0" stroke="#8b949e" opacity="0.075"/>
 <line class="structural" x1="380.0" y1="275.0" x2="381.9" y2="211.1" stroke="#8b949e" opacity="0.075"/>
 <line class="structural" x1="381.9" y1="211.1" x2="380.7" y2="158.5" stroke="#8b949e" opacity="0.075"/>
 <line class="structural" x1="380.0" y1="275.0" x2="259.9" y2="272.2" stroke="#8b949e" opacity="0.075"/>
 <line class="structural" x1="259.9" y1="272.2" x2="226.0" y2="323.8" stroke="#8b949e" opacity="0.075"/>
-<line class="structural" x1="380.0" y1="275.0" x2="572.3" y2="93.8" stroke="#8b949e" opacity="0.075"/>
+<line class="structural" x1="380.0" y1="275.0" x2="450.4" y2="446.2" stroke="#8b949e" opacity="0.075"/>
+<line class="structural" x1="380.0" y1="275.0" x2="572.3" y2="94.8" stroke="#8b949e" opacity="0.075"/>
+<line class="structural" x1="380.0" y1="275.0" x2="117.3" y2="230.6" stroke="#8b949e" opacity="0.075"/>
 <circle cx="380.0" cy="275.0" r="7" fill="#58a6ff"/>
 <circle cx="380.0" cy="275.0" r="12" fill="none" stroke="#58a6ff" stroke-width="1" opacity="0.62"/>
 <text class="label" x="380.0" y="300.0" fill="#f0f6fc" stroke="#0d1117" font-size="13">nekomario28</text>
@@ -215,26 +217,30 @@
 <text class="label" x="571.7" y="280.1" fill="#f0f6fc" stroke="#0d1117" font-size="10.5">FTBPublicClaims</text>
 <circle class="repository" cx="661.0" cy="311.7" r="9.0" fill="#8b949e" stroke="#0d1117"/>
 <text class="label" x="661.0" y="334.7" fill="#f0f6fc" stroke="#0d1117" font-size="10.5">OffHandCombat</text>
-<circle class="repository" cx="529.7" cy="203.0" r="9.0" fill="#3fb950" stroke="#0d1117"/>
-<text class="label" x="529.7" y="226.0" fill="#f0f6fc" stroke="#0d1117" font-size="10.5">antifullbright</text>
+<circle class="repository" cx="529.7" cy="202.9" r="9.0" fill="#3fb950" stroke="#0d1117"/>
+<text class="label" x="529.7" y="225.9" fill="#f0f6fc" stroke="#0d1117" font-size="10.5">antifullbright</text>
 <circle class="repository" cx="573.9" cy="360.0" r="9.0" fill="#8b949e" stroke="#0d1117"/>
 <text class="label" x="573.9" y="383.0" fill="#f0f6fc" stroke="#0d1117" font-size="10.5">recruits</text>
-<circle class="repository" cx="597.6" cy="414.1" r="9.0" fill="#8b949e" stroke="#0d1117"/>
-<text class="label" x="597.6" y="437.1" fill="#f0f6fc" stroke="#0d1117" font-size="10.5">sable</text>
-<circle class="repository" cx="504.1" cy="359.7" r="9.0" fill="#8b949e" stroke="#0d1117"/>
-<text class="label" x="504.1" y="382.7" fill="#f0f6fc" stroke="#0d1117" font-size="10.5">workers</text>
+<circle class="repository" cx="597.6" cy="414.0" r="9.0" fill="#8b949e" stroke="#0d1117"/>
+<text class="label" x="597.6" y="437.0" fill="#f0f6fc" stroke="#0d1117" font-size="10.5">sable</text>
+<circle class="repository" cx="504.1" cy="359.6" r="9.0" fill="#8b949e" stroke="#0d1117"/>
+<text class="label" x="504.1" y="382.6" fill="#f0f6fc" stroke="#0d1117" font-size="10.5">workers</text>
 <circle class="category" cx="521.2" cy="308.6" r="2" stroke="#1f6feb"/>
 <text class="label" x="521.2" y="326.6" fill="#f0f6fc" stroke="#0d1117" font-size="11">Minecraft Modding</text>
-<circle class="repository" cx="379.7" cy="389.4" r="11.0" fill="#8b949e" stroke="#0d1117"/>
-<text class="label" x="379.7" y="414.4" fill="#f0f6fc" stroke="#0d1117" font-size="10.5">lime_tidyup</text>
-<circle class="category" cx="382.2" cy="335.8" r="2" stroke="#1f6feb"/>
-<text class="label" x="382.2" y="353.8" fill="#f0f6fc" stroke="#0d1117" font-size="11">Robotics / ROS 2</text>
+<circle class="repository" cx="379.7" cy="389.0" r="11.0" fill="#8b949e" stroke="#0d1117"/>
+<text class="label" x="379.7" y="414.0" fill="#f0f6fc" stroke="#0d1117" font-size="10.5">lime_tidyup</text>
+<circle class="category" cx="382.2" cy="335.4" r="2" stroke="#1f6feb"/>
+<text class="label" x="382.2" y="353.4" fill="#f0f6fc" stroke="#0d1117" font-size="11">Robotics / ROS 2</text>
 <circle class="repository" cx="226.0" cy="323.8" r="9.0" fill="#8b949e" stroke="#0d1117"/>
 <text class="label" x="226.0" y="346.8" fill="#f0f6fc" stroke="#0d1117" font-size="10.5">turing-smart-screen-python-…</text>
 <circle class="category" cx="259.9" cy="272.2" r="2" stroke="#1f6feb"/>
 <text class="label" x="259.9" y="290.2" fill="#f0f6fc" stroke="#0d1117" font-size="11">Utilities / Hardware</text>
-<circle class="repository" cx="572.3" cy="93.8" r="10.0" fill="#3fb950" stroke="#0d1117"/>
-<text class="label" x="572.3" y="117.8" fill="#f0f6fc" stroke="#0d1117" font-size="10.5">interactive-project-map</text>
+<circle class="repository" cx="572.3" cy="94.8" r="9.0" fill="#8b949e" stroke="#0d1117"/>
+<text class="label" x="572.3" y="117.8" fill="#f0f6fc" stroke="#0d1117" font-size="10.5">gz-sim</text>
+<circle class="repository" cx="450.4" cy="446.2" r="10.0" fill="#3fb950" stroke="#0d1117"/>
+<text class="label" x="450.4" y="470.2" fill="#f0f6fc" stroke="#0d1117" font-size="10.5">interactive-project-map</text>
+<circle class="repository" cx="117.3" cy="230.6" r="9.0" fill="#8b949e" stroke="#0d1117"/>
+<text class="label" x="117.3" y="253.6" fill="#f0f6fc" stroke="#0d1117" font-size="10.5">ros_gz</text>
 <text x="24" y="31" fill="#f0f6fc" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="18" font-weight="600">Interactive Project Map</text>
 <text x="24" y="49" fill="#8b949e" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10.5">A common-center galaxy of public projects</text>
 <a href="https://nekomario28.github.io/nekomario28/" target="_blank">

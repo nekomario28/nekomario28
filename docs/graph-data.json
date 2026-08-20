@@ -1,7 +1,7 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-08-20T02:41:53.429823+00:00",
-  "repositoryCount": 11,
+  "generatedAt": "2026-08-20T14:18:35.360520+00:00",
+  "repositoryCount": 13,
   "groupCount": 4,
   "nodes": [
     {
@@ -51,7 +51,37 @@
       "stars": 1,
       "fork": false,
       "archived": false,
-      "updatedAt": "2026-08-19T20:11:58Z"
+      "updatedAt": "2026-08-20T13:20:32Z"
+    },
+    {
+      "id": "repository:gz-sim",
+      "label": "gz-sim",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/gz-sim",
+      "description": "Open source robotics simulator. The latest version of Gazebo.",
+      "language": null,
+      "topics": [],
+      "categories": [],
+      "categoryIds": [],
+      "stars": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-08-20T13:06:59Z"
+    },
+    {
+      "id": "repository:ros_gz",
+      "label": "ros_gz",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/ros_gz",
+      "description": "Integration between ROS (1 and 2) and Gazebo simulation",
+      "language": null,
+      "topics": [],
+      "categories": [],
+      "categoryIds": [],
+      "stars": 0,
+      "fork": true,
+      "archived": false,
+      "updatedAt": "2026-08-20T04:31:15Z"
     },
     {
       "id": "repository:sable",
@@ -328,6 +358,16 @@
     {
       "source": "user:nekomario28",
       "target": "repository:interactive-project-map",
+      "type": "owns"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:gz-sim",
+      "type": "owns"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:ros_gz",
       "type": "owns"
     }
   ]
