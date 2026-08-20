@@ -60,17 +60,17 @@ jobs:
             --username nekomario28 \
             --relations config/project-relations.json \
             --json project-map/graph-data.json \
-            --light assets/project-map-light.svg \
+            --light "$RUNNER_TEMP/project-map-light.svg" \
             --dark assets/project-map-dark.svg
 
-      - name: Render project map previews
+      - name: Render project map preview
         run: |
           python scripts/render_project_map.py \
             --json project-map/graph-data.json \
-            --light assets/project-map-light.svg \
+            --light "$RUNNER_TEMP/project-map-light.svg" \
             --dark assets/project-map-dark.svg
           python scripts/enhance_project_map_preview.py \
-            assets/project-map-light.svg \
+            "$RUNNER_TEMP/project-map-light.svg" \
             assets/project-map-dark.svg
 
       - name: Validate generated project map
@@ -78,7 +78,7 @@ jobs:
           python scripts/validate_project_map.py \
             --json project-map/graph-data.json \
             --config config/project-relations.json \
-            --light assets/project-map-light.svg \
+            --light "$RUNNER_TEMP/project-map-light.svg" \
             --dark assets/project-map-dark.svg
 
       - name: Commit updated project map
@@ -86,7 +86,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add project-map/graph-data.json assets/project-map-light.svg assets/project-map-dark.svg
+          git add project-map/graph-data.json assets/project-map-dark.svg
 
           if git diff --cached --quiet; then
             echo "Project map is already up to date."

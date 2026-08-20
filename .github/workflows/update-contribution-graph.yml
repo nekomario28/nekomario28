@@ -26,7 +26,7 @@ jobs:
       - name: Check out profile repository
         uses: actions/checkout@v6
 
-      - name: Generate contribution graphs
+      - name: Generate contribution graph
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -34,28 +34,28 @@ jobs:
           python -m py_compile scripts/render_contribution_graph.py
           python scripts/render_contribution_graph.py \
             --username "${{ github.repository_owner }}" \
-            --light assets/github-contributions-light.svg \
+            --light "$RUNNER_TEMP/github-contributions-light.svg" \
             --dark assets/github-contributions-dark.svg
 
       - name: Validate generated SVG files
         shell: bash
         run: |
           set -euo pipefail
-          for file in assets/github-contributions-light.svg assets/github-contributions-dark.svg; do
+          for file in "$RUNNER_TEMP/github-contributions-light.svg" assets/github-contributions-dark.svg; do
             test -s "$file"
             grep -q '<svg' "$file"
             grep -q 'Contributions · last 31 days' "$file"
           done
 
-      - name: Commit updated contribution graphs
+      - name: Commit updated contribution graph
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/github-contributions-light.svg assets/github-contributions-dark.svg
+          git add assets/github-contributions-dark.svg
 
           if git diff --cached --quiet; then
-            echo "Contribution graphs are already up to date."
+            echo "Contribution graph is already up to date."
             exit 0
           fi
 
