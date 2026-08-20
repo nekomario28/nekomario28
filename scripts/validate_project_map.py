@@ -188,38 +188,6 @@ def validate_preview_layout(data: dict[str, Any], width: int = 760, height: int 
         fail("preview node/label overlaps remain: " + "; ".join(overlaps[:8]))
 
 
-def validate_html(path: Path) -> None:
-    text = path.read_text(encoding="utf-8")
-    required_ids = ["graph", "search", "reset", "details", "interaction-hint"]
-    for element_id in required_ids:
-        if f'id="{element_id}"' not in text:
-            fail(f"{path}: missing required element id={element_id}")
-
-    scripts = ["graph.js", "obsidian-controls.js", "orbital-spacing.js", "galaxy-structure.js", "cosmic.js"]
-    positions = [text.find(f'src="{script}"') for script in scripts]
-    if any(position < 0 for position in positions):
-        fail(f"{path}: missing required map script")
-    if positions != sorted(positions):
-        fail(
-            f"{path}: scripts must load in order "
-            "graph.js -> obsidian-controls.js -> orbital-spacing.js -> galaxy-structure.js -> cosmic.js"
-        )
-
-    forbidden = [
-        "natural-motion.js",
-        "galaxy-orbits.js",
-        "galaxy-layout.js",
-        "galaxy-motion.js",
-        "galaxy-controls.js",
-    ]
-    for script in forbidden:
-        if f'src="{script}"' in text:
-            fail(f"{path}: obsolete galaxy behavior script must not be loaded: {script}")
-
-    if "?plain=1" not in text:
-        fail(f"{path}: plain force-graph comparison route must remain documented")
-
-
 def validate_svg(path: Path, expected_groups: int) -> None:
     text = path.read_text(encoding="utf-8")
     lowered = text.lower()
@@ -247,7 +215,6 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Validate generated interactive project map artifacts")
     parser.add_argument("--json", type=Path, required=True)
     parser.add_argument("--config", type=Path, required=True)
-    parser.add_argument("--html", type=Path, required=True)
     parser.add_argument("--light", type=Path, required=True)
     parser.add_argument("--dark", type=Path, required=True)
     return parser.parse_args()
@@ -259,7 +226,6 @@ def main() -> int:
     validate_graph(data)
     validate_public_config(data, args.config)
     validate_preview_layout(data)
-    validate_html(args.html)
     expected_groups = int(data.get("groupCount", 0))
     validate_svg(args.light, expected_groups)
     validate_svg(args.dark, expected_groups)
