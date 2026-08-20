@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "windowDays": 90,
+  "focus": {
+    "maxGroups": 3,
+    "maxRepositoriesPerGroup": 2,
+    "recencyBucketsDays": [7, 30, 90]
+  },
+  "releases": {
+    "maxItems": 2
+  },
+  "upstream": {
+    "maxItems": 2,
+    "allowedRepositories": []
+  }
+}
