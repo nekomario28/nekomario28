@@ -1,0 +1,63 @@
+name: Update contribution graph
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/update-contribution-graph.yml"
+      - "scripts/render_contribution_graph.py"
+  schedule:
+    - cron: "29 0,12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: contribution-graph
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out profile repository
+        uses: actions/checkout@v6
+
+      - name: Generate contribution graphs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/render_contribution_graph.py
+          python scripts/render_contribution_graph.py \
+            --username "${{ github.repository_owner }}" \
+            --light assets/github-contributions-light.svg \
+            --dark assets/github-contributions-dark.svg
+
+      - name: Validate generated SVG files
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in assets/github-contributions-light.svg assets/github-contributions-dark.svg; do
+            test -s "$file"
+            grep -q '<svg' "$file"
+            grep -q 'Contributions · last 31 days' "$file"
+          done
+
+      - name: Commit updated contribution graphs
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/github-contributions-light.svg assets/github-contributions-dark.svg
+
+          if git diff --cached --quiet; then
+            echo "Contribution graphs are already up to date."
+            exit 0
+          fi
+
+          git commit -m "update contribution graph"
+          git push
