@@ -7,6 +7,7 @@ on:
       - ".github/workflows/preview-recent-work.yml"
       - "scripts/render_recent_work.py"
       - "config/project-relations.json"
+      - "config/profile-activity.json"
   workflow_dispatch:
 
 permissions:
@@ -34,7 +35,7 @@ jobs:
           python scripts/render_recent_work.py \
             --username "${{ github.repository_owner }}" \
             --relations config/project-relations.json \
-            --days 90 \
+            --policy config/profile-activity.json \
             --light assets/recent-work-light.svg \
             --dark assets/recent-work-dark.svg
 
@@ -42,14 +43,27 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          python - <<'PY'
+          import json
+          policy = json.load(open('config/profile-activity.json', encoding='utf-8'))
+          assert policy['windowDays'] == 90
+          assert policy['focus']['maxGroups'] <= 3
+          assert policy['focus']['maxRepositoriesPerGroup'] <= 2
+          assert policy['releases']['maxItems'] <= 2
+          assert policy['upstream']['maxItems'] <= 2
+          assert isinstance(policy['upstream']['allowedRepositories'], list)
+          PY
+
           for file in assets/recent-work-light.svg assets/recent-work-dark.svg; do
             test -s "$file"
             grep -q '<svg' "$file"
             grep -q '<title id="title">Recent Work</title>' "$file"
-            grep -q 'outcomes and project areas, not activity volume' "$file"
+            grep -q 'Last 90 days · outcomes and project areas, not activity volume' "$file"
+            grep -q 'public GitHub data · stable caps' "$file"
             ! grep -qi 'total commits' "$file"
             ! grep -qi 'total prs' "$file"
             ! grep -qi 'total reviews' "$file"
+            ! grep -q 'c0c25034/ProjExD_4' "$file"
           done
 
       - name: Commit preview cards
