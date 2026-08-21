@@ -19,44 +19,15 @@ concurrency:
 
 jobs:
   generate:
-    runs-on: ubuntu-latest
     permissions:
       contents: read
-    steps:
-      - name: Checkout profile repository
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - name: Generate project map
-        uses: nekomario28/interactive-project-map@60d439c450d5e691ee1ec45fe1882e07a1a5dcca
-        with:
-          github_token: ${{ github.token }}
-          username: ${{ github.repository_owner }}
-          theme: dark
-          style: galaxy-systems
-          max_repos: "100"
-          forks: "true"
-          archived: "false"
-          width: "740"
-          height: "420"
-          output_dir: project-map
-
-      - name: Validate generated project map
-        shell: bash
-        run: |
-          set -euo pipefail
-          test -s project-map/galaxy.svg
-          test -s project-map/graph.json
-          grep -q 'data-galaxy-preset="systems"' project-map/galaxy.svg
-          grep -q 'stroke-width="1.4"' project-map/galaxy.svg
-          grep -q '"taxonomy"' project-map/graph.json
-
-      - name: Transfer generated files to publish job
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
-        with:
-          name: project-map-generated
-          path: project-map
-          if-no-files-found: error
-          retention-days: 1
+    uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@v1
+    with:
+      theme: dark
+      style: galaxy-systems
+      max_repos: "100"
+      forks: true
+      archived: false
 
   publish:
     needs: generate
@@ -73,6 +44,16 @@ jobs:
         with:
           name: project-map-generated
           path: project-map
+
+      - name: Validate generated project map
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s project-map/galaxy.svg
+          test -s project-map/graph.json
+          grep -q 'data-galaxy-preset="systems"' project-map/galaxy.svg
+          grep -q 'stroke-width="1.4"' project-map/galaxy.svg
+          grep -q '"taxonomy"' project-map/graph.json
 
       - name: Commit only when the generated map changed
         shell: bash
