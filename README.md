@@ -23,8 +23,8 @@
 </p>
 
 <p align="center">
-  <a href="https://nekomario28.github.io/interactive-project-map/u/?username=nekomario28&style=galaxy">
-    <img width="740" src="assets/project-map-dark.svg" alt="Galaxy map of nekomario28 public projects"><br>
+  <a href="https://nekomario28.github.io/interactive-project-map/u/?username=nekomario28&style=galaxy-systems">
+    <img width="740" src="project-map/galaxy.svg" alt="Galaxy Systems map of nekomario28 public projects"><br>
     <strong>Explore the live map ↗</strong>
   </a><br>
   <sub>Select projects · drag nodes · pan · zoom · switch styles</sub>
