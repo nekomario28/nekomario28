@@ -19,7 +19,7 @@ jobs:
     with:
       theme: dark
       style: galaxy-systems
-      max_repos: 20
+      max_repos: "20"
       forks: true
       archived: false
 
