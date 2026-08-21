@@ -1,0 +1,1464 @@
+{
+  "owner": "nekomario28",
+  "generatedAt": "2026-08-21T10:04:56.453Z",
+  "repositoryCount": 13,
+  "groupCount": 5,
+  "nodes": [
+    {
+      "id": "user:nekomario28",
+      "label": "nekomario28",
+      "type": "owner",
+      "url": "https://github.com/nekomario28"
+    },
+    {
+      "id": "group:game-modding",
+      "label": "Game Modding",
+      "type": "group",
+      "repositoryCount": 7
+    },
+    {
+      "id": "repository:sable",
+      "label": "sable",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/sable",
+      "description": "Interactive physics moving block structures!",
+      "language": "Java",
+      "topics": [
+        "minecraft"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-07-27T06:28:06Z",
+      "updatedAt": "2026-08-21T09:25:39Z",
+      "groupId": "game-modding",
+      "groupLabel": "Game Modding",
+      "classification": {
+        "categoryId": "minecraft",
+        "categoryLabel": "Minecraft Modding",
+        "secondaryTags": [
+          "minecraft"
+        ],
+        "confidence": 0.867,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "minecraft",
+            "source": "topic",
+            "value": "minecraft",
+            "weight": 1
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "readme",
+            "value": "minecraft",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "game-modding",
+        "categoryLabel": "Game Modding",
+        "secondaryTags": [
+          "artifact:game-mod",
+          "platform:game",
+          "ecosystem:minecraft"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "game-modding",
+            "source": "description",
+            "value": "P1 exact taxonomy category game-modding",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:OffHandCombat",
+      "label": "OffHandCombat",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/OffHandCombat",
+      "description": "Allows for double handed fighting styles without breaking the combat\"",
+      "language": "Java",
+      "topics": [
+        "minecraft"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-07-26T05:18:26Z",
+      "updatedAt": "2026-08-07T06:33:33Z",
+      "groupId": "game-modding",
+      "groupLabel": "Game Modding",
+      "classification": {
+        "categoryId": "minecraft",
+        "categoryLabel": "Minecraft Modding",
+        "secondaryTags": [
+          "minecraft"
+        ],
+        "confidence": 0.927,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "minecraft",
+            "source": "topic",
+            "value": "minecraft",
+            "weight": 1
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "readme",
+            "value": "minecraft",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "readme",
+            "value": "neoforge",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "game-modding",
+        "categoryLabel": "Game Modding",
+        "secondaryTags": [
+          "artifact:game-mod",
+          "platform:game",
+          "ecosystem:minecraft",
+          "platform:server"
+        ],
+        "confidence": 0.906,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "game-modding",
+            "source": "description",
+            "value": "P1 exact taxonomy category game-modding",
+            "weight": 0.906
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:antifullbright",
+      "label": "antifullbright",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/antifullbright",
+      "description": "Server-side NeoForge mod that detects prolonged mining in complete darkness",
+      "language": "Java",
+      "topics": [
+        "minecraft"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-07-22T12:22:17Z",
+      "updatedAt": "2026-08-02T16:29:37Z",
+      "groupId": "game-modding",
+      "groupLabel": "Game Modding",
+      "classification": {
+        "categoryId": "minecraft",
+        "categoryLabel": "Minecraft Modding",
+        "secondaryTags": [
+          "minecraft"
+        ],
+        "confidence": 0.944,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "minecraft",
+            "source": "topic",
+            "value": "minecraft",
+            "weight": 1
+          },
+          {
+            "categoryId": "ai-ml",
+            "source": "readme",
+            "value": "vision",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "description",
+            "value": "neoforge",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "readme",
+            "value": "minecraft",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "readme",
+            "value": "neoforge",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "game-modding",
+        "categoryLabel": "Game Modding",
+        "secondaryTags": [
+          "artifact:game-mod",
+          "platform:game",
+          "ecosystem:minecraft",
+          "platform:server"
+        ],
+        "confidence": 0.967,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "game-modding",
+            "source": "description",
+            "value": "P1 exact taxonomy category game-modding",
+            "weight": 0.967
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:FTBPublicClaims",
+      "label": "FTBPublicClaims",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/FTBPublicClaims",
+      "description": "",
+      "language": "Java",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-07-22T18:04:55Z",
+      "updatedAt": "2026-07-31T14:31:49Z",
+      "groupId": "game-modding",
+      "groupLabel": "Game Modding",
+      "classification": {
+        "categoryId": "minecraft",
+        "categoryLabel": "Minecraft Modding",
+        "secondaryTags": [],
+        "confidence": 0.817,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "minecraft",
+            "source": "readme",
+            "value": "forge",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "readme",
+            "value": "ftb-chunks",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "readme",
+            "value": "minecraft",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "game-modding",
+        "categoryLabel": "Game Modding",
+        "secondaryTags": [
+          "artifact:game-mod",
+          "platform:game",
+          "ecosystem:minecraft",
+          "ecosystem:ftb-chunks",
+          "platform:server"
+        ],
+        "confidence": 0.941,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "game-modding",
+            "source": "description",
+            "value": "P1 exact taxonomy category game-modding",
+            "weight": 0.941
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:workers",
+      "label": "workers",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/workers",
+      "description": "Mod for Minecraft that adds Villager Workers",
+      "language": "Java",
+      "topics": [
+        "minecraft"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-07-23T14:58:52Z",
+      "updatedAt": "2026-07-28T14:05:51Z",
+      "groupId": "game-modding",
+      "groupLabel": "Game Modding",
+      "classification": {
+        "categoryId": "minecraft",
+        "categoryLabel": "Minecraft Modding",
+        "secondaryTags": [
+          "minecraft"
+        ],
+        "confidence": 1,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "minecraft",
+            "source": "topic",
+            "value": "minecraft",
+            "weight": 1
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "description",
+            "value": "minecraft",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "readme",
+            "value": "minecraft",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "game-modding",
+        "categoryLabel": "Game Modding",
+        "secondaryTags": [
+          "artifact:game-mod",
+          "platform:game",
+          "ecosystem:minecraft"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "game-modding",
+            "source": "description",
+            "value": "P1 exact taxonomy category game-modding",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:recruits",
+      "label": "recruits",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/recruits",
+      "description": "recruiting villagers",
+      "language": "Java",
+      "topics": [
+        "minecraft"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-07-23T06:30:32Z",
+      "updatedAt": "2026-07-28T14:05:34Z",
+      "groupId": "game-modding",
+      "groupLabel": "Game Modding",
+      "classification": {
+        "categoryId": "minecraft",
+        "categoryLabel": "Minecraft Modding",
+        "secondaryTags": [
+          "minecraft",
+          "forge"
+        ],
+        "confidence": 1,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "minecraft",
+            "source": "topic",
+            "value": "minecraft",
+            "weight": 1
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "dependency",
+            "value": "forge",
+            "weight": 0.9
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "dependency",
+            "value": "minecraft",
+            "weight": 0.9
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "game-modding",
+        "categoryLabel": "Game Modding",
+        "secondaryTags": [
+          "artifact:game-mod",
+          "platform:game",
+          "ecosystem:minecraft"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "game-modding",
+            "source": "description",
+            "value": "P1 exact taxonomy category game-modding",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:BuyClaimChunks",
+      "label": "BuyClaimChunks",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/BuyClaimChunks",
+      "description": "",
+      "language": "Java",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-07-21T14:22:12Z",
+      "updatedAt": "2026-07-25T17:02:21Z",
+      "groupId": "game-modding",
+      "groupLabel": "Game Modding",
+      "classification": {
+        "categoryId": "minecraft",
+        "categoryLabel": "Minecraft Modding",
+        "secondaryTags": [],
+        "confidence": 0.8,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "minecraft",
+            "source": "readme",
+            "value": "forge",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "readme",
+            "value": "ftb-chunks",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "readme",
+            "value": "ftbchunks",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "readme",
+            "value": "minecraft",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "readme",
+            "value": "neoforge",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "game-modding",
+        "categoryLabel": "Game Modding",
+        "secondaryTags": [
+          "artifact:game-mod",
+          "platform:game",
+          "ecosystem:minecraft",
+          "ecosystem:ftb-chunks",
+          "platform:server"
+        ],
+        "confidence": 0.96,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "game-modding",
+            "source": "description",
+            "value": "P1 exact taxonomy category game-modding",
+            "weight": 0.96
+          }
+        ]
+      }
+    },
+    {
+      "id": "group:robotics-automation",
+      "label": "Robotics & Automation",
+      "type": "group",
+      "repositoryCount": 3
+    },
+    {
+      "id": "repository:lime_tidyup",
+      "label": "lime_tidyup",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/lime_tidyup",
+      "description": "LimeSimulDemoのfork. 音声認識から行き先を指定、画像認識からルービックキューブの角度を取得、掴む。",
+      "language": "Python",
+      "topics": [],
+      "stars": 2,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-07-03T07:45:19Z",
+      "updatedAt": "2026-08-15T14:38:08Z",
+      "groupId": "robotics-automation",
+      "groupLabel": "Robotics & Automation",
+      "classification": {
+        "categoryId": "robotics",
+        "categoryLabel": "Robotics / ROS 2",
+        "secondaryTags": [],
+        "confidence": 0.8,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "description",
+            "value": "画像認識",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "ai-ml",
+            "source": "readme",
+            "value": "opencv",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "jetson",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "gazebo",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "moveit2",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "nav2",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "robot",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "ros",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "robotics-automation",
+        "categoryLabel": "Robotics & Automation",
+        "secondaryTags": [
+          "artifact:documentation",
+          "ecosystem:ros2",
+          "topic:gazebo",
+          "topic:manipulation",
+          "platform:server"
+        ],
+        "confidence": 0.96,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "robotics-automation",
+            "source": "description",
+            "value": "P1 exact taxonomy category robotics-automation",
+            "weight": 0.96
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:gz-sim",
+      "label": "gz-sim",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/gz-sim",
+      "description": "Open source robotics simulator. The latest version of Gazebo.",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-08-20T13:06:59Z",
+      "updatedAt": "2026-08-20T13:06:59Z",
+      "groupId": "robotics-automation",
+      "groupLabel": "Robotics & Automation",
+      "classification": {
+        "categoryId": "robotics",
+        "categoryLabel": "Robotics / ROS 2",
+        "secondaryTags": [],
+        "confidence": 0.95,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "readme",
+            "value": "ai",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "coursework",
+            "source": "readme",
+            "value": "tutorial",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "sensor",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "description",
+            "value": "gazebo",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "description",
+            "value": "robotics",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "gazebo",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "robot",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "robotics",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "website",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "robotics-automation",
+        "categoryLabel": "Robotics & Automation",
+        "secondaryTags": [
+          "artifact:library",
+          "ecosystem:ros2",
+          "topic:gazebo",
+          "platform:cli",
+          "platform:server"
+        ],
+        "confidence": 0.99,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "robotics-automation",
+            "source": "description",
+            "value": "P1 exact taxonomy category robotics-automation",
+            "weight": 0.99
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:ros_gz",
+      "label": "ros_gz",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/ros_gz",
+      "description": "Integration between ROS (1 and 2) and Gazebo simulation",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-08-20T04:31:15Z",
+      "updatedAt": "2026-08-20T04:31:15Z",
+      "groupId": "robotics-automation",
+      "groupLabel": "Robotics & Automation",
+      "classification": {
+        "categoryId": "robotics",
+        "categoryLabel": "Robotics / ROS 2",
+        "secondaryTags": [],
+        "confidence": 1,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "robotics",
+            "source": "description",
+            "value": "gazebo",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "description",
+            "value": "ros",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "gazebo",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "ros",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "ros-2",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "ros-gz",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "ros2",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "name",
+            "value": "ros",
+            "weight": 0.5
+          },
+          {
+            "categoryId": "robotics",
+            "source": "name",
+            "value": "ros-gz",
+            "weight": 0.5
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "robotics-automation",
+        "categoryLabel": "Robotics & Automation",
+        "secondaryTags": [
+          "artifact:library",
+          "ecosystem:ros2",
+          "topic:gazebo"
+        ],
+        "confidence": 0.99,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "robotics-automation",
+            "source": "description",
+            "value": "P1 exact taxonomy category robotics-automation",
+            "weight": 0.99
+          }
+        ]
+      }
+    },
+    {
+      "id": "group:game-development",
+      "label": "Game Development",
+      "type": "group",
+      "repositoryCount": 1
+    },
+    {
+      "id": "repository:ProjExD_Group10",
+      "label": "ProjExD_Group10",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/ProjExD_Group10",
+      "description": "",
+      "language": "Python",
+      "topics": [],
+      "stars": 1,
+      "forks": 5,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-07-07T04:29:32Z",
+      "updatedAt": "2026-07-30T14:30:30Z",
+      "groupId": "game-development",
+      "groupLabel": "Game Development",
+      "classification": {
+        "categoryId": "uncategorized",
+        "categoryLabel": "Uncategorized",
+        "secondaryTags": [],
+        "confidence": 0,
+        "method": "deterministic",
+        "evidence": []
+      },
+      "taxonomyAssignment": {
+        "categoryId": "game-development",
+        "categoryLabel": "Game Development",
+        "secondaryTags": [
+          "artifact:application",
+          "platform:game",
+          "ecosystem:pygame",
+          "topic:board-game"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "game-development",
+            "source": "description",
+            "value": "P1 exact taxonomy category game-development",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "group:hardware-embedded",
+      "label": "Hardware & Embedded",
+      "type": "group",
+      "repositoryCount": 1
+    },
+    {
+      "id": "repository:turing-smart-screen-python-owl",
+      "label": "turing-smart-screen-python-owl",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/turing-smart-screen-python-owl",
+      "description": "Unofficial Python system monitor and library for small IPS USB-C displays like Turing Smart Screen / TURZX",
+      "language": "Rich Text Format",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-07-02T07:38:37Z",
+      "updatedAt": "2026-08-17T18:28:02Z",
+      "groupId": "hardware-embedded",
+      "groupLabel": "Hardware & Embedded",
+      "classification": {
+        "categoryId": "hardware",
+        "categoryLabel": "Hardware / Embedded",
+        "secondaryTags": [],
+        "confidence": 0.969,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "hardware",
+            "source": "description",
+            "value": "usb-c",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "firmware",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "hardware",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "raspberry",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "raspberry-pi",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "sensor",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "serial",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "usb-c",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "hardware-embedded",
+        "categoryLabel": "Hardware & Embedded",
+        "secondaryTags": [
+          "artifact:library",
+          "topic:device-integration",
+          "platform:embedded"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "hardware-embedded",
+            "source": "description",
+            "value": "P1 exact taxonomy category hardware-embedded",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "group:visualization-knowledge",
+      "label": "Visualization & Knowledge",
+      "type": "group",
+      "repositoryCount": 1
+    },
+    {
+      "id": "repository:interactive-project-map",
+      "label": "interactive-project-map",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/interactive-project-map",
+      "description": "",
+      "language": "JavaScript",
+      "topics": [],
+      "stars": 1,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-08-18T04:50:46Z",
+      "updatedAt": "2026-08-21T09:00:03Z",
+      "groupId": "visualization-knowledge",
+      "groupLabel": "Visualization & Knowledge",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.778,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "frontend",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "visualization-knowledge",
+        "categoryLabel": "Visualization & Knowledge",
+        "secondaryTags": [
+          "artifact:application",
+          "ecosystem:github",
+          "topic:project-visualization",
+          "platform:web",
+          "platform:api"
+        ],
+        "confidence": 0.919,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "visualization-knowledge",
+            "source": "description",
+            "value": "P1 exact taxonomy category visualization-knowledge",
+            "weight": 0.919
+          }
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "user:nekomario28",
+      "target": "group:game-modding",
+      "type": "ownership"
+    },
+    {
+      "source": "group:game-modding",
+      "target": "repository:sable",
+      "type": "membership"
+    },
+    {
+      "source": "group:game-modding",
+      "target": "repository:OffHandCombat",
+      "type": "membership"
+    },
+    {
+      "source": "group:game-modding",
+      "target": "repository:antifullbright",
+      "type": "membership"
+    },
+    {
+      "source": "group:game-modding",
+      "target": "repository:FTBPublicClaims",
+      "type": "membership"
+    },
+    {
+      "source": "group:game-modding",
+      "target": "repository:workers",
+      "type": "membership"
+    },
+    {
+      "source": "group:game-modding",
+      "target": "repository:recruits",
+      "type": "membership"
+    },
+    {
+      "source": "group:game-modding",
+      "target": "repository:BuyClaimChunks",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "group:robotics-automation",
+      "type": "ownership"
+    },
+    {
+      "source": "group:robotics-automation",
+      "target": "repository:lime_tidyup",
+      "type": "membership"
+    },
+    {
+      "source": "group:robotics-automation",
+      "target": "repository:gz-sim",
+      "type": "membership"
+    },
+    {
+      "source": "group:robotics-automation",
+      "target": "repository:ros_gz",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "group:game-development",
+      "type": "ownership"
+    },
+    {
+      "source": "group:game-development",
+      "target": "repository:ProjExD_Group10",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "group:hardware-embedded",
+      "type": "ownership"
+    },
+    {
+      "source": "group:hardware-embedded",
+      "target": "repository:turing-smart-screen-python-owl",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "group:visualization-knowledge",
+      "type": "ownership"
+    },
+    {
+      "source": "group:visualization-knowledge",
+      "target": "repository:interactive-project-map",
+      "type": "membership"
+    }
+  ],
+  "classificationVersion": 1,
+  "taxonomy": {
+    "schemaVersion": 1,
+    "corpusFingerprint": "0931a49848a088f7fc747c8b2141045d3ef0f9dec30d2b8bc3ba18aa35740646",
+    "repositories": [
+      {
+        "repoId": 1286897302,
+        "name": "turing-smart-screen-python-owl",
+        "contentHash": "26ca3712de2cfe4f1a3cf8d543cfa07c46cd91c5c36c08cfdc4fc860ec5a5b1b"
+      },
+      {
+        "repoId": 1288016370,
+        "name": "lime_tidyup",
+        "contentHash": "be22cd33e414d6d31e51e95947529fab260d91c8ed45c4623bbd7eb3f9bd92c5"
+      },
+      {
+        "repoId": 1291751665,
+        "name": "ProjExD_Group10",
+        "contentHash": "3ab2431d3bf91a64a857f6494fbb240642a2bce553cb9257b271437d539c904a"
+      },
+      {
+        "repoId": 1307785056,
+        "name": "BuyClaimChunks",
+        "contentHash": "6295122a3cdfd425e25b365f63e88db16c43da3714cc91d0fc9822f301c692a2"
+      },
+      {
+        "repoId": 1308795050,
+        "name": "antifullbright",
+        "contentHash": "27bddebc6e7db77d085ba6ae9b39e9e3f3a1d896b154a1b2bc04b84a96458f03"
+      },
+      {
+        "repoId": 1309115174,
+        "name": "FTBPublicClaims",
+        "contentHash": "adbc1d0ffe0e586b35a6e4ed2fab632a3a9177d06c08a7aca02178ed4e1fd852"
+      },
+      {
+        "repoId": 1309604724,
+        "name": "recruits",
+        "contentHash": "a8eb6ff86ff6f718d671fe54e3d89663680c07b664bcedb03546cd7e4a341ba2"
+      },
+      {
+        "repoId": 1310062464,
+        "name": "workers",
+        "contentHash": "cce7ddf736820625c132411021b13cbf7f03638ddbcb40bc37b5a3611f6747dd"
+      },
+      {
+        "repoId": 1312516818,
+        "name": "OffHandCombat",
+        "contentHash": "c7aced11dbe5b4530b203fcde51246599b3f7dc7f743e4151a4151b7f12e856e"
+      },
+      {
+        "repoId": 1313495922,
+        "name": "sable",
+        "contentHash": "ced9b430172562484dff66f87921d46486f1110daaf5ba73c1af7ba50a16b799"
+      },
+      {
+        "repoId": 1337983299,
+        "name": "interactive-project-map",
+        "contentHash": "e96e497dbdf03b438c1c209b719e69098b53f13f223803c431d5e26814a02c09"
+      },
+      {
+        "repoId": 1340281422,
+        "name": "ros_gz",
+        "contentHash": "34edc3266dbdedce7aa581e16522986a6833f1e853f8a3bd3e9a0b107b94129d"
+      },
+      {
+        "repoId": 1340711269,
+        "name": "gz-sim",
+        "contentHash": "74e80f2b3787f0ee660d5880167e5c6039bbdafe6095aedfbe9318119df0c378"
+      }
+    ],
+    "categories": [
+      {
+        "id": "ai-ml",
+        "label": "AI & Machine Learning",
+        "description": "Machine learning, generative AI, computer vision, NLP, agents, model training, inference, and AI systems.",
+        "aliases": [
+          "artificial intelligence",
+          "machine learning",
+          "deep learning",
+          "generative ai",
+          "computer vision",
+          "nlp",
+          "llm"
+        ]
+      },
+      {
+        "id": "data-analytics",
+        "label": "Data & Analytics",
+        "description": "Data processing, databases, analytics, ETL, search, information retrieval, metrics, and data engineering.",
+        "aliases": [
+          "data engineering",
+          "analytics",
+          "database",
+          "etl",
+          "search",
+          "information retrieval"
+        ]
+      },
+      {
+        "id": "visualization-knowledge",
+        "label": "Visualization & Knowledge",
+        "description": "Information visualization, project maps, knowledge maps, graph exploration, dashboards, visual analytics, and structured knowledge browsing.",
+        "aliases": [
+          "data visualization",
+          "information visualization",
+          "knowledge graph",
+          "project map",
+          "graph visualization",
+          "visual analytics"
+        ]
+      },
+      {
+        "id": "applications-services",
+        "label": "Applications & Services",
+        "description": "End-user applications and network services whose primary purpose does not fit a more specific standard domain.",
+        "aliases": [
+          "application",
+          "app",
+          "service",
+          "web app",
+          "desktop app",
+          "mobile app",
+          "saas"
+        ]
+      },
+      {
+        "id": "developer-tools",
+        "label": "Developer Tools",
+        "description": "Tools primarily used to build, test, debug, package, inspect, automate, or maintain software and developer workflows.",
+        "aliases": [
+          "developer tool",
+          "build tool",
+          "testing tool",
+          "debugger",
+          "code generation",
+          "devtool",
+          "sdk"
+        ]
+      },
+      {
+        "id": "systems-infrastructure",
+        "label": "Systems & Infrastructure",
+        "description": "Operating systems, runtimes, containers, cloud infrastructure, storage, observability, deployment, and low-level system software.",
+        "aliases": [
+          "systems",
+          "infrastructure",
+          "operating system",
+          "container",
+          "cloud",
+          "runtime",
+          "storage",
+          "observability"
+        ]
+      },
+      {
+        "id": "security-privacy",
+        "label": "Security & Privacy",
+        "description": "Security, privacy, authentication, authorization, cryptography, abuse prevention, malware analysis, and defensive tooling.",
+        "aliases": [
+          "security",
+          "privacy",
+          "authentication",
+          "cryptography",
+          "anti cheat",
+          "malware",
+          "authorization"
+        ]
+      },
+      {
+        "id": "networking-distributed",
+        "label": "Networking & Distributed Systems",
+        "description": "Networking, protocols, distributed systems, messaging, peer-to-peer systems, transport, RPC, and network services infrastructure.",
+        "aliases": [
+          "networking",
+          "distributed systems",
+          "protocol",
+          "rpc",
+          "peer to peer",
+          "messaging",
+          "transport"
+        ]
+      },
+      {
+        "id": "hardware-embedded",
+        "label": "Hardware & Embedded",
+        "description": "Embedded systems, firmware, microcontrollers, device drivers, hardware integration, electronics, sensors, and IoT devices.",
+        "aliases": [
+          "hardware",
+          "embedded",
+          "firmware",
+          "microcontroller",
+          "device integration",
+          "iot",
+          "sensor"
+        ]
+      },
+      {
+        "id": "robotics-automation",
+        "label": "Robotics & Automation",
+        "description": "Robotics, simulation, autonomous systems, manipulation, navigation, control, industrial automation, and robot middleware.",
+        "aliases": [
+          "robotics",
+          "robot",
+          "automation",
+          "ros",
+          "ros2",
+          "gazebo",
+          "navigation",
+          "manipulation"
+        ]
+      },
+      {
+        "id": "game-development",
+        "label": "Game Development",
+        "description": "Games, game engines, gameplay systems, interactive entertainment, simulations designed as games, and game-development tooling tightly coupled to game creation.",
+        "aliases": [
+          "game development",
+          "game engine",
+          "gameplay",
+          "pygame",
+          "unity",
+          "unreal",
+          "godot"
+        ]
+      },
+      {
+        "id": "game-modding",
+        "label": "Game Modding",
+        "description": "Mods, mod loaders, modding libraries, server gameplay extensions, compatibility layers, and tooling whose primary purpose is extending an existing game.",
+        "aliases": [
+          "game mod",
+          "modding",
+          "minecraft mod",
+          "neoforge",
+          "forge",
+          "fabric",
+          "mod loader"
+        ]
+      },
+      {
+        "id": "science-engineering",
+        "label": "Science & Engineering",
+        "description": "Scientific computing, engineering analysis, simulation outside game/robotics domains, mathematics, research software, and domain science tools.",
+        "aliases": [
+          "scientific computing",
+          "engineering",
+          "simulation",
+          "mathematics",
+          "research software",
+          "numerical"
+        ]
+      },
+      {
+        "id": "education-learning",
+        "label": "Education & Learning",
+        "description": "Educational software, tutorials, coursework, learning resources, teaching tools, exercises, and academic learning projects.",
+        "aliases": [
+          "education",
+          "learning",
+          "coursework",
+          "tutorial",
+          "teaching",
+          "exercise",
+          "assignment"
+        ]
+      },
+      {
+        "id": "media-creative",
+        "label": "Media & Creative",
+        "description": "Audio, video, graphics, image creation, design, animation, creative coding, publishing, and media-production software.",
+        "aliases": [
+          "media",
+          "audio",
+          "video",
+          "graphics",
+          "design",
+          "animation",
+          "creative coding"
+        ]
+      },
+      {
+        "id": "business-productivity",
+        "label": "Business & Productivity",
+        "description": "Business applications, productivity workflows, collaboration, commerce operations, personal organization, and office-oriented tools.",
+        "aliases": [
+          "business",
+          "productivity",
+          "workflow",
+          "collaboration",
+          "commerce",
+          "office",
+          "organization"
+        ]
+      }
+    ],
+    "source": {
+      "providerId": "standard",
+      "model": "ipm-standard-v1"
+    }
+  },
+  "taxonomyAssignmentVersion": 1
+}
