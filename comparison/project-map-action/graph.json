@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-08-21T10:04:56.453Z",
+  "generatedAt": "2026-08-21T11:17:16.559Z",
   "repositoryCount": 13,
   "groupCount": 5,
   "nodes": [
@@ -646,6 +646,105 @@
       }
     },
     {
+      "id": "repository:ros_gz",
+      "label": "ros_gz",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/ros_gz",
+      "description": "Integration between ROS (1 and 2) and Gazebo simulation",
+      "language": "C++",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-08-20T04:31:15Z",
+      "updatedAt": "2026-08-21T10:19:35Z",
+      "groupId": "robotics-automation",
+      "groupLabel": "Robotics & Automation",
+      "classification": {
+        "categoryId": "robotics",
+        "categoryLabel": "Robotics / ROS 2",
+        "secondaryTags": [],
+        "confidence": 1,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "robotics",
+            "source": "description",
+            "value": "gazebo",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "description",
+            "value": "ros",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "gazebo",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "ros",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "ros-2",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "ros-gz",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "ros2",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "name",
+            "value": "ros",
+            "weight": 0.5
+          },
+          {
+            "categoryId": "robotics",
+            "source": "name",
+            "value": "ros-gz",
+            "weight": 0.5
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "robotics-automation",
+        "categoryLabel": "Robotics & Automation",
+        "secondaryTags": [
+          "artifact:library",
+          "ecosystem:ros2",
+          "topic:gazebo"
+        ],
+        "confidence": 0.99,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "robotics-automation",
+            "source": "description",
+            "value": "P1 exact taxonomy category robotics-automation",
+            "weight": 0.99
+          }
+        ]
+      }
+    },
+    {
       "id": "repository:gz-sim",
       "label": "gz-sim",
       "type": "repository",
@@ -733,105 +832,6 @@
           "topic:gazebo",
           "platform:cli",
           "platform:server"
-        ],
-        "confidence": 0.99,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "robotics-automation",
-            "source": "description",
-            "value": "P1 exact taxonomy category robotics-automation",
-            "weight": 0.99
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:ros_gz",
-      "label": "ros_gz",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/ros_gz",
-      "description": "Integration between ROS (1 and 2) and Gazebo simulation",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-08-20T04:31:15Z",
-      "updatedAt": "2026-08-20T04:31:15Z",
-      "groupId": "robotics-automation",
-      "groupLabel": "Robotics & Automation",
-      "classification": {
-        "categoryId": "robotics",
-        "categoryLabel": "Robotics / ROS 2",
-        "secondaryTags": [],
-        "confidence": 1,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "robotics",
-            "source": "description",
-            "value": "gazebo",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "robotics",
-            "source": "description",
-            "value": "ros",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "robotics",
-            "source": "readme",
-            "value": "gazebo",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "robotics",
-            "source": "readme",
-            "value": "ros",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "robotics",
-            "source": "readme",
-            "value": "ros-2",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "robotics",
-            "source": "readme",
-            "value": "ros-gz",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "robotics",
-            "source": "readme",
-            "value": "ros2",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "robotics",
-            "source": "name",
-            "value": "ros",
-            "weight": 0.5
-          },
-          {
-            "categoryId": "robotics",
-            "source": "name",
-            "value": "ros-gz",
-            "weight": 0.5
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "robotics-automation",
-        "categoryLabel": "Robotics & Automation",
-        "secondaryTags": [
-          "artifact:library",
-          "ecosystem:ros2",
-          "topic:gazebo"
         ],
         "confidence": 0.99,
         "method": "deterministic",
@@ -1020,7 +1020,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-08-21T09:00:03Z",
+      "updatedAt": "2026-08-21T11:07:38Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -1120,12 +1120,12 @@
     },
     {
       "source": "group:robotics-automation",
-      "target": "repository:gz-sim",
+      "target": "repository:ros_gz",
       "type": "membership"
     },
     {
       "source": "group:robotics-automation",
-      "target": "repository:ros_gz",
+      "target": "repository:gz-sim",
       "type": "membership"
     },
     {
@@ -1162,7 +1162,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "0931a49848a088f7fc747c8b2141045d3ef0f9dec30d2b8bc3ba18aa35740646",
+    "corpusFingerprint": "1cf5d54231669ed6d9b70185a46901b694aa69ef3b483f3cf45c5f5cb0844333",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -1222,7 +1222,7 @@
       {
         "repoId": 1340281422,
         "name": "ros_gz",
-        "contentHash": "34edc3266dbdedce7aa581e16522986a6833f1e853f8a3bd3e9a0b107b94129d"
+        "contentHash": "a7e14e1a30e5874e9340eb21291b9c7b582f7994a7c82c3dddec0c36248de6f4"
       },
       {
         "repoId": 1340711269,
