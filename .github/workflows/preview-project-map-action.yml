@@ -5,13 +5,18 @@ on:
     branches: [experiment/project-map-action-consumer]
     paths:
       - ".github/workflows/preview-project-map-action.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/preview-project-map-action.yml"
+      - "PROJECT_MAP_ACTION_COMPARISON.md"
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: profile-project-map-action-preview
+  group: profile-project-map-action-preview-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -22,6 +27,8 @@ jobs:
     steps:
       - name: Checkout comparison branch
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
 
       - name: Generate with latest reviewed interactive-project-map Action
         uses: nekomario28/interactive-project-map@9307154077613337f29fed4ffe981f4cc73de915
@@ -45,6 +52,7 @@ jobs:
           test -s comparison/project-map-action/graph.json
           grep -q '<svg' comparison/project-map-action/galaxy.svg
           grep -q '"owner"' comparison/project-map-action/graph.json
+          grep -q '"taxonomy"' comparison/project-map-action/graph.json
 
       - name: Transfer generated comparison output
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -63,6 +71,8 @@ jobs:
     steps:
       - name: Checkout comparison branch
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
 
       - name: Download generated comparison output
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
