@@ -2,7 +2,7 @@ name: Update project map
 
 on:
   push:
-    branches: [main, experiment/project-map-action-consumer]
+    branches: [main]
     paths:
       - ".github/workflows/update-knowledge-graph.yml"
   schedule:
