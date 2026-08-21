@@ -27,7 +27,7 @@ jobs:
       style: galaxy-systems
       max_repos: "100"
       forks: true
-      archived: false
+      archived: true
 
   publish:
     needs: generate
