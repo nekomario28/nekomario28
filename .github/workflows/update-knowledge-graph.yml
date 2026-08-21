@@ -12,6 +12,7 @@ on:
       - "scripts/validate_project_map.py"
       - "project-map/graph-data.json"
   schedule:
+    # Daily refresh; push/manual triggers handle immediate updates.
     - cron: "41 1 * * *"
   workflow_dispatch:
 
