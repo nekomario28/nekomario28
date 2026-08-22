@@ -1,0 +1,1 @@
+AI Director hosted API-schema trigger v3. Do not merge.
