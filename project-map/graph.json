@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-08-21T20:22:35.678Z",
+  "generatedAt": "2026-08-22T13:56:34.299Z",
   "repositoryCount": 13,
   "groupCount": 5,
   "nodes": [
@@ -1020,7 +1020,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-08-21T20:21:44Z",
+      "updatedAt": "2026-08-22T13:36:43Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -1039,7 +1039,7 @@
           {
             "categoryId": "web-apps",
             "source": "readme",
-            "value": "frontend",
+            "value": "app",
             "weight": 0.7
           }
         ]
@@ -1052,16 +1052,17 @@
           "ecosystem:github",
           "topic:project-visualization",
           "platform:web",
+          "platform:mobile",
           "platform:api"
         ],
-        "confidence": 0.919,
+        "confidence": 0.9,
         "method": "deterministic",
         "evidence": [
           {
             "categoryId": "visualization-knowledge",
             "source": "description",
             "value": "P1 exact taxonomy category visualization-knowledge",
-            "weight": 0.919
+            "weight": 0.9
           }
         ]
       }
@@ -1162,7 +1163,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "ca618e338166ee095376a343d2b8fdc45145792e483cf39c01ec4e8102efde81",
+    "corpusFingerprint": "266035f349d3ba43b2af505432918f1ba4e598f47cba1602fa43ca651dfaeb27",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -1217,7 +1218,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "a53df33e2c8e47dcb2990d913e4354991073c4d34c2cd6350258eb0f5a0a0c9a"
+        "contentHash": "7c0db6d79f82d4426c6e5113f1e8d18723c7e11b3f57e07dd8cbb3c225285646"
       },
       {
         "repoId": 1340281422,
