@@ -1,0 +1,83 @@
+name: AI Director hosted outcome probe
+
+on:
+  pull_request:
+    branches:
+      - exp/ai-director-hosted-base
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python --version
+          ffmpeg -version | head -n 2
+          df -h .
+
+      - name: Create temporary client environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m venv "$RUNNER_TEMP/ai-director-venv"
+          "$RUNNER_TEMP/ai-director-venv/bin/pip" install --disable-pip-version-check -q --upgrade huggingface_hub gradio_client
+
+      - name: Download real Spotlight media and materialize trim/split
+        shell: bash
+        run: |
+          set -euo pipefail
+          VENV="$RUNNER_TEMP/ai-director-venv"
+          ROOT="$RUNNER_TEMP/ai-director-media"
+          mkdir -p "$ROOT"
+          "$VENV/bin/python" - <<'PY'
+          from huggingface_hub import hf_hub_download
+          from pathlib import Path
+          p = hf_hub_download(
+              repo_id='UBC-ViL/Spotlight-VideoGen-Errors',
+              repo_type='dataset',
+              filename='test/spotlight/ltx2/sid_003.mp4',
+              local_dir=Path.home()/'.cache'/'ai-director-hf',
+          )
+          dst=Path(__import__('os').environ['RUNNER_TEMP'])/'ai-director-media'/'sid_003_ltx2.mp4'
+          dst.write_bytes(Path(p).read_bytes())
+          print('DOWNLOAD_OK', dst, dst.stat().st_size)
+          PY
+          SRC="$ROOT/sid_003_ltx2.mp4"
+          sha256sum "$SRC"
+          ffprobe -v error -show_entries format=duration,size -of json "$SRC"
+          ffmpeg -hide_banner -loglevel error -y -i "$SRC" -t 1.20 -an -c:v libx264 -preset veryfast -crf 18 "$ROOT/sid_003_trim_prefix.mp4"
+          ffmpeg -hide_banner -loglevel error -y -i "$SRC" -t 0.60 -an -c:v libx264 -preset veryfast -crf 18 "$ROOT/sid_003_split_a.mp4"
+          ffmpeg -hide_banner -loglevel error -y -ss 0.60 -i "$SRC" -t 0.60 -an -c:v libx264 -preset veryfast -crf 18 "$ROOT/sid_003_split_b.mp4"
+          for f in "$ROOT"/*.mp4; do
+            printf 'MEDIA %s bytes=%s sha256=%s\n' "$(basename "$f")" "$(wc -c < "$f")" "$(sha256sum "$f" | awk '{print $1}')"
+            ffprobe -v error -show_entries format=duration,size -of compact=p=0:nk=1 "$f"
+          done
+
+      - name: Probe LTX generation and repair APIs
+        shell: bash
+        run: |
+          set -euo pipefail
+          VENV="$RUNNER_TEMP/ai-director-venv"
+          "$VENV/bin/python" - <<'PY'
+          from gradio_client import Client
+          spaces = [
+              'Lightricks/LTX-2-3',
+              'ltx-community/ltx-2.3-inpaint',
+              'linoyts/LTX-2-3-First-Last-Frame',
+          ]
+          for space in spaces:
+              print('\n===SPACE', space, '===')
+              try:
+                  c=Client(space, verbose=False)
+                  info=c.view_api(print_info=False)
+                  print(info)
+              except Exception as e:
+                  print('SPACE_API_ERROR', type(e).__name__, str(e))
+          PY
