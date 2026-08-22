@@ -13,9 +13,11 @@ permissions:
   contents: read
 
 jobs:
-  wan-counterfactuals:
+  local-repairs:
     runs-on: ubuntu-latest
     timeout-minutes: 180
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
     steps:
       - name: Check out exact experiment branch
         uses: actions/checkout@v4
@@ -29,23 +31,22 @@ jobs:
           python --version
           sudo apt-get update -qq
           sudo apt-get install -y -qq ffmpeg
-          ffmpeg -version | head -n 2
 
       - name: Install clients
         run: |
           python -m pip install --disable-pip-version-check -q --upgrade huggingface_hub gradio_client requests
 
-      - name: Execute Wan fresh and anchor counterfactuals
+      - name: Execute local repair outcomes
         run: |
           set -euxo pipefail
-          python experiments/ai_director/run_wan_counterfactuals.py
-          find wan_outcomes -maxdepth 4 -type f -printf '%p %s bytes\n' | sort
+          python experiments/ai_director/run_local_repairs.py
+          find repair_outcomes -maxdepth 4 -type f -printf '%p %s bytes\n' | sort
 
-      - name: Upload Wan outcome evidence
+      - name: Upload local repair evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ai-director-wan-counterfactuals-${{ github.run_id }}
-          path: wan_outcomes
+          name: ai-director-local-repairs-${{ github.run_id }}
+          path: repair_outcomes
           if-no-files-found: warn
           retention-days: 14
