@@ -21,6 +21,8 @@ jobs:
         run: |
           set -euxo pipefail
           python --version
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
           ffmpeg -version | head -n 2
           df -h .
 
