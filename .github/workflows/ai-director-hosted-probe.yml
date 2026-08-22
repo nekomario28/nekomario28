@@ -1,4 +1,4 @@
-name: AI Director non-Zero LTX probe
+name: AI Director unresolved Spotlight media pack
 
 on:
   pull_request:
@@ -10,34 +10,45 @@ permissions:
   contents: read
 
 jobs:
-  probe:
+  pack:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
-      - name: Create client environment
+      - name: Download unresolved 10 cases x 3 generators
         shell: bash
         run: |
           set -euo pipefail
           python -m venv "$RUNNER_TEMP/venv"
-          "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check -q --upgrade gradio_client
-
-      - name: Inspect khuramullah non-Zero LTX I2V API
-        shell: bash
-        run: |
-          set -euo pipefail
+          "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check -q --upgrade huggingface_hub
+          export ROOT="$RUNNER_TEMP/spotlight-unresolved10"
+          mkdir -p "$ROOT"
+          echo "ROOT=$ROOT" >> "$GITHUB_ENV"
           "$RUNNER_TEMP/venv/bin/python" - <<'PY'
-          import json
-          from gradio_client import Client
-          space='khuramullah/LTX2.3-10Eros-image-to-video'
-          c=Client(space, verbose=False)
-          print('SRC',c.src)
-          print('ENDPOINT_COUNT',len(c.endpoints))
-          for idx,ep in sorted(c.endpoints.items()):
-              print('ENDPOINT',idx,'api_name=',getattr(ep,'api_name',None),'fn_index=',getattr(ep,'fn_index',None))
-              dep=getattr(ep,'dependency',None)
-              if dep is not None:
-                  print('DEPENDENCY',json.dumps(dep,ensure_ascii=False,default=str)[:20000])
-          print('VIEW_API_BEGIN')
-          c.view_api()
-          print('VIEW_API_END')
+          from huggingface_hub import hf_hub_download
+          from pathlib import Path
+          import os, shutil, hashlib, json
+          root=Path(os.environ['ROOT'])
+          cases=[3,4,5,7,8,13,15,17,18,21]
+          models=['ltx2','seedance','veo3']
+          manifest=[]
+          for pid in cases:
+              for model in models:
+                  rel=f'test/spotlight/{model}/sid_{pid:03d}.mp4'
+                  p=hf_hub_download(repo_id='UBC-ViL/Spotlight-VideoGen-Errors', repo_type='dataset', filename=rel, local_dir=Path(os.environ['RUNNER_TEMP'])/'hf-cache')
+                  dst=root/model/f'sid_{pid:03d}.mp4'
+                  dst.parent.mkdir(parents=True,exist_ok=True)
+                  shutil.copyfile(p,dst)
+                  b=dst.read_bytes()
+                  item={'pid':f'sid_{pid:03d}','model':model,'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),'path':str(dst.relative_to(root))}
+                  manifest.append(item)
+                  print('DOWNLOADED',item)
+          (root/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2))
+          print('FILES',len(manifest),'TOTAL_BYTES',sum(x['bytes'] for x in manifest))
           PY
+
+      - name: Upload media pack
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-director-spotlight-unresolved10-media
+          path: ${{ env.ROOT }}
+          retention-days: 7
