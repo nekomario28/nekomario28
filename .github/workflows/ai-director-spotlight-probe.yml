@@ -13,76 +13,41 @@ permissions:
   contents: read
 
 jobs:
-  vace-local-repair:
+  exact-duration-probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 40
     steps:
-      - name: Check out exact experiment branch
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
-          persist-credentials: false
       - name: Environment
         run: |
           set -euxo pipefail
           sudo apt-get update -qq
           sudo apt-get install -y -qq ffmpeg
-          python -m pip install --disable-pip-version-check -q --upgrade huggingface_hub gradio_client requests
-      - name: Execute sid_021 VACE local repair
+          python -m pip install --disable-pip-version-check -q --upgrade huggingface_hub
+      - name: Download and probe 60 paired videos
         run: |
           set -euxo pipefail
           python - <<'PY'
-          import json, shutil, subprocess
+          import json, subprocess
           from pathlib import Path
           from huggingface_hub import hf_hub_download
-          from gradio_client import Client, handle_file
-
-          out=Path('vace_repair'); out.mkdir(exist_ok=True)
-          src=Path(hf_hub_download(repo_id='UBC-ViL/Spotlight-VideoGen-Errors',repo_type='dataset',filename='test/spotlight/ltx2/sid_021.mp4',local_dir=out/'src'))
-          clip=out/'sid_021-first3s.mp4'
-          subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(src),'-t','3.0625','-an','-c:v','libx264','-preset','fast','-crf','18','-pix_fmt','yuv420p',str(clip)],check=True)
-          mask=out/'sid_021-mask.mp4'
-          # White regenerates; black preserves. Subject-focused rectangle, source-space coordinates.
-          subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-f','lavfi','-i','color=c=black:s=1920x1080:r=16:d=3.0625','-vf','drawbox=x=40:y=180:w=1480:h=900:color=white:t=fill','-an','-c:v','libx264','-pix_fmt','yuv420p',str(mask)],check=True)
-
-          c=Client('fffiloni/Wan2.1-VACE-1.3B', verbose=True)
-          api=c.view_api(print_info=False)
-          print('API',json.dumps(api,default=str)[:30000],flush=True)
-          prompt='The same realistic tabby cat stays seated inside the same cardboard box and slowly pokes only its head out over the edge, looking around. Correct feline anatomy and smooth natural head motion. Preserve the box, floor, background, camera, lighting and all pixels outside the masked cat region.'
-          negative='deformed cat, extra limbs, duplicated head, warped body, disappearing box, changing background, camera change, flicker, blur, low quality'
-          res=c.predict([],handle_file(str(clip)),handle_file(str(mask)),None,None,None,prompt,negative,16.0,25,1.0,5.0,4021,'480','832','16','49',api_name='/generate')
-          print('RESULT',repr(res),flush=True)
-
-          def candidates(x):
-              if isinstance(x,str):
-                  if x.endswith('.mp4') or x.startswith('http'): yield x
-              elif isinstance(x,dict):
-                  for v in x.values(): yield from candidates(v)
-              elif isinstance(x,(list,tuple)):
-                  for v in x: yield from candidates(v)
-          refs=list(candidates(res))
-          print('VIDEO_REFS',refs,flush=True)
-          if not refs: raise RuntimeError('No mp4 result in VACE response')
-          ref=refs[0]
-          dst=out/'sid_021-vace-local-repair.mp4'
-          if ref.startswith('http'):
-              import requests
-              r=requests.get(ref,timeout=300); r.raise_for_status(); dst.write_bytes(r.content)
-          else:
-              p=Path(ref)
-              if not p.exists(): raise RuntimeError(f'VACE returned missing local path {ref}')
-              shutil.copy2(p,dst)
-          probe=subprocess.run(['ffprobe','-v','error','-show_entries','format=duration,size','-of','json',str(dst)],capture_output=True,text=True,check=True).stdout
-          manifest={'pid':'sid_021','action':'LOCAL_REPAIR','executor':'fffiloni/Wan2.1-VACE-1.3B','source':str(clip),'mask':str(mask),'prompt':prompt,'output':str(dst),'probe':json.loads(probe)['format']}
-          (out/'manifest.json').write_text(json.dumps(manifest,indent=2),encoding='utf-8')
-          print(json.dumps(manifest,indent=2),flush=True)
+          pids=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,18,19,20,21]
+          models=['ltx2','seedance','veo3']
+          out=Path('duration_probe'); out.mkdir(exist_ok=True)
+          rows=[]
+          for pid in pids:
+            sid=f'sid_{pid:03d}'
+            for model in models:
+              path=Path(hf_hub_download(repo_id='UBC-ViL/Spotlight-VideoGen-Errors',repo_type='dataset',filename=f'test/spotlight/{model}/{sid}.mp4',local_dir=out/'cache'))
+              cp=subprocess.run(['ffprobe','-v','error','-show_entries','format=duration,size','-of','json',str(path)],capture_output=True,text=True,check=True)
+              fmt=json.loads(cp.stdout)['format']
+              rows.append({'pid':sid,'model':model,'duration_sec':float(fmt['duration']),'size_bytes':int(fmt['size'])})
+              print(rows[-1],flush=True)
+          (out/'durations.json').write_text(json.dumps(rows,indent=2),encoding='utf-8')
           PY
-          find vace_repair -maxdepth 4 -type f -printf '%p %s bytes\n' | sort
       - name: Upload evidence
-        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ai-director-vace-repair-${{ github.run_id }}
-          path: vace_repair
-          if-no-files-found: warn
+          name: ai-director-duration-probe-${{ github.run_id }}
+          path: duration_probe/durations.json
+          if-no-files-found: error
           retention-days: 14
