@@ -1,0 +1,34 @@
+name: AI Director Wan stateful probe
+
+on:
+  push:
+    branches:
+      - exp/ai-director-spotlight-outcomes
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install --disable-pip-version-check -q --upgrade huggingface_hub gradio_client requests
+      - name: Probe stateful fresh and anchor generation
+        run: python experiments/ai_director/probe_wan_stateful.py
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-director-wan-state-probe-${{ github.run_id }}
+          path: wan_state_probe
+          if-no-files-found: warn
+          retention-days: 14
