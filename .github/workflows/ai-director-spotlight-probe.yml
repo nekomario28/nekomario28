@@ -1,0 +1,62 @@
+name: AI Director Spotlight execution probe
+
+on:
+  push:
+    branches:
+      - exp/ai-director-spotlight-outcomes
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Environment
+        run: |
+          set -euxo pipefail
+          python --version
+          ffmpeg -version | head -n 2
+          df -h .
+
+      - name: Install clients
+        run: |
+          python -m pip install --disable-pip-version-check -q --upgrade huggingface_hub gradio_client
+
+      - name: Download one Spotlight video
+        run: |
+          set -euxo pipefail
+          python - <<'PY'
+          from huggingface_hub import hf_hub_download
+          p = hf_hub_download(
+              repo_id='UBC-ViL/Spotlight-VideoGen-Errors',
+              repo_type='dataset',
+              filename='test/spotlight/ltx2/sid_003.mp4',
+              local_dir='probe',
+          )
+          print(p)
+          PY
+          ffprobe -v error -show_entries format=duration,size -of json probe/test/spotlight/ltx2/sid_003.mp4
+
+      - name: Probe public generation and repair Spaces
+        run: |
+          python - <<'PY'
+          from gradio_client import Client
+          spaces = [
+              'Lightricks/LTX-2-3',
+              'ltx-community/ltx-2.3-inpaint',
+              'jbilcke-hf/InstaVideo',
+          ]
+          for space in spaces:
+              print('\n===', space, '===')
+              try:
+                  c = Client(space, verbose=False)
+                  print(c.view_api(print_info=False))
+              except Exception as e:
+                  print('PROBE_ERROR', type(e).__name__, str(e))
+          PY
