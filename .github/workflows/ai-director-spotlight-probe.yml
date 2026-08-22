@@ -13,40 +13,31 @@ permissions:
   contents: read
 
 jobs:
-  local-repairs:
+  wan-stateful-probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
-    env:
-      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    timeout-minutes: 60
     steps:
       - name: Check out exact experiment branch
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
-
       - name: Environment
         run: |
           set -euxo pipefail
-          python --version
           sudo apt-get update -qq
           sudo apt-get install -y -qq ffmpeg
-
-      - name: Install clients
-        run: |
           python -m pip install --disable-pip-version-check -q --upgrade huggingface_hub gradio_client requests
-
-      - name: Execute local repair outcomes
+      - name: Probe stateful fresh and anchor generation
         run: |
           set -euxo pipefail
-          python experiments/ai_director/run_local_repairs.py
-          find repair_outcomes -maxdepth 4 -type f -printf '%p %s bytes\n' | sort
-
-      - name: Upload local repair evidence
+          python experiments/ai_director/probe_wan_stateful.py
+          find wan_state_probe -maxdepth 4 -type f -printf '%p %s bytes\n' | sort
+      - name: Upload evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ai-director-local-repairs-${{ github.run_id }}
-          path: repair_outcomes
+          name: ai-director-wan-state-probe-${{ github.run_id }}
+          path: wan_state_probe
           if-no-files-found: warn
           retention-days: 14
