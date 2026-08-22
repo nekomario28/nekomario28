@@ -1,4 +1,4 @@
-name: AI Director hosted outcome probe
+name: AI Director real intervention outcome probe
 
 on:
   pull_request:
@@ -10,57 +10,121 @@ permissions:
   contents: read
 
 jobs:
-  probe:
+  sid003:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
-      - name: Create temporary client environment
+      - name: Install ephemeral dependencies
         shell: bash
         run: |
           set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
           python -m venv "$RUNNER_TEMP/ai-director-venv"
-          "$RUNNER_TEMP/ai-director-venv/bin/pip" install --disable-pip-version-check -q --upgrade gradio_client
+          "$RUNNER_TEMP/ai-director-venv/bin/pip" install --disable-pip-version-check -q --upgrade huggingface_hub gradio_client
 
-      - name: Inspect public LTX generation and repair API schemas
+      - name: Download real sid_003 and prepare verified anchor
         shell: bash
         run: |
           set -euo pipefail
-          VENV="$RUNNER_TEMP/ai-director-venv"
-          "$VENV/bin/python" - <<'PY'
-          import json, urllib.request
-          from gradio_client import Client
-
-          spaces = {
-              'Lightricks/LTX-2-3': 'https://lightricks-ltx-2-3.hf.space',
-              'ltx-community/ltx-2.3-inpaint': 'https://ltx-community-ltx-2-3-inpaint.hf.space',
-              'linoyts/LTX-2-3-First-Last-Frame': 'https://linoyts-ltx-2-3-first-last-frame.hf.space',
-          }
-          for space, host in spaces.items():
-              print('\n===SPACE', space, '===')
-              for suffix in ('/gradio_api/info', '/info', '/config'):
-                  url=host+suffix
-                  try:
-                      req=urllib.request.Request(url, headers={'User-Agent':'ai-director-research/1.0'})
-                      with urllib.request.urlopen(req, timeout=30) as r:
-                          raw=r.read()
-                      print('HTTP_OK', suffix, 'bytes', len(raw), 'content-type', r.headers.get('content-type'))
-                      if len(raw) < 200000:
-                          text=raw.decode('utf-8','replace')
-                          print(text[:120000])
-                  except Exception as e:
-                      print('HTTP_ERROR', suffix, type(e).__name__, str(e))
-              try:
-                  c=Client(space, verbose=False)
-                  print('CLIENT_SRC', c.src)
-                  print('CLIENT_ENDPOINT_COUNT', len(c.endpoints))
-                  for idx, ep in sorted(c.endpoints.items()):
-                      print('ENDPOINT', idx, 'api_name=', getattr(ep,'api_name',None), 'fn_index=', getattr(ep,'fn_index',None))
-                      dep=getattr(ep,'dependency',None)
-                      if dep is not None:
-                          print('DEPENDENCY', json.dumps(dep, ensure_ascii=False, default=str)[:10000])
-                  print('VIEW_API_BEGIN')
-                  c.view_api()
-                  print('VIEW_API_END')
-              except Exception as e:
-                  print('CLIENT_ERROR', type(e).__name__, str(e))
+          export ROOT="$RUNNER_TEMP/ai-director-outcomes"
+          mkdir -p "$ROOT"
+          echo "ROOT=$ROOT" >> "$GITHUB_ENV"
+          "$RUNNER_TEMP/ai-director-venv/bin/python" - <<'PY'
+          from huggingface_hub import hf_hub_download
+          from pathlib import Path
+          import os, shutil
+          p=hf_hub_download(repo_id='UBC-ViL/Spotlight-VideoGen-Errors', repo_type='dataset', filename='test/spotlight/ltx2/sid_003.mp4', local_dir=Path(os.environ['RUNNER_TEMP'])/'hf-cache')
+          dst=Path(os.environ['ROOT'])/'sid_003_original.mp4'
+          shutil.copyfile(p,dst)
+          print('ORIGINAL',dst,dst.stat().st_size)
           PY
+          ffprobe -v error -show_entries format=duration,size -of json "$ROOT/sid_003_original.mp4"
+          sha256sum "$ROOT/sid_003_original.mp4"
+          ffmpeg -hide_banner -loglevel error -y -ss 1.10 -i "$ROOT/sid_003_original.mp4" -frames:v 1 "$ROOT/sid_003_anchor_1.10.jpg"
+          ffmpeg -hide_banner -loglevel error -y -i "$ROOT/sid_003_original.mp4" -t 1.10 -an -c:v libx264 -preset veryfast -crf 18 "$ROOT/sid_003_verified_prefix.mp4"
+          sha256sum "$ROOT/sid_003_anchor_1.10.jpg" "$ROOT/sid_003_verified_prefix.mp4"
+
+      - name: Execute fresh regeneration and anchored backtrack continuation
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -u
+          "$RUNNER_TEMP/ai-director-venv/bin/python" - <<'PY'
+          import json, os, shutil, traceback
+          from pathlib import Path
+          from gradio_client import Client, handle_file
+          root=Path(os.environ['ROOT'])
+          exact_prompt='A bicycle pedals itself down the street, stops at a red light, and then continues when it turns green.'
+          continuation_prompt='The self-pedaling bicycle approaches the red traffic light, comes to a complete stop, waits, then when the traffic light turns green it continues riding forward down the street.'
+          outcomes=[]
+          def find_api(client):
+              eps=[]
+              for idx,ep in sorted(client.endpoints.items()):
+                  api=getattr(ep,'api_name',None)
+                  eps.append((idx,api))
+              print('ENDPOINTS',eps)
+              named=[api for _,api in eps if api]
+              for api in named:
+                  if 'generate' in str(api).lower(): return api
+              return named[0] if named else None
+          def save_result(label,result):
+              print(label,'RAW_RESULT',repr(result))
+              value=result[0] if isinstance(result,(tuple,list)) else result
+              if isinstance(value,dict): src=value.get('path') or value.get('url')
+              else: src=str(value) if value is not None else None
+              if src and Path(src).exists():
+                  dst=root/f'{label}.mp4'; shutil.copyfile(src,dst); return str(dst)
+              return src
+          try:
+              c=Client('Lightricks/LTX-2-3', verbose=False)
+              api=find_api(c); print('FRESH_API',api)
+              r=c.predict(None, exact_prompt, 3.0, False, 42, False, 512, 768, api_name=api)
+              out=save_result('sid_003_fresh_ltx23',r)
+              outcomes.append({'action':'fresh_regenerate_switch_backend_ltx2.3','status':'success','output':out})
+          except Exception as e:
+              print('FRESH_ERROR',type(e).__name__,str(e)); traceback.print_exc()
+              outcomes.append({'action':'fresh_regenerate_switch_backend_ltx2.3','status':'error','error':f'{type(e).__name__}: {e}'})
+          try:
+              c=Client('linoyts/LTX-2-3-First-Last-Frame', verbose=False)
+              api=find_api(c); print('BACKTRACK_API',api)
+              anchor=handle_file(str(root/'sid_003_anchor_1.10.jpg'))
+              r=c.predict(anchor, None, None, continuation_prompt, 3.0, False, 43, False, 512, 768, api_name=api)
+              out=save_result('sid_003_backtrack_suffix_ltx23',r)
+              outcomes.append({'action':'backtrack_anchor_regenerate_suffix_ltx2.3','status':'success','output':out,'verified_prefix_sec':1.10})
+          except Exception as e:
+              print('BACKTRACK_ERROR',type(e).__name__,str(e)); traceback.print_exc()
+              outcomes.append({'action':'backtrack_anchor_regenerate_suffix_ltx2.3','status':'error','error':f'{type(e).__name__}: {e}','verified_prefix_sec':1.10})
+          (root/'generation_outcomes.json').write_text(json.dumps(outcomes,ensure_ascii=False,indent=2))
+          print('OUTCOMES_JSON',json.dumps(outcomes,ensure_ascii=False))
+          PY
+
+      - name: Assemble and inspect successful outcomes
+        if: always()
+        shell: bash
+        run: |
+          set -u
+          for f in "$ROOT"/*.mp4; do
+            test -f "$f" || continue
+            printf 'OUTCOME_FILE %s bytes=%s sha256=%s\n' "$(basename "$f")" "$(wc -c < "$f")" "$(sha256sum "$f" | awk '{print $1}')"
+            ffprobe -v error -show_entries format=duration,size -of compact=p=0:nk=1 "$f" || true
+          done
+          if [ -f "$ROOT/sid_003_backtrack_suffix_ltx23.mp4" ]; then
+            printf "file '%s'\nfile '%s'\n" "$ROOT/sid_003_verified_prefix.mp4" "$ROOT/sid_003_backtrack_suffix_ltx23.mp4" > "$ROOT/backtrack_concat.txt"
+            ffmpeg -hide_banner -loglevel error -y -f concat -safe 0 -i "$ROOT/backtrack_concat.txt" -an -c:v libx264 -preset veryfast -crf 18 "$ROOT/sid_003_backtrack_combined.mp4" || true
+            if [ -f "$ROOT/sid_003_backtrack_combined.mp4" ]; then
+              echo 'BACKTRACK_COMBINED_OK'
+              ffprobe -v error -show_entries format=duration,size -of json "$ROOT/sid_003_backtrack_combined.mp4"
+              sha256sum "$ROOT/sid_003_backtrack_combined.mp4"
+            fi
+          fi
+          cat "$ROOT/generation_outcomes.json" 2>/dev/null || true
+
+      - name: Upload real outcome evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-director-sid003-real-outcomes
+          path: ${{ env.ROOT }}
+          if-no-files-found: warn
+          retention-days: 7
