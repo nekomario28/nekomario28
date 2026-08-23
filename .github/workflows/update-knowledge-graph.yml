@@ -28,6 +28,7 @@ jobs:
       max_repos: "100"
       forks: true
       archived: true
+      contributed: true
 
   publish:
     needs: generate
@@ -54,6 +55,32 @@ jobs:
           grep -q 'data-galaxy-preset="systems"' project-map/galaxy.svg
           grep -q 'stroke-width="1.4"' project-map/galaxy.svg
           grep -q '"taxonomy"' project-map/graph.json
+          node <<'NODE'
+          const fs = require('node:fs');
+          const graph = JSON.parse(fs.readFileSync('project-map/graph.json', 'utf8'));
+          const owner = 'nekomario28';
+          const contributed = graph.nodes.filter((node) => node?.type === 'repository' && node?.relation === 'contributed');
+          const contributedIds = new Set(contributed.map((node) => node.id));
+          if (contributed.length < 1) throw new Error('canonical map has no Contributed repositories');
+          if (graph.contributedRepositoryCount !== contributed.length) throw new Error('Contributed count mismatch');
+          if (graph.externalContributions?.includedRepositories !== contributed.length) throw new Error('Contributed diagnostics mismatch');
+          for (const node of contributed) {
+            if (!node.repositoryOwner || !node.repositoryName || String(node.repositoryOwner).toLowerCase() === owner) throw new Error('invalid external repository identity');
+            if ('groupId' in node || 'groupLabel' in node) throw new Error('Contributed repository gained owned category membership');
+          }
+          if (graph.edges.some((edge) => ['ownership', 'membership'].includes(edge?.type) && contributedIds.has(edge?.target))) throw new Error('ownership path reaches Contributed repository');
+          if ((graph.semanticEdges || []).some((edge) => contributedIds.has(edge?.source) || contributedIds.has(edge?.target))) throw new Error('Contributed repository entered owned semantic graph');
+          const forbiddenKeys = new Set(['private', 'isPrivate', 'restricted', 'isRestricted']);
+          const visit = (value) => {
+            if (!value || typeof value !== 'object') return;
+            for (const [key, child] of Object.entries(value)) {
+              if (forbiddenKeys.has(key)) throw new Error(`forbidden privacy key serialized: ${key}`);
+              visit(child);
+            }
+          };
+          visit(graph);
+          console.log(`Canonical map validated: ${graph.repositoryCount} owned + ${contributed.length} Contributed`);
+          NODE
 
       - name: Commit only when the generated map changed
         shell: bash
