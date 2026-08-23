@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="260" viewBox="0 0 900 260" role="img" aria-labelledby="title desc">
+  <title id="title">nekomario28 spring dark profile concept</title>
+  <desc id="desc">Deep indigo spring profile banner with restrained cherry blossom branch and drifting petals.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070b14"/><stop offset="0.58" stop-color="#0b1324"/><stop offset="1" stop-color="#121a2d"/>
+    </linearGradient>
+    <radialGradient id="mist" cx="78%" cy="15%" r="75%"><stop offset="0" stop-color="#d9a6b0" stop-opacity=".10"/><stop offset="1" stop-color="#d9a6b0" stop-opacity="0"/></radialGradient>
+    <path id="petal" d="M0,-6 C5,-7 8,-2 6,3 C4,7 -2,9 -6,5 C-9,1 -6,-5 0,-6Z"/>
+    <g id="flower">
+      <ellipse cy="-7" rx="3.5" ry="6" fill="#ecd0d5"/>
+      <ellipse cy="-7" rx="3.5" ry="6" fill="#e4b8c1" transform="rotate(72)"/>
+      <ellipse cy="-7" rx="3.5" ry="6" fill="#ecd0d5" transform="rotate(144)"/>
+      <ellipse cy="-7" rx="3.5" ry="6" fill="#e4b8c1" transform="rotate(216)"/>
+      <ellipse cy="-7" rx="3.5" ry="6" fill="#ecd0d5" transform="rotate(288)"/>
+      <circle r="1.8" fill="#c89d62"/>
+    </g>
+  </defs>
+  <rect width="900" height="260" rx="18" fill="url(#bg)"/>
+  <rect width="900" height="260" rx="18" fill="url(#mist)"/>
+  <path d="M28 213 C184 187 306 226 457 205 C604 184 714 203 880 178" fill="none" stroke="#d9dde8" stroke-opacity=".06" stroke-width="20" stroke-linecap="round"/>
+  <path d="M36 220 C208 196 340 232 487 211" fill="none" stroke="#e5b8c2" stroke-opacity=".10" stroke-width="2"/>
+  <g transform="translate(70 92)">
+    <text x="0" y="55" font-family="Georgia, 'Times New Roman', serif" font-size="47" letter-spacing="1.8" fill="#f1eee8">nekomario<tspan fill="#d99eaa">28</tspan></text>
+    <rect x="2" y="78" width="54" height="2" rx="1" fill="#a32932"/><circle cx="67" cy="79" r="2" fill="#d2b16f"/>
+  </g>
+  <g fill="none" stroke-linecap="round">
+    <path d="M910 20 C850 31 803 55 755 87 C726 106 700 125 660 142" stroke="#251a20" stroke-width="8"/>
+    <path d="M822 53 C806 37 792 27 773 19" stroke="#251a20" stroke-width="4.5"/>
+    <path d="M774 78 C754 61 737 52 718 46" stroke="#251a20" stroke-width="4"/>
+    <path d="M722 108 C707 92 690 83 672 79" stroke="#251a20" stroke-width="3.5"/>
+  </g>
+  <g opacity=".96">
+    <use href="#flower" transform="translate(854 39) scale(1.0)"/><use href="#flower" transform="translate(818 54) scale(.78)"/>
+    <use href="#flower" transform="translate(780 33) scale(.62)"/><use href="#flower" transform="translate(767 80) scale(.95)"/>
+    <use href="#flower" transform="translate(731 57) scale(.68)"/><use href="#flower" transform="translate(710 101) scale(.82)"/>
+    <use href="#flower" transform="translate(680 84) scale(.60)"/>
+  </g>
+  <g fill="#e4b8c1" opacity=".72"><use href="#petal" transform="translate(716 132) rotate(24) scale(.65)"/><use href="#petal" transform="translate(641 170) rotate(-18) scale(.48)"/><use href="#petal" transform="translate(575 207) rotate(42) scale(.36)"/></g>
+  <rect x=".5" y=".5" width="899" height="259" rx="17.5" fill="none" stroke="#fff" stroke-opacity=".07"/>
+</svg>
