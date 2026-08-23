@@ -21,6 +21,7 @@ jobs:
   generate:
     permissions:
       contents: read
+    # Reviewed accepted-Contributed v1 release: c2a7bdb32dff933801161433e05962b2a9462deb
     uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@v1
     with:
       theme: dark
