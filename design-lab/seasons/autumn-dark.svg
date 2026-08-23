@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="260" viewBox="0 0 900 260" role="img" aria-labelledby="title desc">
+  <title id="title">nekomario28 autumn dark profile concept</title>
+  <desc id="desc">Near-black autumn profile banner with rust maple leaves and fine gold repaired-line accents.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#070707"/><stop offset=".58" stop-color="#0d0c0c"/><stop offset="1" stop-color="#18110f"/></linearGradient>
+    <radialGradient id="ember" cx="85%" cy="20%" r="70%"><stop offset="0" stop-color="#a84a2c" stop-opacity=".12"/><stop offset="1" stop-color="#a84a2c" stop-opacity="0"/></radialGradient>
+    <path id="leaf" d="M0,-15 L4,-6 L13,-10 L9,0 L18,3 L8,7 L10,16 L1,9 L-4,18 L-5,8 L-16,11 L-8,2 L-16,-3 L-6,-4 L-8,-14 L0,-7Z"/>
+  </defs>
+  <rect width="900" height="260" rx="18" fill="url(#bg)"/><rect width="900" height="260" rx="18" fill="url(#ember)"/>
+  <g fill="none" stroke="#bc9652" stroke-opacity=".22" stroke-linecap="round"><path d="M560 260 L615 194 L603 154 L662 105 L649 65 L702 0"/><path d="M615 194 L684 180 L719 139"/><path d="M649 65 L713 79 L763 38"/></g>
+  <g transform="translate(70 92)"><text x="0" y="55" font-family="Georgia, 'Times New Roman', serif" font-size="47" letter-spacing="1.8" fill="#eee9df">nekomario<tspan fill="#a84a2c">28</tspan></text><rect x="2" y="78" width="54" height="2" rx="1" fill="#8d2f20"/><circle cx="67" cy="79" r="2" fill="#b99a5a"/></g>
+  <g fill="none" stroke="#241815" stroke-linecap="round"><path d="M910 20 C850 32 807 53 765 82 C735 104 706 125 664 145" stroke-width="8"/><path d="M824 54 C804 38 787 30 766 23" stroke-width="4.5"/><path d="M779 81 C760 64 744 57 724 51" stroke-width="4"/></g>
+  <g fill="#9e3d26" stroke="#c36a3e" stroke-opacity=".28" stroke-width=".6"><use href="#leaf" transform="translate(856 39) rotate(18) scale(.82)"/><use href="#leaf" transform="translate(813 58) rotate(-12) scale(.62)"/><use href="#leaf" transform="translate(776 79) rotate(22) scale(.76)"/><use href="#leaf" transform="translate(733 59) rotate(-25) scale(.55)"/><use href="#leaf" transform="translate(701 111) rotate(8) scale(.48)"/><use href="#leaf" transform="translate(620 168) rotate(38) scale(.36)"/></g>
+  <g fill="#b05a32" opacity=".55"><use href="#leaf" transform="translate(544 206) rotate(-28) scale(.28)"/><use href="#leaf" transform="translate(482 232) rotate(32) scale(.22)"/></g>
+  <rect x=".5" y=".5" width="899" height="259" rx="17.5" fill="none" stroke="#d0aa63" stroke-opacity=".10"/>
+</svg>
