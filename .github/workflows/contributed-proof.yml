@@ -20,6 +20,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Generate real profile with Contributed via immutable Action F
+        id: generate
         uses: nekomario28/interactive-project-map@e5dafc86bec1cee6d913deaf040a2631599afb53
         with:
           github_token: ${{ github.token }}
@@ -33,6 +34,7 @@ jobs:
           output_dir: .tmp/contributed-proof
 
       - name: Validate C5 privacy and ownership invariants
+        id: validate
         shell: bash
         run: |
           set -euo pipefail
@@ -81,23 +83,91 @@ jobs:
           for (const edge of structuralToExternal) {
             if (edge.type !== 'contribution' || edge.source !== ownerId) throw new Error('ownership/membership path reaches external repository');
           }
-          if ((graph.edges || []).some((edge) => ['ownership', 'membership'].includes(edge?.type) && contributedIds.has(edge?.target))) throw new Error('owned structural edge reaches Contributed');
+          if (graph.edges.some((edge) => ['ownership', 'membership'].includes(edge?.type) && contributedIds.has(edge?.target))) throw new Error('owned structural edge reaches Contributed');
           if ((graph.semanticEdges || []).some((edge) => contributedIds.has(edge?.source) || contributedIds.has(edge?.target))) throw new Error('Contributed leaked into owned semantic graph');
 
-          console.log(JSON.stringify({
-            owner,
+          const receipt = {
+            status: 'success',
+            runId: process.env.GITHUB_RUN_ID,
+            actionSha: 'e5dafc86bec1cee6d913deaf040a2631599afb53',
+            graphGeneratedAt: graph.generatedAt || null,
+            contributionWindow: graph.externalContributions?.window || null,
             ownedRepositories: owned.length,
             contributedRepositories: contributed.length,
             contributionEdges: structuralToExternal.length,
             privacyKeysSerialized: 0,
             ownershipViolations: 0,
-          }));
+          };
+          fs.mkdirSync('.tmp', { recursive: true });
+          fs.writeFileSync('.tmp/proof-receipt.json', `${JSON.stringify(receipt, null, 2)}\n`);
+          console.log(JSON.stringify(receipt));
           NODE
 
-      - name: Upload proof artifact
+      - name: Finalize safe receipt payload
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .tmp
+          if [[ "${{ steps.generate.outcome }}" != "success" || "${{ steps.validate.outcome }}" != "success" ]]; then
+            cat > .tmp/proof-receipt.json <<EOF
+          {
+            "status": "failed",
+            "runId": "${GITHUB_RUN_ID}",
+            "actionSha": "e5dafc86bec1cee6d913deaf040a2631599afb53",
+            "generateOutcome": "${{ steps.generate.outcome }}",
+            "validateOutcome": "${{ steps.validate.outcome }}"
+          }
+          EOF
+          fi
+
+      - name: Upload safe receipt
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: contributed-proof-receipt
+          path: .tmp/proof-receipt.json
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Upload full proof artifact
+        if: success()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: contributed-production-proof
           path: .tmp/contributed-proof
           if-no-files-found: error
           retention-days: 1
+
+  record:
+    needs: proof
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: write
+    steps:
+      - name: Checkout profile repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Download safe receipt
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: contributed-proof-receipt
+          path: .tmp/receipt
+
+      - name: Record proof result without repository names
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .github/proofs
+          cp .tmp/receipt/proof-receipt.json .github/proofs/contributed-production-proof.json
+          git add -- .github/proofs/contributed-production-proof.json
+          if git diff --cached --quiet; then
+            echo "Proof receipt is already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "record Contributed production proof"
+          git push
