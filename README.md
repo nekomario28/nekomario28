@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/sakura-profile-hero.svg" width="900" alt="Animated sakura profile banner for nekomario28">
+  <img src="assets/sakura-profile-hero.svg" width="900" alt="桜を配した nekomario28 のプロフィールバナー">
 </p>
 
 <br>
@@ -16,28 +16,16 @@
 
 <br>
 
-<p align="center">
-  <strong>Robotics / ROS 2 / Linux / Docker</strong>
-</p>
-
-<br>
-
-<h2 align="center">Interactive Project Map</h2>
-
-<p align="center">
-  <sub>Public projects arranged as a living galaxy.</sub>
-</p>
+<h2 align="center">プロジェクト</h2>
 
 <p align="center">
   <a href="https://nekomario28.github.io/interactive-project-map/u/?username=nekomario28&style=galaxy-systems">
-    <img width="740" src="project-map/galaxy.svg" alt="Galaxy Systems map of nekomario28 public projects"><br>
-    <strong>Explore the live map ↗</strong>
-  </a><br>
-  <sub>Select projects · drag nodes · pan · zoom · switch styles</sub>
+    <img width="740" src="project-map/galaxy.svg" alt="nekomario28 の公開プロジェクトマップ">
+  </a>
 </p>
 
 <br>
 
 <p align="center">
-  <img width="760" src="assets/github-contributions-dark.svg" alt="GitHub contribution activity for the last 31 days">
+  <img width="760" src="assets/github-contributions-dark.svg" alt="直近31日間の GitHub コントリビューション">
 </p>
