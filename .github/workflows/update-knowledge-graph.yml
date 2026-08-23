@@ -54,6 +54,8 @@ jobs:
           test -s project-map/graph.json
           grep -q 'data-galaxy-preset="systems"' project-map/galaxy.svg
           grep -q 'stroke-width="1.4"' project-map/galaxy.svg
+          grep -q 'External contributions' project-map/galaxy.svg
+          grep -q '>Contributed</text>' project-map/galaxy.svg
           grep -q '"taxonomy"' project-map/graph.json
           node <<'NODE'
           const fs = require('node:fs');
@@ -61,12 +63,15 @@ jobs:
           const owner = 'nekomario28';
           const contributed = graph.nodes.filter((node) => node?.type === 'repository' && node?.relation === 'contributed');
           const contributedIds = new Set(contributed.map((node) => node.id));
-          if (contributed.length < 1) throw new Error('canonical map has no Contributed repositories');
+          if (contributed.length < 1) throw new Error('canonical map has no accepted Contributed repositories');
           if (graph.contributedRepositoryCount !== contributed.length) throw new Error('Contributed count mismatch');
           if (graph.externalContributions?.includedRepositories !== contributed.length) throw new Error('Contributed diagnostics mismatch');
           for (const node of contributed) {
             if (!node.repositoryOwner || !node.repositoryName || String(node.repositoryOwner).toLowerCase() === owner) throw new Error('invalid external repository identity');
             if ('groupId' in node || 'groupLabel' in node) throw new Error('Contributed repository gained owned category membership');
+            const commits = Number(node.contribution?.commits || 0);
+            const merged = Number(node.contribution?.mergedPullRequests || 0);
+            if (commits < 1 && merged < 1) throw new Error(`pending-only repository admitted as Contributed: ${node.label}`);
           }
           if (graph.edges.some((edge) => ['ownership', 'membership'].includes(edge?.type) && contributedIds.has(edge?.target))) throw new Error('ownership path reaches Contributed repository');
           if ((graph.semanticEdges || []).some((edge) => contributedIds.has(edge?.source) || contributedIds.has(edge?.target))) throw new Error('Contributed repository entered owned semantic graph');
@@ -79,7 +84,7 @@ jobs:
             }
           };
           visit(graph);
-          console.log(`Canonical map validated: ${graph.repositoryCount} owned + ${contributed.length} Contributed`);
+          console.log(`Canonical map validated: ${graph.repositoryCount} owned + ${contributed.length} accepted Contributed`);
           NODE
 
       - name: Commit only when the generated map changed
