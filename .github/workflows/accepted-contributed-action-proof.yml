@@ -1,0 +1,66 @@
+name: Accepted Contributed Action proof
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/accepted-contributed-action-proof.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout profile repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Generate with reviewed Action commit
+        uses: nekomario28/interactive-project-map@1557cfae847c96bf8810fe74bcfef7cb22aec7b3
+        with:
+          github_token: ${{ github.token }}
+          username: nekomario28
+          theme: dark
+          style: galaxy-systems
+          max_repos: "100"
+          forks: true
+          archived: true
+          contributed: true
+          output_dir: proof-map
+
+      - name: Prove accepted Contributed contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s proof-map/graph.json
+          test -s proof-map/galaxy.svg
+          grep -q 'External contributions' proof-map/galaxy.svg
+          grep -q '>Contributed</text>' proof-map/galaxy.svg
+          node <<'NODE'
+          const fs = require('node:fs');
+          const graph = JSON.parse(fs.readFileSync('proof-map/graph.json', 'utf8'));
+          const contributed = graph.nodes.filter((node) => node?.type === 'repository' && node?.relation === 'contributed');
+          if (contributed.length < 1) throw new Error('no accepted Contributed repository in real profile proof');
+          for (const node of contributed) {
+            const commits = Number(node.contribution?.commits || 0);
+            const merged = Number(node.contribution?.mergedPullRequests || 0);
+            if (commits < 1 && merged < 1) throw new Error(`pending-only repository admitted: ${node.label}`);
+            if ('groupId' in node || 'groupLabel' in node) throw new Error(`owned category membership leaked: ${node.label}`);
+          }
+          const targets = new Set(contributed.map((node) => node.id));
+          if (graph.edges.some((edge) => ['ownership', 'membership'].includes(edge?.type) && targets.has(edge?.target))) {
+            throw new Error('ownership/membership edge reaches Contributed repository');
+          }
+          console.log(JSON.stringify({
+            acceptedContributed: contributed.map((node) => ({
+              repository: node.label,
+              commits: node.contribution.commits,
+              pullRequests: node.contribution.pullRequests,
+              mergedPullRequests: node.contribution.mergedPullRequests,
+              contentCategory: node.classification?.categoryLabel || null,
+            })),
+            svgExternalProjection: true,
+          }, null, 2));
+          NODE
