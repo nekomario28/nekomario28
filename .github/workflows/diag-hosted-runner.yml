@@ -1,6 +1,10 @@
 name: Diag hosted runner availability
 
 on:
+  push:
+    branches: [diag/hosted-runner-availability]
+    paths:
+      - '.github/workflows/diag-hosted-runner.yml'
   pull_request:
     branches: [main]
     paths:
@@ -11,7 +15,7 @@ permissions:
 
 jobs:
   probe:
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
