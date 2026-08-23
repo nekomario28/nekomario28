@@ -1,8 +1,8 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-08-23T13:58:21.863Z",
-  "repositoryCount": 13,
-  "groupCount": 5,
+  "generatedAt": "2026-08-23T18:35:16.562Z",
+  "repositoryCount": 14,
+  "groupCount": 6,
   "nodes": [
     {
       "id": "user:nekomario28",
@@ -15,6 +15,77 @@
       "label": "Game Modding",
       "type": "group",
       "repositoryCount": 7
+    },
+    {
+      "id": "repository:FTBPublicClaims",
+      "label": "FTBPublicClaims",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/FTBPublicClaims",
+      "description": "",
+      "language": "Java",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-07-22T18:04:55Z",
+      "updatedAt": "2026-08-23T14:44:58Z",
+      "groupId": "game-modding",
+      "groupLabel": "Game Modding",
+      "classification": {
+        "categoryId": "minecraft",
+        "categoryLabel": "Minecraft Modding",
+        "secondaryTags": [],
+        "confidence": 0.817,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "minecraft",
+            "source": "readme",
+            "value": "forge",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "readme",
+            "value": "ftb-chunks",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "readme",
+            "value": "minecraft",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "game-modding",
+        "categoryLabel": "Game Modding",
+        "secondaryTags": [
+          "artifact:game-mod",
+          "platform:game",
+          "ecosystem:minecraft",
+          "ecosystem:ftb-chunks",
+          "platform:server"
+        ],
+        "confidence": 0.941,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "game-modding",
+            "source": "description",
+            "value": "P1 exact taxonomy category game-modding",
+            "weight": 0.941
+          }
+        ]
+      }
     },
     {
       "id": "repository:sable",
@@ -31,7 +102,7 @@
       "fork": true,
       "archived": false,
       "createdAt": "2026-07-27T06:28:06Z",
-      "updatedAt": "2026-08-21T16:18:28Z",
+      "updatedAt": "2026-08-23T14:35:03Z",
       "groupId": "game-modding",
       "groupLabel": "Game Modding",
       "classification": {
@@ -239,77 +310,6 @@
             "source": "description",
             "value": "P1 exact taxonomy category game-modding",
             "weight": 0.967
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:FTBPublicClaims",
-      "label": "FTBPublicClaims",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/FTBPublicClaims",
-      "description": "",
-      "language": "Java",
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2026-07-22T18:04:55Z",
-      "updatedAt": "2026-07-31T14:31:49Z",
-      "groupId": "game-modding",
-      "groupLabel": "Game Modding",
-      "classification": {
-        "categoryId": "minecraft",
-        "categoryLabel": "Minecraft Modding",
-        "secondaryTags": [],
-        "confidence": 0.817,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "minecraft",
-            "source": "readme",
-            "value": "forge",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "minecraft",
-            "source": "readme",
-            "value": "ftb-chunks",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "minecraft",
-            "source": "readme",
-            "value": "minecraft",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "api",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "game-modding",
-        "categoryLabel": "Game Modding",
-        "secondaryTags": [
-          "artifact:game-mod",
-          "platform:game",
-          "ecosystem:minecraft",
-          "ecosystem:ftb-chunks",
-          "platform:server"
-        ],
-        "confidence": 0.941,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "game-modding",
-            "source": "description",
-            "value": "P1 exact taxonomy category game-modding",
-            "weight": 0.941
           }
         ]
       }
@@ -846,6 +846,102 @@
       }
     },
     {
+      "id": "group:ai-ml",
+      "label": "AI & Machine Learning",
+      "type": "group",
+      "repositoryCount": 1
+    },
+    {
+      "id": "repository:FreeToken",
+      "label": "FreeToken",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/FreeToken",
+      "description": "",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-08-23T17:29:26Z",
+      "updatedAt": "2026-08-23T17:29:26Z",
+      "groupId": "ai-ml",
+      "groupLabel": "AI & Machine Learning",
+      "classification": {
+        "categoryId": "ai-ml",
+        "categoryLabel": "AI / Machine Learning",
+        "secondaryTags": [
+          "torch",
+          "transformers"
+        ],
+        "confidence": 0.75,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "dependency",
+            "value": "torch",
+            "weight": 0.9
+          },
+          {
+            "categoryId": "ai-ml",
+            "source": "dependency",
+            "value": "transformers",
+            "weight": 0.9
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "dependency",
+            "value": "fastapi",
+            "weight": 0.9
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "dependency",
+            "value": "next",
+            "weight": 0.9
+          },
+          {
+            "categoryId": "ai-ml",
+            "source": "readme",
+            "value": "ai",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "hardware",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "ai-ml",
+        "categoryLabel": "AI & Machine Learning",
+        "secondaryTags": [
+          "artifact:application",
+          "platform:desktop",
+          "platform:cli"
+        ],
+        "confidence": 0.948,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "description",
+            "value": "P1 exact taxonomy category ai-ml",
+            "weight": 0.948
+          }
+        ]
+      }
+    },
+    {
       "id": "group:game-development",
       "label": "Game Development",
       "type": "group",
@@ -1020,7 +1116,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-08-23T13:43:59Z",
+      "updatedAt": "2026-08-23T18:33:04Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -1099,308 +1195,6 @@
         "method": "deterministic",
         "evidence": []
       }
-    },
-    {
-      "id": "repository:gazebosim/gz-sim",
-      "label": "gazebosim/gz-sim",
-      "type": "repository",
-      "relation": "contributed",
-      "repositoryOwner": "gazebosim",
-      "repositoryName": "gz-sim",
-      "url": "https://github.com/gazebosim/gz-sim",
-      "description": "Open source robotics simulator. The latest version of Gazebo.",
-      "language": "C++",
-      "topics": [
-        "ignition-gazebo",
-        "ignition-robotics",
-        "graphical-interface",
-        "ignition-libraries",
-        "robotics",
-        "simulation",
-        "robotics-simulation",
-        "cpp",
-        "gazebo",
-        "physics",
-        "rendering",
-        "hacktoberfest",
-        "robot-simulator",
-        "robot-simulation",
-        "simulated-robots",
-        "ros",
-        "ros2",
-        "gazebosim"
-      ],
-      "stars": 1457,
-      "forks": 457,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2020-04-15T09:17:50Z",
-      "updatedAt": "2026-08-23T10:58:19Z",
-      "contribution": {
-        "commits": 0,
-        "pullRequests": 1,
-        "mergedPullRequests": 0,
-        "commitsTruncated": false,
-        "pullRequestsTruncated": false
-      },
-      "classification": {
-        "categoryId": "robotics",
-        "categoryLabel": "Robotics / ROS 2",
-        "secondaryTags": [
-          "robotics",
-          "gazebo",
-          "ros",
-          "ros2"
-        ],
-        "confidence": 1,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "robotics",
-            "source": "topic",
-            "value": "gazebo",
-            "weight": 1
-          },
-          {
-            "categoryId": "robotics",
-            "source": "topic",
-            "value": "robotics",
-            "weight": 1
-          },
-          {
-            "categoryId": "robotics",
-            "source": "topic",
-            "value": "ros",
-            "weight": 1
-          },
-          {
-            "categoryId": "robotics",
-            "source": "topic",
-            "value": "ros2",
-            "weight": 1
-          },
-          {
-            "categoryId": "robotics",
-            "source": "description",
-            "value": "gazebo",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "robotics",
-            "source": "description",
-            "value": "robotics",
-            "weight": 0.7
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:gazebosim/ros_gz",
-      "label": "gazebosim/ros_gz",
-      "type": "repository",
-      "relation": "contributed",
-      "repositoryOwner": "gazebosim",
-      "repositoryName": "ros_gz",
-      "url": "https://github.com/gazebosim/ros_gz",
-      "description": "Integration between ROS (1 and 2) and Gazebo simulation",
-      "language": "C++",
-      "topics": [
-        "ros",
-        "ignition",
-        "ignition-transport",
-        "ignition-gazebo",
-        "ros2",
-        "robotics",
-        "simulation",
-        "cpp",
-        "transport",
-        "pubsub",
-        "robotics-simulation",
-        "hacktoberfest",
-        "gazebo",
-        "gazebosim"
-      ],
-      "stars": 533,
-      "forks": 229,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2018-08-01T22:42:46Z",
-      "updatedAt": "2026-08-22T11:08:44Z",
-      "contribution": {
-        "commits": 0,
-        "pullRequests": 1,
-        "mergedPullRequests": 0,
-        "commitsTruncated": false,
-        "pullRequestsTruncated": false
-      },
-      "classification": {
-        "categoryId": "robotics",
-        "categoryLabel": "Robotics / ROS 2",
-        "secondaryTags": [
-          "ros",
-          "ros2",
-          "robotics",
-          "gazebo"
-        ],
-        "confidence": 1,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "robotics",
-            "source": "topic",
-            "value": "gazebo",
-            "weight": 1
-          },
-          {
-            "categoryId": "robotics",
-            "source": "topic",
-            "value": "robotics",
-            "weight": 1
-          },
-          {
-            "categoryId": "robotics",
-            "source": "topic",
-            "value": "ros",
-            "weight": 1
-          },
-          {
-            "categoryId": "robotics",
-            "source": "topic",
-            "value": "ros2",
-            "weight": 1
-          },
-          {
-            "categoryId": "robotics",
-            "source": "description",
-            "value": "gazebo",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "robotics",
-            "source": "description",
-            "value": "ros",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "robotics",
-            "source": "name",
-            "value": "ros",
-            "weight": 0.5
-          },
-          {
-            "categoryId": "robotics",
-            "source": "name",
-            "value": "ros-gz",
-            "weight": 0.5
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:skyadri-mc/buyclaimchunks",
-      "label": "SkyAdri-mc/BuyClaimChunks",
-      "type": "repository",
-      "relation": "contributed",
-      "repositoryOwner": "SkyAdri-mc",
-      "repositoryName": "BuyClaimChunks",
-      "url": "https://github.com/SkyAdri-mc/BuyClaimChunks",
-      "description": "",
-      "language": "Java",
-      "topics": [],
-      "stars": 0,
-      "forks": 1,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2026-01-11T07:05:07Z",
-      "updatedAt": "2026-01-11T07:07:45Z",
-      "contribution": {
-        "commits": 0,
-        "pullRequests": 1,
-        "mergedPullRequests": 0,
-        "commitsTruncated": false,
-        "pullRequestsTruncated": false
-      },
-      "classification": {
-        "categoryId": "uncategorized",
-        "categoryLabel": "Uncategorized",
-        "secondaryTags": [],
-        "confidence": 0,
-        "method": "deterministic",
-        "evidence": []
-      }
-    },
-    {
-      "id": "repository:talhanation/recruits",
-      "label": "talhanation/recruits",
-      "type": "repository",
-      "relation": "contributed",
-      "repositoryOwner": "talhanation",
-      "repositoryName": "recruits",
-      "url": "https://github.com/talhanation/recruits",
-      "description": "recruiting villagers",
-      "language": "Java",
-      "topics": [],
-      "stars": 33,
-      "forks": 39,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2021-07-20T13:23:18Z",
-      "updatedAt": "2026-08-21T00:48:08Z",
-      "contribution": {
-        "commits": 0,
-        "pullRequests": 1,
-        "mergedPullRequests": 0,
-        "commitsTruncated": false,
-        "pullRequestsTruncated": false
-      },
-      "classification": {
-        "categoryId": "uncategorized",
-        "categoryLabel": "Uncategorized",
-        "secondaryTags": [],
-        "confidence": 0,
-        "method": "deterministic",
-        "evidence": []
-      }
-    },
-    {
-      "id": "repository:talhanation/workers",
-      "label": "talhanation/workers",
-      "type": "repository",
-      "relation": "contributed",
-      "repositoryOwner": "talhanation",
-      "repositoryName": "workers",
-      "url": "https://github.com/talhanation/workers",
-      "description": "Mod for Minecraft that adds Villager Workers",
-      "language": "Java",
-      "topics": [],
-      "stars": 11,
-      "forks": 13,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2021-09-08T18:38:27Z",
-      "updatedAt": "2026-07-04T07:17:13Z",
-      "contribution": {
-        "commits": 0,
-        "pullRequests": 1,
-        "mergedPullRequests": 0,
-        "commitsTruncated": false,
-        "pullRequestsTruncated": false
-      },
-      "classification": {
-        "categoryId": "minecraft",
-        "categoryLabel": "Minecraft Modding",
-        "secondaryTags": [],
-        "confidence": 0.564,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "minecraft",
-            "source": "description",
-            "value": "minecraft",
-            "weight": 0.7
-          }
-        ]
-      }
     }
   ],
   "edges": [
@@ -1408,6 +1202,11 @@
       "source": "user:nekomario28",
       "target": "group:game-modding",
       "type": "ownership"
+    },
+    {
+      "source": "group:game-modding",
+      "target": "repository:FTBPublicClaims",
+      "type": "membership"
     },
     {
       "source": "group:game-modding",
@@ -1422,11 +1221,6 @@
     {
       "source": "group:game-modding",
       "target": "repository:antifullbright",
-      "type": "membership"
-    },
-    {
-      "source": "group:game-modding",
-      "target": "repository:FTBPublicClaims",
       "type": "membership"
     },
     {
@@ -1466,6 +1260,16 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "group:ai-ml",
+      "type": "ownership"
+    },
+    {
+      "source": "group:ai-ml",
+      "target": "repository:FreeToken",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "group:game-development",
       "type": "ownership"
     },
@@ -1498,37 +1302,12 @@
       "source": "user:nekomario28",
       "target": "repository:c0c25034/projexd_4",
       "type": "contribution"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:gazebosim/gz-sim",
-      "type": "contribution"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:gazebosim/ros_gz",
-      "type": "contribution"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:skyadri-mc/buyclaimchunks",
-      "type": "contribution"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:talhanation/recruits",
-      "type": "contribution"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:talhanation/workers",
-      "type": "contribution"
     }
   ],
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "40b97a3c131eb037fa7ba9dceb50855093e7246f9906c7865ace68579d1e6aed",
+    "corpusFingerprint": "60461d04a144538deb2de7f0c5d51f29f2a9b90b23a6345663fcf32a9f6f3e88",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -1583,7 +1362,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "4b38ab5204b7e02485d750c973ffb1255ab9d743197c60fdf0da1fefd55a2b47"
+        "contentHash": "1d0f61e5f775289fd680e8a722581b09c0a3e74d673bd803f87ff6e6c8325d40"
       },
       {
         "repoId": 1340281422,
@@ -1594,6 +1373,11 @@
         "repoId": 1340711269,
         "name": "gz-sim",
         "contentHash": "74e80f2b3787f0ee660d5880167e5c6039bbdafe6095aedfbe9318119df0c378"
+      },
+      {
+        "repoId": 1344034354,
+        "name": "FreeToken",
+        "contentHash": "979d20855b9cb0873018e5a760b1391bbaaf7ebd6a791f1efa087dbf04b07fe6"
       }
     ],
     "categories": [
@@ -1827,16 +1611,16 @@
     }
   },
   "taxonomyAssignmentVersion": 1,
-  "contributedRepositoryCount": 6,
+  "contributedRepositoryCount": 1,
   "externalContributions": {
     "window": {
-      "from": "2025-08-23T13:58:22.822Z",
-      "to": "2026-08-23T13:58:22.822Z"
+      "from": "2025-08-23T18:35:17.867Z",
+      "to": "2026-08-23T18:35:17.867Z"
     },
     "cap": 7,
     "candidateRepositories": 6,
-    "includedRepositories": 6,
-    "omittedRepositories": 0,
+    "includedRepositories": 1,
+    "omittedRepositories": 5,
     "truncatedRepositories": 0
   }
 }
