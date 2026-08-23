@@ -31,16 +31,9 @@
 
   <style>
     .name {
-      font: 600 42px -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
-            "Yu Gothic", "Noto Sans JP", "Segoe UI", sans-serif;
+      font: 600 42px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       letter-spacing: 3px;
       fill: #f7f3ea;
-    }
-    .stack {
-      font: 500 15px -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
-            "Yu Gothic", "Noto Sans JP", "Segoe UI", sans-serif;
-      letter-spacing: 1.5px;
-      fill: #d9d6cf;
     }
     .petal { fill: #f5c7d1; stroke: #f9e4e8; stroke-width: .45; }
     .petal2 { fill: #efb8c4; stroke: #f9e4e8; stroke-width: .45; }
@@ -57,7 +50,6 @@
 
   <g transform="translate(84 102)">
     <text class="name">nekomario28</text>
-    <text class="stack" y="44">ロボティクス ・ ROS 2 ・ Linux ・ Docker</text>
   </g>
 
   <g fill="none" stroke-linecap="round">
