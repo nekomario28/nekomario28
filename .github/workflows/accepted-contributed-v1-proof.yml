@@ -1,0 +1,65 @@
+name: Accepted Contributed v1 proof
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/accepted-contributed-v1-proof.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    permissions:
+      contents: read
+    uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@v1
+    with:
+      theme: dark
+      style: galaxy-systems
+      max_repos: "100"
+      forks: true
+      archived: true
+      contributed: true
+
+  prove:
+    needs: generate
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - name: Download generated map
+        uses: actions/download-artifact@3e5f45b2cfb917205825da76410c181273ba90b1 # v8.0.1
+        with:
+          name: project-map-generated
+          path: proof-map
+
+      - name: Prove accepted Contributed v1 contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s proof-map/graph.json
+          test -s proof-map/galaxy.svg
+          grep -q 'External contributions' proof-map/galaxy.svg
+          grep -q '>Contributed</text>' proof-map/galaxy.svg
+          node <<'NODE'
+          const fs = require('node:fs');
+          const graph = JSON.parse(fs.readFileSync('proof-map/graph.json', 'utf8'));
+          const contributed = graph.nodes.filter((node) => node?.type === 'repository' && node?.relation === 'contributed');
+          if (contributed.length !== 1) throw new Error(`expected exactly one accepted Contributed repository, got ${contributed.length}`);
+          const node = contributed[0];
+          if (node.label !== 'c0c25034/ProjExD_4') throw new Error(`unexpected accepted Contributed repository: ${node.label}`);
+          if (Number(node.contribution?.mergedPullRequests || 0) < 1 && Number(node.contribution?.commits || 0) < 1) throw new Error('accepted Contributed lacks merged/direct-commit evidence');
+          if ('groupId' in node || 'groupLabel' in node) throw new Error('external repository gained owned category membership');
+          const ids = new Set(contributed.map((item) => item.id));
+          if (graph.edges.some((edge) => ['ownership', 'membership'].includes(edge?.type) && ids.has(edge?.target))) throw new Error('ownership path reaches Contributed repository');
+          console.log(JSON.stringify({
+            repositoryCount: graph.repositoryCount,
+            contributedRepositoryCount: contributed.length,
+            accepted: node.label,
+            mergedPullRequests: node.contribution?.mergedPullRequests || 0,
+            commits: node.contribution?.commits || 0,
+            contentCategory: node.classification?.categoryLabel || null,
+            svgExternalProjection: true,
+          }, null, 2));
+          NODE
