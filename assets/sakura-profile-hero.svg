@@ -1,103 +1,139 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="260" viewBox="0 0 900 260" role="img" aria-labelledby="title desc">
-  <title id="title">nekomario28 animated sakura profile banner</title>
-  <desc id="desc">A calm animated banner with drifting cherry blossom petals and the text nekomario28, Robotics, ROS 2, Linux, and Docker.</desc>
+  <title id="title">nekomario28 桜のプロフィールバナー</title>
+  <desc id="desc">濃藍を地に、右上の桜枝と静かに舞う花びらを配したプロフィールバナー。</desc>
 
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0d1117"/>
-      <stop offset="0.52" stop-color="#151824"/>
-      <stop offset="1" stop-color="#211724"/>
+    <linearGradient id="ai" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1d3a"/>
+      <stop offset="0.58" stop-color="#0f2350"/>
+      <stop offset="1" stop-color="#172a46"/>
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-      <stop offset="0" stop-color="#ffb7c5" stop-opacity=".22"/>
-      <stop offset="1" stop-color="#ffb7c5" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="10"/>
+
+    <filter id="washi" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="28"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 .045"/>
+      </feComponentTransfer>
     </filter>
-    <path id="petal" d="M0,-8 C7,-8 10,-1 7,5 C4,10 -3,12 -7,7 C-12,1 -8,-6 0,-8 Z"/>
+
+    <path id="petal" d="M0,-7 C6,-8 9,-2 7,3 C5,8 -2,10 -6,6 C-10,2 -7,-5 0,-7 Z"/>
+
+    <g id="blossom">
+      <ellipse cx="0" cy="-8" rx="4.2" ry="7.4" fill="#f8d9df" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-8" rx="4.2" ry="7.4" fill="#f3c2cc" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-8" rx="4.2" ry="7.4" fill="#f8d9df" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-8" rx="4.2" ry="7.4" fill="#f3c2cc" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-8" rx="4.2" ry="7.4" fill="#f8d9df" transform="rotate(288)"/>
+      <circle r="2.2" fill="#d5a33b"/>
+    </g>
   </defs>
 
   <style>
-    .label { font: 600 15px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 2.6px; fill: #f4c2cc; }
-    .name { font: 700 42px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 5px; fill: #f7f7fb; }
-    .tag { font: 500 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #c9d1d9; }
-    .petal { fill: #ffb7c5; stroke: #ffe2e8; stroke-width: .65; }
-    .petal.alt { fill: #f39aac; }
-    .petal.light { fill: #ffd6df; }
+    .name {
+      font: 600 42px -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+            "Yu Gothic", "Noto Sans JP", "Segoe UI", sans-serif;
+      letter-spacing: 3px;
+      fill: #f7f3ea;
+    }
+    .stack {
+      font: 500 15px -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+            "Yu Gothic", "Noto Sans JP", "Segoe UI", sans-serif;
+      letter-spacing: 1.5px;
+      fill: #d9d6cf;
+    }
+    .petal { fill: #f5c7d1; stroke: #f9e4e8; stroke-width: .45; }
+    .petal2 { fill: #efb8c4; stroke: #f9e4e8; stroke-width: .45; }
     @media (prefers-reduced-motion: reduce) {
       .moving { display: none; }
     }
   </style>
 
-  <rect width="900" height="260" rx="24" fill="url(#bg)"/>
-  <ellipse cx="690" cy="58" rx="180" ry="115" fill="url(#glow)" filter="url(#soft)"/>
-  <ellipse cx="185" cy="236" rx="190" ry="100" fill="url(#glow)" opacity=".55" filter="url(#soft)"/>
+  <rect width="900" height="260" rx="18" fill="url(#ai)"/>
+  <rect width="900" height="260" rx="18" filter="url(#washi)" opacity=".8"/>
+  <rect x=".5" y=".5" width="899" height="259" rx="17.5" fill="none" stroke="#f7f3ea" stroke-opacity=".08"/>
 
-  <g opacity=".2">
-    <path d="M54 198 C230 134 354 226 512 169 S759 101 858 132" fill="none" stroke="#ffb7c5" stroke-width="1"/>
-    <path d="M88 218 C268 154 379 239 536 186 S757 128 835 151" fill="none" stroke="#ffb7c5" stroke-width=".8"/>
+  <rect x="58" y="62" width="3" height="128" rx="1.5" fill="#b7282e"/>
+
+  <g transform="translate(84 102)">
+    <text class="name">nekomario28</text>
+    <text class="stack" y="44">ロボティクス ・ ROS 2 ・ Linux ・ Docker</text>
   </g>
 
-  <g transform="translate(70 84)">
-    <text class="label">BUILD · LEARN · ITERATE</text>
-    <text class="name" y="58">NEKOMARIO28</text>
-    <text class="tag" y="94">Robotics · ROS 2 · Linux · Docker</text>
+  <g fill="none" stroke-linecap="round">
+    <path d="M908 30 C846 40 806 62 760 87 C729 104 704 119 671 133"
+          stroke="#2b1b1d" stroke-width="9"/>
+    <path d="M823 57 C807 39 790 27 771 18" stroke="#2b1b1d" stroke-width="5"/>
+    <path d="M777 77 C758 61 744 50 725 43" stroke="#2b1b1d" stroke-width="4.5"/>
+    <path d="M741 97 C730 81 718 71 703 65" stroke="#2b1b1d" stroke-width="4"/>
+    <path d="M700 117 C690 103 678 94 664 89" stroke="#2b1b1d" stroke-width="3.5"/>
   </g>
 
-  <g transform="translate(70 210)">
-    <circle cx="4" cy="-4" r="4" fill="#3fb950"/>
-    <text x="18" class="tag" font-size="14">building systems that move, learn, and stay reproducible</text>
+  <g opacity=".96">
+    <use href="#blossom" transform="translate(858 39) scale(1.05)"/>
+    <use href="#blossom" transform="translate(819 55) scale(.8)"/>
+    <use href="#blossom" transform="translate(790 32) scale(.72)"/>
+    <use href="#blossom" transform="translate(774 78) scale(1.12)"/>
+    <use href="#blossom" transform="translate(742 57) scale(.75)"/>
+    <use href="#blossom" transform="translate(729 97) scale(.92)"/>
+    <use href="#blossom" transform="translate(704 74) scale(.64)"/>
+    <use href="#blossom" transform="translate(690 118) scale(.86)"/>
+    <use href="#blossom" transform="translate(669 96) scale(.6)"/>
+    <circle cx="839" cy="47" r="3.2" fill="#d4869b"/>
+    <circle cx="753" cy="81" r="2.8" fill="#d4869b"/>
+    <circle cx="716" cy="106" r="2.6" fill="#d4869b"/>
   </g>
 
   <g class="moving">
-    <g class="petal">
-      <use href="#petal"/>
-      <animateTransform attributeName="transform" type="translate" values="85 -25;135 285" dur="8.2s" repeatCount="indefinite"/>
-      <animateTransform attributeName="transform" additive="sum" type="rotate" values="0;270;540" dur="5.1s" repeatCount="indefinite"/>
+    <g transform="translate(826 82)">
+      <g class="petal">
+        <use href="#petal" transform="scale(.68)"/>
+        <animateTransform attributeName="transform" type="translate"
+          values="0 0;-78 196" dur="9.8s" begin="-2.1s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" additive="sum" type="rotate"
+          values="0;210;430" dur="6.1s" repeatCount="indefinite"/>
+      </g>
     </g>
-    <g class="petal alt" opacity=".9">
-      <use href="#petal" transform="scale(.78)"/>
-      <animateTransform attributeName="transform" type="translate" values="210 -45;145 290" dur="10.7s" begin="-2.6s" repeatCount="indefinite"/>
-      <animateTransform attributeName="transform" additive="sum" type="rotate" values="20;240;500" dur="6.4s" repeatCount="indefinite"/>
+    <g transform="translate(778 104)">
+      <g class="petal2">
+        <use href="#petal" transform="scale(.54)"/>
+        <animateTransform attributeName="transform" type="translate"
+          values="0 0;-118 170" dur="11.6s" begin="-6.4s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" additive="sum" type="rotate"
+          values="10;-190;-410" dur="7.4s" repeatCount="indefinite"/>
+      </g>
     </g>
-    <g class="petal light" opacity=".82">
-      <use href="#petal" transform="scale(.62)"/>
-      <animateTransform attributeName="transform" type="translate" values="332 -30;385 282" dur="9.4s" begin="-5.1s" repeatCount="indefinite"/>
-      <animateTransform attributeName="transform" additive="sum" type="rotate" values="0;-250;-500" dur="7.1s" repeatCount="indefinite"/>
+    <g transform="translate(718 132)">
+      <g class="petal">
+        <use href="#petal" transform="scale(.62)"/>
+        <animateTransform attributeName="transform" type="translate"
+          values="0 0;-130 135" dur="8.7s" begin="-4.8s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" additive="sum" type="rotate"
+          values="0;240;480" dur="5.8s" repeatCount="indefinite"/>
+      </g>
     </g>
-    <g class="petal" opacity=".74">
-      <use href="#petal" transform="scale(.9)"/>
-      <animateTransform attributeName="transform" type="translate" values="460 -55;425 286" dur="11.8s" begin="-7.8s" repeatCount="indefinite"/>
-      <animateTransform attributeName="transform" additive="sum" type="rotate" values="35;310;620" dur="6s" repeatCount="indefinite"/>
+    <g transform="translate(865 61)">
+      <g class="petal2" opacity=".82">
+        <use href="#petal" transform="scale(.46)"/>
+        <animateTransform attributeName="transform" type="translate"
+          values="0 0;-44 215" dur="13.2s" begin="-8.6s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" additive="sum" type="rotate"
+          values="20;-240;-500" dur="8.2s" repeatCount="indefinite"/>
+      </g>
     </g>
-    <g class="petal alt" opacity=".88">
-      <use href="#petal" transform="scale(.68)"/>
-      <animateTransform attributeName="transform" type="translate" values="588 -20;640 290" dur="8.9s" begin="-1.4s" repeatCount="indefinite"/>
-      <animateTransform attributeName="transform" additive="sum" type="rotate" values="10;-300;-610" dur="5.8s" repeatCount="indefinite"/>
-    </g>
-    <g class="petal light" opacity=".8">
-      <use href="#petal" transform="scale(.82)"/>
-      <animateTransform attributeName="transform" type="translate" values="710 -40;665 286" dur="10.3s" begin="-4.2s" repeatCount="indefinite"/>
-      <animateTransform attributeName="transform" additive="sum" type="rotate" values="0;250;520" dur="6.9s" repeatCount="indefinite"/>
-    </g>
-    <g class="petal" opacity=".72">
-      <use href="#petal" transform="scale(.58)"/>
-      <animateTransform attributeName="transform" type="translate" values="820 -30;855 278" dur="7.7s" begin="-6.1s" repeatCount="indefinite"/>
-      <animateTransform attributeName="transform" additive="sum" type="rotate" values="15;-260;-540" dur="4.9s" repeatCount="indefinite"/>
-    </g>
-    <g class="petal alt" opacity=".58">
-      <use href="#petal" transform="scale(.48)"/>
-      <animateTransform attributeName="transform" type="translate" values="770 -80;720 275" dur="13.6s" begin="-9.5s" repeatCount="indefinite"/>
-      <animateTransform attributeName="transform" additive="sum" type="rotate" values="0;360;720" dur="8.3s" repeatCount="indefinite"/>
+    <g transform="translate(752 84)">
+      <g class="petal" opacity=".75">
+        <use href="#petal" transform="scale(.42)"/>
+        <animateTransform attributeName="transform" type="translate"
+          values="0 0;-185 180" dur="14s" begin="-10.5s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" additive="sum" type="rotate"
+          values="0;180;370" dur="9s" repeatCount="indefinite"/>
+      </g>
     </g>
   </g>
 
-  <g opacity=".9">
-    <use href="#petal" class="petal light" transform="translate(812 63) rotate(18) scale(.65)"/>
-    <use href="#petal" class="petal alt" transform="translate(780 98) rotate(-24) scale(.42)"/>
-    <use href="#petal" class="petal" transform="translate(842 119) rotate(45) scale(.52)"/>
+  <g opacity=".78">
+    <use href="#petal" class="petal" transform="translate(626 171) rotate(32) scale(.43)"/>
+    <use href="#petal" class="petal2" transform="translate(590 211) rotate(-18) scale(.34)"/>
   </g>
-
-  <rect x=".5" y=".5" width="899" height="259" rx="23.5" fill="none" stroke="#ffb7c5" stroke-opacity=".16"/>
 </svg>
