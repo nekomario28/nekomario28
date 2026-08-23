@@ -1,0 +1,103 @@
+name: Contributed production proof
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/contributed-proof.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout profile repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Generate real profile with Contributed via immutable Action F
+        uses: nekomario28/interactive-project-map@e5dafc86bec1cee6d913deaf040a2631599afb53
+        with:
+          github_token: ${{ github.token }}
+          username: nekomario28
+          theme: dark
+          style: galaxy-systems
+          max_repos: "100"
+          forks: true
+          archived: true
+          contributed: true
+          output_dir: .tmp/contributed-proof
+
+      - name: Validate C5 privacy and ownership invariants
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = '.tmp/contributed-proof/graph.json';
+          const graph = JSON.parse(fs.readFileSync(path, 'utf8'));
+          const owner = 'nekomario28';
+          const ownerId = `user:${owner}`;
+          if (String(graph.owner || '').toLowerCase() !== owner) throw new Error('owner mismatch');
+          if (!Array.isArray(graph.nodes) || !Array.isArray(graph.edges)) throw new Error('missing graph arrays');
+          const repos = graph.nodes.filter((node) => node?.type === 'repository');
+          const contributed = repos.filter((node) => node?.relation === 'contributed');
+          const contributedIds = new Set(contributed.map((node) => node.id));
+          const owned = repos.filter((node) => node?.relation !== 'contributed');
+          if (contributed.length < 1) throw new Error('real profile produced no Contributed repositories');
+          if (graph.repositoryCount !== owned.length) throw new Error('owned repositoryCount was polluted by Contributed');
+          if (graph.contributedRepositoryCount !== contributed.length) throw new Error('contributedRepositoryCount mismatch');
+          if (graph.externalContributions?.includedRepositories !== contributed.length) throw new Error('external contribution diagnostics mismatch');
+
+          const forbiddenKeys = new Set(['private', 'isPrivate', 'restricted', 'isRestricted']);
+          function inspectKeys(value) {
+            if (!value || typeof value !== 'object') return;
+            for (const [key, child] of Object.entries(value)) {
+              if (forbiddenKeys.has(key)) throw new Error(`forbidden privacy key serialized: ${key}`);
+              inspectKeys(child);
+            }
+          }
+          inspectKeys(graph);
+
+          for (const node of contributed) {
+            const externalOwner = String(node.repositoryOwner || '');
+            const name = String(node.repositoryName || '');
+            if (!externalOwner || !name || externalOwner.toLowerCase() === owner) throw new Error('invalid external owner identity');
+            if (String(node.label || '').toLowerCase() !== `${externalOwner}/${name}`.toLowerCase()) throw new Error('external owner/repo label mismatch');
+            const url = new URL(node.url);
+            const parts = url.pathname.split('/').filter(Boolean).map(decodeURIComponent);
+            if (url.protocol !== 'https:' || url.hostname !== 'github.com' || parts.length !== 2 || parts[0].toLowerCase() !== externalOwner.toLowerCase() || parts[1].toLowerCase() !== name.toLowerCase()) throw new Error('non-canonical external repository URL');
+            if ('groupId' in node || 'groupLabel' in node) throw new Error('Contributed node gained owned category membership');
+            const c = node.contribution;
+            if (!c || !Number.isInteger(c.commits) || !Number.isInteger(c.pullRequests) || !Number.isInteger(c.mergedPullRequests) || c.mergedPullRequests > c.pullRequests || c.commits + c.pullRequests < 1) throw new Error('invalid contribution summary');
+          }
+
+          const structuralToExternal = graph.edges.filter((edge) => contributedIds.has(edge?.target));
+          if (structuralToExternal.length !== contributed.length) throw new Error('Contributed edge cardinality mismatch');
+          for (const edge of structuralToExternal) {
+            if (edge.type !== 'contribution' || edge.source !== ownerId) throw new Error('ownership/membership path reaches external repository');
+          }
+          if ((graph.edges || []).some((edge) => ['ownership', 'membership'].includes(edge?.type) && contributedIds.has(edge?.target))) throw new Error('owned structural edge reaches Contributed');
+          if ((graph.semanticEdges || []).some((edge) => contributedIds.has(edge?.source) || contributedIds.has(edge?.target))) throw new Error('Contributed leaked into owned semantic graph');
+
+          console.log(JSON.stringify({
+            owner,
+            ownedRepositories: owned.length,
+            contributedRepositories: contributed.length,
+            contributionEdges: structuralToExternal.length,
+            privacyKeysSerialized: 0,
+            ownershipViolations: 0,
+          }));
+          NODE
+
+      - name: Upload proof artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: contributed-production-proof
+          path: .tmp/contributed-proof
+          if-no-files-found: error
+          retention-days: 1
