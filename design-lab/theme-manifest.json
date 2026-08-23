@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "base_theme": "dark",
+  "surface": "github-profile-readme",
+  "strategy": "seasonal visual envelope",
+  "seasons": {
+    "spring": {
+      "months": [3, 4, 5],
+      "hero": "seasons/spring-dark.svg",
+      "accent": "#d99eaa",
+      "motion_candidate": "sparse-petals"
+    },
+    "summer": {
+      "months": [6, 7, 8],
+      "hero": "seasons/summer-dark.svg",
+      "accent": "#86aa94",
+      "motion_candidate": "rain-and-water"
+    },
+    "autumn": {
+      "months": [9, 10, 11],
+      "hero": "seasons/autumn-dark.svg",
+      "accent": "#a84a2c",
+      "motion_candidate": "sparse-leaves"
+    },
+    "winter": {
+      "months": [12, 1, 2],
+      "hero": "seasons/winter-dark.svg",
+      "accent": "#9facbf",
+      "motion_candidate": "sparse-snow"
+    }
+  },
+  "shared": {
+    "divider": "envelope/divider-dark.svg",
+    "footer": "envelope/footer-dark.svg"
+  },
+  "constraints": [
+    "GitHub page chrome cannot be overlaid or restyled from README content.",
+    "The envelope is limited to the README rendering area.",
+    "Static composition must remain complete if animation is unavailable.",
+    "Dark theme is the design authority for this experiment."
+  ]
+}
