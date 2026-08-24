@@ -1,0 +1,26 @@
+{
+  "contract_version": 1,
+  "target_adapter": "github-profile-readme",
+  "profile": {
+    "theme": "seasonal-dark",
+    "background": "opaque",
+    "text": "safe",
+    "motion": "on"
+  },
+  "surface": {
+    "mounted_source_background": "inherit"
+  },
+  "frame": {
+    "mode": "rail",
+    "caps": "outer-only"
+  },
+  "labels": {
+    "density": "auto"
+  },
+  "packing": {
+    "mode": "auto"
+  },
+  "external_media": {
+    "mode": "reference-only"
+  }
+}
