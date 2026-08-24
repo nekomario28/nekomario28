@@ -13,6 +13,7 @@ The live profile is intentionally separate from this lab. Concepts can be compar
 | D3 | live system | Dark seasonal visual-envelope system. Four static-first seasonal heroes share one layout grammar. |
 | D3.1 | live envelope v2 | Seasonal grammar expanded from the hero to Projects/Activity bands and footer. |
 | D3.2 | motion envelope v3 | Redundant post-hero divider removed; each seasonal hero gains a small optional motion layer with a static/reduced-motion fallback. |
+| D3.3 | envelope v4 shadow | Background/frame experiments tested in GitHub's actual dark desktop/mobile renderer. Segmented bridge remains the refinement candidate; HTML table enclosure is rejected. |
 
 D1 and D2 are saved in `archive/`; neither should be silently overwritten when a later direction wins.
 
@@ -87,6 +88,37 @@ The factual section labels remain full-width seasonal bands, so the palette/moti
 
 This remains visual choreography, not DOM overlay authority. It cannot place true side rails behind arbitrary Markdown content or cover host-owned UI.
 
+## Envelope v4 shadow comparison
+
+Two stronger enclosure strategies are preserved under `envelope-v4/` and were tested against GitHub's actual branch README renderer in dark desktop/mobile views.
+
+### Segmented bridge
+
+A 32px seasonal bridge repeats only at natural transitions and keeps the existing semantic content/link structure. GitHub render proof run `32696523661` showed:
+
+- desktop layout intact;
+- mobile layout intact without observed horizontal overflow;
+- readable project map and contribution graph;
+- frame/background continuity stronger than v3, but still perceptual rather than a literal full-height surrounding rail.
+
+This remains the **preferred refinement candidate**, not a live selection yet.
+
+### Single HTML table frame
+
+The three-column table/side-rail experiment was rendered in run `32696767046`. GitHub preserved the structure, so it can create a more literal enclosure, but the result is rejected because:
+
+- GitHub-owned table borders/padding are visually prominent;
+- mobile compresses the center content too strongly;
+- the host container becomes a larger part of the design than the intended subtle frame.
+
+The rejected experiment remains useful negative evidence and should not be promoted.
+
+### Font portability observation
+
+The same headless proof environment rendered Japanese text inside the SVG section bands as missing-glyph boxes. This proves a client-font dependency exists; it does **not** prove that every Japanese desktop/browser fails. Before a v4 live promotion, remove essential section-label dependence on client-installed Japanese fonts, preferably with deterministic repository-owned vector outlines or another font-independent representation.
+
+Exact decisions and evidence classifications are recorded in `envelope-v4/decision.json` and `envelope-v4/render-evidence-2026-08-24.md`.
+
 ## Current design authority
 
 - target theme: **dark**
@@ -96,9 +128,12 @@ This remains visual choreography, not DOM overlay authority. It cannot place tru
 - structure: stable live assets are independent from the Design Lab
 - section chrome: Projects/Activity labels are part of the seasonal envelope rather than plain Markdown headings
 - separators: use only when they improve rhythm; do not insert one automatically after every major block
+- enclosure: prefer removable segmented chrome over host-table enclosure unless target rendering proves the latter is responsive and visually superior
 - culture-specific direction: use concrete composition/material/palette references; avoid postcard/tourist-symbol accumulation
 - automatic mutation: only manifest-approved, static-rendered seasonal candidates may be promoted
 
 ## Promotion gate
 
 A new seasonal variant is not eligible for automatic live promotion merely because it exists in `seasons/`. It must retain the common grammar, parse cleanly, keep a complete static frame, expose reduced-motion behavior, contain no scripted animation, and be explicitly marked `auto_promote=true` with `static_render=PASS` in the manifest. Generated live chrome must also pass canonical section/footer geometry checks. Unapproved experiments remain Design Lab-only.
+
+For envelope v4, source/CI success is not enough: the selected enclosure must also beat v3 in actual GitHub dark/mobile rendering, keep links/content readable, avoid host-table artifacts, and remove essential client-font dependence before promotion.
