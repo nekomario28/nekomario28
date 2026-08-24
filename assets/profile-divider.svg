@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="46" viewBox="0 0 900 46" role="img" aria-label="dark profile section divider">
-  <defs><linearGradient id="bg" x1="0" x2="1"><stop stop-color="#070b14"/><stop offset=".5" stop-color="#0b1324"/><stop offset="1" stop-color="#070b14"/></linearGradient></defs>
-  <rect width="900" height="46" rx="12" fill="url(#bg)"/>
-  <path d="M92 23 H392" stroke="#d9dde8" stroke-opacity=".12"/><path d="M508 23 H808" stroke="#d9dde8" stroke-opacity=".12"/>
-  <circle cx="450" cy="23" r="3" fill="#a32932"/><circle cx="450" cy="23" r="8" fill="none" stroke="#c9a85f" stroke-opacity=".26"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="38" viewBox="0 0 900 38" role="img" aria-label="季節ダークプロフィール区切り">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#06101a"/><stop offset=".52" stop-color="#0c2d3b"/><stop offset="1" stop-color="#06101a"/></linearGradient></defs>
+  <rect width="900" height="38" rx="11" fill="url(#bg)"/>
+  <path d="M70 19 H410 M490 19 H830" stroke="#eef2f6" stroke-opacity=".10"/>
+  <circle cx="450" cy="19" r="3" fill="#86aa94"/><circle cx="450" cy="19" r="8" fill="none" stroke="#c7b06c" stroke-opacity=".28"/>
+  <g fill="none" stroke-linecap="round"><path d="M704 29 C748 11 796 39 842 20" stroke="#86aa94" stroke-opacity=".34" stroke-width="2"/><path d="M723 35 C764 22 806 42 858 27" stroke="#c7b06c" stroke-opacity=".22" stroke-width="1"/></g>
 </svg>
