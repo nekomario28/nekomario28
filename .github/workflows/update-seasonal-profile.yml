@@ -60,7 +60,7 @@ jobs:
     timeout-minutes: 8
     steps:
       - name: Check out exact profile revision
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
@@ -100,65 +100,54 @@ jobs:
           fi
           python design-lab/scripts/promote-season.py "${args[@]}" | tee "$RUNNER_TEMP/season-result.json"
 
-      - name: Materialize Summer v7 preview once
-        if: github.event_name == 'pull_request' && github.head_ref == 'feat/envelope-v7-continuous-canvas'
-        shell: bash
-        env:
-          HEAD_REF: ${{ github.head_ref }}
-        run: |
-          set -euo pipefail
-          python design-lab/scripts/promote-season.py --season summer --apply --json
-          git add \
-            assets/profile-hero.svg \
-            assets/profile-character-side-left.svg \
-            assets/profile-character-side-right.svg \
-            assets/profile-attribution.svg \
-            assets/profile-frame-bridge-character-projects.svg \
-            assets/profile-section-projects.svg \
-            assets/profile-projects-canvas.svg \
-            assets/profile-frame-bridge-projects-activity.svg \
-            assets/profile-section-activity.svg \
-            assets/profile-activity-canvas.svg \
-            assets/profile-frame-bridge-activity-footer.svg \
-            assets/profile-footer.svg \
-            design-lab/live-theme.json
-          if git diff --cached --quiet; then
-            echo "Envelope v7 preview already materialized."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Materialize Envelope v7 Summer preview"
-          git push origin "HEAD:$HEAD_REF"
-
       - name: Validate stable live Envelope v7
-        if: github.event_name != 'pull_request'
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
           import json, xml.etree.ElementTree as ET
           from pathlib import Path
+
           state = json.loads(Path('design-lab/live-theme.json').read_text())
+          expected = {
+              'hero': ('900','260','0 0 900 260'),
+              'character_left': ('100','394','0 0 100 394'),
+              'character_right': ('100','394','0 0 100 394'),
+              'attribution': ('900','44','0 0 900 44'),
+              'bridge_character_projects': ('900','32','0 0 900 32'),
+              'projects': ('900','68','0 0 900 68'),
+              'projects_canvas': ('900','420','0 0 900 420'),
+              'bridge_projects_activity': ('900','32','0 0 900 32'),
+              'activity': ('900','68','0 0 900 68'),
+              'activity_canvas': ('900','220','0 0 900 220'),
+              'bridge_activity_footer': ('900','32','0 0 900 32'),
+              'footer': ('900','92','0 0 900 92'),
+          }
           assert state['envelope_version'] == 7
+          assert set(state['live_assets']) == set(expected)
           assert state['global_motion_space'] == 'design-lab/envelope-v7/global-motion-space.json'
-          assert state['frame']['mode'] == 'continuous-canvas-global-windowed-flow'
-          assert state['frame']['all_logical_windows_rendered'] is True
-          assert state['frame']['mounted_foreground_media'] is True
-          assert state['frame']['boundary_fade'] is False
-          assert state['frame']['cross_document_hard_sync'] is False
-          for rel in state['live_assets'].values():
-              path = Path(rel)
-              assert path.is_file()
+          frame = state['frame']
+          assert frame['mode'] == 'continuous-canvas-global-windowed-flow'
+          assert frame['all_logical_windows_rendered'] is True
+          assert frame['mounted_foreground_media'] is True
+          assert frame['boundary_fade'] is False
+          assert frame['partial_geometry_clipping'] is True
+          assert frame['cross_document_hard_sync'] is False
+          assert frame['true_overlay'] is False
+          for key, geometry in expected.items():
+              path = Path(state['live_assets'][key])
+              assert path.is_file(), path
               root = ET.parse(path).getroot()
-              assert root.attrib.get('viewBox')
+              assert (root.attrib.get('width'), root.attrib.get('height'), root.attrib.get('viewBox')) == geometry
               text = path.read_text()
               assert 'id="v7-global-window"' in text
-              assert 'prefers-reduced-motion' in text
+              assert 'clip-path="url(#v7-window)"' in text
+              assert 'prefers-reduced-motion' in text and '<animateTransform' in text and 'dur="32s"' in text
               assert '<script' not in text.lower()
           readme = Path('README.md').read_text()
           for rel in state['live_assets'].values():
               assert readme.count(rel) == 1, rel
+          assert readme.count('https://konosuba.com/bakuen/story/img/pdsfi4/05.jpg') == 1
           PY
 
       - name: Commit seasonal change
