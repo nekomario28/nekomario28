@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/nekomario28/nekomario28/blob/main/design-lab/profile-envelope-config.schema.json",
+  "title": "Portable GitHub profile envelope configuration",
+  "description": "Design-contract schema for the future portable profile-envelope renderer. It is not yet wired to the live Envelope v8 renderer.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "target_adapter", "profile"],
+  "properties": {
+    "contract_version": {
+      "const": 1
+    },
+    "target_adapter": {
+      "const": "github-profile-readme"
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["theme", "background", "text", "motion"],
+      "properties": {
+        "theme": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "default": "seasonal-dark",
+          "description": "Named presentation/theme policy. Keep the public set bounded rather than accepting arbitrary renderer code."
+        },
+        "background": {
+          "type": "string",
+          "enum": ["opaque", "transparent"],
+          "default": "opaque",
+          "description": "Controls only the envelope-owned outer surface. Mounted-source backgrounds are configured separately."
+        },
+        "text": {
+          "type": "string",
+          "enum": ["safe", "native", "minimal"],
+          "default": "safe",
+          "description": "safe = deterministic essential visible text; native = host-font-dependent SVG text permitted; minimal = essential fixed text only plus accessibility metadata."
+        },
+        "motion": {
+          "type": "string",
+          "enum": ["on", "off"],
+          "default": "on",
+          "description": "High-level motion choice only. Reduced-motion/static fallback remains mandatory when motion is enabled."
+        }
+      }
+    },
+    "surface": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mounted_source_background": {
+          "type": "string",
+          "enum": ["inherit", "preserve"],
+          "default": "inherit",
+          "description": "inherit removes only a known presentation background so mounted authoritative marks use the envelope surface; preserve leaves the source surface intact."
+        }
+      }
+    },
+    "frame": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["rail", "none"],
+          "default": "rail"
+        },
+        "caps": {
+          "type": "string",
+          "enum": ["outer-only", "none"],
+          "default": "outer-only"
+        }
+      }
+    },
+    "labels": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "density": {
+          "type": "string",
+          "enum": ["auto", "full", "minimal"],
+          "default": "auto",
+          "description": "Presentation-only label density. It must never remove semantic repositories/data from the authoritative source model."
+        }
+      }
+    },
+    "packing": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["auto", "off"],
+          "default": "auto",
+          "description": "GitHub adapter may pack adjacent logical windows into taller physical SVGs without changing logical global coordinates."
+        }
+      }
+    },
+    "external_media": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["reference-only", "none"],
+          "default": "reference-only",
+          "description": "Do not copy third-party media into generated repository-owned SVG bytes unless a separate provenance/license decision permits it."
+        }
+      }
+    }
+  }
+}
