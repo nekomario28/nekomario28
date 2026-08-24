@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "reviewed": "2026-08-24",
   "target": "github-profile-readme-dark",
   "goal": "stronger README-area background and enclosing-frame illusion without claiming host-page overlay authority",
@@ -40,9 +40,14 @@
     }
   },
   "font_portability": {
-    "status": "INVESTIGATE",
-    "observation": "The headless GitHub proof environment lacked usable Japanese glyphs for SVG text and showed tofu in section labels. This is concrete font-dependence evidence, not proof that every Japanese client fails.",
-    "preferred_fix": "Remove essential SVG-label dependence on client-installed Japanese fonts, preferably by repository-owned vector outlines or another deterministic font-independent representation."
+    "status": "PASS_FIXED",
+    "fix_pr": 32,
+    "merged_commit": "5bc90620a4acc34f2d83f8746d7ca1f51946f67d",
+    "seasonal_validation_run": 32697562900,
+    "github_render_run": 32697607431,
+    "implementation": "Japanese Projects/Activity SVG labels are deterministic vector outlines; generated and stable section bands reject SVG <text>.",
+    "result": "The same headless GitHub environment that previously showed tofu renders both section labels visibly on desktop and mobile.",
+    "remaining_boundary": "Host HTML text such as the copyright line still depends on the browser/OS font; this gate covers repository-owned SVG section labels only."
   },
   "hard_boundaries": [
     "No claim of background/overlay outside the README rendering area.",
@@ -50,7 +55,8 @@
     "Do not promote the rejected table experiment.",
     "Frame decoration must remain removable without breaking content authority or links.",
     "If segmented-frame is promoted, its active bridge must switch atomically with the seasonal envelope.",
-    "A target-render PASS for layout does not imply that optional SMIL animation visibly plays."
+    "A target-render PASS for layout does not imply that optional SMIL animation visibly plays.",
+    "Essential repository-owned non-Latin SVG labels must not regress to client-font-dependent <text>."
   ],
-  "next_safe_action": "Keep live main on envelope v3. Refine segmented-frame enclosure without GitHub table layout, remove Japanese SVG label font dependence, then rerun actual GitHub dark/mobile proof before any live promotion."
+  "next_safe_action": "Keep live main on envelope v3 while rebuilding the segmented-frame candidate from the vector-outline main. Strengthen enclosure without host-table layout, then rerun actual GitHub dark/mobile proof before promotion."
 }
