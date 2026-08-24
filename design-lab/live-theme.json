@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "active_season": "summer",
+  "active_theme": "summer-dark",
+  "source": "design-lab/seasons/summer-dark.svg",
+  "live_asset": "assets/profile-hero.svg",
+  "timezone": "Asia/Tokyo",
+  "promoted_at": "2026-08-24",
+  "promotion_mode": "manual-bootstrap"
+}
