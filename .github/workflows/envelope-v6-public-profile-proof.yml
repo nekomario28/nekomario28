@@ -1,0 +1,46 @@
+name: Envelope v6 public profile proof
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/envelope-v6-public-profile-proof.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Capture actual public profile and live bridge boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          chrome="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)"
+          test -n "$chrome"
+          out="$RUNNER_TEMP/envelope-v6-public-profile-proof"
+          mkdir -p "$out"
+
+          profile='https://github.com/nekomario28'
+          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-dark-mode --virtual-time-budget=2000 --window-size=1440,3000 --screenshot="$out/profile-desktop-dark-t2.png" "$profile"
+          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-dark-mode --virtual-time-budget=8000 --window-size=1440,3000 --screenshot="$out/profile-desktop-dark-t8.png" "$profile"
+          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-dark-mode --virtual-time-budget=8000 --window-size=430,3000 --screenshot="$out/profile-mobile-dark-t8.png" "$profile"
+
+          bridge='https://raw.githubusercontent.com/nekomario28/nekomario28/main/assets/profile-frame-bridge-character-projects.svg'
+          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --virtual-time-budget=14800 --window-size=900,80 --screenshot="$out/bridge-main-t14.80.png" "$bridge"
+          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --virtual-time-budget=15420 --window-size=900,80 --screenshot="$out/bridge-main-t15.42.png" "$bridge"
+          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --virtual-time-budget=15500 --window-size=900,80 --screenshot="$out/bridge-main-t15.50.png" "$bridge"
+          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --virtual-time-budget=15700 --window-size=900,80 --screenshot="$out/bridge-main-t15.70.png" "$bridge"
+
+          sha256sum "$out"/*.png | tee "$out/sha256.txt"
+
+      - name: Upload proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: envelope-v6-public-profile-proof
+          path: ${{ runner.temp }}/envelope-v6-public-profile-proof/*
+          if-no-files-found: error
+          retention-days: 1
