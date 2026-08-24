@@ -24,7 +24,51 @@
     "profile": "rain-water-and-leaf-sway",
     "implementation": "embedded-smil",
     "static_fallback": true,
-    "live_verification": "NOT_RUN"
+    "live_verification": "PASS",
+    "live_verification_scope": "v8-public-8-doc-14-rail",
+    "live_verification_observed_main": "17f8085900b9e09b938c6f1317a93b4aebf9673d",
+    "live_verification_run": 32764113788,
+    "live_verification_job": 97549551648,
+    "live_verification_at": "2026-08-25",
+    "live_verification_target_sha256": "7f95e61db7c2a3447879bf8dd0d160bbfa6f548c5ed54b6c311e79e7d63ef83c",
+    "live_verification_sample_seconds": 12.0,
+    "live_verification_sample_count": 25,
+    "live_verification_document_count": 8,
+    "live_verification_rail_count": 14,
+    "live_verification_changed_pair_counts": {
+      "character_left": {
+        "left": 18
+      },
+      "character_right": {
+        "right": 20
+      },
+      "attribution_projects": {
+        "left": 7,
+        "right": 4
+      },
+      "projects": {
+        "left": 8,
+        "right": 4
+      },
+      "projects_canvas": {
+        "left": 19,
+        "right": 21
+      },
+      "activity_header": {
+        "left": 7,
+        "right": 5
+      },
+      "activity_canvas": {
+        "left": 14,
+        "right": 9
+      },
+      "footer_transition": {
+        "left": 5,
+        "right": 10
+      }
+    },
+    "live_verification_hero_in_scope": false,
+    "live_verification_cross_document_hard_sync": false
   },
   "frame": {
     "mode": "continuous-canvas-global-windowed-flow",
