@@ -10,4 +10,16 @@
   <path transform="translate(1181.818 0)" d="M631 833 630 623H536V678H343V728C408 735 471 744 524 755L472 844C361 820 188 803 38 796C49 772 61 735 65 710C119 711 176 714 234 718V678H36V592H234V553H62V242H234V203H58V118H234V59L30 44L44 -57C154 -47 298 -33 443 -17C469 -39 499 -73 514 -97C682 36 728 244 741 513H831C825 190 815 67 795 39C785 26 776 22 760 22C741 22 703 22 660 26C679 -6 692 -55 694 -88C742 -89 788 -89 819 -84C852 -77 876 -67 898 -33C930 12 938 159 948 570C948 584 948 623 948 623H744L746 833ZM343 118H525V203H343V242H520V553H343V592H535V513H627C620 334 596 191 518 82L343 67ZM157 362H234V317H157ZM343 362H421V317H343ZM157 478H234V433H157ZM343 478H421V433H343Z"/>
 </g>
   <g fill="none" stroke-linecap="round"><path d="M704 29 C748 11 796 39 842 20" stroke="#86aa94" stroke-opacity=".34" stroke-width="2"/><path d="M723 35 C764 22 806 42 858 27" stroke="#c7b06c" stroke-opacity=".22" stroke-width="1"/></g>
+<style>@media (prefers-reduced-motion: reduce) { .v5-motion { display:none } }</style>
+<g id="v5-frame" pointer-events="none">
+  
+  <path d="M18 0V68 M882 0V68" fill="none" stroke="#86aa94" stroke-opacity=".16" stroke-width="1.8"/>
+  <path d="M22 0V68 M878 0V68" fill="none" stroke="#c7b06c" stroke-opacity=".08" stroke-width=".7"/>
+  <g class="v5-motion">
+    <circle cx="18" cy="-8" r="2.4" fill="#86aa94"><animate attributeName="cy" values="-8;76" dur="12s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.8;.8;0" keyTimes="0;.12;.82;1" dur="12s" repeatCount="indefinite"/></circle>
+    <circle cx="882" cy="-8" r="2.1" fill="#c7b06c"><animate attributeName="cy" values="-8;76" dur="12s" begin="-3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.65;.65;0" keyTimes="0;.12;.82;1" dur="12s" begin="-3s" repeatCount="indefinite"/></circle>
+    <circle cx="18" cy="-8" r="1.4" fill="#c7b06c"><animate attributeName="cy" values="-8;76" dur="12s" begin="-6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.45;.45;0" keyTimes="0;.12;.82;1" dur="12s" begin="-6s" repeatCount="indefinite"/></circle>
+    <circle cx="882" cy="-8" r="1.5" fill="#86aa94"><animate attributeName="cy" values="-8;76" dur="12s" begin="-9s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.5;.5;0" keyTimes="0;.12;.82;1" dur="12s" begin="-9s" repeatCount="indefinite"/></circle>
+  </g>
+</g>
 </svg>

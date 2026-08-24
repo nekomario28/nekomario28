@@ -6,4 +6,16 @@
   <path d="M322 46 H420 M480 46 H578" stroke="#eef2f6" stroke-opacity=".14"/>
   <circle cx="450" cy="46" r="3" fill="#86aa94"/><circle cx="450" cy="46" r="10" fill="none" stroke="#c7b06c" stroke-opacity=".24"/>
   <g fill="none" stroke-linecap="round"><path d="M704 29 C748 11 796 39 842 20" stroke="#86aa94" stroke-opacity=".34" stroke-width="2"/><path d="M723 35 C764 22 806 42 858 27" stroke="#c7b06c" stroke-opacity=".22" stroke-width="1"/></g>
+<style>@media (prefers-reduced-motion: reduce) { .v5-motion { display:none } }</style>
+<g id="v5-frame" pointer-events="none">
+  <path d="M18 64V74Q18 85 30 85H76 M882 64V74Q882 85 870 85H824" fill="none" stroke="#86aa94" stroke-opacity=".34" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M18 0V92 M882 0V92" fill="none" stroke="#86aa94" stroke-opacity=".16" stroke-width="1.8"/>
+  <path d="M22 0V92 M878 0V92" fill="none" stroke="#c7b06c" stroke-opacity=".08" stroke-width=".7"/>
+  <g class="v5-motion">
+    <circle cx="18" cy="-8" r="2.4" fill="#86aa94"><animate attributeName="cy" values="-8;100" dur="12s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.8;.8;0" keyTimes="0;.12;.82;1" dur="12s" repeatCount="indefinite"/></circle>
+    <circle cx="882" cy="-8" r="2.1" fill="#c7b06c"><animate attributeName="cy" values="-8;100" dur="12s" begin="-3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.65;.65;0" keyTimes="0;.12;.82;1" dur="12s" begin="-3s" repeatCount="indefinite"/></circle>
+    <circle cx="18" cy="-8" r="1.4" fill="#c7b06c"><animate attributeName="cy" values="-8;100" dur="12s" begin="-6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.45;.45;0" keyTimes="0;.12;.82;1" dur="12s" begin="-6s" repeatCount="indefinite"/></circle>
+    <circle cx="882" cy="-8" r="1.5" fill="#86aa94"><animate attributeName="cy" values="-8;100" dur="12s" begin="-9s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.5;.5;0" keyTimes="0;.12;.82;1" dur="12s" begin="-9s" repeatCount="indefinite"/></circle>
+  </g>
+</g>
 </svg>

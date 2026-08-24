@@ -29,4 +29,16 @@
     <g transform="translate(786 65)"><g fill="#8eaa87" stroke="#b5c7b2" stroke-opacity=".22" stroke-width=".4"><use href="#leaf" transform="scale(.18)"/><animateTransform attributeName="transform" type="rotate" values="2;-3;2" dur="9.2s" begin="-2s" repeatCount="indefinite"/></g></g>
   </g>
   <rect x=".5" y=".5" width="899" height="259" rx="17.5" fill="none" stroke="#fff" stroke-opacity=".07"/>
+<style>@media (prefers-reduced-motion: reduce) { .v5-motion { display:none } }</style>
+<g id="v5-frame" pointer-events="none">
+  <path d="M18 30V18Q18 7 30 7H76 M882 30V18Q882 7 870 7H824" fill="none" stroke="#86aa94" stroke-opacity=".34" stroke-width="1.8" stroke-linecap="round"/><path d="M31 13H62 M838 13H869" fill="none" stroke="#c7b06c" stroke-opacity=".20" stroke-width=".8"/>
+  <path d="M18 0V260 M882 0V260" fill="none" stroke="#86aa94" stroke-opacity=".16" stroke-width="1.8"/>
+  <path d="M22 0V260 M878 0V260" fill="none" stroke="#c7b06c" stroke-opacity=".08" stroke-width=".7"/>
+  <g class="v5-motion">
+    <circle cx="18" cy="-8" r="2.4" fill="#86aa94"><animate attributeName="cy" values="-8;268" dur="12s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.8;.8;0" keyTimes="0;.12;.82;1" dur="12s" repeatCount="indefinite"/></circle>
+    <circle cx="882" cy="-8" r="2.1" fill="#c7b06c"><animate attributeName="cy" values="-8;268" dur="12s" begin="-3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.65;.65;0" keyTimes="0;.12;.82;1" dur="12s" begin="-3s" repeatCount="indefinite"/></circle>
+    <circle cx="18" cy="-8" r="1.4" fill="#c7b06c"><animate attributeName="cy" values="-8;268" dur="12s" begin="-6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.45;.45;0" keyTimes="0;.12;.82;1" dur="12s" begin="-6s" repeatCount="indefinite"/></circle>
+    <circle cx="882" cy="-8" r="1.5" fill="#86aa94"><animate attributeName="cy" values="-8;268" dur="12s" begin="-9s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.5;.5;0" keyTimes="0;.12;.82;1" dur="12s" begin="-9s" repeatCount="indefinite"/></circle>
+  </g>
+</g>
 </svg>

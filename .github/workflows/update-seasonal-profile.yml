@@ -10,7 +10,9 @@ on:
       - "design-lab/scripts/select-season.py"
       - "design-lab/scripts/promote-season.py"
       - "design-lab/scripts/render_envelope_chrome.py"
+      - "design-lab/scripts/render_continuous_flow.py"
       - "design-lab/seasons/*.svg"
+      - "assets/profile-hero.svg"
       - "assets/profile-frame-bridge.svg"
       - "assets/profile-section-projects.svg"
       - "assets/profile-section-activity.svg"
@@ -25,7 +27,9 @@ on:
       - "design-lab/scripts/select-season.py"
       - "design-lab/scripts/promote-season.py"
       - "design-lab/scripts/render_envelope_chrome.py"
+      - "design-lab/scripts/render_continuous_flow.py"
       - "design-lab/seasons/*.svg"
+      - "assets/profile-hero.svg"
       - "assets/profile-frame-bridge.svg"
       - "assets/profile-section-projects.svg"
       - "assets/profile-section-activity.svg"
@@ -62,46 +66,59 @@ jobs:
       - name: Check out profile repository
         uses: actions/checkout@v6
 
-      - name: Validate seasonal policy and all envelope variants
+      - name: Validate all Envelope v5 seasonal variants
         shell: bash
         run: |
           set -euo pipefail
-          python -m py_compile design-lab/scripts/select-season.py design-lab/scripts/promote-season.py design-lab/scripts/render_envelope_chrome.py
+          python -m py_compile \
+            design-lab/scripts/select-season.py \
+            design-lab/scripts/promote-season.py \
+            design-lab/scripts/render_envelope_chrome.py \
+            design-lab/scripts/render_continuous_flow.py
+
           python design-lab/scripts/promote-season.py --date 2026-04-01 --json
           python design-lab/scripts/promote-season.py --date 2026-07-01 --json
           python design-lab/scripts/promote-season.py --date 2026-10-01 --json
           python design-lab/scripts/promote-season.py --date 2026-01-01 --json
+
           python - <<'PY'
           import importlib.util, json, tempfile
           import xml.etree.ElementTree as ET
           from pathlib import Path
 
           manifest = json.loads(Path('design-lab/theme-manifest.json').read_text())
-          assert manifest['version'] == 5
+          assert manifest['version'] == 6
           assert set(manifest['seasons']) == {'spring','summer','autumn','winter'}
           assert set(manifest['live_assets']) == {'hero','bridge','projects','activity','footer'}
+          flow = manifest['envelope_motion']
+          assert flow['mode'] == 'phase-tolerant-segmented-handoff'
+          assert flow['rail_x'] == [18, 882]
+          assert flow['duration_seconds'] == 12
+          assert flow['cross_document_hard_sync'] is False
+          assert flow['static_fallback'] is True
+          assert flow['reduced_motion'] is True
 
-          for season, cfg in manifest['seasons'].items():
-              hero = Path('design-lab') / cfg['hero']
-              svg = ET.parse(hero).getroot()
-              assert (svg.attrib['width'], svg.attrib['height'], svg.attrib['viewBox']) == ('900','260','0 0 900 260')
-              text = hero.read_text()
-              assert cfg['motion']['implementation'] == 'embedded-smil'
-              assert cfg['motion']['static_fallback'] is True
-              assert cfg['motion']['live_verification'] in {'NOT_RUN','PASS'}
-              assert 'prefers-reduced-motion' in text and '<animate' in text
-              assert '<script' not in text.lower()
-
-          script = Path('design-lab/scripts/render_envelope_chrome.py')
-          spec = importlib.util.spec_from_file_location('chrome', script)
+          script = Path('design-lab/scripts/render_continuous_flow.py')
+          spec = importlib.util.spec_from_file_location('flow', script)
           module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
           expected = {
+              'assets/profile-hero.svg': ('900','260','0 0 900 260'),
               'assets/profile-frame-bridge.svg': ('900','32','0 0 900 32'),
               'assets/profile-section-projects.svg': ('900','68','0 0 900 68'),
               'assets/profile-section-activity.svg': ('900','68','0 0 900 68'),
               'assets/profile-footer.svg': ('900','92','0 0 900 92'),
           }
-          for season in ('spring','summer','autumn','winter'):
+          for season, cfg in manifest['seasons'].items():
+              source = Path('design-lab') / cfg['hero']
+              source_root = ET.parse(source).getroot()
+              assert (source_root.attrib['width'], source_root.attrib['height'], source_root.attrib['viewBox']) == ('900','260','0 0 900 260')
+              source_text = source.read_text()
+              assert cfg['motion']['implementation'] == 'embedded-smil'
+              assert cfg['motion']['static_fallback'] is True
+              assert cfg['motion']['live_verification'] in {'NOT_RUN','PASS'}
+              assert 'prefers-reduced-motion' in source_text and '<animate' in source_text
+              assert '<script' not in source_text.lower()
+
               with tempfile.TemporaryDirectory() as tmp:
                   root = Path(tmp); module.render(season, root)
                   for rel, geometry in expected.items():
@@ -109,10 +126,18 @@ jobs:
                       svg = ET.parse(path).getroot()
                       assert (svg.attrib['width'], svg.attrib['height'], svg.attrib['viewBox']) == geometry
                       text = path.read_text()
-                      assert 'M18' in text and 'M882' in text, (season, rel, 'missing-frame-rails')
+                      assert 'id="v5-frame"' in text
+                      assert 'prefers-reduced-motion' in text
+                      assert '<animate' in text
+                      assert 'dur="12s"' in text
+                      assert '<script' not in text.lower()
+                      assert 'M18' in text and 'M882' in text
                       if 'profile-section-' in rel:
-                          assert '<text' not in text.lower()
-                          assert '<path' in text.lower()
+                          assert '<text' not in text.lower() and '<path' in text.lower()
+                  hero = (root / 'assets/profile-hero.svg').read_text()
+                  footer = (root / 'assets/profile-footer.svg').read_text()
+                  assert 'M18 30V18Q18 7 30 7H76' in hero
+                  assert 'Q18 85 30 85H76' in footer
           PY
 
       - name: Resolve and promote seasonal envelope
@@ -132,7 +157,7 @@ jobs:
           fi
           python design-lab/scripts/promote-season.py "${args[@]}" | tee "$RUNNER_TEMP/season-result.json"
 
-      - name: Validate stable live envelope
+      - name: Validate stable live Envelope v5
         shell: bash
         run: |
           set -euo pipefail
@@ -147,21 +172,24 @@ jobs:
               'footer': ('900','92','0 0 900 92'),
           }
           state = json.loads(Path('design-lab/live-theme.json').read_text())
-          assert state['envelope_version'] == 4
+          assert state['envelope_version'] == 5
           assert set(state['live_assets']) == set(expected)
-          assert state['frame']['mode'] == 'segmented-rails'
-          assert state['frame']['shared_edge_rails'] is True
-          assert state['frame']['true_overlay'] is False
+          frame = state['frame']
+          assert frame['mode'] == 'continuous-segmented-flow'
+          assert frame['shared_edge_rails'] is True
+          assert frame['top_cap'] is True and frame['bottom_cap'] is True
+          assert frame['phase_tolerant_handoff'] is True
+          assert frame['cross_document_hard_sync'] is False
+          assert frame['true_overlay'] is False
           for key, geometry in expected.items():
               path = Path(state['live_assets'][key]); svg = ET.parse(path).getroot()
               assert (svg.attrib['width'], svg.attrib['height'], svg.attrib['viewBox']) == geometry
               text = path.read_text()
-              if key in {'bridge','projects','activity','footer'}:
-                  assert 'M18' in text and 'M882' in text
+              assert 'id="v5-frame"' in text
+              assert 'prefers-reduced-motion' in text and '<animate' in text and 'dur="12s"' in text
+              assert '<script' not in text.lower()
               if key in {'projects','activity'}:
                   assert '<text' not in text.lower() and '<path' in text.lower()
-          hero = Path(state['live_assets']['hero']).read_text()
-          assert 'prefers-reduced-motion' in hero and '<animate' in hero and '<script' not in hero.lower()
           readme = Path('README.md').read_text()
           for rel in state['live_assets'].values(): assert rel in readme
           assert readme.count('assets/profile-frame-bridge.svg') == 3

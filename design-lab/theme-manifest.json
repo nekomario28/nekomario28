@@ -1,8 +1,8 @@
 {
-  "version": 5,
+  "version": 6,
   "base_theme": "dark",
   "surface": "github-profile-readme",
-  "strategy": "seasonal visual envelope v4 segmented frame",
+  "strategy": "seasonal visual envelope v5 continuous segmented rail flow",
   "timezone": "Asia/Tokyo",
   "live_assets": {
     "hero": "assets/profile-hero.svg",
@@ -15,6 +15,16 @@
     "divider": "assets/profile-divider.svg"
   },
   "live_state": "design-lab/live-theme.json",
+  "envelope_motion": {
+    "mode": "phase-tolerant-segmented-handoff",
+    "rail_x": [18, 882],
+    "duration_seconds": 12,
+    "direction": "top-to-bottom",
+    "cross_document_hard_sync": false,
+    "reason": "GitHub README images are independent SVG documents; shared clocks are not guaranteed.",
+    "static_fallback": true,
+    "reduced_motion": true
+  },
   "seasons": {
     "spring": {
       "months": [3, 4, 5],
@@ -63,6 +73,8 @@
     "Optional animation must not carry essential information and must expose a reduced-motion fallback.",
     "Do not add a separator immediately after the hero when direct visual flow is stronger.",
     "The segmented frame bridge is background/chrome only and must switch atomically with the rest of the active seasonal envelope.",
-    "Projects and Activity labels are font-independent vector outlines, not client-font-dependent SVG text."
+    "Projects and Activity labels are font-independent vector outlines, not client-font-dependent SVG text.",
+    "Cross-document animation is phase-coherent rather than hard-synchronized; do not claim a shared runtime clock.",
+    "Hero top cap, shared rails, bridges, section bands, and footer bottom cap use one frame grammar."
   ]
 }
