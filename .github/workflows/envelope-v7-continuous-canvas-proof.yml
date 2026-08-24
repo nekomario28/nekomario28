@@ -1,0 +1,154 @@
+name: Envelope v7 continuous canvas proof
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "README.md"
+      - "design-lab/envelope-v7/**"
+      - ".github/workflows/envelope-v7-continuous-canvas-proof.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Install proof helpers
+        run: python -m pip install --quiet websocket-client pillow
+
+      - name: Capture branch README and validate continuous rows
+        shell: bash
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          chrome="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)"
+          test -n "$chrome"
+          out="$RUNNER_TEMP/envelope-v7-proof"
+          mkdir -p "$out"
+          export OUT="$out"
+
+          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars \
+            --remote-debugging-port=9222 --remote-allow-origins='*' \
+            --window-size=1440,3400 about:blank >"$out/chrome.log" 2>&1 &
+          chrome_pid=$!
+          trap 'kill "$chrome_pid" 2>/dev/null || true' EXIT
+
+          for _ in $(seq 1 50); do
+            curl -fsS http://127.0.0.1:9222/json/list >"$out/targets.json" && break
+            sleep .2
+          done
+          test -s "$out/targets.json"
+
+          python - <<'PY'
+          import base64, json, os, time
+          from pathlib import Path
+          import websocket
+
+          out = Path(os.environ['OUT'])
+          head = os.environ['HEAD_SHA']
+          target_url = f'https://github.com/nekomario28/nekomario28/tree/{head}'
+          targets = json.loads((out / 'targets.json').read_text())
+          target = next(t for t in targets if t.get('type') == 'page')
+          ws = websocket.create_connection(target['webSocketDebuggerUrl'], timeout=20)
+          seq = 0
+
+          def call(method, params=None):
+              global seq
+              seq += 1
+              ident = seq
+              ws.send(json.dumps({'id': ident, 'method': method, 'params': params or {}}))
+              while True:
+                  msg = json.loads(ws.recv())
+                  if msg.get('id') == ident:
+                      if 'error' in msg:
+                          raise RuntimeError(f"CDP {method}: {msg['error']}")
+                      return msg.get('result', {})
+
+          def evaluate(expr):
+              return call('Runtime.evaluate', {'expression': expr, 'returnByValue': True, 'awaitPromise': True}).get('result', {}).get('value')
+
+          def wait_ready(timeout=20):
+              end = time.time() + timeout
+              while time.time() < end:
+                  state = evaluate("""(() => ({ready:document.readyState, imgs:Array.from(document.images).every(i=>i.complete)}))()""")
+                  if state and state['ready'] == 'complete' and state['imgs']:
+                      return
+                  time.sleep(.2)
+              raise RuntimeError('page/images did not become ready')
+
+          def capture(name):
+              data = call('Page.captureScreenshot', {'format':'png','captureBeyondViewport':False})['data']
+              (out / name).write_bytes(base64.b64decode(data))
+
+          def metrics(label):
+              script = r'''(() => {
+                const imgs = Array.from(document.images);
+                const pick = token => imgs.find(i => i.src.includes(token));
+                const rect = i => { if(!i) return null; const r=i.getBoundingClientRect(); return {src:i.src,x:r.x,y:r.y,w:r.width,h:r.height,b:r.bottom,nw:i.naturalWidth,nh:i.naturalHeight}; };
+                const rows = {
+                  character:[pick('character-side-left.svg'), pick('/05.jpg'), pick('character-side-right.svg')],
+                  projects:[pick('project-map-side-left.svg'), pick('project-map/galaxy.svg'), pick('project-map-side-right.svg')],
+                  activity:[pick('activity-side-left.svg'), pick('github-contributions-dark.svg'), pick('activity-side-right.svg')]
+                };
+                const out = {};
+                for (const [name, arr] of Object.entries(rows)) {
+                  const rs = arr.map(rect);
+                  out[name] = rs;
+                  if (rs.every(Boolean)) {
+                    out[name+'_same_line'] = Math.max(...rs.map(r=>r.y)) - Math.min(...rs.map(r=>r.y)) <= 2;
+                    out[name+'_gap1'] = rs[1].x - (rs[0].x + rs[0].w);
+                    out[name+'_gap2'] = rs[2].x - (rs[1].x + rs[1].w);
+                    out[name+'_span'] = (rs[2].x + rs[2].w) - rs[0].x;
+                  }
+                }
+                out.hero = rect(pick('profile-hero.svg'));
+                out.attribution = rect(pick('attribution-band.svg'));
+                out.viewport = {w:innerWidth,h:innerHeight,dpr:devicePixelRatio};
+                return out;
+              })()'''
+              m = evaluate(script)
+              (out / f'{label}-metrics.json').write_text(json.dumps(m, indent=2))
+              return m
+
+          def assert_layout(m, label):
+              for row in ('character','projects','activity'):
+                  rs = m[row]
+                  if not rs or not all(rs):
+                      raise RuntimeError(f'{label}: missing images for {row}')
+                  if not m[row+'_same_line']:
+                      raise RuntimeError(f'{label}: {row} row wrapped vertically: {rs}')
+                  if abs(m[row+'_gap1']) > 3 or abs(m[row+'_gap2']) > 3:
+                      raise RuntimeError(f'{label}: {row} row has visible inline gaps: {m[row+"_gap1"]}, {m[row+"_gap2"]}')
+                  if any(r['nw'] <= 0 or r['nh'] <= 0 for r in rs):
+                      raise RuntimeError(f'{label}: failed image load in {row}: {rs}')
+              if not m['hero'] or not m['attribution']:
+                  raise RuntimeError(f'{label}: missing full-width v7 blocks')
+
+          call('Page.enable'); call('Runtime.enable')
+          call('Emulation.setEmulatedMedia', {'features':[{'name':'prefers-color-scheme','value':'dark'}]})
+
+          call('Emulation.setDeviceMetricsOverride', {'width':1440,'height':3400,'deviceScaleFactor':1,'mobile':False})
+          call('Page.navigate', {'url':target_url}); wait_ready(); time.sleep(.8)
+          desktop = metrics('desktop'); capture('desktop-dark.png'); assert_layout(desktop, 'desktop')
+
+          call('Emulation.setDeviceMetricsOverride', {'width':430,'height':3400,'deviceScaleFactor':1,'mobile':True})
+          time.sleep(.8)
+          mobile = metrics('mobile'); capture('mobile-dark.png'); assert_layout(mobile, 'mobile')
+
+          summary = {'target':target_url,'desktop':desktop,'mobile':mobile,'result':'PASS'}
+          (out / 'summary.json').write_text(json.dumps(summary, indent=2))
+          print(json.dumps(summary, indent=2))
+          PY
+
+      - name: Upload proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: envelope-v7-continuous-canvas-proof
+          path: ${{ runner.temp }}/envelope-v7-proof/*
+          if-no-files-found: error
+          retention-days: 1
