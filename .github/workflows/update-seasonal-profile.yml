@@ -149,7 +149,8 @@ jobs:
           state = json.loads(Path('design-lab/live-theme.json').read_text())
           assert state['envelope_version'] == 4
           assert set(state['live_assets']) == set(expected)
-          assert state['frame']['mode'] == 'segmented-rails'
+          assert state['frame']['mode'] == 'segmented-bridge-v2'
+          assert state['frame']['shared_edge_rails'] is True
           assert state['frame']['true_overlay'] is False
           for key, geometry in expected.items():
               path = Path(state['live_assets'][key]); svg = ET.parse(path).getroot()
