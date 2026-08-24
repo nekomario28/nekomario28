@@ -9,7 +9,9 @@ on:
       - "design-lab/live-theme.json"
       - "design-lab/scripts/select-season.py"
       - "design-lab/scripts/promote-season.py"
+      - "design-lab/scripts/render_envelope_chrome.py"
       - "design-lab/seasons/*.svg"
+      - "README.md"
   schedule:
     # 00:17 UTC = 09:17 JST. Monthly checks are cheap; only season boundaries mutate files.
     - cron: "17 0 1 * *"
@@ -27,7 +29,7 @@ on:
           - autumn
           - winter
       dry_run:
-        description: "Validate and report without modifying the live hero"
+        description: "Validate and report without modifying stable live assets"
         required: true
         type: boolean
         default: true
@@ -48,17 +50,51 @@ jobs:
       - name: Check out profile repository
         uses: actions/checkout@v6
 
-      - name: Validate seasonal policy
+      - name: Validate seasonal policy and all envelope variants
         shell: bash
         run: |
           set -euo pipefail
-          python -m py_compile design-lab/scripts/select-season.py design-lab/scripts/promote-season.py
+          python -m py_compile \
+            design-lab/scripts/select-season.py \
+            design-lab/scripts/promote-season.py \
+            design-lab/scripts/render_envelope_chrome.py
+
           python design-lab/scripts/promote-season.py --date 2026-04-01 --json
           python design-lab/scripts/promote-season.py --date 2026-07-01 --json
           python design-lab/scripts/promote-season.py --date 2026-10-01 --json
           python design-lab/scripts/promote-season.py --date 2026-01-01 --json
 
-      - name: Resolve and promote seasonal hero
+          python - <<'PY'
+          import importlib.util
+          import tempfile
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+
+          script = Path('design-lab/scripts/render_envelope_chrome.py')
+          spec = importlib.util.spec_from_file_location('render_envelope_chrome', script)
+          module = importlib.util.module_from_spec(spec)
+          assert spec and spec.loader
+          spec.loader.exec_module(module)
+
+          expected = {
+              'assets/profile-divider.svg': ('900', '38', '0 0 900 38'),
+              'assets/profile-section-projects.svg': ('900', '68', '0 0 900 68'),
+              'assets/profile-section-activity.svg': ('900', '68', '0 0 900 68'),
+              'assets/profile-footer.svg': ('900', '92', '0 0 900 92'),
+          }
+          for season in ('spring', 'summer', 'autumn', 'winter'):
+              with tempfile.TemporaryDirectory() as tmp:
+                  root = Path(tmp)
+                  module.render(season, root)
+                  for rel, (width, height, viewbox) in expected.items():
+                      path = root / rel
+                      svg = ET.parse(path).getroot()
+                      assert svg.attrib['width'] == width, (season, rel, 'width')
+                      assert svg.attrib['height'] == height, (season, rel, 'height')
+                      assert svg.attrib['viewBox'] == viewbox, (season, rel, 'viewBox')
+          PY
+
+      - name: Resolve and promote seasonal envelope
         id: promote
         shell: bash
         env:
@@ -82,19 +118,36 @@ jobs:
 
           python design-lab/scripts/promote-season.py "${args[@]}" | tee "$RUNNER_TEMP/season-result.json"
 
-      - name: Validate live asset
+      - name: Validate stable live envelope
         shell: bash
         run: |
           set -euo pipefail
-          test -s assets/profile-hero.svg
-          grep -q '<svg' assets/profile-hero.svg
-          grep -q 'viewBox="0 0 900 260"' assets/profile-hero.svg
           python - <<'PY'
           import json
+          import xml.etree.ElementTree as ET
           from pathlib import Path
+
+          expected = {
+              'hero': ('900', '260', '0 0 900 260'),
+              'divider': ('900', '38', '0 0 900 38'),
+              'projects': ('900', '68', '0 0 900 68'),
+              'activity': ('900', '68', '0 0 900 68'),
+              'footer': ('900', '92', '0 0 900 92'),
+          }
           state = json.loads(Path('design-lab/live-theme.json').read_text())
+          assert state['envelope_version'] == 2
           assert state['active_season'] in {'spring', 'summer', 'autumn', 'winter'}
-          assert state['live_asset'] == 'assets/profile-hero.svg'
+          assert set(state['live_assets']) == set(expected)
+          for key, (width, height, viewbox) in expected.items():
+              path = Path(state['live_assets'][key])
+              assert path.is_file(), path
+              svg = ET.parse(path).getroot()
+              assert svg.attrib['width'] == width, (key, 'width')
+              assert svg.attrib['height'] == height, (key, 'height')
+              assert svg.attrib['viewBox'] == viewbox, (key, 'viewBox')
+          readme = Path('README.md').read_text()
+          for rel in state['live_assets'].values():
+              assert rel in readme, rel
           PY
 
       - name: Commit seasonal change
@@ -104,13 +157,19 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/profile-hero.svg design-lab/live-theme.json
+          git add \
+            assets/profile-hero.svg \
+            assets/profile-divider.svg \
+            assets/profile-section-projects.svg \
+            assets/profile-section-activity.svg \
+            assets/profile-footer.svg \
+            design-lab/live-theme.json
 
           if git diff --cached --quiet; then
-            echo "Seasonal profile is already current."
+            echo "Seasonal profile envelope is already current."
             exit 0
           fi
 
           season="$(python -c 'import json; print(json.load(open("design-lab/live-theme.json"))["active_season"])')"
-          git commit -m "switch profile theme to ${season}"
+          git commit -m "switch profile envelope to ${season}"
           git push
