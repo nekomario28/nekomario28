@@ -114,7 +114,7 @@ def _strip_mounted_source_backgrounds(text: str) -> str:
 
 
 def _strip_legacy_frame(text: str, *, key: str) -> str:
-    """Remove v4/v7 static rails, inner borders, edge ticks and v7 cap paths."""
+    """Remove v4/v7 static rails, inner borders, edge ticks and cap accents."""
     def keep_path(match: re.Match[str]) -> str:
         tag = match.group(0)
         dmatch = re.search(r'\bd="([^"]+)"', tag)
@@ -126,6 +126,7 @@ def _strip_legacy_frame(text: str, *, key: str) -> str:
             or (d.startswith("M22 ") and "M878 " in d)
             or d.startswith("M18 30V18Q18 ")
             or (d.startswith("M18 ") and "Q18 " in d and "H76 M882 " in d)
+            or (d.startswith("M31 13H62") and "M838 13H869" in d)
         ):
             return ""
         if (d.startswith("M80 0V") and "M820 " in d) or (d.startswith("M70 0V") and "M830 " in d):
