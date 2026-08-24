@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate Envelope v8 seamless presentation and GitHub README seam geometry."""
+"""Validate Envelope v8 seamless presentation, unified skin, and GitHub README geometry."""
 from __future__ import annotations
 
 import importlib.util
@@ -20,6 +20,7 @@ V8_RENDERER = V8 / "render_continuous_canvas.py"
 V7_VALIDATE = ROOT / "design-lab" / "envelope-v7" / "validate.py"
 README = ROOT / "README.md"
 MANIFEST = ROOT / "design-lab" / "theme-manifest.json"
+SKIN = "unified-v1"
 
 COMPOSITE_GEOMETRY = {
     "attribution_projects_transition": ("900", "76", "0 0 900 76", 654, 730),
@@ -35,6 +36,34 @@ def load_module(name: str, path: Path):
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+def assert_unified_skin(text: str, root: ET.Element, *, season: str, key: str, cfg: dict) -> None:
+    if root.attrib.get("data-envelope-skin") != SKIN:
+        raise SystemExit(f"missing unified skin marker: {season}/{key}")
+    if text.count('id="v8-frame"') != 1:
+        raise SystemExit(f"presentation asset must own exactly one v8 frame: {season}/{key}")
+    if 'data-frame-grammar="unified-v1"' not in text:
+        raise SystemExit(f"unified frame grammar missing: {season}/{key}")
+    if 'stroke-linecap="round"' in re.search(r'<g id="v8-frame".*?</g>', text, flags=re.S).group(0):
+        raise SystemExit(f"rounded linecap survived in canonical frame: {season}/{key}")
+
+    # The old parallel rail, duplicated same-x rail and inner mounted-canvas borders are forbidden.
+    forbidden = (
+        r'M22 0V\d+ M878 0V\d+',
+        r'M18 8V\d+ M882 8V\d+',
+        r'M80 0V420 M820 0V420',
+        r'M70 0V220 M830 0V220',
+    )
+    for pattern in forbidden:
+        if re.search(pattern, text):
+            raise SystemExit(f"legacy/double rail survived: {season}/{key}: {pattern}")
+
+    # Every physical document is painted from the same season palette and GitHub edge color.
+    if '#0d1117' not in text or cfg["chrome"]["bg0"] not in text or cfg["chrome"]["bg1"] not in text:
+        raise SystemExit(f"shared surface palette missing: {season}/{key}")
+    if '-surface-base"' not in text:
+        raise SystemExit(f"canonical surface base missing: {season}/{key}")
 
 
 def validate_generated() -> None:
@@ -77,6 +106,7 @@ def validate_generated() -> None:
     full_size_keys = {"hero", "projects", "activity", "footer"}
     geometries = inherited.GEOMETRY
     for season in ("spring", "summer", "autumn", "winter"):
+        cfg = manifest["seasons"][season]
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp)
             renderer.render(season, out)
@@ -86,6 +116,7 @@ def validate_generated() -> None:
                 if root.attrib.get("data-envelope-presentation") != "v8-seamless-surface":
                     raise SystemExit(f"missing v8 marker: {season}/{key}")
                 text = path.read_text(encoding="utf-8")
+                assert_unified_skin(text, root, season=season, key=key, cfg=cfg)
                 if key in full_size_keys:
                     width, height, _ = geometries[key]
                     for tag in re.findall(r"<rect\b[^>]*>", text):
@@ -99,6 +130,16 @@ def validate_generated() -> None:
                     text,
                 ):
                     raise SystemExit(f"independent hero card border survived: {season}")
+                if key == "projects_canvas":
+                    if 'fill="url(#galaxy-family-bg)"' in text:
+                        raise SystemExit(f"Project Map opaque local background survived: {season}")
+                    if 'M80 0V420 M820 0V420' in text:
+                        raise SystemExit(f"Project Map inner frame survived: {season}")
+                if key == "activity_canvas":
+                    if re.search(r'<rect\b(?=[^>]*\bwidth="760")(?=[^>]*\bheight="220")(?=[^>]*\bfill="#0d1117")', text):
+                        raise SystemExit(f"Activity opaque local background survived: {season}")
+                    if 'M70 0V220 M830 0V220' in text:
+                        raise SystemExit(f"Activity inner frame survived: {season}")
 
             for key, (width, height, view_box, start, end) in COMPOSITE_GEOMETRY.items():
                 path = out / renderer.PRESENTATION_ASSETS[key]
@@ -108,6 +149,7 @@ def validate_generated() -> None:
                 if root.attrib.get("data-envelope-presentation") != "v8-seamless-surface":
                     raise SystemExit(f"missing packed v8 marker: {season}/{key}")
                 text = path.read_text(encoding="utf-8")
+                assert_unified_skin(text, root, season=season, key=key, cfg=cfg)
                 if text.count('id="v7-global-window"') != 1:
                     raise SystemExit(f"packed surface must own one global motion layer: {season}/{key}")
                 if f'data-global-start="{start}"' not in text or f'data-global-end="{end}"' not in text:
@@ -119,7 +161,7 @@ def validate_generated() -> None:
                 direct_layers = [child for child in root if child.attrib.get("id") == "v7-global-window"]
                 if len(direct_layers) != 1:
                     raise SystemExit(f"packed motion layer must be a root child: {season}/{key}")
-    print("ENVELOPE_V8_SEAMLESS_STATIC_PASS seasons=4 presentation_assets=9 packed_surfaces=3")
+    print("ENVELOPE_V8_UNIFIED_STATIC_PASS seasons=4 presentation_assets=9 packed_surfaces=3 skin=unified-v1")
 
 
 def target_seam_proof_once() -> None:

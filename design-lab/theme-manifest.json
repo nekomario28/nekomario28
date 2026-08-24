@@ -2,15 +2,21 @@
   "version": 8,
   "base_theme": "dark",
   "surface": "github-profile-readme",
-  "strategy": "seasonal visual envelope v8 seamless surface using the proven v7 continuous motion engine and mounted foreground media",
+  "strategy": "seasonal visual envelope v8 unified surface using the proven v7 continuous motion engine and mounted foreground media",
   "timezone": "Asia/Tokyo",
   "presentation": {
     "version": 8,
     "mode": "seamless-surface",
+    "skin": "unified-v1",
     "intermediate_card_rounding": false,
     "name_hero_integrated": true,
     "readme_image_vertical_alignment": "top",
-    "short_window_packing": true
+    "short_window_packing": true,
+    "single_surface_palette": true,
+    "single_frame_rail_per_edge": true,
+    "inner_canvas_borders": false,
+    "mounted_source_backgrounds": "transparent-to-envelope-surface",
+    "outer_caps_only": true
   },
   "live_assets": {
     "hero": "assets/profile-hero.svg",
@@ -59,7 +65,7 @@
     "all_logical_windows_rendered": true,
     "mounted_foreground_media": true,
     "cross_document_hard_sync": false,
-    "reason": "Envelope v8 preserves the proven v7 shared coordinate field while removing presentation seams and independent-card styling; GitHub README images remain independent documents, so no shared runtime clock is claimed.",
+    "reason": "Envelope v8 preserves the proven v7 shared coordinate field while one v8 presentation layer owns the visible palette and frame grammar; GitHub README images remain independent documents, so no shared runtime clock is claimed.",
     "static_fallback": true,
     "reduced_motion": true
   },
@@ -116,13 +122,16 @@
     "All logical Y spans are rendered; invisible content gaps are represented by visible background canvas surfaces.",
     "Third-party character media remains a normal README image and is never copied into repository-owned SVG bytes.",
     "The character image is mounted between two repository-owned side surfaces; each side surface maps its local X back to the common 900px coordinate system.",
-    "Repository-owned Project Map and contribution SVG bodies may be composed into generated 900px canvas stages so their real data remains authoritative while the background fills the full width.",
+    "Repository-owned Project Map and contribution SVG bodies may be composed into generated 900px canvas stages so their real data remains authoritative while presentation-only local backgrounds may be removed to expose the envelope surface.",
     "Cross-document animation remains phase-tolerant rather than hard-synchronized; do not claim a shared runtime clock.",
     "Hero, character surfaces, attribution, bridges, section bands, mounted canvases and footer use one continuous rectangular surface; independent rounded-card styling is forbidden inside the envelope.",
     "README profile images use top vertical alignment so inline-image baseline/descender spacing cannot create visible seams between logical windows.",
     "Short contiguous logical windows may share one taller physical SVG document when needed to stay above GitHub README line-height after responsive scaling; the packed document must retain the original global start/end coordinates and must not delete logical spans.",
     "The name hero is the first window of the same envelope rather than an independent card; it must not carry its own inset card border.",
-    "Hero top cap, continuous background surfaces, shared rails, bridges, section bands, and footer bottom cap use one global coordinate grammar.",
+    "All presentation documents sample the same 900px horizontal surface palette so adjacent windows cannot change background color at a boundary.",
+    "Exactly one static frame rail exists per visible edge; legacy parallel rails, same-x duplicate rails, mounted-canvas inner borders and bridge edge ticks are forbidden.",
+    "Only the envelope outer ends may carry frame caps; intermediate physical documents must use straight through-rails without independent corners.",
+    "Mounted Project Map and Activity data render over the shared envelope surface rather than opaque rounded local cards.",
     "A seasonal motion live_verification PASS is scoped to a tested target surface/environment and must be re-earned after a renderer/version change or seasonal promotion."
   ]
 }
