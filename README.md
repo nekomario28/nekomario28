@@ -19,10 +19,8 @@
 </p>
 
 <p align="center">
-  <img src="assets/profile-divider.svg" width="900" alt="">
+  <img src="assets/profile-section-projects.svg" width="900" alt="プロジェクト">
 </p>
-
-<h2 align="center">プロジェクト</h2>
 
 <p align="center">
   <a href="https://nekomario28.github.io/interactive-project-map/u/?username=nekomario28&style=galaxy-systems">
@@ -31,7 +29,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/profile-divider.svg" width="900" alt="">
+  <img src="assets/profile-section-activity.svg" width="900" alt="活動">
 </p>
 
 <p align="center">
