@@ -179,7 +179,7 @@ def main() -> int:
             "timezone": manifest.get("timezone", "Asia/Tokyo"),
             "motion": cfg["motion"],
             "frame": {
-                "mode": "segmented-bridge-v2",
+                "mode": "segmented-rails",
                 "background_illusion": True,
                 "shared_edge_rails": True,
                 "true_overlay": False
