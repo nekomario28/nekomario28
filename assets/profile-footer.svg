@@ -1,6 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="96" viewBox="0 0 900 96" role="img" aria-label="dark profile closing footer">
-  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#070b14"/><stop offset=".5" stop-color="#0b1324"/><stop offset="1" stop-color="#070b14"/></linearGradient></defs>
-  <rect width="900" height="96" rx="16" fill="url(#bg)"/>
-  <path d="M0 71 C125 42 223 87 344 66 C466 44 565 80 694 55 C779 39 832 43 900 29" fill="none" stroke="#d8dde7" stroke-opacity=".055" stroke-width="14"/>
-  <path d="M330 48 H425 M475 48 H570" stroke="#d8dde7" stroke-opacity=".18"/><circle cx="450" cy="48" r="3" fill="#a32932"/><circle cx="450" cy="48" r="10" fill="none" stroke="#c9a85f" stroke-opacity=".22"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="92" viewBox="0 0 900 92" role="img" aria-label="季節ダークプロフィール終端">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#06101a"/><stop offset=".52" stop-color="#0c2d3b"/><stop offset="1" stop-color="#06101a"/></linearGradient></defs>
+  <rect width="900" height="92" rx="16" fill="url(#bg)"/>
+  <path d="M0 68 C132 46 236 82 356 63 C482 43 582 77 704 53 C788 37 842 42 900 29" fill="none" stroke="#86aa94" stroke-opacity=".08" stroke-width="15"/>
+  <path d="M322 46 H420 M480 46 H578" stroke="#eef2f6" stroke-opacity=".14"/>
+  <circle cx="450" cy="46" r="3" fill="#86aa94"/><circle cx="450" cy="46" r="10" fill="none" stroke="#c7b06c" stroke-opacity=".24"/>
+  <g fill="none" stroke-linecap="round"><path d="M704 29 C748 11 796 39 842 20" stroke="#86aa94" stroke-opacity=".34" stroke-width="2"/><path d="M723 35 C764 22 806 42 858 27" stroke="#c7b06c" stroke-opacity=".22" stroke-width="1"/></g>
 </svg>
