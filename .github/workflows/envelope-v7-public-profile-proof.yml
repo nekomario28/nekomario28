@@ -25,20 +25,24 @@ jobs:
           chrome="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)"
           test -n "$chrome"
           out="$RUNNER_TEMP/envelope-v7-public-profile-proof"
-          mkdir -p "$out"
+          mkdir -p "$out/chrome-profile"
           export OUT="$out"
 
-          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars \
+          "$chrome" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars \
+            --user-data-dir="$out/chrome-profile" \
             --remote-debugging-port=9222 --remote-allow-origins='*' \
             --window-size=1440,3400 about:blank >"$out/chrome.log" 2>&1 &
           chrome_pid=$!
           trap 'kill "$chrome_pid" 2>/dev/null || true' EXIT
 
-          for _ in $(seq 1 50); do
+          for _ in $(seq 1 80); do
             curl -fsS http://127.0.0.1:9222/json/list >"$out/targets.json" && break
             sleep .2
           done
-          test -s "$out/targets.json"
+          if ! test -s "$out/targets.json"; then
+            cat "$out/chrome.log" || true
+            exit 1
+          fi
 
           python - <<'PY'
           import base64, json, os, time, urllib.request
