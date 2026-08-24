@@ -21,8 +21,8 @@ jobs:
   generate:
     permissions:
       contents: read
-    # Reviewed static-Contributed v1 release: R 2a172c3c62e8be8138e38822f05dd48671072209
-    # resolves immutable Action F a5519222947325ff71a20309c483feba1085c718.
+    # Reviewed Galaxy Systems Contributed rail v1 release: R 5818675661b260da844454ec4aeac8c8ad2b2c38
+    # resolves immutable Action F 94abe621aae576d6a49e38fe7e146e0790387fc2 (Verify #780; pin promotion #782).
     uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@v1
     with:
       theme: dark
@@ -57,7 +57,10 @@ jobs:
           grep -q 'data-galaxy-preset="systems"' project-map/galaxy.svg
           grep -q '#E69F00' project-map/galaxy.svg
           grep -q 'data-galaxy-external="true"' project-map/galaxy.svg
+          grep -q 'data-galaxy-external-layout="rail"' project-map/galaxy.svg
+          grep -q 'data-galaxy-external-backdrop="true"' project-map/galaxy.svg
           grep -q 'data-galaxy-orbit="contributed"' project-map/galaxy.svg
+          grep -q 'data-galaxy-placement="external-rail"' project-map/galaxy.svg
           grep -q '>Contributed</text>' project-map/galaxy.svg
           if grep -q 'External contributions' project-map/galaxy.svg; then
             echo 'Legacy synthetic External contributions hub is still present.' >&2
@@ -70,6 +73,7 @@ jobs:
           grep -q '"taxonomy"' project-map/graph.json
           node <<'NODE'
           const fs = require('node:fs');
+          const svg = fs.readFileSync('project-map/galaxy.svg', 'utf8');
           const graph = JSON.parse(fs.readFileSync('project-map/graph.json', 'utf8'));
           const owner = 'nekomario28';
           const contributed = graph.nodes.filter((node) => node?.type === 'repository' && node?.relation === 'contributed');
@@ -88,6 +92,11 @@ jobs:
           const contributionTargets = new Set(graph.edges.filter((edge) => edge?.type === 'contribution').map((edge) => edge.target));
           for (const id of contributedIds) if (!contributionTargets.has(id)) throw new Error(`missing canonical contribution edge for ${id}`);
           if ((graph.semanticEdges || []).some((edge) => contributedIds.has(edge?.source) || contributedIds.has(edge?.target))) throw new Error('Contributed repository entered owned semantic graph');
+          const railStart = svg.indexOf('data-galaxy-external-layout="rail"');
+          if (railStart < 0) throw new Error('Galaxy Systems external rail is missing');
+          const railPlacements = [...svg.matchAll(/data-galaxy-orbit="contributed" data-galaxy-placement="external-rail"/g)];
+          if (railPlacements.length !== contributed.length) throw new Error(`external rail placement mismatch: ${railPlacements.length} SVG vs ${contributed.length} graph`);
+          if (/<animateTransform\b/.test(svg.slice(railStart))) throw new Error('Contributed external rail re-entered global orbit animation');
           const forbiddenKeys = new Set(['private', 'isPrivate', 'restricted', 'isRestricted']);
           const visit = (value) => {
             if (!value || typeof value !== 'object') return;
@@ -97,7 +106,7 @@ jobs:
             }
           };
           visit(graph);
-          console.log(`Canonical map validated: ${graph.repositoryCount} owned + ${contributed.length} accepted Contributed`);
+          console.log(`Canonical map validated: ${graph.repositoryCount} owned + ${contributed.length} accepted Contributed; external rail verified`);
           NODE
 
       - name: Commit only when the generated map changed
