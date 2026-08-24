@@ -21,7 +21,8 @@ jobs:
   generate:
     permissions:
       contents: read
-    # Reviewed accepted-Contributed v1 release: c2a7bdb32dff933801161433e05962b2a9462deb
+    # Reviewed static-Contributed v1 release: R 2a172c3c62e8be8138e38822f05dd48671072209
+    # resolves immutable Action F a5519222947325ff71a20309c483feba1085c718.
     uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@v1
     with:
       theme: dark
@@ -54,9 +55,18 @@ jobs:
           test -s project-map/galaxy.svg
           test -s project-map/graph.json
           grep -q 'data-galaxy-preset="systems"' project-map/galaxy.svg
-          grep -q 'stroke-width="1.4"' project-map/galaxy.svg
-          grep -q 'External contributions' project-map/galaxy.svg
+          grep -q '#E69F00' project-map/galaxy.svg
+          grep -q 'data-galaxy-external="true"' project-map/galaxy.svg
+          grep -q 'data-galaxy-orbit="contributed"' project-map/galaxy.svg
           grep -q '>Contributed</text>' project-map/galaxy.svg
+          if grep -q 'External contributions' project-map/galaxy.svg; then
+            echo 'Legacy synthetic External contributions hub is still present.' >&2
+            exit 1
+          fi
+          if grep -Eq 'stroke="#E69F00"[^>]+stroke-dasharray="3 3"' project-map/galaxy.svg; then
+            echo 'Legacy Contributed halo is still present.' >&2
+            exit 1
+          fi
           grep -q '"taxonomy"' project-map/graph.json
           node <<'NODE'
           const fs = require('node:fs');
@@ -75,6 +85,8 @@ jobs:
             if (commits < 1 && merged < 1) throw new Error(`pending-only repository admitted as Contributed: ${node.label}`);
           }
           if (graph.edges.some((edge) => ['ownership', 'membership'].includes(edge?.type) && contributedIds.has(edge?.target))) throw new Error('ownership path reaches Contributed repository');
+          const contributionTargets = new Set(graph.edges.filter((edge) => edge?.type === 'contribution').map((edge) => edge.target));
+          for (const id of contributedIds) if (!contributionTargets.has(id)) throw new Error(`missing canonical contribution edge for ${id}`);
           if ((graph.semanticEdges || []).some((edge) => contributedIds.has(edge?.source) || contributedIds.has(edge?.target))) throw new Error('Contributed repository entered owned semantic graph');
           const forbiddenKeys = new Set(['private', 'isPrivate', 'restricted', 'isRestricted']);
           const visit = (value) => {
