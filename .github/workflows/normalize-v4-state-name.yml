@@ -35,3 +35,4 @@ jobs:
           git add .github/workflows/update-seasonal-profile.yml design-lab/scripts/promote-season.py design-lab/live-theme.json
           git commit -m "normalize envelope v4 frame mode"
           git push
+# retrigger: 2
