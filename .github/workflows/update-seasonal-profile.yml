@@ -11,6 +11,7 @@ on:
       - "design-lab/scripts/promote-season.py"
       - "design-lab/scripts/render_envelope_chrome.py"
       - "design-lab/seasons/*.svg"
+      - "assets/profile-frame-bridge.svg"
       - "README.md"
   pull_request:
     branches: [main]
@@ -22,6 +23,7 @@ on:
       - "design-lab/scripts/promote-season.py"
       - "design-lab/scripts/render_envelope_chrome.py"
       - "design-lab/seasons/*.svg"
+      - "assets/profile-frame-bridge.svg"
       - "README.md"
   schedule:
     # 00:17 UTC = 09:17 JST. Monthly checks are cheap; only season boundaries mutate files.
@@ -109,6 +111,7 @@ jobs:
           spec.loader.exec_module(module)
 
           expected = {
+              'assets/profile-frame-bridge.svg': ('900', '32', '0 0 900 32'),
               'assets/profile-section-projects.svg': ('900', '68', '0 0 900 68'),
               'assets/profile-section-activity.svg': ('900', '68', '0 0 900 68'),
               'assets/profile-footer.svg': ('900', '92', '0 0 900 92'),
@@ -160,15 +163,18 @@ jobs:
 
           expected = {
               'hero': ('900', '260', '0 0 900 260'),
+              'bridge': ('900', '32', '0 0 900 32'),
               'projects': ('900', '68', '0 0 900 68'),
               'activity': ('900', '68', '0 0 900 68'),
               'footer': ('900', '92', '0 0 900 92'),
           }
           state = json.loads(Path('design-lab/live-theme.json').read_text())
-          assert state['envelope_version'] == 3
+          assert state['envelope_version'] == 4
           assert state['active_season'] in {'spring', 'summer', 'autumn', 'winter'}
           assert set(state['live_assets']) == set(expected)
           assert state['motion']['static_fallback'] is True
+          assert state['frame']['mode'] == 'segmented-bridge'
+          assert state['frame']['true_overlay'] is False
           for key, (width, height, viewbox) in expected.items():
               path = Path(state['live_assets'][key])
               assert path.is_file(), path
@@ -183,6 +189,7 @@ jobs:
           readme = Path('README.md').read_text()
           for rel in state['live_assets'].values():
               assert rel in readme, rel
+          assert readme.count('assets/profile-frame-bridge.svg') == 3
           assert 'assets/profile-divider.svg' not in readme
           PY
 
@@ -195,6 +202,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add \
             assets/profile-hero.svg \
+            assets/profile-frame-bridge.svg \
             assets/profile-section-projects.svg \
             assets/profile-section-activity.svg \
             assets/profile-footer.svg \

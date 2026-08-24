@@ -1,11 +1,12 @@
 {
-  "version": 4,
+  "version": 5,
   "base_theme": "dark",
   "surface": "github-profile-readme",
-  "strategy": "seasonal visual envelope v3",
+  "strategy": "seasonal visual envelope v4 segmented frame",
   "timezone": "Asia/Tokyo",
   "live_assets": {
     "hero": "assets/profile-hero.svg",
+    "bridge": "assets/profile-frame-bridge.svg",
     "projects": "assets/profile-section-projects.svg",
     "activity": "assets/profile-section-activity.svg",
     "footer": "assets/profile-footer.svg"
@@ -100,6 +101,7 @@
     "Automatic promotion may only use season entries with auto_promote=true and static_render=PASS.",
     "The live README references only stable assets; seasonal source paths stay inside the design lab.",
     "Optional animation must not carry essential information and must expose a reduced-motion fallback.",
-    "Do not add a separator immediately after the hero when direct visual flow is stronger."
+    "Do not add a separator immediately after the hero when direct visual flow is stronger.",
+    "The segmented frame bridge is background/chrome only and must switch atomically with the rest of the active seasonal envelope."
   ]
 }

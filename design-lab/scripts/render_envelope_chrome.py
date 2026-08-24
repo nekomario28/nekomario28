@@ -39,6 +39,18 @@ def motif_svg(kind: str, accent: str, accent2: str) -> str:
     raise ValueError(f"unknown motif: {kind}")
 
 
+def bridge_motif(kind: str, accent: str, accent2: str) -> str:
+    if kind == "petal":
+        return f'<g fill="{esc(accent)}" fill-opacity=".22"><ellipse cx="430" cy="15" rx="4" ry="2" transform="rotate(-24 430 15)"/><ellipse cx="470" cy="18" rx="3.4" ry="1.8" transform="rotate(28 470 18)"/></g>'
+    if kind == "water":
+        return f'<path d="M338 22 C390 10 443 27 494 17 C544 8 590 22 637 13" fill="none" stroke="{esc(accent)}" stroke-opacity=".10" stroke-width="1.4"/>'
+    if kind == "leaf":
+        return f'<g fill="{esc(accent)}" fill-opacity=".22"><path d="M0,-6 2,-2 6,-4 4,0 7,2 3,3 4,7 0,4 -2,8 -2,4 -7,5 -4,1 -7,-2 -3,-2 -3,-6 0,-3Z" transform="translate(450 16) rotate(18)"/></g>'
+    if kind == "snow":
+        return f'<g fill="{esc(accent2)}" fill-opacity=".25"><circle cx="430" cy="14" r="1.4"/><circle cx="450" cy="19" r="1"/><circle cx="472" cy="13" r="1.2"/></g>'
+    raise ValueError(f"unknown motif: {kind}")
+
+
 def background_defs(bg0: str, bg1: str) -> str:
     return f'''<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="{esc(bg0)}"/><stop offset=".52" stop-color="{esc(bg1)}"/><stop offset="1" stop-color="{esc(bg0)}"/></linearGradient></defs>'''
 
@@ -53,6 +65,21 @@ def section_band(cfg: dict, label: str, aria: str) -> str:
   <circle cx="564" cy="34" r="2.5" fill="{esc(c['accent2'])}"/>
   <text x="450" y="41" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans CJK JP',sans-serif" font-size="22" font-weight="600" letter-spacing="4" fill="#eef1f4">{esc(label)}</text>
   {motif_svg(c['motif'], cfg['accent'], c['accent2'])}
+</svg>'''
+
+
+def bridge(cfg: dict) -> str:
+    c = cfg["chrome"]
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="900" height="32" viewBox="0 0 900 32" role="img" aria-label="seasonal envelope frame bridge">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="{esc(c['bg0'])}"/><stop offset=".5" stop-color="{esc(c['bg1'])}"/><stop offset="1" stop-color="{esc(c['bg0'])}"/></linearGradient>
+    <linearGradient id="rail" x1="0" y1="0" x2="0" y2="1"><stop stop-color="{esc(cfg['accent'])}" stop-opacity=".12"/><stop offset=".5" stop-color="{esc(c['accent2'])}" stop-opacity=".34"/><stop offset="1" stop-color="{esc(cfg['accent'])}" stop-opacity=".12"/></linearGradient>
+  </defs>
+  <rect width="900" height="32" fill="url(#bg)"/>
+  <path d="M18 0V32 M882 0V32" stroke="url(#rail)" stroke-width="1.2"/>
+  <path d="M18 15H64 M836 15H882" stroke="#dce8e4" stroke-opacity=".07"/>
+  {bridge_motif(c['motif'], cfg['accent'], c['accent2'])}
+  <circle cx="450" cy="16" r="2" fill="{esc(c['accent2'])}" fill-opacity=".30"/>
 </svg>'''
 
 
@@ -73,6 +100,7 @@ def render(season: str, out_root: Path = ROOT) -> list[Path]:
     cfg = data["seasons"][season]
     assets = data["live_assets"]
     outputs = {
+        "bridge": bridge(cfg),
         "projects": section_band(cfg, "プロジェクト", "プロジェクト セクション"),
         "activity": section_band(cfg, "活動", "活動 セクション"),
         "footer": footer(cfg),

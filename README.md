@@ -15,6 +15,10 @@
 </p>
 
 <p align="center">
+  <img src="assets/profile-frame-bridge.svg" width="900" alt="">
+</p>
+
+<p align="center">
   <img src="assets/profile-section-projects.svg" width="900" alt="プロジェクト">
 </p>
 
@@ -25,11 +29,19 @@
 </p>
 
 <p align="center">
+  <img src="assets/profile-frame-bridge.svg" width="900" alt="">
+</p>
+
+<p align="center">
   <img src="assets/profile-section-activity.svg" width="900" alt="活動">
 </p>
 
 <p align="center">
   <img width="760" src="assets/github-contributions-dark.svg" alt="直近31日間の GitHub コントリビューション">
+</p>
+
+<p align="center">
+  <img src="assets/profile-frame-bridge.svg" width="900" alt="">
 </p>
 
 <p align="center">
