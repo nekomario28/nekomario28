@@ -1,0 +1,168 @@
+name: TEMP OpenArm dataset Python oracle
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/openarm-dataset-python-oracle-once.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  oracle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Clone exact current Python authority and Rust replacement
+        shell: bash
+        env:
+          PY_SHA: 7c412acd8a7f30f88b1a95d556f71e12e2e1eea5
+          RUST_SHA: 2c34fe87b4dbc759b91ff85d01ce675125ecec0b
+        run: |
+          set -euo pipefail
+          git clone --filter=blob:none https://github.com/enactic/openarm_dataset.git python
+          git -C python checkout --detach "$PY_SHA"
+          test "$(git -C python rev-parse HEAD)" = "$PY_SHA"
+          git clone --filter=blob:none https://github.com/k1000dai/openarm_dataset-rust.git rust
+          git -C rust checkout --detach "$RUST_SHA"
+          test "$(git -C rust rev-parse HEAD)" = "$RUST_SHA"
+          echo "OPENARM_ORACLE_EXACT_HEADS PASS python=$PY_SHA rust=$RUST_SHA"
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install minimal Python oracle dependencies
+        run: python -m pip install --disable-pip-version-check pyyaml numpy pyarrow pandas scipy pillow
+
+      - name: Execute current Python leader API, roundtrip, and merge contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH="$PWD/python/src" python - <<'PY'
+          from pathlib import Path
+          import tempfile
+          import yaml
+          from openarm_dataset.metadata import Metadata
+          from openarm_dataset.merge import _validate_compatibility, MergeError
+
+          def document(firmware: str):
+              return {
+                  'version': '0.4.0',
+                  'operation_type': 'teleop',
+                  'episodes': [],
+                  'tasks': [],
+                  'frequencies': {},
+                  'equipment': {
+                      'id': 'Test',
+                      'version': '1.0',
+                      'embodiments': {},
+                      'perceptions': {'cameras': {}},
+                      'leader': {
+                          'ker': {
+                              'id': 'OpenArmKER',
+                              'firmware_version': firmware,
+                              'hardware_version': '1.0',
+                          }
+                      },
+                  },
+              }
+
+          def make(root: Path, firmware: str) -> Metadata:
+              root.mkdir(parents=True)
+              path = root / 'metadata.yaml'
+              path.write_text(yaml.safe_dump(document(firmware)), encoding='utf-8')
+              return Metadata(path)
+
+          class FakeDataset:
+              def __init__(self, meta):
+                  self.meta = meta
+
+          with tempfile.TemporaryDirectory() as td:
+              td = Path(td)
+              a = make(td/'a', '1.2.3')
+              b = make(td/'b', '1.2.3')
+              c = make(td/'c', '1.3.0')
+
+              ker = a.equipment.leader['ker']
+              assert ker.kind == 'ker'
+              assert ker.id == 'OpenArmKER'
+              assert ker.firmware_version == '1.2.3'
+              assert ker.hardware_version == '1.0'
+              print('PY_ORACLE_TYPED_LEADER PASS')
+
+              out = td/'written'
+              a.write(out)
+              rewritten = Metadata(out/'metadata.yaml')
+              assert rewritten.equipment.leader['ker'].firmware_version == '1.2.3'
+              print('PY_ORACLE_ROUNDTRIP PASS')
+
+              _validate_compatibility([FakeDataset(a), FakeDataset(b)])
+              print('PY_ORACLE_EQUAL_LEADER_MERGE_COMPAT PASS')
+
+              try:
+                  _validate_compatibility([FakeDataset(a), FakeDataset(c)])
+              except MergeError as e:
+                  assert 'equipment configuration differs' in str(e)
+                  print('PY_ORACLE_FIRMWARE_DRIFT_REJECT PASS')
+              else:
+                  raise AssertionError('current upstream accepted differing leader firmware')
+          PY
+
+      - name: Inject and execute equivalent Rust observations
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > rust/tests/current_python_leader_oracle.rs <<'RS'
+          mod support;
+          use openarm_dataset::{Dataset, MergeOptions, merge_datasets};
+          use serde_yaml::Value;
+          use std::fs;
+          use std::path::Path;
+
+          fn inject_leader(root: &Path, firmware: &str) {
+              let path = root.join("metadata.yaml");
+              let text = fs::read_to_string(&path).unwrap();
+              let marker = "  perceptions:\n";
+              assert!(text.contains(marker));
+              let leader = format!("  leader:\n    ker:\n      id: OpenArmKER\n      firmware_version: \"{firmware}\"\n      hardware_version: \"1.0\"\n");
+              fs::write(&path, text.replacen(marker, &(leader + marker), 1)).unwrap();
+          }
+
+          fn firmware(dataset: &Dataset) -> String {
+              dataset.metadata().equipment_raw().unwrap()
+                  .get(Value::from("leader")).and_then(|v| v.get(Value::from("ker")))
+                  .and_then(|v| v.get(Value::from("firmware_version"))).and_then(Value::as_str)
+                  .unwrap().to_string()
+          }
+
+          #[test]
+          fn raw_roundtrip_matches_current_python_observable() {
+              let tmp=tempfile::tempdir().unwrap();
+              let input=tmp.path().join("input"); let out=tmp.path().join("out");
+              support::build_0_4_0_qpos(&input); inject_leader(&input,"1.2.3");
+              let ds=Dataset::open(&input).unwrap(); assert_eq!(firmware(&ds),"1.2.3");
+              ds.metadata().write(&out).unwrap();
+              assert_eq!(firmware(&Dataset::open(&out).unwrap()),"1.2.3");
+          }
+
+          #[test]
+          fn merge_contract_matches_current_python_observable() {
+              let tmp=tempfile::tempdir().unwrap();
+              let a=tmp.path().join("a"); let b=tmp.path().join("b"); let c=tmp.path().join("c");
+              support::build_0_4_0_qpos(&a); support::build_0_4_0_qpos(&b); support::build_0_4_0_qpos(&c);
+              inject_leader(&a,"1.2.3"); inject_leader(&b,"1.2.3"); inject_leader(&c,"1.3.0");
+              merge_datasets(&[a.clone(),b],&tmp.path().join("same"),&MergeOptions::default()).unwrap();
+              let err=merge_datasets(&[a,c],&tmp.path().join("different"),&MergeOptions::default()).unwrap_err();
+              assert!(err.to_string().contains("equipment configuration differs"));
+          }
+          RS
+          cargo test --manifest-path rust/Cargo.toml --locked --test current_python_leader_oracle -- --nocapture
+          echo 'RUST_CURRENT_PYTHON_OBSERVABLE_MATCH PASS tests=2'
+
+      - name: Record boundary
+        if: always()
+        run: |
+          echo 'OPENARM_ORACLE_REMOTE_MUTATION=false'
+          echo 'OPENARM_ORACLE_MODEL_INFERENCE=false'
