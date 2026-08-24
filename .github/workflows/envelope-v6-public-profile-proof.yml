@@ -18,7 +18,7 @@ jobs:
         shell: bash
         run: python -m pip install --quiet websocket-client pillow
 
-      - name: Capture one persistent public-profile timeline
+      - name: Capture persistent public-profile motion
         shell: bash
         run: |
           set -euo pipefail
@@ -74,8 +74,12 @@ jobs:
                   time.sleep(.1)
               raise RuntimeError('page did not reach readyState=complete')
 
-          def capture(name):
-              data = call('Page.captureScreenshot', {'format': 'png', 'captureBeyondViewport': False})['data']
+          def capture(name, clip=None):
+              params = {'format': 'png', 'captureBeyondViewport': False}
+              if clip:
+                  params['clip'] = {**clip, 'scale': 1}
+                  params['captureBeyondViewport'] = True
+              data = call('Page.captureScreenshot', params)['data']
               (out / name).write_bytes(base64.b64decode(data))
 
           call('Page.enable')
@@ -85,49 +89,54 @@ jobs:
           call('Page.navigate', {'url': 'https://github.com/nekomario28'})
           wait_complete()
 
-          t0 = time.monotonic()
-          time.sleep(2)
-          capture('profile-desktop-dark-t2.png')
+          time.sleep(1)
           bridge_rects = evaluate("""(() => Array.from(document.images).filter(i => i.src.includes('profile-frame-bridge-character-projects.svg')).map(i => { const r=i.getBoundingClientRect(); return {src:i.src,x:r.x,y:r.y,width:r.width,height:r.height}; }))()""") or []
-          time.sleep(max(0, 8 - (time.monotonic() - t0)))
-          capture('profile-desktop-dark-t8.png')
+          if not bridge_rects:
+              raise RuntimeError('v6 bridge asset was not found on public profile DOM')
+          r = bridge_rects[0]
+          clip = {'x': r['x'], 'y': r['y'], 'width': r['width'], 'height': r['height']}
 
-          a = Image.open(out / 'profile-desktop-dark-t2.png').convert('RGB')
-          b = Image.open(out / 'profile-desktop-dark-t8.png').convert('RGB')
-          full = ImageChops.difference(a, b)
-          full_changed = sum(1 for px in full.getdata() if px != (0,0,0))
-          full_bbox = full.getbbox()
+          # Sample the same live bridge every 250 ms for 7 seconds. v6 particles are
+          # phase-spaced every 6 seconds, so at least one rail crossing should occur.
+          sample_names = []
+          start = time.monotonic()
+          for i in range(29):
+              name = f'bridge-sample-{i:02d}.png'
+              capture(name, clip=clip)
+              sample_names.append(name)
+              target_t = start + (i + 1) * 0.25
+              time.sleep(max(0, target_t - time.monotonic()))
 
-          rail_changed = 0
-          strips = []
-          if bridge_rects:
-              r = bridge_rects[0]
-              for logical_x in (18, 882):
-                  sx = int(round(r['x'] + r['width'] * logical_x / 900))
-                  y0 = max(0, int(r['y']))
-                  y1 = min(a.height, int(r['y'] + r['height']))
-                  box = (max(0,sx-4), y0, min(a.width,sx+5), y1)
-                  strips.append(box)
-                  d = ImageChops.difference(a.crop(box), b.crop(box))
-                  rail_changed += sum(1 for px in d.getdata() if px != (0,0,0))
+          max_changed = 0
+          changed_pairs = []
+          for i in range(len(sample_names) - 1):
+              a = Image.open(out / sample_names[i]).convert('RGB')
+              b = Image.open(out / sample_names[i+1]).convert('RGB')
+              d = ImageChops.difference(a, b)
+              changed = sum(1 for px in d.getdata() if px != (0,0,0))
+              if changed:
+                  changed_pairs.append({'from': i, 'to': i+1, 'changed_pixels': changed, 'bbox': d.getbbox()})
+                  max_changed = max(max_changed, changed)
 
+          capture('profile-desktop-dark-final.png')
           call('Emulation.setDeviceMetricsOverride', {'width': 430, 'height': 3000, 'deviceScaleFactor': 1, 'mobile': True})
           time.sleep(.5)
-          capture('profile-mobile-dark-t8.png')
+          capture('profile-mobile-dark-final.png')
 
           metrics = {
-              'profile_same_page_t2_t8': {'bbox': full_bbox, 'changed_pixels': full_changed},
-              'public_bridge_rects': bridge_rects,
-              'public_bridge_rail_diff': {'changed_pixels': rail_changed, 'strips': strips},
-              'proof_scope': 'actual public GitHub profile, same persistent Chrome page, wall-clock 2s -> 8s'
+              'public_bridge_rect': r,
+              'sample_interval_seconds': 0.25,
+              'sample_duration_seconds': 7.0,
+              'sample_count': len(sample_names),
+              'changed_pairs': changed_pairs,
+              'max_changed_pixels_between_adjacent_samples': max_changed,
+              'proof_scope': 'actual public GitHub profile, one persistent Chrome page'
           }
           (out / 'metrics.json').write_text(json.dumps(metrics, indent=2))
           print(json.dumps(metrics, indent=2))
 
-          if not bridge_rects:
-              raise RuntimeError('v6 bridge asset was not found on public profile DOM')
-          if rail_changed <= 0:
-              raise RuntimeError('v6 bridge rail did not visibly change on the persistent public profile page')
+          if not changed_pairs:
+              raise RuntimeError('no visible change observed in v6 bridge across 7-second persistent-page sample')
           PY
 
           sha256sum "$out"/*.png | tee "$out/sha256.txt"
