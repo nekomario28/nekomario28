@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "coordinate_system": "profile-envelope-continuous-canvas-y-v1",
+  "width": 900,
+  "global_extent": 1662,
+  "bleed": 24,
+  "rail_x": [18, 882],
+  "duration_seconds": 32,
+  "direction": "top-to-bottom",
+  "cross_document_hard_sync": false,
+  "render_model": "shared-global-field-clipped-by-rendered-canvas-windows",
+  "background_model": "edge-matched-dark-surface-with-mounted-foreground-media",
+  "notes": [
+    "Every logical span is rendered in Envelope v7; v6 invisible content gaps are replaced by visible canvas surfaces.",
+    "Repository-owned project and contribution SVG bodies are copied into generated 900px stages; third-party character media remains a normal external README image flanked by side-surface SVGs.",
+    "A local SVG clips the shared logical field and does not own object lifecycle at its edges.",
+    "The paired character side surfaces cover one logical window but are independent SVG runtime documents; hard synchronization is not claimed.",
+    "Outer backgrounds approach GitHub dark #0d1117 to soften the visible canvas boundary on the dark theme."
+  ],
+  "windows": {
+    "hero": {"start": 0, "end": 260, "height": 260, "rendered": true, "asset_key": "hero", "rails": "both"},
+    "character": {"start": 260, "end": 654, "height": 394, "rendered": true, "asset_keys": ["character_left", "character_right"], "rails": "split"},
+    "attribution": {"start": 654, "end": 698, "height": 44, "rendered": true, "asset_key": "attribution", "rails": "both"},
+    "bridge_character_projects": {"start": 698, "end": 730, "height": 32, "rendered": true, "asset_key": "bridge_character_projects", "rails": "both"},
+    "projects": {"start": 730, "end": 798, "height": 68, "rendered": true, "asset_key": "projects", "rails": "both"},
+    "projects_canvas": {"start": 798, "end": 1218, "height": 420, "rendered": true, "asset_key": "projects_canvas", "rails": "both"},
+    "bridge_projects_activity": {"start": 1218, "end": 1250, "height": 32, "rendered": true, "asset_key": "bridge_projects_activity", "rails": "both"},
+    "activity": {"start": 1250, "end": 1318, "height": 68, "rendered": true, "asset_key": "activity", "rails": "both"},
+    "activity_canvas": {"start": 1318, "end": 1538, "height": 220, "rendered": true, "asset_key": "activity_canvas", "rails": "both"},
+    "bridge_activity_footer": {"start": 1538, "end": 1570, "height": 32, "rendered": true, "asset_key": "bridge_activity_footer", "rails": "both"},
+    "footer": {"start": 1570, "end": 1662, "height": 92, "rendered": true, "asset_key": "footer", "rails": "both"}
+  },
+  "particles": [
+    {"id": "left-primary", "rail": "left", "radius": 2.4, "tail": 13, "phase_seconds": 0, "color": "accent", "opacity": 0.82},
+    {"id": "right-secondary", "rail": "right", "radius": 2.1, "tail": 11, "phase_seconds": 5.333333, "color": "accent2", "opacity": 0.68},
+    {"id": "left-secondary", "rail": "left", "radius": 1.5, "tail": 9, "phase_seconds": 10.666667, "color": "accent2", "opacity": 0.50},
+    {"id": "right-primary", "rail": "right", "radius": 1.7, "tail": 10, "phase_seconds": 16, "color": "accent", "opacity": 0.58},
+    {"id": "left-fine", "rail": "left", "radius": 1.2, "tail": 8, "phase_seconds": 21.333333, "color": "accent", "opacity": 0.42},
+    {"id": "right-fine", "rail": "right", "radius": 1.2, "tail": 8, "phase_seconds": 26.666667, "color": "accent2", "opacity": 0.40}
+  ]
+}
