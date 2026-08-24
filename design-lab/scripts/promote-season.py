@@ -1,17 +1,11 @@
 #!/usr/bin/env python3
-"""Validate and optionally promote the complete seasonal profile envelope.
-
-The live README references stable assets only. Promotion changes the approved hero,
-segmented frame bridge, seasonal section chrome, footer, and design-lab/live-theme.json
-without restructuring README. Animation remains optional and the static frame is always authoritative.
-"""
+"""Validate and optionally promote the complete seasonal profile envelope v5."""
 from __future__ import annotations
 
 import argparse
 import datetime as dt
 import importlib.util
 import json
-import shutil
 import tempfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -21,7 +15,7 @@ LAB = Path(__file__).resolve().parents[1]
 ROOT = LAB.parent
 MANIFEST = LAB / "theme-manifest.json"
 LIVE_STATE = LAB / "live-theme.json"
-RENDERER = Path(__file__).with_name("render_envelope_chrome.py")
+RENDERER = Path(__file__).with_name("render_continuous_flow.py")
 
 
 def load_json(path: Path) -> dict:
@@ -31,26 +25,30 @@ def load_json(path: Path) -> dict:
 def validate_manifest(data: dict) -> None:
     seen: dict[int, str] = {}
     required_assets = {"hero", "bridge", "projects", "activity", "footer"}
+    if data.get("version") != 6:
+        raise SystemExit("Envelope v5 requires manifest version 6")
     if set(data.get("live_assets", {})) != required_assets:
         raise SystemExit(f"live_assets must be exactly {sorted(required_assets)}")
+    flow = data.get("envelope_motion", {})
+    if flow.get("mode") != "phase-tolerant-segmented-handoff":
+        raise SystemExit("unexpected envelope motion mode")
+    if flow.get("cross_document_hard_sync") is not False:
+        raise SystemExit("cross-document hard sync must not be claimed")
+    if flow.get("rail_x") != [18, 882] or flow.get("duration_seconds") != 12:
+        raise SystemExit("unexpected v5 rail motion contract")
     for name, cfg in data["seasons"].items():
         for month in cfg["months"]:
-            if not 1 <= month <= 12:
-                raise SystemExit(f"invalid month {month} for {name}")
-            if month in seen:
-                raise SystemExit(f"month {month} is assigned to both {seen[month]} and {name}")
+            if not 1 <= month <= 12 or month in seen:
+                raise SystemExit(f"invalid or duplicate month {month} for {name}")
             seen[month] = name
-        chrome = cfg.get("chrome", {})
         for field in ("bg0", "bg1", "accent2", "motif"):
-            if not chrome.get(field):
+            if not cfg.get("chrome", {}).get(field):
                 raise SystemExit(f"missing chrome.{field} for {name}")
         motion = cfg.get("motion", {})
-        if motion.get("implementation") != "embedded-smil":
-            raise SystemExit(f"unsupported motion implementation for {name}")
-        if motion.get("static_fallback") is not True:
-            raise SystemExit(f"motion must preserve a static fallback for {name}")
+        if motion.get("implementation") != "embedded-smil" or motion.get("static_fallback") is not True:
+            raise SystemExit(f"invalid motion contract for {name}")
     if set(seen) != set(range(1, 13)):
-        raise SystemExit(f"season mapping must cover months 1..12 exactly once; got {sorted(seen)}")
+        raise SystemExit("season mapping must cover months 1..12 exactly once")
 
 
 def resolve_day(value: str | None, timezone: str) -> dt.date:
@@ -61,8 +59,6 @@ def resolve_day(value: str | None, timezone: str) -> dt.date:
 
 def resolve_season(data: dict, day: dt.date, explicit: str | None) -> tuple[str, dict]:
     if explicit:
-        if explicit not in data["seasons"]:
-            raise SystemExit(f"unknown season: {explicit}")
         return explicit, data["seasons"][explicit]
     matches = [(name, cfg) for name, cfg in data["seasons"].items() if day.month in cfg["months"]]
     if len(matches) != 1:
@@ -70,122 +66,110 @@ def resolve_season(data: dict, day: dt.date, explicit: str | None) -> tuple[str,
     return matches[0]
 
 
-def validate_svg(path: Path, width: str, height: str, viewbox: str) -> None:
-    if not path.is_file():
-        raise SystemExit(f"SVG not found: {path}")
+def validate_svg(path: Path, geometry: tuple[str, str, str], *, require_v5: bool = True) -> None:
     try:
         root = ET.parse(path).getroot()
-    except ET.ParseError as exc:
-        raise SystemExit(f"invalid SVG XML: {path}: {exc}") from exc
-    if not root.tag.endswith("svg"):
-        raise SystemExit(f"not an SVG root: {path}")
-    if root.attrib.get("viewBox") != viewbox:
-        raise SystemExit(f"unexpected viewBox in {path}: {root.attrib.get('viewBox')!r}")
-    if root.attrib.get("width") != width or root.attrib.get("height") != height:
+    except (FileNotFoundError, ET.ParseError) as exc:
+        raise SystemExit(f"invalid SVG {path}: {exc}") from exc
+    if (root.attrib.get("width"), root.attrib.get("height"), root.attrib.get("viewBox")) != geometry:
         raise SystemExit(f"unexpected geometry in {path}")
-
-
-def validate_motion(path: Path) -> None:
     text = path.read_text(encoding="utf-8")
-    if "prefers-reduced-motion" not in text:
-        raise SystemExit(f"missing reduced-motion fallback in {path}")
-    if "<animate" not in text:
-        raise SystemExit(f"missing optional animation layer in {path}")
-    if "<script" in text.lower() or "javascript:" in text.lower():
-        raise SystemExit(f"scripted animation is not allowed in {path}")
+    if require_v5:
+        if 'id="v5-frame"' not in text or "prefers-reduced-motion" not in text or "<animate" not in text:
+            raise SystemExit(f"missing v5 motion/frame contract in {path}")
+        if "<script" in text.lower() or "javascript:" in text.lower():
+            raise SystemExit(f"scripted animation is not allowed in {path}")
 
 
 def load_renderer():
-    spec = importlib.util.spec_from_file_location("render_envelope_chrome", RENDERER)
+    spec = importlib.util.spec_from_file_location("render_continuous_flow", RENDERER)
     if spec is None or spec.loader is None:
-        raise SystemExit("unable to load envelope chrome renderer")
+        raise SystemExit("unable to load v5 renderer")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
 
 
-def expected_chrome(renderer, season: str) -> dict[str, bytes]:
+def expected_assets(renderer, season: str, live_assets: dict[str, str]) -> dict[str, bytes]:
     with tempfile.TemporaryDirectory() as tmp:
         root = Path(tmp)
         renderer.render(season, root)
-        return {
-            "bridge": (root / "assets/profile-frame-bridge.svg").read_bytes(),
-            "projects": (root / "assets/profile-section-projects.svg").read_bytes(),
-            "activity": (root / "assets/profile-section-activity.svg").read_bytes(),
-            "footer": (root / "assets/profile-footer.svg").read_bytes(),
-        }
+        return {key: (root / rel).read_bytes() for key, rel in live_assets.items()}
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--date", help="ISO date in the manifest timezone; defaults to now")
-    parser.add_argument("--season", choices=["spring", "summer", "autumn", "winter"])
-    parser.add_argument("--apply", action="store_true", help="promote the approved candidate to all stable live envelope assets")
-    parser.add_argument("--force", action="store_true", help="allow explicit manual promotion even when auto_promote is false")
-    parser.add_argument("--json", action="store_true", help="emit machine-readable result")
-    args = parser.parse_args()
+    p = argparse.ArgumentParser()
+    p.add_argument("--date")
+    p.add_argument("--season", choices=["spring", "summer", "autumn", "winter"])
+    p.add_argument("--apply", action="store_true")
+    p.add_argument("--force", action="store_true")
+    p.add_argument("--json", action="store_true")
+    args = p.parse_args()
 
     manifest = load_json(MANIFEST)
     validate_manifest(manifest)
     day = resolve_day(args.date, manifest.get("timezone", "Asia/Tokyo"))
     season, cfg = resolve_season(manifest, day, args.season)
-
-    hero = LAB / cfg["hero"]
-    validate_svg(hero, "900", "260", "0 0 900 260")
-    validate_motion(hero)
+    source_hero = LAB / cfg["hero"]
+    validate_svg(source_hero, ("900", "260", "0 0 900 260"), require_v5=False)
+    source_text = source_hero.read_text(encoding="utf-8")
+    if "prefers-reduced-motion" not in source_text or "<animate" not in source_text or "<script" in source_text.lower():
+        raise SystemExit(f"invalid seasonal hero motion source: {season}")
     if cfg.get("static_render") != "PASS":
         raise SystemExit(f"{season} is not statically render-approved")
     if not cfg.get("auto_promote", False) and not (args.force and args.season):
         raise SystemExit(f"{season} is not approved for automatic promotion")
 
-    assets = {key: ROOT / path for key, path in manifest["live_assets"].items()}
     renderer = load_renderer()
-    generated = expected_chrome(renderer, season)
+    expected = expected_assets(renderer, season, manifest["live_assets"])
+    assets = {key: ROOT / rel for key, rel in manifest["live_assets"].items()}
     live = load_json(LIVE_STATE)
     changed = (
         live.get("active_season") != season
-        or live.get("envelope_version") != 4
-        or assets["hero"].read_bytes() != hero.read_bytes()
-        or any(assets[key].read_bytes() != generated[key] for key in ("bridge", "projects", "activity", "footer"))
+        or live.get("envelope_version") != 5
+        or any(not assets[key].is_file() or assets[key].read_bytes() != expected[key] for key in expected)
     )
 
     result = {
-        "date": day.isoformat(),
-        "timezone": manifest.get("timezone", "Asia/Tokyo"),
-        "season": season,
-        "theme": f"{season}-dark",
-        "source": str(hero.relative_to(ROOT)),
-        "live_assets": {key: str(path.relative_to(ROOT)) for key, path in assets.items()},
-        "motion": cfg["motion"],
-        "changed": changed,
-        "apply": args.apply,
-        "envelope_version": 4,
+        "date": day.isoformat(), "timezone": manifest.get("timezone", "Asia/Tokyo"),
+        "season": season, "theme": f"{season}-dark", "changed": changed,
+        "apply": args.apply, "envelope_version": 5,
+        "motion_mode": manifest["envelope_motion"]["mode"],
+        "cross_document_hard_sync": False,
     }
 
     if args.apply:
-        shutil.copyfile(hero, assets["hero"])
         renderer.render(season, ROOT)
-        validate_svg(assets["bridge"], "900", "32", "0 0 900 32")
-        validate_svg(assets["projects"], "900", "68", "0 0 900 68")
-        validate_svg(assets["activity"], "900", "68", "0 0 900 68")
-        validate_svg(assets["footer"], "900", "92", "0 0 900 92")
+        specs = {
+            "hero": ("900", "260", "0 0 900 260"),
+            "bridge": ("900", "32", "0 0 900 32"),
+            "projects": ("900", "68", "0 0 900 68"),
+            "activity": ("900", "68", "0 0 900 68"),
+            "footer": ("900", "92", "0 0 900 92"),
+        }
+        for key, geom in specs.items():
+            validate_svg(assets[key], geom)
         next_state = {
-            "version": 4,
-            "envelope_version": 4,
+            "version": 5,
+            "envelope_version": 5,
             "active_season": season,
             "active_theme": f"{season}-dark",
-            "source": str(hero.relative_to(ROOT)),
+            "source": str(source_hero.relative_to(ROOT)),
             "live_assets": {key: str(path.relative_to(ROOT)) for key, path in assets.items()},
             "timezone": manifest.get("timezone", "Asia/Tokyo"),
             "motion": cfg["motion"],
             "frame": {
-                "mode": "segmented-rails",
+                "mode": "continuous-segmented-flow",
                 "background_illusion": True,
                 "shared_edge_rails": True,
+                "top_cap": True,
+                "bottom_cap": True,
+                "phase_tolerant_handoff": True,
+                "cross_document_hard_sync": False,
                 "true_overlay": False
             },
             "promoted_at": day.isoformat(),
-            "promotion_mode": "automatic" if args.season is None else "manual",
+            "promotion_mode": "automatic" if args.season is None else "manual"
         }
         LIVE_STATE.write_text(json.dumps(next_state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
@@ -193,7 +177,7 @@ def main() -> int:
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
     else:
         action = "promoted" if args.apply and changed else "refreshed" if args.apply else "no-change" if not changed else "would-promote"
-        print(f"{action}: {season} envelope v4")
+        print(f"{action}: {season} envelope v5")
     return 0
 
 
