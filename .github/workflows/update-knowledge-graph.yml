@@ -9,6 +9,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/update-knowledge-graph.yml"
+      - "README.md"
   schedule:
     # Twice-daily refresh; push/manual triggers handle immediate updates.
     - cron: "41 1,13 * * *"
@@ -55,12 +56,17 @@ jobs:
           name: project-map-generated
           path: project-map
 
-      - name: Validate generated project map
+      - name: Validate direct IPM profile surface
         shell: bash
         run: |
           set -euo pipefail
           test -s project-map/galaxy.svg
           test -s project-map/graph.json
+          grep -q 'src="project-map/galaxy.svg"' README.md
+          if grep -Eq 'active-profile-envelope|profile-projects-canvas\.svg|profile-activity-canvas\.svg|profile-(attribution-projects-transition|activity-header|footer-transition)\.svg' README.md; then
+            echo 'README still mounts Envelope-derived presentation SVGs.' >&2
+            exit 1
+          fi
           grep -q 'data-galaxy-preset="systems"' project-map/galaxy.svg
           grep -q '#E69F00' project-map/galaxy.svg
           grep -q 'data-profile-galaxy-background="ead72debca2a16608ebc5b799993c0234ea10cab"' project-map/galaxy.svg
@@ -69,14 +75,8 @@ jobs:
           grep -q 'data-galaxy-orbit="contributed"' project-map/galaxy.svg
           grep -q 'data-galaxy-placement="external-halo-orbit"' project-map/galaxy.svg
           grep -q '>Contributed</text>' project-map/galaxy.svg
-          if grep -q 'data-galaxy-external-layout="rail"' project-map/galaxy.svg || \
-             grep -q 'data-galaxy-external-backdrop="true"' project-map/galaxy.svg || \
-             grep -q 'data-galaxy-placement="external-rail"' project-map/galaxy.svg; then
-            echo 'Detached Contributed rail presentation is still present.' >&2
-            exit 1
-          fi
-          if grep -q 'External contributions' project-map/galaxy.svg; then
-            echo 'Legacy synthetic External contributions hub is still present.' >&2
+          if grep -Eq 'data-galaxy-external-layout="rail"|data-galaxy-external-backdrop="true"|data-galaxy-placement="external-rail"|External contributions' project-map/galaxy.svg; then
+            echo 'Detached/legacy Contributed presentation is still present.' >&2
             exit 1
           fi
           grep -q '"taxonomy"' project-map/graph.json
@@ -89,6 +89,7 @@ jobs:
           const groups = graph.nodes.filter((node) => node?.type === 'group');
           const contributed = graph.nodes.filter((node) => node?.type === 'repository' && node?.relation === 'contributed');
           const contributedIds = new Set(contributed.map((node) => node.id));
+
           if (contributed.length < 1) throw new Error('canonical map has no accepted Contributed repositories');
           if (graph.contributedRepositoryCount !== contributed.length) throw new Error('Contributed count mismatch');
           if (graph.externalContributions?.includedRepositories !== contributed.length) throw new Error('Contributed diagnostics mismatch');
@@ -104,14 +105,14 @@ jobs:
           for (const id of contributedIds) if (!contributionTargets.has(id)) throw new Error(`missing canonical contribution edge for ${id}`);
           if ((graph.semanticEdges || []).some((edge) => contributedIds.has(edge?.source) || contributedIds.has(edge?.target))) throw new Error('Contributed repository entered owned semantic graph');
 
-          if (!svg.includes(`data-profile-galaxy-background="${donor}"`)) throw new Error('historical profile-local Galaxy donor marker is missing');
+          if (!svg.includes(`data-profile-galaxy-background="${donor}"`)) throw new Error('historical background donor marker is missing');
           const rings = [...svg.matchAll(/data-profile-galaxy-ring=/g)].length;
           const arms = [...svg.matchAll(/data-profile-galaxy-arm=/g)].length;
           const associations = [...svg.matchAll(/data-profile-stellar-association=/g)].length;
-          if (rings !== 3) throw new Error(`profile-local Galaxy ring count mismatch: ${rings}`);
-          if (arms !== 0) throw new Error(`profile-local Galaxy arms must stay absent: ${arms}`);
+          if (rings !== 3) throw new Error(`Galaxy ring count mismatch: ${rings}`);
+          if (arms !== 0) throw new Error(`historical foreground arms leaked into the background import: ${arms}`);
           if (associations !== groups.length) throw new Error(`stellar association count mismatch: ${associations} SVG vs ${groups.length} groups`);
-          if (/parallax|meteor/i.test(svg)) throw new Error('screen-space cosmic decoration leaked back into static Galaxy output');
+          if (/parallax|meteor/i.test(svg)) throw new Error('screen-space cosmic decoration leaked into static Galaxy output');
 
           const haloStart = svg.indexOf('data-galaxy-external-layout="halo"');
           if (haloStart < 0) throw new Error('Galaxy Systems external halo is missing');
@@ -120,7 +121,6 @@ jobs:
           if (haloPlacements.length !== contributed.length) throw new Error(`external halo placement mismatch: ${haloPlacements.length} SVG vs ${contributed.length} graph`);
           const haloAnimations = [...haloSlice.matchAll(/<animateTransform\b/g)].length;
           if (haloAnimations < contributed.length) throw new Error(`external halo motion mismatch: ${haloAnimations} animations vs ${contributed.length} contributed repositories`);
-          if (/data-galaxy-external-layout="rail"|data-galaxy-external-backdrop="true"|data-galaxy-placement="external-rail"/.test(svg)) throw new Error('detached external rail survived release');
 
           const forbiddenKeys = new Set(['private', 'isPrivate', 'restricted', 'isRestricted']);
           const visit = (value) => {
@@ -131,58 +131,33 @@ jobs:
             }
           };
           visit(graph);
-          console.log(`Canonical map validated: ${graph.repositoryCount} owned + ${contributed.length} accepted Contributed; arm-free profile-local Galaxy background + external halo verified`);
+          console.log(`Direct IPM profile validated: ${graph.repositoryCount} owned + ${contributed.length} Contributed; background-only donor + external halo`);
           NODE
 
-      - name: Refresh active Envelope v8 from generated project map
-        shell: bash
-        run: |
-          set -euo pipefail
-          python -m py_compile \
-            design-lab/scripts/promote-season.py \
-            design-lab/envelope-v8/render_continuous_canvas.py \
-            design-lab/envelope-v8/validate.py
-          python design-lab/scripts/promote-season.py --apply --json
-          python design-lab/envelope-v8/validate.py
-
-      - name: Verify atomic publish diff on pull requests
+      - name: Verify direct publish diff on pull requests
         if: github.event_name == 'pull_request'
         shell: bash
         run: |
           set -euo pipefail
           git diff --check
-          test -n "$(git status --short -- project-map/galaxy.svg project-map/graph.json assets/profile-projects-canvas.svg design-lab/live-theme.json)"
-          echo "PROJECT_MAP_ENVELOPE_ATOMIC_REFRESH_PR_PASS"
+          if test -n "$(git status --short -- assets/profile-*.svg design-lab/live-theme.json)"; then
+            echo 'Project Map refresh unexpectedly modified retired Envelope derivatives.' >&2
+            git status --short -- assets/profile-*.svg design-lab/live-theme.json >&2
+            exit 1
+          fi
+          echo "DIRECT_IPM_PROFILE_REFRESH_PR_PASS"
 
-      - name: Commit project map and mounted profile derivatives atomically
+      - name: Commit project map
         if: github.event_name != 'pull_request'
         shell: bash
         run: |
           set -euo pipefail
-          git add -- \
-            project-map/galaxy.svg \
-            project-map/graph.json \
-            assets/profile-hero.svg \
-            assets/profile-character-side-left.svg \
-            assets/profile-character-side-right.svg \
-            assets/profile-attribution.svg \
-            assets/profile-frame-bridge-character-projects.svg \
-            assets/profile-section-projects.svg \
-            assets/profile-projects-canvas.svg \
-            assets/profile-frame-bridge-projects-activity.svg \
-            assets/profile-section-activity.svg \
-            assets/profile-activity-canvas.svg \
-            assets/profile-frame-bridge-activity-footer.svg \
-            assets/profile-footer.svg \
-            assets/profile-attribution-projects-transition.svg \
-            assets/profile-activity-header.svg \
-            assets/profile-footer-transition.svg \
-            design-lab/live-theme.json
+          git add -- project-map/galaxy.svg project-map/graph.json
           if git diff --cached --quiet; then
-            echo "Project map and mounted profile derivatives are already up to date."
+            echo "Project map is already up to date."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "update project map and profile canvas"
+          git commit -m "update project map"
           git push origin HEAD:main
