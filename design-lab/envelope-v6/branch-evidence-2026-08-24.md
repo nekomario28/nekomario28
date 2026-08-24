@@ -122,3 +122,5 @@ Still not established until live promotion:
 - Spring/Autumn/Winter live playback.
 
 Summer `live_verification` therefore remains `NOT_RUN` until a post-merge public-profile proof is captured.
+
+The temporary branch render-proof workflow was removed before the final clean-head validation; it is evidence tooling only and is not part of the Envelope v6 product/runtime surface.
