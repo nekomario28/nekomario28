@@ -24,11 +24,14 @@
     "implementation": "embedded-smil",
     "static_fallback": true,
     "live_verification": "PASS",
-    "live_verification_scope": "representative-v7-rail-public-profile",
-    "live_verification_observed_main": "18c091cbe7f3e40ee7b56afbdd952a414b204395",
-    "live_verification_run": 32752864753,
-    "live_verification_job": 97513627206,
+    "live_verification_scope": "projects-activity-composite-outer-rails-public-profile",
+    "live_verification_observed_main": "c125b5d44b05d6b6916e747dfe1d4d6a43b40dab",
+    "live_verification_run": 32755621394,
+    "live_verification_job": 97522354218,
     "live_verification_at": "2026-08-25",
+    "live_verification_sample_seconds": 12.0,
+    "live_verification_projects_changed_pairs": {"left": 18, "right": 20},
+    "live_verification_activity_changed_pairs": {"left": 11, "right": 12},
     "live_verification_cross_document_hard_sync": false
   },
   "frame": {
