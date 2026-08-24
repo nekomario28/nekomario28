@@ -7,15 +7,18 @@ on:
       - ".github/workflows/update-seasonal-profile.yml"
       - "design-lab/theme-manifest.json"
       - "design-lab/live-theme.json"
+      - "design-lab/envelope-v6/**"
       - "design-lab/scripts/select-season.py"
       - "design-lab/scripts/promote-season.py"
       - "design-lab/scripts/render_envelope_chrome.py"
-      - "design-lab/scripts/render_continuous_flow.py"
+      - "design-lab/scripts/render_global_motion.py"
       - "design-lab/seasons/*.svg"
       - "assets/profile-hero.svg"
-      - "assets/profile-frame-bridge.svg"
+      - "assets/profile-frame-bridge-character-projects.svg"
       - "assets/profile-section-projects.svg"
+      - "assets/profile-frame-bridge-projects-activity.svg"
       - "assets/profile-section-activity.svg"
+      - "assets/profile-frame-bridge-activity-footer.svg"
       - "assets/profile-footer.svg"
       - "README.md"
   pull_request:
@@ -24,15 +27,18 @@ on:
       - ".github/workflows/update-seasonal-profile.yml"
       - "design-lab/theme-manifest.json"
       - "design-lab/live-theme.json"
+      - "design-lab/envelope-v6/**"
       - "design-lab/scripts/select-season.py"
       - "design-lab/scripts/promote-season.py"
       - "design-lab/scripts/render_envelope_chrome.py"
-      - "design-lab/scripts/render_continuous_flow.py"
+      - "design-lab/scripts/render_global_motion.py"
       - "design-lab/seasons/*.svg"
       - "assets/profile-hero.svg"
-      - "assets/profile-frame-bridge.svg"
+      - "assets/profile-frame-bridge-character-projects.svg"
       - "assets/profile-section-projects.svg"
+      - "assets/profile-frame-bridge-projects-activity.svg"
       - "assets/profile-section-activity.svg"
+      - "assets/profile-frame-bridge-activity-footer.svg"
       - "assets/profile-footer.svg"
       - "README.md"
   schedule:
@@ -66,7 +72,7 @@ jobs:
       - name: Check out profile repository
         uses: actions/checkout@v6
 
-      - name: Validate all Envelope v5 seasonal variants
+      - name: Validate all Envelope v6 seasonal variants
         shell: bash
         run: |
           set -euo pipefail
@@ -74,7 +80,7 @@ jobs:
             design-lab/scripts/select-season.py \
             design-lab/scripts/promote-season.py \
             design-lab/scripts/render_envelope_chrome.py \
-            design-lab/scripts/render_continuous_flow.py
+            design-lab/scripts/render_global_motion.py
 
           python design-lab/scripts/promote-season.py --date 2026-04-01 --json
           python design-lab/scripts/promote-season.py --date 2026-07-01 --json
@@ -87,27 +93,45 @@ jobs:
           from pathlib import Path
 
           manifest = json.loads(Path('design-lab/theme-manifest.json').read_text())
-          assert manifest['version'] == 6
+          assert manifest['version'] == 7
           assert set(manifest['seasons']) == {'spring','summer','autumn','winter'}
-          assert set(manifest['live_assets']) == {'hero','bridge','projects','activity','footer'}
+          expected = {
+              'hero': ('assets/profile-hero.svg', ('900','260','0 0 900 260')),
+              'bridge_character_projects': ('assets/profile-frame-bridge-character-projects.svg', ('900','32','0 0 900 32')),
+              'projects': ('assets/profile-section-projects.svg', ('900','68','0 0 900 68')),
+              'bridge_projects_activity': ('assets/profile-frame-bridge-projects-activity.svg', ('900','32','0 0 900 32')),
+              'activity': ('assets/profile-section-activity.svg', ('900','68','0 0 900 68')),
+              'bridge_activity_footer': ('assets/profile-frame-bridge-activity-footer.svg', ('900','32','0 0 900 32')),
+              'footer': ('assets/profile-footer.svg', ('900','92','0 0 900 92')),
+          }
+          assert manifest['live_assets'] == {k:v[0] for k,v in expected.items()}
           flow = manifest['envelope_motion']
-          assert flow['mode'] == 'phase-tolerant-segmented-handoff'
+          assert flow['mode'] == 'global-coordinate-windowed-handoff'
+          assert flow['coordinate_system'] == 'profile-envelope-logical-y-v1'
+          assert flow['render_model'] == 'shared-global-field-clipped-by-local-window'
+          assert flow['space'] == 'design-lab/envelope-v6/global-motion-space.json'
           assert flow['rail_x'] == [18, 882]
-          assert flow['duration_seconds'] == 12
+          assert flow['duration_seconds'] == 36
+          assert flow['global_extent'] == 1868
+          assert flow['bleed'] == 24
+          assert flow['boundary_fade'] is False
+          assert flow['partial_geometry_clipping'] is True
           assert flow['cross_document_hard_sync'] is False
           assert flow['static_fallback'] is True
           assert flow['reduced_motion'] is True
 
-          script = Path('design-lab/scripts/render_continuous_flow.py')
+          script = Path('design-lab/scripts/render_global_motion.py')
           spec = importlib.util.spec_from_file_location('flow', script)
           module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
-          expected = {
-              'assets/profile-hero.svg': ('900','260','0 0 900 260'),
-              'assets/profile-frame-bridge.svg': ('900','32','0 0 900 32'),
-              'assets/profile-section-projects.svg': ('900','68','0 0 900 68'),
-              'assets/profile-section-activity.svg': ('900','68','0 0 900 68'),
-              'assets/profile-footer.svg': ('900','92','0 0 900 92'),
+          space = json.loads(Path(flow['space']).read_text())
+          module.validate_space(space)
+          visible = {
+              w['asset_key']: (name, int(w['start']), int(w['end']), int(w['height']))
+              for name,w in space['windows'].items() if w.get('rendered')
           }
+          assert set(visible) == set(expected)
+          assert [visible[k][1] for k in ('bridge_character_projects','bridge_projects_activity','bridge_activity_footer')] == [765,1360,1744]
+
           for season, cfg in manifest['seasons'].items():
               source = Path('design-lab') / cfg['hero']
               source_root = ET.parse(source).getroot()
@@ -121,21 +145,30 @@ jobs:
 
               with tempfile.TemporaryDirectory() as tmp:
                   root = Path(tmp); module.render(season, root)
-                  for rel, geometry in expected.items():
+                  for key, (rel, geometry) in expected.items():
                       path = root / rel
                       svg = ET.parse(path).getroot()
                       assert (svg.attrib['width'], svg.attrib['height'], svg.attrib['viewBox']) == geometry
                       text = path.read_text()
-                      assert 'id="v5-frame"' in text
+                      name,start,end,height = visible[key]
+                      assert 'id="v6-global-window"' in text
+                      assert f'data-window="{name}"' in text
+                      assert f'data-global-start="{start}"' in text
+                      assert f'data-global-end="{end}"' in text
+                      assert f'data-global-extent="{space["global_extent"]}"' in text
+                      assert 'clip-path="url(#v6-window)"' in text
                       assert 'prefers-reduced-motion' in text
-                      assert '<animate' in text
-                      assert 'dur="12s"' in text
+                      assert '<animateTransform' in text and 'dur="36s"' in text
                       assert '<script' not in text.lower()
-                      assert 'M18' in text and 'M882' in text
-                      if 'profile-section-' in rel:
+                      v6_tail = text.split('id="v6-global-window"',1)[1]
+                      assert '<animate attributeName="opacity"' not in v6_tail
+                      local_from = -int(space['bleed']) - start
+                      local_to = int(space['global_extent']) + int(space['bleed']) - start
+                      assert f'values="0 {local_from};0 {local_to}"' in text
+                      if key in {'projects','activity'}:
                           assert '<text' not in text.lower() and '<path' in text.lower()
-                  hero = (root / 'assets/profile-hero.svg').read_text()
-                  footer = (root / 'assets/profile-footer.svg').read_text()
+                  hero = (root / expected['hero'][0]).read_text()
+                  footer = (root / expected['footer'][0]).read_text()
                   assert 'M18 30V18Q18 7 30 7H76' in hero
                   assert 'Q18 85 30 85H76' in footer
           PY
@@ -157,7 +190,7 @@ jobs:
           fi
           python design-lab/scripts/promote-season.py "${args[@]}" | tee "$RUNNER_TEMP/season-result.json"
 
-      - name: Validate stable live Envelope v5
+      - name: Validate stable live Envelope v6
         shell: bash
         run: |
           set -euo pipefail
@@ -166,18 +199,27 @@ jobs:
           from pathlib import Path
           expected = {
               'hero': ('900','260','0 0 900 260'),
-              'bridge': ('900','32','0 0 900 32'),
+              'bridge_character_projects': ('900','32','0 0 900 32'),
               'projects': ('900','68','0 0 900 68'),
+              'bridge_projects_activity': ('900','32','0 0 900 32'),
               'activity': ('900','68','0 0 900 68'),
+              'bridge_activity_footer': ('900','32','0 0 900 32'),
               'footer': ('900','92','0 0 900 92'),
           }
           state = json.loads(Path('design-lab/live-theme.json').read_text())
-          assert state['envelope_version'] == 5
+          assert state['envelope_version'] == 6
           assert set(state['live_assets']) == set(expected)
+          assert state['global_motion_space'] == 'design-lab/envelope-v6/global-motion-space.json'
           frame = state['frame']
-          assert frame['mode'] == 'continuous-segmented-flow'
+          assert frame['mode'] == 'global-windowed-flow'
           assert frame['shared_edge_rails'] is True
           assert frame['top_cap'] is True and frame['bottom_cap'] is True
+          assert frame['global_coordinate_space'] is True
+          assert frame['shared_global_object_field'] is True
+          assert frame['window_clipping'] is True
+          assert frame['boundary_fade'] is False
+          assert frame['partial_geometry_clipping'] is True
+          assert frame['unique_bridge_windows'] is True
           assert frame['phase_tolerant_handoff'] is True
           assert frame['cross_document_hard_sync'] is False
           assert frame['true_overlay'] is False
@@ -185,14 +227,16 @@ jobs:
               path = Path(state['live_assets'][key]); svg = ET.parse(path).getroot()
               assert (svg.attrib['width'], svg.attrib['height'], svg.attrib['viewBox']) == geometry
               text = path.read_text()
-              assert 'id="v5-frame"' in text
-              assert 'prefers-reduced-motion' in text and '<animate' in text and 'dur="12s"' in text
+              assert 'id="v6-global-window"' in text
+              assert 'clip-path="url(#v6-window)"' in text
+              assert 'prefers-reduced-motion' in text and '<animateTransform' in text and 'dur="36s"' in text
               assert '<script' not in text.lower()
               if key in {'projects','activity'}:
                   assert '<text' not in text.lower() and '<path' in text.lower()
           readme = Path('README.md').read_text()
-          for rel in state['live_assets'].values(): assert rel in readme
-          assert readme.count('assets/profile-frame-bridge.svg') == 3
+          for rel in state['live_assets'].values():
+              assert readme.count(rel) == 1
+          assert 'assets/profile-frame-bridge.svg' not in readme
           assert 'assets/profile-divider.svg' not in readme
           PY
 
@@ -203,7 +247,15 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/profile-hero.svg assets/profile-frame-bridge.svg assets/profile-section-projects.svg assets/profile-section-activity.svg assets/profile-footer.svg design-lab/live-theme.json
+          git add \
+            assets/profile-hero.svg \
+            assets/profile-frame-bridge-character-projects.svg \
+            assets/profile-section-projects.svg \
+            assets/profile-frame-bridge-projects-activity.svg \
+            assets/profile-section-activity.svg \
+            assets/profile-frame-bridge-activity-footer.svg \
+            assets/profile-footer.svg \
+            design-lab/live-theme.json
           if git diff --cached --quiet; then echo "Seasonal profile envelope is already current."; exit 0; fi
           season="$(python -c 'import json; print(json.load(open("design-lab/live-theme.json"))["active_season"])')"
           git commit -m "switch profile envelope to ${season}"
