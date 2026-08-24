@@ -209,6 +209,33 @@ def expected_assets(renderer, season: str, live_assets: dict[str, str]) -> dict[
         return {key: (root / rel).read_bytes() for key, rel in live_assets.items()}
 
 
+def same_verification_target(live: dict, *, season: str, source_hero: Path) -> bool:
+    """Whether a live playback receipt still describes this exact deployed target.
+
+    Derived Project Map/contribution refreshes do not invalidate representative v7 rail
+    playback. A seasonal source, Envelope version, or global-space change does.
+    Renderer/layout changes are expected to advance the Envelope version before release.
+    """
+    return (
+        live.get("active_season") == season
+        and live.get("envelope_version") == 7
+        and live.get("source") == str(source_hero.relative_to(ROOT))
+        and live.get("global_motion_space") == str(GLOBAL_SPACE.relative_to(ROOT))
+    )
+
+
+def next_motion_state(live: dict, cfg: dict, *, season: str, source_hero: Path) -> dict:
+    next_motion = dict(cfg["motion"])
+    current_motion = live.get("motion", {}) if isinstance(live.get("motion"), dict) else {}
+    if same_verification_target(live, season=season, source_hero=source_hero) and current_motion.get("live_verification") == "PASS":
+        for key, value in current_motion.items():
+            if key == "live_verification" or key.startswith("live_verification_"):
+                next_motion[key] = value
+    else:
+        next_motion["live_verification"] = "NOT_RUN"
+    return next_motion
+
+
 def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("--date")
@@ -271,8 +298,6 @@ def main() -> int:
         windows = asset_windows(space)
         for key, geom in GEOMETRY.items():
             validate_svg(assets[key], geom, window=windows[key])
-        next_motion = dict(cfg["motion"])
-        next_motion["live_verification"] = "NOT_RUN"
         next_state = {
             "version": 7,
             "envelope_version": 7,
@@ -281,7 +306,7 @@ def main() -> int:
             "source": str(source_hero.relative_to(ROOT)),
             "live_assets": {key: str(path.relative_to(ROOT)) for key, path in assets.items()},
             "timezone": manifest.get("timezone", "Asia/Tokyo"),
-            "motion": next_motion,
+            "motion": next_motion_state(live, cfg, season=season, source_hero=source_hero),
             "frame": {
                 "mode": "continuous-canvas-global-windowed-flow",
                 "background_illusion": True,

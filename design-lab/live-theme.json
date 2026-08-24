@@ -23,7 +23,13 @@
     "profile": "rain-water-and-leaf-sway",
     "implementation": "embedded-smil",
     "static_fallback": true,
-    "live_verification": "NOT_RUN"
+    "live_verification": "PASS",
+    "live_verification_scope": "representative-v7-rail-public-profile",
+    "live_verification_observed_main": "18c091cbe7f3e40ee7b56afbdd952a414b204395",
+    "live_verification_run": 32752864753,
+    "live_verification_job": 97513627206,
+    "live_verification_at": "2026-08-25",
+    "live_verification_cross_document_hard_sync": false
   },
   "frame": {
     "mode": "continuous-canvas-global-windowed-flow",
