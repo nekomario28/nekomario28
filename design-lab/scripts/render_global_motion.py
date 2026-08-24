@@ -23,6 +23,8 @@ ROOT = LAB.parent
 MANIFEST = LAB / "theme-manifest.json"
 SPACE = LAB / "envelope-v6" / "global-motion-space.json"
 BASE_RENDERER = Path(__file__).with_name("render_envelope_chrome.py")
+V7_VALIDATOR = LAB / "envelope-v7" / "validate.py"
+_V7_VALIDATED = False
 
 
 def load_base_renderer():
@@ -36,6 +38,21 @@ def load_base_renderer():
 
 def load_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def validate_experimental_v7_if_present() -> None:
+    global _V7_VALIDATED
+    if _V7_VALIDATED or not V7_VALIDATOR.is_file():
+        return
+    spec = importlib.util.spec_from_file_location("envelope_v7_validate", V7_VALIDATOR)
+    if spec is None or spec.loader is None:
+        raise ValueError("unable to load Envelope v7 validator")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    result = module.main()
+    if result not in (None, 0):
+        raise ValueError(f"Envelope v7 validator returned {result}")
+    _V7_VALIDATED = True
 
 
 def validate_space(space: dict) -> None:
@@ -64,6 +81,7 @@ def validate_space(space: dict) -> None:
     phases = [float(p["phase_seconds"]) for p in space["particles"]]
     if len(phases) != len(set(phases)):
         raise ValueError("particle phases must be unique")
+    validate_experimental_v7_if_present()
 
 
 def cap_markup(height: int, accent: str, accent2: str, *, top: bool, bottom: bool) -> str:
