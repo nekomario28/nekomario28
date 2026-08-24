@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-08-23T18:35:16.562Z",
+  "generatedAt": "2026-08-24T02:49:13.263Z",
   "repositoryCount": 14,
   "groupCount": 6,
   "nodes": [
@@ -857,14 +857,14 @@
       "type": "repository",
       "url": "https://github.com/nekomario28/FreeToken",
       "description": "",
-      "language": null,
+      "language": "Python",
       "topics": [],
       "stars": 0,
       "forks": 0,
       "fork": true,
       "archived": false,
       "createdAt": "2026-08-23T17:29:26Z",
-      "updatedAt": "2026-08-23T17:29:26Z",
+      "updatedAt": "2026-08-24T02:34:01Z",
       "groupId": "ai-ml",
       "groupLabel": "AI & Machine Learning",
       "classification": {
@@ -1116,7 +1116,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-08-23T18:33:04Z",
+      "updatedAt": "2026-08-23T19:56:53Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -1307,7 +1307,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "60461d04a144538deb2de7f0c5d51f29f2a9b90b23a6345663fcf32a9f6f3e88",
+    "corpusFingerprint": "dd4022ee570f543d7c5401ee769ce8f54c9fa9b8242a7ce563ad6c4e0d8717f5",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -1377,7 +1377,7 @@
       {
         "repoId": 1344034354,
         "name": "FreeToken",
-        "contentHash": "979d20855b9cb0873018e5a760b1391bbaaf7ebd6a791f1efa087dbf04b07fe6"
+        "contentHash": "7b09fbc6a22040bc747da90451f59775688b0eb40fa21a1e67022cb9e2164ee4"
       }
     ],
     "categories": [
@@ -1614,13 +1614,13 @@
   "contributedRepositoryCount": 1,
   "externalContributions": {
     "window": {
-      "from": "2025-08-23T18:35:17.867Z",
-      "to": "2026-08-23T18:35:17.867Z"
+      "from": "2025-08-24T02:49:14.571Z",
+      "to": "2026-08-24T02:49:14.571Z"
     },
     "cap": 7,
-    "candidateRepositories": 6,
+    "candidateRepositories": 7,
     "includedRepositories": 1,
-    "omittedRepositories": 5,
+    "omittedRepositories": 6,
     "truncatedRepositories": 0
   }
 }
