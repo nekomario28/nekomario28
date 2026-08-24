@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "coordinate_system": "profile-envelope-logical-y-v1",
+  "width": 900,
+  "global_extent": 1868,
+  "bleed": 24,
+  "rail_x": [18, 882],
+  "duration_seconds": 36,
+  "direction": "top-to-bottom",
+  "cross_document_hard_sync": false,
+  "render_model": "shared-global-field-clipped-by-local-window",
+  "notes": [
+    "The coordinate space is logical README-envelope space, not authority over GitHub page chrome.",
+    "Invisible gap spans approximate the tested GitHub desktop proportions so particles spend time traversing real-content regions instead of teleporting between chrome blocks.",
+    "Every rendered SVG receives the same global particle trajectories and subtracts only its own window start from global Y.",
+    "Particles are not faded at segment boundaries. Root/window clipping reveals only the geometric intersection, including partial circles and tails after their centers cross an edge.",
+    "Independent SVG documents still do not share a proven clock; matching global coordinates and negative phase offsets provide phase-tolerant continuity rather than hard synchronization."
+  ],
+  "windows": {
+    "hero": {"start": 0, "end": 260, "height": 260, "rendered": true, "asset_key": "hero"},
+    "character_gap": {"start": 260, "end": 765, "height": 505, "rendered": false},
+    "bridge_character_projects": {"start": 765, "end": 797, "height": 32, "rendered": true, "asset_key": "bridge_character_projects"},
+    "projects": {"start": 797, "end": 865, "height": 68, "rendered": true, "asset_key": "projects"},
+    "project_map_gap": {"start": 865, "end": 1360, "height": 495, "rendered": false},
+    "bridge_projects_activity": {"start": 1360, "end": 1392, "height": 32, "rendered": true, "asset_key": "bridge_projects_activity"},
+    "activity": {"start": 1392, "end": 1460, "height": 68, "rendered": true, "asset_key": "activity"},
+    "contributions_gap": {"start": 1460, "end": 1744, "height": 284, "rendered": false},
+    "bridge_activity_footer": {"start": 1744, "end": 1776, "height": 32, "rendered": true, "asset_key": "bridge_activity_footer"},
+    "footer": {"start": 1776, "end": 1868, "height": 92, "rendered": true, "asset_key": "footer"}
+  },
+  "particles": [
+    {"id": "left-primary", "rail": "left", "radius": 2.4, "tail": 13, "phase_seconds": 0, "color": "accent", "opacity": 0.82},
+    {"id": "right-secondary", "rail": "right", "radius": 2.1, "tail": 11, "phase_seconds": 6, "color": "accent2", "opacity": 0.68},
+    {"id": "left-secondary", "rail": "left", "radius": 1.5, "tail": 9, "phase_seconds": 12, "color": "accent2", "opacity": 0.50},
+    {"id": "right-primary", "rail": "right", "radius": 1.7, "tail": 10, "phase_seconds": 18, "color": "accent", "opacity": 0.58},
+    {"id": "left-fine", "rail": "left", "radius": 1.2, "tail": 8, "phase_seconds": 24, "color": "accent", "opacity": 0.42},
+    {"id": "right-fine", "rail": "right", "radius": 1.2, "tail": 8, "phase_seconds": 30, "color": "accent2", "opacity": 0.40}
+  ]
+}
