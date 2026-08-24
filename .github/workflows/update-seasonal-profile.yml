@@ -191,4 +191,4 @@ jobs:
           fi
           season="$(python -c 'import json; print(json.load(open("design-lab/live-theme.json"))["active_season"])')"
           git commit -m "switch profile envelope to ${season}"
-          git push
+          git push origin HEAD:main
