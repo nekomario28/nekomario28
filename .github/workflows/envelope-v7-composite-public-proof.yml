@@ -1,0 +1,155 @@
+name: Envelope v7 composite public playback proof
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+    paths:
+      - ".github/workflows/envelope-v7-composite-public-proof.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Install proof helpers
+        run: python -m pip install --quiet websocket-client pillow
+
+      - name: Prove Projects and Activity outer-rail playback
+        shell: bash
+        run: |
+          set -euo pipefail
+          chrome="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)"
+          test -n "$chrome"
+          out="$RUNNER_TEMP/envelope-v7-composite-proof"
+          mkdir -p "$out/chrome-profile"
+          export OUT="$out"
+
+          "$chrome" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars \
+            --user-data-dir="$out/chrome-profile" \
+            --remote-debugging-port=9222 --remote-allow-origins='*' \
+            --window-size=1440,3400 about:blank >"$out/chrome.log" 2>&1 &
+          chrome_pid=$!
+          trap 'kill "$chrome_pid" 2>/dev/null || true' EXIT
+
+          for _ in $(seq 1 80); do
+            curl -fsS http://127.0.0.1:9222/json/list >"$out/targets.json" && break
+            sleep .2
+          done
+          test -s "$out/targets.json"
+
+          python - <<'PY'
+          import base64, json, os, time, urllib.request
+          from pathlib import Path
+          import websocket
+          from PIL import Image, ImageChops
+
+          out = Path(os.environ['OUT'])
+          target = next(t for t in json.loads((out / 'targets.json').read_text()) if t.get('type') == 'page')
+          ws = websocket.create_connection(target['webSocketDebuggerUrl'], timeout=20)
+          seq = 0
+
+          def call(method, params=None):
+              global seq
+              seq += 1
+              ident = seq
+              ws.send(json.dumps({'id': ident, 'method': method, 'params': params or {}}))
+              while True:
+                  msg = json.loads(ws.recv())
+                  if msg.get('id') == ident:
+                      if 'error' in msg:
+                          raise RuntimeError(f"CDP {method}: {msg['error']}")
+                      return msg.get('result', {})
+
+          def evaluate(expr):
+              return call('Runtime.evaluate', {'expression': expr, 'returnByValue': True, 'awaitPromise': True}).get('result', {}).get('value')
+
+          def wait_complete(timeout=25):
+              end = time.time() + timeout
+              while time.time() < end:
+                  state = evaluate("""(() => ({ready:document.readyState,images:Array.from(document.images).every(i=>i.complete&&i.naturalWidth>0)}))()""")
+                  if state and state.get('ready') == 'complete' and state.get('images'):
+                      time.sleep(1)
+                      return
+                  time.sleep(.2)
+              raise RuntimeError('public profile did not finish loading images')
+
+          def capture(path, rect):
+              data = call('Page.captureScreenshot', {
+                  'format': 'png', 'captureBeyondViewport': True,
+                  'clip': {'x': rect['x'], 'y': rect['y'], 'width': rect['width'], 'height': rect['height'], 'scale': 1},
+              })['data']
+              path.write_bytes(base64.b64decode(data))
+
+          with urllib.request.urlopen('https://api.github.com/repos/nekomario28/nekomario28/commits/main', timeout=15) as response:
+              observed_main = json.load(response)['sha']
+
+          call('Page.enable')
+          call('Runtime.enable')
+          call('Emulation.setEmulatedMedia', {'features': [{'name':'prefers-color-scheme','value':'dark'}]})
+          call('Emulation.setDeviceMetricsOverride', {'width':1440,'height':3400,'deviceScaleFactor':1,'mobile':False})
+          call('Page.navigate', {'url':'https://github.com/nekomario28'})
+          wait_complete()
+
+          media = evaluate("""(() => ({reduce:matchMedia('(prefers-reduced-motion: reduce)').matches,noPreference:matchMedia('(prefers-reduced-motion: no-preference)').matches}))()""")
+          rects = evaluate("""(() => { const a=Array.from(document.images); const pick=(s)=>{const i=a.find(x=>x.src.includes(s)); if(!i)return null; const r=i.getBoundingClientRect(); return {src:i.src,x:r.x,y:r.y,width:r.width,height:r.height,naturalWidth:i.naturalWidth,naturalHeight:i.naturalHeight};}; return {projects:pick('profile-projects-canvas.svg'),activity:pick('profile-activity-canvas.svg')}; })()""")
+          if not rects.get('projects') or not rects.get('activity'):
+              raise RuntimeError(f'missing composite canvas: {rects}')
+          if (rects['projects']['naturalWidth'], rects['projects']['naturalHeight']) != (900,420):
+              raise RuntimeError(f'unexpected Projects geometry: {rects["projects"]}')
+          if (rects['activity']['naturalWidth'], rects['activity']['naturalHeight']) != (900,220):
+              raise RuntimeError(f'unexpected Activity geometry: {rects["activity"]}')
+
+          interval = .5
+          duration = 12.0
+          count = int(duration / interval) + 1
+          samples = {'projects': [], 'activity': []}
+          start = time.monotonic()
+          for i in range(count):
+              for key in ('projects','activity'):
+                  path = out / f'{key}-{i:02d}.png'
+                  capture(path, rects[key])
+                  samples[key].append(path)
+              target_t = start + (i + 1) * interval
+              time.sleep(max(0, target_t - time.monotonic()))
+
+          def edge_metrics(paths):
+              result = {'left': [], 'right': []}
+              for i in range(len(paths)-1):
+                  a = Image.open(paths[i]).convert('RGB')
+                  b = Image.open(paths[i+1]).convert('RGB')
+                  edge = max(24, round(a.width * 48 / 900))
+                  for side, box in (
+                      ('left', (0,0,edge,a.height)),
+                      ('right', (a.width-edge,0,a.width,a.height)),
+                  ):
+                      d = ImageChops.difference(a.crop(box), b.crop(box))
+                      changed = sum(1 for px in d.getdata() if px != (0,0,0))
+                      if changed:
+                          result[side].append({'from':i,'to':i+1,'changed_pixels':changed,'bbox':d.getbbox()})
+              return result
+
+          changes = {key: edge_metrics(paths) for key, paths in samples.items()}
+          counts = {key:{side:len(items) for side,items in sides.items()} for key,sides in changes.items()}
+          passed = all(counts[key][side] > 0 for key in ('projects','activity') for side in ('left','right'))
+          metrics = {
+              'result':'PASS' if passed else 'FAIL',
+              'observed_main_sha':observed_main,
+              'target':'https://github.com/nekomario28',
+              'proof_scope':'actual public profile, Projects and Activity outer 48px logical rail strips',
+              'media':media,
+              'sample_interval_seconds':interval,
+              'sample_duration_seconds':duration,
+              'sample_count':count,
+              'rects':rects,
+              'changed_pair_counts':counts,
+              'first_changes':{k:{s:v[:5] for s,v in sides.items()} for k,sides in changes.items()},
+              'cross_document_hard_sync_claimed':False,
+          }
+          print('ENVELOPE_V7_COMPOSITE_PUBLIC_PLAYBACK ' + json.dumps(metrics,separators=(',',':')))
+          if not passed:
+              raise RuntimeError('one or more composite outer rails showed no public playback')
+          PY
