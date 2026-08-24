@@ -1,7 +1,7 @@
-<!-- active-profile-theme: summer-dark | source: design-lab/seasons/summer-dark.svg | promoted: 2026-08-24 -->
+<!-- active-profile-theme: managed by design-lab/live-theme.json -->
 
 <p align="center">
-  <img src="assets/profile-hero.svg" width="900" alt="青楓と水の流れを配した nekomario28 の夏のダークプロフィールバナー">
+  <img src="assets/profile-hero.svg" width="900" alt="nekomario28 の季節ダークプロフィールバナー">
 </p>
 
 <p align="center">
