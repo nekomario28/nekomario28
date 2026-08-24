@@ -13,6 +13,7 @@ import argparse
 import importlib.util
 import json
 import shutil
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 LAB = Path(__file__).resolve().parents[1]
@@ -86,11 +87,18 @@ def validate_space(space: dict) -> None:
 
 
 def inject(svg_text: str, layer: str) -> str:
-    if "</svg>" not in svg_text:
-        raise ValueError("missing closing svg tag")
     if 'id="v7-global-window"' in svg_text:
         raise ValueError("v7 global layer already exists")
-    return svg_text.replace("</svg>", layer + "\n</svg>", 1)
+    head, closing, tail = svg_text.rpartition("</svg>")
+    if not closing or tail.strip():
+        raise ValueError("root closing svg tag must be the final element")
+    rendered = head + layer + "\n</svg>" + tail
+    root = ET.fromstring(rendered)
+    direct_layers = [child for child in root if child.attrib.get("id") == "v7-global-window"]
+    all_layers = [element for element in root.iter() if element.attrib.get("id") == "v7-global-window"]
+    if len(direct_layers) != 1 or len(all_layers) != 1:
+        raise ValueError("v7 global layer must be exactly one direct child of the root svg")
+    return rendered
 
 
 def particle_markup(
