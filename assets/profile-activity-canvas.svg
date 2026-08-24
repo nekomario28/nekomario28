@@ -59,7 +59,10 @@
 <text x="390.00" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 9</text>
 <text x="577.73" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 17</text>
 <text x="742.00" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 24</text>
-</g><defs><clipPath id="v7-window"><rect x="0" y="0" width="900" height="220"/></clipPath></defs>
+</g></svg>
+  <path d="M70 0V220 M830 0V220" stroke="#eef2f6" stroke-opacity=".08"/>
+  <path d="M18 0V220 M882 0V220" fill="none" stroke="#86aa94" stroke-opacity=".18" stroke-width="1.6"/><path d="M22 0V220 M878 0V220" fill="none" stroke="#c7b06c" stroke-opacity=".08" stroke-width=".7"/>
+<defs><clipPath id="v7-window"><rect x="0" y="0" width="900" height="220"/></clipPath></defs>
 <style>@media (prefers-reduced-motion: reduce) { .v7-motion { display:none } }</style>
 <g id="v7-global-window" data-window="activity_canvas" data-global-start="1318" data-global-end="1538" data-global-extent="1662" data-global-x-offset="0" pointer-events="none">
   
@@ -96,7 +99,4 @@
     </g>
   </g>
 </g>
-</svg>
-  <path d="M70 0V220 M830 0V220" stroke="#eef2f6" stroke-opacity=".08"/>
-  <path d="M18 0V220 M882 0V220" fill="none" stroke="#86aa94" stroke-opacity=".18" stroke-width="1.6"/><path d="M22 0V220 M878 0V220" fill="none" stroke="#c7b06c" stroke-opacity=".08" stroke-width=".7"/>
 </svg>
