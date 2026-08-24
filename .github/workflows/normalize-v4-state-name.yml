@@ -16,14 +16,22 @@ jobs:
       - run: |
           python - <<'PY'
           from pathlib import Path
-          p = Path('.github/workflows/update-seasonal-profile.yml')
-          s = p.read_text()
-          s2 = s.replace("state['frame']['mode'] == 'segmented-rails'", "state['frame']['mode'] == 'segmented-bridge-v2'")
-          assert s2 != s
-          p.write_text(s2)
+          paths = [
+              Path('.github/workflows/update-seasonal-profile.yml'),
+              Path('design-lab/scripts/promote-season.py'),
+              Path('design-lab/live-theme.json'),
+          ]
+          changed = False
+          for p in paths:
+              s = p.read_text()
+              s2 = s.replace('segmented-bridge-v2', 'segmented-rails')
+              if s2 != s:
+                  p.write_text(s2)
+                  changed = True
+          assert changed
           PY
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .github/workflows/update-seasonal-profile.yml
-          git commit -m "align envelope v4 frame mode validation"
+          git add .github/workflows/update-seasonal-profile.yml design-lab/scripts/promote-season.py design-lab/live-theme.json
+          git commit -m "normalize envelope v4 frame mode"
           git push
