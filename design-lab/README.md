@@ -11,7 +11,8 @@ The live profile is intentionally separate from this lab. Concepts can be compar
 | D1 | archived | First animated neon/sakura SVG. Preserved exactly from commit `4fc69a45a60ad74a13ed75e46c40881bebb12880`. |
 | D2 | archived lineage | Restrained indigo/sakura rewrite from commit `0c8aebb6c976c78e6ad940cf8f5a37c6db4883bd`. Useful as evidence, not the target aesthetic. |
 | D3 | live system | Dark seasonal visual-envelope system. Four static-first seasonal heroes share one layout grammar. |
-| D3.1 | live envelope v2 | The seasonal grammar now applies to the README section chrome as well as the hero. |
+| D3.1 | live envelope v2 | Seasonal grammar expanded from the hero to Projects/Activity bands and footer. |
+| D3.2 | motion envelope v3 | Redundant post-hero divider removed; each seasonal hero gains a small optional motion layer with a static/reduced-motion fallback. |
 
 D1 and D2 are saved in `archive/`; neither should be silently overwritten when a later direction wins.
 
@@ -33,19 +34,29 @@ D1 and D2 are saved in `archive/`; neither should be silently overwritten when a
 
 ![Winter dark concept](seasons/winter-dark.svg)
 
-The palette and motif change, while the username placement, dark base, spacing rhythm, border geometry, and section-envelope grammar remain stable. All four current static hero variants have been rendered successfully at `900x260` and are approved by `theme-manifest.json` for seasonal promotion.
+The palette and motif change, while username placement, dark base, spacing rhythm, border geometry, and section-envelope grammar remain stable.
+
+Each current seasonal hero contains an **optional embedded SMIL motion layer**:
+
+- spring: breathing mist + sparse drifting petals
+- summer: sparse rain + water shimmer + tiny leaf sway
+- autumn: faint ember breathing + sparse drifting leaves
+- winter: moon haze + sparse slow snow
+
+The complete static composition remains underneath the motion layer. Every source includes a `prefers-reduced-motion` fallback and contains no JavaScript. Actual motion playback on the public GitHub profile remains a separate runtime verification gate; source presence is not treated as proof of playback.
 
 ## Live promotion model
 
-The root README never points directly at a seasonal experiment. It references stable live assets only:
+The root README never points directly at a seasonal experiment. Envelope v3 references these stable live assets only:
 
 - `assets/profile-hero.svg`
-- `assets/profile-divider.svg`
 - `assets/profile-section-projects.svg`
 - `assets/profile-section-activity.svg`
 - `assets/profile-footer.svg`
 
-`live-theme.json` records which seasonal source currently owns the complete envelope. `scripts/promote-season.py` validates the month mapping, approval flags, hero SVG XML/geometry, then promotes the hero and asks `scripts/render_envelope_chrome.py` to regenerate the matching divider, section bands, and footer.
+`assets/profile-divider.svg` remains available as an archived/optional envelope element but is no longer part of the live choreography.
+
+`live-theme.json` records which seasonal source currently owns the complete live envelope. `scripts/promote-season.py` validates month mapping, approval flags, hero SVG XML/geometry, motion fallback policy, and the matching section chrome before promotion.
 
 This means seasonal switching does not rewrite README structure. The README remains one selected projection while the Design Lab remains the source of candidates and lineage.
 
@@ -60,32 +71,34 @@ This means seasonal switching does not rewrite README structure. The README rema
 
 `.github/workflows/update-seasonal-profile.yml` checks on the first day of every month at about 09:17 JST. A scheduled run applies the approved seasonal envelope; if the stable assets already match, the commit step is a no-op. Manual dispatch defaults to dry-run.
 
-The workflow also runs as a non-committing validation on pushes that change the seasonal policy, scripts, state, README structure, renderer, or source SVGs. All four seasonal chrome variants are rendered into temporary directories and geometry-checked before the live workflow is allowed to continue.
+The workflow also runs read-only on pull requests and on relevant pushes, so policy/source changes can be validated before a live mutation. Representative dates exercise all four seasonal heroes, and all generated section/footer assets are geometry-checked.
 
 ## Visual envelope / pseudo-overlay
 
 GitHub README content **cannot** place a real overlay over GitHub page chrome, the avatar/sidebar, pinned-repository UI, or other host-owned profile elements. README HTML/CSS/JS also cannot restyle the surrounding GitHub application.
 
-What is implementable is a visual envelope **inside the profile README rendering area**. Envelope v2 currently uses this choreography:
+Envelope v3 uses this live choreography:
 
-`seasonal hero -> seasonal divider -> existing character content -> seasonal Projects band -> project map -> seasonal Activity band -> contribution graph -> seasonal footer`
+`seasonal animated/static-first hero -> existing character content -> seasonal Projects band -> project map -> seasonal Activity band -> contribution graph -> seasonal footer`
 
-The important change from v1 is that section boundaries are no longer generic repeated separators. The factual section labels themselves are full-width seasonal bands, so the palette/motif recurs through the complete vertical reading path. On GitHub dark theme, these bands visually blend with the host background and make the README read more like one continuous composition.
+The post-hero divider from v2 was removed after review because the hero already acts as the opening boundary. Keeping another full-width separator immediately after it fragmented the reading flow and weakened the illusion of one continuous composition.
 
-This remains a visual illusion/choreography, not DOM overlay authority. It cannot place side rails behind arbitrary Markdown content or cover host-owned UI.
+The factual section labels remain full-width seasonal bands, so the palette/motif recurs through the vertical reading path without putting a decorative separator at every boundary. On GitHub dark theme, these bands visually blend with the host background and make the README read more like one continuous composition.
 
-See `envelope-demo.md` for the bounded implementation concept.
+This remains visual choreography, not DOM overlay authority. It cannot place true side rails behind arbitrary Markdown content or cover host-owned UI.
 
 ## Current design authority
 
 - target theme: **dark**
 - copy: username/factual labels only; no invented motivational slogans
-- motion: optional and secondary; static frame must remain complete
+- motion: sparse/slow/optional and secondary to a complete static frame
+- reduced motion: animated overlays are removable without deleting essential content
 - structure: stable live assets are independent from the Design Lab
 - section chrome: Projects/Activity labels are part of the seasonal envelope rather than plain Markdown headings
+- separators: use only when they improve rhythm; do not insert one automatically after every major block
 - culture-specific direction: use concrete composition/material/palette references; avoid postcard/tourist-symbol accumulation
 - automatic mutation: only manifest-approved, static-rendered seasonal candidates may be promoted
 
 ## Promotion gate
 
-A new seasonal variant is not eligible for automatic live promotion merely because it exists in `seasons/`. It must retain the common grammar, parse/render cleanly, and be explicitly marked `auto_promote=true` with `static_render=PASS` in the manifest. The generated chrome must also pass the canonical divider/section/footer geometry checks. Unapproved experiments remain Design Lab-only.
+A new seasonal variant is not eligible for automatic live promotion merely because it exists in `seasons/`. It must retain the common grammar, parse cleanly, keep a complete static frame, expose reduced-motion behavior, contain no scripted animation, and be explicitly marked `auto_promote=true` with `static_render=PASS` in the manifest. Generated live chrome must also pass canonical section/footer geometry checks. Unapproved experiments remain Design Lab-only.
