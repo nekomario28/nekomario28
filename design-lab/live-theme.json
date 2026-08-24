@@ -30,8 +30,14 @@
     "live_verification_job": 97522354218,
     "live_verification_at": "2026-08-25",
     "live_verification_sample_seconds": 12.0,
-    "live_verification_projects_changed_pairs": {"left": 18, "right": 20},
-    "live_verification_activity_changed_pairs": {"left": 11, "right": 12},
+    "live_verification_projects_changed_pairs": {
+      "left": 18,
+      "right": 20
+    },
+    "live_verification_activity_changed_pairs": {
+      "left": 11,
+      "right": 12
+    },
     "live_verification_cross_document_hard_sync": false
   },
   "frame": {
