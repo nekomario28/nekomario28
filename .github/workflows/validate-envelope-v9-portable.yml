@@ -1,0 +1,48 @@
+name: Validate Envelope v9 portable donor
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/validate-envelope-v9-portable.yml"
+      - "design-lab/envelope-v9/**"
+      - "design-lab/envelope-v8/**"
+      - "design-lab/envelope-v7/**"
+      - "design-lab/profile-envelope-config*.json"
+      - "design-lab/scripts/profile_envelope_contract.py"
+      - "design-lab/theme-manifest.json"
+      - "design-lab/seasons/*.svg"
+      - "project-map/galaxy.svg"
+      - "assets/github-contributions-dark.svg"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/validate-envelope-v9-portable.yml"
+      - "design-lab/envelope-v9/**"
+      - "design-lab/profile-envelope-config*.json"
+      - "design-lab/scripts/profile_envelope_contract.py"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Checkout exact revision
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Validate portable v9 donor structure
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile \
+            design-lab/scripts/profile_envelope_contract.py \
+            design-lab/envelope-v9/vector_text.py \
+            design-lab/envelope-v9/render_portable_surface.py \
+            design-lab/envelope-v9/validate.py
+          python design-lab/envelope-v9/validate.py
+          git diff --check

@@ -1,0 +1,142 @@
+#!/usr/bin/env python3
+"""Structural/contract validation for the lab-only Envelope v9 portability donor."""
+from __future__ import annotations
+
+import importlib.util
+import json
+import tempfile
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+HERE = Path(__file__).resolve().parent
+RENDERER_PATH = HERE / "render_portable_surface.py"
+OPAQUE_SAFE = ROOT / "design-lab" / "profile-envelope-config.example.json"
+TRANSPARENT_SAFE = ROOT / "design-lab" / "profile-envelope-config.transparent.example.json"
+
+
+def load_renderer():
+    spec = importlib.util.spec_from_file_location("envelope_v9_renderer", RENDERER_PATH)
+    if spec is None or spec.loader is None:
+        raise RuntimeError("unable to load v9 renderer")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+R = load_renderer()
+
+
+def write_config(root: Path, name: str, *, background: str, text: str, motion: str, mounted: str = "inherit", density: str = "auto") -> Path:
+    path = root / f"{name}.json"
+    path.write_text(
+        json.dumps(
+            {
+                "contract_version": 1,
+                "target_adapter": "github-profile-readme",
+                "profile": {"theme": "seasonal-dark", "background": background, "text": text, "motion": motion},
+                "surface": {"mounted_source_background": mounted},
+                "frame": {"mode": "rail", "caps": "outer-only"},
+                "labels": {"density": density},
+                "packing": {"mode": "auto"},
+                "external_media": {"mode": "reference-only"},
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return path
+
+
+def texts(path: Path) -> int:
+    return R.VECTOR.visible_text_count(path.read_text(encoding="utf-8"))
+
+
+def assert_xml(root: Path) -> None:
+    for rel in R.asset_paths():
+        ET.parse(root / rel)
+
+
+def assert_markers(root: Path, *, background: str, text: str, motion: str, fingerprint: str) -> None:
+    for rel in R.asset_paths():
+        svg = (root / rel).read_text(encoding="utf-8")
+        assert 'data-envelope-presentation="v9-portable-surface"' in svg, rel
+        assert f'data-profile-contract-sha256="{fingerprint}"' in svg, rel
+        assert f'data-profile-background="{background}"' in svg, rel
+        assert f'data-profile-text="{text}"' in svg, rel
+        assert f'data-profile-motion="{motion}"' in svg, rel
+
+
+def render_case(work: Path, name: str, config: Path) -> tuple[Path, dict, dict]:
+    out = work / name
+    out.mkdir()
+    contract, resolved = R.render(config, season="summer", output_root=out)
+    assert_xml(out)
+    assert_markers(
+        out,
+        background=contract["profile"]["background"],
+        text=contract["profile"]["text"],
+        motion=contract["profile"]["motion"],
+        fingerprint=resolved["normalized_contract_sha256"],
+    )
+    return out, contract, resolved
+
+
+def main() -> int:
+    with tempfile.TemporaryDirectory() as tmp:
+        work = Path(tmp)
+
+        opaque, opaque_contract, opaque_resolved = render_case(work, "opaque-safe", OPAQUE_SAFE)
+        transparent, transparent_contract, transparent_resolved = render_case(work, "transparent-safe", TRANSPARENT_SAFE)
+        native_cfg = write_config(work, "native", background="opaque", text="native", motion="on")
+        native, _, _ = render_case(work, "opaque-native", native_cfg)
+        minimal_cfg = write_config(work, "minimal", background="transparent", text="minimal", motion="off", density="minimal")
+        minimal, _, _ = render_case(work, "transparent-minimal", minimal_cfg)
+        preserve_cfg = write_config(work, "preserve", background="transparent", text="native", motion="off", mounted="preserve")
+        preserve, _, _ = render_case(work, "transparent-preserve", preserve_cfg)
+
+        # safe: no visible <text> survives in any repository-owned output.
+        assert all(texts(opaque / rel) == 0 for rel in R.asset_paths())
+        assert all(texts(transparent / rel) == 0 for rel in R.asset_paths())
+        assert sum((opaque / rel).read_text().count('data-vector-text="v1"') for rel in R.asset_paths()) > 0
+
+        # native: host-font dependency remains explicit and observable.
+        assert sum(texts(native / rel) for rel in R.asset_paths()) > 0
+        assert opaque_resolved["verification"]["text_pass_mode"] == "font-independent"
+        native_contract, native_resolved = R.CONTRACT.load_and_resolve(native_cfg)
+        assert native_contract["profile"]["text"] == "native"
+        assert native_resolved["verification"]["text_pass_mode"] == "host-dependent-only"
+
+        # minimal: fixed text is vectorized, dynamic visible labels are suppressed,
+        # accessibility title/desc metadata remains textual.
+        for rel in R.DYNAMIC_VISIBLE_TEXT:
+            svg = (minimal / rel).read_text(encoding="utf-8")
+            assert '<text' not in svg
+            assert 'data-vector-text="v1"' not in svg
+            assert '<title' in svg or '<desc' in svg
+        assert (minimal / "assets/profile-hero.svg").read_text().count('data-vector-text="v1"') >= 1
+        assert all('<animate' not in (minimal / rel).read_text().lower() for rel in R.asset_paths())
+
+        # outer transparency is independent from mounted-source opacity.
+        assert all('surface-base"' in (opaque / rel).read_text() for rel in R.asset_paths())
+        assert all('surface-base"' not in (transparent / rel).read_text() for rel in R.asset_paths())
+        inherited_projects = (transparent / "assets/profile-projects-canvas.svg").read_text()
+        preserved_projects = (preserve / "assets/profile-projects-canvas.svg").read_text()
+        assert 'fill="url(#galaxy-family-bg)"' not in inherited_projects
+        assert 'fill="url(#galaxy-family-bg)"' in preserved_projects
+
+        # transparent mode expands the required host-appearance matrix.
+        assert len(opaque_resolved["verification"]["target_cases"]) == 2
+        assert len(transparent_resolved["verification"]["target_cases"]) == 4
+        assert {case["appearance"] for case in transparent_resolved["verification"]["target_cases"]} == {"dark", "light"}
+        assert opaque_contract["profile"]["background"] == "opaque"
+        assert transparent_contract["profile"]["background"] == "transparent"
+
+    print("ENVELOPE_V9_PORTABLE_STRUCTURE_PASS cases=5 text=safe/native/minimal background=opaque/transparent mounted=inherit/preserve")
+    print("TARGET_LAYOUT=NOT_RUN TEXT_RENDER=NOT_RUN PLAYBACK=NOT_RUN")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
