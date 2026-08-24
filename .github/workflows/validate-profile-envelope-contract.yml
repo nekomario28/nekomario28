@@ -1,0 +1,66 @@
+name: Validate portable profile envelope contract
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/validate-profile-envelope-contract.yml"
+      - "design-lab/profile-envelope-config*.json"
+      - "design-lab/profile-envelope-portability.md"
+      - "design-lab/scripts/profile_envelope_contract.py"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/validate-profile-envelope-contract.yml"
+      - "design-lab/profile-envelope-config*.json"
+      - "design-lab/profile-envelope-portability.md"
+      - "design-lab/scripts/profile_envelope_contract.py"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Checkout exact revision
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Validate contract examples and derived policy
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile design-lab/scripts/profile_envelope_contract.py
+          python design-lab/scripts/profile_envelope_contract.py design-lab/profile-envelope-config.example.json
+          python design-lab/scripts/profile_envelope_contract.py design-lab/profile-envelope-config.transparent.example.json
+          python design-lab/scripts/profile_envelope_contract.py \
+            design-lab/profile-envelope-config.transparent.example.json \
+            --resolved-json > "$RUNNER_TEMP/transparent-resolved.json"
+          python - "$RUNNER_TEMP/transparent-resolved.json" <<'PY'
+          import json, sys
+          data = json.load(open(sys.argv[1], encoding='utf-8'))
+          resolved = data['resolved']
+          cases = resolved['verification']['target_cases']
+          assert len(cases) == 4, cases
+          assert {case['appearance'] for case in cases} == {'dark', 'light'}
+          assert resolved['verification']['transparent_requires_light_dark'] is True
+          assert resolved['text_roles']['essential_fixed_visible']['host_font_dependency'] is False
+          assert resolved['publication']['writer_separation_required'] is True
+          PY
+          cat > "$RUNNER_TEMP/invalid.json" <<'JSON'
+          {
+            "contract_version": 1,
+            "target_adapter": "github-profile-readme",
+            "profile": {"theme": "seasonal-dark", "background": "opaque", "text": "safe", "motion": "off"},
+            "frame": {"mode": "none", "caps": "outer-only"}
+          }
+          JSON
+          if python design-lab/scripts/profile_envelope_contract.py "$RUNNER_TEMP/invalid.json"; then
+            echo "Invalid frame combination unexpectedly passed." >&2
+            exit 1
+          fi
+          git diff --check
+          echo "PROFILE_ENVELOPE_PORTABLE_CONTRACT_PASS"
