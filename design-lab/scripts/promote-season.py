@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import importlib.util
 import json
 import tempfile
@@ -17,6 +18,7 @@ MANIFEST = LAB / "theme-manifest.json"
 LIVE_STATE = LAB / "live-theme.json"
 GLOBAL_SPACE = LAB / "envelope-v7" / "global-motion-space.json"
 RENDERER = LAB / "envelope-v8" / "render_continuous_canvas.py"
+README = ROOT / "README.md"
 ENVELOPE_VERSION = 8
 
 REQUIRED_ASSETS = {
@@ -212,20 +214,63 @@ def expected_assets(renderer, season: str, live_assets: dict[str, str]) -> dict[
         return {key: (root / rel).read_bytes() for key, rel in live_assets.items()}
 
 
-def same_verification_target(live: dict, *, season: str, source_hero: Path) -> bool:
+def verification_target_sha256(manifest: dict, *, season: str, cfg: dict) -> str:
+    """Fingerprint the public rail-playback target without coupling it to changing Project Map data."""
+    payload = {
+        "envelope_version": ENVELOPE_VERSION,
+        "presentation": manifest.get("presentation", {}),
+        "envelope_motion": manifest.get("envelope_motion", {}),
+        "season": season,
+        "season_visual": {
+            "hero": cfg.get("hero"),
+            "accent": cfg.get("accent"),
+            "chrome": cfg.get("chrome", {}),
+            "motion_profile": cfg.get("motion", {}).get("profile"),
+        },
+        "renderer_sha256": hashlib.sha256(RENDERER.read_bytes()).hexdigest(),
+        "readme_sha256": hashlib.sha256(README.read_bytes()).hexdigest(),
+    }
+    encoded = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def same_verification_target(
+    live: dict,
+    *,
+    season: str,
+    source_hero: Path,
+    verification_target: str,
+) -> bool:
     """Whether a live playback receipt still describes this exact deployed target."""
+    motion = live.get("motion", {}) if isinstance(live.get("motion"), dict) else {}
     return (
         live.get("active_season") == season
         and live.get("envelope_version") == ENVELOPE_VERSION
         and live.get("source") == str(source_hero.relative_to(ROOT))
         and live.get("global_motion_space") == str(GLOBAL_SPACE.relative_to(ROOT))
+        and motion.get("live_verification_target_sha256") == verification_target
     )
 
 
-def next_motion_state(live: dict, cfg: dict, *, season: str, source_hero: Path) -> dict:
+def next_motion_state(
+    live: dict,
+    cfg: dict,
+    *,
+    season: str,
+    source_hero: Path,
+    verification_target: str,
+) -> dict:
     next_motion = dict(cfg["motion"])
     current_motion = live.get("motion", {}) if isinstance(live.get("motion"), dict) else {}
-    if same_verification_target(live, season=season, source_hero=source_hero) and current_motion.get("live_verification") == "PASS":
+    if (
+        same_verification_target(
+            live,
+            season=season,
+            source_hero=source_hero,
+            verification_target=verification_target,
+        )
+        and current_motion.get("live_verification") == "PASS"
+    ):
         for key, value in current_motion.items():
             if key == "live_verification" or key.startswith("live_verification_"):
                 next_motion[key] = value
@@ -249,6 +294,7 @@ def main() -> int:
     day = resolve_day(args.date, manifest.get("timezone", "Asia/Tokyo"))
     season, cfg = resolve_season(manifest, day, args.season)
     source_hero = LAB / cfg["hero"]
+    verification_target = verification_target_sha256(manifest, season=season, cfg=cfg)
 
     try:
         source_root = ET.parse(source_hero).getroot()
@@ -270,10 +316,16 @@ def main() -> int:
         live = load_json(LIVE_STATE)
     except FileNotFoundError:
         live = {}
+    current_motion = live.get("motion", {}) if isinstance(live.get("motion"), dict) else {}
+    stale_pass = (
+        current_motion.get("live_verification") == "PASS"
+        and current_motion.get("live_verification_target_sha256") != verification_target
+    )
     changed = (
         live.get("active_season") != season
         or live.get("envelope_version") != ENVELOPE_VERSION
         or live.get("global_motion_space") != str(GLOBAL_SPACE.relative_to(ROOT))
+        or stale_pass
         or any(not assets[key].is_file() or assets[key].read_bytes() != expected[key] for key in expected)
     )
 
@@ -289,6 +341,7 @@ def main() -> int:
         "motion_mode": manifest["envelope_motion"]["mode"],
         "coordinate_system": manifest["envelope_motion"]["coordinate_system"],
         "global_extent": manifest["envelope_motion"]["global_extent"],
+        "verification_target_sha256": verification_target,
         "cross_document_hard_sync": False,
     }
 
@@ -306,7 +359,13 @@ def main() -> int:
             "source": str(source_hero.relative_to(ROOT)),
             "live_assets": {key: str(path.relative_to(ROOT)) for key, path in assets.items()},
             "timezone": manifest.get("timezone", "Asia/Tokyo"),
-            "motion": next_motion_state(live, cfg, season=season, source_hero=source_hero),
+            "motion": next_motion_state(
+                live,
+                cfg,
+                season=season,
+                source_hero=source_hero,
+                verification_target=verification_target,
+            ),
             "frame": {
                 "mode": "continuous-canvas-global-windowed-flow",
                 "background_illusion": True,
