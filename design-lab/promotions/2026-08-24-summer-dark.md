@@ -37,7 +37,9 @@ Confirmed through the GitHub repository API:
 - the live README declares `summer-dark` as the active theme;
 - the pre-existing content references remain present.
 
-The public GitHub profile HTML could not be independently fetched by the available web path at promotion time, so browser-level visual verification remains `NOT_RUN` rather than being inferred from source validity.
+The promoted `assets/profile-hero.svg` was also rendered locally at its canonical `900x260` geometry with CairoSVG. The static render completed without parser/render failure, clipping, or missing internal SVG references. This proves the hero asset itself is renderable; it does not prove the complete GitHub profile composition.
+
+The public GitHub profile HTML could not be independently fetched by the available web path at promotion time, so browser-level full-profile visual verification remains `NOT_RUN` rather than being inferred from source or hero-only rendering.
 
 ## Rollback
 
