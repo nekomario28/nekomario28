@@ -21,8 +21,8 @@ jobs:
   generate:
     permissions:
       contents: read
-    # Reviewed Galaxy Systems Contributed rail v1 release: R 5818675661b260da844454ec4aeac8c8ad2b2c38
-    # resolves immutable Action F 94abe621aae576d6a49e38fe7e146e0790387fc2 (Verify #780; pin promotion #782).
+    # Reviewed profile-local Galaxy world v1 release: R 19b56d8b78965285aad190c9fc4ebcde7abcd1ac
+    # resolves immutable Action F 4e5bbf4c4a4858770b4393ced718722fba724530 (Verify #806).
     uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@v1
     with:
       theme: dark
@@ -56,18 +56,20 @@ jobs:
           test -s project-map/graph.json
           grep -q 'data-galaxy-preset="systems"' project-map/galaxy.svg
           grep -q '#E69F00' project-map/galaxy.svg
+          grep -q 'data-profile-galaxy-background="ead72debca2a16608ebc5b799993c0234ea10cab"' project-map/galaxy.svg
           grep -q 'data-galaxy-external="true"' project-map/galaxy.svg
-          grep -q 'data-galaxy-external-layout="rail"' project-map/galaxy.svg
-          grep -q 'data-galaxy-external-backdrop="true"' project-map/galaxy.svg
+          grep -q 'data-galaxy-external-layout="halo"' project-map/galaxy.svg
           grep -q 'data-galaxy-orbit="contributed"' project-map/galaxy.svg
-          grep -q 'data-galaxy-placement="external-rail"' project-map/galaxy.svg
+          grep -q 'data-galaxy-placement="external-halo-orbit"' project-map/galaxy.svg
           grep -q '>Contributed</text>' project-map/galaxy.svg
-          if grep -q 'External contributions' project-map/galaxy.svg; then
-            echo 'Legacy synthetic External contributions hub is still present.' >&2
+          if grep -q 'data-galaxy-external-layout="rail"' project-map/galaxy.svg || \
+             grep -q 'data-galaxy-external-backdrop="true"' project-map/galaxy.svg || \
+             grep -q 'data-galaxy-placement="external-rail"' project-map/galaxy.svg; then
+            echo 'Detached Contributed rail presentation is still present.' >&2
             exit 1
           fi
-          if grep -Eq 'stroke="#E69F00"[^>]+stroke-dasharray="3 3"' project-map/galaxy.svg; then
-            echo 'Legacy Contributed halo is still present.' >&2
+          if grep -q 'External contributions' project-map/galaxy.svg; then
+            echo 'Legacy synthetic External contributions hub is still present.' >&2
             exit 1
           fi
           grep -q '"taxonomy"' project-map/graph.json
@@ -76,6 +78,8 @@ jobs:
           const svg = fs.readFileSync('project-map/galaxy.svg', 'utf8');
           const graph = JSON.parse(fs.readFileSync('project-map/graph.json', 'utf8'));
           const owner = 'nekomario28';
+          const donor = 'ead72debca2a16608ebc5b799993c0234ea10cab';
+          const groups = graph.nodes.filter((node) => node?.type === 'group');
           const contributed = graph.nodes.filter((node) => node?.type === 'repository' && node?.relation === 'contributed');
           const contributedIds = new Set(contributed.map((node) => node.id));
           if (contributed.length < 1) throw new Error('canonical map has no accepted Contributed repositories');
@@ -92,11 +96,25 @@ jobs:
           const contributionTargets = new Set(graph.edges.filter((edge) => edge?.type === 'contribution').map((edge) => edge.target));
           for (const id of contributedIds) if (!contributionTargets.has(id)) throw new Error(`missing canonical contribution edge for ${id}`);
           if ((graph.semanticEdges || []).some((edge) => contributedIds.has(edge?.source) || contributedIds.has(edge?.target))) throw new Error('Contributed repository entered owned semantic graph');
-          const railStart = svg.indexOf('data-galaxy-external-layout="rail"');
-          if (railStart < 0) throw new Error('Galaxy Systems external rail is missing');
-          const railPlacements = [...svg.matchAll(/data-galaxy-orbit="contributed" data-galaxy-placement="external-rail"/g)];
-          if (railPlacements.length !== contributed.length) throw new Error(`external rail placement mismatch: ${railPlacements.length} SVG vs ${contributed.length} graph`);
-          if (/<animateTransform\b/.test(svg.slice(railStart))) throw new Error('Contributed external rail re-entered global orbit animation');
+
+          if (!svg.includes(`data-profile-galaxy-background="${donor}"`)) throw new Error('historical profile-local Galaxy donor marker is missing');
+          const rings = [...svg.matchAll(/data-profile-galaxy-ring=/g)].length;
+          const arms = [...svg.matchAll(/data-profile-galaxy-arm=/g)].length;
+          const associations = [...svg.matchAll(/data-profile-stellar-association=/g)].length;
+          if (rings !== 3) throw new Error(`profile-local Galaxy ring count mismatch: ${rings}`);
+          if (arms !== groups.length) throw new Error(`profile-local Galaxy arm count mismatch: ${arms} SVG vs ${groups.length} groups`);
+          if (associations !== groups.length) throw new Error(`stellar association count mismatch: ${associations} SVG vs ${groups.length} groups`);
+          if (/parallax|meteor/i.test(svg)) throw new Error('screen-space cosmic decoration leaked back into static Galaxy output');
+
+          const haloStart = svg.indexOf('data-galaxy-external-layout="halo"');
+          if (haloStart < 0) throw new Error('Galaxy Systems external halo is missing');
+          const haloSlice = svg.slice(haloStart);
+          const haloPlacements = [...haloSlice.matchAll(/data-galaxy-orbit="contributed" data-galaxy-placement="external-halo-orbit"/g)];
+          if (haloPlacements.length !== contributed.length) throw new Error(`external halo placement mismatch: ${haloPlacements.length} SVG vs ${contributed.length} graph`);
+          const haloAnimations = [...haloSlice.matchAll(/<animateTransform\b/g)].length;
+          if (haloAnimations < contributed.length) throw new Error(`external halo motion mismatch: ${haloAnimations} animations vs ${contributed.length} contributed repositories`);
+          if (/data-galaxy-external-layout="rail"|data-galaxy-external-backdrop="true"|data-galaxy-placement="external-rail"/.test(svg)) throw new Error('detached external rail survived release');
+
           const forbiddenKeys = new Set(['private', 'isPrivate', 'restricted', 'isRestricted']);
           const visit = (value) => {
             if (!value || typeof value !== 'object') return;
@@ -106,7 +124,7 @@ jobs:
             }
           };
           visit(graph);
-          console.log(`Canonical map validated: ${graph.repositoryCount} owned + ${contributed.length} accepted Contributed; external rail verified`);
+          console.log(`Canonical map validated: ${graph.repositoryCount} owned + ${contributed.length} accepted Contributed; profile-local Galaxy background + external halo verified`);
           NODE
 
       - name: Commit only when the generated map changed
