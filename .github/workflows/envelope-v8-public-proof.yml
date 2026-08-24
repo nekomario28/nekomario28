@@ -1,0 +1,185 @@
+name: Envelope v8 public playback proof
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+    paths:
+      - ".github/workflows/envelope-v8-public-proof.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Install proof helpers
+        run: python -m pip install --quiet websocket-client pillow
+
+      - name: Prove Envelope v8 rail playback on public profile
+        shell: bash
+        run: |
+          set -euo pipefail
+          chrome="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)"
+          test -n "$chrome"
+          out="$RUNNER_TEMP/envelope-v8-public-proof"
+          mkdir -p "$out/chrome-profile"
+          export OUT="$out"
+
+          "$chrome" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars \
+            --user-data-dir="$out/chrome-profile" \
+            --remote-debugging-port=9222 --remote-allow-origins='*' \
+            --window-size=1440,3600 about:blank >"$out/chrome.log" 2>&1 &
+          chrome_pid=$!
+          trap 'kill "$chrome_pid" 2>/dev/null || true' EXIT
+
+          for _ in $(seq 1 80); do
+            curl -fsS http://127.0.0.1:9222/json/list >"$out/targets.json" && break
+            sleep .2
+          done
+          test -s "$out/targets.json"
+
+          python - <<'PY'
+          import base64, json, math, os, time, urllib.request
+          from pathlib import Path
+          import websocket
+          from PIL import Image, ImageChops
+
+          out = Path(os.environ['OUT'])
+          target = next(t for t in json.loads((out / 'targets.json').read_text()) if t.get('type') == 'page')
+          ws = websocket.create_connection(target['webSocketDebuggerUrl'], timeout=20)
+          seq = 0
+
+          def call(method, params=None):
+              global seq
+              seq += 1
+              ident = seq
+              ws.send(json.dumps({'id': ident, 'method': method, 'params': params or {}}))
+              while True:
+                  msg = json.loads(ws.recv())
+                  if msg.get('id') == ident:
+                      if 'error' in msg:
+                          raise RuntimeError(f"CDP {method}: {msg['error']}")
+                      return msg.get('result', {})
+
+          def evaluate(expr):
+              return call('Runtime.evaluate', {'expression': expr, 'returnByValue': True, 'awaitPromise': True}).get('result', {}).get('value')
+
+          def wait_complete(timeout=25):
+              end = time.time() + timeout
+              while time.time() < end:
+                  state = evaluate("""(() => ({ready:document.readyState,images:Array.from(document.images).every(i=>i.complete&&i.naturalWidth>0)}))()""")
+                  if state and state.get('ready') == 'complete' and state.get('images'):
+                      time.sleep(1)
+                      return
+                  time.sleep(.2)
+              raise RuntimeError('public profile did not finish loading images')
+
+          def capture(path, rect):
+              data = call('Page.captureScreenshot', {
+                  'format': 'png', 'captureBeyondViewport': True,
+                  'clip': {'x': rect['x'], 'y': rect['y'], 'width': rect['width'], 'height': rect['height'], 'scale': 1},
+              })['data']
+              path.write_bytes(base64.b64decode(data))
+
+          with urllib.request.urlopen('https://api.github.com/repos/nekomario28/nekomario28/commits/main', timeout=15) as response:
+              observed_main_before = json.load(response)['sha']
+
+          call('Page.enable')
+          call('Runtime.enable')
+          call('Emulation.setEmulatedMedia', {'features': [{'name':'prefers-color-scheme','value':'dark'}]})
+          call('Emulation.setDeviceMetricsOverride', {'width':1440,'height':3600,'deviceScaleFactor':1,'mobile':False})
+          call('Page.navigate', {'url':'https://github.com/nekomario28'})
+          wait_complete()
+
+          media = evaluate("""(() => ({reduce:matchMedia('(prefers-reduced-motion: reduce)').matches,noPreference:matchMedia('(prefers-reduced-motion: no-preference)').matches}))()""")
+          specs = {
+              'character_left': {'src':'profile-character-side-left.svg','nw':100,'nh':394,'rails':{'left':18}},
+              'character_right': {'src':'profile-character-side-right.svg','nw':100,'nh':394,'rails':{'right':82}},
+              'attribution_projects': {'src':'profile-attribution-projects-transition.svg','nw':900,'nh':76,'rails':{'left':18,'right':882}},
+              'projects': {'src':'profile-section-projects.svg','nw':900,'nh':68,'rails':{'left':18,'right':882}},
+              'projects_canvas': {'src':'profile-projects-canvas.svg','nw':900,'nh':420,'rails':{'left':18,'right':882}},
+              'activity_header': {'src':'profile-activity-header.svg','nw':900,'nh':100,'rails':{'left':18,'right':882}},
+              'activity_canvas': {'src':'profile-activity-canvas.svg','nw':900,'nh':220,'rails':{'left':18,'right':882}},
+              'footer_transition': {'src':'profile-footer-transition.svg','nw':900,'nh':124,'rails':{'left':18,'right':882}},
+          }
+          rects = evaluate("""(() => { const imgs=Array.from(document.images); const names=%s; const out={}; for (const [key,s] of Object.entries(names)) { const i=imgs.find(x=>x.src.includes(s.src)); if (!i) { out[key]=null; continue; } const r=i.getBoundingClientRect(); out[key]={src:i.src,x:r.x,y:r.y,width:r.width,height:r.height,naturalWidth:i.naturalWidth,naturalHeight:i.naturalHeight}; } return out; })()""" % json.dumps({k:{'src':v['src']} for k,v in specs.items()}))
+          for key, spec in specs.items():
+              r = rects.get(key)
+              if not r:
+                  raise RuntimeError(f'missing public profile asset: {key}')
+              if (r['naturalWidth'], r['naturalHeight']) != (spec['nw'], spec['nh']):
+                  raise RuntimeError(f'unexpected geometry for {key}: {r}')
+
+          clip = {
+              'x': min(r['x'] for r in rects.values()),
+              'y': min(r['y'] for r in rects.values()),
+              'width': max(r['x'] + r['width'] for r in rects.values()) - min(r['x'] for r in rects.values()),
+              'height': max(r['y'] + r['height'] for r in rects.values()) - min(r['y'] for r in rects.values()),
+          }
+          interval = .5
+          duration = 12.0
+          count = int(duration / interval) + 1
+          samples = []
+          start = time.monotonic()
+          for i in range(count):
+              path = out / f'profile-{i:02d}.png'
+              capture(path, clip)
+              samples.append(path)
+              target_t = start + (i + 1) * interval
+              time.sleep(max(0, target_t - time.monotonic()))
+
+          def rail_box(rect, logical_x):
+              sx = rect['width'] / rect['naturalWidth']
+              cx = rect['x'] - clip['x'] + logical_x * sx
+              half = max(3, math.ceil(6 * sx))
+              left = max(0, math.floor(cx - half))
+              right = min(math.ceil(clip['width']), math.ceil(cx + half))
+              top = max(0, math.floor(rect['y'] - clip['y']))
+              bottom = min(math.ceil(clip['height']), math.ceil(rect['y'] - clip['y'] + rect['height']))
+              return (left, top, right, bottom)
+
+          changes = {}
+          for key, spec in specs.items():
+              changes[key] = {}
+              for side, logical_x in spec['rails'].items():
+                  box = rail_box(rects[key], logical_x)
+                  hits = []
+                  for i in range(len(samples)-1):
+                      a = Image.open(samples[i]).convert('RGB').crop(box)
+                      b = Image.open(samples[i+1]).convert('RGB').crop(box)
+                      d = ImageChops.difference(a, b)
+                      changed = sum(1 for px in d.getdata() if px != (0,0,0))
+                      if changed:
+                          hits.append({'from':i,'to':i+1,'changed_pixels':changed,'bbox':d.getbbox()})
+                  changes[key][side] = {'box':box,'hits':hits}
+
+          counts = {key:{side:len(data['hits']) for side,data in sides.items()} for key,sides in changes.items()}
+          passed = all(count > 0 for sides in counts.values() for count in sides.values())
+
+          with urllib.request.urlopen('https://api.github.com/repos/nekomario28/nekomario28/commits/main', timeout=15) as response:
+              observed_main_after = json.load(response)['sha']
+          main_stable = observed_main_before == observed_main_after
+          metrics = {
+              'result':'PASS' if passed and main_stable else 'FAIL',
+              'observed_main_before':observed_main_before,
+              'observed_main_after':observed_main_after,
+              'main_stable_during_sample':main_stable,
+              'target':'https://github.com/nekomario28',
+              'proof_scope':'actual public profile; 8 non-hero repo-owned Envelope v8 documents; 14 narrow rail strips; hero excluded because seasonal local animation is not rail-isolated',
+              'media':media,
+              'sample_interval_seconds':interval,
+              'sample_duration_seconds':duration,
+              'sample_count':count,
+              'changed_pair_counts':counts,
+              'first_changes':{k:{s:v['hits'][:3] for s,v in sides.items()} for k,sides in changes.items()},
+              'cross_document_hard_sync_claimed':False,
+          }
+          print('ENVELOPE_V8_PUBLIC_PLAYBACK ' + json.dumps(metrics,separators=(',',':')))
+          if not passed:
+              raise RuntimeError('one or more v8 rail strips showed no public playback')
+          if not main_stable:
+              raise RuntimeError('main changed during public playback sample; proof target is not stable')
+          PY
