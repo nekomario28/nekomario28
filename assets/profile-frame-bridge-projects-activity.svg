@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="32" viewBox="0 0 900 32" role="img" aria-label="seasonal envelope frame bridge">
+<svg data-envelope-presentation="v8-seamless-surface" xmlns="http://www.w3.org/2000/svg" width="900" height="32" viewBox="0 0 900 32" role="img" aria-label="seasonal envelope frame bridge">
   <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#06101a"/><stop offset=".52" stop-color="#0c2d3b"/><stop offset="1" stop-color="#06101a"/></linearGradient></defs>
   <rect width="900" height="32" fill="url(#bg)"/>
   <g fill="none" stroke-linecap="round"><path d="M18 0V32 M882 0V32" stroke="#86aa94" stroke-opacity=".24" stroke-width="1.6"/><path d="M18 8V24 M882 8V24" stroke="#c7b06c" stroke-opacity=".18" stroke-width=".7"/></g>

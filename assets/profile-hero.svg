@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="260" viewBox="0 0 900 260" role="img" aria-labelledby="title desc">
+<svg data-envelope-presentation="v8-seamless-surface" xmlns="http://www.w3.org/2000/svg" width="900" height="260" viewBox="0 0 900 260" role="img" aria-labelledby="title desc">
   <title id="title">nekomario28 summer dark profile concept</title>
   <desc id="desc">Deep blue summer profile banner with abstract water, rain, green maple leaves, and optional subtle motion.</desc>
   <defs>
@@ -7,7 +7,7 @@
     <path id="leaf" d="M0,-13 L4,-5 L12,-8 L8,0 L16,3 L7,7 L9,15 L1,9 L-4,17 L-5,8 L-15,10 L-8,2 L-15,-3 L-6,-4 L-7,-13 L0,-7 Z"/>
   </defs>
   <style>@media (prefers-reduced-motion: reduce) { .motion { display: none; } }</style>
-  <rect width="900" height="260" rx="18" fill="url(#bg)"/>
+  <rect width="900" height="260" fill="url(#bg)"/>
   <g stroke="#dce8e4" stroke-opacity=".07" stroke-width="1"><path d="M610 0v78"/><path d="M640 0v96"/><path d="M670 0v65"/><path d="M700 0v105"/><path d="M730 0v79"/><path d="M760 0v100"/><path d="M790 0v64"/></g>
   <path d="M328 226 C463 154 577 250 707 172 C775 132 818 145 888 119" fill="none" stroke="url(#water)" stroke-width="36" stroke-linecap="round"/>
   <path d="M301 238 C450 178 583 252 711 193 C786 158 829 161 900 139" fill="none" stroke="#a8c6c1" stroke-opacity=".14" stroke-width="2"/>
@@ -28,7 +28,6 @@
     <g transform="translate(842 35)"><g fill="#8eaa87" stroke="#b5c7b2" stroke-opacity=".25" stroke-width=".4"><use href="#leaf" transform="scale(.25)"/><animateTransform attributeName="transform" type="rotate" values="-2;3;-2" dur="7.6s" repeatCount="indefinite"/></g></g>
     <g transform="translate(786 65)"><g fill="#8eaa87" stroke="#b5c7b2" stroke-opacity=".22" stroke-width=".4"><use href="#leaf" transform="scale(.18)"/><animateTransform attributeName="transform" type="rotate" values="2;-3;2" dur="9.2s" begin="-2s" repeatCount="indefinite"/></g></g>
   </g>
-  <rect x=".5" y=".5" width="899" height="259" rx="17.5" fill="none" stroke="#fff" stroke-opacity=".07"/>
 <defs><clipPath id="v7-window"><rect x="0" y="0" width="900" height="260"/></clipPath></defs>
 <style>@media (prefers-reduced-motion: reduce) { .v7-motion { display:none } }</style>
 <g id="v7-global-window" data-window="hero" data-global-start="0" data-global-end="260" data-global-extent="1662" data-global-x-offset="0" pointer-events="none">

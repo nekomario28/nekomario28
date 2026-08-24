@@ -1,14 +1,21 @@
-<svg data-envelope-presentation="v8-seamless-surface" xmlns="http://www.w3.org/2000/svg" width="900" height="32" viewBox="0 0 900 32" role="img" aria-label="seasonal envelope frame bridge">
-  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#06101a"/><stop offset=".52" stop-color="#0c2d3b"/><stop offset="1" stop-color="#06101a"/></linearGradient></defs>
-  <rect width="900" height="32" fill="url(#bg)"/>
+<svg data-envelope-presentation="v8-seamless-surface" xmlns="http://www.w3.org/2000/svg" width="900" height="124" viewBox="0 0 900 124" role="img" aria-label="Envelope v8 seamless profile transition">
+  <svg x="0" y="0" width="900" height="32" viewBox="0 0 900 32"><defs><linearGradient id="v8-footer-transition-0-bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#06101a"/><stop offset=".52" stop-color="#0c2d3b"/><stop offset="1" stop-color="#06101a"/></linearGradient></defs>
+  <rect width="900" height="32" fill="url(#v8-footer-transition-0-bg)"/>
   <g fill="none" stroke-linecap="round"><path d="M18 0V32 M882 0V32" stroke="#86aa94" stroke-opacity=".24" stroke-width="1.6"/><path d="M18 8V24 M882 8V24" stroke="#c7b06c" stroke-opacity=".18" stroke-width=".7"/></g>
   <path d="M18 7H58 M18 25H44 M842 7H882 M856 25H882" stroke="#dce8e4" stroke-opacity=".10"/>
   <path d="M338 22 C390 10 443 27 494 17 C544 8 590 22 637 13" fill="none" stroke="#86aa94" stroke-opacity=".10" stroke-width="1.4"/>
-  <circle cx="450" cy="16" r="2" fill="#c7b06c" fill-opacity=".34"/>
-<defs><clipPath id="v7-window"><rect x="0" y="0" width="900" height="32"/></clipPath></defs>
+  <circle cx="450" cy="16" r="2" fill="#c7b06c" fill-opacity=".34"/></svg>
+  <svg x="0" y="32" width="900" height="92" viewBox="0 0 900 92"><defs><linearGradient id="v8-footer-transition-1-bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#06101a"/><stop offset=".52" stop-color="#0c2d3b"/><stop offset="1" stop-color="#06101a"/></linearGradient></defs>
+  <rect width="900" height="92" fill="url(#v8-footer-transition-1-bg)"/>
+  <g fill="none" stroke-linecap="round"><path d="M18 0V70 Q18 82 30 82H62 M882 0V70 Q882 82 870 82H838" stroke="#86aa94" stroke-opacity=".24" stroke-width="1.6"/><path d="M18 8V84 M882 8V84" stroke="#c7b06c" stroke-opacity=".18" stroke-width=".7"/></g>
+  <path d="M0 68 C132 46 236 82 356 63 C482 43 582 77 704 53 C788 37 842 42 900 29" fill="none" stroke="#86aa94" stroke-opacity=".08" stroke-width="15"/>
+  <path d="M322 46 H420 M480 46 H578" stroke="#eef2f6" stroke-opacity=".14"/>
+  <circle cx="450" cy="46" r="3" fill="#86aa94"/><circle cx="450" cy="46" r="10" fill="none" stroke="#c7b06c" stroke-opacity=".24"/>
+  <g fill="none" stroke-linecap="round"><path d="M704 29 C748 11 796 39 842 20" stroke="#86aa94" stroke-opacity=".34" stroke-width="2"/><path d="M723 35 C764 22 806 42 858 27" stroke="#c7b06c" stroke-opacity=".22" stroke-width="1"/></g></svg>
+  <defs><clipPath id="v7-window"><rect x="0" y="0" width="900" height="124"/></clipPath></defs>
 <style>@media (prefers-reduced-motion: reduce) { .v7-motion { display:none } }</style>
-<g id="v7-global-window" data-window="bridge_activity_footer" data-global-start="1538" data-global-end="1570" data-global-extent="1662" data-global-x-offset="0" pointer-events="none">
-  
+<g id="v7-global-window" data-window="footer-transition" data-global-start="1538" data-global-end="1662" data-global-extent="1662" data-global-x-offset="0" pointer-events="none">
+  <path d="M18 96V106Q18 117 30 117H76 M882 96V106Q882 117 870 117H824" fill="none" stroke="#86aa94" stroke-opacity=".34" stroke-width="1.8" stroke-linecap="round"/>
   <g class="v7-motion" clip-path="url(#v7-window)">
     <g id="v7-particle-left-primary" opacity="0.82">
       <line x1="18" y1="-13" x2="18" y2="0" stroke="#86aa94" stroke-opacity=".34" stroke-width="1.2" stroke-linecap="round"/>

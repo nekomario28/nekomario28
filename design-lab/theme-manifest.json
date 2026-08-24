@@ -2,8 +2,16 @@
   "version": 8,
   "base_theme": "dark",
   "surface": "github-profile-readme",
-  "strategy": "seasonal visual envelope v7 continuous canvas with mounted foreground media",
+  "strategy": "seasonal visual envelope v8 seamless surface using the proven v7 continuous motion engine and mounted foreground media",
   "timezone": "Asia/Tokyo",
+  "presentation": {
+    "version": 8,
+    "mode": "seamless-surface",
+    "intermediate_card_rounding": false,
+    "name_hero_integrated": true,
+    "readme_image_vertical_alignment": "top",
+    "short_window_packing": true
+  },
   "live_assets": {
     "hero": "assets/profile-hero.svg",
     "character_left": "assets/profile-character-side-left.svg",
@@ -17,6 +25,17 @@
     "activity_canvas": "assets/profile-activity-canvas.svg",
     "bridge_activity_footer": "assets/profile-frame-bridge-activity-footer.svg",
     "footer": "assets/profile-footer.svg"
+  },
+  "presentation_assets": {
+    "hero": "assets/profile-hero.svg",
+    "character_left": "assets/profile-character-side-left.svg",
+    "character_right": "assets/profile-character-side-right.svg",
+    "attribution_projects_transition": "assets/profile-attribution-projects-transition.svg",
+    "projects": "assets/profile-section-projects.svg",
+    "projects_canvas": "assets/profile-projects-canvas.svg",
+    "activity_header": "assets/profile-activity-header.svg",
+    "activity_canvas": "assets/profile-activity-canvas.svg",
+    "footer_transition": "assets/profile-footer-transition.svg"
   },
   "optional_assets": {
     "legacy_v5_bridge": "assets/profile-frame-bridge.svg",
@@ -40,7 +59,7 @@
     "all_logical_windows_rendered": true,
     "mounted_foreground_media": true,
     "cross_document_hard_sync": false,
-    "reason": "GitHub README images remain independent documents; Envelope v7 removes invisible logical gaps and renders a shared coordinate field across visible background surfaces without claiming one runtime clock.",
+    "reason": "Envelope v8 preserves the proven v7 shared coordinate field while removing presentation seams and independent-card styling; GitHub README images remain independent documents, so no shared runtime clock is claimed.",
     "static_fallback": true,
     "reduced_motion": true
   },
@@ -94,11 +113,15 @@
     "Projects and Activity labels and the attribution band are font-independent vector geometry.",
     "Moving rail objects belong to one logical global field; a local SVG is only a clipping viewport into that field.",
     "Local boundary opacity fades are forbidden; partial geometry must leave and enter through clipping instead.",
-    "All v7 logical Y spans are rendered; invisible content gaps from v6 are replaced by visible background canvas surfaces.",
+    "All logical Y spans are rendered; invisible content gaps are represented by visible background canvas surfaces.",
     "Third-party character media remains a normal README image and is never copied into repository-owned SVG bytes.",
     "The character image is mounted between two repository-owned side surfaces; each side surface maps its local X back to the common 900px coordinate system.",
     "Repository-owned Project Map and contribution SVG bodies may be composed into generated 900px canvas stages so their real data remains authoritative while the background fills the full width.",
     "Cross-document animation remains phase-tolerant rather than hard-synchronized; do not claim a shared runtime clock.",
+    "Hero, character surfaces, attribution, bridges, section bands, mounted canvases and footer use one continuous rectangular surface; independent rounded-card styling is forbidden inside the envelope.",
+    "README profile images use top vertical alignment so inline-image baseline/descender spacing cannot create visible seams between logical windows.",
+    "Short contiguous logical windows may share one taller physical SVG document when needed to stay above GitHub README line-height after responsive scaling; the packed document must retain the original global start/end coordinates and must not delete logical spans.",
+    "The name hero is the first window of the same envelope rather than an independent card; it must not carry its own inset card border.",
     "Hero top cap, continuous background surfaces, shared rails, bridges, section bands, and footer bottom cap use one global coordinate grammar.",
     "A seasonal motion live_verification PASS is scoped to a tested target surface/environment and must be re-earned after a renderer/version change or seasonal promotion."
   ]
