@@ -134,17 +134,16 @@ jobs:
           console.log(`Canonical map validated: ${graph.repositoryCount} owned + ${contributed.length} accepted Contributed; arm-free profile-local Galaxy background + external halo verified`);
           NODE
 
-      - name: Refresh Envelope v7 from generated project map
+      - name: Refresh active Envelope v8 from generated project map
         shell: bash
         run: |
           set -euo pipefail
           python -m py_compile \
             design-lab/scripts/promote-season.py \
-            design-lab/envelope-v7/render_panels.py \
-            design-lab/envelope-v7/render_continuous_canvas.py \
-            design-lab/envelope-v7/validate.py
+            design-lab/envelope-v8/render_continuous_canvas.py \
+            design-lab/envelope-v8/validate.py
           python design-lab/scripts/promote-season.py --apply --json
-          python design-lab/envelope-v7/validate.py
+          python design-lab/envelope-v8/validate.py
 
       - name: Verify atomic publish diff on pull requests
         if: github.event_name == 'pull_request'
