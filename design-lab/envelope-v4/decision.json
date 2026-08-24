@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "reviewed": "2026-08-24",
+  "target": "github-profile-readme-dark",
+  "goal": "stronger README-area background and enclosing-frame illusion without claiming host-page overlay authority",
+  "candidates": {
+    "segmented-frame": {
+      "status": "PREFERRED_SHADOW",
+      "live": false,
+      "assets": [
+        "design-lab/envelope-v4/assets/rail-bridge-summer.svg"
+      ],
+      "source_validation": "PASS",
+      "static_render": "PASS",
+      "target_github_render": "NOT_RUN",
+      "mobile_render": "NOT_RUN",
+      "notes": "Preserves current content/links and uses removable bridge chrome; continuity is perceptual rather than a literal background layer."
+    },
+    "single-table-frame": {
+      "status": "EXPERIMENTAL",
+      "live": false,
+      "assets": [
+        "design-lab/envelope-v4/assets/side-rail-summer.svg"
+      ],
+      "source_validation": "PASS",
+      "static_asset_render": "PASS",
+      "target_github_render": "NOT_RUN",
+      "mobile_render": "NOT_RUN",
+      "notes": "Closest DOM-level enclosure, but GitHub-owned table CSS, sanitization, padding and responsive behavior must be observed before promotion."
+    }
+  },
+  "hard_boundaries": [
+    "No claim of background/overlay outside the README rendering area.",
+    "Do not replace factual project/activity content with a flattened decorative mockup.",
+    "Do not promote the table experiment before GitHub dark/mobile rendering is observed.",
+    "Frame decoration must remain removable without breaking content authority or links."
+  ],
+  "next_safe_action": "Open a draft comparison PR; keep live README on envelope v3 until target rendering evidence favors one v4 candidate."
+}
