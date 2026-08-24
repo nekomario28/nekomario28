@@ -77,9 +77,30 @@ jobs:
 
           python - <<'PY'
           import importlib.util
+          import json
           import tempfile
           import xml.etree.ElementTree as ET
           from pathlib import Path
+
+          manifest = json.loads(Path('design-lab/theme-manifest.json').read_text())
+          expected_seasons = {'spring', 'summer', 'autumn', 'winter'}
+          assert set(manifest['seasons']) == expected_seasons
+
+          for season, cfg in manifest['seasons'].items():
+              hero = Path('design-lab') / cfg['hero']
+              assert hero.is_file(), (season, hero)
+              svg = ET.parse(hero).getroot()
+              assert svg.attrib['width'] == '900', (season, 'width')
+              assert svg.attrib['height'] == '260', (season, 'height')
+              assert svg.attrib['viewBox'] == '0 0 900 260', (season, 'viewBox')
+              text = hero.read_text()
+              motion = cfg['motion']
+              assert motion['implementation'] == 'embedded-smil', season
+              assert motion['static_fallback'] is True, season
+              assert motion['live_verification'] in {'NOT_RUN', 'PASS'}, season
+              assert 'prefers-reduced-motion' in text, season
+              assert '<animate' in text, season
+              assert '<script' not in text.lower(), season
 
           script = Path('design-lab/scripts/render_envelope_chrome.py')
           spec = importlib.util.spec_from_file_location('render_envelope_chrome', script)
