@@ -4,10 +4,14 @@
 Repository-owned source SVG bodies are copied into a nested same-document viewport inside
 a 900px stage. Side/background chrome is derived from the approved seasonal manifest.
 The generator deliberately does not copy or nest the third-party character image.
+
+Each source-derived stage records the SHA-256 of its authoritative checked-in source so
+validation can detect stale mounted canvases instead of accepting geometry-only drift.
 """
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -15,6 +19,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 LAB = Path(__file__).resolve().parent
 MANIFEST = ROOT / "design-lab" / "theme-manifest.json"
+PROJECT_SOURCE = ROOT / "project-map" / "galaxy.svg"
+ACTIVITY_SOURCE = ROOT / "assets" / "github-contributions-dark.svg"
 HOST_DARK = "#0d1117"
 
 
@@ -24,6 +30,10 @@ def svg_body(path: Path) -> str:
     if not match:
         raise ValueError(f"unable to extract SVG body: {path}")
     return match.group(1).strip()
+
+
+def source_sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def season_config(season: str) -> dict:
@@ -44,12 +54,13 @@ def rails(height: int, accent: str, accent2: str) -> str:
 
 
 def projects_panel(cfg: dict) -> str:
-    inner = svg_body(ROOT / "project-map" / "galaxy.svg")
+    inner = svg_body(PROJECT_SOURCE)
+    source_hash = source_sha256(PROJECT_SOURCE)
     accent = cfg["accent"]
     c = cfg["chrome"]
     bg0 = c["bg0"]
     accent2 = c["accent2"]
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-label="nekomario28 の公開プロジェクトマップを背景surface上に配置した projects stage">
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" data-source-path="project-map/galaxy.svg" data-source-sha256="{source_hash}" aria-label="nekomario28 の公開プロジェクトマップを背景surface上に配置した projects stage">
   <defs><linearGradient id="v7-projects-bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="{HOST_DARK}"/><stop offset=".11" stop-color="{bg0}"/><stop offset=".18" stop-color="#070a12"/><stop offset=".82" stop-color="#070a12"/><stop offset=".89" stop-color="{bg0}"/><stop offset="1" stop-color="{HOST_DARK}"/></linearGradient></defs>
   <rect width="900" height="420" fill="url(#v7-projects-bg)"/>
   <g fill="#e8edf7"><circle cx="36" cy="54" r="1" opacity=".22"/><circle cx="62" cy="114" r=".7" opacity=".18"/><circle cx="44" cy="220" r="1.1" opacity=".15"/><circle cx="858" cy="78" r=".8" opacity=".20"/><circle cx="838" cy="188" r="1.1" opacity=".16"/><circle cx="864" cy="328" r=".7" opacity=".19"/></g>
@@ -60,12 +71,13 @@ def projects_panel(cfg: dict) -> str:
 
 
 def activity_panel(cfg: dict) -> str:
-    inner = svg_body(ROOT / "assets" / "github-contributions-dark.svg")
+    inner = svg_body(ACTIVITY_SOURCE)
+    source_hash = source_sha256(ACTIVITY_SOURCE)
     accent = cfg["accent"]
     c = cfg["chrome"]
     bg0 = c["bg0"]
     accent2 = c["accent2"]
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="900" height="220" viewBox="0 0 900 220" role="img" aria-label="直近31日間の GitHub コントリビューションを背景surface上に配置した activity stage">
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="900" height="220" viewBox="0 0 900 220" role="img" data-source-path="assets/github-contributions-dark.svg" data-source-sha256="{source_hash}" aria-label="直近31日間の GitHub コントリビューションを背景surface上に配置した activity stage">
   <defs><linearGradient id="v7-activity-bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="{HOST_DARK}"/><stop offset=".12" stop-color="{bg0}"/><stop offset=".18" stop-color="{HOST_DARK}"/><stop offset=".82" stop-color="{HOST_DARK}"/><stop offset=".88" stop-color="{bg0}"/><stop offset="1" stop-color="{HOST_DARK}"/></linearGradient></defs>
   <rect width="900" height="220" fill="url(#v7-activity-bg)"/>
   <g opacity=".10" fill="{accent}"><rect x="32" y="184" width="5" height="12" rx="1"/><rect x="44" y="176" width="5" height="20" rx="1"/><rect x="56" y="188" width="5" height="8" rx="1"/><rect x="839" y="180" width="5" height="16" rx="1"/><rect x="851" y="172" width="5" height="24" rx="1"/><rect x="863" y="186" width="5" height="10" rx="1"/></g>

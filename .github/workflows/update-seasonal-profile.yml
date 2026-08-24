@@ -95,17 +95,18 @@ jobs:
           if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
             [[ -z "${REQUESTED_SEASON:-}" || "$REQUESTED_SEASON" == auto ]] || args+=(--season "$REQUESTED_SEASON")
             [[ "${DRY_RUN:-true}" == true ]] || args+=(--apply)
-          elif [[ "$EVENT_NAME" == schedule || "$EVENT_NAME" == push ]]; then
+          elif [[ "$EVENT_NAME" == pull_request || "$EVENT_NAME" == schedule || "$EVENT_NAME" == push ]]; then
             args+=(--apply)
           fi
           python design-lab/scripts/promote-season.py "${args[@]}" | tee "$RUNNER_TEMP/season-result.json"
+          git diff --check
 
       - name: Validate stable live Envelope v7
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
-          import json, xml.etree.ElementTree as ET
+          import hashlib, json, xml.etree.ElementTree as ET
           from pathlib import Path
 
           state = json.loads(Path('design-lab/live-theme.json').read_text())
@@ -122,6 +123,10 @@ jobs:
               'activity_canvas': ('900','220','0 0 900 220'),
               'bridge_activity_footer': ('900','32','0 0 900 32'),
               'footer': ('900','92','0 0 900 92'),
+          }
+          source_sync = {
+              'projects_canvas': 'project-map/galaxy.svg',
+              'activity_canvas': 'assets/github-contributions-dark.svg',
           }
           assert state['envelope_version'] == 7
           assert set(state['live_assets']) == set(expected)
@@ -144,10 +149,19 @@ jobs:
               assert 'clip-path="url(#v7-window)"' in text
               assert 'prefers-reduced-motion' in text and '<animateTransform' in text and 'dur="32s"' in text
               assert '<script' not in text.lower()
+              if key in source_sync:
+                  source_rel = source_sync[key]
+                  source = Path(source_rel)
+                  digest = hashlib.sha256(source.read_bytes()).hexdigest()
+                  assert root.attrib.get('data-source-path') == source_rel, (key, root.attrib.get('data-source-path'), source_rel)
+                  assert root.attrib.get('data-source-sha256') == digest, (key, root.attrib.get('data-source-sha256'), digest)
+                  if key == 'projects_canvas' and 'data-galaxy-external-layout="rail"' in source.read_text():
+                      assert 'data-galaxy-external-layout="rail"' in text
           readme = Path('README.md').read_text()
           for rel in state['live_assets'].values():
               assert readme.count(rel) == 1, rel
           assert readme.count('https://konosuba.com/bakuen/story/img/pdsfi4/05.jpg') == 1
+          print('ENVELOPE_V7_LIVE_SOURCE_SYNC_PASS')
           PY
 
       - name: Commit seasonal change
