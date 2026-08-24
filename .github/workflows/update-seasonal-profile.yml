@@ -1,0 +1,107 @@
+name: Update seasonal profile
+
+on:
+  schedule:
+    # 00:17 UTC = 09:17 JST. Monthly checks are cheap; only season boundaries mutate files.
+    - cron: "17 0 1 * *"
+  workflow_dispatch:
+    inputs:
+      season:
+        description: "Season to evaluate; auto resolves from Asia/Tokyo date"
+        required: true
+        type: choice
+        default: auto
+        options:
+          - auto
+          - spring
+          - summer
+          - autumn
+          - winter
+      dry_run:
+        description: "Validate and report without modifying the live hero"
+        required: true
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: seasonal-profile
+  cancel-in-progress: false
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out profile repository
+        uses: actions/checkout@v6
+
+      - name: Validate seasonal policy
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile design-lab/scripts/select-season.py design-lab/scripts/promote-season.py
+          python design-lab/scripts/promote-season.py --date 2026-04-01 --json
+          python design-lab/scripts/promote-season.py --date 2026-07-01 --json
+          python design-lab/scripts/promote-season.py --date 2026-10-01 --json
+          python design-lab/scripts/promote-season.py --date 2026-01-01 --json
+
+      - name: Resolve and promote seasonal hero
+        id: promote
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REQUESTED_SEASON: ${{ inputs.season }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          args=(--json)
+
+          if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
+            if [[ -n "${REQUESTED_SEASON:-}" && "$REQUESTED_SEASON" != "auto" ]]; then
+              args+=(--season "$REQUESTED_SEASON")
+            fi
+            if [[ "${DRY_RUN:-true}" != "true" ]]; then
+              args+=(--apply)
+            fi
+          else
+            args+=(--apply)
+          fi
+
+          python design-lab/scripts/promote-season.py "${args[@]}" | tee "$RUNNER_TEMP/season-result.json"
+
+      - name: Validate promoted live asset
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s assets/profile-hero.svg
+          grep -q '<svg' assets/profile-hero.svg
+          grep -q 'viewBox="0 0 900 260"' assets/profile-hero.svg
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          state = json.loads(Path('design-lab/live-theme.json').read_text())
+          assert state['active_season'] in {'spring', 'summer', 'autumn', 'winter'}
+          assert state['live_asset'] == 'assets/profile-hero.svg'
+          PY
+
+      - name: Commit seasonal change
+        if: github.event_name == 'schedule' || inputs.dry_run == false
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/profile-hero.svg design-lab/live-theme.json
+
+          if git diff --cached --quiet; then
+            echo "Seasonal profile is already current."
+            exit 0
+          fi
+
+          season="$(python -c 'import json; print(json.load(open("design-lab/live-theme.json"))["active_season"])')"
+          git commit -m "switch profile theme to ${season}"
+          git push
