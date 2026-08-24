@@ -1,7 +1,18 @@
-<svg data-envelope-presentation="v8-seamless-surface" xmlns="http://www.w3.org/2000/svg" width="900" height="68" viewBox="0 0 900 68" role="img" aria-label="活動 セクション">
+<svg data-envelope-skin="unified-v1" data-envelope-presentation="v8-seamless-surface" xmlns="http://www.w3.org/2000/svg" width="900" height="68" viewBox="0 0 900 68" role="img" aria-label="活動 セクション">
+<defs id="v8-activity-surface-defs">
+  <linearGradient id="v8-activity-surface" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="900" y2="0">
+    <stop offset="0" stop-color="#0d1117"/>
+    <stop offset=".08" stop-color="#06101a"/>
+    <stop offset=".24" stop-color="#0c2d3b"/>
+    <stop offset=".50" stop-color="#06101a"/>
+    <stop offset=".76" stop-color="#0c2d3b"/>
+    <stop offset=".92" stop-color="#06101a"/>
+    <stop offset="1" stop-color="#0d1117"/>
+  </linearGradient>
+</defs>
+<rect id="v8-activity-surface-base" width="900" height="100%" fill="url(#v8-activity-surface)"/>
   <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#06101a"/><stop offset=".52" stop-color="#0c2d3b"/><stop offset="1" stop-color="#06101a"/></linearGradient></defs>
-  <rect width="900" height="68" fill="url(#bg)"/>
-  <g fill="none" stroke-linecap="round"><path d="M18 0V68 M882 0V68" stroke="#86aa94" stroke-opacity=".24" stroke-width="1.6"/><path d="M18 8V60 M882 8V60" stroke="#c7b06c" stroke-opacity=".18" stroke-width=".7"/></g>
+<g fill="none" stroke-linecap="round"></g>
   <path d="M56 34 H318 M582 34 H844" stroke="#eef2f6" stroke-opacity=".10"/>
   <circle cx="336" cy="34" r="2.5" fill="#86aa94"/>
   <circle cx="564" cy="34" r="2.5" fill="#c7b06c"/>
@@ -13,7 +24,7 @@
 <defs><clipPath id="v7-window"><rect x="0" y="0" width="900" height="68"/></clipPath></defs>
 <style>@media (prefers-reduced-motion: reduce) { .v7-motion { display:none } }</style>
 <g id="v7-global-window" data-window="activity" data-global-start="1250" data-global-end="1318" data-global-extent="1662" data-global-x-offset="0" pointer-events="none">
-  
+
   <g class="v7-motion" clip-path="url(#v7-window)">
     <g id="v7-particle-left-primary" opacity="0.82">
       <line x1="18" y1="-13" x2="18" y2="0" stroke="#86aa94" stroke-opacity=".34" stroke-width="1.2" stroke-linecap="round"/>
@@ -47,4 +58,6 @@
     </g>
   </g>
 </g>
+
+<g id="v8-frame" data-frame-grammar="unified-v1" fill="none"><path d="M18 0V68 M882 0V68" stroke="#86aa94" stroke-opacity=".22" stroke-width="1.2"/></g>
 </svg>

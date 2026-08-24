@@ -1,4 +1,16 @@
-<svg data-envelope-presentation="v8-seamless-surface" xmlns="http://www.w3.org/2000/svg" width="900" height="260" viewBox="0 0 900 260" role="img" aria-labelledby="title desc">
+<svg data-envelope-skin="unified-v1" data-envelope-presentation="v8-seamless-surface" xmlns="http://www.w3.org/2000/svg" width="900" height="260" viewBox="0 0 900 260" role="img" aria-labelledby="title desc">
+<defs id="v8-hero-surface-defs">
+  <linearGradient id="v8-hero-surface" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="900" y2="0">
+    <stop offset="0" stop-color="#0d1117"/>
+    <stop offset=".08" stop-color="#06101a"/>
+    <stop offset=".24" stop-color="#0c2d3b"/>
+    <stop offset=".50" stop-color="#06101a"/>
+    <stop offset=".76" stop-color="#0c2d3b"/>
+    <stop offset=".92" stop-color="#06101a"/>
+    <stop offset="1" stop-color="#0d1117"/>
+  </linearGradient>
+</defs>
+<rect id="v8-hero-surface-base" width="900" height="100%" fill="url(#v8-hero-surface)"/>
   <title id="title">nekomario28 summer dark profile concept</title>
   <desc id="desc">Deep blue summer profile banner with abstract water, rain, green maple leaves, and optional subtle motion.</desc>
   <defs>
@@ -7,8 +19,7 @@
     <path id="leaf" d="M0,-13 L4,-5 L12,-8 L8,0 L16,3 L7,7 L9,15 L1,9 L-4,17 L-5,8 L-15,10 L-8,2 L-15,-3 L-6,-4 L-7,-13 L0,-7 Z"/>
   </defs>
   <style>@media (prefers-reduced-motion: reduce) { .motion { display: none; } }</style>
-  <rect width="900" height="260" fill="url(#bg)"/>
-  <g stroke="#dce8e4" stroke-opacity=".07" stroke-width="1"><path d="M610 0v78"/><path d="M640 0v96"/><path d="M670 0v65"/><path d="M700 0v105"/><path d="M730 0v79"/><path d="M760 0v100"/><path d="M790 0v64"/></g>
+<g stroke="#dce8e4" stroke-opacity=".07" stroke-width="1"><path d="M610 0v78"/><path d="M640 0v96"/><path d="M670 0v65"/><path d="M700 0v105"/><path d="M730 0v79"/><path d="M760 0v100"/><path d="M790 0v64"/></g>
   <path d="M328 226 C463 154 577 250 707 172 C775 132 818 145 888 119" fill="none" stroke="url(#water)" stroke-width="36" stroke-linecap="round"/>
   <path d="M301 238 C450 178 583 252 711 193 C786 158 829 161 900 139" fill="none" stroke="#a8c6c1" stroke-opacity=".14" stroke-width="2"/>
   <path d="M347 216 C466 159 571 224 677 167" fill="none" stroke="#c5b177" stroke-opacity=".22" stroke-width="1.2"/>
@@ -31,7 +42,7 @@
 <defs><clipPath id="v7-window"><rect x="0" y="0" width="900" height="260"/></clipPath></defs>
 <style>@media (prefers-reduced-motion: reduce) { .v7-motion { display:none } }</style>
 <g id="v7-global-window" data-window="hero" data-global-start="0" data-global-end="260" data-global-extent="1662" data-global-x-offset="0" pointer-events="none">
-  <path d="M18 30V18Q18 7 30 7H76 M882 30V18Q882 7 870 7H824" fill="none" stroke="#86aa94" stroke-opacity=".34" stroke-width="1.8" stroke-linecap="round"/><path d="M31 13H62 M838 13H869" fill="none" stroke="#c7b06c" stroke-opacity=".20" stroke-width=".8"/>
+  <path d="M31 13H62 M838 13H869" fill="none" stroke="#c7b06c" stroke-opacity=".20" stroke-width=".8"/>
   <g class="v7-motion" clip-path="url(#v7-window)">
     <g id="v7-particle-left-primary" opacity="0.82">
       <line x1="18" y1="-13" x2="18" y2="0" stroke="#86aa94" stroke-opacity=".34" stroke-width="1.2" stroke-linecap="round"/>
@@ -65,4 +76,6 @@
     </g>
   </g>
 </g>
+
+<g id="v8-frame" data-frame-grammar="unified-v1" fill="none"><path d="M18 260V8H72 M882 260V8H828" stroke="#86aa94" stroke-opacity=".22" stroke-width="1.2"/></g>
 </svg>

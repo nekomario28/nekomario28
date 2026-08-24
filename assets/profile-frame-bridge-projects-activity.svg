@@ -1,14 +1,25 @@
-<svg data-envelope-presentation="v8-seamless-surface" xmlns="http://www.w3.org/2000/svg" width="900" height="32" viewBox="0 0 900 32" role="img" aria-label="seasonal envelope frame bridge">
+<svg data-envelope-skin="unified-v1" data-envelope-presentation="v8-seamless-surface" xmlns="http://www.w3.org/2000/svg" width="900" height="32" viewBox="0 0 900 32" role="img" aria-label="seasonal envelope frame bridge">
+<defs id="v8-bridge_projects_activity-surface-defs">
+  <linearGradient id="v8-bridge_projects_activity-surface" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="900" y2="0">
+    <stop offset="0" stop-color="#0d1117"/>
+    <stop offset=".08" stop-color="#06101a"/>
+    <stop offset=".24" stop-color="#0c2d3b"/>
+    <stop offset=".50" stop-color="#06101a"/>
+    <stop offset=".76" stop-color="#0c2d3b"/>
+    <stop offset=".92" stop-color="#06101a"/>
+    <stop offset="1" stop-color="#0d1117"/>
+  </linearGradient>
+</defs>
+<rect id="v8-bridge_projects_activity-surface-base" width="900" height="100%" fill="url(#v8-bridge_projects_activity-surface)"/>
   <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#06101a"/><stop offset=".52" stop-color="#0c2d3b"/><stop offset="1" stop-color="#06101a"/></linearGradient></defs>
-  <rect width="900" height="32" fill="url(#bg)"/>
-  <g fill="none" stroke-linecap="round"><path d="M18 0V32 M882 0V32" stroke="#86aa94" stroke-opacity=".24" stroke-width="1.6"/><path d="M18 8V24 M882 8V24" stroke="#c7b06c" stroke-opacity=".18" stroke-width=".7"/></g>
-  <path d="M18 7H58 M18 25H44 M842 7H882 M856 25H882" stroke="#dce8e4" stroke-opacity=".10"/>
+<g fill="none" stroke-linecap="round"></g>
+
   <path d="M338 22 C390 10 443 27 494 17 C544 8 590 22 637 13" fill="none" stroke="#86aa94" stroke-opacity=".10" stroke-width="1.4"/>
   <circle cx="450" cy="16" r="2" fill="#c7b06c" fill-opacity=".34"/>
 <defs><clipPath id="v7-window"><rect x="0" y="0" width="900" height="32"/></clipPath></defs>
 <style>@media (prefers-reduced-motion: reduce) { .v7-motion { display:none } }</style>
 <g id="v7-global-window" data-window="bridge_projects_activity" data-global-start="1218" data-global-end="1250" data-global-extent="1662" data-global-x-offset="0" pointer-events="none">
-  
+
   <g class="v7-motion" clip-path="url(#v7-window)">
     <g id="v7-particle-left-primary" opacity="0.82">
       <line x1="18" y1="-13" x2="18" y2="0" stroke="#86aa94" stroke-opacity=".34" stroke-width="1.2" stroke-linecap="round"/>
@@ -42,4 +53,6 @@
     </g>
   </g>
 </g>
+
+<g id="v8-frame" data-frame-grammar="unified-v1" fill="none"><path d="M18 0V32 M882 0V32" stroke="#86aa94" stroke-opacity=".22" stroke-width="1.2"/></g>
 </svg>

@@ -1,13 +1,23 @@
-<svg data-envelope-presentation="v8-seamless-surface" xmlns="http://www.w3.org/2000/svg" width="900" height="220" viewBox="0 0 900 220" role="img" data-source-path="assets/github-contributions-dark.svg" data-source-sha256="02cf2d22a20c35d9dc575154f2479692cf96f4dead55adf20eae4ab86c46ad91" aria-label="直近31日間の GitHub コントリビューションを背景surface上に配置した activity stage">
+<svg data-envelope-skin="unified-v1" data-envelope-presentation="v8-seamless-surface" xmlns="http://www.w3.org/2000/svg" width="900" height="220" viewBox="0 0 900 220" role="img" data-source-path="assets/github-contributions-dark.svg" data-source-sha256="02cf2d22a20c35d9dc575154f2479692cf96f4dead55adf20eae4ab86c46ad91" aria-label="直近31日間の GitHub コントリビューションを背景surface上に配置した activity stage">
+<defs id="v8-activity_canvas-surface-defs">
+  <linearGradient id="v8-activity_canvas-surface" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="900" y2="0">
+    <stop offset="0" stop-color="#0d1117"/>
+    <stop offset=".08" stop-color="#06101a"/>
+    <stop offset=".24" stop-color="#0c2d3b"/>
+    <stop offset=".50" stop-color="#06101a"/>
+    <stop offset=".76" stop-color="#0c2d3b"/>
+    <stop offset=".92" stop-color="#06101a"/>
+    <stop offset="1" stop-color="#0d1117"/>
+  </linearGradient>
+</defs>
+<rect id="v8-activity_canvas-surface-base" width="900" height="100%" fill="url(#v8-activity_canvas-surface)"/>
   <defs><linearGradient id="v7-activity-bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#0d1117"/><stop offset=".12" stop-color="#06101a"/><stop offset=".18" stop-color="#0d1117"/><stop offset=".82" stop-color="#0d1117"/><stop offset=".88" stop-color="#06101a"/><stop offset="1" stop-color="#0d1117"/></linearGradient></defs>
-  <rect width="900" height="220" fill="url(#v7-activity-bg)"/>
-  <g opacity=".10" fill="#86aa94"><rect x="32" y="184" width="5" height="12" rx="1"/><rect x="44" y="176" width="5" height="20" rx="1"/><rect x="56" y="188" width="5" height="8" rx="1"/><rect x="839" y="180" width="5" height="16" rx="1"/><rect x="851" y="172" width="5" height="24" rx="1"/><rect x="863" y="186" width="5" height="10" rx="1"/></g>
+<g opacity=".10" fill="#86aa94"><rect x="32" y="184" width="5" height="12" rx="1"/><rect x="44" y="176" width="5" height="20" rx="1"/><rect x="56" y="188" width="5" height="8" rx="1"/><rect x="839" y="180" width="5" height="16" rx="1"/><rect x="851" y="172" width="5" height="24" rx="1"/><rect x="863" y="186" width="5" height="10" rx="1"/></g>
   <svg x="70" y="0" width="760" height="220" viewBox="0 0 760 220"><title id="title">nekomario28 contributions</title>
 <desc id="desc">Daily GitHub contribution counts for the last 31 days.</desc>
 <defs>
 <linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#58a6ff" stop-opacity="0.30"/><stop offset="1" stop-color="#58a6ff" stop-opacity="0.02"/></linearGradient>
 </defs>
-<rect width="760" height="220" rx="8" fill="#0d1117"/>
 <text x="38" y="24" fill="#f0f6fc" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="14" font-weight="600">Contributions · last 31 days</text>
 <text x="742" y="24" text-anchor="end" fill="#8b949e" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11">5755 contributions</text>
 <g font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
@@ -60,12 +70,12 @@
 <text x="577.73" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 17</text>
 <text x="742.00" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 24</text>
 </g></svg>
-  <path d="M70 0V220 M830 0V220" stroke="#eef2f6" stroke-opacity=".08"/>
-  <path d="M18 0V220 M882 0V220" fill="none" stroke="#86aa94" stroke-opacity=".18" stroke-width="1.6"/><path d="M22 0V220 M878 0V220" fill="none" stroke="#c7b06c" stroke-opacity=".08" stroke-width=".7"/>
+
+
 <defs><clipPath id="v7-window"><rect x="0" y="0" width="900" height="220"/></clipPath></defs>
 <style>@media (prefers-reduced-motion: reduce) { .v7-motion { display:none } }</style>
 <g id="v7-global-window" data-window="activity_canvas" data-global-start="1318" data-global-end="1538" data-global-extent="1662" data-global-x-offset="0" pointer-events="none">
-  
+
   <g class="v7-motion" clip-path="url(#v7-window)">
     <g id="v7-particle-left-primary" opacity="0.82">
       <line x1="18" y1="-13" x2="18" y2="0" stroke="#86aa94" stroke-opacity=".34" stroke-width="1.2" stroke-linecap="round"/>
@@ -99,4 +109,6 @@
     </g>
   </g>
 </g>
+
+<g id="v8-frame" data-frame-grammar="unified-v1" fill="none"><path d="M18 0V220 M882 0V220" stroke="#86aa94" stroke-opacity=".22" stroke-width="1.2"/></g>
 </svg>
