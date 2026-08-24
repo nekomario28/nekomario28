@@ -1,11 +1,12 @@
 {
-  "version": 4,
+  "version": 5,
   "base_theme": "dark",
   "surface": "github-profile-readme",
-  "strategy": "seasonal visual envelope v3",
+  "strategy": "seasonal visual envelope v4 segmented frame",
   "timezone": "Asia/Tokyo",
   "live_assets": {
     "hero": "assets/profile-hero.svg",
+    "bridge": "assets/profile-frame-bridge.svg",
     "projects": "assets/profile-section-projects.svg",
     "activity": "assets/profile-section-activity.svg",
     "footer": "assets/profile-footer.svg"
@@ -19,77 +20,37 @@
       "months": [3, 4, 5],
       "hero": "seasons/spring-dark.svg",
       "accent": "#d99eaa",
-      "motion": {
-        "profile": "mist-and-sparse-petals",
-        "implementation": "embedded-smil",
-        "static_fallback": true,
-        "live_verification": "NOT_RUN"
-      },
+      "motion": {"profile": "mist-and-sparse-petals", "implementation": "embedded-smil", "static_fallback": true, "live_verification": "NOT_RUN"},
       "auto_promote": true,
       "static_render": "PASS",
-      "chrome": {
-        "bg0": "#070b14",
-        "bg1": "#121a2d",
-        "accent2": "#d2b16f",
-        "motif": "petal"
-      }
+      "chrome": {"bg0": "#070b14", "bg1": "#121a2d", "accent2": "#d2b16f", "motif": "petal"}
     },
     "summer": {
       "months": [6, 7, 8],
       "hero": "seasons/summer-dark.svg",
       "accent": "#86aa94",
-      "motion": {
-        "profile": "rain-water-and-leaf-sway",
-        "implementation": "embedded-smil",
-        "static_fallback": true,
-        "live_verification": "NOT_RUN"
-      },
+      "motion": {"profile": "rain-water-and-leaf-sway", "implementation": "embedded-smil", "static_fallback": true, "live_verification": "NOT_RUN"},
       "auto_promote": true,
       "static_render": "PASS",
-      "chrome": {
-        "bg0": "#06101a",
-        "bg1": "#0c2d3b",
-        "accent2": "#c7b06c",
-        "motif": "water"
-      }
+      "chrome": {"bg0": "#06101a", "bg1": "#0c2d3b", "accent2": "#c7b06c", "motif": "water"}
     },
     "autumn": {
       "months": [9, 10, 11],
       "hero": "seasons/autumn-dark.svg",
       "accent": "#a84a2c",
-      "motion": {
-        "profile": "ember-and-sparse-leaves",
-        "implementation": "embedded-smil",
-        "static_fallback": true,
-        "live_verification": "NOT_RUN"
-      },
+      "motion": {"profile": "ember-and-sparse-leaves", "implementation": "embedded-smil", "static_fallback": true, "live_verification": "NOT_RUN"},
       "auto_promote": true,
       "static_render": "PASS",
-      "chrome": {
-        "bg0": "#070707",
-        "bg1": "#18110f",
-        "accent2": "#bc9652",
-        "motif": "leaf"
-      }
+      "chrome": {"bg0": "#070707", "bg1": "#18110f", "accent2": "#bc9652", "motif": "leaf"}
     },
     "winter": {
       "months": [12, 1, 2],
       "hero": "seasons/winter-dark.svg",
       "accent": "#9facbf",
-      "motion": {
-        "profile": "moon-haze-and-sparse-snow",
-        "implementation": "embedded-smil",
-        "static_fallback": true,
-        "live_verification": "NOT_RUN"
-      },
+      "motion": {"profile": "moon-haze-and-sparse-snow", "implementation": "embedded-smil", "static_fallback": true, "live_verification": "NOT_RUN"},
       "auto_promote": true,
       "static_render": "PASS",
-      "chrome": {
-        "bg0": "#05080e",
-        "bg1": "#101827",
-        "accent2": "#dfe7f2",
-        "motif": "snow"
-      }
+      "chrome": {"bg0": "#05080e", "bg1": "#101827", "accent2": "#dfe7f2", "motif": "snow"}
     }
   },
   "constraints": [
@@ -100,6 +61,8 @@
     "Automatic promotion may only use season entries with auto_promote=true and static_render=PASS.",
     "The live README references only stable assets; seasonal source paths stay inside the design lab.",
     "Optional animation must not carry essential information and must expose a reduced-motion fallback.",
-    "Do not add a separator immediately after the hero when direct visual flow is stronger."
+    "Do not add a separator immediately after the hero when direct visual flow is stronger.",
+    "The segmented frame bridge is background/chrome only and must switch atomically with the rest of the active seasonal envelope.",
+    "Projects and Activity labels are font-independent vector outlines, not client-font-dependent SVG text."
   ]
 }

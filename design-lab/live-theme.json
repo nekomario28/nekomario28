@@ -1,11 +1,12 @@
 {
-  "version": 3,
-  "envelope_version": 3,
+  "version": 4,
+  "envelope_version": 4,
   "active_season": "summer",
   "active_theme": "summer-dark",
   "source": "design-lab/seasons/summer-dark.svg",
   "live_assets": {
     "hero": "assets/profile-hero.svg",
+    "bridge": "assets/profile-frame-bridge.svg",
     "projects": "assets/profile-section-projects.svg",
     "activity": "assets/profile-section-activity.svg",
     "footer": "assets/profile-footer.svg"
@@ -16,6 +17,12 @@
     "static_fallback": true,
     "live_verification": "NOT_RUN"
   },
+  "frame": {
+    "mode": "segmented-rails",
+    "background_illusion": true,
+    "shared_edge_rails": true,
+    "true_overlay": false
+  },
   "promoted_at": "2026-08-24",
-  "promotion_mode": "manual-motion-envelope-v3"
+  "promotion_mode": "manual-envelope-v4-refresh-preview"
 }

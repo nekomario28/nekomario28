@@ -2,8 +2,8 @@
 """Validate and optionally promote the complete seasonal profile envelope.
 
 The live README references stable assets only. Promotion changes the approved hero,
-seasonal section chrome, footer, and design-lab/live-theme.json without restructuring
-README. Animation remains optional and the static frame is always authoritative.
+segmented frame bridge, seasonal section chrome, footer, and design-lab/live-theme.json
+without restructuring README. Animation remains optional and the static frame is always authoritative.
 """
 from __future__ import annotations
 
@@ -30,7 +30,7 @@ def load_json(path: Path) -> dict:
 
 def validate_manifest(data: dict) -> None:
     seen: dict[int, str] = {}
-    required_assets = {"hero", "projects", "activity", "footer"}
+    required_assets = {"hero", "bridge", "projects", "activity", "footer"}
     if set(data.get("live_assets", {})) != required_assets:
         raise SystemExit(f"live_assets must be exactly {sorted(required_assets)}")
     for name, cfg in data["seasons"].items():
@@ -109,6 +109,7 @@ def expected_chrome(renderer, season: str) -> dict[str, bytes]:
         root = Path(tmp)
         renderer.render(season, root)
         return {
+            "bridge": (root / "assets/profile-frame-bridge.svg").read_bytes(),
             "projects": (root / "assets/profile-section-projects.svg").read_bytes(),
             "activity": (root / "assets/profile-section-activity.svg").read_bytes(),
             "footer": (root / "assets/profile-footer.svg").read_bytes(),
@@ -143,8 +144,9 @@ def main() -> int:
     live = load_json(LIVE_STATE)
     changed = (
         live.get("active_season") != season
+        or live.get("envelope_version") != 4
         or assets["hero"].read_bytes() != hero.read_bytes()
-        or any(assets[key].read_bytes() != generated[key] for key in ("projects", "activity", "footer"))
+        or any(assets[key].read_bytes() != generated[key] for key in ("bridge", "projects", "activity", "footer"))
     )
 
     result = {
@@ -157,24 +159,31 @@ def main() -> int:
         "motion": cfg["motion"],
         "changed": changed,
         "apply": args.apply,
-        "envelope_version": 3,
+        "envelope_version": 4,
     }
 
     if args.apply:
         shutil.copyfile(hero, assets["hero"])
         renderer.render(season, ROOT)
+        validate_svg(assets["bridge"], "900", "32", "0 0 900 32")
         validate_svg(assets["projects"], "900", "68", "0 0 900 68")
         validate_svg(assets["activity"], "900", "68", "0 0 900 68")
         validate_svg(assets["footer"], "900", "92", "0 0 900 92")
         next_state = {
-            "version": 3,
-            "envelope_version": 3,
+            "version": 4,
+            "envelope_version": 4,
             "active_season": season,
             "active_theme": f"{season}-dark",
             "source": str(hero.relative_to(ROOT)),
             "live_assets": {key: str(path.relative_to(ROOT)) for key, path in assets.items()},
             "timezone": manifest.get("timezone", "Asia/Tokyo"),
             "motion": cfg["motion"],
+            "frame": {
+                "mode": "segmented-rails",
+                "background_illusion": True,
+                "shared_edge_rails": True,
+                "true_overlay": False
+            },
             "promoted_at": day.isoformat(),
             "promotion_mode": "automatic" if args.season is None else "manual",
         }
@@ -184,7 +193,7 @@ def main() -> int:
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
     else:
         action = "promoted" if args.apply and changed else "refreshed" if args.apply else "no-change" if not changed else "would-promote"
-        print(f"{action}: {season} envelope v3")
+        print(f"{action}: {season} envelope v4")
     return 0
 
 
