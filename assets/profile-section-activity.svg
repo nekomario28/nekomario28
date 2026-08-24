@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="68" viewBox="0 0 900 68" role="img" aria-label="活動 セクション">
   <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#06101a"/><stop offset=".52" stop-color="#0c2d3b"/><stop offset="1" stop-color="#06101a"/></linearGradient></defs>
   <rect width="900" height="68" rx="14" fill="url(#bg)"/>
+  <g fill="none" stroke-linecap="round"><path d="M18 0V68 M882 0V68" stroke="#86aa94" stroke-opacity=".24" stroke-width="1.6"/><path d="M18 8V60 M882 8V60" stroke="#c7b06c" stroke-opacity=".18" stroke-width=".7"/></g>
   <path d="M56 34 H318 M582 34 H844" stroke="#eef2f6" stroke-opacity=".10"/>
   <circle cx="336" cy="34" r="2.5" fill="#86aa94"/>
   <circle cx="564" cy="34" r="2.5" fill="#c7b06c"/>
