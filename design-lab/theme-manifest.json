@@ -1,10 +1,16 @@
 {
-  "version": 2,
+  "version": 3,
   "base_theme": "dark",
   "surface": "github-profile-readme",
-  "strategy": "seasonal visual envelope",
+  "strategy": "seasonal visual envelope v2",
   "timezone": "Asia/Tokyo",
-  "live_asset": "assets/profile-hero.svg",
+  "live_assets": {
+    "hero": "assets/profile-hero.svg",
+    "divider": "assets/profile-divider.svg",
+    "projects": "assets/profile-section-projects.svg",
+    "activity": "assets/profile-section-activity.svg",
+    "footer": "assets/profile-footer.svg"
+  },
   "live_state": "design-lab/live-theme.json",
   "seasons": {
     "spring": {
@@ -13,7 +19,13 @@
       "accent": "#d99eaa",
       "motion_candidate": "sparse-petals",
       "auto_promote": true,
-      "static_render": "PASS"
+      "static_render": "PASS",
+      "chrome": {
+        "bg0": "#070b14",
+        "bg1": "#121a2d",
+        "accent2": "#d2b16f",
+        "motif": "petal"
+      }
     },
     "summer": {
       "months": [6, 7, 8],
@@ -21,7 +33,13 @@
       "accent": "#86aa94",
       "motion_candidate": "rain-and-water",
       "auto_promote": true,
-      "static_render": "PASS"
+      "static_render": "PASS",
+      "chrome": {
+        "bg0": "#06101a",
+        "bg1": "#0c2d3b",
+        "accent2": "#c7b06c",
+        "motif": "water"
+      }
     },
     "autumn": {
       "months": [9, 10, 11],
@@ -29,7 +47,13 @@
       "accent": "#a84a2c",
       "motion_candidate": "sparse-leaves",
       "auto_promote": true,
-      "static_render": "PASS"
+      "static_render": "PASS",
+      "chrome": {
+        "bg0": "#070707",
+        "bg1": "#18110f",
+        "accent2": "#bc9652",
+        "motif": "leaf"
+      }
     },
     "winter": {
       "months": [12, 1, 2],
@@ -37,18 +61,21 @@
       "accent": "#9facbf",
       "motion_candidate": "sparse-snow",
       "auto_promote": true,
-      "static_render": "PASS"
+      "static_render": "PASS",
+      "chrome": {
+        "bg0": "#05080e",
+        "bg1": "#101827",
+        "accent2": "#dfe7f2",
+        "motif": "snow"
+      }
     }
-  },
-  "shared": {
-    "divider": "envelope/divider-dark.svg",
-    "footer": "envelope/footer-dark.svg"
   },
   "constraints": [
     "GitHub page chrome cannot be overlaid or restyled from README content.",
     "The envelope is limited to the README rendering area.",
     "Static composition must remain complete if animation is unavailable.",
     "Dark theme is the design authority for this experiment.",
-    "Automatic promotion may only use season entries with auto_promote=true and static_render=PASS."
+    "Automatic promotion may only use season entries with auto_promote=true and static_render=PASS.",
+    "The live README references only stable assets; seasonal source paths stay inside the design lab."
   ]
 }
