@@ -14,19 +14,28 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Capture branch README around first global-window handoff
+      - name: Capture branch README and first bridge boundary states
         shell: bash
         run: |
           set -euo pipefail
           chrome="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)"
           test -n "$chrome"
-          url='https://github.com/nekomario28/nekomario28/tree/feat/envelope-v6-global-motion-space'
+          page='https://github.com/nekomario28/nekomario28/tree/feat/envelope-v6-global-motion-space'
+          bridge='https://raw.githubusercontent.com/nekomario28/nekomario28/feat/envelope-v6-global-motion-space/assets/profile-frame-bridge-character-projects.svg'
           out="$RUNNER_TEMP/envelope-v6-render-proof"
           mkdir -p "$out"
-          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-dark-mode --virtual-time-budget=14000 --window-size=1440,3000 --screenshot="$out/profile-desktop-dark-t14.png" "$url"
-          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-dark-mode --virtual-time-budget=15000 --window-size=1440,3000 --screenshot="$out/profile-desktop-dark-t15.png" "$url"
-          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-dark-mode --virtual-time-budget=16000 --window-size=1440,3000 --screenshot="$out/profile-desktop-dark-t16.png" "$url"
-          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-dark-mode --virtual-time-budget=16000 --window-size=430,3000 --screenshot="$out/profile-mobile-dark-t16.png" "$url"
+
+          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-dark-mode --virtual-time-budget=16000 --window-size=1440,3000 --screenshot="$out/profile-desktop-dark-t16.png" "$page"
+          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-dark-mode --virtual-time-budget=16000 --window-size=430,3000 --screenshot="$out/profile-mobile-dark-t16.png" "$page"
+
+          # First primary particle reaches the first bridge window around 14.82s and leaves
+          # around 15.42s. The 15.50s frame intentionally has its center outside the 32px
+          # viewport while part of the 13px tail should still intersect the clipped window.
+          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-dark-mode --virtual-time-budget=14800 --window-size=900,32 --screenshot="$out/bridge-t14.80.png" "$bridge"
+          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-dark-mode --virtual-time-budget=15420 --window-size=900,32 --screenshot="$out/bridge-t15.42.png" "$bridge"
+          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-dark-mode --virtual-time-budget=15500 --window-size=900,32 --screenshot="$out/bridge-t15.50.png" "$bridge"
+          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-dark-mode --virtual-time-budget=15700 --window-size=900,32 --screenshot="$out/bridge-t15.70.png" "$bridge"
+
           sha256sum "$out"/*.png | tee "$out/sha256.txt"
 
       - name: Upload proof
