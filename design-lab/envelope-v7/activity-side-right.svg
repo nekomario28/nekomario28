@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="70" height="220" viewBox="0 0 70 220" role="img" aria-label="Envelope v7 activity right background surface">
+  <defs><linearGradient id="bg" x1="1" y1="0" x2="0" y2="0"><stop stop-color="#0d1117"/><stop offset=".45" stop-color="#0d1117"/><stop offset="1" stop-color="#0d1117"/></linearGradient><linearGradient id="edge" x1="1" y1="0" x2="0" y2="0"><stop offset=".15" stop-color="#86aa94" stop-opacity="0"/><stop offset="1" stop-color="#86aa94" stop-opacity=".08"/></linearGradient></defs>
+  <rect width="70" height="220" fill="url(#bg)"/><rect width="70" height="220" fill="url(#edge)"/>
+  <rect x="9" y="182" width="5" height="12" rx="1" fill="#86aa94" opacity=".10"/><rect x="19" y="187" width="5" height="8" rx="1" fill="#86aa94" opacity=".08"/><rect x="29" y="192" width="5" height="20" rx="1" fill="#86aa94" opacity=".06"/><rect x="39" y="182" width="5" height="16" rx="1" fill="#86aa94" opacity=".10"/><rect x="49" y="187" width="5" height="12" rx="1" fill="#86aa94" opacity=".08"/><rect x="59" y="192" width="5" height="8" rx="1" fill="#86aa94" opacity=".06"/>
+  <path d="M0 77 C24.5 94.6 44.8 59.4 70 74.8" fill="none" stroke="#c7b06c" stroke-opacity=".08"/>
+  <path d="M52 0V220" fill="none" stroke="#86aa94" stroke-opacity=".18" stroke-width="1.6"/><path d="M48 0V220" fill="none" stroke="#c7b06c" stroke-opacity=".08" stroke-width=".7"/><path d="M1 0V220" fill="none" stroke="#eef2f6" stroke-opacity=".07"/>
+</svg>

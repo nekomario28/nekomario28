@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="420" viewBox="0 0 80 420" role="img" aria-label="Envelope v7 project map left background surface">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#0d1117"/><stop offset=".42" stop-color="#06101a"/><stop offset="1" stop-color="#070a12"/></linearGradient><linearGradient id="edge" x1="0" y1="0" x2="1" y2="0"><stop offset=".15" stop-color="#86aa94" stop-opacity="0"/><stop offset="1" stop-color="#86aa94" stop-opacity=".10"/></linearGradient></defs>
+  <rect width="80" height="420" fill="url(#bg)"/><rect width="80" height="420" fill="url(#edge)"/>
+  <g fill="#e8edf7"><circle cx="22.4" cy="50.4" r="1" opacity=".25"/><circle cx="50.4" cy="96.6" r=".7" opacity=".18"/><circle cx="35.2" cy="176.4" r="1.2" opacity=".20"/><circle cx="59.2" cy="256.2" r=".8" opacity=".26"/><circle cx="26.4" cy="331.8" r=".6" opacity=".20"/><circle cx="46.4" cy="382.2" r="1" opacity=".14"/></g>
+  <path d="M0 243.6 C25.6 205.8 54.4 289.8 80 231" fill="none" stroke="#c7b06c" stroke-opacity=".08" stroke-width="1.2"/>
+  <path d="M18 0V420" fill="none" stroke="#86aa94" stroke-opacity=".18" stroke-width="1.6"/><path d="M22 0V420" fill="none" stroke="#c7b06c" stroke-opacity=".08" stroke-width=".7"/><path d="M79 0V420" fill="none" stroke="#eef2f6" stroke-opacity=".07"/>
+</svg>

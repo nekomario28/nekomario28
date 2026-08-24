@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="394" viewBox="0 0 900 394" role="img" aria-label="めぐみん画像を背景surface上に配置した Envelope v7 character stage">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#0d1117"/><stop offset=".12" stop-color="#06101a"/><stop offset=".5" stop-color="#0c2d3b"/><stop offset=".88" stop-color="#06101a"/><stop offset="1" stop-color="#0d1117"/></linearGradient>
+    <linearGradient id="mountL" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#86aa94" stop-opacity="0"/><stop offset="1" stop-color="#86aa94" stop-opacity=".16"/></linearGradient>
+    <linearGradient id="mountR" x1="1" y1="0" x2="0" y2="0"><stop stop-color="#86aa94" stop-opacity="0"/><stop offset="1" stop-color="#86aa94" stop-opacity=".16"/></linearGradient>
+    <clipPath id="media"><rect x="100" y="0" width="700" height="394" rx="10"/></clipPath>
+  </defs>
+  <rect width="900" height="394" fill="url(#bg)"/>
+  <g stroke="#dce8e4" stroke-opacity=".05" stroke-width="1"><path d="M55 0v86"/><path d="M78 0v112"/><path d="M822 0v96"/><path d="M846 0v72"/></g>
+  <path d="M0 307 C46 270 77 347 110 292" fill="none" stroke="#86aa94" stroke-opacity=".10" stroke-width="18"/>
+  <path d="M790 292 C823 347 854 270 900 307" fill="none" stroke="#86aa94" stroke-opacity=".10" stroke-width="18"/>
+  <image href="https://konosuba.com/bakuen/story/img/pdsfi4/05.jpg" x="100" y="0" width="700" height="394" preserveAspectRatio="xMidYMid slice" clip-path="url(#media)"/>
+  <rect x="84" y="0" width="16" height="394" fill="url(#mountL)"/><rect x="800" y="0" width="16" height="394" fill="url(#mountR)"/>
+  <path d="M100 0V394 M800 0V394" stroke="#eef2f6" stroke-opacity=".10"/>
+  <path d="M18 0V394 M882 0V394" fill="none" stroke="#86aa94" stroke-opacity=".18" stroke-width="1.6"/><path d="M22 0V394 M878 0V394" fill="none" stroke="#c7b06c" stroke-opacity=".08" stroke-width=".7"/>
+</svg>

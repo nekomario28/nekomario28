@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="220" viewBox="0 0 900 220" role="img" aria-label="直近31日間の GitHub コントリビューションを背景surface上に配置した activity stage">
+  <defs><linearGradient id="v7-activity-bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#0d1117"/><stop offset=".12" stop-color="#06101a"/><stop offset=".18" stop-color="#0d1117"/><stop offset=".82" stop-color="#0d1117"/><stop offset=".88" stop-color="#06101a"/><stop offset="1" stop-color="#0d1117"/></linearGradient></defs>
+  <rect width="900" height="220" fill="url(#v7-activity-bg)"/>
+  <g opacity=".10" fill="#86aa94"><rect x="32" y="184" width="5" height="12" rx="1"/><rect x="44" y="176" width="5" height="20" rx="1"/><rect x="56" y="188" width="5" height="8" rx="1"/><rect x="839" y="180" width="5" height="16" rx="1"/><rect x="851" y="172" width="5" height="24" rx="1"/><rect x="863" y="186" width="5" height="10" rx="1"/></g>
+  <svg x="70" y="0" width="760" height="220" viewBox="0 0 760 220"><title id="title">nekomario28 contributions</title>
+<desc id="desc">Daily GitHub contribution counts for the last 31 days.</desc>
+<defs>
+<linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#58a6ff" stop-opacity="0.30"/><stop offset="1" stop-color="#58a6ff" stop-opacity="0.02"/></linearGradient>
+</defs>
+<rect width="760" height="220" rx="8" fill="#0d1117"/>
+<text x="38" y="24" fill="#f0f6fc" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="14" font-weight="600">Contributions · last 31 days</text>
+<text x="742" y="24" text-anchor="end" fill="#8b949e" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11">5755 contributions</text>
+<g font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
+<line x1="38" y1="188.00" x2="742" y2="188.00" stroke="#21262d" stroke-width="1" opacity="0.55"/>
+<text x="30" y="192.00" text-anchor="end" fill="#8b949e" font-size="10">0</text>
+<line x1="38" y1="151.50" x2="742" y2="151.50" stroke="#21262d" stroke-width="1" opacity="0.55"/>
+<text x="30" y="155.50" text-anchor="end" fill="#8b949e" font-size="10">250</text>
+<line x1="38" y1="115.00" x2="742" y2="115.00" stroke="#21262d" stroke-width="1" opacity="0.55"/>
+<text x="30" y="119.00" text-anchor="end" fill="#8b949e" font-size="10">500</text>
+<line x1="38" y1="78.50" x2="742" y2="78.50" stroke="#21262d" stroke-width="1" opacity="0.55"/>
+<text x="30" y="82.50" text-anchor="end" fill="#8b949e" font-size="10">750</text>
+<line x1="38" y1="42.00" x2="742" y2="42.00" stroke="#21262d" stroke-width="1" opacity="0.55"/>
+<text x="30" y="46.00" text-anchor="end" fill="#8b949e" font-size="10">1000</text>
+<path d="M 38.00 185.37 L 61.47 173.98 L 84.93 162.74 L 108.40 168.14 L 131.87 172.82 L 155.33 168.14 L 178.80 184.20 L 202.27 161.14 L 225.73 169.75 L 249.20 177.78 L 272.67 184.06 L 296.13 176.47 L 319.60 187.71 L 343.07 170.48 L 366.53 177.05 L 390.00 170.48 L 413.47 182.45 L 436.93 169.17 L 460.40 174.71 L 483.87 180.70 L 507.33 184.79 L 530.80 186.69 L 554.27 188.00 L 577.73 157.05 L 601.20 148.14 L 624.67 152.96 L 648.13 133.69 L 671.60 128.14 L 695.07 125.80 L 718.53 42.44 L 742.00 42.73 L 742.00 188.00 L 38.00 188.00 Z" fill="url(#area)"/>
+<path d="M 38.00 185.37 L 61.47 173.98 L 84.93 162.74 L 108.40 168.14 L 131.87 172.82 L 155.33 168.14 L 178.80 184.20 L 202.27 161.14 L 225.73 169.75 L 249.20 177.78 L 272.67 184.06 L 296.13 176.47 L 319.60 187.71 L 343.07 170.48 L 366.53 177.05 L 390.00 170.48 L 413.47 182.45 L 436.93 169.17 L 460.40 174.71 L 483.87 180.70 L 507.33 184.79 L 530.80 186.69 L 554.27 188.00 L 577.73 157.05 L 601.20 148.14 L 624.67 152.96 L 648.13 133.69 L 671.60 128.14 L 695.07 125.80 L 718.53 42.44 L 742.00 42.73" fill="none" stroke="#58a6ff" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="38.00" cy="185.37" r="2.15" fill="#79c0ff"/>
+<circle cx="61.47" cy="173.98" r="2.15" fill="#79c0ff"/>
+<circle cx="84.93" cy="162.74" r="2.15" fill="#79c0ff"/>
+<circle cx="108.40" cy="168.14" r="2.15" fill="#79c0ff"/>
+<circle cx="131.87" cy="172.82" r="2.15" fill="#79c0ff"/>
+<circle cx="155.33" cy="168.14" r="2.15" fill="#79c0ff"/>
+<circle cx="178.80" cy="184.20" r="2.15" fill="#79c0ff"/>
+<circle cx="202.27" cy="161.14" r="2.15" fill="#79c0ff"/>
+<circle cx="225.73" cy="169.75" r="2.15" fill="#79c0ff"/>
+<circle cx="249.20" cy="177.78" r="2.15" fill="#79c0ff"/>
+<circle cx="272.67" cy="184.06" r="2.15" fill="#79c0ff"/>
+<circle cx="296.13" cy="176.47" r="2.15" fill="#79c0ff"/>
+<circle cx="319.60" cy="187.71" r="2.15" fill="#79c0ff"/>
+<circle cx="343.07" cy="170.48" r="2.15" fill="#79c0ff"/>
+<circle cx="366.53" cy="177.05" r="2.15" fill="#79c0ff"/>
+<circle cx="390.00" cy="170.48" r="2.15" fill="#79c0ff"/>
+<circle cx="413.47" cy="182.45" r="2.15" fill="#79c0ff"/>
+<circle cx="436.93" cy="169.17" r="2.15" fill="#79c0ff"/>
+<circle cx="460.40" cy="174.71" r="2.15" fill="#79c0ff"/>
+<circle cx="483.87" cy="180.70" r="2.15" fill="#79c0ff"/>
+<circle cx="507.33" cy="184.79" r="2.15" fill="#79c0ff"/>
+<circle cx="530.80" cy="186.69" r="2.15" fill="#79c0ff"/>
+<circle cx="554.27" cy="188.00" r="2.15" fill="#79c0ff"/>
+<circle cx="577.73" cy="157.05" r="2.15" fill="#79c0ff"/>
+<circle cx="601.20" cy="148.14" r="2.15" fill="#79c0ff"/>
+<circle cx="624.67" cy="152.96" r="2.15" fill="#79c0ff"/>
+<circle cx="648.13" cy="133.69" r="2.15" fill="#79c0ff"/>
+<circle cx="671.60" cy="128.14" r="2.15" fill="#79c0ff"/>
+<circle cx="695.07" cy="125.80" r="2.15" fill="#79c0ff"/>
+<circle cx="718.53" cy="42.44" r="2.15" fill="#79c0ff"/>
+<circle cx="742.00" cy="42.73" r="2.15" fill="#79c0ff"/>
+<text x="38.00" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Jul 25</text>
+<text x="202.27" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 1</text>
+<text x="390.00" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 9</text>
+<text x="577.73" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 17</text>
+<text x="742.00" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 24</text>
+</g><defs><clipPath id="v7-window"><rect x="0" y="0" width="900" height="220"/></clipPath></defs>
+<style>@media (prefers-reduced-motion: reduce) { .v7-motion { display:none } }</style>
+<g id="v7-global-window" data-window="activity_canvas" data-global-start="1318" data-global-end="1538" data-global-extent="1662" data-global-x-offset="0" pointer-events="none">
+  
+  <g class="v7-motion" clip-path="url(#v7-window)">
+    <g id="v7-particle-left-primary" opacity="0.82">
+      <line x1="18" y1="-13" x2="18" y2="0" stroke="#86aa94" stroke-opacity=".34" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="18" cy="0" r="2.4" fill="#86aa94"/>
+      <animateTransform attributeName="transform" type="translate" values="0 -1342;0 368" dur="32s" begin="0s" repeatCount="indefinite"/>
+    </g>
+    <g id="v7-particle-right-secondary" opacity="0.68">
+      <line x1="882" y1="-11" x2="882" y2="0" stroke="#c7b06c" stroke-opacity=".34" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="882" cy="0" r="2.1" fill="#c7b06c"/>
+      <animateTransform attributeName="transform" type="translate" values="0 -1342;0 368" dur="32s" begin="-5.33333s" repeatCount="indefinite"/>
+    </g>
+    <g id="v7-particle-left-secondary" opacity="0.5">
+      <line x1="18" y1="-9" x2="18" y2="0" stroke="#c7b06c" stroke-opacity=".34" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="18" cy="0" r="1.5" fill="#c7b06c"/>
+      <animateTransform attributeName="transform" type="translate" values="0 -1342;0 368" dur="32s" begin="-10.6667s" repeatCount="indefinite"/>
+    </g>
+    <g id="v7-particle-right-primary" opacity="0.58">
+      <line x1="882" y1="-10" x2="882" y2="0" stroke="#86aa94" stroke-opacity=".34" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="882" cy="0" r="1.7" fill="#86aa94"/>
+      <animateTransform attributeName="transform" type="translate" values="0 -1342;0 368" dur="32s" begin="-16s" repeatCount="indefinite"/>
+    </g>
+    <g id="v7-particle-left-fine" opacity="0.42">
+      <line x1="18" y1="-8" x2="18" y2="0" stroke="#86aa94" stroke-opacity=".34" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="18" cy="0" r="1.2" fill="#86aa94"/>
+      <animateTransform attributeName="transform" type="translate" values="0 -1342;0 368" dur="32s" begin="-21.3333s" repeatCount="indefinite"/>
+    </g>
+    <g id="v7-particle-right-fine" opacity="0.4">
+      <line x1="882" y1="-8" x2="882" y2="0" stroke="#c7b06c" stroke-opacity=".34" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="882" cy="0" r="1.2" fill="#c7b06c"/>
+      <animateTransform attributeName="transform" type="translate" values="0 -1342;0 368" dur="32s" begin="-26.6667s" repeatCount="indefinite"/>
+    </g>
+  </g>
+</g>
+</svg>
+  <path d="M70 0V220 M830 0V220" stroke="#eef2f6" stroke-opacity=".08"/>
+  <path d="M18 0V220 M882 0V220" fill="none" stroke="#86aa94" stroke-opacity=".18" stroke-width="1.6"/><path d="M22 0V220 M878 0V220" fill="none" stroke="#c7b06c" stroke-opacity=".08" stroke-width=".7"/>
+</svg>

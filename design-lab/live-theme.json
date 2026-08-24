@@ -1,15 +1,20 @@
 {
-  "version": 6,
-  "envelope_version": 6,
+  "version": 7,
+  "envelope_version": 7,
   "active_season": "summer",
   "active_theme": "summer-dark",
   "source": "design-lab/seasons/summer-dark.svg",
   "live_assets": {
     "hero": "assets/profile-hero.svg",
+    "character_left": "assets/profile-character-side-left.svg",
+    "character_right": "assets/profile-character-side-right.svg",
+    "attribution": "assets/profile-attribution.svg",
     "bridge_character_projects": "assets/profile-frame-bridge-character-projects.svg",
     "projects": "assets/profile-section-projects.svg",
+    "projects_canvas": "assets/profile-projects-canvas.svg",
     "bridge_projects_activity": "assets/profile-frame-bridge-projects-activity.svg",
     "activity": "assets/profile-section-activity.svg",
+    "activity_canvas": "assets/profile-activity-canvas.svg",
     "bridge_activity_footer": "assets/profile-frame-bridge-activity-footer.svg",
     "footer": "assets/profile-footer.svg"
   },
@@ -18,11 +23,14 @@
     "profile": "rain-water-and-leaf-sway",
     "implementation": "embedded-smil",
     "static_fallback": true,
-    "live_verification": "PASS"
+    "live_verification": "NOT_RUN"
   },
   "frame": {
-    "mode": "global-windowed-flow",
+    "mode": "continuous-canvas-global-windowed-flow",
     "background_illusion": true,
+    "edge_matched_background": true,
+    "mounted_foreground_media": true,
+    "all_logical_windows_rendered": true,
     "shared_edge_rails": true,
     "top_cap": true,
     "bottom_cap": true,
@@ -31,22 +39,12 @@
     "window_clipping": true,
     "boundary_fade": false,
     "partial_geometry_clipping": true,
-    "unique_bridge_windows": true,
+    "split_character_window": true,
     "phase_tolerant_handoff": true,
     "cross_document_hard_sync": false,
     "true_overlay": false
   },
-  "global_motion_space": "design-lab/envelope-v6/global-motion-space.json",
-  "promoted_at": "2026-08-24",
-  "promotion_mode": "manual",
-  "live_verification_evidence": {
-    "proof_pr": 38,
-    "run": 32731491688,
-    "job": 97444494630,
-    "surface": "actual-public-github-profile",
-    "browser": "headless-chrome-persistent-page",
-    "sample_interval_seconds": 0.25,
-    "sample_duration_seconds": 7.0,
-    "result": "PASS"
-  }
+  "global_motion_space": "design-lab/envelope-v7/global-motion-space.json",
+  "promoted_at": "2026-08-25",
+  "promotion_mode": "manual"
 }

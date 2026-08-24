@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate and optionally promote the complete seasonal profile Envelope v6."""
+"""Validate and optionally promote the complete seasonal profile Envelope v7."""
 from __future__ import annotations
 
 import argparse
@@ -15,27 +15,52 @@ LAB = Path(__file__).resolve().parents[1]
 ROOT = LAB.parent
 MANIFEST = LAB / "theme-manifest.json"
 LIVE_STATE = LAB / "live-theme.json"
-GLOBAL_SPACE = LAB / "envelope-v6" / "global-motion-space.json"
-RENDERER = Path(__file__).with_name("render_global_motion.py")
+GLOBAL_SPACE = LAB / "envelope-v7" / "global-motion-space.json"
+RENDERER = LAB / "envelope-v7" / "render_continuous_canvas.py"
 
 REQUIRED_ASSETS = {
     "hero",
+    "character_left",
+    "character_right",
+    "attribution",
     "bridge_character_projects",
     "projects",
+    "projects_canvas",
     "bridge_projects_activity",
     "activity",
+    "activity_canvas",
     "bridge_activity_footer",
     "footer",
 }
 
 GEOMETRY = {
     "hero": ("900", "260", "0 0 900 260"),
+    "character_left": ("100", "394", "0 0 100 394"),
+    "character_right": ("100", "394", "0 0 100 394"),
+    "attribution": ("900", "44", "0 0 900 44"),
     "bridge_character_projects": ("900", "32", "0 0 900 32"),
     "projects": ("900", "68", "0 0 900 68"),
+    "projects_canvas": ("900", "420", "0 0 900 420"),
     "bridge_projects_activity": ("900", "32", "0 0 900 32"),
     "activity": ("900", "68", "0 0 900 68"),
+    "activity_canvas": ("900", "220", "0 0 900 220"),
     "bridge_activity_footer": ("900", "32", "0 0 900 32"),
     "footer": ("900", "92", "0 0 900 92"),
+}
+
+WINDOW_FOR_ASSET = {
+    "hero": "hero",
+    "character_left": "character",
+    "character_right": "character",
+    "attribution": "attribution",
+    "bridge_character_projects": "bridge_character_projects",
+    "projects": "projects",
+    "projects_canvas": "projects_canvas",
+    "bridge_projects_activity": "bridge_projects_activity",
+    "activity": "activity",
+    "activity_canvas": "activity_canvas",
+    "bridge_activity_footer": "bridge_activity_footer",
+    "footer": "footer",
 }
 
 
@@ -44,39 +69,43 @@ def load_json(path: Path) -> dict:
 
 
 def load_renderer():
-    spec = importlib.util.spec_from_file_location("render_global_motion", RENDERER)
+    spec = importlib.util.spec_from_file_location("render_continuous_canvas", RENDERER)
     if spec is None or spec.loader is None:
-        raise SystemExit("unable to load Envelope v6 renderer")
+        raise SystemExit("unable to load Envelope v7 renderer")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
 
 
 def validate_manifest(data: dict, renderer) -> dict:
-    if data.get("version") != 7:
-        raise SystemExit("Envelope v6 requires manifest version 7")
+    if data.get("version") != 8:
+        raise SystemExit("Envelope v7 requires manifest version 8")
     if set(data.get("live_assets", {})) != REQUIRED_ASSETS:
         raise SystemExit(f"live_assets must be exactly {sorted(REQUIRED_ASSETS)}")
+
     flow = data.get("envelope_motion", {})
     expected_flow = {
-        "mode": "global-coordinate-windowed-handoff",
-        "coordinate_system": "profile-envelope-logical-y-v1",
-        "render_model": "shared-global-field-clipped-by-local-window",
+        "mode": "continuous-canvas-global-windowed-handoff",
+        "coordinate_system": "profile-envelope-continuous-canvas-y-v1",
+        "render_model": "shared-global-field-clipped-by-rendered-canvas-windows",
+        "background_model": "edge-matched-dark-surface-with-mounted-foreground-media",
         "rail_x": [18, 882],
-        "duration_seconds": 36,
-        "global_extent": 1868,
+        "duration_seconds": 32,
+        "global_extent": 1662,
         "bleed": 24,
-        "cross_document_hard_sync": False,
         "boundary_fade": False,
         "partial_geometry_clipping": True,
+        "all_logical_windows_rendered": True,
+        "mounted_foreground_media": True,
+        "cross_document_hard_sync": False,
         "static_fallback": True,
         "reduced_motion": True,
     }
     for key, value in expected_flow.items():
         if flow.get(key) != value:
-            raise SystemExit(f"unexpected Envelope v6 motion contract: {key}")
-    if flow.get("space") != "design-lab/envelope-v6/global-motion-space.json":
-        raise SystemExit("unexpected global motion space path")
+            raise SystemExit(f"unexpected Envelope v7 motion contract: {key}")
+    if flow.get("space") != "design-lab/envelope-v7/global-motion-space.json":
+        raise SystemExit("unexpected Envelope v7 global motion space path")
 
     space = load_json(GLOBAL_SPACE)
     try:
@@ -84,23 +113,19 @@ def validate_manifest(data: dict, renderer) -> dict:
     except ValueError as exc:
         raise SystemExit(str(exc)) from exc
 
-    rendered_windows = {
-        w["asset_key"]: (name, int(w["start"]), int(w["end"]), int(w["height"]))
-        for name, w in space["windows"].items()
-        if w.get("rendered")
-    }
-    if set(rendered_windows) != REQUIRED_ASSETS:
-        raise SystemExit("global motion rendered windows must match live_assets exactly")
-    for key, (_, _, _, height) in rendered_windows.items():
+    mapped: dict[str, tuple[str, int, int, int]] = {}
+    for name, window in space["windows"].items():
+        keys = []
+        if window.get("asset_key"):
+            keys.append(window["asset_key"])
+        keys.extend(window.get("asset_keys", []))
+        for key in keys:
+            mapped[key] = (name, int(window["start"]), int(window["end"]), int(window["height"]))
+    if set(mapped) != REQUIRED_ASSETS:
+        raise SystemExit("Envelope v7 rendered windows must map all live assets exactly")
+    for key, (_, _, _, height) in mapped.items():
         if int(GEOMETRY[key][1]) != height:
             raise SystemExit(f"window height does not match asset geometry: {key}")
-
-    bridge_starts = [
-        rendered_windows[key][1]
-        for key in ("bridge_character_projects", "bridge_projects_activity", "bridge_activity_footer")
-    ]
-    if len(set(bridge_starts)) != 3:
-        raise SystemExit("the three bridge occurrences must have distinct global windows")
 
     seen: dict[int, str] = {}
     for name, cfg in data["seasons"].items():
@@ -136,7 +161,7 @@ def resolve_season(data: dict, day: dt.date, explicit: str | None) -> tuple[str,
     return matches[0]
 
 
-def validate_svg(path: Path, geometry: tuple[str, str, str], *, expected_window: tuple[str, int, int] | None = None) -> None:
+def validate_svg(path: Path, geometry: tuple[str, str, str], *, window: tuple[str, int, int] | None = None) -> None:
     try:
         root = ET.parse(path).getroot()
     except (FileNotFoundError, ET.ParseError) as exc:
@@ -144,25 +169,37 @@ def validate_svg(path: Path, geometry: tuple[str, str, str], *, expected_window:
     if (root.attrib.get("width"), root.attrib.get("height"), root.attrib.get("viewBox")) != geometry:
         raise SystemExit(f"unexpected geometry in {path}")
     text = path.read_text(encoding="utf-8")
-    if 'id="v6-global-window"' not in text:
-        raise SystemExit(f"missing v6 global window in {path}")
+    if 'id="v7-global-window"' not in text:
+        raise SystemExit(f"missing v7 global window in {path}")
     if "prefers-reduced-motion" not in text or "<animateTransform" not in text:
-        raise SystemExit(f"missing v6 motion/reduced-motion contract in {path}")
-    if 'clip-path="url(#v6-window)"' not in text:
-        raise SystemExit(f"missing v6 clipped-window rendering in {path}")
-    if 'dur="36s"' not in text:
-        raise SystemExit(f"unexpected global motion duration in {path}")
+        raise SystemExit(f"missing v7 motion/reduced-motion contract in {path}")
+    if 'clip-path="url(#v7-window)"' not in text:
+        raise SystemExit(f"missing v7 clipped-window rendering in {path}")
+    if 'dur="32s"' not in text:
+        raise SystemExit(f"unexpected v7 global motion duration in {path}")
     if "<script" in text.lower() or "javascript:" in text.lower():
         raise SystemExit(f"scripted animation is not allowed in {path}")
-    v6_tail = text.split('id="v6-global-window"', 1)[1]
-    if '<animate attributeName="opacity"' in v6_tail:
-        raise SystemExit(f"v6 boundary fade is forbidden in {path}")
-    if expected_window:
-        name, start, end = expected_window
+    tail = text.split('id="v7-global-window"', 1)[1]
+    if '<animate attributeName="opacity"' in tail:
+        raise SystemExit(f"v7 boundary fade is forbidden in {path}")
+    if window:
+        name, start, end = window
         if f'data-window="{name}"' not in text:
-            raise SystemExit(f"wrong v6 global window name in {path}")
+            raise SystemExit(f"wrong v7 global window name in {path}")
         if f'data-global-start="{start}"' not in text or f'data-global-end="{end}"' not in text:
-            raise SystemExit(f"wrong v6 global coordinates in {path}")
+            raise SystemExit(f"wrong v7 global coordinates in {path}")
+
+
+def asset_windows(space: dict) -> dict[str, tuple[str, int, int]]:
+    result: dict[str, tuple[str, int, int]] = {}
+    for name, window in space["windows"].items():
+        keys = []
+        if window.get("asset_key"):
+            keys.append(window["asset_key"])
+        keys.extend(window.get("asset_keys", []))
+        for key in keys:
+            result[key] = (name, int(window["start"]), int(window["end"]))
+    return result
 
 
 def expected_assets(renderer, season: str, live_assets: dict[str, str]) -> dict[str, bytes]:
@@ -204,10 +241,14 @@ def main() -> int:
 
     expected = expected_assets(renderer, season, manifest["live_assets"])
     assets = {key: ROOT / rel for key, rel in manifest["live_assets"].items()}
-    live = load_json(LIVE_STATE)
+    try:
+        live = load_json(LIVE_STATE)
+    except FileNotFoundError:
+        live = {}
     changed = (
         live.get("active_season") != season
-        or live.get("envelope_version") != 6
+        or live.get("envelope_version") != 7
+        or live.get("global_motion_space") != str(GLOBAL_SPACE.relative_to(ROOT))
         or any(not assets[key].is_file() or assets[key].read_bytes() != expected[key] for key in expected)
     )
 
@@ -218,33 +259,35 @@ def main() -> int:
         "theme": f"{season}-dark",
         "changed": changed,
         "apply": args.apply,
-        "envelope_version": 6,
+        "envelope_version": 7,
         "motion_mode": manifest["envelope_motion"]["mode"],
         "coordinate_system": manifest["envelope_motion"]["coordinate_system"],
+        "global_extent": manifest["envelope_motion"]["global_extent"],
         "cross_document_hard_sync": False,
     }
 
     if args.apply:
         renderer.render(season, ROOT)
-        rendered_windows = {
-            w["asset_key"]: (name, int(w["start"]), int(w["end"]))
-            for name, w in space["windows"].items()
-            if w.get("rendered")
-        }
+        windows = asset_windows(space)
         for key, geom in GEOMETRY.items():
-            validate_svg(assets[key], geom, expected_window=rendered_windows[key])
+            validate_svg(assets[key], geom, window=windows[key])
+        next_motion = dict(cfg["motion"])
+        next_motion["live_verification"] = "NOT_RUN"
         next_state = {
-            "version": 6,
-            "envelope_version": 6,
+            "version": 7,
+            "envelope_version": 7,
             "active_season": season,
             "active_theme": f"{season}-dark",
             "source": str(source_hero.relative_to(ROOT)),
             "live_assets": {key: str(path.relative_to(ROOT)) for key, path in assets.items()},
             "timezone": manifest.get("timezone", "Asia/Tokyo"),
-            "motion": cfg["motion"],
+            "motion": next_motion,
             "frame": {
-                "mode": "global-windowed-flow",
+                "mode": "continuous-canvas-global-windowed-flow",
                 "background_illusion": True,
+                "edge_matched_background": True,
+                "mounted_foreground_media": True,
+                "all_logical_windows_rendered": True,
                 "shared_edge_rails": True,
                 "top_cap": True,
                 "bottom_cap": True,
@@ -253,7 +296,7 @@ def main() -> int:
                 "window_clipping": True,
                 "boundary_fade": False,
                 "partial_geometry_clipping": True,
-                "unique_bridge_windows": True,
+                "split_character_window": True,
                 "phase_tolerant_handoff": True,
                 "cross_document_hard_sync": False,
                 "true_overlay": False,
@@ -268,7 +311,7 @@ def main() -> int:
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
     else:
         action = "promoted" if args.apply and changed else "refreshed" if args.apply else "no-change" if not changed else "would-promote"
-        print(f"{action}: {season} envelope v6")
+        print(f"{action}: {season} envelope v7")
     return 0
 
 

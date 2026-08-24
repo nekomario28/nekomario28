@@ -29,42 +29,40 @@
     <g transform="translate(786 65)"><g fill="#8eaa87" stroke="#b5c7b2" stroke-opacity=".22" stroke-width=".4"><use href="#leaf" transform="scale(.18)"/><animateTransform attributeName="transform" type="rotate" values="2;-3;2" dur="9.2s" begin="-2s" repeatCount="indefinite"/></g></g>
   </g>
   <rect x=".5" y=".5" width="899" height="259" rx="17.5" fill="none" stroke="#fff" stroke-opacity=".07"/>
-<defs><clipPath id="v6-window"><rect x="0" y="0" width="900" height="260"/></clipPath></defs>
-<style>@media (prefers-reduced-motion: reduce) { .v6-motion { display:none } }</style>
-<g id="v6-global-window" data-window="hero" data-global-start="0" data-global-end="260" data-global-extent="1868" pointer-events="none">
+<defs><clipPath id="v7-window"><rect x="0" y="0" width="900" height="260"/></clipPath></defs>
+<style>@media (prefers-reduced-motion: reduce) { .v7-motion { display:none } }</style>
+<g id="v7-global-window" data-window="hero" data-global-start="0" data-global-end="260" data-global-extent="1662" data-global-x-offset="0" pointer-events="none">
   <path d="M18 30V18Q18 7 30 7H76 M882 30V18Q882 7 870 7H824" fill="none" stroke="#86aa94" stroke-opacity=".34" stroke-width="1.8" stroke-linecap="round"/><path d="M31 13H62 M838 13H869" fill="none" stroke="#c7b06c" stroke-opacity=".20" stroke-width=".8"/>
-  <path d="M18 0V260 M882 0V260" fill="none" stroke="#86aa94" stroke-opacity=".16" stroke-width="1.8"/>
-  <path d="M22 0V260 M878 0V260" fill="none" stroke="#c7b06c" stroke-opacity=".08" stroke-width=".7"/>
-  <g class="v6-motion" clip-path="url(#v6-window)">
-    <g id="v6-particle-left-primary" opacity="0.82">
+  <g class="v7-motion" clip-path="url(#v7-window)">
+    <g id="v7-particle-left-primary" opacity="0.82">
       <line x1="18" y1="-13" x2="18" y2="0" stroke="#86aa94" stroke-opacity=".34" stroke-width="1.2" stroke-linecap="round"/>
       <circle cx="18" cy="0" r="2.4" fill="#86aa94"/>
-      <animateTransform attributeName="transform" type="translate" values="0 -24;0 1892" dur="36s" begin="0s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="translate" values="0 -24;0 1686" dur="32s" begin="0s" repeatCount="indefinite"/>
     </g>
-    <g id="v6-particle-right-secondary" opacity="0.68">
+    <g id="v7-particle-right-secondary" opacity="0.68">
       <line x1="882" y1="-11" x2="882" y2="0" stroke="#c7b06c" stroke-opacity=".34" stroke-width="1.2" stroke-linecap="round"/>
       <circle cx="882" cy="0" r="2.1" fill="#c7b06c"/>
-      <animateTransform attributeName="transform" type="translate" values="0 -24;0 1892" dur="36s" begin="-6s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="translate" values="0 -24;0 1686" dur="32s" begin="-5.33333s" repeatCount="indefinite"/>
     </g>
-    <g id="v6-particle-left-secondary" opacity="0.5">
+    <g id="v7-particle-left-secondary" opacity="0.5">
       <line x1="18" y1="-9" x2="18" y2="0" stroke="#c7b06c" stroke-opacity=".34" stroke-width="1.2" stroke-linecap="round"/>
       <circle cx="18" cy="0" r="1.5" fill="#c7b06c"/>
-      <animateTransform attributeName="transform" type="translate" values="0 -24;0 1892" dur="36s" begin="-12s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="translate" values="0 -24;0 1686" dur="32s" begin="-10.6667s" repeatCount="indefinite"/>
     </g>
-    <g id="v6-particle-right-primary" opacity="0.58">
+    <g id="v7-particle-right-primary" opacity="0.58">
       <line x1="882" y1="-10" x2="882" y2="0" stroke="#86aa94" stroke-opacity=".34" stroke-width="1.2" stroke-linecap="round"/>
       <circle cx="882" cy="0" r="1.7" fill="#86aa94"/>
-      <animateTransform attributeName="transform" type="translate" values="0 -24;0 1892" dur="36s" begin="-18s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="translate" values="0 -24;0 1686" dur="32s" begin="-16s" repeatCount="indefinite"/>
     </g>
-    <g id="v6-particle-left-fine" opacity="0.42">
+    <g id="v7-particle-left-fine" opacity="0.42">
       <line x1="18" y1="-8" x2="18" y2="0" stroke="#86aa94" stroke-opacity=".34" stroke-width="1.2" stroke-linecap="round"/>
       <circle cx="18" cy="0" r="1.2" fill="#86aa94"/>
-      <animateTransform attributeName="transform" type="translate" values="0 -24;0 1892" dur="36s" begin="-24s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="translate" values="0 -24;0 1686" dur="32s" begin="-21.3333s" repeatCount="indefinite"/>
     </g>
-    <g id="v6-particle-right-fine" opacity="0.4">
+    <g id="v7-particle-right-fine" opacity="0.4">
       <line x1="882" y1="-8" x2="882" y2="0" stroke="#c7b06c" stroke-opacity=".34" stroke-width="1.2" stroke-linecap="round"/>
       <circle cx="882" cy="0" r="1.2" fill="#c7b06c"/>
-      <animateTransform attributeName="transform" type="translate" values="0 -24;0 1892" dur="36s" begin="-30s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="translate" values="0 -24;0 1686" dur="32s" begin="-26.6667s" repeatCount="indefinite"/>
     </g>
   </g>
 </g>
