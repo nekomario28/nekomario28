@@ -18,7 +18,7 @@
     "profile": "rain-water-and-leaf-sway",
     "implementation": "embedded-smil",
     "static_fallback": true,
-    "live_verification": "NOT_RUN"
+    "live_verification": "PASS"
   },
   "frame": {
     "mode": "global-windowed-flow",
@@ -38,5 +38,15 @@
   },
   "global_motion_space": "design-lab/envelope-v6/global-motion-space.json",
   "promoted_at": "2026-08-24",
-  "promotion_mode": "manual"
+  "promotion_mode": "manual",
+  "live_verification_evidence": {
+    "proof_pr": 38,
+    "run": 32731491688,
+    "job": 97444494630,
+    "surface": "actual-public-github-profile",
+    "browser": "headless-chrome-persistent-page",
+    "sample_interval_seconds": 0.25,
+    "sample_duration_seconds": 7.0,
+    "result": "PASS"
+  }
 }

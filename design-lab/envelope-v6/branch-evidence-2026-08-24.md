@@ -4,7 +4,7 @@
 
 Envelope v6 replaces segment-local rail-pulse ownership with one logical global motion field. Each participating SVG is a clipping window into that field.
 
-The implementation is specifically intended to remove the visible failure mode where a moving object appears to die as soon as its center reaches an SVG edge.
+The implementation is intended to remove the visible failure mode where a moving object appears to die as soon as its center reaches an SVG edge.
 
 ## Implementation identity
 
@@ -23,7 +23,7 @@ Core model:
 local_y(t) = global_y(t) - window_start
 ```
 
-The same global trajectory is embedded in every participating asset. The local viewport uses an explicit clip path and does not own a separate boundary-fade lifecycle.
+The same logical trajectory is embedded in every participating asset. Each local SVG clips that trajectory to its viewport and does not own a separate edge-triggered opacity lifecycle.
 
 ## Global space
 
@@ -64,63 +64,50 @@ Validated for Spring, Summer, Autumn and Winter:
 - dry-run seasonal promotion;
 - stable Summer preview matching the renderer.
 
-A later proof-head seasonal run `32727489372` also completed successfully while the temporary render proof was present.
+Additional successful seasonal runs included `32727489372` and final clean-head run `32727783004`.
 
-## GitHub branch render proof
+## Branch layout proof
 
-Proof run `32727489379`: **SUCCESS**.
+Run `32727489379` captured the branch README in dark desktop/mobile and confirmed layout usability without table-style center compression or observed horizontal overflow.
 
-Artifact:
+### Correction to the original boundary-playback interpretation
 
-- name: `envelope-v6-render-proof`
-- artifact id: `9520079458`
+The same run also produced direct raw-SVG screenshots using separate Chrome invocations with `--virtual-time-budget`. Later re-analysis showed those direct bridge screenshots were byte-identical across the requested virtual times. Therefore they **must not** be treated as proof that the pulse visibly crossed the local boundary.
 
-Target branch README:
+The previous text that described those images as showing a circle/tail progression was an over-interpretation and is superseded by this correction.
 
-- desktop dark 1440px capture: PASS for layout
-- mobile dark 430px capture: PASS for layout
-- no observed table-style center compression or horizontal overflow
+What remains valid from source/CI inspection is the deterministic geometry rule:
 
-The full branch README screenshots were not used alone to claim the rail boundary behavior because the small rail pulse was not cleanly discriminated at the chosen full-page timestamp.
+- the v6 particle is represented by a circle plus trailing line;
+- no local boundary opacity animation exists;
+- every window uses explicit clipping;
+- the global trajectory is translated by that window's `window_start`;
+- therefore geometry that still intersects a window is eligible to render even after the leading center has crossed the edge.
 
-## Direct boundary clipping proof
+This geometry property is distinct from target-surface playback evidence.
 
-The same proof run also rendered the first repository-owned v6 bridge SVG directly through headless Chrome from the GitHub raw branch URL.
+## Public-profile playback evidence
 
-The first primary pulse traverses the first bridge window around 14.82s-15.42s under the frozen 36s/global-extent contract.
+Public playback is recorded separately in `design-lab/envelope-v6/live-evidence-2026-08-24.md`.
 
-Observed frames:
-
-- `bridge-t14.80.png`: the leading circle is partially visible at the top edge;
-- `bridge-t15.42.png`: the pulse reaches the lower boundary;
-- `bridge-t15.50.png`: the center has crossed beyond the 32px viewport but a portion of the 13px trailing line still intersects the bottom of the clipping window;
-- `bridge-t15.70.png`: the trailing geometry has also left and the pulse is no longer visible.
-
-Pixel inspection around the left rail confirms motion in the expected x=18 strip. Between 15.42s and 15.50s changed pixels remain in the lower boundary region even after the leading center has moved outside the local window.
-
-This proves the intended local boundary rule:
-
-> the object is not deleted or faded when its center crosses the edge; the global trajectory continues, and the SVG draws only the geometry that still intersects its clipping window.
-
-It does **not** prove a shared clock between separate README SVG documents.
+A persistent-browser proof on the actual public profile was required because restarting Chrome for every timestamp resets or obscures the relevant timeline.
 
 ## Evidence boundary
 
 Established:
 
-- global-coordinate/windowed renderer exists and is deterministic;
-- local boundary fade has been removed from the v6 rail field;
-- partial overrun geometry is rendered through clipping;
+- deterministic global-coordinate/windowed renderer;
+- local boundary opacity lifecycle removed;
+- partial geometry is represented by clip-based intersection rather than edge-triggered deletion logic;
 - three repeated bridge positions have distinct global windows;
 - all four seasonal variants generate and validate;
-- dark desktop/mobile branch layout remains usable.
+- dark desktop/mobile layout remains usable;
+- Summer public-profile v6 playback is separately observed and PASS.
 
-Still not established until live promotion:
+Not claimed:
 
-- Summer v6 playback on the actual public profile surface;
-- frame-perfect cross-document synchronization (not claimed and not required);
-- Spring/Autumn/Winter live playback.
+- frame-perfect synchronization between independent SVG documents;
+- a shared runtime clock across README `<img>` documents;
+- Spring/Autumn/Winter public playback before those variants are actually observed live.
 
-Summer `live_verification` therefore remains `NOT_RUN` until a post-merge public-profile proof is captured.
-
-The temporary branch render-proof workflow was removed before the final clean-head validation; it is evidence tooling only and is not part of the Envelope v6 product/runtime surface.
+The temporary proof workflows were evidence tooling only and are not part of the Envelope v6 product/runtime surface.
