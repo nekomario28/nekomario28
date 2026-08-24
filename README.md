@@ -1,8 +1,12 @@
+<!-- active-profile-theme: summer-dark | source: design-lab/seasons/summer-dark.svg | promoted: 2026-08-24 -->
+
 <p align="center">
-  <img src="assets/sakura-profile-hero.svg" width="900" alt="桜を配した nekomario28 のプロフィールバナー">
+  <img src="assets/profile-hero.svg" width="900" alt="青楓と水の流れを配した nekomario28 の夏のダークプロフィールバナー">
 </p>
 
-<br>
+<p align="center">
+  <img src="assets/profile-divider.svg" width="900" alt="">
+</p>
 
 <p align="center">
   <a href="https://konosuba.com/bakuen/story/?mode=story4">
@@ -14,7 +18,9 @@
   <sub>©2023 暁なつめ・三嶋くろね／KADOKAWA／このすば爆焔製作委員会</sub>
 </p>
 
-<br>
+<p align="center">
+  <img src="assets/profile-divider.svg" width="900" alt="">
+</p>
 
 <h2 align="center">プロジェクト</h2>
 
@@ -24,8 +30,14 @@
   </a>
 </p>
 
-<br>
+<p align="center">
+  <img src="assets/profile-divider.svg" width="900" alt="">
+</p>
 
 <p align="center">
   <img width="760" src="assets/github-contributions-dark.svg" alt="直近31日間の GitHub コントリビューション">
+</p>
+
+<p align="center">
+  <img src="assets/profile-footer.svg" width="900" alt="">
 </p>
