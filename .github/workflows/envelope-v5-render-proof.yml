@@ -32,19 +32,9 @@ jobs:
           "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-dark-mode --virtual-time-budget=2000 --window-size=1440,2600 --screenshot="$out/desktop-dark-t2.png" "$url"
           "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-dark-mode --virtual-time-budget=8000 --window-size=1440,2600 --screenshot="$out/desktop-dark-t8.png" "$url"
           "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-dark-mode --virtual-time-budget=8000 --window-size=430,2600 --screenshot="$out/mobile-dark-t8.png" "$url"
-          python - <<'PY'
-          from pathlib import Path
-          from PIL import Image, ImageChops
-          root = Path(__import__('os').environ['RUNNER_TEMP']) / 'envelope-v5-proof'
-          a = Image.open(root/'desktop-dark-t2.png').convert('RGB')
-          b = Image.open(root/'desktop-dark-t8.png').convert('RGB')
-          diff = ImageChops.difference(a,b)
-          bbox = diff.getbbox()
-          changed = 0 if bbox is None else sum(1 for px in diff.getdata() if px != (0,0,0))
-          (root/'motion-diff.txt').write_text(f'changed_pixels={changed}\nbbox={bbox}\n')
-          print((root/'motion-diff.txt').read_text())
-          PY
+          sha256sum "$out"/*.png | tee "$out/sha256.txt"
       - name: Upload proof
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: envelope-v5-github-render-proof
