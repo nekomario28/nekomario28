@@ -2,6 +2,7 @@
 """Validate Envelope v7 generation and its real GitHub desktop/mobile layout."""
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import json
 import os
@@ -40,6 +41,14 @@ WINDOW_FOR_ASSET = {
     "activity_canvas": "activity_canvas", "bridge_activity_footer": "bridge_activity_footer",
     "footer": "footer",
 }
+SOURCE_FOR_ASSET = {
+    "projects_canvas": (ROOT / "project-map" / "galaxy.svg", "project-map/galaxy.svg"),
+    "activity_canvas": (ROOT / "assets" / "github-contributions-dark.svg", "assets/github-contributions-dark.svg"),
+}
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def load_renderer():
@@ -84,6 +93,12 @@ def validate_generated() -> None:
                 assert "prefers-reduced-motion" in text and '<animateTransform' in text and 'dur="32s"' in text
                 assert "<script" not in text.lower() and "javascript:" not in text.lower()
                 assert '<animate attributeName="opacity"' not in text.split('id="v7-global-window"', 1)[1]
+                if key in SOURCE_FOR_ASSET:
+                    source_path, source_rel = SOURCE_FOR_ASSET[key]
+                    assert root.attrib.get("data-source-path") == source_rel
+                    assert root.attrib.get("data-source-sha256") == sha256(source_path)
+                    if key == "projects_canvas" and 'data-galaxy-external-layout="rail"' in source_path.read_text(encoding="utf-8"):
+                        assert 'data-galaxy-external-layout="rail"' in text
 
             left = (out / module.LIVE_ASSETS["character_left"]).read_text(encoding="utf-8")
             right = (out / module.LIVE_ASSETS["character_right"]).read_text(encoding="utf-8")
@@ -95,7 +110,7 @@ def validate_generated() -> None:
             assert '<image ' not in projects and '<svg x="80"' in projects
             assert '<image ' not in activity and '<svg x="70"' in activity
             assert '<text' not in attribution.lower()
-    print("ENVELOPE_V7_VALIDATION_PASS seasons=4 assets=12 extent=1662")
+    print("ENVELOPE_V7_VALIDATION_PASS seasons=4 assets=12 extent=1662 source_sync=PASS")
 
 
 def target_layout_proof_once() -> None:
