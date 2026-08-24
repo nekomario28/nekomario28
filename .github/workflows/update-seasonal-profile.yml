@@ -1,6 +1,14 @@
 name: Update seasonal profile
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/update-seasonal-profile.yml"
+      - "design-lab/theme-manifest.json"
+      - "design-lab/live-theme.json"
+      - "design-lab/scripts/promote-season.py"
+      - "design-lab/seasons/*.svg"
   schedule:
     # 00:17 UTC = 09:17 JST. Monthly checks are cheap; only season boundaries mutate files.
     - cron: "17 0 1 * *"
@@ -67,13 +75,13 @@ jobs:
             if [[ "${DRY_RUN:-true}" != "true" ]]; then
               args+=(--apply)
             fi
-          else
+          elif [[ "$EVENT_NAME" == "schedule" ]]; then
             args+=(--apply)
           fi
 
           python design-lab/scripts/promote-season.py "${args[@]}" | tee "$RUNNER_TEMP/season-result.json"
 
-      - name: Validate promoted live asset
+      - name: Validate live asset
         shell: bash
         run: |
           set -euo pipefail
@@ -89,7 +97,7 @@ jobs:
           PY
 
       - name: Commit seasonal change
-        if: github.event_name == 'schedule' || inputs.dry_run == false
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.dry_run == false)
         shell: bash
         run: |
           set -euo pipefail
