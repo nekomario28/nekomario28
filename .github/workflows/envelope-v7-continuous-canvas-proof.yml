@@ -19,7 +19,7 @@ jobs:
       - name: Install proof helpers
         run: python -m pip install --quiet websocket-client pillow
 
-      - name: Capture branch README and validate continuous rows
+      - name: Capture branch README and validate single-stage panels
         shell: bash
         env:
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
@@ -28,7 +28,8 @@ jobs:
           chrome="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)"
           test -n "$chrome"
           out="$RUNNER_TEMP/envelope-v7-proof"
-          profile="$out/chrome-profile"
+          profile="$RUNNER_TEMP/envelope-v7-chrome-profile"
+          rm -rf "$out" "$profile"
           mkdir -p "$out" "$profile"
           export OUT="$out"
 
@@ -60,6 +61,7 @@ jobs:
           import base64, json, os, time
           from pathlib import Path
           import websocket
+          from PIL import Image, ImageStat
 
           out = Path(os.environ['OUT'])
           head = os.environ['HEAD_SHA']
@@ -93,66 +95,105 @@ jobs:
                   time.sleep(.2)
               raise RuntimeError('page/images did not become ready')
 
-          def capture(name):
-              data = call('Page.captureScreenshot', {'format':'png','captureBeyondViewport':False})['data']
+          def capture(name, clip=None):
+              params = {'format':'png','captureBeyondViewport': bool(clip)}
+              if clip:
+                  params['clip'] = {**clip, 'scale': 1}
+              data = call('Page.captureScreenshot', params)['data']
               (out / name).write_bytes(base64.b64decode(data))
 
+          tokens = [
+              'profile-hero.svg',
+              'character-panel.svg',
+              'attribution-band.svg',
+              'profile-frame-bridge-character-projects.svg',
+              'profile-section-projects.svg',
+              'projects-panel.svg',
+              'profile-frame-bridge-projects-activity.svg',
+              'profile-section-activity.svg',
+              'activity-panel.svg',
+              'profile-frame-bridge-activity-footer.svg',
+              'profile-footer.svg',
+          ]
+
           def metrics(label):
-              script = r'''(() => {
+              script = f'''(() => {{
+                const tokens = {json.dumps(tokens)};
                 const imgs = Array.from(document.images);
-                const pick = token => imgs.find(i => i.src.includes(token));
-                const rect = i => { if(!i) return null; const r=i.getBoundingClientRect(); return {src:i.src,x:r.x,y:r.y,w:r.width,h:r.height,b:r.bottom,nw:i.naturalWidth,nh:i.naturalHeight}; };
-                const rows = {
-                  character:[pick('character-side-left.svg'), pick('/05.jpg'), pick('character-side-right.svg')],
-                  projects:[pick('project-map-side-left.svg'), pick('project-map/galaxy.svg'), pick('project-map-side-right.svg')],
-                  activity:[pick('activity-side-left.svg'), pick('github-contributions-dark.svg'), pick('activity-side-right.svg')]
-                };
-                const out = {};
-                for (const [name, arr] of Object.entries(rows)) {
-                  const rs = arr.map(rect);
-                  out[name] = rs;
-                  if (rs.every(Boolean)) {
-                    out[name+'_same_line'] = Math.max(...rs.map(r=>r.y)) - Math.min(...rs.map(r=>r.y)) <= 2;
-                    out[name+'_gap1'] = rs[1].x - (rs[0].x + rs[0].w);
-                    out[name+'_gap2'] = rs[2].x - (rs[1].x + rs[1].w);
-                    out[name+'_span'] = (rs[2].x + rs[2].w) - rs[0].x;
-                  }
-                }
-                out.hero = rect(pick('profile-hero.svg'));
-                out.attribution = rect(pick('attribution-band.svg'));
-                out.viewport = {w:innerWidth,h:innerHeight,dpr:devicePixelRatio};
+                const rect = i => {{ if(!i) return null; const r=i.getBoundingClientRect(); return {{src:i.src,x:r.x,y:r.y,w:r.width,h:r.height,b:r.bottom,right:r.right,nw:i.naturalWidth,nh:i.naturalHeight}}; }};
+                const out = {{}};
+                for (const token of tokens) out[token] = rect(imgs.find(i => i.src.includes(token)));
+                const container = document.querySelector('article.markdown-body') || document.querySelector('.markdown-body');
+                out.container = container ? (() => {{ const r=container.getBoundingClientRect(); return {{x:r.x,y:r.y,w:r.width,h:r.height,right:r.right}}; }})() : null;
+                out.viewport = {{w:innerWidth,h:innerHeight,dpr:devicePixelRatio}};
                 return out;
-              })()'''
+              }})()'''
               m = evaluate(script)
               (out / f'{label}-metrics.json').write_text(json.dumps(m, indent=2))
               return m
 
           def assert_layout(m, label):
-              for row in ('character','projects','activity'):
-                  rs = m[row]
-                  if not rs or not all(rs):
-                      raise RuntimeError(f'{label}: missing images for {row}')
-                  if not m[row+'_same_line']:
-                      raise RuntimeError(f'{label}: {row} row wrapped vertically: {rs}')
-                  if abs(m[row+'_gap1']) > 3 or abs(m[row+'_gap2']) > 3:
-                      raise RuntimeError(f'{label}: {row} row has visible inline gaps: {m[row+"_gap1"]}, {m[row+"_gap2"]}')
-                  if any(r['nw'] <= 0 or r['nh'] <= 0 for r in rs):
-                      raise RuntimeError(f'{label}: failed image load in {row}: {rs}')
-              if not m['hero'] or not m['attribution']:
-                  raise RuntimeError(f'{label}: missing full-width v7 blocks')
+              missing = [t for t in tokens if not m.get(t)]
+              if missing:
+                  raise RuntimeError(f'{label}: missing stage images: {missing}')
+              failed = [t for t in tokens if m[t]['nw'] <= 0 or m[t]['nh'] <= 0]
+              if failed:
+                  raise RuntimeError(f'{label}: failed stage image loads: {failed}')
+              hero_w = m['profile-hero.svg']['w']
+              full = [t for t in tokens if t not in {
+                  'profile-frame-bridge-character-projects.svg',
+                  'profile-frame-bridge-projects-activity.svg',
+                  'profile-frame-bridge-activity-footer.svg'}]
+              for t in full:
+                  if abs(m[t]['w'] - hero_w) > 3:
+                      raise RuntimeError(f'{label}: {t} width {m[t]["w"]} differs from hero {hero_w}')
+              if m.get('container'):
+                  left = m['container']['x'] - 2
+                  right = m['container']['right'] + 2
+                  for t in tokens:
+                      if m[t]['x'] < left or m[t]['right'] > right:
+                          raise RuntimeError(f'{label}: {t} overflows README container: {m[t]} vs {m["container"]}')
+              ordered = [m[t] for t in tokens]
+              gaps = [ordered[i+1]['y'] - ordered[i]['b'] for i in range(len(ordered)-1)]
+              m['inter_stage_gaps'] = gaps
+              if max(gaps) > 10:
+                  raise RuntimeError(f'{label}: excessive vertical stage gap: {gaps}')
+
+          def panel_stats(name, center_fraction):
+              im = Image.open(out / name).convert('RGB')
+              w,h = im.size
+              x0,x1 = int(w*center_fraction[0]), int(w*center_fraction[1])
+              crop = im.crop((x0, 0, x1, h))
+              stat = ImageStat.Stat(crop)
+              return {
+                  'size':[w,h],
+                  'center_box':[x0,0,x1,h],
+                  'center_mean':[round(v,2) for v in stat.mean],
+                  'center_stddev':[round(v,2) for v in stat.stddev],
+                  'center_extrema':[list(v) for v in stat.extrema],
+              }
 
           call('Page.enable'); call('Runtime.enable')
           call('Emulation.setEmulatedMedia', {'features':[{'name':'prefers-color-scheme','value':'dark'}]})
 
           call('Emulation.setDeviceMetricsOverride', {'width':1440,'height':3400,'deviceScaleFactor':1,'mobile':False})
-          call('Page.navigate', {'url':target_url}); wait_ready(); time.sleep(.8)
-          desktop = metrics('desktop'); capture('desktop-dark.png'); assert_layout(desktop, 'desktop')
+          call('Page.navigate', {'url':target_url}); wait_ready(); time.sleep(1.0)
+          desktop = metrics('desktop'); assert_layout(desktop, 'desktop'); capture('desktop-dark.png')
+          for token, name in [('character-panel.svg','character-panel-render.png'),('projects-panel.svg','projects-panel-render.png'),('activity-panel.svg','activity-panel-render.png')]:
+              r = desktop[token]
+              capture(name, {'x':r['x'],'y':r['y'],'width':r['w'],'height':r['h']})
+          stats = {
+              'character': panel_stats('character-panel-render.png',(100/900,800/900)),
+              'projects': panel_stats('projects-panel-render.png',(80/900,820/900)),
+              'activity': panel_stats('activity-panel-render.png',(70/900,830/900)),
+          }
+          (out / 'panel-stats.json').write_text(json.dumps(stats, indent=2))
 
           call('Emulation.setDeviceMetricsOverride', {'width':430,'height':3400,'deviceScaleFactor':1,'mobile':True})
-          time.sleep(.8)
-          mobile = metrics('mobile'); capture('mobile-dark.png'); assert_layout(mobile, 'mobile')
+          time.sleep(1.0)
+          mobile = metrics('mobile'); assert_layout(mobile, 'mobile'); capture('mobile-dark.png')
 
-          summary = {'target':target_url,'desktop':desktop,'mobile':mobile,'result':'PASS'}
+          summary = {'target':target_url,'desktop':desktop,'mobile':mobile,'panel_stats':stats,'result':'PASS'}
           (out / 'summary.json').write_text(json.dumps(summary, indent=2))
           print(json.dumps(summary, indent=2))
           PY
@@ -162,6 +203,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: envelope-v7-continuous-canvas-proof
-          path: ${{ runner.temp }}/envelope-v7-proof/*
+          path: |
+            ${{ runner.temp }}/envelope-v7-proof/*.png
+            ${{ runner.temp }}/envelope-v7-proof/*.json
+            ${{ runner.temp }}/envelope-v7-proof/chrome.log
           if-no-files-found: error
           retention-days: 1
