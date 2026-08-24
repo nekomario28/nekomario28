@@ -5,6 +5,10 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/update-knowledge-graph.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/update-knowledge-graph.yml"
   schedule:
     # Twice-daily refresh; push/manual triggers handle immediate updates.
     - cron: "41 1,13 * * *"
@@ -39,8 +43,11 @@ jobs:
       actions: read
       contents: write
     steps:
-      - name: Checkout profile repository
+      - name: Checkout exact profile revision
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
 
       - name: Download generated files
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
@@ -139,7 +146,17 @@ jobs:
           python design-lab/scripts/promote-season.py --apply --json
           python design-lab/envelope-v7/validate.py
 
+      - name: Verify atomic publish diff on pull requests
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          test -n "$(git status --short -- project-map/galaxy.svg project-map/graph.json assets/profile-projects-canvas.svg design-lab/live-theme.json)"
+          echo "PROJECT_MAP_ENVELOPE_ATOMIC_REFRESH_PR_PASS"
+
       - name: Commit project map and mounted profile derivatives atomically
+        if: github.event_name != 'pull_request'
         shell: bash
         run: |
           set -euo pipefail
@@ -166,4 +183,4 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "update project map and profile canvas"
-          git push
+          git push origin HEAD:main
