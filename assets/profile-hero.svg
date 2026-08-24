@@ -42,6 +42,7 @@
 <defs><clipPath id="v7-window"><rect x="0" y="0" width="900" height="260"/></clipPath></defs>
 <style>@media (prefers-reduced-motion: reduce) { .v7-motion { display:none } }</style>
 <g id="v7-global-window" data-window="hero" data-global-start="0" data-global-end="260" data-global-extent="1662" data-global-x-offset="0" pointer-events="none">
+
   <g class="v7-motion" clip-path="url(#v7-window)">
     <g id="v7-particle-left-primary" opacity="0.82">
       <line x1="18" y1="-13" x2="18" y2="0" stroke="#86aa94" stroke-opacity=".34" stroke-width="1.2" stroke-linecap="round"/>
