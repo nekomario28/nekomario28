@@ -43,17 +43,6 @@ def background_defs(bg0: str, bg1: str) -> str:
     return f'''<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="{esc(bg0)}"/><stop offset=".52" stop-color="{esc(bg1)}"/><stop offset="1" stop-color="{esc(bg0)}"/></linearGradient></defs>'''
 
 
-def divider(cfg: dict) -> str:
-    c = cfg["chrome"]
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="900" height="38" viewBox="0 0 900 38" role="img" aria-label="季節ダークプロフィール区切り">
-  {background_defs(c['bg0'], c['bg1'])}
-  <rect width="900" height="38" rx="11" fill="url(#bg)"/>
-  <path d="M70 19 H410 M490 19 H830" stroke="#eef2f6" stroke-opacity=".10"/>
-  <circle cx="450" cy="19" r="3" fill="{esc(cfg['accent'])}"/><circle cx="450" cy="19" r="8" fill="none" stroke="{esc(c['accent2'])}" stroke-opacity=".28"/>
-  {motif_svg(c['motif'], cfg['accent'], c['accent2'])}
-</svg>'''
-
-
 def section_band(cfg: dict, label: str, aria: str) -> str:
     c = cfg["chrome"]
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="900" height="68" viewBox="0 0 900 68" role="img" aria-label="{esc(aria)}">
@@ -84,7 +73,6 @@ def render(season: str, out_root: Path = ROOT) -> list[Path]:
     cfg = data["seasons"][season]
     assets = data["live_assets"]
     outputs = {
-        "divider": divider(cfg),
         "projects": section_band(cfg, "プロジェクト", "プロジェクト セクション"),
         "activity": section_band(cfg, "活動", "活動 セクション"),
         "footer": footer(cfg),
