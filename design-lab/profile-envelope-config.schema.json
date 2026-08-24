@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/nekomario28/nekomario28/blob/main/design-lab/profile-envelope-config.schema.json",
+  "$id": "urn:profile-envelope:config:v1",
   "title": "Portable GitHub profile envelope configuration",
-  "description": "Design-contract schema for the future portable profile-envelope renderer. It is not yet wired to the live Envelope v8 renderer.",
+  "description": "Portable configuration contract for a GitHub profile envelope renderer. Publication and donor-specific rendering remain separate concerns.",
   "type": "object",
   "additionalProperties": false,
   "required": ["contract_version", "target_adapter", "profile"],
