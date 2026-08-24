@@ -1,0 +1,147 @@
+name: TEMP OpenArm dataset leader holdout
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/openarm-dataset-leader-holdout-once.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  holdout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Clone exact Rust replacement and Python upstream
+        shell: bash
+        env:
+          RUST_SHA: 2c34fe87b4dbc759b91ff85d01ce675125ecec0b
+          PY_SHA: 7c412acd8a7f30f88b1a95d556f71e12e2e1eea5
+        run: |
+          set -euo pipefail
+          git clone --filter=blob:none https://github.com/k1000dai/openarm_dataset-rust.git rust
+          git -C rust checkout --detach "$RUST_SHA"
+          test "$(git -C rust rev-parse HEAD)" = "$RUST_SHA"
+          git clone --filter=blob:none https://github.com/enactic/openarm_dataset.git python
+          git -C python checkout --detach "$PY_SHA"
+          test "$(git -C python rev-parse HEAD)" = "$PY_SHA"
+          echo "OPENARM_HOLDOUT_EXACT_HEADS PASS rust=$RUST_SHA python=$PY_SHA"
+
+      - name: Assert current upstream leader contract exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q '^class Leader(Mapping):' python/src/openarm_dataset/metadata.py
+          grep -q '^class LeaderDevice:' python/src/openarm_dataset/metadata.py
+          grep -q 'self.leader = Leader' python/src/openarm_dataset/metadata.py
+          grep -q 'ref_equipment = ref.meta.data\["equipment"\]' python/src/openarm_dataset/merge.py
+          grep -q 'ds.meta.data\["equipment"\] != ref_equipment' python/src/openarm_dataset/merge.py
+          echo 'OPENARM_HOLDOUT_UPSTREAM_CONTRACT PASS typed_leader=true full_equipment_merge=true'
+
+      - name: Inject frozen transfer test into disposable Rust checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > rust/tests/upstream_leader_holdout.rs <<'RS'
+          mod support;
+
+          use openarm_dataset::{Dataset, MergeOptions, merge_datasets};
+          use serde_yaml::Value;
+          use std::fs;
+          use std::path::Path;
+
+          fn inject_leader(root: &Path, firmware: &str) {
+              let path = root.join("metadata.yaml");
+              let text = fs::read_to_string(&path).unwrap();
+              let marker = "  perceptions:\n";
+              assert!(text.contains(marker));
+              let leader = format!(
+                  "  leader:\n    ker:\n      id: OpenArmKER\n      firmware_version: \"{firmware}\"\n      hardware_version: \"1.0\"\n"
+              );
+              fs::write(&path, text.replacen(marker, &(leader + marker), 1)).unwrap();
+          }
+
+          fn leader_firmware(dataset: &Dataset) -> String {
+              let equipment = dataset.metadata().equipment_raw().unwrap();
+              equipment
+                  .get(Value::from("leader"))
+                  .and_then(|v| v.get(Value::from("ker")))
+                  .and_then(|v| v.get(Value::from("firmware_version")))
+                  .and_then(Value::as_str)
+                  .unwrap()
+                  .to_string()
+          }
+
+          #[test]
+          fn current_upstream_leader_raw_read_and_writer_roundtrip_are_preserved() {
+              let tmp = tempfile::tempdir().unwrap();
+              let input = tmp.path().join("input");
+              let output = tmp.path().join("written");
+              support::build_0_4_0_qpos(&input);
+              inject_leader(&input, "1.2.3");
+
+              let dataset = Dataset::open(&input).unwrap();
+              assert_eq!(leader_firmware(&dataset), "1.2.3");
+              dataset.metadata().write(&output).unwrap();
+
+              let written = fs::read_to_string(output.join("metadata.yaml")).unwrap();
+              assert!(written.contains("leader:"));
+              assert!(written.contains("id: OpenArmKER"));
+              assert!(written.contains("firmware_version: 1.2.3") || written.contains("firmware_version: '1.2.3'"));
+              assert!(written.contains("hardware_version: '1.0'") || written.contains("hardware_version: 1.0"));
+          }
+
+          #[test]
+          fn equal_leader_metadata_merges_and_is_preserved() {
+              let tmp = tempfile::tempdir().unwrap();
+              let a = tmp.path().join("a");
+              let b = tmp.path().join("b");
+              let output = tmp.path().join("out");
+              support::build_0_4_0_qpos(&a);
+              support::build_0_4_0_qpos(&b);
+              inject_leader(&a, "1.2.3");
+              inject_leader(&b, "1.2.3");
+
+              merge_datasets(&[a, b], &output, &MergeOptions::default()).unwrap();
+              let merged = Dataset::open(&output).unwrap();
+              assert_eq!(leader_firmware(&merged), "1.2.3");
+          }
+
+          #[test]
+          fn leader_firmware_drift_is_rejected_by_full_equipment_comparison() {
+              let tmp = tempfile::tempdir().unwrap();
+              let a = tmp.path().join("a");
+              let b = tmp.path().join("b");
+              let output = tmp.path().join("out");
+              support::build_0_4_0_qpos(&a);
+              support::build_0_4_0_qpos(&b);
+              inject_leader(&a, "1.2.3");
+              inject_leader(&b, "1.3.0");
+
+              let err = merge_datasets(&[a, b], &output, &MergeOptions::default()).unwrap_err();
+              assert!(err.to_string().contains("equipment configuration differs"), "{err}");
+          }
+          RS
+          echo 'OPENARM_HOLDOUT_TEST_INJECTED PASS'
+
+      - name: Run frozen Rust transfer holdout
+        shell: bash
+        working-directory: rust
+        run: |
+          set -euo pipefail
+          cargo test --locked --test upstream_leader_holdout -- --nocapture
+          echo 'OPENARM_HOLDOUT_RUST_EXECUTION PASS tests=3'
+
+      - name: Confirm source repositories remained remote-read-only
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -z "$(git -C python status --porcelain=v1)"
+          git -C rust diff --cached --quiet
+          test -n "$(git -C rust status --porcelain=v1 --untracked-files=all)"
+          echo 'OPENARM_HOLDOUT_REMOTE_MUTATION=false'
+          echo 'OPENARM_HOLDOUT_INFERENCE_STARTED=false'
