@@ -1,37 +1,28 @@
 {
-  "version": 4,
+  "version": 5,
   "reviewed": "2026-08-24",
   "target": "github-profile-readme-dark",
   "goal": "stronger README-area background and enclosing-frame illusion without claiming host-page overlay authority",
   "candidates": {
     "segmented-frame": {
-      "status": "PREFERRED_REFINEMENT",
-      "live": false,
-      "renderer": "design-lab/envelope-v4/render_segmented_frame.py",
-      "assets": [
-        "design-lab/envelope-v4/assets/rail-bridge-spring.svg",
-        "design-lab/envelope-v4/assets/rail-bridge-summer.svg",
-        "design-lab/envelope-v4/assets/rail-bridge-autumn.svg",
-        "design-lab/envelope-v4/assets/rail-bridge-winter.svg"
-      ],
+      "status": "LIVE_SELECTED",
+      "live": true,
+      "live_merge_commit": "fff229261dfa5b93ce3f9c42229b5e390d084132",
       "source_validation": "PASS",
       "all_seasons_geometry": "PASS",
-      "static_render": "PASS",
-      "github_render_run": 32696523661,
+      "four_season_pr_run": 32700948779,
+      "final_clean_head_run": 32701140464,
+      "github_render_run": 32700999845,
       "target_github_dark_render": "PASS",
       "mobile_render": "PASS",
       "responsive_overflow": "NONE_OBSERVED",
-      "enclosure_strength": "PARTIAL",
-      "notes": "GitHub desktop/mobile rendering preserved readability and responsive sizing. The 32px bridge reads more as a transition band/background continuation than as a literal full-height side frame, so keep refining instead of promoting unchanged."
+      "enclosure_strength": "IMPROVED",
+      "frame_mode": "segmented-rails",
+      "notes": "Shared x=18/x=882 rails recur across bridge, Projects, Activity and footer. GitHub desktop/mobile rendering preserves readability and avoids host-table compression while producing a clearer repeated outer-frame grammar than envelope v3 and the first segmented prototype."
     },
     "single-table-frame": {
       "status": "REJECTED",
       "live": false,
-      "assets": [
-        "design-lab/envelope-v4/assets/side-rail-summer.svg"
-      ],
-      "source_validation": "PASS",
-      "static_asset_render": "PASS",
       "github_render_run": 32696767046,
       "target_github_dark_render": "PASS_STRUCTURAL",
       "mobile_render": "FAIL_VISUAL",
@@ -54,9 +45,9 @@
     "Do not replace factual project/activity content with a flattened decorative mockup.",
     "Do not promote the rejected table experiment.",
     "Frame decoration must remain removable without breaking content authority or links.",
-    "If segmented-frame is promoted, its active bridge must switch atomically with the seasonal envelope.",
+    "The active bridge and shared rail chrome must switch atomically with the seasonal envelope.",
     "A target-render PASS for layout does not imply that optional SMIL animation visibly plays.",
     "Essential repository-owned non-Latin SVG labels must not regress to client-font-dependent <text>."
   ],
-  "next_safe_action": "Keep live main on envelope v3 while rebuilding the segmented-frame candidate from the vector-outline main. Strengthen enclosure without host-table layout, then rerun actual GitHub dark/mobile proof before promotion."
+  "next_safe_action": "Keep envelope v4 live, monitor the first scheduled Summer-to-Autumn switch on 2026-09-01, and continue treating public SMIL playback as a separate runtime gate."
 }
