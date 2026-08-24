@@ -1,6 +1,6 @@
 {
-  "version": 4,
-  "envelope_version": 4,
+  "version": 5,
+  "envelope_version": 5,
   "active_season": "summer",
   "active_theme": "summer-dark",
   "source": "design-lab/seasons/summer-dark.svg",
@@ -18,11 +18,15 @@
     "live_verification": "NOT_RUN"
   },
   "frame": {
-    "mode": "segmented-rails",
+    "mode": "continuous-segmented-flow",
     "background_illusion": true,
     "shared_edge_rails": true,
+    "top_cap": true,
+    "bottom_cap": true,
+    "phase_tolerant_handoff": true,
+    "cross_document_hard_sync": false,
     "true_overlay": false
   },
   "promoted_at": "2026-08-24",
-  "promotion_mode": "manual-envelope-v4-refresh-preview"
+  "promotion_mode": "manual-envelope-v5-preview"
 }
