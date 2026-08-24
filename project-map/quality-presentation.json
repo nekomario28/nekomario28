@@ -4,11 +4,11 @@
   "status": "experimental-non-default",
   "source": {
     "graphOwner": "nekomario28",
-    "graphGeneratedAt": "2026-08-24T19:04:37.321Z",
+    "graphGeneratedAt": "2026-08-24T20:17:23.597Z",
     "assessment": {
       "contractId": "ipm-repository-assessment-artifact-v1",
       "owner": "nekomario28",
-      "generatedAt": "2026-08-24T19:04:37.321Z",
+      "generatedAt": "2026-08-24T20:17:23.597Z",
       "generatorRevision": "d6b4b36b531b005795bb3b24ee3383b741bd8a56",
       "assessmentPolicyId": "ipm-repository-assessment-v1"
     }
