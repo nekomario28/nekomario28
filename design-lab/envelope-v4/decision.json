@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "reviewed": "2026-08-24",
   "target": "github-profile-readme-dark",
   "goal": "stronger README-area background and enclosing-frame illusion without claiming host-page overlay authority",
@@ -7,14 +7,19 @@
     "segmented-frame": {
       "status": "PREFERRED_SHADOW",
       "live": false,
+      "renderer": "design-lab/envelope-v4/render_segmented_frame.py",
       "assets": [
-        "design-lab/envelope-v4/assets/rail-bridge-summer.svg"
+        "design-lab/envelope-v4/assets/rail-bridge-spring.svg",
+        "design-lab/envelope-v4/assets/rail-bridge-summer.svg",
+        "design-lab/envelope-v4/assets/rail-bridge-autumn.svg",
+        "design-lab/envelope-v4/assets/rail-bridge-winter.svg"
       ],
       "source_validation": "PASS",
+      "all_seasons_geometry": "PASS",
       "static_render": "PASS",
       "target_github_render": "NOT_RUN",
       "mobile_render": "NOT_RUN",
-      "notes": "Preserves current content/links and uses removable bridge chrome; continuity is perceptual rather than a literal background layer."
+      "notes": "Preserves current content/links and uses removable bridge chrome; continuity is perceptual rather than a literal background layer. Seasonal bridge output is deterministic from the existing theme manifest."
     },
     "single-table-frame": {
       "status": "EXPERIMENTAL",
@@ -33,7 +38,8 @@
     "No claim of background/overlay outside the README rendering area.",
     "Do not replace factual project/activity content with a flattened decorative mockup.",
     "Do not promote the table experiment before GitHub dark/mobile rendering is observed.",
-    "Frame decoration must remain removable without breaking content authority or links."
+    "Frame decoration must remain removable without breaking content authority or links.",
+    "If segmented-frame is promoted, its active bridge must switch atomically with the seasonal envelope."
   ],
-  "next_safe_action": "Open a draft comparison PR; keep live README on envelope v3 until target rendering evidence favors one v4 candidate."
+  "next_safe_action": "Keep PR #29 as a render-comparison surface; if segmented-frame wins dark/mobile review, integrate the bridge as one stable seasonal live asset and extend the existing promotion workflow atomically."
 }
