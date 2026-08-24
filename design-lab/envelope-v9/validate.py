@@ -58,11 +58,12 @@ def assert_xml(root: Path) -> None:
         ET.parse(root / rel)
 
 
-def assert_markers(root: Path, *, background: str, text: str, motion: str, fingerprint: str) -> None:
+def assert_markers(root: Path, *, background: str, text: str, motion: str, contract_fingerprint: str, render_target: str) -> None:
     for rel in R.asset_paths():
         svg = (root / rel).read_text(encoding="utf-8")
         assert 'data-envelope-presentation="v9-portable-surface"' in svg, rel
-        assert f'data-profile-contract-sha256="{fingerprint}"' in svg, rel
+        assert f'data-profile-contract-sha256="{contract_fingerprint}"' in svg, rel
+        assert f'data-profile-render-target-sha256="{render_target}"' in svg, rel
         assert f'data-profile-background="{background}"' in svg, rel
         assert f'data-profile-text="{text}"' in svg, rel
         assert f'data-profile-motion="{motion}"' in svg, rel
@@ -78,7 +79,8 @@ def render_case(work: Path, name: str, config: Path) -> tuple[Path, dict, dict]:
         background=contract["profile"]["background"],
         text=contract["profile"]["text"],
         motion=contract["profile"]["motion"],
-        fingerprint=resolved["normalized_contract_sha256"],
+        contract_fingerprint=resolved["normalized_contract_sha256"],
+        render_target=resolved["render_target_sha256"],
     )
     return out, contract, resolved
 
@@ -89,24 +91,45 @@ def main() -> int:
 
         opaque, opaque_contract, opaque_resolved = render_case(work, "opaque-safe", OPAQUE_SAFE)
         transparent, transparent_contract, transparent_resolved = render_case(work, "transparent-safe", TRANSPARENT_SAFE)
+        transparent_repeat, _, transparent_repeat_resolved = render_case(work, "transparent-safe-repeat", TRANSPARENT_SAFE)
         native_cfg = write_config(work, "native", background="opaque", text="native", motion="on")
-        native, _, _ = render_case(work, "opaque-native", native_cfg)
+        native, _, native_resolved = render_case(work, "opaque-native", native_cfg)
         minimal_cfg = write_config(work, "minimal", background="transparent", text="minimal", motion="off", density="minimal")
-        minimal, _, _ = render_case(work, "transparent-minimal", minimal_cfg)
+        minimal, _, minimal_resolved = render_case(work, "transparent-minimal", minimal_cfg)
         preserve_cfg = write_config(work, "preserve", background="transparent", text="native", motion="off", mounted="preserve")
-        preserve, _, _ = render_case(work, "transparent-preserve", preserve_cfg)
+        preserve, _, preserve_resolved = render_case(work, "transparent-preserve", preserve_cfg)
+
+        # The render-target receipt is deterministic for identical target bytes and
+        # differs when a material presentation contract changes.
+        assert transparent_resolved["render_target_sha256"] == transparent_repeat_resolved["render_target_sha256"]
+        target_ids = {
+            opaque_resolved["render_target_sha256"],
+            transparent_resolved["render_target_sha256"],
+            native_resolved["render_target_sha256"],
+            minimal_resolved["render_target_sha256"],
+            preserve_resolved["render_target_sha256"],
+        }
+        assert len(target_ids) == 5
 
         # safe: no visible <text> survives in any repository-owned output.
         assert all(texts(opaque / rel) == 0 for rel in R.asset_paths())
         assert all(texts(transparent / rel) == 0 for rel in R.asset_paths())
         assert sum((opaque / rel).read_text().count('data-vector-text="v1"') for rel in R.asset_paths()) > 0
 
+        # Transparent safe text is host-appearance adaptive without reintroducing fonts.
+        transparent_hero = (transparent / "assets/profile-hero.svg").read_text(encoding="utf-8")
+        assert 'data-v9-adaptive-vector-text-style="v1"' in transparent_hero
+        assert 'class="v9-adaptive-vector-text"' in transparent_hero
+        assert 'prefers-color-scheme: light' in transparent_hero
+        assert 'prefers-color-scheme: dark' in transparent_hero
+        assert 'stroke="currentColor"' in transparent_hero
+
         # native: host-font dependency remains explicit and observable.
         assert sum(texts(native / rel) for rel in R.asset_paths()) > 0
         assert opaque_resolved["verification"]["text_pass_mode"] == "font-independent"
-        native_contract, native_resolved = R.CONTRACT.load_and_resolve(native_cfg)
+        native_contract, native_contract_resolved = R.CONTRACT.load_and_resolve(native_cfg)
         assert native_contract["profile"]["text"] == "native"
-        assert native_resolved["verification"]["text_pass_mode"] == "host-dependent-only"
+        assert native_contract_resolved["verification"]["text_pass_mode"] == "host-dependent-only"
 
         # minimal: fixed text is vectorized, dynamic visible labels are suppressed,
         # accessibility title/desc metadata remains textual.
@@ -134,6 +157,7 @@ def main() -> int:
         assert transparent_contract["profile"]["background"] == "transparent"
 
     print("ENVELOPE_V9_PORTABLE_STRUCTURE_PASS cases=5 text=safe/native/minimal background=opaque/transparent mounted=inherit/preserve")
+    print("RENDER_TARGET_FINGERPRINT=PASS deterministic=true target_sensitive=true")
     print("TARGET_LAYOUT=NOT_RUN TEXT_RENDER=NOT_RUN PLAYBACK=NOT_RUN")
     return 0
 
