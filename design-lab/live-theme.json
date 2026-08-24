@@ -46,5 +46,5 @@
   },
   "global_motion_space": "design-lab/envelope-v7/global-motion-space.json",
   "promoted_at": "2026-08-25",
-  "promotion_mode": "manual"
+  "promotion_mode": "automatic"
 }
