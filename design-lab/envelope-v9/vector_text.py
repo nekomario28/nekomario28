@@ -3,7 +3,7 @@
 
 This intentionally does not embed or redistribute a font. It renders a compact
 alphanumeric stick alphabet from repository-owned segment geometry. The visible
-shape is deterministic across clients while the exact source string remains in
+shape is deterministic across clients while the decoded visible string remains in
 textual accessibility metadata.
 """
 from __future__ import annotations
@@ -187,7 +187,7 @@ def _vector_group(source_text: str, attrs_source: str, *, adaptive: bool) -> str
                 f"L{origin + x2 * glyph_width:.2f},{top + y2 * glyph_height:.2f}"
             )
 
-    escaped = html.escape(source_text, quote=True)
+    escaped = html.escape(visible, quote=True)
     opacity = f' opacity="{html.escape(style.opacity, quote=True)}"' if style.opacity else ""
     adaptive_attrs = (
         f' class="v9-adaptive-vector-text" color="#f0f6fc" '
@@ -198,11 +198,11 @@ def _vector_group(source_text: str, attrs_source: str, *, adaptive: bool) -> str
     if not commands:
         return (
             f'<g data-vector-text="v1" aria-label="{escaped}"{adaptive_attrs}>'
-            f'<title>{html.escape(source_text)}</title></g>'
+            f'<title>{html.escape(visible)}</title></g>'
         )
     return (
         f'<g data-vector-text="v1" aria-label="{escaped}"{opacity}{adaptive_attrs}>'
-        f'<title>{html.escape(source_text)}</title>'
+        f'<title>{html.escape(visible)}</title>'
         f'<path d="{" ".join(commands)}" fill="none" stroke="{html.escape(stroke, quote=True)}" '
         f'stroke-width="{stroke_width:.2f}" stroke-linecap="round" stroke-linejoin="round"/>'
         f'</g>'

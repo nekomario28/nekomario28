@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "candidate_public_repository": "profile-envelope",
+  "public_repo_creation": "defer-until-independent-consumer",
+  "readiness_claim": "standalone-copy-set-only",
+  "layers": {
+    "portable_core": [
+      {
+        "source": "design-lab/scripts/profile_envelope_contract.py",
+        "destination": "src/profile_envelope/contract.py"
+      },
+      {
+        "source": "design-lab/envelope-v9/vector_text.py",
+        "destination": "src/profile_envelope/vector_text.py"
+      },
+      {
+        "source": "design-lab/profile-envelope-config.schema.json",
+        "destination": "schema/profile-envelope-config.schema.json"
+      },
+      {
+        "source": "design-lab/profile-envelope-config.example.json",
+        "destination": "examples/opaque-safe.json"
+      },
+      {
+        "source": "design-lab/profile-envelope-config.transparent.example.json",
+        "destination": "examples/transparent-safe.json"
+      }
+    ],
+    "github_adapter_candidate": [
+      {
+        "source": "design-lab/envelope-v9/render_portable_surface.py",
+        "status": "donor-bound",
+        "reason": "imports the frozen v8 donor and repository-local source assets; do not pretend this is standalone core"
+      }
+    ],
+    "evidence_harness": [
+      "design-lab/envelope-v9/validate.py",
+      "design-lab/envelope-v9/browser_verify.py",
+      "design-lab/envelope-v9/motion_verify.py",
+      ".github/workflows/validate-envelope-v9-portable.yml"
+    ],
+    "donor_only_prefixes": [
+      "design-lab/envelope-v8/",
+      "design-lab/envelope-v7/",
+      "design-lab/seasons/",
+      "design-lab/theme-manifest.json",
+      "project-map/galaxy.svg",
+      "assets/github-contributions-dark.svg"
+    ]
+  },
+  "portable_core_forbidden_tokens": [
+    "nekomario28",
+    "project-map/",
+    "github-contributions-dark.svg",
+    "GITHUB_TOKEN",
+    "api.github.com/repos/nekomario28",
+    "/home/"
+  ],
+  "known_non_blocking_constraints": [
+    "contract v1 intentionally names github-profile-readme as its only target adapter; do not invent a universal host IR before a second adapter exists",
+    "vector safe text covers the proven donor glyph set and fails closed for unsupported visible glyphs",
+    "the complete v9 renderer is still donor-bound even though the contract and vector-text kernel are standalone-copyable"
+  ],
+  "promotion_gates": {
+    "create_public_repository": [
+      "an independent consumer or concrete reuse request exists",
+      "donor-bound renderer dependencies are replaced by declared adapter inputs",
+      "the extracted package passes its own structure and browser evidence without reading this profile repository"
+    ],
+    "create_new_skill": [
+      "a discriminating evaluation shows existing readme-visual-design and animation-composition guidance is insufficient",
+      "the same workflow recurs outside this profile donor"
+    ]
+  }
+}
