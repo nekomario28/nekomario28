@@ -116,17 +116,11 @@ def _style(attrs: dict[str, str]) -> TextStyle:
 
 def _normalize_visible(value: str) -> str:
     value = html.unescape(value)
-    value = value.replace("…", "...").replace("·", ".")
-    return value
+    return value.replace("…", "...").replace("·", ".")
 
 
 def _flatten_simple_body(body: str) -> str:
-    """Flatten plain text plus simple text-only tspans; reject richer inline markup.
-
-    The first portable primitive prioritizes deterministic glyph geometry over
-    preserving per-tspan paint. Rich text runs remain a future typography-quality
-    concern rather than silently inheriting client fonts.
-    """
+    """Flatten plain text plus simple text-only tspans; reject richer inline markup."""
     parts: list[str] = []
     cursor = 0
     for match in _TSPAN_RE.finditer(body):
@@ -149,8 +143,7 @@ def _flatten_simple_body(body: str) -> str:
 def _glyph_strokes(char: str) -> tuple[str, ...]:
     if char == " ":
         return ()
-    upper = char.upper()
-    pattern = _GLYPHS.get(upper)
+    pattern = _GLYPHS.get(char.upper())
     if pattern is None:
         raise UnsupportedGlyph(f"unsupported visible safe-mode glyph U+{ord(char):04X} {char!r}")
     names: list[str] = []
@@ -165,7 +158,7 @@ def _glyph_strokes(char: str) -> tuple[str, ...]:
     return tuple(names)
 
 
-def _vector_group(source_text: str, attrs_source: str) -> str:
+def _vector_group(source_text: str, attrs_source: str, *, adaptive: bool) -> str:
     visible = _normalize_visible(source_text)
     attrs = _attrs(attrs_source)
     style = _style(attrs)
@@ -193,24 +186,34 @@ def _vector_group(source_text: str, attrs_source: str) -> str:
                 f"M{origin + x1 * glyph_width:.2f},{top + y1 * glyph_height:.2f} "
                 f"L{origin + x2 * glyph_width:.2f},{top + y2 * glyph_height:.2f}"
             )
+
     escaped = html.escape(source_text, quote=True)
     opacity = f' opacity="{html.escape(style.opacity, quote=True)}"' if style.opacity else ""
+    adaptive_attrs = (
+        f' class="v9-adaptive-vector-text" color="#f0f6fc" '
+        f'data-vector-original-color="{html.escape(style.color, quote=True)}"'
+        if adaptive else ""
+    )
+    stroke = "currentColor" if adaptive else style.color
     if not commands:
-        return f'<g data-vector-text="v1" aria-label="{escaped}"><title>{html.escape(source_text)}</title></g>'
+        return (
+            f'<g data-vector-text="v1" aria-label="{escaped}"{adaptive_attrs}>'
+            f'<title>{html.escape(source_text)}</title></g>'
+        )
     return (
-        f'<g data-vector-text="v1" aria-label="{escaped}"{opacity}>'
+        f'<g data-vector-text="v1" aria-label="{escaped}"{opacity}{adaptive_attrs}>'
         f'<title>{html.escape(source_text)}</title>'
-        f'<path d="{" ".join(commands)}" fill="none" stroke="{html.escape(style.color, quote=True)}" '
+        f'<path d="{" ".join(commands)}" fill="none" stroke="{html.escape(stroke, quote=True)}" '
         f'stroke-width="{stroke_width:.2f}" stroke-linecap="round" stroke-linejoin="round"/>'
         f'</g>'
     )
 
 
-def vectorize_visible_text(svg: str) -> tuple[str, int]:
+def vectorize_visible_text(svg: str, *, adaptive: bool = False) -> tuple[str, int]:
     """Replace supported visible SVG <text> nodes with deterministic vector strokes.
 
-    Plain text and simple text-only tspans are supported. Rich nested text and
-    unsupported glyphs fail closed.
+    `adaptive=True` uses `currentColor` plus a stable dark fallback so the caller
+    can attach a host appearance policy without introducing client font authority.
     """
     count = 0
 
@@ -218,7 +221,7 @@ def vectorize_visible_text(svg: str) -> tuple[str, int]:
         nonlocal count
         source = _flatten_simple_body(match.group("body"))
         count += 1
-        return _vector_group(source, match.group("attrs"))
+        return _vector_group(source, match.group("attrs"), adaptive=adaptive)
 
     result = _TEXT_BLOCK_RE.sub(replace, svg)
     if _ANY_TEXT_RE.search(result):

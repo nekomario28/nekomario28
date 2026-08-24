@@ -1,12 +1,12 @@
 # Envelope v9 portable donor
 
-Status: **Design Lab only / not live / P2 donor implementation**
+Status: **Design Lab only / not live / P3 local-render PASS / public GitHub profile NOT_RUN**
 
 Envelope v9 applies the portable profile-surface contract to the proven Envelope v8 donor without changing the current direct-IPM public profile.
 
 ## Scope
 
-v9 intentionally implements the small contract surface first:
+v9 implements the bounded contract surface:
 
 - `profile.background = opaque | transparent`;
 - `profile.text = safe | native | minimal`;
@@ -22,11 +22,11 @@ This is not a new public API yet. The public contract remains `design-lab/profil
 
 ### safe
 
-All simple visible SVG `<text>` nodes in repository-owned generated presentation assets are replaced with deterministic repository-owned vector strokes. No font file is embedded, copied or distributed. Unsupported visible glyphs fail closed instead of silently falling back to tofu/missing-glyph boxes.
+All supported visible SVG `<text>` nodes in repository-owned generated presentation assets are replaced with deterministic repository-owned vector strokes. No font file is embedded, copied or distributed. Unsupported visible glyphs fail closed instead of silently falling back to tofu/missing-glyph boxes.
 
 The exact original string remains textual accessibility metadata inside the replacement group. Existing `<title>`, `<desc>` and other semantic metadata are not converted.
 
-The current primitive is deliberately small and utilitarian. It proves host-font independence; it is not yet a typography-quality claim. Browser readability and dense-label quality remain `TEXT_RENDER=NOT_RUN` until target evidence exists.
+For a transparent outer surface, safe vector text uses `currentColor` with explicit `prefers-color-scheme` light/dark rules. P3 Chrome evidence verifies the resulting computed stroke and contrast instead of assuming the media query works from source inspection alone.
 
 ### native
 
@@ -48,7 +48,19 @@ Outer surface transparency and mounted-source opacity are independent:
 
 Therefore transparent+preserve may intentionally produce opaque islands. The P1 contract resolver warns about that combination rather than silently changing it.
 
-Transparent output requires later target proof on GitHub light and dark appearances at desktop and mobile widths.
+P3 verifies transparent safe output in Chrome at desktop/mobile widths and both light/dark host appearances. Screenshot corner pixels must expose the host background rather than merely omitting a source `<rect>`.
+
+## Render-target identity
+
+The normalized config fingerprint is not sufficient evidence identity because renderer/source changes can alter output without changing config.
+
+v9 therefore derives one `data-profile-render-target-sha256` from:
+
+- normalized contract identity;
+- selected season;
+- SHA-256 of every transformed generated SVG before the target marker is inserted.
+
+The same target fingerprint is embedded into every generated SVG. Re-rendering the same target must reproduce the fingerprint; materially different tested configurations must produce distinct fingerprints. Browser and playback proof are bound to this rendered-target identity.
 
 ## Motion and frame
 
@@ -56,27 +68,36 @@ Transparent output requires later target proof on GitHub light and dark appearan
 
 `frame.mode=none` removes the v8 frame layer. `frame.caps=none` keeps straight through-rails but removes the outer-end cap geometry.
 
-## Evidence boundary
+For motion-on, v9 preserves the inherited v8/v7 `.v7-motion` subtree exactly. P3 verifies actual playback using the same evidence shape as the accepted v8 public proof: persistent Chrome, real elapsed time, narrow rail-strip screenshots and localized pixel diffs. Reduced motion is applied browser-wide at Chrome startup so external SVG image documents receive the user preference; parent-page-only CDP media emulation is not accepted as equivalent evidence.
 
-`validate.py` currently proves only deterministic generation/structure policy:
+## P3 evidence boundary
 
-- safe/native/minimal transformations;
-- opaque/transparent surface policy;
-- inherit/preserve mounted-background separation;
-- motion-off static structure;
-- normalized contract fingerprint embedded into every generated SVG;
-- XML parseability and expected role markers.
+See `EVIDENCE.md` for exact runs and negative proof lineage.
 
-It deliberately reports:
+Established for the local generated render target:
 
-- `TARGET_LAYOUT=NOT_RUN`;
-- `TEXT_RENDER=NOT_RUN`;
-- `PLAYBACK=NOT_RUN`.
+- deterministic/target-sensitive render fingerprint;
+- safe/native/minimal structural behavior;
+- transparent/opaque and mounted-background separation;
+- light/dark adaptive safe text in real Chrome;
+- desktop/mobile rendered geometry for the tested hero cases;
+- screenshot-backed transparent host-background exposure;
+- dynamic Projects safe/minimal behavior;
+- local isolated rail playback;
+- reduced-motion silence;
+- motion-off silence;
+- exact v8-to-v9 inherited motion-subtree equivalence.
 
-A later P3 browser matrix must prove actual typography/readability, transparent light/dark contrast, desktop/mobile layout, dense-label behavior, motion and reduced-motion before v9 can be considered a release candidate.
+Not established:
+
+- that v9 is mounted on the public GitHub profile;
+- public GitHub v9 playback;
+- cross-document hard clock synchronization or frame-perfect handoff;
+- broad typography-quality equivalence to a conventional font face;
+- a second independent consumer proving standalone public-repository extraction is worthwhile.
 
 ## Why this shape is portable
 
-The adapter imports the existing v8 donor but does not put the donor username, IPM taxonomy or GitHub write credentials into the portable contract. The new deterministic text primitive is font-file-free and renderer-local. Contract normalization remains separate from rendering, and publication authority remains outside the renderer.
+The adapter imports the existing v8 donor but does not put the donor username, IPM taxonomy or GitHub write credentials into the portable contract. The deterministic text primitive is font-file-free and renderer-local. Contract normalization remains separate from rendering, and publication authority remains outside the renderer.
 
-That preserves the IPM lessons: small bounded inputs, read-only generation, semantic/presentation separation, source provenance, exact evidence identity, and no premature universal IR.
+That preserves the IPM lessons: small bounded inputs, read-only generation, semantic/presentation separation, source provenance, exact evidence identity, bounded browser proof, and no premature universal IR.
