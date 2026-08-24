@@ -28,20 +28,33 @@ jobs:
           chrome="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)"
           test -n "$chrome"
           out="$RUNNER_TEMP/envelope-v7-proof"
-          mkdir -p "$out"
+          profile="$out/chrome-profile"
+          mkdir -p "$out" "$profile"
           export OUT="$out"
 
-          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars \
+          "$chrome" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars \
+            --user-data-dir="$profile" \
             --remote-debugging-port=9222 --remote-allow-origins='*' \
             --window-size=1440,3400 about:blank >"$out/chrome.log" 2>&1 &
           chrome_pid=$!
           trap 'kill "$chrome_pid" 2>/dev/null || true' EXIT
 
-          for _ in $(seq 1 50); do
-            curl -fsS http://127.0.0.1:9222/json/list >"$out/targets.json" && break
+          ready=0
+          for _ in $(seq 1 100); do
+            if curl -fsS http://127.0.0.1:9222/json/list >"$out/targets.json"; then
+              ready=1
+              break
+            fi
+            if ! kill -0 "$chrome_pid" 2>/dev/null; then
+              break
+            fi
             sleep .2
           done
-          test -s "$out/targets.json"
+          if test "$ready" != 1; then
+            echo "Chrome failed to expose CDP" >&2
+            cat "$out/chrome.log" >&2 || true
+            exit 1
+          fi
 
           python - <<'PY'
           import base64, json, os, time
