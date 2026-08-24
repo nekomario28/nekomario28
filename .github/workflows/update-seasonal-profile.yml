@@ -8,6 +8,7 @@ on:
       - "design-lab/theme-manifest.json"
       - "design-lab/live-theme.json"
       - "design-lab/envelope-v7/**"
+      - "design-lab/envelope-v8/**"
       - "design-lab/scripts/select-season.py"
       - "design-lab/scripts/promote-season.py"
       - "design-lab/scripts/render_envelope_chrome.py"
@@ -23,6 +24,7 @@ on:
       - "design-lab/theme-manifest.json"
       - "design-lab/live-theme.json"
       - "design-lab/envelope-v7/**"
+      - "design-lab/envelope-v8/**"
       - "design-lab/scripts/select-season.py"
       - "design-lab/scripts/promote-season.py"
       - "design-lab/scripts/render_envelope_chrome.py"
@@ -65,7 +67,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
 
-      - name: Validate Envelope v7 source and all seasons
+      - name: Validate Envelope v8 source and all seasons
         shell: bash
         run: |
           set -euo pipefail
@@ -75,15 +77,17 @@ jobs:
             design-lab/scripts/render_envelope_chrome.py \
             design-lab/envelope-v7/render_panels.py \
             design-lab/envelope-v7/render_continuous_canvas.py \
-            design-lab/envelope-v7/validate.py
-          python design-lab/envelope-v7/validate.py
+            design-lab/envelope-v7/validate.py \
+            design-lab/envelope-v8/render_continuous_canvas.py \
+            design-lab/envelope-v8/validate.py
+          GITHUB_HEAD_REF= python design-lab/envelope-v8/validate.py
           python design-lab/scripts/promote-season.py --date 2026-04-01 --json
           python design-lab/scripts/promote-season.py --date 2026-07-01 --json
           python design-lab/scripts/promote-season.py --date 2026-10-01 --json
           python design-lab/scripts/promote-season.py --date 2026-01-01 --json
           git diff --check
 
-      - name: Resolve seasonal Envelope v7
+      - name: Resolve seasonal Envelope v8
         shell: bash
         env:
           EVENT_NAME: ${{ github.event_name }}
@@ -101,7 +105,38 @@ jobs:
           python design-lab/scripts/promote-season.py "${args[@]}" | tee "$RUNNER_TEMP/season-result.json"
           git diff --check
 
-      - name: Validate stable live Envelope v7
+      - name: Verify Envelope v8 PR preview is checked in
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- \
+            assets/profile-hero.svg \
+            assets/profile-character-side-left.svg \
+            assets/profile-character-side-right.svg \
+            assets/profile-attribution.svg \
+            assets/profile-frame-bridge-character-projects.svg \
+            assets/profile-section-projects.svg \
+            assets/profile-projects-canvas.svg \
+            assets/profile-frame-bridge-projects-activity.svg \
+            assets/profile-section-activity.svg \
+            assets/profile-activity-canvas.svg \
+            assets/profile-frame-bridge-activity-footer.svg \
+            assets/profile-footer.svg \
+            assets/profile-attribution-projects-transition.svg \
+            assets/profile-activity-header.svg \
+            assets/profile-footer-transition.svg \
+            design-lab/live-theme.json
+          echo "ENVELOPE_V8_PR_PREVIEW_CURRENT"
+
+      - name: Validate GitHub Envelope v8 seams
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python design-lab/envelope-v8/validate.py
+
+      - name: Validate stable live Envelope v8
         shell: bash
         run: |
           set -euo pipefail
@@ -110,6 +145,7 @@ jobs:
           from pathlib import Path
 
           state = json.loads(Path('design-lab/live-theme.json').read_text())
+          manifest = json.loads(Path('design-lab/theme-manifest.json').read_text())
           expected = {
               'hero': ('900','260','0 0 900 260'),
               'character_left': ('100','394','0 0 100 394'),
@@ -124,13 +160,20 @@ jobs:
               'bridge_activity_footer': ('900','32','0 0 900 32'),
               'footer': ('900','92','0 0 900 92'),
           }
+          packed = {
+              'attribution_projects_transition': ('900','76','0 0 900 76',654,730),
+              'activity_header': ('900','100','0 0 900 100',1218,1318),
+              'footer_transition': ('900','124','0 0 900 124',1538,1662),
+          }
           source_sync = {
               'projects_canvas': 'project-map/galaxy.svg',
               'activity_canvas': 'assets/github-contributions-dark.svg',
           }
-          assert state['envelope_version'] == 7
+          assert state['envelope_version'] == 8
+          assert state['presentation'] == 'v8-seamless-surface'
           assert set(state['live_assets']) == set(expected)
           assert state['global_motion_space'] == 'design-lab/envelope-v7/global-motion-space.json'
+          assert state['motion']['live_verification'] in {'NOT_RUN', 'PASS'}
           frame = state['frame']
           assert frame['mode'] == 'continuous-canvas-global-windowed-flow'
           assert frame['all_logical_windows_rendered'] is True
@@ -139,11 +182,15 @@ jobs:
           assert frame['partial_geometry_clipping'] is True
           assert frame['cross_document_hard_sync'] is False
           assert frame['true_overlay'] is False
+          assert frame['seamless_surface'] is True
+          assert frame['intermediate_card_rounding'] is False
+          assert frame['name_hero_integrated'] is True
           for key, geometry in expected.items():
               path = Path(state['live_assets'][key])
               assert path.is_file(), path
               root = ET.parse(path).getroot()
               assert (root.attrib.get('width'), root.attrib.get('height'), root.attrib.get('viewBox')) == geometry
+              assert root.attrib.get('data-envelope-presentation') == 'v8-seamless-surface', key
               text = path.read_text()
               assert 'id="v7-global-window"' in text
               assert 'clip-path="url(#v7-window)"' in text
@@ -155,13 +202,22 @@ jobs:
                   digest = hashlib.sha256(source.read_bytes()).hexdigest()
                   assert root.attrib.get('data-source-path') == source_rel, (key, root.attrib.get('data-source-path'), source_rel)
                   assert root.attrib.get('data-source-sha256') == digest, (key, root.attrib.get('data-source-sha256'), digest)
-                  if key == 'projects_canvas' and 'data-galaxy-external-layout="rail"' in source.read_text():
-                      assert 'data-galaxy-external-layout="rail"' in text
+          for key, (w,h,vb,start,end) in packed.items():
+              path = Path(manifest['presentation_assets'][key])
+              assert path.is_file(), path
+              root = ET.parse(path).getroot()
+              assert (root.attrib.get('width'), root.attrib.get('height'), root.attrib.get('viewBox')) == (w,h,vb)
+              assert root.attrib.get('data-envelope-presentation') == 'v8-seamless-surface'
+              text = path.read_text()
+              assert text.count('id="v7-global-window"') == 1
+              assert f'data-global-start="{start}"' in text and f'data-global-end="{end}"' in text
+              assert 'prefers-reduced-motion' in text and '<animateTransform' in text and 'dur="32s"' in text
           readme = Path('README.md').read_text()
-          for rel in state['live_assets'].values():
+          for rel in manifest['presentation_assets'].values():
               assert readme.count(rel) == 1, rel
           assert readme.count('https://konosuba.com/bakuen/story/img/pdsfi4/05.jpg') == 1
-          print('ENVELOPE_V7_LIVE_SOURCE_SYNC_PASS')
+          assert readme.count('align="top"') == 10
+          print('ENVELOPE_V8_LIVE_SOURCE_SYNC_PASS packed_surfaces=3')
           PY
 
       - name: Commit seasonal change
@@ -184,9 +240,12 @@ jobs:
             assets/profile-activity-canvas.svg \
             assets/profile-frame-bridge-activity-footer.svg \
             assets/profile-footer.svg \
+            assets/profile-attribution-projects-transition.svg \
+            assets/profile-activity-header.svg \
+            assets/profile-footer-transition.svg \
             design-lab/live-theme.json
           if git diff --cached --quiet; then
-            echo "Seasonal Envelope v7 is already current."
+            echo "Seasonal Envelope v8 is already current."
             exit 0
           fi
           season="$(python -c 'import json; print(json.load(open("design-lab/live-theme.json"))["active_season"])')"

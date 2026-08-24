@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="92" viewBox="0 0 900 92" role="img" aria-label="季節ダークプロフィール終端">
+<svg data-envelope-presentation="v8-seamless-surface" xmlns="http://www.w3.org/2000/svg" width="900" height="92" viewBox="0 0 900 92" role="img" aria-label="季節ダークプロフィール終端">
   <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#06101a"/><stop offset=".52" stop-color="#0c2d3b"/><stop offset="1" stop-color="#06101a"/></linearGradient></defs>
-  <rect width="900" height="92" rx="16" fill="url(#bg)"/>
+  <rect width="900" height="92" fill="url(#bg)"/>
   <g fill="none" stroke-linecap="round"><path d="M18 0V70 Q18 82 30 82H62 M882 0V70 Q882 82 870 82H838" stroke="#86aa94" stroke-opacity=".24" stroke-width="1.6"/><path d="M18 8V84 M882 8V84" stroke="#c7b06c" stroke-opacity=".18" stroke-width=".7"/></g>
   <path d="M0 68 C132 46 236 82 356 63 C482 43 582 77 704 53 C788 37 842 42 900 29" fill="none" stroke="#86aa94" stroke-opacity=".08" stroke-width="15"/>
   <path d="M322 46 H420 M480 46 H578" stroke="#eef2f6" stroke-opacity=".14"/>

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate and optionally promote the complete seasonal profile Envelope v7."""
+"""Validate and optionally promote the complete seasonal profile Envelope v8."""
 from __future__ import annotations
 
 import argparse
@@ -16,7 +16,8 @@ ROOT = LAB.parent
 MANIFEST = LAB / "theme-manifest.json"
 LIVE_STATE = LAB / "live-theme.json"
 GLOBAL_SPACE = LAB / "envelope-v7" / "global-motion-space.json"
-RENDERER = LAB / "envelope-v7" / "render_continuous_canvas.py"
+RENDERER = LAB / "envelope-v8" / "render_continuous_canvas.py"
+ENVELOPE_VERSION = 8
 
 REQUIRED_ASSETS = {
     "hero",
@@ -71,7 +72,7 @@ def load_json(path: Path) -> dict:
 def load_renderer():
     spec = importlib.util.spec_from_file_location("render_continuous_canvas", RENDERER)
     if spec is None or spec.loader is None:
-        raise SystemExit("unable to load Envelope v7 renderer")
+        raise SystemExit("unable to load Envelope v8 renderer")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -79,7 +80,7 @@ def load_renderer():
 
 def validate_manifest(data: dict, renderer) -> dict:
     if data.get("version") != 8:
-        raise SystemExit("Envelope v7 requires manifest version 8")
+        raise SystemExit("Envelope v8 requires manifest version 8")
     if set(data.get("live_assets", {})) != REQUIRED_ASSETS:
         raise SystemExit(f"live_assets must be exactly {sorted(REQUIRED_ASSETS)}")
 
@@ -103,9 +104,9 @@ def validate_manifest(data: dict, renderer) -> dict:
     }
     for key, value in expected_flow.items():
         if flow.get(key) != value:
-            raise SystemExit(f"unexpected Envelope v7 motion contract: {key}")
+            raise SystemExit(f"unexpected Envelope v8 motion contract: {key}")
     if flow.get("space") != "design-lab/envelope-v7/global-motion-space.json":
-        raise SystemExit("unexpected Envelope v7 global motion space path")
+        raise SystemExit("unexpected Envelope v8 global motion space path")
 
     space = load_json(GLOBAL_SPACE)
     try:
@@ -122,7 +123,7 @@ def validate_manifest(data: dict, renderer) -> dict:
         for key in keys:
             mapped[key] = (name, int(window["start"]), int(window["end"]), int(window["height"]))
     if set(mapped) != REQUIRED_ASSETS:
-        raise SystemExit("Envelope v7 rendered windows must map all live assets exactly")
+        raise SystemExit("Envelope v8 rendered windows must map all live assets exactly")
     for key, (_, _, _, height) in mapped.items():
         if int(GEOMETRY[key][1]) != height:
             raise SystemExit(f"window height does not match asset geometry: {key}")
@@ -168,26 +169,28 @@ def validate_svg(path: Path, geometry: tuple[str, str, str], *, window: tuple[st
         raise SystemExit(f"invalid SVG {path}: {exc}") from exc
     if (root.attrib.get("width"), root.attrib.get("height"), root.attrib.get("viewBox")) != geometry:
         raise SystemExit(f"unexpected geometry in {path}")
+    if root.attrib.get("data-envelope-presentation") != "v8-seamless-surface":
+        raise SystemExit(f"missing Envelope v8 presentation marker in {path}")
     text = path.read_text(encoding="utf-8")
     if 'id="v7-global-window"' not in text:
-        raise SystemExit(f"missing v7 global window in {path}")
+        raise SystemExit(f"missing inherited v7 global window in {path}")
     if "prefers-reduced-motion" not in text or "<animateTransform" not in text:
-        raise SystemExit(f"missing v7 motion/reduced-motion contract in {path}")
+        raise SystemExit(f"missing motion/reduced-motion contract in {path}")
     if 'clip-path="url(#v7-window)"' not in text:
-        raise SystemExit(f"missing v7 clipped-window rendering in {path}")
+        raise SystemExit(f"missing clipped-window rendering in {path}")
     if 'dur="32s"' not in text:
-        raise SystemExit(f"unexpected v7 global motion duration in {path}")
+        raise SystemExit(f"unexpected global motion duration in {path}")
     if "<script" in text.lower() or "javascript:" in text.lower():
         raise SystemExit(f"scripted animation is not allowed in {path}")
     tail = text.split('id="v7-global-window"', 1)[1]
     if '<animate attributeName="opacity"' in tail:
-        raise SystemExit(f"v7 boundary fade is forbidden in {path}")
+        raise SystemExit(f"boundary fade is forbidden in {path}")
     if window:
         name, start, end = window
         if f'data-window="{name}"' not in text:
-            raise SystemExit(f"wrong v7 global window name in {path}")
+            raise SystemExit(f"wrong global window name in {path}")
         if f'data-global-start="{start}"' not in text or f'data-global-end="{end}"' not in text:
-            raise SystemExit(f"wrong v7 global coordinates in {path}")
+            raise SystemExit(f"wrong global coordinates in {path}")
 
 
 def asset_windows(space: dict) -> dict[str, tuple[str, int, int]]:
@@ -210,15 +213,10 @@ def expected_assets(renderer, season: str, live_assets: dict[str, str]) -> dict[
 
 
 def same_verification_target(live: dict, *, season: str, source_hero: Path) -> bool:
-    """Whether a live playback receipt still describes this exact deployed target.
-
-    Derived Project Map/contribution refreshes do not invalidate representative v7 rail
-    playback. A seasonal source, Envelope version, or global-space change does.
-    Renderer/layout changes are expected to advance the Envelope version before release.
-    """
+    """Whether a live playback receipt still describes this exact deployed target."""
     return (
         live.get("active_season") == season
-        and live.get("envelope_version") == 7
+        and live.get("envelope_version") == ENVELOPE_VERSION
         and live.get("source") == str(source_hero.relative_to(ROOT))
         and live.get("global_motion_space") == str(GLOBAL_SPACE.relative_to(ROOT))
     )
@@ -274,7 +272,7 @@ def main() -> int:
         live = {}
     changed = (
         live.get("active_season") != season
-        or live.get("envelope_version") != 7
+        or live.get("envelope_version") != ENVELOPE_VERSION
         or live.get("global_motion_space") != str(GLOBAL_SPACE.relative_to(ROOT))
         or any(not assets[key].is_file() or assets[key].read_bytes() != expected[key] for key in expected)
     )
@@ -286,7 +284,8 @@ def main() -> int:
         "theme": f"{season}-dark",
         "changed": changed,
         "apply": args.apply,
-        "envelope_version": 7,
+        "envelope_version": ENVELOPE_VERSION,
+        "presentation": "v8-seamless-surface",
         "motion_mode": manifest["envelope_motion"]["mode"],
         "coordinate_system": manifest["envelope_motion"]["coordinate_system"],
         "global_extent": manifest["envelope_motion"]["global_extent"],
@@ -299,8 +298,9 @@ def main() -> int:
         for key, geom in GEOMETRY.items():
             validate_svg(assets[key], geom, window=windows[key])
         next_state = {
-            "version": 7,
-            "envelope_version": 7,
+            "version": ENVELOPE_VERSION,
+            "envelope_version": ENVELOPE_VERSION,
+            "presentation": "v8-seamless-surface",
             "active_season": season,
             "active_theme": f"{season}-dark",
             "source": str(source_hero.relative_to(ROOT)),
@@ -325,6 +325,9 @@ def main() -> int:
                 "phase_tolerant_handoff": True,
                 "cross_document_hard_sync": False,
                 "true_overlay": False,
+                "seamless_surface": True,
+                "intermediate_card_rounding": False,
+                "name_hero_integrated": True,
             },
             "global_motion_space": str(GLOBAL_SPACE.relative_to(ROOT)),
             "promoted_at": day.isoformat(),
@@ -336,7 +339,7 @@ def main() -> int:
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
     else:
         action = "promoted" if args.apply and changed else "refreshed" if args.apply else "no-change" if not changed else "would-promote"
-        print(f"{action}: {season} envelope v7")
+        print(f"{action}: {season} envelope v{ENVELOPE_VERSION}")
     return 0
 
 
