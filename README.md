@@ -5,10 +5,6 @@
 </p>
 
 <p align="center">
-  <img src="assets/profile-divider.svg" width="900" alt="">
-</p>
-
-<p align="center">
   <a href="https://konosuba.com/bakuen/story/?mode=story4">
     <img src="https://konosuba.com/bakuen/story/img/pdsfi4/05.jpg" width="700" alt="めぐみん">
   </a>
