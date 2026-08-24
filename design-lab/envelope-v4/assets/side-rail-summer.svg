@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="220" viewBox="0 0 24 220" role="img" aria-label="summer side rail">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#06101a"/>
+      <stop offset=".5" stop-color="#082033"/>
+      <stop offset="1" stop-color="#06101a"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#86aa94" stop-opacity=".08"/>
+      <stop offset=".5" stop-color="#c7b06c" stop-opacity=".40"/>
+      <stop offset="1" stop-color="#86aa94" stop-opacity=".08"/>
+    </linearGradient>
+  </defs>
+  <rect width="24" height="220" rx="10" fill="url(#bg)"/>
+  <path d="M12 10V210" stroke="url(#line)" stroke-width="1.4"/>
+  <circle cx="12" cy="68" r="2" fill="#86aa94" fill-opacity=".32"/>
+  <circle cx="12" cy="154" r="1.6" fill="#c7b06c" fill-opacity=".34"/>
+</svg>
