@@ -26,8 +26,9 @@ jobs:
   generate:
     permissions:
       contents: read
-    # Reviewed arm-free profile Galaxy v1 release: R 7524a9bf43fbdb5dd88ede5312f858de0e41e70a
-    # resolves immutable Action F 041717e17cea8a28343a3b607ef4faf008813fd0 (Verify #822/#827).
+    # Stable pre-profile-import IPM visual release.
+    # v1 R 36828be099e1cd160476b1be4ba32a2b9601911c resolves immutable
+    # Action F c871a6e5e47b11dad5cd82ec940ca2d6efa7199e (Verify #874/#881; direct-profile proof #190).
     uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@v1
     with:
       theme: dark
@@ -56,7 +57,7 @@ jobs:
           name: project-map-generated
           path: project-map
 
-      - name: Validate direct IPM profile surface
+      - name: Validate direct native IPM profile surface
         shell: bash
         run: |
           set -euo pipefail
@@ -68,15 +69,16 @@ jobs:
             exit 1
           fi
           grep -q 'data-galaxy-preset="systems"' project-map/galaxy.svg
+          grep -q 'id="galaxy-family-bg"' project-map/galaxy.svg
           grep -q '#E69F00' project-map/galaxy.svg
-          grep -q 'data-profile-galaxy-background="ead72debca2a16608ebc5b799993c0234ea10cab"' project-map/galaxy.svg
           grep -q 'data-galaxy-external="true"' project-map/galaxy.svg
-          grep -q 'data-galaxy-external-layout="halo"' project-map/galaxy.svg
+          grep -q 'data-galaxy-external-layout="rail"' project-map/galaxy.svg
+          grep -q 'data-galaxy-external-backdrop="true"' project-map/galaxy.svg
           grep -q 'data-galaxy-orbit="contributed"' project-map/galaxy.svg
-          grep -q 'data-galaxy-placement="external-halo-orbit"' project-map/galaxy.svg
+          grep -q 'data-galaxy-placement="external-rail"' project-map/galaxy.svg
           grep -q '>Contributed</text>' project-map/galaxy.svg
-          if grep -Eq 'data-galaxy-external-layout="rail"|data-galaxy-external-backdrop="true"|data-galaxy-placement="external-rail"|External contributions' project-map/galaxy.svg; then
-            echo 'Detached/legacy Contributed presentation is still present.' >&2
+          if grep -Eq 'data-profile-galaxy-|profile-galaxy-(ring|association|nucleus|arm)|data-galaxy-external-layout="halo"|data-galaxy-placement="external-halo-orbit"' project-map/galaxy.svg; then
+            echo 'Profile-local donor decoration or halo placement leaked into native IPM output.' >&2
             exit 1
           fi
           grep -q '"taxonomy"' project-map/graph.json
@@ -85,8 +87,6 @@ jobs:
           const svg = fs.readFileSync('project-map/galaxy.svg', 'utf8');
           const graph = JSON.parse(fs.readFileSync('project-map/graph.json', 'utf8'));
           const owner = 'nekomario28';
-          const donor = 'ead72debca2a16608ebc5b799993c0234ea10cab';
-          const groups = graph.nodes.filter((node) => node?.type === 'group');
           const contributed = graph.nodes.filter((node) => node?.type === 'repository' && node?.relation === 'contributed');
           const contributedIds = new Set(contributed.map((node) => node.id));
 
@@ -105,22 +105,34 @@ jobs:
           for (const id of contributedIds) if (!contributionTargets.has(id)) throw new Error(`missing canonical contribution edge for ${id}`);
           if ((graph.semanticEdges || []).some((edge) => contributedIds.has(edge?.source) || contributedIds.has(edge?.target))) throw new Error('Contributed repository entered owned semantic graph');
 
-          if (!svg.includes(`data-profile-galaxy-background="${donor}"`)) throw new Error('historical background donor marker is missing');
-          const rings = [...svg.matchAll(/data-profile-galaxy-ring=/g)].length;
-          const arms = [...svg.matchAll(/data-profile-galaxy-arm=/g)].length;
-          const associations = [...svg.matchAll(/data-profile-stellar-association=/g)].length;
-          if (rings !== 3) throw new Error(`Galaxy ring count mismatch: ${rings}`);
-          if (arms !== 0) throw new Error(`historical foreground arms leaked into the background import: ${arms}`);
-          if (associations !== groups.length) throw new Error(`stellar association count mismatch: ${associations} SVG vs ${groups.length} groups`);
-          if (/parallax|meteor/i.test(svg)) throw new Error('screen-space cosmic decoration leaked into static Galaxy output');
+          if (!svg.includes('id="galaxy-family-bg"') || !svg.includes('fill="url(#galaxy-family-bg)"')) {
+            throw new Error('native IPM Galaxy background is missing');
+          }
+          if (/data-profile-galaxy-|ead72debca2a16608ebc5b799993c0234ea10cab/.test(svg)) {
+            throw new Error('profile-local historical donor markers survived the rollback');
+          }
+          if (/parallax|meteor/i.test(svg)) throw new Error('interactive screen-space background decoration leaked into static SVG output');
 
-          const haloStart = svg.indexOf('data-galaxy-external-layout="halo"');
-          if (haloStart < 0) throw new Error('Galaxy Systems external halo is missing');
-          const haloSlice = svg.slice(haloStart);
-          const haloPlacements = [...haloSlice.matchAll(/data-galaxy-orbit="contributed" data-galaxy-placement="external-halo-orbit"/g)];
-          if (haloPlacements.length !== contributed.length) throw new Error(`external halo placement mismatch: ${haloPlacements.length} SVG vs ${contributed.length} graph`);
-          const haloAnimations = [...haloSlice.matchAll(/<animateTransform\b/g)].length;
-          if (haloAnimations < contributed.length) throw new Error(`external halo motion mismatch: ${haloAnimations} animations vs ${contributed.length} contributed repositories`);
+          const railStart = svg.indexOf('data-galaxy-external-layout="rail"');
+          if (railStart < 0) throw new Error('Galaxy Systems external rail is missing');
+          const railSlice = svg.slice(railStart);
+          const placements = [...railSlice.matchAll(/data-galaxy-orbit="contributed" data-galaxy-placement="external-rail" transform="translate\(([0-9.]+) ([0-9.]+)\)"/g)];
+          if (placements.length !== contributed.length) throw new Error(`external rail placement mismatch: ${placements.length} SVG vs ${contributed.length} graph`);
+          if (/<animateTransform\b/.test(railSlice)) throw new Error('stationary external rail unexpectedly contains orbit animation');
+
+          const root = svg.match(/<svg\b[^>]*\bwidth="([0-9.]+)"[^>]*\bheight="([0-9.]+)"/);
+          if (!root) throw new Error('unable to read SVG geometry');
+          const width = Number(root[1]);
+          const height = Number(root[2]);
+          const xs = placements.map((match) => Number(match[1]));
+          const ys = placements.map((match) => Number(match[2]));
+          if (Math.min(...xs) <= width * 0.75) throw new Error(`external rail entered owned canvas: x=${Math.min(...xs)}`);
+          if (Math.min(...ys) < 54 || Math.max(...ys) > height - 44) throw new Error('external rail violated top/legend clearance');
+          if (ys.length > 1) {
+            const sorted = [...ys].sort((a, b) => a - b);
+            const minGap = Math.min(...sorted.slice(1).map((value, index) => value - sorted[index]));
+            if (minGap < 24) throw new Error(`external rail spacing collapsed: ${minGap}`);
+          }
 
           const forbiddenKeys = new Set(['private', 'isPrivate', 'restricted', 'isRestricted']);
           const visit = (value) => {
@@ -131,7 +143,7 @@ jobs:
             }
           };
           visit(graph);
-          console.log(`Direct IPM profile validated: ${graph.repositoryCount} owned + ${contributed.length} Contributed; background-only donor + external halo`);
+          console.log(`Direct native IPM profile validated: ${graph.repositoryCount} owned + ${contributed.length} Contributed; native background + external rail`);
           NODE
 
       - name: Verify direct publish diff on pull requests
@@ -145,7 +157,7 @@ jobs:
             git status --short -- assets/profile-*.svg design-lab/live-theme.json >&2
             exit 1
           fi
-          echo "DIRECT_IPM_PROFILE_REFRESH_PR_PASS"
+          echo "DIRECT_NATIVE_IPM_PROFILE_REFRESH_PR_PASS"
 
       - name: Commit project map
         if: github.event_name != 'pull_request'
