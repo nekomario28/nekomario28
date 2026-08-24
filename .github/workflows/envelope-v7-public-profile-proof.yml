@@ -92,78 +92,75 @@ jobs:
 
           call('Page.enable')
           call('Runtime.enable')
-          call('Emulation.setEmulatedMedia', {'features': [
-              {'name': 'prefers-color-scheme', 'value': 'dark'},
-              {'name': 'prefers-reduced-motion', 'value': 'no-preference'},
-          ]})
+          # Match the known-good Envelope v6 proof: only force GitHub dark rendering.
+          call('Emulation.setEmulatedMedia', {'features': [{'name': 'prefers-color-scheme', 'value': 'dark'}]})
           call('Emulation.setDeviceMetricsOverride', {'width': 1440, 'height': 3400, 'deviceScaleFactor': 1, 'mobile': False})
           call('Page.navigate', {'url': 'https://github.com/nekomario28'})
           wait_complete()
           time.sleep(1.0)
 
-          project = evaluate("""(() => {
-            const i = Array.from(document.images).find(x => x.src.includes('profile-projects-canvas.svg'));
+          media = evaluate("""(() => ({reduce: matchMedia('(prefers-reduced-motion: reduce)').matches, noPreference: matchMedia('(prefers-reduced-motion: no-preference)').matches}))()""")
+          bridge = evaluate("""(() => {
+            const i = Array.from(document.images).find(x => x.src.includes('profile-frame-bridge-character-projects.svg'));
             if (!i) return null;
             const r = i.getBoundingClientRect();
             return {src:i.src,x:r.x,y:r.y,width:r.width,height:r.height,naturalWidth:i.naturalWidth,naturalHeight:i.naturalHeight};
           })()""")
-          if not project:
-              raise RuntimeError('Envelope v7 Projects canvas is absent from the actual public profile DOM')
-          if project['naturalWidth'] != 900 or project['naturalHeight'] != 420:
-              raise RuntimeError(f'unexpected Projects canvas geometry: {project}')
+          if not bridge:
+              raise RuntimeError('Envelope v7 bridge is absent from the actual public profile DOM')
+          if bridge['naturalWidth'] != 900 or bridge['naturalHeight'] != 32:
+              raise RuntimeError(f'unexpected v7 bridge geometry: {bridge}')
 
-          # Only capture the left outer canvas strip. The embedded Project Map starts at
-          # logical x=80, while the Envelope v7 rail is at logical x=18. This isolates
-          # Envelope motion from Project Map orbit animation.
-          scale = project['width'] / 900.0
-          clip = {
-              'x': project['x'], 'y': project['y'],
-              'width': max(36.0, 48.0 * scale), 'height': project['height']
-          }
+          clip = {'x': bridge['x'], 'y': bridge['y'], 'width': bridge['width'], 'height': bridge['height']}
           interval = 0.25
           duration = 9.0
           count = int(duration / interval) + 1
           names = []
           start = time.monotonic()
           for i in range(count):
-              name = f'projects-left-rail-{i:02d}.png'
+              name = f'bridge-{i:02d}.png'
               capture(name, clip)
               names.append(name)
               target_t = start + (i + 1) * interval
               time.sleep(max(0, target_t - time.monotonic()))
 
           changed_pairs = []
-          max_changed = 0
+          edge_pairs = []
+          max_edge_changed = 0
           for i in range(len(names) - 1):
               a = Image.open(out / names[i]).convert('RGB')
               b = Image.open(out / names[i+1]).convert('RGB')
               diff = ImageChops.difference(a, b)
               changed = sum(1 for px in diff.getdata() if px != (0, 0, 0))
-              if changed:
-                  bbox = diff.getbbox()
-                  changed_pairs.append({'from': i, 'to': i + 1, 'changed_pixels': changed, 'bbox': bbox})
-                  max_changed = max(max_changed, changed)
+              if not changed:
+                  continue
+              bbox = diff.getbbox()
+              item = {'from': i, 'to': i + 1, 'changed_pixels': changed, 'bbox': bbox}
+              changed_pairs.append(item)
+              if bbox and (bbox[2] <= 32 or bbox[0] >= a.width - 32):
+                  edge_pairs.append(item)
+                  max_edge_changed = max(max_edge_changed, changed)
 
           metrics = {
-              'result': 'PASS' if changed_pairs else 'FAIL',
+              'result': 'PASS' if edge_pairs else 'FAIL',
               'observed_main_sha': observed_main,
               'target': 'https://github.com/nekomario28',
-              'proof_scope': 'actual public GitHub profile, one persistent Chrome page, Projects left outer rail only',
-              'projects_rect': project,
-              'logical_project_map_start_x': 80,
-              'logical_envelope_left_rail_x': 18,
+              'proof_scope': 'actual public GitHub profile, one persistent Chrome page, v7 character-to-projects bridge',
+              'bridge_rect': bridge,
+              'media': media,
               'sample_interval_seconds': interval,
               'sample_duration_seconds': duration,
               'sample_count': count,
               'changed_pair_count': len(changed_pairs),
-              'max_changed_pixels_between_adjacent_samples': max_changed,
-              'first_changed_pairs': changed_pairs[:8],
+              'edge_localized_pair_count': len(edge_pairs),
+              'max_edge_changed_pixels': max_edge_changed,
+              'first_edge_pairs': edge_pairs[:8],
               'cross_document_hard_sync_claimed': False,
           }
           print('ENVELOPE_V7_PUBLIC_PLAYBACK ' + json.dumps(metrics, separators=(',', ':')))
           (out / 'metrics.json').write_text(json.dumps(metrics, indent=2))
-          if not changed_pairs:
-              raise RuntimeError('no visible Envelope v7 left-rail motion observed across the persistent-page sample')
+          if not edge_pairs:
+              raise RuntimeError('no edge-localized Envelope v7 bridge motion observed across the persistent-page sample')
           PY
 
-          sha256sum "$out"/projects-left-rail-*.png | tail -n 4
+          sha256sum "$out"/bridge-*.png | tail -n 4
