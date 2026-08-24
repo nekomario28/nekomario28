@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-label="project map を背景surface上に配置した Envelope v7 projects stage">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#0d1117"/><stop offset=".11" stop-color="#06101a"/><stop offset=".18" stop-color="#070a12"/><stop offset=".82" stop-color="#070a12"/><stop offset=".89" stop-color="#06101a"/><stop offset="1" stop-color="#0d1117"/></linearGradient>
+    <clipPath id="media"><rect x="80" y="0" width="740" height="420" rx="16"/></clipPath>
+  </defs>
+  <rect width="900" height="420" fill="url(#bg)"/>
+  <g fill="#e8edf7"><circle cx="36" cy="54" r="1" opacity=".22"/><circle cx="62" cy="114" r=".7" opacity=".18"/><circle cx="44" cy="220" r="1.1" opacity=".15"/><circle cx="858" cy="78" r=".8" opacity=".20"/><circle cx="838" cy="188" r="1.1" opacity=".16"/><circle cx="864" cy="328" r=".7" opacity=".19"/></g>
+  <image href="../../../project-map/galaxy.svg" x="80" y="0" width="740" height="420" preserveAspectRatio="xMidYMid meet" clip-path="url(#media)"/>
+  <path d="M80 0V420 M820 0V420" stroke="#eef2f6" stroke-opacity=".08"/>
+  <path d="M18 0V420 M882 0V420" fill="none" stroke="#86aa94" stroke-opacity=".18" stroke-width="1.6"/><path d="M22 0V420 M878 0V420" fill="none" stroke="#c7b06c" stroke-opacity=".08" stroke-width=".7"/>
+</svg>
