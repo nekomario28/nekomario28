@@ -5,6 +5,10 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/update-knowledge-graph.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/update-knowledge-graph.yml"
   schedule:
     # Twice-daily refresh; push/manual triggers handle immediate updates.
     - cron: "41 1,13 * * *"
@@ -39,8 +43,11 @@ jobs:
       actions: read
       contents: write
     steps:
-      - name: Checkout profile repository
+      - name: Checkout exact profile revision
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
 
       - name: Download generated files
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
@@ -127,16 +134,53 @@ jobs:
           console.log(`Canonical map validated: ${graph.repositoryCount} owned + ${contributed.length} accepted Contributed; profile-local Galaxy background + external halo verified`);
           NODE
 
-      - name: Commit only when the generated map changed
+      - name: Refresh Envelope v7 from generated project map
         shell: bash
         run: |
           set -euo pipefail
-          git add -- project-map/galaxy.svg project-map/graph.json
+          python -m py_compile \
+            design-lab/scripts/promote-season.py \
+            design-lab/envelope-v7/render_panels.py \
+            design-lab/envelope-v7/render_continuous_canvas.py \
+            design-lab/envelope-v7/validate.py
+          python design-lab/scripts/promote-season.py --apply --json
+          python design-lab/envelope-v7/validate.py
+
+      - name: Verify atomic publish diff on pull requests
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          test -n "$(git status --short -- project-map/galaxy.svg project-map/graph.json assets/profile-projects-canvas.svg design-lab/live-theme.json)"
+          echo "PROJECT_MAP_ENVELOPE_ATOMIC_REFRESH_PR_PASS"
+
+      - name: Commit project map and mounted profile derivatives atomically
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- \
+            project-map/galaxy.svg \
+            project-map/graph.json \
+            assets/profile-hero.svg \
+            assets/profile-character-side-left.svg \
+            assets/profile-character-side-right.svg \
+            assets/profile-attribution.svg \
+            assets/profile-frame-bridge-character-projects.svg \
+            assets/profile-section-projects.svg \
+            assets/profile-projects-canvas.svg \
+            assets/profile-frame-bridge-projects-activity.svg \
+            assets/profile-section-activity.svg \
+            assets/profile-activity-canvas.svg \
+            assets/profile-frame-bridge-activity-footer.svg \
+            assets/profile-footer.svg \
+            design-lab/live-theme.json
           if git diff --cached --quiet; then
-            echo "Project map is already up to date."
+            echo "Project map and mounted profile derivatives are already up to date."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "update project map"
-          git push
+          git commit -m "update project map and profile canvas"
+          git push origin HEAD:main
