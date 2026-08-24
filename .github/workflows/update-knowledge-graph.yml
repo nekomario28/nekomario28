@@ -54,9 +54,14 @@ jobs:
           test -s project-map/galaxy.svg
           test -s project-map/graph.json
           grep -q 'data-galaxy-preset="systems"' project-map/galaxy.svg
-          grep -q 'stroke-width="1.4"' project-map/galaxy.svg
-          grep -q 'External contributions' project-map/galaxy.svg
+          grep -q '#E69F00' project-map/galaxy.svg
+          grep -q 'data-galaxy-external="true"' project-map/galaxy.svg
+          grep -q 'data-galaxy-orbit="contributed"' project-map/galaxy.svg
           grep -q '>Contributed</text>' project-map/galaxy.svg
+          if grep -q 'External contributions' project-map/galaxy.svg; then
+            echo 'Legacy synthetic External contributions hub is still present.' >&2
+            exit 1
+          fi
           grep -q '"taxonomy"' project-map/graph.json
           node <<'NODE'
           const fs = require('node:fs');
