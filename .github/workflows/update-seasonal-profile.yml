@@ -7,6 +7,7 @@ on:
       - ".github/workflows/update-seasonal-profile.yml"
       - "design-lab/theme-manifest.json"
       - "design-lab/live-theme.json"
+      - "design-lab/scripts/select-season.py"
       - "design-lab/scripts/promote-season.py"
       - "design-lab/seasons/*.svg"
   schedule:
