@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/profile-frame-bridge.svg" width="900" alt="">
+  <img src="assets/profile-frame-bridge-character-projects.svg" width="900" alt="">
 </p>
 
 <p align="center">
@@ -29,7 +29,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/profile-frame-bridge.svg" width="900" alt="">
+  <img src="assets/profile-frame-bridge-projects-activity.svg" width="900" alt="">
 </p>
 
 <p align="center">
@@ -41,7 +41,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/profile-frame-bridge.svg" width="900" alt="">
+  <img src="assets/profile-frame-bridge-activity-footer.svg" width="900" alt="">
 </p>
 
 <p align="center">
