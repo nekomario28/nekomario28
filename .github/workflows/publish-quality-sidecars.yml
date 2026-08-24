@@ -1,0 +1,193 @@
+name: Publish experimental Quality sidecars
+
+on:
+  workflow_run:
+    workflows: ["Update project map"]
+    types: [completed]
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-quality-sidecars.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-quality-sidecars.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-sidecars-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      IPM_QUALITY_TOOLS_REF: 1c4133152d67f9ff71711a356b4e8749545856a9
+    steps:
+      - name: Checkout profile repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.event.workflow_run.head_branch || github.sha }}
+          fetch-depth: 0
+
+      - name: Checkout experimental assessment tools
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: nekomario28/interactive-project-map
+          ref: ${{ env.IPM_QUALITY_TOOLS_REF }}
+          path: .ipm-quality-tools
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          package-manager-cache: false
+
+      - name: Build reviewed Quality enrichment bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import { pathToFileURL } from 'node:url';
+
+          const tools = path.resolve('.ipm-quality-tools');
+          const readJson = (relative) => JSON.parse(fs.readFileSync(path.join(tools, relative), 'utf8'));
+          const { buildQualityEvidenceVector } = await import(pathToFileURL(path.join(tools, 'scripts/repository-quality-evidence.mjs')));
+          const policy = readJson('data/repository-assessment-policy.v1.json');
+          const applications = readJson('fixtures/repository-quality-real-calibration.v1.json');
+          const libraries = readJson('fixtures/repository-quality-fork-library-calibration.v1.json');
+
+          const app = (id) => {
+            const value = applications.cases.find((entry) => entry.id === id);
+            if (!value) throw new Error(`missing application calibration: ${id}`);
+            return value;
+          };
+          const library = (fragment) => {
+            const value = libraries.cases.find((entry) => entry.id.includes(fragment));
+            if (!value) throw new Error(`missing library calibration: ${fragment}`);
+            return value;
+          };
+          const quality = (artifacts, evidence) => buildQualityEvidenceVector(policy, { artifacts, evidence });
+
+          const ipm = app('interactive-project-map-application');
+          const group10 = app('projexd-group10-application');
+          const gz = library('gz-sim');
+          const turing = library('turing');
+          const enrichments = [
+            { repositoryKey: 'nekomario28/interactive-project-map', state: 'partial', value: quality(ipm.context.artifacts, ipm.evidence) },
+            { repositoryKey: 'nekomario28/projexd_group10', state: 'partial', value: quality(group10.context.artifacts, group10.evidence) },
+            { repositoryKey: 'nekomario28/gz-sim', state: 'partial', value: quality(gz.context.artifacts, gz.qualityEvidence) },
+            { repositoryKey: 'nekomario28/turing-smart-screen-python-owl', state: 'partial', value: quality(turing.context.artifacts, turing.qualityEvidence) },
+          ];
+
+          fs.writeFileSync('.quality-enrichments.json', `${JSON.stringify({
+            schemaVersion: 1,
+            assessmentPolicyId: policy.policyId,
+            enrichments,
+          }, null, 2)}\n`);
+          NODE
+
+      - name: Generate assessment and renderer-neutral presentation sidecars
+        shell: bash
+        run: |
+          set -euo pipefail
+          node .ipm-quality-tools/scripts/repository-assessment-candidate.mjs \
+            --graph project-map/graph.json \
+            --out project-map/assessment.json \
+            --generator-revision "$IPM_QUALITY_TOOLS_REF" \
+            --quality-enrichments .quality-enrichments.json
+          node .ipm-quality-tools/scripts/repository-quality-presentation-candidate.mjs \
+            --graph project-map/graph.json \
+            --assessment project-map/assessment.json \
+            --out project-map/quality-presentation.json
+
+      - name: Validate sidecar authority and current graph identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s project-map/assessment.json
+          test -s project-map/quality-presentation.json
+          node <<'NODE'
+          const fs = require('node:fs');
+          const graph = JSON.parse(fs.readFileSync('project-map/graph.json', 'utf8'));
+          const assessment = JSON.parse(fs.readFileSync('project-map/assessment.json', 'utf8'));
+          const presentation = JSON.parse(fs.readFileSync('project-map/quality-presentation.json', 'utf8'));
+          const graphRepositories = graph.nodes.filter((node) => node?.type === 'repository');
+          const graphIds = new Set(graphRepositories.map((node) => node.id));
+          const assessmentIds = new Set(assessment.repositories.map((entry) => entry.identity.graphNodeId));
+          const presentationIds = new Set(presentation.repositories.map((entry) => entry.graphNodeId));
+          const expectedAvailable = new Set([
+            'nekomario28/interactive-project-map',
+            'nekomario28/projexd_group10',
+            'nekomario28/gz-sim',
+            'nekomario28/turing-smart-screen-python-owl',
+          ]);
+          const available = presentation.repositories.filter((entry) => entry.overlayState === 'available');
+
+          if (assessment.contractId !== 'ipm-repository-assessment-artifact-v1') throw new Error('unexpected assessment contract');
+          if (assessment.productionScoring !== false) throw new Error('assessment production scoring must remain disabled');
+          if (assessment.repositories.some((entry) => entry.productionScore !== null)) throw new Error('repository production score leaked into sidecar');
+          if (presentation.presentationId !== 'ipm-repository-quality-presentation-v1') throw new Error('unexpected presentation contract');
+          if (presentation.status !== 'experimental-non-default') throw new Error('Quality presentation is no longer non-default');
+          if (presentation.source?.graphGeneratedAt !== graph.generatedAt) throw new Error('presentation graphGeneratedAt does not match graph');
+          if (presentation.invariants?.rendererDoesNotInferQuality !== true) throw new Error('renderer authority invariant missing');
+          if (presentation.invariants?.productionRankingAllowed !== false) throw new Error('production ranking unexpectedly enabled');
+          if (graphIds.size !== graphRepositories.length) throw new Error('duplicate graph repository ids');
+          if (assessmentIds.size !== graphIds.size || presentationIds.size !== graphIds.size) throw new Error('sidecar repository count mismatch');
+          for (const id of graphIds) {
+            if (!assessmentIds.has(id) || !presentationIds.has(id)) throw new Error(`sidecar missing graph repository: ${id}`);
+          }
+          for (const id of assessmentIds) if (!graphIds.has(id)) throw new Error(`assessment orphan repository: ${id}`);
+          for (const id of presentationIds) if (!graphIds.has(id)) throw new Error(`presentation orphan repository: ${id}`);
+          if (available.length !== expectedAvailable.size) throw new Error(`Quality available count mismatch: ${available.length}`);
+          for (const key of expectedAvailable) {
+            if (!available.some((entry) => entry.repositoryKey === key)) throw new Error(`expected Quality presentation missing: ${key}`);
+          }
+          for (const entry of presentation.repositories) {
+            const policy = entry.visualPolicy;
+            if (!policy || policy.repositoryCore !== 'inherit-structure-renderer') throw new Error(`invalid repository core policy: ${entry.repositoryKey}`);
+            for (const key of ['placementEffect', 'nodeSizeEffect', 'labelPriorityEffect', 'impactHaloEffect']) {
+              if (policy[key] !== 'none') throw new Error(`Quality exceeded visual authority for ${entry.repositoryKey}: ${key}`);
+            }
+          }
+          console.log(`Quality sidecars validated: ${graphIds.size} joined; ${available.length} available; ${graphIds.size - available.length} unavailable`);
+          NODE
+
+      - name: Remove temporary assessment tools
+        shell: bash
+        run: rm -rf .ipm-quality-tools .quality-enrichments.json
+
+      - name: Verify generated sidecars on pull requests
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          test -s project-map/assessment.json
+          test -s project-map/quality-presentation.json
+          echo "EXPERIMENTAL_QUALITY_SIDECAR_PR_PASS"
+
+      - name: Commit experimental Quality sidecars
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- project-map/assessment.json project-map/quality-presentation.json
+          if git diff --cached --quiet; then
+            echo "Quality sidecars are already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "update experimental Quality sidecars"
+          git push origin HEAD:main
