@@ -77,7 +77,6 @@ jobs:
           spec.loader.exec_module(module)
 
           expected = {
-              'assets/profile-divider.svg': ('900', '38', '0 0 900 38'),
               'assets/profile-section-projects.svg': ('900', '68', '0 0 900 68'),
               'assets/profile-section-activity.svg': ('900', '68', '0 0 900 68'),
               'assets/profile-footer.svg': ('900', '92', '0 0 900 92'),
@@ -129,15 +128,15 @@ jobs:
 
           expected = {
               'hero': ('900', '260', '0 0 900 260'),
-              'divider': ('900', '38', '0 0 900 38'),
               'projects': ('900', '68', '0 0 900 68'),
               'activity': ('900', '68', '0 0 900 68'),
               'footer': ('900', '92', '0 0 900 92'),
           }
           state = json.loads(Path('design-lab/live-theme.json').read_text())
-          assert state['envelope_version'] == 2
+          assert state['envelope_version'] == 3
           assert state['active_season'] in {'spring', 'summer', 'autumn', 'winter'}
           assert set(state['live_assets']) == set(expected)
+          assert state['motion']['static_fallback'] is True
           for key, (width, height, viewbox) in expected.items():
               path = Path(state['live_assets'][key])
               assert path.is_file(), path
@@ -145,9 +144,14 @@ jobs:
               assert svg.attrib['width'] == width, (key, 'width')
               assert svg.attrib['height'] == height, (key, 'height')
               assert svg.attrib['viewBox'] == viewbox, (key, 'viewBox')
+          hero_text = Path(state['live_assets']['hero']).read_text()
+          assert 'prefers-reduced-motion' in hero_text
+          assert '<animate' in hero_text
+          assert '<script' not in hero_text.lower()
           readme = Path('README.md').read_text()
           for rel in state['live_assets'].values():
               assert rel in readme, rel
+          assert 'assets/profile-divider.svg' not in readme
           PY
 
       - name: Commit seasonal change
@@ -159,7 +163,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add \
             assets/profile-hero.svg \
-            assets/profile-divider.svg \
             assets/profile-section-projects.svg \
             assets/profile-section-activity.svg \
             assets/profile-footer.svg \
