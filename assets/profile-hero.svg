@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="260" viewBox="0 0 900 260" role="img" aria-labelledby="title desc">
+  <title id="title">nekomario28 summer dark profile</title>
+  <desc id="desc">Deep blue summer profile banner with abstract water, rain, and green maple leaves.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#06101a"/><stop offset=".55" stop-color="#082033"/><stop offset="1" stop-color="#0c2d3b"/></linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#90b7b0" stop-opacity="0"/><stop offset=".65" stop-color="#8fb8b0" stop-opacity=".28"/><stop offset="1" stop-color="#d3e2da" stop-opacity=".05"/></linearGradient>
+    <path id="leaf" d="M0,-13 L4,-5 L12,-8 L8,0 L16,3 L7,7 L9,15 L1,9 L-4,17 L-5,8 L-15,10 L-8,2 L-15,-3 L-6,-4 L-7,-13 L0,-7 Z"/>
+  </defs>
+  <rect width="900" height="260" rx="18" fill="url(#bg)"/>
+  <g stroke="#dce8e4" stroke-opacity=".07" stroke-width="1"><path d="M610 0v78"/><path d="M640 0v96"/><path d="M670 0v65"/><path d="M700 0v105"/><path d="M730 0v79"/><path d="M760 0v100"/><path d="M790 0v64"/></g>
+  <path d="M328 226 C463 154 577 250 707 172 C775 132 818 145 888 119" fill="none" stroke="url(#water)" stroke-width="36" stroke-linecap="round"/>
+  <path d="M301 238 C450 178 583 252 711 193 C786 158 829 161 900 139" fill="none" stroke="#a8c6c1" stroke-opacity=".14" stroke-width="2"/>
+  <path d="M347 216 C466 159 571 224 677 167" fill="none" stroke="#c5b177" stroke-opacity=".22" stroke-width="1.2"/>
+  <g transform="translate(70 92)"><text x="0" y="55" font-family="Georgia, 'Times New Roman', serif" font-size="47" letter-spacing="1.8" fill="#f1eee8">nekomario<tspan fill="#86aa94">28</tspan></text><rect x="2" y="78" width="54" height="2" rx="1" fill="#a32932"/><circle cx="67" cy="79" r="2" fill="#c7b06c"/></g>
+  <g fill="none" stroke="#1f2923" stroke-linecap="round"><path d="M910 18 C849 28 817 42 772 65" stroke-width="7"/><path d="M826 42 C805 31 785 24 762 20" stroke-width="4"/><path d="M784 60 C765 52 744 48 725 48" stroke-width="3.5"/></g>
+  <g fill="#7d9d78" stroke="#a8bda5" stroke-opacity=".30" stroke-width=".5"><use href="#leaf" transform="translate(855 34) rotate(14) scale(.78)"/><use href="#leaf" transform="translate(810 48) rotate(-12) scale(.62)"/><use href="#leaf" transform="translate(775 67) rotate(22) scale(.72)"/><use href="#leaf" transform="translate(738 50) rotate(-25) scale(.55)"/><use href="#leaf" transform="translate(704 82) rotate(12) scale(.48)"/></g>
+  <rect x=".5" y=".5" width="899" height="259" rx="17.5" fill="none" stroke="#fff" stroke-opacity=".07"/>
+</svg>
