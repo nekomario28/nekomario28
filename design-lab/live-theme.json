@@ -1,32 +1,42 @@
 {
-  "version": 5,
-  "envelope_version": 5,
+  "version": 6,
+  "envelope_version": 6,
   "active_season": "summer",
   "active_theme": "summer-dark",
   "source": "design-lab/seasons/summer-dark.svg",
   "live_assets": {
     "hero": "assets/profile-hero.svg",
-    "bridge": "assets/profile-frame-bridge.svg",
+    "bridge_character_projects": "assets/profile-frame-bridge-character-projects.svg",
     "projects": "assets/profile-section-projects.svg",
+    "bridge_projects_activity": "assets/profile-frame-bridge-projects-activity.svg",
     "activity": "assets/profile-section-activity.svg",
+    "bridge_activity_footer": "assets/profile-frame-bridge-activity-footer.svg",
     "footer": "assets/profile-footer.svg"
   },
   "timezone": "Asia/Tokyo",
   "motion": {
+    "profile": "rain-water-and-leaf-sway",
     "implementation": "embedded-smil",
     "static_fallback": true,
-    "live_verification": "PASS"
+    "live_verification": "NOT_RUN"
   },
   "frame": {
-    "mode": "continuous-segmented-flow",
+    "mode": "global-windowed-flow",
     "background_illusion": true,
     "shared_edge_rails": true,
     "top_cap": true,
     "bottom_cap": true,
+    "global_coordinate_space": true,
+    "shared_global_object_field": true,
+    "window_clipping": true,
+    "boundary_fade": false,
+    "partial_geometry_clipping": true,
+    "unique_bridge_windows": true,
     "phase_tolerant_handoff": true,
     "cross_document_hard_sync": false,
     "true_overlay": false
   },
+  "global_motion_space": "design-lab/envelope-v6/global-motion-space.json",
   "promoted_at": "2026-08-24",
-  "promotion_mode": "manual-envelope-v5-preview"
+  "promotion_mode": "manual"
 }

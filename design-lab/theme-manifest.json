@@ -1,27 +1,38 @@
 {
-  "version": 6,
+  "version": 7,
   "base_theme": "dark",
   "surface": "github-profile-readme",
-  "strategy": "seasonal visual envelope v5 continuous segmented rail flow",
+  "strategy": "seasonal visual envelope v6 global motion space with clipped windows",
   "timezone": "Asia/Tokyo",
   "live_assets": {
     "hero": "assets/profile-hero.svg",
-    "bridge": "assets/profile-frame-bridge.svg",
+    "bridge_character_projects": "assets/profile-frame-bridge-character-projects.svg",
     "projects": "assets/profile-section-projects.svg",
+    "bridge_projects_activity": "assets/profile-frame-bridge-projects-activity.svg",
     "activity": "assets/profile-section-activity.svg",
+    "bridge_activity_footer": "assets/profile-frame-bridge-activity-footer.svg",
     "footer": "assets/profile-footer.svg"
   },
   "optional_assets": {
+    "legacy_v5_bridge": "assets/profile-frame-bridge.svg",
     "divider": "assets/profile-divider.svg"
   },
   "live_state": "design-lab/live-theme.json",
   "envelope_motion": {
-    "mode": "phase-tolerant-segmented-handoff",
+    "mode": "global-coordinate-windowed-handoff",
+    "space": "design-lab/envelope-v6/global-motion-space.json",
+    "coordinate_system": "profile-envelope-logical-y-v1",
+    "render_model": "shared-global-field-clipped-by-local-window",
     "rail_x": [18, 882],
-    "duration_seconds": 12,
+    "duration_seconds": 36,
+    "global_extent": 1868,
+    "bleed": 24,
     "direction": "top-to-bottom",
+    "object_ownership": "shared-global-field",
+    "boundary_fade": false,
+    "partial_geometry_clipping": true,
     "cross_document_hard_sync": false,
-    "reason": "GitHub README images are independent SVG documents; shared clocks are not guaranteed.",
+    "reason": "GitHub README images are independent SVG documents; the common coordinate field is deterministic but a shared runtime clock is not guaranteed.",
     "static_fallback": true,
     "reduced_motion": true
   },
@@ -39,7 +50,7 @@
       "months": [6, 7, 8],
       "hero": "seasons/summer-dark.svg",
       "accent": "#86aa94",
-      "motion": {"profile": "rain-water-and-leaf-sway", "implementation": "embedded-smil", "static_fallback": true, "live_verification": "PASS"},
+      "motion": {"profile": "rain-water-and-leaf-sway", "implementation": "embedded-smil", "static_fallback": true, "live_verification": "NOT_RUN"},
       "auto_promote": true,
       "static_render": "PASS",
       "chrome": {"bg0": "#06101a", "bg1": "#0c2d3b", "accent2": "#c7b06c", "motif": "water"}
@@ -72,10 +83,12 @@
     "The live README references only stable assets; seasonal source paths stay inside the design lab.",
     "Optional animation must not carry essential information and must expose a reduced-motion fallback.",
     "Do not add a separator immediately after the hero when direct visual flow is stronger.",
-    "The segmented frame bridge is background/chrome only and must switch atomically with the rest of the active seasonal envelope.",
     "Projects and Activity labels are font-independent vector outlines, not client-font-dependent SVG text.",
-    "Cross-document animation is phase-coherent rather than hard-synchronized; do not claim a shared runtime clock.",
-    "Hero top cap, shared rails, bridges, section bands, and footer bottom cap use one frame grammar.",
-    "A seasonal motion live_verification PASS is scoped to a tested target surface/environment and must be re-earned for another season after automatic promotion."
+    "The moving rail objects belong to one logical global field; a local SVG is only a clipping window into that field.",
+    "Local boundary opacity fades are forbidden for v6 rail objects; partial geometry must leave/enter through clipping instead.",
+    "The three bridge occurrences use distinct stable assets because one reused SVG cannot represent three distinct global windows.",
+    "Cross-document animation remains phase-tolerant rather than hard-synchronized; do not claim a shared runtime clock.",
+    "Hero top cap, shared rails, three bridge windows, section bands, and footer bottom cap use one global coordinate grammar.",
+    "A seasonal motion live_verification PASS is scoped to a tested target surface/environment and must be re-earned after a renderer/version change or seasonal promotion."
   ]
 }
