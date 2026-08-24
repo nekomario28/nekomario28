@@ -1,32 +1,43 @@
 {
-  "version": 1,
+  "version": 2,
   "base_theme": "dark",
   "surface": "github-profile-readme",
   "strategy": "seasonal visual envelope",
+  "timezone": "Asia/Tokyo",
+  "live_asset": "assets/profile-hero.svg",
+  "live_state": "design-lab/live-theme.json",
   "seasons": {
     "spring": {
       "months": [3, 4, 5],
       "hero": "seasons/spring-dark.svg",
       "accent": "#d99eaa",
-      "motion_candidate": "sparse-petals"
+      "motion_candidate": "sparse-petals",
+      "auto_promote": true,
+      "static_render": "PASS"
     },
     "summer": {
       "months": [6, 7, 8],
       "hero": "seasons/summer-dark.svg",
       "accent": "#86aa94",
-      "motion_candidate": "rain-and-water"
+      "motion_candidate": "rain-and-water",
+      "auto_promote": true,
+      "static_render": "PASS"
     },
     "autumn": {
       "months": [9, 10, 11],
       "hero": "seasons/autumn-dark.svg",
       "accent": "#a84a2c",
-      "motion_candidate": "sparse-leaves"
+      "motion_candidate": "sparse-leaves",
+      "auto_promote": true,
+      "static_render": "PASS"
     },
     "winter": {
       "months": [12, 1, 2],
       "hero": "seasons/winter-dark.svg",
       "accent": "#9facbf",
-      "motion_candidate": "sparse-snow"
+      "motion_candidate": "sparse-snow",
+      "auto_promote": true,
+      "static_render": "PASS"
     }
   },
   "shared": {
@@ -37,6 +48,7 @@
     "GitHub page chrome cannot be overlaid or restyled from README content.",
     "The envelope is limited to the README rendering area.",
     "Static composition must remain complete if animation is unavailable.",
-    "Dark theme is the design authority for this experiment."
+    "Dark theme is the design authority for this experiment.",
+    "Automatic promotion may only use season entries with auto_promote=true and static_render=PASS."
   ]
 }
