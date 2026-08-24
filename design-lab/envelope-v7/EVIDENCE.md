@@ -1,6 +1,6 @@
 # Envelope v7 evidence
 
-Status before live merge: **LIVE_CANDIDATE / target-layout PASS**.
+Status after live merge: **LIVE / target-layout PASS / public-playback NOT_RUN**.
 
 ## Authoritative branch gate
 
@@ -17,6 +17,14 @@ Measured responsive geometry:
 - mobile 430px viewport: hero `364px`; character row `40.44 + 283.11 + 40.44 = 363.99px`.
 
 The proof requires the character side surfaces and external foreground image to stay on one row, have no inline gap, load successfully, match the hero width, and remain inside the README container. Full-width attribution, Projects canvas, Activity canvas, section bands, and footer must also match the hero width.
+
+## Live promotion receipt
+
+- PR #40 merged as `66a2c43ab0db5d918279c44663b6fdee128f6dfd`.
+- Merge parent: `75da76d478a92d1d36404afb691517b95df85fb3` (`update project map`).
+- Promoted tree: `b7446097b6ad80f5b8304fb6a4f871cbf20ddf6e`.
+- The promoted tree was rebuilt directly on the latest main parent so the experimental 50-commit branch history and temporary `.noop*` / cleanup-marker files were not carried into main.
+- The Project Map had advanced to the accepted-Contributed external-rail renderer before the v7 merge. Envelope v7 panel generation therefore treats current checked-in `project-map/galaxy.svg` and `assets/github-contributions-dark.svg` as authorities and regenerates mounted canvas assets on push/schedule rather than freezing Design Lab copies.
 
 ## Architecture decision
 
