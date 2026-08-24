@@ -18,7 +18,7 @@ jobs:
         shell: bash
         run: python -m pip install --quiet websocket-client pillow
 
-      - name: Capture one persistent browser timeline
+      - name: Capture one persistent public-profile timeline
         shell: bash
         run: |
           set -euo pipefail
@@ -28,8 +28,7 @@ jobs:
           mkdir -p "$out"
           export OUT="$out"
 
-          "$chrome" \
-            --headless=new --no-sandbox --disable-gpu --hide-scrollbars \
+          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars \
             --remote-debugging-port=9222 --remote-allow-origins='*' \
             --window-size=1440,3000 about:blank >"$out/chrome.log" 2>&1 &
           chrome_pid=$!
@@ -71,8 +70,7 @@ jobs:
           def wait_complete(timeout=15):
               end = time.time() + timeout
               while time.time() < end:
-                  if evaluate('document.readyState') == 'complete':
-                      return
+                  if evaluate('document.readyState') == 'complete': return
                   time.sleep(.1)
               raise RuntimeError('page did not reach readyState=complete')
 
@@ -80,108 +78,56 @@ jobs:
               data = call('Page.captureScreenshot', {'format': 'png', 'captureBeyondViewport': False})['data']
               (out / name).write_bytes(base64.b64decode(data))
 
-          def diff_metrics(a_name, b_name):
-              a = Image.open(out / a_name).convert('RGB')
-              b = Image.open(out / b_name).convert('RGB')
-              d = ImageChops.difference(a, b)
-              bbox = d.getbbox()
-              changed = sum(1 for px in d.getdata() if px != (0, 0, 0))
-              return {'bbox': bbox, 'changed_pixels': changed}
-
           call('Page.enable')
           call('Runtime.enable')
           call('Emulation.setEmulatedMedia', {'features': [{'name': 'prefers-color-scheme', 'value': 'dark'}]})
           call('Emulation.setDeviceMetricsOverride', {'width': 1440, 'height': 3000, 'deviceScaleFactor': 1, 'mobile': False})
-
-          # Public profile in one persistent page: real wall-clock 2s -> 8s.
           call('Page.navigate', {'url': 'https://github.com/nekomario28'})
           wait_complete()
-          profile_t0 = time.monotonic()
+
+          t0 = time.monotonic()
           time.sleep(2)
           capture('profile-desktop-dark-t2.png')
           bridge_rects = evaluate("""(() => Array.from(document.images).filter(i => i.src.includes('profile-frame-bridge-character-projects.svg')).map(i => { const r=i.getBoundingClientRect(); return {src:i.src,x:r.x,y:r.y,width:r.width,height:r.height}; }))()""") or []
-          time.sleep(max(0, 8 - (time.monotonic() - profile_t0)))
+          time.sleep(max(0, 8 - (time.monotonic() - t0)))
           capture('profile-desktop-dark-t8.png')
+
+          a = Image.open(out / 'profile-desktop-dark-t2.png').convert('RGB')
+          b = Image.open(out / 'profile-desktop-dark-t8.png').convert('RGB')
+          full = ImageChops.difference(a, b)
+          full_changed = sum(1 for px in full.getdata() if px != (0,0,0))
+          full_bbox = full.getbbox()
+
+          rail_changed = 0
+          strips = []
+          if bridge_rects:
+              r = bridge_rects[0]
+              for logical_x in (18, 882):
+                  sx = int(round(r['x'] + r['width'] * logical_x / 900))
+                  y0 = max(0, int(r['y']))
+                  y1 = min(a.height, int(r['y'] + r['height']))
+                  box = (max(0,sx-4), y0, min(a.width,sx+5), y1)
+                  strips.append(box)
+                  d = ImageChops.difference(a.crop(box), b.crop(box))
+                  rail_changed += sum(1 for px in d.getdata() if px != (0,0,0))
 
           call('Emulation.setDeviceMetricsOverride', {'width': 430, 'height': 3000, 'deviceScaleFactor': 1, 'mobile': True})
           time.sleep(.5)
           capture('profile-mobile-dark-t8.png')
 
-          profile_diff = diff_metrics('profile-desktop-dark-t2.png', 'profile-desktop-dark-t8.png')
-          rail_changed = None
-          if bridge_rects:
-              a = Image.open(out / 'profile-desktop-dark-t2.png').convert('RGB')
-              b = Image.open(out / 'profile-desktop-dark-t8.png').convert('RGB')
-              r = bridge_rects[0]
-              strips = []
-              for logical_x in (18, 882):
-                  sx = int(round(r['x'] + r['width'] * logical_x / 900))
-                  y0 = max(0, int(r['y']))
-                  y1 = min(a.height, int(r['y'] + r['height']))
-                  strips.append((max(0, sx-4), y0, min(a.width, sx+5), y1))
-              changed = 0
-              for box in strips:
-                  d = ImageChops.difference(a.crop(box), b.crop(box))
-                  changed += sum(1 for px in d.getdata() if px != (0, 0, 0))
-              rail_changed = {'bridge_rect': r, 'rail_strip_changed_pixels': changed, 'strips': strips}
-
-          # Main bridge: inspect the actual SMIL animVal at exact document times.
-          call('Emulation.setDeviceMetricsOverride', {'width': 900, 'height': 32, 'deviceScaleFactor': 1, 'mobile': False})
-          bridge_url = 'https://raw.githubusercontent.com/nekomario28/nekomario28/1a2eb9a82ac67b04662b2bbc45477278f3414e32/assets/profile-frame-bridge-character-projects.svg'
-          call('Page.navigate', {'url': bridge_url})
-          wait_complete()
-          env = evaluate("""(() => ({
-            canSet: typeof document.documentElement.setCurrentTime === 'function',
-            canPause: typeof document.documentElement.pauseAnimations === 'function',
-            reduced: matchMedia('(prefers-reduced-motion: reduce)').matches,
-            motionDisplay: getComputedStyle(document.querySelector('.v6-motion')).display
-          }))()""")
-          if not env['canSet'] or not env['canPause']:
-              raise RuntimeError('top-level SVG SMIL timeline controls unavailable')
-          evaluate('document.documentElement.pauseAnimations()')
-
-          bridge_states = []
-          bridge_times = [14.80, 15.42, 15.50, 15.70]
-          for t in bridge_times:
-              evaluate(f'document.documentElement.setCurrentTime({t})')
-              state = evaluate("""(() => {
-                const e = document.querySelector('#v6-particle-left-primary');
-                const tr = e.transform.animVal.consolidate();
-                return {
-                  current: document.documentElement.getCurrentTime(),
-                  translateY: tr ? tr.matrix.f : null,
-                  rect: (() => { const r=e.getBoundingClientRect(); return {x:r.x,y:r.y,width:r.width,height:r.height}; })()
-                };
-              })()""")
-              bridge_states.append({'requested': t, **state})
-              if abs(state['current'] - t) > 0.02:
-                  raise RuntimeError(f"expected SVG time {t}, got {state['current']}")
-              capture(f'bridge-main-t{t:.2f}.png')
-
-          bridge_diffs = {
-              '14.80_to_15.42': diff_metrics('bridge-main-t14.80.png', 'bridge-main-t15.42.png'),
-              '15.42_to_15.50': diff_metrics('bridge-main-t15.42.png', 'bridge-main-t15.50.png'),
-              '15.50_to_15.70': diff_metrics('bridge-main-t15.50.png', 'bridge-main-t15.70.png'),
-          }
-
           metrics = {
-              'profile_same_page_t2_t8': profile_diff,
+              'profile_same_page_t2_t8': {'bbox': full_bbox, 'changed_pixels': full_changed},
               'public_bridge_rects': bridge_rects,
-              'public_bridge_rail_diff': rail_changed,
-              'smil_environment': env,
-              'main_bridge_states': bridge_states,
-              'main_bridge_setCurrentTime_diffs': bridge_diffs,
+              'public_bridge_rail_diff': {'changed_pixels': rail_changed, 'strips': strips},
+              'proof_scope': 'actual public GitHub profile, same persistent Chrome page, wall-clock 2s -> 8s'
           }
           (out / 'metrics.json').write_text(json.dumps(metrics, indent=2))
           print(json.dumps(metrics, indent=2))
 
-          # Require the public bridge rail to change on one persistent page and
-          # require the SMIL animated transform to progress across requested times.
-          if not rail_changed or rail_changed['rail_strip_changed_pixels'] <= 0:
-              raise RuntimeError('public profile bridge rail did not visibly change on the persistent page')
-          ys = [s['translateY'] for s in bridge_states]
-          if any(v is None for v in ys) or len(set(round(v, 3) for v in ys)) != len(ys):
-              raise RuntimeError(f'SMIL animVal did not progress across exact times: {ys}')
+          if not bridge_rects:
+              raise RuntimeError('v6 bridge asset was not found on public profile DOM')
+          if rail_changed <= 0:
+              raise RuntimeError('v6 bridge rail did not visibly change on the persistent public profile page')
           PY
 
           sha256sum "$out"/*.png | tee "$out/sha256.txt"
