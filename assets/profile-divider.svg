@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="46" viewBox="0 0 900 46" role="img" aria-label="dark profile section divider">
+  <defs><linearGradient id="bg" x1="0" x2="1"><stop stop-color="#070b14"/><stop offset=".5" stop-color="#0b1324"/><stop offset="1" stop-color="#070b14"/></linearGradient></defs>
+  <rect width="900" height="46" rx="12" fill="url(#bg)"/>
+  <path d="M92 23 H392" stroke="#d9dde8" stroke-opacity=".12"/><path d="M508 23 H808" stroke="#d9dde8" stroke-opacity=".12"/>
+  <circle cx="450" cy="23" r="3" fill="#a32932"/><circle cx="450" cy="23" r="8" fill="none" stroke="#c9a85f" stroke-opacity=".26"/>
+</svg>
