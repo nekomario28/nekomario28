@@ -174,6 +174,9 @@ jobs:
             assets/profile-activity-canvas.svg \
             assets/profile-frame-bridge-activity-footer.svg \
             assets/profile-footer.svg \
+            assets/profile-attribution-projects-transition.svg \
+            assets/profile-activity-header.svg \
+            assets/profile-footer-transition.svg \
             design-lab/live-theme.json
           if git diff --cached --quiet; then
             echo "Project map and mounted profile derivatives are already up to date."
