@@ -39,7 +39,7 @@
       "months": [6, 7, 8],
       "hero": "seasons/summer-dark.svg",
       "accent": "#86aa94",
-      "motion": {"profile": "rain-water-and-leaf-sway", "implementation": "embedded-smil", "static_fallback": true, "live_verification": "NOT_RUN"},
+      "motion": {"profile": "rain-water-and-leaf-sway", "implementation": "embedded-smil", "static_fallback": true, "live_verification": "PASS"},
       "auto_promote": true,
       "static_render": "PASS",
       "chrome": {"bg0": "#06101a", "bg1": "#0c2d3b", "accent2": "#c7b06c", "motif": "water"}
@@ -75,6 +75,7 @@
     "The segmented frame bridge is background/chrome only and must switch atomically with the rest of the active seasonal envelope.",
     "Projects and Activity labels are font-independent vector outlines, not client-font-dependent SVG text.",
     "Cross-document animation is phase-coherent rather than hard-synchronized; do not claim a shared runtime clock.",
-    "Hero top cap, shared rails, bridges, section bands, and footer bottom cap use one frame grammar."
+    "Hero top cap, shared rails, bridges, section bands, and footer bottom cap use one frame grammar.",
+    "A seasonal motion live_verification PASS is scoped to a tested target surface/environment and must be re-earned for another season after automatic promotion."
   ]
 }

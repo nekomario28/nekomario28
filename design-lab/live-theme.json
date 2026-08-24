@@ -15,7 +15,7 @@
   "motion": {
     "implementation": "embedded-smil",
     "static_fallback": true,
-    "live_verification": "NOT_RUN"
+    "live_verification": "PASS"
   },
   "frame": {
     "mode": "continuous-segmented-flow",
