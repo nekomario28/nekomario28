@@ -1,0 +1,37 @@
+name: Envelope v4 table render proof
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/envelope-v4-table-render-proof.yml"
+      - "README.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Capture GitHub-rendered table frame in dark mode
+        shell: bash
+        run: |
+          set -euo pipefail
+          chrome="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)"
+          test -n "$chrome"
+          url='https://github.com/nekomario28/nekomario28/tree/feat/envelope-v4-table-live-preview#readme'
+          mkdir -p "$RUNNER_TEMP/envelope-v4-table-proof"
+          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-dark-mode --virtual-time-budget=8000 --window-size=1440,2600 --screenshot="$RUNNER_TEMP/envelope-v4-table-proof/desktop-dark.png" "$url"
+          "$chrome" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-dark-mode --virtual-time-budget=8000 --window-size=430,2600 --screenshot="$RUNNER_TEMP/envelope-v4-table-proof/mobile-dark.png" "$url"
+          file "$RUNNER_TEMP/envelope-v4-table-proof/"*.png
+
+      - name: Upload table render proof
+        uses: actions/upload-artifact@v4
+        with:
+          name: envelope-v4-table-github-render-proof
+          path: ${{ runner.temp }}/envelope-v4-table-proof/*.png
+          if-no-files-found: error
+          retention-days: 1
