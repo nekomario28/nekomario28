@@ -25,8 +25,8 @@ jobs:
   generate:
     permissions:
       contents: read
-    # Reviewed profile-local Galaxy world v1 release: R 19b56d8b78965285aad190c9fc4ebcde7abcd1ac
-    # resolves immutable Action F 4e5bbf4c4a4858770b4393ced718722fba724530 (Verify #806).
+    # Reviewed arm-free profile Galaxy v1 release: R 7524a9bf43fbdb5dd88ede5312f858de0e41e70a
+    # resolves immutable Action F 041717e17cea8a28343a3b607ef4faf008813fd0 (Verify #822/#827).
     uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@v1
     with:
       theme: dark
@@ -109,7 +109,7 @@ jobs:
           const arms = [...svg.matchAll(/data-profile-galaxy-arm=/g)].length;
           const associations = [...svg.matchAll(/data-profile-stellar-association=/g)].length;
           if (rings !== 3) throw new Error(`profile-local Galaxy ring count mismatch: ${rings}`);
-          if (arms !== groups.length) throw new Error(`profile-local Galaxy arm count mismatch: ${arms} SVG vs ${groups.length} groups`);
+          if (arms !== 0) throw new Error(`profile-local Galaxy arms must stay absent: ${arms}`);
           if (associations !== groups.length) throw new Error(`stellar association count mismatch: ${associations} SVG vs ${groups.length} groups`);
           if (/parallax|meteor/i.test(svg)) throw new Error('screen-space cosmic decoration leaked back into static Galaxy output');
 
@@ -131,20 +131,19 @@ jobs:
             }
           };
           visit(graph);
-          console.log(`Canonical map validated: ${graph.repositoryCount} owned + ${contributed.length} accepted Contributed; profile-local Galaxy background + external halo verified`);
+          console.log(`Canonical map validated: ${graph.repositoryCount} owned + ${contributed.length} accepted Contributed; arm-free profile-local Galaxy background + external halo verified`);
           NODE
 
-      - name: Refresh Envelope v7 from generated project map
+      - name: Refresh active Envelope v8 from generated project map
         shell: bash
         run: |
           set -euo pipefail
           python -m py_compile \
             design-lab/scripts/promote-season.py \
-            design-lab/envelope-v7/render_panels.py \
-            design-lab/envelope-v7/render_continuous_canvas.py \
-            design-lab/envelope-v7/validate.py
+            design-lab/envelope-v8/render_continuous_canvas.py \
+            design-lab/envelope-v8/validate.py
           python design-lab/scripts/promote-season.py --apply --json
-          python design-lab/envelope-v7/validate.py
+          python design-lab/envelope-v8/validate.py
 
       - name: Verify atomic publish diff on pull requests
         if: github.event_name == 'pull_request'
