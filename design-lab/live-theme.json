@@ -1,17 +1,21 @@
 {
-  "version": 2,
-  "envelope_version": 2,
+  "version": 3,
+  "envelope_version": 3,
   "active_season": "summer",
   "active_theme": "summer-dark",
   "source": "design-lab/seasons/summer-dark.svg",
   "live_assets": {
     "hero": "assets/profile-hero.svg",
-    "divider": "assets/profile-divider.svg",
     "projects": "assets/profile-section-projects.svg",
     "activity": "assets/profile-section-activity.svg",
     "footer": "assets/profile-footer.svg"
   },
   "timezone": "Asia/Tokyo",
+  "motion": {
+    "implementation": "embedded-smil",
+    "static_fallback": true,
+    "live_verification": "NOT_RUN"
+  },
   "promoted_at": "2026-08-24",
-  "promotion_mode": "manual-envelope-v2"
+  "promotion_mode": "manual-motion-envelope-v3"
 }
