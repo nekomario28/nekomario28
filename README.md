@@ -1,6 +1,6 @@
-<!-- Envelope v7 continuous-canvas EXPERIMENT B. Main remains unchanged until target-surface validation. -->
+<!-- Envelope v7 continuous-canvas EXPERIMENT C. Main remains unchanged until target-surface validation. -->
 <div align="center"><img src="assets/profile-hero.svg" width="900" alt="nekomario28 の季節ダークプロフィールバナー"></div>
-<div align="center"><a href="https://konosuba.com/bakuen/story/?mode=story4"><img src="design-lab/envelope-v7/character-panel.svg" width="900" alt="めぐみん画像を背景surface上に配置した character stage"></a></div>
+<div align="center"><img src="design-lab/envelope-v7/character-side-left.svg" width="11.111%" alt=""><a href="https://konosuba.com/bakuen/story/?mode=story4"><img src="https://konosuba.com/bakuen/story/img/pdsfi4/05.jpg" width="77.778%" alt="めぐみん"></a><img src="design-lab/envelope-v7/character-side-right.svg" width="11.111%" alt=""></div>
 <div align="center"><img src="design-lab/envelope-v7/attribution-band.svg" width="900" alt="©2023 暁なつめ・三嶋くろね／KADOKAWA／このすば爆焔製作委員会"></div>
 <div align="center"><img src="assets/profile-frame-bridge-character-projects.svg" width="900" alt=""></div>
 <div align="center"><img src="assets/profile-section-projects.svg" width="900" alt="プロジェクト"></div>
