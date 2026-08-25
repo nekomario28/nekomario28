@@ -85,6 +85,50 @@ def render_case(work: Path, name: str, config: Path) -> tuple[Path, dict, dict]:
     return out, contract, resolved
 
 
+def assert_donor_boundary_equivalence(work: Path, expected: Path) -> None:
+    """Moving mounted-background policy across the donor boundary must not alter inherit output."""
+    contract, resolved = R.CONTRACT.load_and_resolve(OPAQUE_SAFE)
+    stripped_donor = work / "donor-default-stripped"
+    preserved_donor = work / "donor-preserved"
+    legacy_equivalent = work / "legacy-boundary-output"
+    decoupled = work / "decoupled-boundary-output"
+    for path in (stripped_donor, preserved_donor, legacy_equivalent, decoupled):
+        path.mkdir()
+
+    # Old boundary shape: v8 already removed mounted presentation backgrounds.
+    R.V8.render("summer", stripped_donor)
+
+    # New normalized boundary: v8 always preserves them; the standalone transformer
+    # alone owns `inherit | preserve`.
+    original_strip = R.V8._strip_mounted_source_backgrounds
+    R.V8._strip_mounted_source_backgrounds = lambda text: text
+    try:
+        R.V8.render("summer", preserved_donor)
+    finally:
+        R.V8._strip_mounted_source_backgrounds = original_strip
+
+    legacy_receipt = R.TRANSFORM.transform_bundle(
+        stripped_donor,
+        legacy_equivalent,
+        contract=contract,
+        resolved=resolved,
+        season="summer",
+    )
+    decoupled_receipt = R.TRANSFORM.transform_bundle(
+        preserved_donor,
+        decoupled,
+        contract=contract,
+        resolved=resolved,
+        season="summer",
+    )
+    assert legacy_receipt["render_target_sha256"] == decoupled_receipt["render_target_sha256"]
+    for rel in R.asset_paths():
+        legacy_bytes = (legacy_equivalent / rel).read_bytes()
+        decoupled_bytes = (decoupled / rel).read_bytes()
+        current_bytes = (expected / rel).read_bytes()
+        assert legacy_bytes == decoupled_bytes == current_bytes, rel
+
+
 def main() -> int:
     with tempfile.TemporaryDirectory() as tmp:
         work = Path(tmp)
@@ -99,6 +143,8 @@ def main() -> int:
         preserve_cfg = write_config(work, "preserve", background="transparent", text="native", motion="off", mounted="preserve")
         preserve, _, preserve_resolved = render_case(work, "transparent-preserve", preserve_cfg)
 
+        assert_donor_boundary_equivalence(work, opaque)
+
         # The render-target receipt is deterministic for identical target bytes and
         # differs when a material presentation contract changes.
         assert transparent_resolved["render_target_sha256"] == transparent_repeat_resolved["render_target_sha256"]
@@ -111,12 +157,10 @@ def main() -> int:
         }
         assert len(target_ids) == 5
 
-        # safe: no visible <text> survives in any repository-owned output.
         assert all(texts(opaque / rel) == 0 for rel in R.asset_paths())
         assert all(texts(transparent / rel) == 0 for rel in R.asset_paths())
         assert sum((opaque / rel).read_text().count('data-vector-text="v1"') for rel in R.asset_paths()) > 0
 
-        # Transparent safe text is host-appearance adaptive without reintroducing fonts.
         transparent_hero = (transparent / "assets/profile-hero.svg").read_text(encoding="utf-8")
         assert 'data-v9-adaptive-vector-text-style="v1"' in transparent_hero
         assert 'class="v9-adaptive-vector-text"' in transparent_hero
@@ -124,15 +168,12 @@ def main() -> int:
         assert 'prefers-color-scheme: dark' in transparent_hero
         assert 'stroke="currentColor"' in transparent_hero
 
-        # native: host-font dependency remains explicit and observable.
         assert sum(texts(native / rel) for rel in R.asset_paths()) > 0
         assert opaque_resolved["verification"]["text_pass_mode"] == "font-independent"
         native_contract, native_contract_resolved = R.CONTRACT.load_and_resolve(native_cfg)
         assert native_contract["profile"]["text"] == "native"
         assert native_contract_resolved["verification"]["text_pass_mode"] == "host-dependent-only"
 
-        # minimal: fixed text is vectorized, dynamic visible labels are suppressed,
-        # accessibility title/desc metadata remains textual.
         for rel in R.DYNAMIC_VISIBLE_TEXT:
             svg = (minimal / rel).read_text(encoding="utf-8")
             assert '<text' not in svg
@@ -141,7 +182,6 @@ def main() -> int:
         assert (minimal / "assets/profile-hero.svg").read_text().count('data-vector-text="v1"') >= 1
         assert all('<animate' not in (minimal / rel).read_text().lower() for rel in R.asset_paths())
 
-        # outer transparency is independent from mounted-source opacity.
         assert all('surface-base"' in (opaque / rel).read_text() for rel in R.asset_paths())
         assert all('surface-base"' not in (transparent / rel).read_text() for rel in R.asset_paths())
         inherited_projects = (transparent / "assets/profile-projects-canvas.svg").read_text()
@@ -149,7 +189,6 @@ def main() -> int:
         assert 'fill="url(#galaxy-family-bg)"' not in inherited_projects
         assert 'fill="url(#galaxy-family-bg)"' in preserved_projects
 
-        # transparent mode expands the required host-appearance matrix.
         assert len(opaque_resolved["verification"]["target_cases"]) == 2
         assert len(transparent_resolved["verification"]["target_cases"]) == 4
         assert {case["appearance"] for case in transparent_resolved["verification"]["target_cases"]} == {"dark", "light"}
@@ -157,6 +196,7 @@ def main() -> int:
         assert transparent_contract["profile"]["background"] == "transparent"
 
     print("ENVELOPE_V9_PORTABLE_STRUCTURE_PASS cases=5 text=safe/native/minimal background=opaque/transparent mounted=inherit/preserve")
+    print("DONOR_BOUNDARY_EQUIVALENCE=PASS legacy_prestripped_vs_preserve_first=true")
     print("RENDER_TARGET_FINGERPRINT=PASS deterministic=true target_sensitive=true")
     print("TARGET_LAYOUT=NOT_RUN TEXT_RENDER=NOT_RUN PLAYBACK=NOT_RUN")
     return 0
