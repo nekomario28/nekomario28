@@ -18,7 +18,7 @@
     "source_sha": "bf3960dc85eebf8e25c5e8a015e968322a984597",
     "initial_filtered_history_head": "ee0a07b9e85f7a57c6b2146149e68420202f4fe5",
     "current_bootstrap_main_sha": "d916b057ec897ceef94bdee293d4e02f42e46d1b",
-    "current_working_main_sha": "23f9b3d546a9ca29435de3741f8bee848450a937",
+    "current_working_main_sha": "3379342a048e5d64f36a28e91ce132b14592961b",
     "bootstrap_carrier_run": 32868834661,
     "exact_head_validation_run": 32869436824,
     "portable_regression_run": 32871700639,
@@ -33,7 +33,24 @@
       "tests": 14,
       "donor_bundle_lint": "PASS",
       "donor_bundle_assets": 15,
-      "renderer_authority": false
+      "renderer_authority": false,
+      "geometry_projection": {
+        "phase": "P10",
+        "mode": "opt-in-semantic-frame-rail-projection",
+        "implementation_commit": "c73c902661ceadd93ae15a89d9eea352f2d1ac5e",
+        "evidence_head": "3379342a048e5d64f36a28e91ce132b14592961b",
+        "implementation_validation_run": 32881179871,
+        "implementation_validation_job": 97910809919,
+        "exact_head_validation_run": 32881471260,
+        "exact_head_validation_job": 97911747424,
+        "tests": 15,
+        "donor_sha": "0ed9c954283661edd924d0abb6c22c3544b3ae93",
+        "donor_byte_equivalence": "PASS",
+        "donor_assets": 15,
+        "heterogeneous_right_side_projection": "120px->x102-from-width-minus-18-inset",
+        "legacy_default_preserved": true,
+        "global_renderer_authority": false
+      }
     },
     "public_release": "DEFERRED"
   },
@@ -114,7 +131,8 @@
     "the standalone GitHub transformer consumes a complete donor SVG bundle but does not define how arbitrary semantic source data becomes that bundle",
     "the P6 second consumer is a structurally different synthetic fixture, not an independent external consumer",
     "the private working repository is an extraction/development surface and does not itself authorize public redistribution",
-    "P9 design grammar is detection-only measured reference; it does not become renderer authority until migration equivalence and rendered evidence are re-earned"
+    "P9 design grammar remains the measured reference; P10 gives only frame-rail geometry an explicit opt-in projection path and does not make the grammar global renderer authority",
+    "P10 exact donor byte equivalence covers the frame-caps-none transform case and does not replace browser, responsive, playback or public-target evidence"
   ],
   "promotion_gates": {
     "create_public_repository": [
