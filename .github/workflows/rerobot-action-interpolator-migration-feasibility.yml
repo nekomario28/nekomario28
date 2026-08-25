@@ -1,0 +1,144 @@
+name: Rerobot ActionInterpolator migration feasibility
+
+on:
+  push:
+    branches:
+      - research/rerobot-current-consumer-gate
+
+permissions:
+  contents: read
+
+jobs:
+  migration-feasibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      REROBOT_SHA: f6c36c7da5326886fb6eb6e83d8a2d87283b31ec
+      LEROBOT_SHA: 8b256a6c0d4769c3cc3e7e98f04940126398a391
+    steps:
+      - name: Clone exact Rerobot
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --quiet https://github.com/k1000dai/Rerobot.git rerobot
+          git -C rerobot checkout --quiet --detach "$REROBOT_SHA"
+          test "$(git -C rerobot rev-parse HEAD)" = "$REROBOT_SHA"
+          echo "REROBOT_EXACT_HEAD=$REROBOT_SHA"
+          echo "CURRENT_LEROBOT_AUTHORITY=$LEROBOT_SHA"
+
+      - name: Apply minimal current-contract migration in disposable clone
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('rerobot/crates/rerobot-core/src/action_interpolator.rs')
+          text = path.read_text()
+
+          replacements = [
+              (
+                  "    idx: usize,\n}\n",
+                  "    idx: usize,\n    emitted_policy_action: bool,\n}\n",
+              ),
+              (
+                  "            idx: 0,\n        })\n",
+                  "            idx: 0,\n            emitted_policy_action: false,\n        })\n",
+              ),
+              (
+                  "    pub fn reset(&mut self) {\n        self.prev = None;\n        self.buffer.clear();\n        self.idx = 0;\n    }\n",
+                  "    pub fn reset(&mut self) {\n        self.prev = None;\n        self.buffer.clear();\n        self.idx = 0;\n        self.emitted_policy_action = false;\n    }\n",
+              ),
+              (
+                  "    pub fn needs_new_action(&self) -> bool {\n        self.idx >= self.buffer.len()\n    }\n",
+                  "    pub fn needs_new_action(&self) -> bool {\n        self.idx >= self.buffer.len()\n    }\n\n    /// Whether the action returned by the last `get` was the policy action itself.\n    pub fn emitted_policy_action(&self) -> bool {\n        self.emitted_policy_action\n    }\n",
+              ),
+              (
+                  "                for i in 1..=steps {\n                    let t = T::from_f64(i as f64 / steps as f64);\n                    let step = (0..width)\n                        .map(|k| T::lerp(prev[k * prev_stride], t, action[k * action_stride]))\n                        .collect();\n                    self.buffer.push(step);\n                }\n",
+                  "                for i in 1..steps {\n                    let t = T::from_f64(i as f64 / steps as f64);\n                    let step = (0..width)\n                        .map(|k| T::lerp(prev[k * prev_stride], t, action[k * action_stride]))\n                        .collect();\n                    self.buffer.push(step);\n                }\n                // Current LeRobot contract: the cycle-end command is the exact\n                // policy action, not a t=1 recomputation that can differ by an ULP.\n                self.buffer.push(action.to_vec());\n",
+              ),
+              (
+                  "    pub fn get(&mut self) -> Option<&[T]> {\n        if self.idx >= self.buffer.len() {\n            return None;\n        }\n        let i = self.idx;\n        self.idx += 1;\n        Some(&self.buffer[i])\n    }\n",
+                  "    pub fn get(&mut self) -> Option<&[T]> {\n        if self.idx >= self.buffer.len() {\n            self.emitted_policy_action = false;\n            return None;\n        }\n        let i = self.idx;\n        self.idx += 1;\n        self.emitted_policy_action = self.idx == self.buffer.len();\n        Some(&self.buffer[i])\n    }\n",
+              ),
+          ]
+
+          for old, new in replacements:
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'patch anchor count {count}, expected 1: {old[:80]!r}')
+              text = text.replace(old, new, 1)
+
+          path.write_text(text)
+          print('MINIMAL_MIGRATION_PATCH_APPLIED')
+          PY
+
+          git -C rerobot diff --check
+          git -C rerobot diff -- crates/rerobot-core/src/action_interpolator.rs
+
+      - name: Add current-contract regression tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > rerobot/crates/rerobot-core/tests/current_upstream_action_interpolator_migration.rs <<'RS'
+          //! Current LeRobot ActionInterpolator migration feasibility probes.
+
+          use rerobot_core::action_interpolator::ActionInterpolator;
+
+          #[test]
+          fn cycle_end_is_bit_exact_policy_action_on_current_discriminator() {
+              let prev = [-8.56674575805664_f32, 0.6271883249282837_f32];
+              let action = [11.006041526794434_f32, -7.663063049316406_f32];
+              let old_endpoint = [
+                  prev[0] + 1.0_f32 * (action[0] - prev[0]),
+                  prev[1] + 1.0_f32 * (action[1] - prev[1]),
+              ];
+              assert_ne!(old_endpoint, action, "fixture became vacuous");
+
+              let mut interp = ActionInterpolator::<f32>::new(2).unwrap();
+              interp.add(&prev).unwrap();
+              assert_eq!(interp.get(), Some(prev.as_slice()));
+              interp.add(&action).unwrap();
+              let _ = interp.get().unwrap();
+              let endpoint = interp.get().unwrap().to_vec();
+
+              assert_eq!(endpoint.as_slice(), action.as_slice());
+              assert_eq!(
+                  endpoint.iter().copied().map(f32::to_bits).collect::<Vec<_>>(),
+                  action.map(f32::to_bits).to_vec(),
+              );
+              println!("CURRENT_BIT_EXACT_ENDPOINT_MIGRATION_PASS");
+          }
+
+          #[test]
+          fn emitted_policy_action_marks_only_real_policy_ticks() {
+              let mut interp = ActionInterpolator::<f32>::new(2).unwrap();
+              let a0 = [0.0_f32];
+              let a1 = [2.0_f32];
+
+              interp.add(&a0).unwrap();
+              assert_eq!(interp.get(), Some(a0.as_slice()));
+              assert!(interp.emitted_policy_action());
+
+              interp.add(&a1).unwrap();
+              assert_eq!(interp.get(), Some([1.0_f32].as_slice()));
+              assert!(!interp.emitted_policy_action());
+
+              assert_eq!(interp.get(), Some(a1.as_slice()));
+              assert!(interp.emitted_policy_action());
+
+              assert_eq!(interp.get(), None);
+              assert!(!interp.emitted_policy_action());
+              println!("CURRENT_EMITTED_POLICY_ACTION_CADENCE_PASS");
+          }
+          RS
+
+      - name: Run existing rerobot-core regression suite plus current contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd rerobot
+          cargo test --locked -p rerobot-core -- --nocapture | tee /tmp/migration.log
+          grep -q 'CURRENT_BIT_EXACT_ENDPOINT_MIGRATION_PASS' /tmp/migration.log
+          grep -q 'CURRENT_EMITTED_POLICY_ACTION_CADENCE_PASS' /tmp/migration.log
+          echo MINIMAL_MIGRATION_EXISTING_CORE_SUITE_PASS
