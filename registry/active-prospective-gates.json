@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "status": "VALIDATED",
+  "purpose": "Expose active preregistered prospective gates before material decisions without granting execution or mutation authority.",
+  "gates": [
+    {
+      "gateId": "level9-execution-admission-first-native-consumer",
+      "state": "ACTIVE",
+      "eventTypes": [
+        "PRE_PAYLOAD_ADMISSION"
+      ],
+      "record": "research/2026-08-25-level-9-next-prospective-gates-preregistration.md",
+      "preDecisionRequired": true,
+      "requiredActions": [
+        "freeze native baseline before shared observation",
+        "construct EXECUTION_ADMISSION_OBSERVATION from already-available read-only facts",
+        "compare native and shared decisions/costs before promotion"
+      ],
+      "invalidIf": [
+        "payload already started",
+        "shared receipt constructed after owner decision and relabeled prospective",
+        "workload manufactured only to exercise the component"
+      ],
+      "doesNotAuthorize": [
+        "execution",
+        "rerun",
+        "retry",
+        "cleanup",
+        "kill",
+        "dispatch",
+        "scheduling",
+        "payload",
+        "physical action"
+      ]
+    },
+    {
+      "gateId": "level9-patch-convergence-next-moving-main",
+      "state": "ACTIVE",
+      "eventTypes": [
+        "MOVING_MAIN_CONVERGENCE"
+      ],
+      "record": "research/2026-08-25-level-9-next-prospective-gates-preregistration.md",
+      "preDecisionRequired": true,
+      "requiredActions": [
+        "freeze native convergence plan",
+        "run PATCH_CONVERGENCE read-only before reviewer/CI/merge decision",
+        "compare helper report with native handling"
+      ],
+      "invalidIf": [
+        "merge/rebase/CI decision already made",
+        "retrospective replay relabeled prospective",
+        "synthetic base drift created only for the experiment"
+      ],
+      "doesNotAuthorize": [
+        "rebase",
+        "cherry-pick",
+        "merge",
+        "branch write",
+        "force update",
+        "CI skip"
+      ]
+    }
+  ]
+}
