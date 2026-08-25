@@ -35,7 +35,7 @@ jobs:
     permissions:
       contents: write
     env:
-      IPM_QUALITY_TOOLS_REF: c2ae67b85d211d8edb7cc928d5839d6d67d00015
+      IPM_QUALITY_TOOLS_REF: a05e1cc31a0a82b42af16e6e2c13c584577792be
     steps:
       - name: Checkout profile repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -69,7 +69,7 @@ jobs:
           cp .quality-sidecars/assessment.json project-map/assessment.json
           cp .quality-sidecars/quality-presentation.json project-map/quality-presentation.json
 
-      - name: Validate sidecar authority and current graph identity
+      - name: Validate sidecar authority, attribution and evidence freshness
         shell: bash
         run: |
           set -euo pipefail
@@ -86,14 +86,21 @@ jobs:
           const graphIds = new Set(graphRepositories.map((node) => node.id));
           const assessmentIds = new Set(assessment.repositories.map((entry) => entry.identity.graphNodeId));
           const presentationIds = new Set(presentation.repositories.map((entry) => entry.graphNodeId));
+          const normalizeKey = (value) => String(value || '').toLowerCase();
+          const expectedAssessmentSources = new Set([
+            'nekomario28/interactive-project-map',
+            'nekomario28/projexd_group10',
+            'nekomario28/gz-sim',
+            'nekomario28/turing-smart-screen-python-owl',
+          ]);
           const expectedAvailable = new Set([
             'nekomario28/interactive-project-map',
             'nekomario28/projexd_group10',
             'nekomario28/turing-smart-screen-python-owl',
           ]);
-          const expectedEvidenceSourceCount = 4;
+          const expectedSnapshotDates = ['2026-08-25'];
           const available = presentation.repositories.filter((entry) => entry.overlayState === 'available');
-          const byKey = new Map(presentation.repositories.map((entry) => [entry.repositoryKey, entry]));
+          const unavailable = presentation.repositories.filter((entry) => entry.overlayState !== 'available');
 
           if (assessment.contractId !== 'ipm-repository-assessment-artifact-v1') throw new Error('unexpected assessment contract');
           if (assessment.generatorRevision !== process.env.IPM_QUALITY_TOOLS_REF) throw new Error('assessment generator revision does not match pinned tools ref');
@@ -108,12 +115,17 @@ jobs:
           if (diagnostics.sourceGraph?.generatedAt !== graph.generatedAt) throw new Error('diagnostics graphGeneratedAt does not match graph');
           if (diagnostics.sourceGraph?.repositoryNodeCount !== graphRepositories.length) throw new Error('diagnostics repository-node count mismatch');
           if (diagnostics.generatorRevision !== process.env.IPM_QUALITY_TOOLS_REF) throw new Error('diagnostics generator revision does not match pinned tools ref');
-          if (diagnostics.enrichmentSources?.length !== expectedEvidenceSourceCount) throw new Error('bounded enrichment source count mismatch');
-          if (diagnostics.expectedPresentationAvailable !== expectedAvailable.size) throw new Error('attribution-safe presentation expectation mismatch');
-          if (diagnostics.invariants?.forkQualityUsesProvenanceAwareBundle !== true) throw new Error('fork provenance-aware bundle invariant missing');
-          if (diagnostics.invariants?.forkPortfolioQualityUsesLocalDeltaOnly !== true) throw new Error('fork local-delta-only presentation invariant missing');
+          if (diagnostics.expectedPresentationAvailable !== expectedAvailable.size) throw new Error('manifest presentation-available expectation mismatch');
+          if (diagnostics.enrichmentSources?.length !== expectedAssessmentSources.size) throw new Error('bounded assessment source count mismatch');
+          if (diagnostics.assessment?.quality?.applied !== expectedAssessmentSources.size) throw new Error('bounded assessment enrichment count mismatch');
+          if (diagnostics.invariants?.forkQualityUsesProvenanceAwareBundle !== true) throw new Error('fork provenance bundle invariant missing');
+          if (diagnostics.invariants?.forkPortfolioQualityUsesLocalDeltaOnly !== true) throw new Error('fork local-delta presentation invariant missing');
+          if (diagnostics.invariants?.frozenEvidenceFreshnessIsPublished !== true) throw new Error('frozen evidence freshness invariant missing');
+          if (diagnostics.invariants?.automaticEvidenceRefreshPerformed !== false) throw new Error('automatic evidence refresh must remain disabled');
+          if (diagnostics.invariants?.presentationFreshnessUsesPresentationEligibleSourcesOnly !== true) throw new Error('presentation freshness scope invariant missing');
           if (diagnostics.invariants?.publicationPerformed !== false) throw new Error('generator must not claim publication authority');
           if (diagnostics.invariants?.defaultActionChanged !== false) throw new Error('generator must not claim default Action changes');
+
           if (graphIds.size !== graphRepositories.length) throw new Error('duplicate graph repository ids');
           if (assessmentIds.size !== graphIds.size || presentationIds.size !== graphIds.size) throw new Error('sidecar repository count mismatch');
           for (const id of graphIds) {
@@ -121,28 +133,41 @@ jobs:
           }
           for (const id of assessmentIds) if (!graphIds.has(id)) throw new Error(`assessment orphan repository: ${id}`);
           for (const id of presentationIds) if (!graphIds.has(id)) throw new Error(`presentation orphan repository: ${id}`);
-          if (available.length !== expectedAvailable.size) throw new Error(`Quality available count mismatch: ${available.length}`);
-          for (const key of expectedAvailable) {
-            if (!available.some((entry) => entry.repositoryKey === key)) throw new Error(`expected Quality presentation missing: ${key}`);
-          }
 
-          const gz = byKey.get('nekomario28/gz-sim');
-          if (!gz || gz.qualityAttributionScope !== 'local-delta') throw new Error('gz-sim fork attribution scope is not local-delta');
-          if (gz.overlayState !== 'unavailable' || gz.unavailableReason !== 'no-local-delta-observed-in-comparison-scope') {
-            throw new Error('gz-sim inherited snapshot Quality leaked into portfolio presentation');
+          const sourceByKey = new Map(diagnostics.enrichmentSources.map((entry) => [normalizeKey(entry.repositoryKey), entry]));
+          if (sourceByKey.size !== expectedAssessmentSources.size) throw new Error('duplicate bounded assessment source keys');
+          for (const key of expectedAssessmentSources) if (!sourceByKey.has(key)) throw new Error(`expected assessment source missing: ${key}`);
+
+          if (available.length !== expectedAvailable.size) throw new Error(`Quality available count mismatch: ${available.length}`);
+          const availableByKey = new Map(available.map((entry) => [normalizeKey(entry.repositoryKey), entry]));
+          for (const key of expectedAvailable) if (!availableByKey.has(key)) throw new Error(`expected Quality presentation missing: ${key}`);
+
+          const assessmentFreshness = diagnostics.evidenceFreshness?.assessment;
+          const presentationFreshness = diagnostics.evidenceFreshness?.portfolioPresentation;
+          if (assessmentFreshness?.mode !== 'bounded-frozen-snapshots' || assessmentFreshness.scope !== 'all-bounded-assessment-sources') throw new Error('assessment freshness contract mismatch');
+          if (assessmentFreshness.automaticRefresh !== false || assessmentFreshness.sourceCount !== expectedAssessmentSources.size) throw new Error('assessment freshness cardinality/refresh mismatch');
+          if (JSON.stringify(assessmentFreshness.snapshotDates) !== JSON.stringify(expectedSnapshotDates)) throw new Error('assessment freshness snapshot dates mismatch');
+          if (presentationFreshness?.mode !== 'bounded-frozen-snapshots' || presentationFreshness.scope !== 'portfolio-quality-presented-sources') throw new Error('presentation freshness contract mismatch');
+          if (presentationFreshness.automaticRefresh !== false || presentationFreshness.sourceCount !== expectedAvailable.size) throw new Error('presentation freshness cardinality/refresh mismatch');
+          if (JSON.stringify(presentationFreshness.snapshotDates) !== JSON.stringify(expectedSnapshotDates)) throw new Error('presentation freshness snapshot dates mismatch');
+          if (JSON.stringify(presentation.evidenceFreshness) !== JSON.stringify(presentationFreshness)) throw new Error('published presentation freshness diverges from diagnostics');
+
+          for (const entry of available) {
+            if (entry.evidenceFreshness?.state !== 'frozen-snapshot') throw new Error(`available Quality freshness state missing: ${entry.repositoryKey}`);
+            if (entry.evidenceFreshness?.snapshotDate !== '2026-08-25') throw new Error(`available Quality snapshot date mismatch: ${entry.repositoryKey}`);
+            if (entry.evidenceFreshness?.automaticRefresh !== false) throw new Error(`available Quality automatic refresh unexpectedly enabled: ${entry.repositoryKey}`);
           }
-          const turing = byKey.get('nekomario28/turing-smart-screen-python-owl');
-          if (!turing || turing.overlayState !== 'available' || turing.qualityAttributionScope !== 'local-delta') {
-            throw new Error('turing fork Quality is not explicitly local-delta attributed');
-          }
-          const turingStewardship = turing.views?.detail?.segments?.find((segment) => segment.id === 'stewardship');
-          if (!turingStewardship || turingStewardship.findingState !== 'unknown') {
-            throw new Error('inherited turing stewardship leaked into local-delta Quality');
-          }
-          for (const key of ['nekomario28/interactive-project-map', 'nekomario28/projexd_group10']) {
-            const entry = byKey.get(key);
-            if (!entry || entry.qualityAttributionScope !== 'repository-snapshot') throw new Error(`unexpected non-fork Quality scope: ${key}`);
-          }
+          if (unavailable.some((entry) => entry.evidenceFreshness != null)) throw new Error('unavailable repository must not receive portfolio evidence freshness');
+
+          const gzSource = sourceByKey.get('nekomario28/gz-sim');
+          const gzPresentation = presentation.repositories.find((entry) => normalizeKey(entry.repositoryKey) === 'nekomario28/gz-sim');
+          if (gzSource?.mode !== 'fork-local-delta' || gzSource?.qualityAttributionScope !== 'local-delta') throw new Error('gz-sim assessment source lost fork local-delta attribution');
+          if (gzSource?.presentationExpected !== 'unavailable' || gzSource?.fixtureSnapshotDate !== '2026-08-25') throw new Error('gz-sim source freshness/presentation expectation mismatch');
+          if (gzPresentation?.qualityAttributionScope !== 'local-delta') throw new Error('gz-sim presentation attribution scope mismatch');
+          if (gzPresentation?.overlayState !== 'unavailable' || gzPresentation?.unavailableReason !== 'no-local-delta-observed-in-comparison-scope') throw new Error('gz-sim attribution-safe unavailability mismatch');
+
+          const turing = availableByKey.get('nekomario28/turing-smart-screen-python-owl');
+          if (turing?.qualityAttributionScope !== 'local-delta') throw new Error('turing presentation must remain local-delta Quality');
 
           for (const entry of presentation.repositories) {
             const policy = entry.visualPolicy;
@@ -151,7 +176,7 @@ jobs:
               if (policy[key] !== 'none') throw new Error(`Quality exceeded visual authority for ${entry.repositoryKey}: ${key}`);
             }
           }
-          console.log(`Quality sidecars validated: ${graphIds.size} joined; ${available.length} available; ${graphIds.size - available.length} unavailable`);
+          console.log(`Quality sidecars validated: ${graphIds.size} joined; ${available.length} available; ${unavailable.length} unavailable; frozen evidence ${presentationFreshness.newestSnapshotDate}`);
           NODE
 
       - name: Remove temporary assessment tools
