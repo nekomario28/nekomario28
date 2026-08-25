@@ -58,6 +58,52 @@ def assert_schema_alignment(schema: dict, contract) -> None:
         assert set(values) == set(contract.ALLOWED[key]), (key, values, contract.ALLOWED[key])
 
 
+def expected_repository_creation(readiness: dict[str, str]) -> str:
+    technical = readiness["technical_copy_set"] == "PASS"
+    external_demand = (
+        readiness["independent_consumer"] == "ESTABLISHED"
+        or readiness["concrete_reuse_request"] == "ESTABLISHED"
+    )
+    license_selected = readiness["license_selection"] == "SELECTED"
+    return "READY" if technical and external_demand and license_selected else "DEFERRED"
+
+
+def assert_publication_readiness(manifest: dict) -> None:
+    readiness = manifest["publication_readiness"]
+    assert readiness["technical_copy_set"] in {"PASS", "NOT_PASS"}
+    assert readiness["independent_consumer"] in {"ESTABLISHED", "NOT_ESTABLISHED"}
+    assert readiness["concrete_reuse_request"] in {"ESTABLISHED", "NOT_ESTABLISHED"}
+    assert readiness["license_selection"] in {"SELECTED", "UNSELECTED"}
+    assert readiness["repository_creation"] in {"READY", "DEFERRED"}
+    assert readiness["repository_creation"] == expected_repository_creation(readiness)
+
+    # Discriminating state checks: technical copyability alone must never authorize publication.
+    assert expected_repository_creation({
+        "technical_copy_set": "PASS",
+        "independent_consumer": "NOT_ESTABLISHED",
+        "concrete_reuse_request": "NOT_ESTABLISHED",
+        "license_selection": "SELECTED",
+    }) == "DEFERRED"
+    assert expected_repository_creation({
+        "technical_copy_set": "PASS",
+        "independent_consumer": "ESTABLISHED",
+        "concrete_reuse_request": "NOT_ESTABLISHED",
+        "license_selection": "UNSELECTED",
+    }) == "DEFERRED"
+    assert expected_repository_creation({
+        "technical_copy_set": "PASS",
+        "independent_consumer": "NOT_ESTABLISHED",
+        "concrete_reuse_request": "ESTABLISHED",
+        "license_selection": "SELECTED",
+    }) == "READY"
+    assert expected_repository_creation({
+        "technical_copy_set": "NOT_PASS",
+        "independent_consumer": "ESTABLISHED",
+        "concrete_reuse_request": "ESTABLISHED",
+        "license_selection": "SELECTED",
+    }) == "DEFERRED"
+
+
 def second_consumer_svg(rel: str) -> str:
     """A structurally different donor using only the portable marker contract."""
     if rel.endswith("profile-character-side-left.svg") or rel.endswith("profile-character-side-right.svg"):
@@ -90,8 +136,9 @@ def second_consumer_svg(rel: str) -> str:
 def main() -> int:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     assert manifest["version"] == 1
-    assert manifest["public_repo_creation"] == "defer-until-independent-consumer"
+    assert manifest["public_repo_creation"] == "defer-until-external-demand-and-license"
     assert manifest["readiness_claim"] == "standalone-core-and-marker-github-transformer"
+    assert_publication_readiness(manifest)
 
     core = manifest["layers"]["portable_core"]
     adapters = manifest["layers"]["portable_adapters"]
@@ -203,6 +250,7 @@ def main() -> int:
     gates = manifest["promotion_gates"]
     assert gates["create_public_repository"] and gates["create_new_skill"]
 
+    readiness = manifest["publication_readiness"]
     print(
         "ENVELOPE_V9_EXTRACTION_TRANSFORM_PASS "
         f"core_files={len(core)} adapter_files={len(adapters)} python_stdlib_only=true personalized_tokens=0 "
@@ -210,8 +258,17 @@ def main() -> int:
     )
     print("SECOND_CONSUMER_FIXTURE_PASS donor_identity=v8-independent geometry=heterogeneous generic_markers=3")
     print(
+        "PUBLICATION_GATE=PASS "
+        f"technical_copy_set={readiness['technical_copy_set']} "
+        f"independent_consumer={readiness['independent_consumer']} "
+        f"concrete_reuse_request={readiness['concrete_reuse_request']} "
+        f"license_selection={readiness['license_selection']} "
+        f"repository_creation={readiness['repository_creation']}"
+    )
+    print(
         "PUBLIC_REPO_CREATE=DEFERRED donor_producer=donor-bound "
-        "second_consumer=FIXTURE_ONLY independent_consumer=NOT_ESTABLISHED new_skill=DEFERRED"
+        "second_consumer=FIXTURE_ONLY independent_consumer=NOT_ESTABLISHED "
+        "concrete_reuse_request=NOT_ESTABLISHED license_selection=UNSELECTED new_skill=DEFERRED"
     )
     return 0
 
