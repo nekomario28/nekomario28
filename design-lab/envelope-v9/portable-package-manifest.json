@@ -2,7 +2,7 @@
   "version": 1,
   "candidate_public_repository": "profile-envelope",
   "public_repo_creation": "defer-until-independent-consumer",
-  "readiness_claim": "standalone-core-and-github-transformer",
+  "readiness_claim": "standalone-core-and-marker-github-transformer",
   "layers": {
     "portable_core": [
       {
@@ -31,14 +31,14 @@
         "source": "design-lab/envelope-v9/github_profile_transform.py",
         "destination": "src/profile_envelope/github_profile_transform.py",
         "status": "standalone-copyable",
-        "input_contract": "complete pre-rendered 15-SVG profile donor bundle"
+        "input_contract": "complete pre-rendered 15-SVG profile donor bundle using generic surface/frame/mounted-background marker attributes"
       }
     ],
     "donor_producer": [
       {
         "source": "design-lab/envelope-v9/render_portable_surface.py",
         "status": "donor-bound",
-        "reason": "produces the current donor bundle by importing Envelope v8; portable policy is delegated to the standalone transformer"
+        "reason": "produces the current v8 donor bundle and translates donor-specific element identity into the generic marker contract"
       }
     ],
     "evidence_harness": [
@@ -65,12 +65,20 @@
     "api.github.com/repos/nekomario28",
     "/home/",
     "design-lab/envelope-v8",
-    "design-lab/envelope-v7"
+    "design-lab/envelope-v7",
+    "v8-frame",
+    "galaxy-family-bg"
   ],
+  "generic_input_markers": {
+    "outer_surface": "data-profile-envelope-surface-base=outer",
+    "frame": "data-profile-envelope-frame=rail",
+    "mounted_presentation_background": "data-profile-envelope-mounted-background=presentation"
+  },
   "known_non_blocking_constraints": [
-    "contract v1 intentionally names github-profile-readme as its only target adapter; do not invent a universal host IR before a second adapter exists",
-    "vector safe text covers the proven donor glyph set and fails closed for unsupported visible glyphs",
-    "the standalone GitHub transformer consumes a complete donor SVG bundle but does not define how arbitrary source data becomes that bundle"
+    "contract v1 intentionally names github-profile-readme as its only target adapter; do not invent a universal host IR before a second host exists",
+    "vector safe text covers the proven glyph set and fails closed for unsupported visible glyphs",
+    "the standalone GitHub transformer consumes a complete donor SVG bundle but does not define how arbitrary semantic source data becomes that bundle",
+    "the P6 second consumer is a structurally different synthetic fixture, not an independent external consumer"
   ],
   "promotion_gates": {
     "create_public_repository": [

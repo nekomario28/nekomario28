@@ -58,29 +58,31 @@ def assert_schema_alignment(schema: dict, contract) -> None:
         assert set(values) == set(contract.ALLOWED[key]), (key, values, contract.ALLOWED[key])
 
 
-def synthetic_svg(rel: str) -> str:
+def second_consumer_svg(rel: str) -> str:
+    """A structurally different donor using only the portable marker contract."""
     if rel.endswith("profile-character-side-left.svg") or rel.endswith("profile-character-side-right.svg"):
-        width, height = 100, 394
+        width, height = 120, 360
     elif rel.endswith("profile-projects-canvas.svg"):
-        width, height = 900, 420
+        width, height = 900, 360
     elif rel.endswith("profile-activity-canvas.svg"):
-        width, height = 900, 220
+        width, height = 900, 180
     else:
-        width, height = 900, 80
+        width, height = 900, 64
 
     mounted = ""
     defs = ""
     if rel.endswith("profile-projects-canvas.svg"):
-        defs = '<defs><linearGradient id="galaxy-family-bg"><stop stop-color="#0d1117"/></linearGradient></defs>'
-        mounted = '<rect width="100%" height="100%" fill="url(#galaxy-family-bg)"/>'
+        defs = '<defs><linearGradient id="consumer-b-surface"><stop stop-color="#123456"/></linearGradient></defs>'
+        mounted = '<rect data-profile-envelope-mounted-background="presentation" width="100%" height="100%" fill="url(#consumer-b-surface)"/>'
     elif rel.endswith("profile-activity-canvas.svg"):
-        mounted = '<rect width="760" height="220" fill="#0d1117"/>'
+        mounted = '<rect data-profile-envelope-mounted-background="presentation" width="810" height="180" fill="#112233"/>'
 
-    frame = f'<g id="v8-frame"><path d="M18 0V{height} M882 0V{height}"/></g>' if width == 900 else '<g id="v8-frame"><path d="M18 0V394"/></g>'
+    frame_path = f"M7 0V{height} M{max(8, width - 7)} 0V{height}"
+    frame = f'<g data-profile-envelope-frame="rail"><path d="{frame_path}"/></g>'
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">'
-        f'{defs}<rect id="v8-synthetic-surface-base" width="{width}" height="100%" fill="#0d1117"/>{mounted}'
-        '<text x="20" y="48" font-size="24" fill="#f0f6fc">SAFE 28 &amp; TEST</text>'
+        f'{defs}<rect data-profile-envelope-surface-base="outer" id="consumer-b-base" width="{width}" height="100%" fill="#223344"/>{mounted}'
+        '<text x="20" y="44" font-size="22" fill="#f0f6fc">SECOND 28 &amp; SAFE</text>'
         f'{frame}</svg>\n'
     )
 
@@ -89,7 +91,7 @@ def main() -> int:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     assert manifest["version"] == 1
     assert manifest["public_repo_creation"] == "defer-until-independent-consumer"
-    assert manifest["readiness_claim"] == "standalone-core-and-github-transformer"
+    assert manifest["readiness_claim"] == "standalone-core-and-marker-github-transformer"
 
     core = manifest["layers"]["portable_core"]
     adapters = manifest["layers"]["portable_adapters"]
@@ -167,14 +169,14 @@ def main() -> int:
         assert 'data-vector-text="v1"' in rendered
         assert 'aria-label="HELLO 28 &amp; SAFE"' in rendered
 
-        donor_root = extracted / "synthetic-donor"
+        donor_root = extracted / "second-consumer-donor"
         for rel in transform.asset_paths():
             path = donor_root / rel
             path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(synthetic_svg(rel), encoding="utf-8")
+            path.write_text(second_consumer_svg(rel), encoding="utf-8")
 
         transparent_contract, transparent_resolved = contract.load_and_resolve(transparent_path)
-        transformed_root = extracted / "transformed"
+        transformed_root = extracted / "second-consumer-transformed"
         transformed = transform.transform_bundle(
             donor_root,
             transformed_root,
@@ -188,11 +190,14 @@ def main() -> int:
             svg = (transformed_root / rel).read_text(encoding="utf-8")
             assert 'data-envelope-presentation="v9-portable-surface"' in svg
             assert f'data-profile-render-target-sha256="{transformed["render_target_sha256"]}"' in svg
-            assert 'v8-synthetic-surface-base' not in svg
+            assert "consumer-b-base" not in svg
             assert "<text" not in svg
             assert 'data-v9-adaptive-vector-text-style="v1"' in svg
-        assert 'fill="url(#galaxy-family-bg)"' not in (transformed_root / "assets/profile-projects-canvas.svg").read_text()
-        assert '<rect width="760" height="220" fill="#0d1117"' not in (transformed_root / "assets/profile-activity-canvas.svg").read_text()
+            assert "data-profile-envelope-surface-base=" not in svg
+            assert "data-profile-envelope-frame=" not in svg
+            assert "data-profile-envelope-mounted-background=" not in svg
+        assert 'fill="url(#consumer-b-surface)"' not in (transformed_root / "assets/profile-projects-canvas.svg").read_text()
+        assert '#112233' not in (transformed_root / "assets/profile-activity-canvas.svg").read_text()
 
     assert (ROOT / donor[0]["source"]).is_file()
     gates = manifest["promotion_gates"]
@@ -203,9 +208,10 @@ def main() -> int:
         f"core_files={len(core)} adapter_files={len(adapters)} python_stdlib_only=true personalized_tokens=0 "
         "standalone_contract=PASS standalone_vector_text=PASS standalone_github_transform=PASS schema_alignment=PASS"
     )
+    print("SECOND_CONSUMER_FIXTURE_PASS donor_identity=v8-independent geometry=heterogeneous generic_markers=3")
     print(
         "PUBLIC_REPO_CREATE=DEFERRED donor_producer=donor-bound "
-        "second_consumer=NOT_ESTABLISHED new_skill=DEFERRED"
+        "second_consumer=FIXTURE_ONLY independent_consumer=NOT_ESTABLISHED new_skill=DEFERRED"
     )
     return 0
 

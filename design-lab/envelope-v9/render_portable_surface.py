@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 """Envelope v9 donor adapter over the standalone GitHub-profile transformer.
 
-This file is intentionally repository-bound: it creates the current v8 donor bundle.
-Portable presentation policy lives in `github_profile_transform.py`, which does not
-import v7/v8 or repository-local Project Map / Activity source modules.
+This file is intentionally repository-bound: it creates the current v8 donor bundle
+and annotates donor-specific elements with the small generic marker contract consumed
+by `github_profile_transform.py`.
 """
 from __future__ import annotations
 
 import argparse
 import importlib.util
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -38,12 +39,45 @@ DYNAMIC_VISIBLE_TEXT = TRANSFORM.DYNAMIC_VISIBLE_TEXT
 asset_paths = TRANSFORM.asset_paths
 
 
+def _add_marker(tag: str, marker: str) -> str:
+    if marker in tag:
+        return tag
+    return re.sub(r'(<[A-Za-z][^\s/>]*)', lambda match: match.group(1) + " " + marker, tag, count=1)
+
+
+def _annotate_donor_svg(svg: str, *, rel: str) -> str:
+    surface = re.compile(r'<rect\b(?=[^>]*\bid="v8-[^"]+-surface-base")[^>]*/>')
+    svg = surface.sub(lambda match: _add_marker(match.group(0), TRANSFORM.SURFACE_MARKER), svg)
+
+    frame = re.compile(r'<g\b(?=[^>]*\bid="v8-frame")[^>]*>')
+    svg = frame.sub(lambda match: _add_marker(match.group(0), TRANSFORM.FRAME_MARKER), svg)
+
+    if rel == "assets/profile-projects-canvas.svg":
+        mounted = re.compile(
+            r'<rect\b(?=[^>]*\bwidth="100%")(?=[^>]*\bheight="100%")'
+            r'(?=[^>]*\bfill="url\(#galaxy-family-bg\)")[^>]*/>'
+        )
+        svg = mounted.sub(lambda match: _add_marker(match.group(0), TRANSFORM.MOUNTED_BACKGROUND_MARKER), svg, count=1)
+    elif rel == "assets/profile-activity-canvas.svg":
+        mounted = re.compile(
+            r'<rect\b(?=[^>]*\bwidth="760")(?=[^>]*\bheight="220")'
+            r'(?=[^>]*\bfill="#0d1117")[^>]*/>'
+        )
+        svg = mounted.sub(lambda match: _add_marker(match.group(0), TRANSFORM.MOUNTED_BACKGROUND_MARKER), svg, count=1)
+    return svg
+
+
+def normalize_donor_bundle(root: Path) -> None:
+    """Translate donor-specific element identity into portable marker semantics."""
+    for rel in asset_paths():
+        path = root / rel
+        svg = path.read_text(encoding="utf-8")
+        path.write_text(_annotate_donor_svg(svg, rel=rel), encoding="utf-8")
+
+
 def render(config_path: Path, *, season: str, output_root: Path) -> tuple[dict, dict]:
     contract, resolved = CONTRACT.load_and_resolve(config_path)
 
-    # Normalize the donor boundary: always retain mounted-source presentation
-    # backgrounds in the v8 bundle. The standalone transformer alone decides
-    # `inherit | preserve`, so its behavior can be extracted without v8 imports.
     original_strip = V8._strip_mounted_source_backgrounds
     V8._strip_mounted_source_backgrounds = lambda text: text
     try:
@@ -51,6 +85,7 @@ def render(config_path: Path, *, season: str, output_root: Path) -> tuple[dict, 
     finally:
         V8._strip_mounted_source_backgrounds = original_strip
 
+    normalize_donor_bundle(output_root)
     resolved_out = TRANSFORM.transform_bundle(
         output_root,
         output_root,

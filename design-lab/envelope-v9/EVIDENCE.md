@@ -1,6 +1,6 @@
 # Envelope v9 evidence
 
-Status: **Design Lab only / local render-target P3 PASS / P4 extraction-kernel PASS / P5 standalone GitHub transformer PASS / public GitHub profile NOT_RUN**
+Status: **Design Lab only / P3 rendered-target PASS / P4 extraction-kernel PASS / P5 standalone transformer PASS / P6 v8-independent fixture PASS / public GitHub profile NOT_RUN**
 
 Envelope v9 remains a donor/portability experiment. The current public profile remains the direct-IPM surface. No v9 asset is promoted live by this work.
 
@@ -43,7 +43,7 @@ P3 also proves bounded local playback:
 
 ## P4 extraction readiness
 
-PR #64 was cleaned to one commit, passed exact-head CI against the then-latest Project Map input, and was squash-merged as `09c929a2224aa78610e528995db2fb595331359a`.
+PR #64 was cleaned to one commit, passed exact-head CI, and was squash-merged as `09c929a2224aa78610e528995db2fb595331359a`.
 
 Accepted clean P4 receipt:
 
@@ -52,7 +52,7 @@ Accepted clean P4 receipt:
 - portable contract run `32773284888`, job `97578376096`: **SUCCESS**;
 - render target `71797c18a43efc3aac75c6769f57284c1dda2a38d0685ad037f3f11e23009e94`.
 
-P4 established a five-file standalone-copyable kernel and owner-independent Schema identity `urn:profile-envelope:config:v1`. Its extraction smoke found and fixed a real accessibility bug: encoded source text such as `&amp;` could previously be decoded for glyph geometry but escaped again from the encoded source for `aria-label` / `<title>`. The kernel now derives both from the same decoded visible string.
+P4 established a five-file standalone-copyable kernel and owner-independent Schema identity `urn:profile-envelope:config:v1`. Its extraction smoke found and fixed a real accessibility bug: encoded source text such as `&amp;` could be decoded for glyph geometry but escaped again from the encoded source for `aria-label` / `<title>`. The kernel now derives both from the same decoded visible string.
 
 Accepted extraction marker:
 
@@ -76,33 +76,52 @@ Accepted clean P5 receipt:
 - portable contract run `32811886796`, job `97692641886`: **SUCCESS**;
 - render target `62d68a97a354ffc3c82efdbe2396730f5ca90cafdfa5579c59504b7df9c35b4f`.
 
-The render-target SHA changed from the earlier P5 proof because main's Activity / Project Map-derived inputs changed. The clean exact-head rerun re-earned browser and playback evidence on the new target instead of reusing the stale receipt.
+The render-target SHA changed from the earlier P5 proof because Activity / Project Map-derived input bytes changed. The clean exact-head rerun re-earned browser and playback evidence instead of retaining a stale receipt.
 
 Structural/extraction markers:
 
 - `DONOR_BOUNDARY_EQUIVALENCE=PASS legacy_prestripped_vs_preserve_first=true`;
+- `ENVELOPE_V9_EXTRACTION_TRANSFORM_PASS core_files=5 adapter_files=1 python_stdlib_only=true personalized_tokens=0 standalone_contract=PASS standalone_vector_text=PASS standalone_github_transform=PASS schema_alignment=PASS`.
+
+The standalone extraction smoke copies the GitHub transformer into a temporary repository and applies it to a synthetic complete 15-SVG donor bundle. The same clean P5 exact head re-ran the nine-case Chrome matrix and motion proof successfully: motion-on left **7** / right **12**, reduced motion **0/0**, motion-off **0/0**, with exact inherited motion-subtree equivalence across 15 generated assets.
+
+## P6 second-consumer fixture evaluation
+
+PR #68 tests whether P5's standalone transformer still contains hidden donor identity assumptions. It does **not** claim an external independent consumer; the P6 consumer is a deliberately heterogeneous synthetic fixture executed from the copied package tree.
+
+P6 found residual donor identity in the portable transformer:
+
+- `v8-frame`;
+- v8 surface-base IDs;
+- Project Map's `galaxy-family-bg` identity;
+- the Activity donor's exact background geometry/color.
+
+Instead of introducing a universal IR, P6 narrows the portable input boundary to three semantic SVG attributes:
+
+- `data-profile-envelope-surface-base="outer"`;
+- `data-profile-envelope-frame="rail"`;
+- `data-profile-envelope-mounted-background="presentation"`.
+
+The donor-bound producer translates current v8/Project Map/Activity identity into those markers. The portable transformer consumes only the markers and removes them before final output fingerprinting, so marker normalization does not become part of the public rendered bytes.
+
+Accepted formative P6 receipt before final history cleanup:
+
+- head `e3d99fd22c49c8b19b5561eda63dcadf304cc700`;
+- run `32812335640`;
+- job `97693949695`;
+- result: **SUCCESS**;
+- render target remained `62d68a97a354ffc3c82efdbe2396730f5ca90cafdfa5579c59504b7df9c35b4f`.
+
+Accepted P6 markers:
+
+- `GENERIC_DONOR_MARKER_BOUNDARY=PASS portable_transformer_v8_identity=false`;
+- `SECOND_CONSUMER_FIXTURE_PASS donor_identity=v8-independent geometry=heterogeneous generic_markers=3`;
 - `ENVELOPE_V9_EXTRACTION_TRANSFORM_PASS core_files=5 adapter_files=1 python_stdlib_only=true personalized_tokens=0 standalone_contract=PASS standalone_vector_text=PASS standalone_github_transform=PASS schema_alignment=PASS`;
-- `PUBLIC_REPO_CREATE=DEFERRED donor_producer=donor-bound second_consumer=NOT_ESTABLISHED new_skill=DEFERRED`.
+- `PUBLIC_REPO_CREATE=DEFERRED donor_producer=donor-bound second_consumer=FIXTURE_ONLY independent_consumer=NOT_ESTABLISHED new_skill=DEFERRED`.
 
-The equivalence check renders both boundary shapes:
+The fixture differs from the v8 donor in dimensions, frame geometry, base colors and mounted-background identifiers. It contains no v8 element identity. The copied transformer successfully applies transparent/safe/inherit policy using only the three generic markers. The current donor path remains byte-equivalent: P6 kept the same render-target fingerprint as P5 and re-passed the nine-case Chrome matrix plus motion 7/12, reduced-motion 0/0 and motion-off 0/0.
 
-1. old-equivalent v8 donor where mounted source backgrounds are already stripped;
-2. new normalized v8 donor where mounted source backgrounds are preserved first.
-
-Both are passed through the standalone transformer under `inherit`; every final SVG byte and the render-target fingerprint must be identical to the normal current v9 path. This proves the architectural boundary moved without changing the visible target.
-
-The standalone extraction smoke copies the GitHub transformer into a temporary repository and applies it to a synthetic complete 15-SVG donor bundle. It proves the transformer runs without reading this profile repository, contains no donor-specific forbidden tokens, uses only standard-library/extracted-package dependencies, applies safe transparent text, removes the declared outer and mounted backgrounds, and produces a shared render-target fingerprint across all 15 outputs.
-
-The same clean P5 exact head re-ran the rendered gates successfully:
-
-- nine-case Chrome matrix: **PASS**;
-- `TARGET_LAYOUT=PASS TEXT_RENDER=PASS TRANSPARENCY_RENDER=PASS NATIVE_RENDER=OBSERVED MINIMAL_DYNAMIC_TEXT=PASS`;
-- motion-on: 6.0s / 13 samples / left **7**, right **12** changed pairs;
-- browser-wide reduced motion: left **0**, right **0**;
-- motion-off: left **0**, right **0**;
-- exact v8 -> v9 motion-subtree equivalence: 15 generated assets;
-- `LOCAL_RENDER_TARGET_PLAYBACK=PASS REDUCED_MOTION=PASS MOTION_OFF=PASS`;
-- public GitHub v9 playback remains `NOT_RUN` and cross-document hard synchronization is not claimed.
+This proves a stronger adapter boundary, but **does not satisfy the publication gate requiring an independent external consumer or concrete reuse request**.
 
 ## Negative proof lineage retained
 
@@ -111,7 +130,8 @@ Useful failed approaches remain evidence rather than being erased:
 - asynchronous `--dump-dom` serialized before an async receipt was populated — harness race, not render evidence;
 - `SVGSVGElement.setCurrentTime()` + `getCTM()` produced no useful timeline delta — replaced by persistent Chrome + real elapsed time + screenshot pixel diffs;
 - parent-target-only CDP reduced-motion emulation did not establish propagation to separately decoded SVG images — browser-wide `--force-prefers-reduced-motion` is the accepted proof;
-- standalone-copy P4 exposed accessibility double escaping that donor-local render tests had not discriminated — extraction must be executed, not inferred.
+- standalone-copy P4 exposed accessibility double escaping that donor-local render tests had not discriminated — extraction must be executed, not inferred;
+- the first P6 fixture assertion required an unused gradient definition to disappear after its marked background rectangle was removed. The actual presentation contract only requires removal of background paint; the over-strong test was corrected rather than expanding transformer scope to dead-def cleanup.
 
 ## Relationship to v8 public evidence
 
@@ -130,7 +150,9 @@ Established:
 - five-file stdlib-only standalone core with owner-independent Schema identity;
 - decoded accessibility metadata consistent with visible vector text;
 - standalone-copyable GitHub-profile transformer operating on a declared complete 15-SVG donor bundle;
-- byte-identical output across the old and new mounted-background donor boundary.
+- byte-identical output across the old/new mounted-background donor boundary;
+- a generic three-marker donor boundary with no v8/Project Map element identity in portable code;
+- a v8-independent heterogeneous fixture that passes from the copied package tree.
 
 Not established:
 
@@ -139,9 +161,9 @@ Not established:
 - shared runtime clocks or frame-perfect cross-document synchronization;
 - universal typography quality for all future glyphs/data densities;
 - arbitrary semantic source data can be converted into the 15-SVG donor bundle by the public package;
-- a second independent consumer exists;
+- an independent external second consumer exists;
 - a standalone `profile-envelope` Skill is justified.
 
 ## Next safe action
 
-P5 is merged. The next useful milestone is **P6 second-consumer evaluation**: exercise the extracted core + GitHub transformer with a structurally different donor fixture and use the result to distinguish genuine reusable assumptions from profile-specific ones. Public repository publication remains deferred until an independent consumer or concrete reuse request exists. Keep the new-Skill decision deferred until a discriminating evaluation shows existing README/animation skills are insufficient.
+P6 should be cleaned onto current main and re-run once on the exact final head before merge. After P6, further generic abstraction is not justified by the current evidence. The next meaningful gates are packaging/license/release design and a real external reuse request or independent consumer. Public repository creation and a new standalone Skill remain deferred until those gates are met.
