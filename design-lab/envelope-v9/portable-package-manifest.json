@@ -18,7 +18,7 @@
     "source_sha": "bf3960dc85eebf8e25c5e8a015e968322a984597",
     "initial_filtered_history_head": "ee0a07b9e85f7a57c6b2146149e68420202f4fe5",
     "current_bootstrap_main_sha": "d916b057ec897ceef94bdee293d4e02f42e46d1b",
-    "current_working_main_sha": "379e8cc5d0587e83b0574834bf04f61f58e786d3",
+    "current_working_main_sha": "369b88eec6bed0fc360bc0671b9da94d35324d54",
     "bootstrap_carrier_run": 32868834661,
     "exact_head_validation_run": 32869436824,
     "portable_regression_run": 32871700639,
@@ -56,6 +56,7 @@
         "mode": "opt-in-four-semantic-seasonal-roles",
         "implementation_commit": "0a2bbdc5e8f19ffc43483c947c129d0996b9679c",
         "evidence_head": "379e8cc5d0587e83b0574834bf04f61f58e786d3",
+        "browser_evidence_head": "369b88eec6bed0fc360bc0671b9da94d35324d54",
         "exact_head_validation_run": 32892318459,
         "exact_head_validation_job": 97946857082,
         "tests": 23,
@@ -63,6 +64,20 @@
         "donor_byte_equivalence": "PASS",
         "donor_seasons": 4,
         "donor_assets_per_season": 15,
+        "browser_authority_donor_sha": "314f58135ad424ba6a7c882fb884ad1e474f08a5",
+        "browser_authority_donor_delta_from_equivalence_donor": "docs-and-manifest-only",
+        "hosted_browser_run": 32893193589,
+        "hosted_browser_job": 97949631208,
+        "summer_browser_matrix": "PASS",
+        "summer_local_playback": "PASS",
+        "summer_reduced_motion": "PASS",
+        "summer_motion_off": "PASS",
+        "all_season_browser_run": 32894758667,
+        "all_season_browser_job": 97954702345,
+        "all_season_browser_matrix": "PASS",
+        "all_season_browser_seasons": 4,
+        "all_season_browser_cases_per_season": 9,
+        "public_github_profile": "NOT_RUN",
         "source_reference": "summer",
         "roles": [
           "surface_base",
@@ -101,7 +116,10 @@
       "p11_donor_byte_equivalence": "PASS",
       "p11_donor_seasons": 4,
       "p11_donor_assets_per_season": 15,
-      "p11_delta_repository_history_audit": "PASS"
+      "p11_delta_repository_history_audit": "PASS",
+      "p11_all_season_local_browser": "PASS",
+      "p11_summer_local_playback": "PASS",
+      "p11_public_github_profile": "NOT_RUN"
     },
     "public_release": "DEFERRED"
   },
@@ -186,7 +204,8 @@
     "P10 product-copy-set repository-history provenance PASS does not authorize exposing the entire existing private repository or its private development history",
     "P9 design grammar remains the measured reference; P10 gives only frame-rail geometry an explicit opt-in projection path and does not make the grammar global renderer authority",
     "P10 exact donor byte equivalence covers the frame-caps-none transform case and does not replace browser, responsive, playback or public-target evidence",
-    "P11 gives only frame-rail geometry plus the four measured seasonal surface/accent roles an explicit opt-in grammar projection path; typography, spacing, motion, arbitrary decorative colors and global renderer authority remain outside this migration"
+    "P11 gives only frame-rail geometry plus the four measured seasonal surface/accent roles an explicit opt-in grammar projection path; typography, spacing, motion, arbitrary decorative colors and global renderer authority remain outside this migration",
+    "P11 all-season local browser evidence and summer local playback/reduced-motion evidence are established by exact rendered-byte equivalence to the donor harness; public GitHub-profile P11 acceptance remains NOT_ESTABLISHED"
   ],
   "promotion_gates": {
     "create_public_repository": [
