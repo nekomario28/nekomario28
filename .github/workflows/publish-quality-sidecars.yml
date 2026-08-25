@@ -35,7 +35,7 @@ jobs:
     permissions:
       contents: write
     env:
-      IPM_QUALITY_TOOLS_REF: 05cf48bcb7669d450f97cbd3cc4dc35e5e60f2ea
+      IPM_QUALITY_TOOLS_REF: 1c426da42b63f8ce322251bf7fefeb562ef1d9c6
     steps:
       - name: Checkout profile repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -97,6 +97,7 @@ jobs:
             'nekomario28/interactive-project-map',
             'nekomario28/projexd_group10',
             'nekomario28/antifullbright',
+            'nekomario28/ftbpublicclaims',
             'nekomario28/buyclaimchunks',
             'nekomario28/gz-sim',
             'nekomario28/turing-smart-screen-python-owl',
@@ -105,6 +106,7 @@ jobs:
             'nekomario28/interactive-project-map',
             'nekomario28/projexd_group10',
             'nekomario28/antifullbright',
+            'nekomario28/ftbpublicclaims',
             'nekomario28/buyclaimchunks',
             'nekomario28/turing-smart-screen-python-owl',
           ]);
@@ -113,6 +115,7 @@ jobs:
             ['nekomario28/interactive-project-map', '2026-08-25'],
             ['nekomario28/projexd_group10', '2026-08-25'],
             ['nekomario28/antifullbright', '2026-08-25'],
+            ['nekomario28/ftbpublicclaims', '2026-08-25'],
             ['nekomario28/buyclaimchunks', '2026-07-25'],
             ['nekomario28/turing-smart-screen-python-owl', '2026-08-25'],
           ]);
@@ -198,6 +201,23 @@ jobs:
           if (antifullbrightMaintainability?.findingState !== 'unknown') throw new Error('AntiFullbright Maintainability must remain unknown');
           if (antifullbrightSecurity?.applicability !== 'optional' || antifullbrightSecurity?.findingState !== 'supports') throw new Error('AntiFullbright optional Security/Safety contract mismatch');
 
+          const ftbSource = sourceByKey.get('nekomario28/ftbpublicclaims');
+          const ftb = availableByKey.get('nekomario28/ftbpublicclaims');
+          if (ftbSource?.mode !== 'repository-snapshot' || ftbSource?.qualityAttributionScope !== 'repository-snapshot') throw new Error('FTBPublicClaims assessment source lost repository-snapshot attribution');
+          if (ftbSource?.presentationExpected !== 'available' || ftbSource?.fixtureSnapshotDate !== '2026-08-25') throw new Error('FTBPublicClaims source freshness/presentation expectation mismatch');
+          if (ftbSource?.calibratedRevision !== '8caaab65266a94e7bdedc6ad2f66030c7e394edf') throw new Error('FTBPublicClaims calibrated default-branch revision mismatch');
+          if (ftbSource?.caseId !== 'ftbpublicclaims-game-mod-default-8caaab') throw new Error('FTBPublicClaims live source must use the default-snapshot calibration case');
+          if (ftb?.qualityAttributionScope !== 'repository-snapshot' || ftb?.overlayState !== 'available') throw new Error('FTBPublicClaims presentation scope/state mismatch');
+          if (ftb?.overlay?.coverage?.targetDimensions !== 6 || ftb?.overlay?.coverage?.inspectedDimensions !== 5) throw new Error('FTBPublicClaims target coverage mismatch');
+          if (ftb?.overlay?.targetFindingCounts?.supports !== 5 || ftb?.overlay?.targetFindingCounts?.unknown !== 1) throw new Error('FTBPublicClaims finding distribution mismatch');
+          const ftbVerification = ftb?.overlay?.segments?.find((segment) => segment.id === 'verification');
+          const ftbMaintainability = ftb?.overlay?.segments?.find((segment) => segment.id === 'maintainability');
+          const ftbSecurity = ftb?.overlay?.segments?.find((segment) => segment.id === 'security-safety');
+          if (ftbVerification?.findingState !== 'unknown') throw new Error('FTBPublicClaims Verification must remain unknown');
+          if (ftbMaintainability?.findingState !== 'supports') throw new Error('FTBPublicClaims Maintainability mismatch');
+          if (ftbSecurity?.applicability !== 'optional' || ftbSecurity?.findingState !== 'supports') throw new Error('FTBPublicClaims optional Security/Safety contract mismatch');
+          if (ftb?.evidenceFreshness?.snapshotDate !== '2026-08-25') throw new Error('FTBPublicClaims evidence freshness mismatch');
+
           const buyClaimSource = sourceByKey.get('nekomario28/buyclaimchunks');
           const buyClaim = availableByKey.get('nekomario28/buyclaimchunks');
           if (buyClaimSource?.mode !== 'fork-local-delta' || buyClaimSource?.qualityAttributionScope !== 'local-delta') throw new Error('BuyClaimChunks assessment source lost fork local-delta attribution');
@@ -224,7 +244,7 @@ jobs:
           const turingStewardship = turing?.views?.detail?.segments?.find((segment) => segment.id === 'stewardship');
           if (!turingStewardship || turingStewardship.findingState !== 'unknown') throw new Error('inherited turing stewardship leaked into local-delta Quality');
 
-          for (const key of ['nekomario28/interactive-project-map', 'nekomario28/projexd_group10', 'nekomario28/antifullbright']) {
+          for (const key of ['nekomario28/interactive-project-map', 'nekomario28/projexd_group10', 'nekomario28/antifullbright', 'nekomario28/ftbpublicclaims']) {
             if (availableByKey.get(key)?.qualityAttributionScope !== 'repository-snapshot') throw new Error(`unexpected non-fork Quality scope: ${key}`);
           }
 
