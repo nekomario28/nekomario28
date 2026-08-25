@@ -6,6 +6,11 @@ on:
     paths:
       - ".github/workflows/update-contribution-graph.yml"
       - "scripts/render_contribution_graph.py"
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/update-contribution-graph.yml"
+      - "scripts/render_contribution_graph.py"
   schedule:
     - cron: "29 0,12 * * *"
   workflow_dispatch:
@@ -14,7 +19,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: contribution-graph
+  group: contribution-graph-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -45,9 +50,11 @@ jobs:
             test -s "$file"
             grep -q '<svg' "$file"
             grep -q 'Contributions · last 31 days' "$file"
+            grep -q 'font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif"' "$file"
           done
 
       - name: Commit updated contribution graph
+        if: github.event_name != 'pull_request'
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
