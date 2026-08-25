@@ -18,15 +18,15 @@
     "source_sha": "bf3960dc85eebf8e25c5e8a015e968322a984597",
     "initial_filtered_history_head": "ee0a07b9e85f7a57c6b2146149e68420202f4fe5",
     "current_bootstrap_main_sha": "d916b057ec897ceef94bdee293d4e02f42e46d1b",
-    "current_working_main_sha": "960171849769830b0fa72b00c438c7c716ab2e3c",
+    "current_working_main_sha": "379e8cc5d0587e83b0574834bf04f61f58e786d3",
     "bootstrap_carrier_run": 32868834661,
     "exact_head_validation_run": 32869436824,
     "portable_regression_run": 32871700639,
     "portable_regression_job": 97880025443,
     "portable_regression_tests": 7,
     "design_grammar": {
-      "phase": "P9",
-      "mode": "measured-reference-detection-only",
+      "phase": "P11",
+      "mode": "measured-reference-bounded-opt-in-projections",
       "grammar_sha256": "24ee74fdb9ae669390244af16463220e0f9b0f9e0661159c19b0ced0a69a4ced",
       "exact_head_validation_run": 32876973365,
       "exact_head_validation_job": 97897147907,
@@ -50,14 +50,36 @@
         "heterogeneous_right_side_projection": "120px->x102-from-width-minus-18-inset",
         "legacy_default_preserved": true,
         "global_renderer_authority": false
+      },
+      "seasonal_palette_projection": {
+        "phase": "P11",
+        "mode": "opt-in-four-semantic-seasonal-roles",
+        "implementation_commit": "0a2bbdc5e8f19ffc43483c947c129d0996b9679c",
+        "evidence_head": "379e8cc5d0587e83b0574834bf04f61f58e786d3",
+        "exact_head_validation_run": 32892318459,
+        "exact_head_validation_job": 97946857082,
+        "tests": 23,
+        "donor_sha": "35fca55d0629b8ac9de37b5788390e98030b31d8",
+        "donor_byte_equivalence": "PASS",
+        "donor_seasons": 4,
+        "donor_assets_per_season": 15,
+        "source_reference": "summer",
+        "roles": [
+          "surface_base",
+          "surface_alt",
+          "accent_primary",
+          "accent_secondary"
+        ],
+        "legacy_default_preserved": true,
+        "global_renderer_authority": false
       }
     },
     "release_copy_set": {
-      "phase": "P10",
+      "phase": "P11",
       "boundary_kind": "product-copy-set",
       "product_file_count": 8,
-      "product_content_revision": "a4a954f22aa3511540c17723d88a33de38733910",
-      "provenance_head": "960171849769830b0fa72b00c438c7c716ab2e3c",
+      "product_content_revision": "0a2bbdc5e8f19ffc43483c947c129d0996b9679c",
+      "provenance_head": "379e8cc5d0587e83b0574834bf04f61f58e786d3",
       "technical_standalone": "PASS",
       "release_closure_run": 32883641201,
       "release_closure_job": 97918842614,
@@ -71,17 +93,40 @@
       "p9_p10_delta_repository_history_audit": "PASS",
       "product_copy_set_repository_history_audit": "PASS",
       "legal_conclusion": "NOT_CLAIMED",
-      "whole_repository_publication_audit": "NOT_ESTABLISHED"
+      "whole_repository_publication_audit": "NOT_ESTABLISHED",
+      "p11_exact_head_validation_run": 32892318459,
+      "p11_exact_head_validation_job": 97946857082,
+      "p11_tests": 23,
+      "p11_donor_sha": "35fca55d0629b8ac9de37b5788390e98030b31d8",
+      "p11_donor_byte_equivalence": "PASS",
+      "p11_donor_seasons": 4,
+      "p11_donor_assets_per_season": 15,
+      "p11_delta_repository_history_audit": "PASS"
     },
     "public_release": "DEFERRED"
   },
   "layers": {
     "portable_core": [
-      {"source": "design-lab/scripts/profile_envelope_contract.py", "destination": "src/profile_envelope/contract.py"},
-      {"source": "design-lab/envelope-v9/vector_text.py", "destination": "src/profile_envelope/vector_text.py"},
-      {"source": "design-lab/profile-envelope-config.schema.json", "destination": "schema/profile-envelope-config.schema.json"},
-      {"source": "design-lab/profile-envelope-config.example.json", "destination": "examples/opaque-safe.json"},
-      {"source": "design-lab/profile-envelope-config.transparent.example.json", "destination": "examples/transparent-safe.json"}
+      {
+        "source": "design-lab/scripts/profile_envelope_contract.py",
+        "destination": "src/profile_envelope/contract.py"
+      },
+      {
+        "source": "design-lab/envelope-v9/vector_text.py",
+        "destination": "src/profile_envelope/vector_text.py"
+      },
+      {
+        "source": "design-lab/profile-envelope-config.schema.json",
+        "destination": "schema/profile-envelope-config.schema.json"
+      },
+      {
+        "source": "design-lab/profile-envelope-config.example.json",
+        "destination": "examples/opaque-safe.json"
+      },
+      {
+        "source": "design-lab/profile-envelope-config.transparent.example.json",
+        "destination": "examples/transparent-safe.json"
+      }
     ],
     "portable_adapters": [
       {
@@ -140,7 +185,8 @@
     "the private working repository is an extraction/development surface and does not itself authorize public redistribution",
     "P10 product-copy-set repository-history provenance PASS does not authorize exposing the entire existing private repository or its private development history",
     "P9 design grammar remains the measured reference; P10 gives only frame-rail geometry an explicit opt-in projection path and does not make the grammar global renderer authority",
-    "P10 exact donor byte equivalence covers the frame-caps-none transform case and does not replace browser, responsive, playback or public-target evidence"
+    "P10 exact donor byte equivalence covers the frame-caps-none transform case and does not replace browser, responsive, playback or public-target evidence",
+    "P11 gives only frame-rail geometry plus the four measured seasonal surface/accent roles an explicit opt-in grammar projection path; typography, spacing, motion, arbitrary decorative colors and global renderer authority remain outside this migration"
   ],
   "promotion_gates": {
     "create_public_repository": [
