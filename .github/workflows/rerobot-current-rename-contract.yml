@@ -1,0 +1,72 @@
+name: Rerobot current rename processor contract
+
+on:
+  push:
+    branches: [research/rerobot-current-rename-contract]
+  pull_request:
+    paths: [.github/workflows/rerobot-current-rename-contract.yml]
+
+permissions:
+  contents: read
+
+jobs:
+  receipt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Freeze authorities
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'REROBOT_SHA=f6c36c7da5326886fb6eb6e83d8a2d87283b31ec'
+          echo 'LEROBOT_SHA=8b256a6c0d4769c3cc3e7e98f04940126398a391'
+          git clone --filter=blob:none https://github.com/k1000dai/Rerobot.git rerobot
+          git -C rerobot checkout --detach f6c36c7da5326886fb6eb6e83d8a2d87283b31ec
+          test "$(git -C rerobot rev-parse HEAD)" = f6c36c7da5326886fb6eb6e83d8a2d87283b31ec
+
+      - name: Inject current-upstream discriminator into disposable checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > rerobot/crates/rerobot-core/tests/current_rename_suffix_contract.rs <<'RS'
+          use rerobot_core::processor::rename::{Observation, RenameObservationsProcessorStep};
+          use serde_json::json;
+          use std::collections::BTreeSet;
+
+          #[test]
+          fn current_lerobot_temporal_padding_suffix_contract_is_missing() {
+              let step = RenameObservationsProcessorStep::new([
+                  ("image", "observation.images.camera1"),
+              ]);
+              let mut observation = Observation::new();
+              observation.insert("image".into(), json!([0]));
+              observation.insert("image_is_pad".into(), json!([true]));
+              observation.insert("image_padding_mask".into(), json!([true]));
+
+              let renamed = step.observation(&observation);
+              let actual: BTreeSet<_> = renamed.keys().cloned().collect();
+              let current_expected: BTreeSet<_> = [
+                  "observation.images.camera1".to_string(),
+                  "observation.images.camera1_is_pad".to_string(),
+                  "observation.images.camera1_padding_mask".to_string(),
+              ].into_iter().collect();
+
+              println!("CURRENT_EXPECTED_KEYS={current_expected:?}");
+              println!("REROBOT_ACTUAL_KEYS={actual:?}");
+              assert_ne!(actual, current_expected, "fixture stopped discriminating current contract");
+              assert!(actual.contains("observation.images.camera1"));
+              assert!(actual.contains("image_is_pad"));
+              assert!(actual.contains("image_padding_mask"));
+              assert!(!actual.contains("observation.images.camera1_is_pad"));
+              assert!(!actual.contains("observation.images.camera1_padding_mask"));
+              println!("CURRENT_RENAME_SUFFIX_CONTRACT_RED_CONFIRMED");
+          }
+          RS
+
+      - name: Execute exact Rerobot against current rename contract
+        shell: bash
+        working-directory: rerobot
+        run: |
+          set -euo pipefail
+          cargo test -p rerobot-core --test current_rename_suffix_contract -- --nocapture
+          echo 'RENAME_SUFFIX_EXECUTABLE_DRIFT_RECEIPT_PASS'
