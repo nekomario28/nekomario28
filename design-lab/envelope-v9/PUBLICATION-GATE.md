@@ -18,19 +18,25 @@ Envelope v9 has the first claim. On 2026-08-26 the repository owner explicitly r
 - donor source: `nekomario28/nekomario28@bf3960dc85eebf8e25c5e8a015e968322a984597`;
 - retained filtered-history head before path normalization: `ee0a07b9e85f7a57c6b2146149e68420202f4fe5`;
 - first post-bootstrap working main: `d916b057ec897ceef94bdee293d4e02f42e46d1b`;
-- current working main: `7cc093b00b0f37883951000693714b0a76e96276`;
+- current working main: `23f9b3d546a9ca29435de3741f8bee848450a937`;
 - one-shot bootstrap carrier: ShotFork run `32868834661` on `MeguminDesktop` / `shotroute` — **SUCCESS**;
 - exact-head validation after `.gitignore` hygiene repair: ShotFork run `32869436824` — **SUCCESS**;
 - portable regression exact-head validation: ShotFork run `32871700639`, job `97880025443` — **SUCCESS**, 7 tests;
-- retained donor history: eight path-filtered commits plus one path-normalization/bootstrap commit and subsequent validation-boundary/hygiene/regression commits;
+- P9 design-grammar exact-head validation: ShotFork run `32876973365`, job `97897147907` — **SUCCESS**, 14 tests;
+- P9 design-grammar fingerprint: `24ee74fdb9ae669390244af16463220e0f9b0f9e0661159c19b0ced0a69a4ced`;
+- P9 actual donor-bundle design lint: **PASS**, 15 SVG assets at donor `36a8a57cb5cfe0b7af4bf1499b06e629dba55141`;
+- P9 renderer authority: **false / detection-only**;
+- retained donor history: eight path-filtered commits plus one path-normalization/bootstrap commit and subsequent validation-boundary/hygiene/regression/design-grammar commits;
 - public license: **not selected**;
 - public release: **DEFERRED**.
 
 The extraction preserved retained donor Author/Committer metadata through path-filtered Git history rather than copying the six files into an unrelated root commit. Commit object IDs necessarily changed because filtering changes trees and parent topology.
 
-The initial repository-local hosted `ubuntu-latest` validation run `32868886581` failed before repository steps were assigned a runner. It is classified as provider/executor failure rather than a portable-core failure. The extracted code is now covered by a seven-test repository-local deterministic suite, validated at exact head through the bounded self-hosted carrier. The carrier is not promoted to permanent unattended CI because its pre-existing host `gh` credential is broader than the new repository's least-privilege requirement.
+The initial repository-local hosted `ubuntu-latest` validation run `32868886581` failed before repository steps were assigned a runner. It is classified as provider/executor failure rather than a portable-core failure. The extracted code is now covered by repository-local deterministic regression and P9 design-grammar tests, validated at exact heads through the bounded self-hosted carrier. The carrier is not promoted to permanent unattended CI because its pre-existing host `gh` credential is broader than the new repository's least-privilege requirement.
 
-The seven-test suite directly covers schema/contract alignment, fail-closed contract keys, deterministic safe vector text, unsupported-glyph fail-closed behavior, and a structurally different synthetic 15-SVG second consumer whose outputs are deterministic and stripped of donor-only input markers/background state. This protects the portable mechanism; it does not replace GitHub target-render/browser or live-playback evidence.
+The portable regression suite covers schema/contract alignment, fail-closed contract keys, deterministic safe vector text, unsupported-glyph fail-closed behavior, and a structurally different synthetic 15-SVG second consumer whose outputs are deterministic and stripped of donor-only input markers/background state. P9 adds a measured semantic design grammar for proven geometry, seasonal palette roles, typography hierarchy and motion boundaries plus bounded design lint against the actual 15-SVG donor bundle.
+
+P9 remains deliberately **detection-only**. It does not make the grammar the renderer source of truth, and its PASS does not replace GitHub target-render/browser, perceptual-quality, pixel-equivalence or live-playback evidence.
 
 ## Current machine gate
 
@@ -43,8 +49,12 @@ concrete_reuse_request=ESTABLISHED
 license_selection=UNSELECTED
 repository_creation=DEFERRED
 working_repository=CREATED_PRIVATE
-current_working_main_sha=7cc093b00b0f37883951000693714b0a76e96276
+current_working_main_sha=23f9b3d546a9ca29435de3741f8bee848450a937
 portable_regression_tests=7
+design_grammar=P9/measured-reference-detection-only
+design_grammar_tests=14
+design_grammar_donor_bundle_lint=PASS/15-assets
+design_grammar_renderer_authority=false
 ```
 
 `repository_creation=DEFERRED` remains the **public publication/repository gate**. It no longer means that no private development repository exists.
@@ -63,6 +73,18 @@ Every other state is `DEFERRED`.
 
 The 2026-08-26 explicit extraction request satisfies the concrete reuse/demand term, but it does not select a redistribution license. Therefore the public gate correctly remains `DEFERRED`.
 
+## P9 design-grammar promotion boundary
+
+P9 records measured design decisions without silently changing the already-proven renderer. It may become renderer authority only after all of the following are re-earned on the migrated implementation:
+
+1. the measured grammar continues to pass against the proven donor bundle;
+2. tokenizing each renderer-owned value preserves byte-equivalent output or receives explicit visual review for an intentional change;
+3. browser/static/reduced-motion evidence is rerun and remains green;
+4. optical or data-derived exceptions are recorded by semantic reason rather than hidden raw literals;
+5. affected public/live claims are re-earned after deployment when those claims are required.
+
+Until these conditions are met, design-grammar PASS means **consistency detection PASS**, not renderer migration or visual acceptance PASS.
+
 ## Canonical P7 implementation
 
 P7 originally merged through PR #71 as:
@@ -73,7 +95,7 @@ P7 originally merged through PR #71 as:
 - accepted workflow run: `32814044647`;
 - accepted job: `97698734935`.
 
-That P7 receipt established the fail-closed public-publication rule. The later private extraction does not invalidate it; it only clarifies that a private development surface can be created without satisfying the public redistribution gate.
+That P7 receipt established the fail-closed public-publication rule. The later private extraction and P9 design consistency work do not invalidate it; they only add a private development surface and a pre-render consistency gate without authorizing redistribution.
 
 ## Technical evidence retained from P7/P8
 
@@ -123,4 +145,6 @@ Do not make the repository public merely because it already exists privately.
 
 A standalone `profile-envelope` Skill remains **DEFERRED**. The implementation now has a real extracted working repository, but a new Skill still needs recurrence outside this profile donor plus a discriminating evaluation showing that existing `readme-visual-design` and `animation-composition` guidance is insufficient.
 
-The repository-creation execution lesson is different: it is a general alternate-execution/authority pattern and should be fed back into `alternate-execution-routing`, not promoted as a Profile Envelope-specific Skill.
+The P9 lesson is a candidate for a broader design-consistency pattern — measured design decisions -> semantic grammar -> fail-closed design lint -> rendered verification — but one Profile Envelope case is not enough to create a new `design-system-consistency` Skill. Preserve it as a candidate until an independent UI/visual consumer demonstrates the same workflow.
+
+The repository-creation execution lesson remains a general alternate-execution/authority pattern and belongs in `alternate-execution-routing`, not a Profile Envelope-specific Skill.
