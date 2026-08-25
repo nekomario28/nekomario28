@@ -1,8 +1,9 @@
 name: Temporary OffHandCombat Quality publisher patch
 
 on:
-  pull_request:
-    branches: [main]
+  push:
+    branches:
+      - work/publish-offhandcombat-quality-tmp
 
 permissions:
   contents: write
@@ -11,16 +12,14 @@ jobs:
   patch:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout exact PR head
+      - name: Checkout carrier branch
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: work/publish-offhandcombat-quality-tmp
           fetch-depth: 0
 
       - name: Patch publisher validator only
         shell: bash
-        env:
-          HEAD_BRANCH: ${{ github.event.pull_request.head.ref }}
         run: |
           set -euo pipefail
           python3 - <<'PY'
@@ -43,7 +42,6 @@ jobs:
               'IPM_QUALITY_TOOLS_REF: 62870393d022646d1e356713d17d20d9dea11ef2',
               'producer pin',
           )
-
           replace_once(
               "            'nekomario28/freetoken',\n            'nekomario28/gz-sim',",
               "            'nekomario28/freetoken',\n            'nekomario28/offhandcombat',\n            'nekomario28/gz-sim',",
@@ -86,20 +84,12 @@ jobs:
                   raise SystemExit('missing patch anchor: gz block')
               s = s.replace(marker, offhand_block + marker, 1)
 
-          # Preserve production mechanics exactly: fail closed if these canonical fragments disappear.
           required = [
-              'on:\n  workflow_run:',
-              '  workflow_dispatch:',
-              '  push:\n    branches: [main]',
-              '  pull_request:\n    branches: [main]',
-              'permissions:\n  contents: read',
-              '    permissions:\n      contents: write',
-              "if: github.event_name != 'pull_request'",
-              'git commit -m "update experimental Quality sidecars"',
-              'git push origin HEAD:main',
               'IPM_QUALITY_TOOLS_REF: 62870393d022646d1e356713d17d20d9dea11ef2',
               "'nekomario28/offhandcombat'",
               "['nekomario28/offhandcombat', '2026-08-04']",
+              'git commit -m "update experimental Quality sidecars"',
+              'git push origin HEAD:main',
           ]
           for fragment in required:
               if fragment not in s:
@@ -109,10 +99,6 @@ jobs:
           PY
 
           git diff --check
-          grep -F 'IPM_QUALITY_TOOLS_REF: 62870393d022646d1e356713d17d20d9dea11ef2' .github/workflows/publish-quality-sidecars.yml
-          grep -F "'nekomario28/offhandcombat'" .github/workflows/publish-quality-sidecars.yml
-          grep -F "['nekomario28/offhandcombat', '2026-08-04']" .github/workflows/publish-quality-sidecars.yml
-
           if git diff --quiet; then
             echo 'Publisher patch already applied.'
             exit 0
@@ -121,4 +107,4 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add .github/workflows/publish-quality-sidecars.yml
           git commit -m 'Validate OffHandCombat in Quality sidecar publisher'
-          git push origin "HEAD:${HEAD_BRANCH}"
+          git push origin HEAD:work/publish-offhandcombat-quality-tmp
