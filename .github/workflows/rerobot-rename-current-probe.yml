@@ -1,0 +1,117 @@
+name: Rerobot rename current-contract probe
+
+on:
+  push:
+    branches:
+      - research/rerobot-action-interpolator-current-probe
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      REROBOT_SHA: f6c36c7da5326886fb6eb6e83d8a2d87283b31ec
+      LEROBOT_SHA: 8b256a6c0d4769c3cc3e7e98f04940126398a391
+    steps:
+      - name: Checkout carrier
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          clean: true
+          fetch-depth: 1
+
+      - name: Clone exact authorities
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$RUNNER_TEMP/rerobot-rename-$GITHUB_RUN_ID"
+          echo "ROOT=$root" >> "$GITHUB_ENV"
+          git clone --filter=blob:none https://github.com/k1000dai/Rerobot.git "$root/Rerobot"
+          git -C "$root/Rerobot" checkout --detach "$REROBOT_SHA"
+          git clone --filter=blob:none https://github.com/huggingface/lerobot.git "$root/lerobot"
+          git -C "$root/lerobot" checkout --detach "$LEROBOT_SHA"
+          test "$(git -C "$root/Rerobot" rev-parse HEAD)" = "$REROBOT_SHA"
+          test "$(git -C "$root/lerobot" rev-parse HEAD)" = "$LEROBOT_SHA"
+
+      - name: Execute Rerobot rename on coupled metadata fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > "$ROOT/Rerobot/crates/rerobot-core/tests/current_rename_metadata_probe.rs" <<'RS'
+          use rerobot_core::processor::rename::{Observation, RenameObservationsProcessorStep};
+          use serde_json::json;
+
+          #[test]
+          fn current_upstream_coupled_metadata_contract_is_not_implemented() {
+              let step = RenameObservationsProcessorStep::new([("pixels", "observation.image")]);
+              let mut obs = Observation::new();
+              obs.insert("pixels".to_string(), json!([1, 2, 3]));
+              obs.insert("pixels_is_pad".to_string(), json!(true));
+              obs.insert("pixels_padding_mask".to_string(), json!([true, false]));
+              obs.insert("reward".to_string(), json!(1.0));
+
+              let out = step.observation(&obs);
+              let keys: Vec<_> = out.keys().cloned().collect();
+              println!("rerobot_keys={keys:?}");
+
+              assert!(out.contains_key("observation.image"));
+              assert!(out.contains_key("pixels_is_pad"));
+              assert!(out.contains_key("pixels_padding_mask"));
+              assert!(!out.contains_key("observation.image_is_pad"));
+              assert!(!out.contains_key("observation.image_padding_mask"));
+              println!("REROBOT_CURRENT_RENAME_METADATA=RED_CONFIRMED");
+          }
+          RS
+          cd "$ROOT/Rerobot"
+          cargo test --locked -p rerobot-core --test current_rename_metadata_probe -- --nocapture | tee "$ROOT/rust-probe.log"
+          grep -q 'REROBOT_CURRENT_RENAME_METADATA=RED_CONFIRMED' "$ROOT/rust-probe.log"
+
+      - name: Execute exact current upstream rename helper
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' | tee "$ROOT/python-probe.log"
+          import ast
+          import os
+          from pathlib import Path
+
+          source_path = Path(os.environ['ROOT']) / 'lerobot/src/lerobot/processor/rename_processor.py'
+          source = source_path.read_text(encoding='utf-8')
+          tree = ast.parse(source, filename=str(source_path))
+          wanted = {'_rename_key_with_metadata'}
+          nodes = [n for n in tree.body if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)) and n.name in wanted]
+          assert {n.name for n in nodes} == wanted
+          module = ast.Module(body=nodes, type_ignores=[])
+          ast.fix_missing_locations(module)
+          ns = {}
+          exec(compile(module, str(source_path), 'exec'), ns, ns)
+          rename = ns['_rename_key_with_metadata']
+
+          rename_map = {'pixels': 'observation.image'}
+          keys = ['pixels', 'pixels_is_pad', 'pixels_padding_mask', 'reward']
+          out = [rename(k, rename_map) for k in keys]
+          expected = [
+              'observation.image',
+              'observation.image_is_pad',
+              'observation.image_padding_mask',
+              'reward',
+          ]
+          print('current_keys=', out)
+          assert out == expected, (out, expected)
+          print('CURRENT_LEROBOT_RENAME_METADATA=PASS')
+          PY
+          grep -q 'CURRENT_LEROBOT_RENAME_METADATA=PASS' "$ROOT/python-probe.log"
+
+      - name: Assert source contract and no tracked mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q '_rename_key_with_metadata' "$ROOT/lerobot/src/lerobot/processor/rename_processor.py"
+          grep -q '_is_pad' "$ROOT/lerobot/src/lerobot/processor/rename_processor.py"
+          grep -q '_padding_mask' "$ROOT/lerobot/src/lerobot/processor/rename_processor.py"
+          test -z "$(git -C "$ROOT/Rerobot" diff --name-only)"
+          test -z "$(git -C "$ROOT/lerobot" diff --name-only)"
+          echo 'SOURCE_TRACKED_MUTATION=FALSE'
