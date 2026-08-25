@@ -2,446 +2,13 @@
   "schemaVersion": 1,
   "contractId": "ipm-repository-assessment-artifact-v1",
   "owner": "nekomario28",
-  "generatedAt": "2026-08-25T08:50:34.255Z",
+  "generatedAt": "2026-08-25T14:25:48.617Z",
   "generatorRevision": "62870393d022646d1e356713d17d20d9dea11ef2",
   "taxonomyId": "ipm-standard-v1",
   "assessmentPolicyId": "ipm-repository-assessment-v1",
   "productionScoring": false,
   "prominenceCandidateId": null,
   "repositories": [
-    {
-      "identity": {
-        "repositoryKey": "nekomario28/ftbpublicclaims",
-        "graphNodeId": "repository:FTBPublicClaims",
-        "owner": "nekomario28",
-        "name": "FTBPublicClaims",
-        "githubRepositoryId": null
-      },
-      "context": {
-        "category": {
-          "state": "observed",
-          "id": "game-modding"
-        },
-        "artifacts": {
-          "state": "observed",
-          "values": [
-            "game-mod"
-          ]
-        },
-        "lifecycle": "unknown",
-        "relation": {
-          "ownership": "owned",
-          "collaboration": "unknown",
-          "lineage": "original"
-        }
-      },
-      "acquisition": {
-        "level": "L1",
-        "observedAt": "2026-08-25T08:50:34.255Z"
-      },
-      "quality": {
-        "state": "partial",
-        "value": {
-          "schemaVersion": 1,
-          "artifacts": [
-            "game-mod"
-          ],
-          "claimBoundaries": [],
-          "dimensions": {
-            "understandability": {
-              "applicability": "recommended",
-              "authority": "repository-native",
-              "evidenceState": "observed",
-              "findingState": "supports",
-              "findingCounts": {
-                "supports": 1,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "evidenced",
-              "evidenceCount": 1,
-              "evidence": [
-                {
-                  "authority": "repository-native",
-                  "state": "observed",
-                  "finding": "supports",
-                  "evidenceClass": "C",
-                  "sourceId": "README.md@8caaab65266a94e7bdedc6ad2f66030c7e394edf",
-                  "claim": "README documents the public-claim ownership model, player and manager permissions, client/server installation requirement, commands, anti-grief defaults, claim limits, supported Minecraft/Forge/FTB versions, and the internal FTB Teams compatibility boundary."
-                }
-              ]
-            },
-            "verification": {
-              "applicability": "recommended",
-              "authority": "unknown",
-              "evidenceState": "unknown",
-              "findingState": "unknown",
-              "findingCounts": {
-                "supports": 0,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "unevidenced",
-              "evidenceCount": 0,
-              "evidence": []
-            },
-            "reproducibility": {
-              "applicability": "recommended",
-              "authority": "repository-native",
-              "evidenceState": "observed",
-              "findingState": "supports",
-              "findingCounts": {
-                "supports": 1,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "evidenced",
-              "evidenceCount": 1,
-              "evidence": [
-                {
-                  "authority": "repository-native",
-                  "state": "observed",
-                  "finding": "supports",
-                  "evidenceClass": "C",
-                  "sourceId": "build.gradle+gradle.properties@8caaab65266a94e7bdedc6ad2f66030c7e394edf",
-                  "claim": "The default snapshot records Java 17, Minecraft 1.20.1, Forge 47.4.13, official 1.20.1 mappings, exact FTB Chunks 2001.3.6, FTB Teams 2001.3.1, FTB Library 2001.2.12, Architectury 9.1.12, and the Gradle build path."
-                }
-              ]
-            },
-            "maintainability": {
-              "applicability": "recommended",
-              "authority": "repository-native",
-              "evidenceState": "observed",
-              "findingState": "supports",
-              "findingCounts": {
-                "supports": 1,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "evidenced",
-              "evidenceCount": 1,
-              "evidence": [
-                {
-                  "authority": "repository-native",
-                  "state": "observed",
-                  "finding": "supports",
-                  "evidenceClass": "C",
-                  "sourceId": "README.md+FTBServerTeamBridge.java@8caaab65266a94e7bdedc6ad2f66030c7e394edf",
-                  "claim": "The repository identifies private/internal FTB Teams 2001.3.1 behavior as a version-specific compatibility risk and isolates that dependency in a dedicated FTBServerTeamBridge instead of scattering it through the public-claim service and packet layers."
-                }
-              ]
-            },
-            "integrity": {
-              "applicability": "optional",
-              "authority": "unknown",
-              "evidenceState": "unknown",
-              "findingState": "unknown",
-              "findingCounts": {
-                "supports": 0,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "unevidenced",
-              "evidenceCount": 0,
-              "evidence": []
-            },
-            "interoperability": {
-              "applicability": "recommended",
-              "authority": "repository-native",
-              "evidenceState": "observed",
-              "findingState": "supports",
-              "findingCounts": {
-                "supports": 1,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "evidenced",
-              "evidenceCount": 1,
-              "evidence": [
-                {
-                  "authority": "repository-native",
-                  "state": "observed",
-                  "finding": "supports",
-                  "evidenceClass": "C",
-                  "sourceId": "README.md+build.gradle+META-INF/mods.toml@8caaab65266a94e7bdedc6ad2f66030c7e394edf",
-                  "claim": "The snapshot declares exact FTB component versions, both-side dependency requirements, the Forge/Minecraft compatibility range, and the client UI plus custom networking requirement; README separately documents why the private FTB Teams boundary is pinned."
-                }
-              ]
-            },
-            "security-safety": {
-              "applicability": "optional",
-              "authority": "repository-native",
-              "evidenceState": "observed",
-              "findingState": "supports",
-              "findingCounts": {
-                "supports": 1,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "evidenced",
-              "evidenceCount": 1,
-              "evidence": [
-                {
-                  "authority": "repository-native",
-                  "state": "observed",
-                  "finding": "supports",
-                  "evidenceClass": "C",
-                  "sourceId": "README.md+Config.java+PublicChunkChangePacket.java+PublicClaimService.java@8caaab65266a94e7bdedc6ad2f66030c7e394edf",
-                  "claim": "Public-claim mutations are bounded server-side by enable/manager checks, per-project capacity, player distance, adjacency, existing-claim protection, a 64-change packet limit, and rejection of malformed packet counts; default team policy also disables explosions, mob griefing, PVP, and fake-player block editing."
-                }
-              ]
-            },
-            "stewardship": {
-              "applicability": "recommended",
-              "authority": "repository-native",
-              "evidenceState": "observed",
-              "findingState": "supports",
-              "findingCounts": {
-                "supports": 1,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "evidenced",
-              "evidenceCount": 1,
-              "evidence": [
-                {
-                  "authority": "repository-native",
-                  "state": "observed",
-                  "finding": "supports",
-                  "evidenceClass": "C",
-                  "sourceId": "LICENSE+gradle.properties+AGENTS.md@8caaab65266a94e7bdedc6ad2f66030c7e394edf",
-                  "claim": "The default snapshot carries an MIT license, explicit project identity/version metadata, and repository-local engineering guidance that preserves ownership/capacity isolation, exact compatibility evidence, persistence/client-server boundaries, and the distinction between default history and active unmerged port carriers."
-                }
-              ]
-            }
-          },
-          "compositeQualityScore": null
-        }
-      },
-      "impact": {
-        "state": "partial",
-        "value": {
-          "schemaVersion": 1,
-          "relation": {
-            "ownership": "owned",
-            "collaboration": "unknown",
-            "lineage": "original"
-          },
-          "projectSide": {
-            "recognition": {
-              "state": "observed",
-              "raw": 0,
-              "transformed": 0,
-              "source": "stars",
-              "directQualityEffect": false
-            },
-            "reuseDerivativeInterest": {
-              "state": "observed",
-              "raw": 0,
-              "transformed": 0,
-              "source": "forks",
-              "interpretation": "reuse-derivative-interest",
-              "independentAdopterCount": null,
-              "directQualityEffect": false
-            },
-            "adoption": {
-              "dependents": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              },
-              "downloads": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              }
-            },
-            "researchDomainUptake": {
-              "citations": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              }
-            },
-            "collaborationContext": {
-              "contributors": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              },
-              "personalContributionInferred": false
-            }
-          },
-          "upstreamContext": null,
-          "attribution": {
-            "profile": "unresolved",
-            "requiresPersonalContributionGate": true,
-            "upstreamMetricsAreContextOnly": false,
-            "collaborationState": "unknown",
-            "lineageState": "original"
-          },
-          "compositeImpact": null,
-          "portfolioProminenceEffect": null
-        }
-      },
-      "scale": {
-        "state": "not-collected",
-        "value": null
-      },
-      "lifecycle": {
-        "state": "not-collected",
-        "value": null
-      },
-      "personalContribution": {
-        "state": "not-collected",
-        "value": null
-      },
-      "prominence": {
-        "state": "not-collected",
-        "value": null
-      },
-      "productionScore": null
-    },
-    {
-      "identity": {
-        "repositoryKey": "nekomario28/sable",
-        "graphNodeId": "repository:sable",
-        "owner": "nekomario28",
-        "name": "sable",
-        "githubRepositoryId": null
-      },
-      "context": {
-        "category": {
-          "state": "observed",
-          "id": "game-modding"
-        },
-        "artifacts": {
-          "state": "observed",
-          "values": [
-            "game-mod"
-          ]
-        },
-        "lifecycle": "unknown",
-        "relation": {
-          "ownership": "owned",
-          "collaboration": "unknown",
-          "lineage": "fork"
-        }
-      },
-      "acquisition": {
-        "level": "L0",
-        "observedAt": "2026-08-25T08:50:34.255Z"
-      },
-      "quality": {
-        "state": "not-collected",
-        "value": null
-      },
-      "impact": {
-        "state": "partial",
-        "value": {
-          "schemaVersion": 1,
-          "relation": {
-            "ownership": "owned",
-            "collaboration": "unknown",
-            "lineage": "fork"
-          },
-          "projectSide": {
-            "recognition": {
-              "state": "observed",
-              "raw": 0,
-              "transformed": 0,
-              "source": "stars",
-              "directQualityEffect": false
-            },
-            "reuseDerivativeInterest": {
-              "state": "observed",
-              "raw": 0,
-              "transformed": 0,
-              "source": "forks",
-              "interpretation": "reuse-derivative-interest",
-              "independentAdopterCount": null,
-              "directQualityEffect": false
-            },
-            "adoption": {
-              "dependents": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              },
-              "downloads": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              }
-            },
-            "researchDomainUptake": {
-              "citations": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              }
-            },
-            "collaborationContext": {
-              "contributors": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              },
-              "personalContributionInferred": false
-            }
-          },
-          "upstreamContext": {
-            "state": "unknown",
-            "contextOnly": true,
-            "eligibleForLocalImpact": false,
-            "recognition": {
-              "state": "unknown",
-              "raw": null,
-              "transformed": null
-            },
-            "reuseDerivativeInterest": {
-              "state": "unknown",
-              "raw": null,
-              "transformed": null
-            }
-          },
-          "attribution": {
-            "profile": "fork",
-            "requiresPersonalContributionGate": true,
-            "upstreamMetricsAreContextOnly": true,
-            "collaborationState": "unknown",
-            "lineageState": "fork"
-          },
-          "compositeImpact": null,
-          "portfolioProminenceEffect": null
-        }
-      },
-      "scale": {
-        "state": "not-collected",
-        "value": null
-      },
-      "lifecycle": {
-        "state": "not-collected",
-        "value": null
-      },
-      "personalContribution": {
-        "state": "not-collected",
-        "value": null
-      },
-      "prominence": {
-        "state": "not-collected",
-        "value": null
-      },
-      "productionScore": null
-    },
     {
       "identity": {
         "repositoryKey": "nekomario28/offhandcombat",
@@ -470,7 +37,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-08-25T08:50:34.255Z"
+        "observedAt": "2026-08-25T14:25:48.617Z"
       },
       "quality": {
         "state": "partial",
@@ -1013,6 +580,439 @@
     },
     {
       "identity": {
+        "repositoryKey": "nekomario28/ftbpublicclaims",
+        "graphNodeId": "repository:FTBPublicClaims",
+        "owner": "nekomario28",
+        "name": "FTBPublicClaims",
+        "githubRepositoryId": null
+      },
+      "context": {
+        "category": {
+          "state": "observed",
+          "id": "game-modding"
+        },
+        "artifacts": {
+          "state": "observed",
+          "values": [
+            "game-mod"
+          ]
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "owned",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "acquisition": {
+        "level": "L1",
+        "observedAt": "2026-08-25T14:25:48.617Z"
+      },
+      "quality": {
+        "state": "partial",
+        "value": {
+          "schemaVersion": 1,
+          "artifacts": [
+            "game-mod"
+          ],
+          "claimBoundaries": [],
+          "dimensions": {
+            "understandability": {
+              "applicability": "recommended",
+              "authority": "repository-native",
+              "evidenceState": "observed",
+              "findingState": "supports",
+              "findingCounts": {
+                "supports": 1,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "evidenced",
+              "evidenceCount": 1,
+              "evidence": [
+                {
+                  "authority": "repository-native",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "C",
+                  "sourceId": "README.md@8caaab65266a94e7bdedc6ad2f66030c7e394edf",
+                  "claim": "README documents the public-claim ownership model, player and manager permissions, client/server installation requirement, commands, anti-grief defaults, claim limits, supported Minecraft/Forge/FTB versions, and the internal FTB Teams compatibility boundary."
+                }
+              ]
+            },
+            "verification": {
+              "applicability": "recommended",
+              "authority": "unknown",
+              "evidenceState": "unknown",
+              "findingState": "unknown",
+              "findingCounts": {
+                "supports": 0,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "unevidenced",
+              "evidenceCount": 0,
+              "evidence": []
+            },
+            "reproducibility": {
+              "applicability": "recommended",
+              "authority": "repository-native",
+              "evidenceState": "observed",
+              "findingState": "supports",
+              "findingCounts": {
+                "supports": 1,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "evidenced",
+              "evidenceCount": 1,
+              "evidence": [
+                {
+                  "authority": "repository-native",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "C",
+                  "sourceId": "build.gradle+gradle.properties@8caaab65266a94e7bdedc6ad2f66030c7e394edf",
+                  "claim": "The default snapshot records Java 17, Minecraft 1.20.1, Forge 47.4.13, official 1.20.1 mappings, exact FTB Chunks 2001.3.6, FTB Teams 2001.3.1, FTB Library 2001.2.12, Architectury 9.1.12, and the Gradle build path."
+                }
+              ]
+            },
+            "maintainability": {
+              "applicability": "recommended",
+              "authority": "repository-native",
+              "evidenceState": "observed",
+              "findingState": "supports",
+              "findingCounts": {
+                "supports": 1,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "evidenced",
+              "evidenceCount": 1,
+              "evidence": [
+                {
+                  "authority": "repository-native",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "C",
+                  "sourceId": "README.md+FTBServerTeamBridge.java@8caaab65266a94e7bdedc6ad2f66030c7e394edf",
+                  "claim": "The repository identifies private/internal FTB Teams 2001.3.1 behavior as a version-specific compatibility risk and isolates that dependency in a dedicated FTBServerTeamBridge instead of scattering it through the public-claim service and packet layers."
+                }
+              ]
+            },
+            "integrity": {
+              "applicability": "optional",
+              "authority": "unknown",
+              "evidenceState": "unknown",
+              "findingState": "unknown",
+              "findingCounts": {
+                "supports": 0,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "unevidenced",
+              "evidenceCount": 0,
+              "evidence": []
+            },
+            "interoperability": {
+              "applicability": "recommended",
+              "authority": "repository-native",
+              "evidenceState": "observed",
+              "findingState": "supports",
+              "findingCounts": {
+                "supports": 1,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "evidenced",
+              "evidenceCount": 1,
+              "evidence": [
+                {
+                  "authority": "repository-native",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "C",
+                  "sourceId": "README.md+build.gradle+META-INF/mods.toml@8caaab65266a94e7bdedc6ad2f66030c7e394edf",
+                  "claim": "The snapshot declares exact FTB component versions, both-side dependency requirements, the Forge/Minecraft compatibility range, and the client UI plus custom networking requirement; README separately documents why the private FTB Teams boundary is pinned."
+                }
+              ]
+            },
+            "security-safety": {
+              "applicability": "optional",
+              "authority": "repository-native",
+              "evidenceState": "observed",
+              "findingState": "supports",
+              "findingCounts": {
+                "supports": 1,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "evidenced",
+              "evidenceCount": 1,
+              "evidence": [
+                {
+                  "authority": "repository-native",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "C",
+                  "sourceId": "README.md+Config.java+PublicChunkChangePacket.java+PublicClaimService.java@8caaab65266a94e7bdedc6ad2f66030c7e394edf",
+                  "claim": "Public-claim mutations are bounded server-side by enable/manager checks, per-project capacity, player distance, adjacency, existing-claim protection, a 64-change packet limit, and rejection of malformed packet counts; default team policy also disables explosions, mob griefing, PVP, and fake-player block editing."
+                }
+              ]
+            },
+            "stewardship": {
+              "applicability": "recommended",
+              "authority": "repository-native",
+              "evidenceState": "observed",
+              "findingState": "supports",
+              "findingCounts": {
+                "supports": 1,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "evidenced",
+              "evidenceCount": 1,
+              "evidence": [
+                {
+                  "authority": "repository-native",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "C",
+                  "sourceId": "LICENSE+gradle.properties+AGENTS.md@8caaab65266a94e7bdedc6ad2f66030c7e394edf",
+                  "claim": "The default snapshot carries an MIT license, explicit project identity/version metadata, and repository-local engineering guidance that preserves ownership/capacity isolation, exact compatibility evidence, persistence/client-server boundaries, and the distinction between default history and active unmerged port carriers."
+                }
+              ]
+            }
+          },
+          "compositeQualityScore": null
+        }
+      },
+      "impact": {
+        "state": "partial",
+        "value": {
+          "schemaVersion": 1,
+          "relation": {
+            "ownership": "owned",
+            "collaboration": "unknown",
+            "lineage": "original"
+          },
+          "projectSide": {
+            "recognition": {
+              "state": "observed",
+              "raw": 0,
+              "transformed": 0,
+              "source": "stars",
+              "directQualityEffect": false
+            },
+            "reuseDerivativeInterest": {
+              "state": "observed",
+              "raw": 0,
+              "transformed": 0,
+              "source": "forks",
+              "interpretation": "reuse-derivative-interest",
+              "independentAdopterCount": null,
+              "directQualityEffect": false
+            },
+            "adoption": {
+              "dependents": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "downloads": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "researchDomainUptake": {
+              "citations": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "collaborationContext": {
+              "contributors": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "personalContributionInferred": false
+            }
+          },
+          "upstreamContext": null,
+          "attribution": {
+            "profile": "unresolved",
+            "requiresPersonalContributionGate": true,
+            "upstreamMetricsAreContextOnly": false,
+            "collaborationState": "unknown",
+            "lineageState": "original"
+          },
+          "compositeImpact": null,
+          "portfolioProminenceEffect": null
+        }
+      },
+      "scale": {
+        "state": "not-collected",
+        "value": null
+      },
+      "lifecycle": {
+        "state": "not-collected",
+        "value": null
+      },
+      "personalContribution": {
+        "state": "not-collected",
+        "value": null
+      },
+      "prominence": {
+        "state": "not-collected",
+        "value": null
+      },
+      "productionScore": null
+    },
+    {
+      "identity": {
+        "repositoryKey": "nekomario28/sable",
+        "graphNodeId": "repository:sable",
+        "owner": "nekomario28",
+        "name": "sable",
+        "githubRepositoryId": null
+      },
+      "context": {
+        "category": {
+          "state": "observed",
+          "id": "game-modding"
+        },
+        "artifacts": {
+          "state": "observed",
+          "values": [
+            "game-mod"
+          ]
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "owned",
+          "collaboration": "unknown",
+          "lineage": "fork"
+        }
+      },
+      "acquisition": {
+        "level": "L0",
+        "observedAt": "2026-08-25T14:25:48.617Z"
+      },
+      "quality": {
+        "state": "not-collected",
+        "value": null
+      },
+      "impact": {
+        "state": "partial",
+        "value": {
+          "schemaVersion": 1,
+          "relation": {
+            "ownership": "owned",
+            "collaboration": "unknown",
+            "lineage": "fork"
+          },
+          "projectSide": {
+            "recognition": {
+              "state": "observed",
+              "raw": 0,
+              "transformed": 0,
+              "source": "stars",
+              "directQualityEffect": false
+            },
+            "reuseDerivativeInterest": {
+              "state": "observed",
+              "raw": 0,
+              "transformed": 0,
+              "source": "forks",
+              "interpretation": "reuse-derivative-interest",
+              "independentAdopterCount": null,
+              "directQualityEffect": false
+            },
+            "adoption": {
+              "dependents": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "downloads": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "researchDomainUptake": {
+              "citations": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "collaborationContext": {
+              "contributors": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "personalContributionInferred": false
+            }
+          },
+          "upstreamContext": {
+            "state": "unknown",
+            "contextOnly": true,
+            "eligibleForLocalImpact": false,
+            "recognition": {
+              "state": "unknown",
+              "raw": null,
+              "transformed": null
+            },
+            "reuseDerivativeInterest": {
+              "state": "unknown",
+              "raw": null,
+              "transformed": null
+            }
+          },
+          "attribution": {
+            "profile": "fork",
+            "requiresPersonalContributionGate": true,
+            "upstreamMetricsAreContextOnly": true,
+            "collaborationState": "unknown",
+            "lineageState": "fork"
+          },
+          "compositeImpact": null,
+          "portfolioProminenceEffect": null
+        }
+      },
+      "scale": {
+        "state": "not-collected",
+        "value": null
+      },
+      "lifecycle": {
+        "state": "not-collected",
+        "value": null
+      },
+      "personalContribution": {
+        "state": "not-collected",
+        "value": null
+      },
+      "prominence": {
+        "state": "not-collected",
+        "value": null
+      },
+      "productionScore": null
+    },
+    {
+      "identity": {
         "repositoryKey": "nekomario28/antifullbright",
         "graphNodeId": "repository:antifullbright",
         "owner": "nekomario28",
@@ -1039,7 +1039,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-08-25T08:50:34.255Z"
+        "observedAt": "2026-08-25T14:25:48.617Z"
       },
       "quality": {
         "state": "partial",
@@ -1372,7 +1372,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-08-25T08:50:34.255Z"
+        "observedAt": "2026-08-25T14:25:48.617Z"
       },
       "quality": {
         "state": "not-collected",
@@ -1504,7 +1504,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-08-25T08:50:34.255Z"
+        "observedAt": "2026-08-25T14:25:48.617Z"
       },
       "quality": {
         "state": "not-collected",
@@ -1636,7 +1636,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-08-25T08:50:34.255Z"
+        "observedAt": "2026-08-25T14:25:48.617Z"
       },
       "quality": {
         "state": "partial",
@@ -2217,7 +2217,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-08-25T08:50:34.255Z"
+        "observedAt": "2026-08-25T14:25:48.617Z"
       },
       "quality": {
         "state": "not-collected",
@@ -2349,7 +2349,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-08-25T08:50:34.255Z"
+        "observedAt": "2026-08-25T14:25:48.617Z"
       },
       "quality": {
         "state": "not-collected",
@@ -2481,7 +2481,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-08-25T08:50:34.255Z"
+        "observedAt": "2026-08-25T14:25:48.617Z"
       },
       "quality": {
         "state": "partial",
@@ -2852,7 +2852,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-08-25T08:50:34.255Z"
+        "observedAt": "2026-08-25T14:25:48.617Z"
       },
       "quality": {
         "state": "partial",
@@ -3338,6 +3338,138 @@
     },
     {
       "identity": {
+        "repositoryKey": "nekomario28/wiki",
+        "graphNodeId": "repository:wiki",
+        "owner": "nekomario28",
+        "name": "wiki",
+        "githubRepositoryId": null
+      },
+      "context": {
+        "category": {
+          "state": "observed",
+          "id": "applications-services"
+        },
+        "artifacts": {
+          "state": "observed",
+          "values": [
+            "application"
+          ]
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "owned",
+          "collaboration": "unknown",
+          "lineage": "fork"
+        }
+      },
+      "acquisition": {
+        "level": "L0",
+        "observedAt": "2026-08-25T14:25:48.617Z"
+      },
+      "quality": {
+        "state": "not-collected",
+        "value": null
+      },
+      "impact": {
+        "state": "partial",
+        "value": {
+          "schemaVersion": 1,
+          "relation": {
+            "ownership": "owned",
+            "collaboration": "unknown",
+            "lineage": "fork"
+          },
+          "projectSide": {
+            "recognition": {
+              "state": "observed",
+              "raw": 0,
+              "transformed": 0,
+              "source": "stars",
+              "directQualityEffect": false
+            },
+            "reuseDerivativeInterest": {
+              "state": "observed",
+              "raw": 0,
+              "transformed": 0,
+              "source": "forks",
+              "interpretation": "reuse-derivative-interest",
+              "independentAdopterCount": null,
+              "directQualityEffect": false
+            },
+            "adoption": {
+              "dependents": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "downloads": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "researchDomainUptake": {
+              "citations": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "collaborationContext": {
+              "contributors": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "personalContributionInferred": false
+            }
+          },
+          "upstreamContext": {
+            "state": "unknown",
+            "contextOnly": true,
+            "eligibleForLocalImpact": false,
+            "recognition": {
+              "state": "unknown",
+              "raw": null,
+              "transformed": null
+            },
+            "reuseDerivativeInterest": {
+              "state": "unknown",
+              "raw": null,
+              "transformed": null
+            }
+          },
+          "attribution": {
+            "profile": "fork",
+            "requiresPersonalContributionGate": true,
+            "upstreamMetricsAreContextOnly": true,
+            "collaborationState": "unknown",
+            "lineageState": "fork"
+          },
+          "compositeImpact": null,
+          "portfolioProminenceEffect": null
+        }
+      },
+      "scale": {
+        "state": "not-collected",
+        "value": null
+      },
+      "lifecycle": {
+        "state": "not-collected",
+        "value": null
+      },
+      "personalContribution": {
+        "state": "not-collected",
+        "value": null
+      },
+      "prominence": {
+        "state": "not-collected",
+        "value": null
+      },
+      "productionScore": null
+    },
+    {
+      "identity": {
         "repositoryKey": "nekomario28/projexd_group10",
         "graphNodeId": "repository:ProjExD_Group10",
         "owner": "nekomario28",
@@ -3364,7 +3496,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-08-25T08:50:34.255Z"
+        "observedAt": "2026-08-25T14:25:48.617Z"
       },
       "quality": {
         "state": "partial",
@@ -3638,7 +3770,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-08-25T08:50:34.255Z"
+        "observedAt": "2026-08-25T14:25:48.617Z"
       },
       "quality": {
         "state": "partial",
@@ -4169,7 +4301,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-08-25T08:50:34.255Z"
+        "observedAt": "2026-08-25T14:25:48.617Z"
       },
       "quality": {
         "state": "partial",
@@ -4450,7 +4582,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-08-25T08:50:34.255Z"
+        "observedAt": "2026-08-25T14:25:48.617Z"
       },
       "quality": {
         "state": "not-collected",
