@@ -18,7 +18,7 @@
     "source_sha": "bf3960dc85eebf8e25c5e8a015e968322a984597",
     "initial_filtered_history_head": "ee0a07b9e85f7a57c6b2146149e68420202f4fe5",
     "current_bootstrap_main_sha": "d916b057ec897ceef94bdee293d4e02f42e46d1b",
-    "current_working_main_sha": "3379342a048e5d64f36a28e91ce132b14592961b",
+    "current_working_main_sha": "960171849769830b0fa72b00c438c7c716ab2e3c",
     "bootstrap_carrier_run": 32868834661,
     "exact_head_validation_run": 32869436824,
     "portable_regression_run": 32871700639,
@@ -52,30 +52,36 @@
         "global_renderer_authority": false
       }
     },
+    "release_copy_set": {
+      "phase": "P10",
+      "boundary_kind": "product-copy-set",
+      "product_file_count": 8,
+      "product_content_revision": "a4a954f22aa3511540c17723d88a33de38733910",
+      "provenance_head": "960171849769830b0fa72b00c438c7c716ab2e3c",
+      "technical_standalone": "PASS",
+      "release_closure_run": 32883641201,
+      "release_closure_job": 97918842614,
+      "release_closure_tests": 18,
+      "provenance_exact_head_run": 32884162091,
+      "provenance_exact_head_job": 97920532341,
+      "provenance_tests": 19,
+      "donor_byte_equivalence": "PASS",
+      "donor_assets": 15,
+      "historical_six_file_donor_audit": "PASS",
+      "p9_p10_delta_repository_history_audit": "PASS",
+      "product_copy_set_repository_history_audit": "PASS",
+      "legal_conclusion": "NOT_CLAIMED",
+      "whole_repository_publication_audit": "NOT_ESTABLISHED"
+    },
     "public_release": "DEFERRED"
   },
   "layers": {
     "portable_core": [
-      {
-        "source": "design-lab/scripts/profile_envelope_contract.py",
-        "destination": "src/profile_envelope/contract.py"
-      },
-      {
-        "source": "design-lab/envelope-v9/vector_text.py",
-        "destination": "src/profile_envelope/vector_text.py"
-      },
-      {
-        "source": "design-lab/profile-envelope-config.schema.json",
-        "destination": "schema/profile-envelope-config.schema.json"
-      },
-      {
-        "source": "design-lab/profile-envelope-config.example.json",
-        "destination": "examples/opaque-safe.json"
-      },
-      {
-        "source": "design-lab/profile-envelope-config.transparent.example.json",
-        "destination": "examples/transparent-safe.json"
-      }
+      {"source": "design-lab/scripts/profile_envelope_contract.py", "destination": "src/profile_envelope/contract.py"},
+      {"source": "design-lab/envelope-v9/vector_text.py", "destination": "src/profile_envelope/vector_text.py"},
+      {"source": "design-lab/profile-envelope-config.schema.json", "destination": "schema/profile-envelope-config.schema.json"},
+      {"source": "design-lab/profile-envelope-config.example.json", "destination": "examples/opaque-safe.json"},
+      {"source": "design-lab/profile-envelope-config.transparent.example.json", "destination": "examples/transparent-safe.json"}
     ],
     "portable_adapters": [
       {
@@ -130,15 +136,22 @@
     "vector safe text covers the proven glyph set and fails closed for unsupported visible glyphs",
     "the standalone GitHub transformer consumes a complete donor SVG bundle but does not define how arbitrary semantic source data becomes that bundle",
     "the P6 second consumer is a structurally different synthetic fixture, not an independent external consumer",
+    "the donor layers above remain the historical six-file extraction boundary; the current working P10 product boundary is the separate eight-file release_copy_set",
     "the private working repository is an extraction/development surface and does not itself authorize public redistribution",
+    "P10 product-copy-set repository-history provenance PASS does not authorize exposing the entire existing private repository or its private development history",
     "P9 design grammar remains the measured reference; P10 gives only frame-rail geometry an explicit opt-in projection path and does not make the grammar global renderer authority",
     "P10 exact donor byte equivalence covers the frame-caps-none transform case and does not replace browser, responsive, playback or public-target evidence"
   ],
   "promotion_gates": {
     "create_public_repository": [
       "an independent consumer or concrete reuse request exists",
-      "the extracted package passes structure and browser evidence without reading this profile repository",
-      "publication/licensing metadata for the new repository is chosen explicitly"
+      "the intended product/support copy set passes standalone structure and required render evidence",
+      "publication/licensing metadata for the exact release is chosen explicitly"
+    ],
+    "make_existing_private_repository_public": [
+      "whole_repository_publication_audit is ESTABLISHED for support files and exposed repository history",
+      "publication/licensing metadata is selected for the intended public repository state",
+      "the exact visibility transition revision is revalidated and recorded"
     ],
     "promote_design_grammar_to_renderer_authority": [
       "the measured grammar passes against the proven donor bundle",
