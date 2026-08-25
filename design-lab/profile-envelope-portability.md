@@ -1,6 +1,6 @@
 # Portable profile envelope contract
 
-Status: **design contract + extraction candidate / not yet a public API**  
+Status: **design contract + extraction candidate / publication gate implemented / not yet a public API**  
 Updated: **2026-08-25 JST**
 
 This document freezes the reusable boundary discovered while building the profile envelope and direct IPM surfaces. The current public profile is the direct-IPM surface; Envelope v8/v9 are evidence-bearing donors in Design Lab. No portability work should implicitly promote them live.
@@ -26,6 +26,8 @@ data-profile-envelope-mounted-background="presentation"
 The transformer consumes the markers and removes them before final output fingerprinting. This keeps the portable boundary semantic and bounded without inventing a universal visual IR.
 
 A heterogeneous synthetic second-consumer fixture proves that the copied transformer can operate on a donor with different dimensions, frame geometry, colors and mounted-background identity while using only those three markers. That fixture is evaluation evidence, **not an independent external consumer**.
+
+P7 adds a separate publication-readiness state. Technical extraction is currently `PASS`, but public repository creation remains `DEFERRED` until real external demand exists through either an independent consumer or a concrete reuse request **and** a publication license is selected explicitly. P8 audits the repository-local introduction history of the exact six-file candidate copy set without turning that history into a legal conclusion.
 
 ## Public configuration v1
 
@@ -103,6 +105,28 @@ Config identity is insufficient. Every generated target carries one target-sensi
 
 Generic donor marker attributes are removed before the fingerprint is calculated. A pure adapter-boundary refactor can therefore remain byte-identical, while any actual visible/source change still changes the render-target identity and invalidates old render/playback evidence.
 
+## Publication readiness
+
+The publication gate is intentionally separate from rendering/extraction success. The authoritative machine state lives in `envelope-v9/portable-package-manifest.json` and is validated fail-closed.
+
+Current state:
+
+```text
+technical_copy_set=PASS
+independent_consumer=NOT_ESTABLISHED
+concrete_reuse_request=NOT_ESTABLISHED
+license_selection=UNSELECTED
+repository_creation=DEFERRED
+```
+
+`repository_creation=READY` is valid only if all of the following are true:
+
+1. the technical copy set passes;
+2. external demand exists through either an independent consumer or a concrete reuse request;
+3. a publication license is selected explicitly.
+
+Technical copyability alone is not publication authority. External demand without a selected license is also insufficient.
+
 ## Extraction package shape
 
 The current candidate copy set is declared in `envelope-v9/portable-package-manifest.json`.
@@ -118,12 +142,14 @@ profile-envelope/
 ├── examples/
 │   ├── opaque-safe.json
 │   └── transparent-safe.json
-└── ... evidence / packaging surfaces added only when publication is justified
+└── ... publication surfaces added only when the gate is eligible
 ```
 
 The Schema identity is owner-independent: `urn:profile-envelope:config:v1`.
 
 The current repository-bound `render_portable_surface.py` is **not** part of that copyable package. It imports v8, materializes this profile's donor bundle and translates donor-specific element identity into the three generic marker attributes.
+
+P8's `PROVENANCE-AUDIT.md` traces the repository-local introduction of the exact five portable-core files plus the standalone GitHub-profile transformer. That audit is evidence about Git history and current dependency/notice observations; it does not establish exclusive copyright ownership, absence of external influence, or the correct open-source license.
 
 ### Portable code must not know
 
@@ -163,6 +189,7 @@ The extraction deliberately reuses patterns that worked in Interactive Project M
 - **Fail closed.** Unsupported glyphs/configs/source shapes do not silently degrade authority.
 - **Derived provenance.** Generated targets bind to source/config/output identity.
 - **Translate donor identity at the adapter edge.** Portable projection code consumes semantic markers rather than pattern-matching one donor's IDs.
+- **Separate technical readiness from publication authority.** A copyable artifact still needs a real consumption signal and explicit redistribution/licensing decision.
 
 Failures and near-failures to keep as regression rules:
 
@@ -179,6 +206,8 @@ Failures and near-failures to keep as regression rules:
 - accessibility metadata derived from differently encoded text than visible glyph geometry;
 - portable code matching donor implementation IDs instead of explicit semantic markers;
 - requiring dead SVG definitions to disappear when the contract only requires their rendered background paint to be removed;
+- technical extraction PASS treated as authority to create a public repository;
+- clean Git history treated as a substitute for an explicit provenance/license decision;
 - universal IR/adapter design before a second host or independent consumer exists.
 
 ## Evidence contract
@@ -193,6 +222,8 @@ A release claim should distinguish at least:
 6. **PLAYBACK PASS** — selected motion visibly runs, while reduced-motion and motion-off are static.
 7. **EXTRACTION PASS** — declared copy set runs outside the donor repository.
 8. **SECOND-FIXTURE PASS** — a structurally different donor exercises the portable marker boundary; this is not equivalent to an independent consumer.
+9. **PUBLICATION GATE PASS** — the declared readiness state is internally consistent and fail-closed; a PASS may still correctly result in `repository_creation=DEFERRED`.
+10. **PROVENANCE AUDIT** — copy-set lineage and notices/dependencies are inspected without overstating legal conclusions.
 
 `Actions success` alone is never equivalent to public rendered success.
 
@@ -228,9 +259,17 @@ PR #68 merged the three-marker donor boundary and v8-independent heterogeneous f
 
 The fixture is intentionally not counted as an external independent consumer.
 
-### P7 — public repository publication: deferred
+### P7 — publication readiness gate: complete; current outcome DEFERRED
 
-Do not create the repository solely because extraction is technically possible. Publication is justified when there is an independent consumer or concrete reuse request, and license/package/release surfaces can be chosen deliberately. At that point, use the manifest as the initial copy boundary rather than moving the entire Design Lab history.
+PR #71 merged a machine-readable, fail-closed publication gate. Technical copyability, external demand and license selection are independent inputs. The current state is correctly `DEFERRED` because no independent consumer or concrete reuse request is established and no publication license is selected.
+
+### P8 — six-file provenance audit: complete as evidence
+
+`design-lab/envelope-v9/PROVENANCE-AUDIT.md` records the repository-local introduction and current audited blobs for the exact copy set. It narrows provenance uncertainty but deliberately does not make a legal ownership conclusion or select a license.
+
+### P9 — public repository publication: deferred by evidence
+
+Do not create the repository solely because extraction is technically possible. Publication becomes eligible only after real external demand and explicit license selection, followed by exact-release extraction/browser verification. Use the six-file manifest boundary rather than exporting Design Lab history.
 
 Further generic abstraction before that signal is not justified by current evidence.
 
