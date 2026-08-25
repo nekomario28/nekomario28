@@ -1,0 +1,251 @@
+name: TEMP Rerobot paired CPU hosted benchmark
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/temp-rerobot-paired-cpu-hosted.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      REROBOT_SHA: f6c36c7da5326886fb6eb6e83d8a2d87283b31ec
+      LEROBOT_SHA: bf31dd794ffb4f87380aba3912f64421e8352d3c
+      CARGO_BUILD_JOBS: '2'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      NUMEXPR_NUM_THREADS: '1'
+      RAYON_NUM_THREADS: '1'
+      WANDB_MODE: disabled
+    steps:
+      - name: Record hosted environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "runner_name=$RUNNER_NAME runner_os=$RUNNER_OS runner_arch=$RUNNER_ARCH image_os=${ImageOS:-unknown}"
+          python3 --version
+          cargo --version
+          rustc --version
+          nproc
+          grep -m1 '^model name' /proc/cpuinfo || true
+          free -h
+          df -h .
+          cat /proc/loadavg
+          command -v /usr/bin/time
+
+      - name: Clone exact authorities read-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$RUNNER_TEMP/rerobot-paired-hosted-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          rm -rf "$root"
+          mkdir -p "$root"
+          git clone --filter=blob:none --no-checkout https://github.com/k1000dai/Rerobot.git "$root/rerobot"
+          git -C "$root/rerobot" fetch --depth=1 origin "$REROBOT_SHA"
+          git -C "$root/rerobot" checkout --detach "$REROBOT_SHA"
+          test "$(git -C "$root/rerobot" rev-parse HEAD)" = "$REROBOT_SHA"
+          git clone --filter=blob:none --no-checkout https://github.com/huggingface/lerobot.git "$root/lerobot"
+          git -C "$root/lerobot" fetch --depth=1 origin "$LEROBOT_SHA"
+          git -C "$root/lerobot" checkout --detach "$LEROBOT_SHA"
+          test "$(git -C "$root/lerobot" rev-parse HEAD)" = "$LEROBOT_SHA"
+          echo "WORK_ROOT=$root" >> "$GITHUB_ENV"
+          echo "FIXTURE=$root/rerobot/crates/rerobot-train/tests/fixtures/state_only" >> "$GITHUB_ENV"
+          echo "REROBOT_EXACT_HEAD=$(git -C "$root/rerobot" rev-parse HEAD)"
+          echo "LEROBOT_EXACT_HEAD=$(git -C "$root/lerobot" rev-parse HEAD)"
+
+      - name: Bootstrap isolated Python 3.12 and current LeRobot training runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import sys
+          print(sys.version)
+          if sys.version_info < (3, 12):
+              raise SystemExit('Python >=3.12 required by frozen LeRobot authority')
+          PY
+          python3 -m venv "$WORK_ROOT/venv"
+          py="$WORK_ROOT/venv/bin/python"
+          pip="$WORK_ROOT/venv/bin/pip"
+          "$pip" install --disable-pip-version-check --no-input --upgrade pip
+          "$pip" install --disable-pip-version-check --no-input \
+            --index-url https://download.pytorch.org/whl/cpu \
+            'torch==2.7.1' 'torchvision==0.22.1'
+          "$pip" install --disable-pip-version-check --no-input -e "$WORK_ROOT/lerobot[training]"
+          "$py" - <<'PY'
+          import torch, lerobot
+          print('CURRENT_LEROBOT_IMPORT_PASS')
+          print('torch', torch.__version__)
+          print('lerobot', getattr(lerobot, '__version__', '<none>'))
+          if torch.cuda.is_available():
+              raise SystemExit('hosted benchmark must stay CPU-only')
+          PY
+          echo "PY=$py" >> "$GITHUB_ENV"
+
+      - name: Build exact Rerobot release trainer
+        shell: bash
+        run: |
+          set -euo pipefail
+          export CARGO_TARGET_DIR="$WORK_ROOT/cargo-target"
+          cargo build --release --locked --manifest-path "$WORK_ROOT/rerobot/Cargo.toml" -p rerobot-cli --bin lerobot-train
+          test -x "$CARGO_TARGET_DIR/release/lerobot-train"
+          echo "RUST_TRAIN=$CARGO_TARGET_DIR/release/lerobot-train" >> "$GITHUB_ENV"
+
+      - name: Hosted resource admission before warmup
+        shell: bash
+        run: |
+          set -euo pipefail
+          mem_kib=$(awk '/MemAvailable:/ {print $2}' /proc/meminfo)
+          free_kib=$(df -Pk . | awk 'NR==2 {print $4}')
+          cpus=$(nproc)
+          load1=$(awk '{print $1}' /proc/loadavg)
+          awk -v m="$mem_kib" 'BEGIN { if (m < 4*1024*1024) exit 1 }' || { echo "HOSTED_ADMISSION_FAIL mem_available_kib=$mem_kib"; exit 1; }
+          awk -v d="$free_kib" 'BEGIN { if (d < 10*1024*1024) exit 1 }' || { echo "HOSTED_ADMISSION_FAIL free_disk_kib=$free_kib"; exit 1; }
+          awk -v l="$load1" -v c="$cpus" 'BEGIN { if (l/c > 1.5) exit 1 }' || { echo "HOSTED_ADMISSION_FAIL load1=$load1 cpus=$cpus"; exit 1; }
+          echo "HOSTED_ADMISSION_PASS mem_available_kib=$mem_kib free_disk_kib=$free_kib load1=$load1 cpus=$cpus"
+
+      - name: Pairing warmups on identical fixture and ACT config
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUST_TRAIN" \
+            --dataset.repo_id=rerobot/state_only_slice --dataset.root="$FIXTURE" \
+            --policy.type=act --steps=5 --batch_size=2 --num_workers=0 \
+            --policy.chunk_size=2 --policy.n_action_steps=2 \
+            --policy.dim_model=32 --policy.n_heads=4 --policy.dim_feedforward=64 \
+            --policy.n_encoder_layers=1 --policy.n_decoder_layers=1 \
+            --policy.n_vae_encoder_layers=1 --policy.latent_dim=8 \
+            --policy.device=cpu --seed=1000 --log_freq=1000 --save_checkpoint=false \
+            --output_dir="$WORK_ROOT/warm-rust" > "$WORK_ROOT/warm-rust.log" 2>&1
+          grep -q '^End of training$' "$WORK_ROOT/warm-rust.log"
+          echo 'RUST_WARMUP_PASS'
+
+          "$WORK_ROOT/venv/bin/lerobot-train" \
+            --dataset.repo_id=rerobot/state_only_slice --dataset.root="$FIXTURE" \
+            --policy.type=act --steps=5 --batch_size=2 --num_workers=0 --persistent_workers=false \
+            --policy.chunk_size=2 --policy.n_action_steps=2 \
+            --policy.dim_model=32 --policy.n_heads=4 --policy.dim_feedforward=64 \
+            --policy.n_encoder_layers=1 --policy.n_decoder_layers=1 \
+            --policy.n_vae_encoder_layers=1 --policy.latent_dim=8 \
+            --policy.device=cpu --seed=1000 --log_freq=1000 --save_checkpoint=false \
+            --env_eval_freq=0 --eval_steps=0 --wandb.enable=false \
+            --output_dir="$WORK_ROOT/warm-python" > "$WORK_ROOT/warm-python.log" 2>&1
+          grep -q 'End of training' "$WORK_ROOT/warm-python.log"
+          echo 'PYTHON_WARMUP_PASS'
+          echo 'PAIRING_WARMUP_PASS'
+
+      - name: Hosted resource admission before measured runs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mem_kib=$(awk '/MemAvailable:/ {print $2}' /proc/meminfo)
+          free_kib=$(df -Pk . | awk 'NR==2 {print $4}')
+          cpus=$(nproc)
+          load1=$(awk '{print $1}' /proc/loadavg)
+          awk -v m="$mem_kib" 'BEGIN { if (m < 4*1024*1024) exit 1 }' || { echo "HOSTED_ADMISSION_FAIL mem_available_kib=$mem_kib"; exit 1; }
+          awk -v d="$free_kib" 'BEGIN { if (d < 10*1024*1024) exit 1 }' || { echo "HOSTED_ADMISSION_FAIL free_disk_kib=$free_kib"; exit 1; }
+          awk -v l="$load1" -v c="$cpus" 'BEGIN { if (l/c > 1.5) exit 1 }' || { echo "HOSTED_ADMISSION_FAIL load1=$load1 cpus=$cpus"; exit 1; }
+          echo "HOSTED_ADMISSION_PASS mem_available_kib=$mem_kib free_disk_kib=$free_kib load1=$load1 cpus=$cpus"
+
+      - name: Run preregistered hosted paired benchmark
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$WORK_ROOT/metrics"
+          run_rust() {
+            local idx="$1"
+            /usr/bin/time -f '%e %M %x' -o "$WORK_ROOT/metrics/rust-$idx.txt" \
+              "$RUST_TRAIN" \
+              --dataset.repo_id=rerobot/state_only_slice --dataset.root="$FIXTURE" \
+              --policy.type=act --steps=50 --batch_size=2 --num_workers=0 \
+              --policy.chunk_size=2 --policy.n_action_steps=2 \
+              --policy.dim_model=32 --policy.n_heads=4 --policy.dim_feedforward=64 \
+              --policy.n_encoder_layers=1 --policy.n_decoder_layers=1 \
+              --policy.n_vae_encoder_layers=1 --policy.latent_dim=8 \
+              --policy.device=cpu --seed=1000 --log_freq=1000 --save_checkpoint=false \
+              --output_dir="$WORK_ROOT/rust-$idx" > "$WORK_ROOT/rust-$idx.log" 2>&1
+            grep -q '^End of training$' "$WORK_ROOT/rust-$idx.log"
+          }
+          run_python() {
+            local idx="$1"
+            /usr/bin/time -f '%e %M %x' -o "$WORK_ROOT/metrics/python-$idx.txt" \
+              "$WORK_ROOT/venv/bin/lerobot-train" \
+              --dataset.repo_id=rerobot/state_only_slice --dataset.root="$FIXTURE" \
+              --policy.type=act --steps=50 --batch_size=2 --num_workers=0 --persistent_workers=false \
+              --policy.chunk_size=2 --policy.n_action_steps=2 \
+              --policy.dim_model=32 --policy.n_heads=4 --policy.dim_feedforward=64 \
+              --policy.n_encoder_layers=1 --policy.n_decoder_layers=1 \
+              --policy.n_vae_encoder_layers=1 --policy.latent_dim=8 \
+              --policy.device=cpu --seed=1000 --log_freq=1000 --save_checkpoint=false \
+              --env_eval_freq=0 --eval_steps=0 --wandb.enable=false \
+              --output_dir="$WORK_ROOT/python-$idx" > "$WORK_ROOT/python-$idx.log" 2>&1
+            grep -q 'End of training' "$WORK_ROOT/python-$idx.log"
+          }
+          run_rust 1
+          run_python 1
+          run_python 2
+          run_rust 2
+          run_rust 3
+          run_python 3
+
+          "$PY" - <<'PY'
+          import json, os, pathlib, statistics
+          root = pathlib.Path(os.environ['WORK_ROOT']) / 'metrics'
+          rows = {'rust': [], 'python': []}
+          for impl in rows:
+              for i in (1, 2, 3):
+                  wall, rss, status = (root / f'{impl}-{i}.txt').read_text().strip().split()
+                  row = {'run': i, 'wall_seconds': float(wall), 'max_rss_kib': int(rss), 'exit_status': int(status)}
+                  if row['exit_status'] != 0:
+                      raise SystemExit(f'{impl}-{i} failed: {row}')
+                  rows[impl].append(row)
+          summary = {
+              'protocol': 'github_hosted_same_vm_cpu_cli_training_50_steps_n3',
+              'order': ['rust1', 'python1', 'python2', 'rust2', 'rust3', 'python3'],
+              'rust': rows['rust'],
+              'python': rows['python'],
+              'rust_median_wall_seconds': statistics.median(x['wall_seconds'] for x in rows['rust']),
+              'python_median_wall_seconds': statistics.median(x['wall_seconds'] for x in rows['python']),
+              'rust_median_max_rss_kib': statistics.median(x['max_rss_kib'] for x in rows['rust']),
+              'python_median_max_rss_kib': statistics.median(x['max_rss_kib'] for x in rows['python']),
+          }
+          summary['python_over_rust_median_wall_ratio'] = summary['python_median_wall_seconds'] / summary['rust_median_wall_seconds']
+          out = root / 'summary.json'
+          out.write_text(json.dumps(summary, indent=2, sort_keys=True) + '\n')
+          print(out.read_text())
+          PY
+
+      - name: Preserve bounded summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo '## Rerobot vs current LeRobot public-hosted paired CPU benchmark'
+            echo
+            echo "- Rerobot: \`$REROBOT_SHA\`"
+            echo "- LeRobot: \`$LEROBOT_SHA\`"
+            echo "- run: \`$GITHUB_RUN_ID\` attempt \`$GITHUB_RUN_ATTEMPT\`"
+            if [[ -f "${WORK_ROOT:-}/metrics/summary.json" ]]; then
+              echo '```json'
+              cat "$WORK_ROOT/metrics/summary.json"
+              echo '```'
+            elif [[ -f "${WORK_ROOT:-}/warm-python.log" ]]; then
+              echo 'No timing summary. Python warmup tail:'
+              echo '```text'
+              tail -n 80 "$WORK_ROOT/warm-python.log"
+              echo '```'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Cleanup disposable checkouts
+        if: always()
+        shell: bash
+        run: |
+          if [[ -n "${WORK_ROOT:-}" && "$WORK_ROOT" == "$RUNNER_TEMP"/rerobot-paired-hosted-* ]]; then
+            rm -rf "$WORK_ROOT"
+          fi
