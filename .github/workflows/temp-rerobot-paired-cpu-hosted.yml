@@ -96,6 +96,25 @@ jobs:
           test -x "$CARGO_TARGET_DIR/release/lerobot-train"
           echo "RUST_TRAIN=$CARGO_TARGET_DIR/release/lerobot-train" >> "$GITHUB_ENV"
 
+      - name: Bounded cooldown before warmup admission
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 0 12); do
+            cpus=$(nproc)
+            load1=$(awk '{print $1}' /proc/loadavg)
+            echo "HOSTED_COOLDOWN_SAMPLE phase=pre-warmup attempt=$attempt load1=$load1 cpus=$cpus"
+            if awk -v l="$load1" -v c="$cpus" 'BEGIN { exit !((l/c) <= 1.5) }'; then
+              echo "HOSTED_COOLDOWN_READY phase=pre-warmup load1=$load1 cpus=$cpus"
+              exit 0
+            fi
+            if [ "$attempt" -eq 12 ]; then
+              echo "HOSTED_COOLDOWN_EXHAUSTED phase=pre-warmup load1=$load1 cpus=$cpus"
+              exit 1
+            fi
+            sleep 10
+          done
+
       - name: Hosted resource admission before warmup
         shell: bash
         run: |
@@ -138,6 +157,25 @@ jobs:
           grep -q 'End of training' "$WORK_ROOT/warm-python.log"
           echo 'PYTHON_WARMUP_PASS'
           echo 'PAIRING_WARMUP_PASS'
+
+      - name: Bounded cooldown before measured-run admission
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 0 12); do
+            cpus=$(nproc)
+            load1=$(awk '{print $1}' /proc/loadavg)
+            echo "HOSTED_COOLDOWN_SAMPLE phase=pre-measurement attempt=$attempt load1=$load1 cpus=$cpus"
+            if awk -v l="$load1" -v c="$cpus" 'BEGIN { exit !((l/c) <= 1.5) }'; then
+              echo "HOSTED_COOLDOWN_READY phase=pre-measurement load1=$load1 cpus=$cpus"
+              exit 0
+            fi
+            if [ "$attempt" -eq 12 ]; then
+              echo "HOSTED_COOLDOWN_EXHAUSTED phase=pre-measurement load1=$load1 cpus=$cpus"
+              exit 1
+            fi
+            sleep 10
+          done
 
       - name: Hosted resource admission before measured runs
         shell: bash
