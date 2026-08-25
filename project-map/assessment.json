@@ -3,7 +3,7 @@
   "contractId": "ipm-repository-assessment-artifact-v1",
   "owner": "nekomario28",
   "generatedAt": "2026-08-25T07:26:18.447Z",
-  "generatorRevision": "05cf48bcb7669d450f97cbd3cc4dc35e5e60f2ea",
+  "generatorRevision": "1c426da42b63f8ce322251bf7fefeb562ef1d9c6",
   "taxonomyId": "ipm-standard-v1",
   "assessmentPolicyId": "ipm-repository-assessment-v1",
   "productionScoring": false,
@@ -36,12 +36,195 @@
         }
       },
       "acquisition": {
-        "level": "L0",
+        "level": "L1",
         "observedAt": "2026-08-25T07:26:18.447Z"
       },
       "quality": {
-        "state": "not-collected",
-        "value": null
+        "state": "partial",
+        "value": {
+          "schemaVersion": 1,
+          "artifacts": [
+            "game-mod"
+          ],
+          "claimBoundaries": [],
+          "dimensions": {
+            "understandability": {
+              "applicability": "recommended",
+              "authority": "repository-native",
+              "evidenceState": "observed",
+              "findingState": "supports",
+              "findingCounts": {
+                "supports": 1,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "evidenced",
+              "evidenceCount": 1,
+              "evidence": [
+                {
+                  "authority": "repository-native",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "C",
+                  "sourceId": "README.md@8caaab65266a94e7bdedc6ad2f66030c7e394edf",
+                  "claim": "README documents the public-claim ownership model, player and manager permissions, client/server installation requirement, commands, anti-grief defaults, claim limits, supported Minecraft/Forge/FTB versions, and the internal FTB Teams compatibility boundary."
+                }
+              ]
+            },
+            "verification": {
+              "applicability": "recommended",
+              "authority": "unknown",
+              "evidenceState": "unknown",
+              "findingState": "unknown",
+              "findingCounts": {
+                "supports": 0,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "unevidenced",
+              "evidenceCount": 0,
+              "evidence": []
+            },
+            "reproducibility": {
+              "applicability": "recommended",
+              "authority": "repository-native",
+              "evidenceState": "observed",
+              "findingState": "supports",
+              "findingCounts": {
+                "supports": 1,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "evidenced",
+              "evidenceCount": 1,
+              "evidence": [
+                {
+                  "authority": "repository-native",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "C",
+                  "sourceId": "build.gradle+gradle.properties@8caaab65266a94e7bdedc6ad2f66030c7e394edf",
+                  "claim": "The default snapshot records Java 17, Minecraft 1.20.1, Forge 47.4.13, official 1.20.1 mappings, exact FTB Chunks 2001.3.6, FTB Teams 2001.3.1, FTB Library 2001.2.12, Architectury 9.1.12, and the Gradle build path."
+                }
+              ]
+            },
+            "maintainability": {
+              "applicability": "recommended",
+              "authority": "repository-native",
+              "evidenceState": "observed",
+              "findingState": "supports",
+              "findingCounts": {
+                "supports": 1,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "evidenced",
+              "evidenceCount": 1,
+              "evidence": [
+                {
+                  "authority": "repository-native",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "C",
+                  "sourceId": "README.md+FTBServerTeamBridge.java@8caaab65266a94e7bdedc6ad2f66030c7e394edf",
+                  "claim": "The repository identifies private/internal FTB Teams 2001.3.1 behavior as a version-specific compatibility risk and isolates that dependency in a dedicated FTBServerTeamBridge instead of scattering it through the public-claim service and packet layers."
+                }
+              ]
+            },
+            "integrity": {
+              "applicability": "optional",
+              "authority": "unknown",
+              "evidenceState": "unknown",
+              "findingState": "unknown",
+              "findingCounts": {
+                "supports": 0,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "unevidenced",
+              "evidenceCount": 0,
+              "evidence": []
+            },
+            "interoperability": {
+              "applicability": "recommended",
+              "authority": "repository-native",
+              "evidenceState": "observed",
+              "findingState": "supports",
+              "findingCounts": {
+                "supports": 1,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "evidenced",
+              "evidenceCount": 1,
+              "evidence": [
+                {
+                  "authority": "repository-native",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "C",
+                  "sourceId": "README.md+build.gradle+META-INF/mods.toml@8caaab65266a94e7bdedc6ad2f66030c7e394edf",
+                  "claim": "The snapshot declares exact FTB component versions, both-side dependency requirements, the Forge/Minecraft compatibility range, and the client UI plus custom networking requirement; README separately documents why the private FTB Teams boundary is pinned."
+                }
+              ]
+            },
+            "security-safety": {
+              "applicability": "optional",
+              "authority": "repository-native",
+              "evidenceState": "observed",
+              "findingState": "supports",
+              "findingCounts": {
+                "supports": 1,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "evidenced",
+              "evidenceCount": 1,
+              "evidence": [
+                {
+                  "authority": "repository-native",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "C",
+                  "sourceId": "README.md+Config.java+PublicChunkChangePacket.java+PublicClaimService.java@8caaab65266a94e7bdedc6ad2f66030c7e394edf",
+                  "claim": "Public-claim mutations are bounded server-side by enable/manager checks, per-project capacity, player distance, adjacency, existing-claim protection, a 64-change packet limit, and rejection of malformed packet counts; default team policy also disables explosions, mob griefing, PVP, and fake-player block editing."
+                }
+              ]
+            },
+            "stewardship": {
+              "applicability": "recommended",
+              "authority": "repository-native",
+              "evidenceState": "observed",
+              "findingState": "supports",
+              "findingCounts": {
+                "supports": 1,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "evidenced",
+              "evidenceCount": 1,
+              "evidence": [
+                {
+                  "authority": "repository-native",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "C",
+                  "sourceId": "LICENSE+gradle.properties+AGENTS.md@8caaab65266a94e7bdedc6ad2f66030c7e394edf",
+                  "claim": "The default snapshot carries an MIT license, explicit project identity/version metadata, and repository-local engineering guidance that preserves ownership/capacity isolation, exact compatibility evidence, persistence/client-server boundaries, and the distinction between default history and active unmerged port carriers."
+                }
+              ]
+            }
+          },
+          "compositeQualityScore": null
+        }
       },
       "impact": {
         "state": "partial",
