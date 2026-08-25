@@ -16,6 +16,7 @@ jobs:
     env:
       REROBOT_SHA: f6c36c7da5326886fb6eb6e83d8a2d87283b31ec
       LEROBOT_SHA: bf31dd794ffb4f87380aba3912f64421e8352d3c
+      CARRIER_HEAD: ${{ github.event.pull_request.head.sha }}
       CARGO_BUILD_JOBS: '2'
       OMP_NUM_THREADS: '1'
       MKL_NUM_THREADS: '1'
@@ -46,18 +47,32 @@ jobs:
           root="$RUNNER_TEMP/rerobot-paired-hosted-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
           rm -rf "$root"
           mkdir -p "$root"
+
           git clone --filter=blob:none --no-checkout https://github.com/k1000dai/Rerobot.git "$root/rerobot"
           git -C "$root/rerobot" fetch --depth=1 origin "$REROBOT_SHA"
           git -C "$root/rerobot" checkout --detach "$REROBOT_SHA"
           test "$(git -C "$root/rerobot" rev-parse HEAD)" = "$REROBOT_SHA"
+
           git clone --filter=blob:none --no-checkout https://github.com/huggingface/lerobot.git "$root/lerobot"
           git -C "$root/lerobot" fetch --depth=1 origin "$LEROBOT_SHA"
           git -C "$root/lerobot" checkout --detach "$LEROBOT_SHA"
           test "$(git -C "$root/lerobot" rev-parse HEAD)" = "$LEROBOT_SHA"
+
+          git clone --filter=blob:none --no-checkout https://github.com/nekomario28/nekomario28.git "$root/carrier"
+          git -C "$root/carrier" fetch --depth=1 origin "$CARRIER_HEAD"
+          git -C "$root/carrier" checkout --detach "$CARRIER_HEAD"
+          test "$(git -C "$root/carrier" rev-parse HEAD)" = "$CARRIER_HEAD"
+          test "$(git -C "$root/carrier" hash-object registry/active-prospective-gates.json)" = a2825e36bfbc8f6a7271196f569d1954b6abb7ad
+          test "$(git -C "$root/carrier" hash-object schemas/agent-engineering/execution-admission-observation.schema.json)" = f15a3ca2d6069ab8d94db4fd22f5a11b6c3c77fe
+          test "$(git -C "$root/carrier" hash-object experiments/execution-admission-observation/evaluate_v01.py)" = 4f1f0036027922fb2d918ec96f285da7365899a7
+
           echo "WORK_ROOT=$root" >> "$GITHUB_ENV"
           echo "FIXTURE=$root/rerobot/crates/rerobot-train/tests/fixtures/state_only" >> "$GITHUB_ENV"
+          echo "CARRIER_ROOT=$root/carrier" >> "$GITHUB_ENV"
           echo "REROBOT_EXACT_HEAD=$(git -C "$root/rerobot" rev-parse HEAD)"
           echo "LEROBOT_EXACT_HEAD=$(git -C "$root/lerobot" rev-parse HEAD)"
+          echo "CARRIER_EXACT_HEAD=$(git -C "$root/carrier" rev-parse HEAD)"
+          echo "LEVEL9_PINNED_SUBSTRATE_BLOBS=PASS"
 
       - name: Bootstrap isolated Python 3.12 and current LeRobot training runtime
         shell: bash
@@ -77,11 +92,13 @@ jobs:
             --index-url https://download.pytorch.org/whl/cpu \
             'torch==2.7.1' 'torchvision==0.22.1'
           "$pip" install --disable-pip-version-check --no-input -e "$WORK_ROOT/lerobot[training]"
+          "$pip" install --disable-pip-version-check --no-input 'jsonschema==4.25.1'
           "$py" - <<'PY'
-          import torch, lerobot
+          import jsonschema, torch, lerobot
           print('CURRENT_LEROBOT_IMPORT_PASS')
           print('torch', torch.__version__)
           print('lerobot', getattr(lerobot, '__version__', '<none>'))
+          print('jsonschema', jsonschema.__version__ if hasattr(jsonschema, '__version__') else '<unknown>')
           if torch.cuda.is_available():
               raise SystemExit('hosted benchmark must stay CPU-only')
           PY
@@ -115,7 +132,7 @@ jobs:
             sleep 10
           done
 
-      - name: Hosted resource admission before warmup
+      - name: Level 9 shared admission observation before warmup
         shell: bash
         run: |
           set -euo pipefail
@@ -123,10 +140,53 @@ jobs:
           free_kib=$(df -Pk . | awk 'NR==2 {print $4}')
           cpus=$(nproc)
           load1=$(awk '{print $1}' /proc/loadavg)
-          awk -v m="$mem_kib" 'BEGIN { if (m < 4*1024*1024) exit 1 }' || { echo "HOSTED_ADMISSION_FAIL mem_available_kib=$mem_kib"; exit 1; }
-          awk -v d="$free_kib" 'BEGIN { if (d < 10*1024*1024) exit 1 }' || { echo "HOSTED_ADMISSION_FAIL free_disk_kib=$free_kib"; exit 1; }
-          awk -v l="$load1" -v c="$cpus" 'BEGIN { if (l/c > 1.5) exit 1 }' || { echo "HOSTED_ADMISSION_FAIL load1=$load1 cpus=$cpus"; exit 1; }
+          out="$WORK_ROOT/admission-pre-warmup.json"
+          started_ns=$(date +%s%N)
+          "$PY" "$CARRIER_ROOT/experiments/execution-admission-observation/live_hosted_v01.py" \
+            --phase pre-warmup \
+            --mem-kib "$mem_kib" \
+            --free-kib "$free_kib" \
+            --load1 "$load1" \
+            --cpus "$cpus" \
+            --revision "$CARRIER_HEAD" \
+            --run-id "$GITHUB_RUN_ID" \
+            --run-attempt "$GITHUB_RUN_ATTEMPT" \
+            --out "$out"
+          finished_ns=$(date +%s%N)
+          shared_decision=$("$PY" -c 'import json,sys; print(json.load(open(sys.argv[1]))["decision"])' "$out")
+          echo "WARM_MEM_KIB=$mem_kib" >> "$GITHUB_ENV"
+          echo "WARM_FREE_KIB=$free_kib" >> "$GITHUB_ENV"
+          echo "WARM_CPUS=$cpus" >> "$GITHUB_ENV"
+          echo "WARM_LOAD1=$load1" >> "$GITHUB_ENV"
+          echo "WARM_SHARED_DECISION=$shared_decision" >> "$GITHUB_ENV"
+          echo "LEVEL9_ADMISSION_TOTAL_OVERHEAD_NS=$((finished_ns-started_ns)) phase=pre-warmup"
+
+      - name: Hosted resource admission before warmup
+        shell: bash
+        run: |
+          set -euo pipefail
+          mem_kib="$WARM_MEM_KIB"
+          free_kib="$WARM_FREE_KIB"
+          cpus="$WARM_CPUS"
+          load1="$WARM_LOAD1"
+          awk -v m="$mem_kib" 'BEGIN { if (m < 4*1024*1024) exit 1 }' || {
+            test "$WARM_SHARED_DECISION" = BLOCKED
+            echo "HOSTED_ADMISSION_FAIL mem_available_kib=$mem_kib free_disk_kib=$free_kib load1=$load1 cpus=$cpus"
+            exit 1
+          }
+          awk -v d="$free_kib" 'BEGIN { if (d < 10*1024*1024) exit 1 }' || {
+            test "$WARM_SHARED_DECISION" = BLOCKED
+            echo "HOSTED_ADMISSION_FAIL mem_available_kib=$mem_kib free_disk_kib=$free_kib load1=$load1 cpus=$cpus"
+            exit 1
+          }
+          awk -v l="$load1" -v c="$cpus" 'BEGIN { if (l/c > 1.5) exit 1 }' || {
+            test "$WARM_SHARED_DECISION" = BLOCKED
+            echo "HOSTED_ADMISSION_FAIL mem_available_kib=$mem_kib free_disk_kib=$free_kib load1=$load1 cpus=$cpus"
+            exit 1
+          }
+          test "$WARM_SHARED_DECISION" = PASS
           echo "HOSTED_ADMISSION_PASS mem_available_kib=$mem_kib free_disk_kib=$free_kib load1=$load1 cpus=$cpus"
+          echo "LEVEL9_NATIVE_SHARED_OWNER_DECISION_AGREEMENT=PASS phase=pre-warmup"
 
       - name: Pairing warmups on identical fixture and ACT config
         shell: bash
@@ -182,7 +242,7 @@ jobs:
             sleep 10
           done
 
-      - name: Hosted resource admission before measured runs
+      - name: Level 9 shared admission observation before measured runs
         shell: bash
         run: |
           set -euo pipefail
@@ -190,10 +250,53 @@ jobs:
           free_kib=$(df -Pk . | awk 'NR==2 {print $4}')
           cpus=$(nproc)
           load1=$(awk '{print $1}' /proc/loadavg)
-          awk -v m="$mem_kib" 'BEGIN { if (m < 4*1024*1024) exit 1 }' || { echo "HOSTED_ADMISSION_FAIL mem_available_kib=$mem_kib"; exit 1; }
-          awk -v d="$free_kib" 'BEGIN { if (d < 10*1024*1024) exit 1 }' || { echo "HOSTED_ADMISSION_FAIL free_disk_kib=$free_kib"; exit 1; }
-          awk -v l="$load1" -v c="$cpus" 'BEGIN { if (l/c > 1.5) exit 1 }' || { echo "HOSTED_ADMISSION_FAIL load1=$load1 cpus=$cpus"; exit 1; }
+          out="$WORK_ROOT/admission-pre-measurement.json"
+          started_ns=$(date +%s%N)
+          "$PY" "$CARRIER_ROOT/experiments/execution-admission-observation/live_hosted_v01.py" \
+            --phase pre-measurement \
+            --mem-kib "$mem_kib" \
+            --free-kib "$free_kib" \
+            --load1 "$load1" \
+            --cpus "$cpus" \
+            --revision "$CARRIER_HEAD" \
+            --run-id "$GITHUB_RUN_ID" \
+            --run-attempt "$GITHUB_RUN_ATTEMPT" \
+            --out "$out"
+          finished_ns=$(date +%s%N)
+          shared_decision=$("$PY" -c 'import json,sys; print(json.load(open(sys.argv[1]))["decision"])' "$out")
+          echo "MEASURE_MEM_KIB=$mem_kib" >> "$GITHUB_ENV"
+          echo "MEASURE_FREE_KIB=$free_kib" >> "$GITHUB_ENV"
+          echo "MEASURE_CPUS=$cpus" >> "$GITHUB_ENV"
+          echo "MEASURE_LOAD1=$load1" >> "$GITHUB_ENV"
+          echo "MEASURE_SHARED_DECISION=$shared_decision" >> "$GITHUB_ENV"
+          echo "LEVEL9_ADMISSION_TOTAL_OVERHEAD_NS=$((finished_ns-started_ns)) phase=pre-measurement"
+
+      - name: Hosted resource admission before measured runs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mem_kib="$MEASURE_MEM_KIB"
+          free_kib="$MEASURE_FREE_KIB"
+          cpus="$MEASURE_CPUS"
+          load1="$MEASURE_LOAD1"
+          awk -v m="$mem_kib" 'BEGIN { if (m < 4*1024*1024) exit 1 }' || {
+            test "$MEASURE_SHARED_DECISION" = BLOCKED
+            echo "HOSTED_ADMISSION_FAIL mem_available_kib=$mem_kib free_disk_kib=$free_kib load1=$load1 cpus=$cpus"
+            exit 1
+          }
+          awk -v d="$free_kib" 'BEGIN { if (d < 10*1024*1024) exit 1 }' || {
+            test "$MEASURE_SHARED_DECISION" = BLOCKED
+            echo "HOSTED_ADMISSION_FAIL mem_available_kib=$mem_kib free_disk_kib=$free_kib load1=$load1 cpus=$cpus"
+            exit 1
+          }
+          awk -v l="$load1" -v c="$cpus" 'BEGIN { if (l/c > 1.5) exit 1 }' || {
+            test "$MEASURE_SHARED_DECISION" = BLOCKED
+            echo "HOSTED_ADMISSION_FAIL mem_available_kib=$mem_kib free_disk_kib=$free_kib load1=$load1 cpus=$cpus"
+            exit 1
+          }
+          test "$MEASURE_SHARED_DECISION" = PASS
           echo "HOSTED_ADMISSION_PASS mem_available_kib=$mem_kib free_disk_kib=$free_kib load1=$load1 cpus=$cpus"
+          echo "LEVEL9_NATIVE_SHARED_OWNER_DECISION_AGREEMENT=PASS phase=pre-measurement"
 
       - name: Run preregistered hosted paired benchmark
         shell: bash
@@ -273,7 +376,17 @@ jobs:
             echo
             echo "- Rerobot: \`$REROBOT_SHA\`"
             echo "- LeRobot: \`$LEROBOT_SHA\`"
+            echo "- carrier head: \`$CARRIER_HEAD\`"
             echo "- run: \`$GITHUB_RUN_ID\` attempt \`$GITHUB_RUN_ATTEMPT\`"
+            for receipt in "${WORK_ROOT:-}"/admission-pre-warmup.json "${WORK_ROOT:-}"/admission-pre-measurement.json; do
+              if [[ -f "$receipt" ]]; then
+                echo
+                echo "Admission receipt: \`$(basename "$receipt")\`"
+                echo '```json'
+                cat "$receipt"
+                echo '```'
+              fi
+            done
             if [[ -f "${WORK_ROOT:-}/metrics/summary.json" ]]; then
               echo '```json'
               cat "$WORK_ROOT/metrics/summary.json"
