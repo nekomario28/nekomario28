@@ -1,0 +1,79 @@
+name: Proof exact IPM reusable workflow
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/proof-ipm-reusable-889cb85.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    permissions:
+      contents: read
+    uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@889cb85d8280d91067bc83865e9ee5d86481edaf
+    with:
+      theme: dark
+      style: galaxy-systems
+      max_repos: "100"
+      forks: true
+      archived: true
+      contributed: true
+
+  validate:
+    needs: generate
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - name: Checkout exact profile revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Download exact reusable-workflow artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: project-map-generated
+          path: project-map
+
+      - name: Prove reusable workflow preserves profile contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s project-map/galaxy.svg
+          test -s project-map/graph.json
+          grep -q 'data-galaxy-preset="systems"' project-map/galaxy.svg
+          grep -q 'font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif"' project-map/galaxy.svg
+          grep -q 'data-galaxy-external-layout="halo"' project-map/galaxy.svg
+          grep -q 'data-galaxy-placement="external-halo-orbit"' project-map/galaxy.svg
+          grep -q 'data-galaxy-orbit="contributed"' project-map/galaxy.svg
+          grep -q '#E69F00' project-map/galaxy.svg
+          if grep -Eq 'data-galaxy-external-layout="rail"|data-galaxy-placement="external-rail"|data-galaxy-external-backdrop="true"' project-map/galaxy.svg; then
+            echo 'Detached Contributed rail survived reusable-workflow release.' >&2
+            exit 1
+          fi
+          node <<'NODE'
+          const fs = require('node:fs');
+          const graph = JSON.parse(fs.readFileSync('project-map/graph.json', 'utf8'));
+          const contributed = graph.nodes.filter((node) => node?.type === 'repository' && node?.relation === 'contributed');
+          const ids = new Set(contributed.map((node) => node.id));
+          if (contributed.length < 1) throw new Error('no accepted Contributed repositories');
+          if (graph.contributedRepositoryCount !== contributed.length) throw new Error('Contributed count mismatch');
+          for (const node of contributed) {
+            if ('groupId' in node || 'groupLabel' in node) throw new Error('Contributed gained owned category membership');
+            const commits = Number(node.contribution?.commits || 0);
+            const merged = Number(node.contribution?.mergedPullRequests || 0);
+            if (commits < 1 && merged < 1) throw new Error(`pending-only repository admitted: ${node.label}`);
+          }
+          if (graph.edges.some((edge) => ['ownership', 'membership'].includes(edge?.type) && ids.has(edge?.target))) {
+            throw new Error('ownership path reaches Contributed repository');
+          }
+          if ((graph.semanticEdges || []).some((edge) => ids.has(edge?.source) || ids.has(edge?.target))) {
+            throw new Error('Contributed entered owned semantic graph');
+          }
+          console.log(`EXACT_REUSABLE_IPM_PROFILE_PASS owned=${graph.repositoryCount} contributed=${contributed.length}`);
+          NODE
