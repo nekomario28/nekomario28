@@ -1,6 +1,6 @@
 # Envelope v9 evidence
 
-Status: **Design Lab only / P3 rendered-target PASS / P4 extraction-kernel PASS / P5 standalone transformer PASS / P6 v8-independent fixture PASS / public GitHub profile NOT_RUN**
+Status: **Design Lab only / P3 rendered-target PASS / P4 extraction-kernel PASS / P5 standalone transformer PASS / P6 v8-independent fixture PASS / P7 publication-gate PASS with current outcome DEFERRED / P8 copy-set provenance AUDITED / public GitHub profile NOT_RUN**
 
 Envelope v9 remains a donor/portability experiment. The current public profile remains the direct-IPM surface. No v9 asset is promoted live by this work.
 
@@ -126,6 +126,46 @@ The current donor remains byte-equivalent under the marker refactor: the render-
 
 This proves a stronger adapter boundary, but the fixture is **evaluation evidence only**. It does not satisfy the publication gate requiring an independent external consumer or concrete reuse request.
 
+## P7 publication readiness gate
+
+PR #71 implemented a fail-closed publication gate and was squash-merged as `0a6fb92240a85f1ee36c36cca27eeef413ef8ce8`.
+
+Accepted clean P7 receipt:
+
+- base main `c1bd7f255cfa7e0ac372731cad9d5f49e31f9142`;
+- head `d0ea3525e794924338a2df0f0fa51518853f9e5c` — one commit directly over main;
+- full v9 run `32814044647`, job `97698734935`: **SUCCESS**;
+- render target remained `62d68a97a354ffc3c82efdbe2396730f5ca90cafdfa5579c59504b7df9c35b4f`;
+- nine-case Chrome matrix passed;
+- motion-on remained left **7** / right **12**; browser-wide reduced motion and motion-off remained **0/0**.
+
+P7 explicitly separates technical extraction from publication authority. The machine-readable state is currently:
+
+```text
+technical_copy_set=PASS
+independent_consumer=NOT_ESTABLISHED
+concrete_reuse_request=NOT_ESTABLISHED
+license_selection=UNSELECTED
+repository_creation=DEFERRED
+```
+
+Accepted markers:
+
+- `PUBLICATION_GATE=PASS technical_copy_set=PASS independent_consumer=NOT_ESTABLISHED concrete_reuse_request=NOT_ESTABLISHED license_selection=UNSELECTED repository_creation=DEFERRED`;
+- `PUBLIC_REPO_CREATE=DEFERRED donor_producer=donor-bound second_consumer=FIXTURE_ONLY independent_consumer=NOT_ESTABLISHED concrete_reuse_request=NOT_ESTABLISHED license_selection=UNSELECTED new_skill=DEFERRED`.
+
+The validator derives `repository_creation=READY` only when the technical copy set passes, external demand exists via either an independent consumer or a concrete reuse request, and a publication license has been selected. Discriminating negative states prove that technical copyability alone, or external demand without license selection, cannot authorize publication.
+
+## P8 portable copy-set provenance audit
+
+Main commit `10c83126bcd5e7539c218c9416c8c9d53e113626` records `design-lab/envelope-v9/PROVENANCE-AUDIT.md` for the exact six-file candidate copy set.
+
+The audit traces the repository-local introduction of the five portable-core files plus the standalone GitHub-profile transformer, records their audited current blobs, and confirms the observed Python dependency boundary remains standard-library/extracted-package only. It also records that no file-level third-party copyright, SPDX or license notice was observed in the inspected current Python headers.
+
+This is **provenance evidence, not a legal conclusion**. Repository history does not establish exclusive copyright ownership, absence of external conceptual influence, or which open-source license should be chosen. P8 therefore does not change the P7 state: `license_selection=UNSELECTED` and `repository_creation=DEFERRED` remain authoritative.
+
+The future publication copy boundary remains only the six declared files plus publication-facing README/LICENSE created at release time. Donor artwork, fonts, v7/v8 renderers, Project Map data, Activity data and historical Design Lab files remain outside the candidate package.
+
 ## Negative proof lineage retained
 
 Useful failed approaches remain evidence rather than being erased:
@@ -134,7 +174,8 @@ Useful failed approaches remain evidence rather than being erased:
 - `SVGSVGElement.setCurrentTime()` + `getCTM()` produced no useful timeline delta — replaced by persistent Chrome + real elapsed time + screenshot pixel diffs;
 - parent-target-only CDP reduced-motion emulation did not establish propagation to separately decoded SVG images — browser-wide `--force-prefers-reduced-motion` is the accepted proof;
 - standalone-copy P4 exposed accessibility double escaping that donor-local render tests had not discriminated — extraction must be executed, not inferred;
-- the first P6 fixture assertion required an unused gradient definition to disappear after its marked background rectangle was removed. The presentation contract only requires removal of background paint; the over-strong test was corrected rather than expanding transformer scope to dead-def cleanup.
+- the first P6 fixture assertion required an unused gradient definition to disappear after its marked background rectangle was removed. The presentation contract only requires removal of background paint; the over-strong test was corrected rather than expanding transformer scope to dead-def cleanup;
+- treating technical extraction PASS as publication readiness — P7 now keeps external demand and explicit license selection as separate mandatory gates.
 
 ## Relationship to v8 public evidence
 
@@ -155,7 +196,9 @@ Established:
 - standalone-copyable GitHub-profile transformer operating on a declared complete 15-SVG donor bundle;
 - byte-identical output across the old/new mounted-background donor boundary;
 - a generic three-marker donor boundary with no v8/Project Map element identity in portable code;
-- a v8-independent heterogeneous fixture that passes from the copied package tree.
+- a v8-independent heterogeneous fixture that passes from the copied package tree;
+- fail-closed publication readiness derived from technical copyability + real external demand + explicit license selection;
+- repository-local introduction history audited for the exact six-file candidate copy set, without upgrading that history into a legal conclusion.
 
 Not established:
 
@@ -164,9 +207,11 @@ Not established:
 - shared runtime clocks or frame-perfect cross-document synchronization;
 - universal typography quality for all future glyphs/data densities;
 - arbitrary semantic source data can be converted into the 15-SVG donor bundle by the public package;
-- an independent external second consumer exists;
+- an independent external second consumer or concrete reuse request exists;
+- a publication license has been selected;
+- exclusive copyright ownership or a legal redistribution conclusion is established by Git history;
 - a standalone `profile-envelope` Skill is justified.
 
 ## Next safe action
 
-P6 is merged. Further generic abstraction is not justified by current evidence. The next meaningful gates are packaging/license/release design and a real external reuse request or independent consumer. Public repository creation and a new standalone Skill remain deferred until those gates are met.
+P0-P8 are complete for the current donor evidence boundary. There is no remaining profile-envelope implementation task that should be manufactured solely to create progress. Keep the candidate frozen until either an independent consumer or a concrete reuse request appears. When that happens, compare the real consumer with the exact six-file boundary, re-audit any changed files, make an explicit provenance/license decision for the intended package, and rerun extraction/browser evidence on the exact proposed release revision before allowing `repository_creation=READY`.
