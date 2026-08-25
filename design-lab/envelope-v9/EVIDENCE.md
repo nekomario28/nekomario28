@@ -87,7 +87,7 @@ The standalone extraction smoke copies the GitHub transformer into a temporary r
 
 ## P6 second-consumer fixture evaluation
 
-PR #68 tests whether P5's standalone transformer still contains hidden donor identity assumptions. It does **not** claim an external independent consumer; the P6 consumer is a deliberately heterogeneous synthetic fixture executed from the copied package tree.
+PR #68 tested whether P5's standalone transformer still contained hidden donor identity assumptions and was squash-merged as `07c8f6845f5c28594371a1224ac44308dcf59b78`.
 
 P6 found residual donor identity in the portable transformer:
 
@@ -96,32 +96,35 @@ P6 found residual donor identity in the portable transformer:
 - Project Map's `galaxy-family-bg` identity;
 - the Activity donor's exact background geometry/color.
 
-Instead of introducing a universal IR, P6 narrows the portable input boundary to three semantic SVG attributes:
+Instead of introducing a universal IR, P6 narrowed the portable input boundary to three semantic SVG attributes:
 
 - `data-profile-envelope-surface-base="outer"`;
 - `data-profile-envelope-frame="rail"`;
 - `data-profile-envelope-mounted-background="presentation"`.
 
-The donor-bound producer translates current v8/Project Map/Activity identity into those markers. The portable transformer consumes only the markers and removes them before final output fingerprinting, so marker normalization does not become part of the public rendered bytes.
+The donor-bound producer translates current v8/Project Map/Activity identity into those markers. The portable transformer consumes only the markers and removes them before final output fingerprinting, so marker normalization does not become part of public rendered bytes.
 
-Accepted formative P6 receipt before final history cleanup:
+Accepted clean P6 receipt:
 
-- head `e3d99fd22c49c8b19b5561eda63dcadf304cc700`;
-- run `32812335640`;
-- job `97693949695`;
-- result: **SUCCESS**;
+- base main `1baf38898a89d7eb8df4fe431608b2c252ac2e26`;
+- head `f4f6c60aad2010c1c81249e8f668b14ece834819` — one commit directly over main;
+- full v9 run `32812597928`, job `97694710641`: **SUCCESS**;
+- portable contract run `32812597971`: **SUCCESS**;
 - render target remained `62d68a97a354ffc3c82efdbe2396730f5ca90cafdfa5579c59504b7df9c35b4f`.
 
 Accepted P6 markers:
 
+- `DONOR_BOUNDARY_EQUIVALENCE=PASS legacy_prestripped_vs_preserve_first=true`;
 - `GENERIC_DONOR_MARKER_BOUNDARY=PASS portable_transformer_v8_identity=false`;
 - `SECOND_CONSUMER_FIXTURE_PASS donor_identity=v8-independent geometry=heterogeneous generic_markers=3`;
 - `ENVELOPE_V9_EXTRACTION_TRANSFORM_PASS core_files=5 adapter_files=1 python_stdlib_only=true personalized_tokens=0 standalone_contract=PASS standalone_vector_text=PASS standalone_github_transform=PASS schema_alignment=PASS`;
 - `PUBLIC_REPO_CREATE=DEFERRED donor_producer=donor-bound second_consumer=FIXTURE_ONLY independent_consumer=NOT_ESTABLISHED new_skill=DEFERRED`.
 
-The fixture differs from the v8 donor in dimensions, frame geometry, base colors and mounted-background identifiers. It contains no v8 element identity. The copied transformer successfully applies transparent/safe/inherit policy using only the three generic markers. The current donor path remains byte-equivalent: P6 kept the same render-target fingerprint as P5 and re-passed the nine-case Chrome matrix plus motion 7/12, reduced-motion 0/0 and motion-off 0/0.
+The fixture differs from the v8 donor in dimensions, frame geometry, base colors and mounted-background identifiers. It contains no v8 element identity. The copied transformer successfully applies transparent/safe/inherit policy using only the three generic markers.
 
-This proves a stronger adapter boundary, but **does not satisfy the publication gate requiring an independent external consumer or concrete reuse request**.
+The current donor remains byte-equivalent under the marker refactor: the render-target fingerprint stayed identical to P5, the nine-case Chrome matrix passed, motion-on remained left **7** / right **12**, browser-wide reduced motion remained **0/0**, motion-off remained **0/0**, and exact v8 -> v9 motion-subtree equivalence remained 15 generated assets.
+
+This proves a stronger adapter boundary, but the fixture is **evaluation evidence only**. It does not satisfy the publication gate requiring an independent external consumer or concrete reuse request.
 
 ## Negative proof lineage retained
 
@@ -131,7 +134,7 @@ Useful failed approaches remain evidence rather than being erased:
 - `SVGSVGElement.setCurrentTime()` + `getCTM()` produced no useful timeline delta — replaced by persistent Chrome + real elapsed time + screenshot pixel diffs;
 - parent-target-only CDP reduced-motion emulation did not establish propagation to separately decoded SVG images — browser-wide `--force-prefers-reduced-motion` is the accepted proof;
 - standalone-copy P4 exposed accessibility double escaping that donor-local render tests had not discriminated — extraction must be executed, not inferred;
-- the first P6 fixture assertion required an unused gradient definition to disappear after its marked background rectangle was removed. The actual presentation contract only requires removal of background paint; the over-strong test was corrected rather than expanding transformer scope to dead-def cleanup.
+- the first P6 fixture assertion required an unused gradient definition to disappear after its marked background rectangle was removed. The presentation contract only requires removal of background paint; the over-strong test was corrected rather than expanding transformer scope to dead-def cleanup.
 
 ## Relationship to v8 public evidence
 
@@ -166,4 +169,4 @@ Not established:
 
 ## Next safe action
 
-P6 should be cleaned onto current main and re-run once on the exact final head before merge. After P6, further generic abstraction is not justified by the current evidence. The next meaningful gates are packaging/license/release design and a real external reuse request or independent consumer. Public repository creation and a new standalone Skill remain deferred until those gates are met.
+P6 is merged. Further generic abstraction is not justified by current evidence. The next meaningful gates are packaging/license/release design and a real external reuse request or independent consumer. Public repository creation and a new standalone Skill remain deferred until those gates are met.

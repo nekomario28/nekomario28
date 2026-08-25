@@ -15,7 +15,7 @@ Envelope v9 has three explicit layers:
 2. **standalone GitHub-profile transformer** — applies text/background/frame/motion policy to a complete pre-rendered 15-SVG donor bundle;
 3. **donor producer** — this profile repository's current v8-based bundle generator, intentionally still repository-bound.
 
-P6 further removes donor element identity from the transformer. Portable code no longer pattern-matches `v8-frame`, v8 surface IDs, Project Map gradient names or Activity-specific background geometry. The donor producer translates those local details into three semantic input markers:
+P6 removes donor element identity from the transformer. Portable code no longer pattern-matches `v8-frame`, v8 surface IDs, Project Map gradient names or Activity-specific background geometry. The donor producer translates those local details into three semantic input markers:
 
 ```text
 data-profile-envelope-surface-base="outer"
@@ -222,15 +222,17 @@ The five-file core copies into a temporary standalone repository, uses only the 
 
 PR #65 merged the standalone-copyable GitHub transformer. The old pre-stripped donor boundary and preserve-first donor boundary produce byte-identical `inherit` targets, and the existing Chrome/motion gates remain green.
 
-### P6 — second-consumer fixture: validated, pending clean merge
+### P6 — second-consumer fixture: complete
 
-Portable code now uses only the three generic semantic markers rather than v8/Project Map element identity. A heterogeneous v8-independent synthetic donor passes from the copied package tree. The current donor remains byte-identical and retains the same render-target fingerprint under the marker refactor.
+PR #68 merged the three-marker donor boundary and v8-independent heterogeneous fixture. Clean exact-head CI passed structure/extraction, the nine-case Chrome matrix and motion/reduced-motion gates. The current donor retained render target `62d68a97a354ffc3c82efdbe2396730f5ca90cafdfa5579c59504b7df9c35b4f`, proving the marker refactor did not change current rendered bytes.
 
-The fixture is intentionally not counted as an external independent consumer. Final P6 acceptance requires one clean commit on current main and exact-head CI.
+The fixture is intentionally not counted as an external independent consumer.
 
 ### P7 — public repository publication: deferred
 
 Do not create the repository solely because extraction is technically possible. Publication is justified when there is an independent consumer or concrete reuse request, and license/package/release surfaces can be chosen deliberately. At that point, use the manifest as the initial copy boundary rather than moving the entire Design Lab history.
+
+Further generic abstraction before that signal is not justified by current evidence.
 
 ## Skill/reuse decision
 
