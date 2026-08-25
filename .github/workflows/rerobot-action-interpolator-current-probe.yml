@@ -1,0 +1,135 @@
+name: Rerobot ActionInterpolator current-contract probe
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/rerobot-action-interpolator-current-probe.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      REROBOT_SHA: f6c36c7da5326886fb6eb6e83d8a2d87283b31ec
+      LEROBOT_SHA: 8b256a6c0d4769c3cc3e7e98f04940126398a391
+    steps:
+      - name: Checkout carrier
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          clean: true
+          fetch-depth: 1
+
+      - name: Clone exact authorities
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$RUNNER_TEMP/rerobot-action-interpolator-$GITHUB_RUN_ID"
+          echo "ROOT=$root" >> "$GITHUB_ENV"
+          git clone --filter=blob:none https://github.com/k1000dai/Rerobot.git "$root/Rerobot"
+          git -C "$root/Rerobot" checkout --detach "$REROBOT_SHA"
+          git clone --filter=blob:none https://github.com/huggingface/lerobot.git "$root/lerobot"
+          git -C "$root/lerobot" checkout --detach "$LEROBOT_SHA"
+          test "$(git -C "$root/Rerobot" rev-parse HEAD)" = "$REROBOT_SHA"
+          test "$(git -C "$root/lerobot" rev-parse HEAD)" = "$LEROBOT_SHA"
+
+      - name: Execute Rerobot on current discriminating fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > "$ROOT/Rerobot/crates/rerobot-core/tests/current_action_interpolator_probe.rs" <<'RS'
+          use rerobot_core::action_interpolator::ActionInterpolator;
+
+          #[test]
+          fn current_upstream_bit_exact_endpoint_fixture_discriminates() {
+              let prev = [-8.56674575805664_f32, 0.6271883249282837_f32];
+              let action = [11.006041526794434_f32, -7.663063049316406_f32];
+              let old_lerp = [
+                  prev[0] + 1.0_f32 * (action[0] - prev[0]),
+                  prev[1] + 1.0_f32 * (action[1] - prev[1]),
+              ];
+              assert_ne!(old_lerp, action, "fixture stopped discriminating old lerp from policy action");
+
+              let mut interp = ActionInterpolator::<f32>::new(3).unwrap();
+              interp.add(&prev).unwrap();
+              assert_eq!(interp.get(), Some(prev.as_slice()));
+              interp.add(&action).unwrap();
+              interp.get();
+              interp.get();
+              let emitted = interp.get().expect("cycle-end action").to_vec();
+
+              println!("prev={prev:?}");
+              println!("action={action:?}");
+              println!("old_lerp={old_lerp:?}");
+              println!("rerobot_emitted={emitted:?}");
+              println!("action_bits={:08x?}", action.map(f32::to_bits));
+              println!("emitted_bits={:08x?}", emitted.iter().copied().map(f32::to_bits).collect::<Vec<_>>());
+
+              assert_eq!(emitted, old_lerp, "Rerobot no longer implements the historical computed endpoint");
+              assert_ne!(emitted, action, "Rerobot unexpectedly matches current bit-exact endpoint contract");
+              println!("REROBOT_CURRENT_ACTION_INTERPOLATOR=RED_CONFIRMED");
+          }
+          RS
+          cd "$ROOT/Rerobot"
+          cargo test --locked -p rerobot-core --test current_action_interpolator_probe -- --nocapture | tee "$ROOT/rust-probe.log"
+          grep -q 'REROBOT_CURRENT_ACTION_INTERPOLATOR=RED_CONFIRMED' "$ROOT/rust-probe.log"
+
+      - name: Execute current LeRobot on same fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 --version
+          python3 -m venv "$ROOT/venv"
+          "$ROOT/venv/bin/python" -m pip install --disable-pip-version-check -q --upgrade pip
+          "$ROOT/venv/bin/python" -m pip install --disable-pip-version-check -q \
+            --index-url https://download.pytorch.org/whl/cpu 'torch==2.11.0'
+          PYTHONPATH="$ROOT/lerobot/src" "$ROOT/venv/bin/python" - <<'PY' | tee "$ROOT/python-probe.log"
+          import torch
+          from lerobot.utils.action_interpolator import ActionInterpolator
+
+          prev = torch.tensor([-8.56674575805664, 0.6271883249282837], dtype=torch.float32)
+          action = torch.tensor([11.006041526794434, -7.663063049316406], dtype=torch.float32)
+          old_lerp = prev + 1.0 * (action - prev)
+          assert not torch.equal(old_lerp, action), 'fixture stopped discriminating'
+
+          interp = ActionInterpolator(multiplier=3)
+          interp.add(prev)
+          interp.get()
+          interp.add(action)
+          interp.get()
+          interp.get()
+          emitted = interp.get()
+
+          assert interp.emitted_policy_action
+          assert torch.equal(emitted, action)
+          print('prev=', prev.tolist())
+          print('action=', action.tolist())
+          print('old_lerp=', old_lerp.tolist())
+          print('current_emitted=', emitted.tolist())
+          print('CURRENT_LEROBOT_ACTION_INTERPOLATOR=PASS')
+          PY
+          grep -q 'CURRENT_LEROBOT_ACTION_INTERPOLATOR=PASS' "$ROOT/python-probe.log"
+
+      - name: Assert current API-surface mismatch remains explicit
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'pub struct ActionInterpolator' "$ROOT/Rerobot/crates/rerobot-core/src/action_interpolator.rs"
+          if grep -q 'emitted_policy_action' "$ROOT/Rerobot/crates/rerobot-core/src/action_interpolator.rs"; then
+            echo 'Rerobot now exposes emitted_policy_action; static API assumption changed'
+            exit 1
+          fi
+          grep -q 'def emitted_policy_action' "$ROOT/lerobot/src/lerobot/utils/action_interpolator.py"
+          echo 'CURRENT_API_SURFACE_MISMATCH=CONFIRMED'
+
+      - name: Preserve source checkout boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          # The Rust probe is intentionally an untracked temporary test; tracked source must stay untouched.
+          test -z "$(git -C "$ROOT/Rerobot" diff --name-only)"
+          test -z "$(git -C "$ROOT/lerobot" diff --name-only)"
+          echo 'SOURCE_TRACKED_MUTATION=FALSE'
