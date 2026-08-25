@@ -60,7 +60,9 @@ jobs:
           grep -q '^step:1 loss:' /tmp/rerobot-train.log
           test -s /tmp/rr-run/checkpoints/000001/pretrained_model/config.json
           test -s /tmp/rr-run/checkpoints/000001/pretrained_model/model.safetensors
+          test -s /tmp/rr-run/checkpoints/000001/pretrained_model/train_config.json
           test -s /tmp/rr-run/checkpoints/000001/training_state/optimizer_state.safetensors
+          test -s /tmp/rr-run/checkpoints/000001/training_state/training_step.json
           echo REROBOT_ONE_STEP_CHECKPOINT_PASS
 
       - name: Install exact current LeRobot
@@ -126,3 +128,110 @@ jobs:
             /tmp/rr-run/checkpoints/000001 | tee /tmp/current-consumer.log
           grep -q 'upstream lerobot can read this checkpoint.' /tmp/current-consumer.log
           echo CURRENT_FULL_ARTIFACT_CONSUMER_PASS
+
+      - name: Current production policy loader
+        shell: bash
+        run: |
+          set -euo pipefail
+          . /tmp/lerobot-venv/bin/activate
+          python - <<'PY'
+          from pathlib import Path
+          import torch
+          from lerobot.policies.act.modeling_act import ACTPolicy
+
+          pretrained = Path('/tmp/rr-run/checkpoints/000001/pretrained_model')
+          policy = ACTPolicy.from_pretrained(str(pretrained), strict=True)
+          cfg = policy.config
+          if policy.training:
+              raise SystemExit('from_pretrained did not leave policy in eval mode')
+          state_dim = cfg.input_features['observation.state'].shape[0]
+          env_dim = cfg.input_features['observation.environment_state'].shape[0]
+          batch = {
+              'observation.state': torch.zeros(1, state_dim),
+              'observation.environment_state': torch.zeros(1, env_dim),
+          }
+          with torch.no_grad():
+              actions = policy.predict_action_chunk(batch)
+          if not bool(torch.isfinite(actions).all()):
+              raise SystemExit('production loader policy produced non-finite actions')
+          print('CURRENT_POLICY_FROM_PRETRAINED_PASS', tuple(actions.shape), 'eval=True')
+          PY
+
+      - name: Current processor factory and full inference pipeline
+        shell: bash
+        run: |
+          set -euo pipefail
+          . /tmp/lerobot-venv/bin/activate
+          python - <<'PY'
+          from pathlib import Path
+          import numpy as np
+          import torch
+          from lerobot.common.control_utils import predict_action
+          from lerobot.policies.act.configuration_act import ACTConfig
+          from lerobot.policies.act.modeling_act import ACTPolicy
+          from lerobot.policies.factory import make_pre_post_processors
+
+          pretrained = Path('/tmp/rr-run/checkpoints/000001/pretrained_model')
+          cfg = ACTConfig.from_pretrained(str(pretrained))
+          policy = ACTPolicy.from_pretrained(str(pretrained), config=cfg, strict=True)
+          pre, post = make_pre_post_processors(cfg, pretrained_path=str(pretrained))
+          state_dim = cfg.input_features['observation.state'].shape[0]
+          env_dim = cfg.input_features['observation.environment_state'].shape[0]
+          raw_observation = {
+              'observation.state': np.zeros((state_dim,), dtype=np.float32),
+              'observation.environment_state': np.zeros((env_dim,), dtype=np.float32),
+          }
+          action = predict_action(
+              observation=raw_observation,
+              policy=policy,
+              device=torch.device(cfg.device),
+              preprocessor=pre,
+              postprocessor=post,
+              use_amp=False,
+          )
+          if not bool(torch.isfinite(action).all()):
+              raise SystemExit('factory deployment pipeline produced non-finite action')
+          print('CURRENT_FACTORY_DEPLOYMENT_PASS', tuple(action.shape), 'all_finite=True')
+          PY
+
+      - name: Current train-config and legacy training-metadata consumers
+        shell: bash
+        run: |
+          set -euo pipefail
+          . /tmp/lerobot-venv/bin/activate
+          python - <<'PY'
+          from pathlib import Path
+          from lerobot.common.train_utils import load_training_metadata
+          from lerobot.configs.train import CheckpointFormat, TrainPipelineConfig
+
+          checkpoint = Path('/tmp/rr-run/checkpoints/000001')
+          pretrained = checkpoint / 'pretrained_model'
+          training_state = checkpoint / 'training_state'
+
+          cfg = TrainPipelineConfig.from_pretrained(pretrained / 'train_config.json')
+          if cfg.policy is None or cfg.policy.type != 'act':
+              raise SystemExit(f'unexpected current train policy config: {cfg.policy!r}')
+          if cfg.checkpoint_format is not CheckpointFormat.SAFETENSORS:
+              raise SystemExit(f'unexpected legacy default checkpoint format: {cfg.checkpoint_format!r}')
+          print(
+              'CURRENT_TRAIN_CONFIG_PARSE_PASS',
+              f'policy={cfg.policy.type}',
+              f'batch_size={cfg.batch_size}',
+              f'checkpoint_format={cfg.checkpoint_format.value}',
+          )
+
+          meta = load_training_metadata(training_state)
+          if meta['step'] != 1:
+              raise SystemExit(f"unexpected step {meta['step']}")
+          if meta['dp_world_size'] != 1:
+              raise SystemExit(f"legacy num_processes fallback failed: {meta}")
+          if meta['batch_size'] != 2:
+              raise SystemExit(f"unexpected batch size: {meta}")
+          print(
+              'CURRENT_TRAINING_METADATA_PASS',
+              f"step={meta['step']}",
+              f"dp_world_size={meta['dp_world_size']}",
+              f"batch_size={meta['batch_size']}",
+              f"grad_accum_steps={meta.get('grad_accum_steps')}",
+          )
+          PY
