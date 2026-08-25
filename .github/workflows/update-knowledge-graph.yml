@@ -26,10 +26,10 @@ jobs:
   generate:
     permissions:
       contents: read
-    # Stable native-IPM Contributed world-coherence release.
-    # v1 R 452a197889cf83cdddf779a70102188056bc5f36 resolves immutable
-    # Action F 37500d3e3b231452b7281a78374f32d04c6445ea.
-    # F, exact reusable R, Chromium/WebKit, and real-profile halo proofs passed before promotion.
+    # Stable native-IPM taxonomy artifact-identity release.
+    # v1 R 72ead19e8c49354af2bcbfa9144404c7a8d6ff9f resolves immutable
+    # Action F 9d018370d7b22d82d8974ae1ac018de5589dd85a.
+    # F, release-chain R, Chromium/WebKit, and exact real-profile proof #203 passed before promotion.
     uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@v1
     with:
       theme: dark
