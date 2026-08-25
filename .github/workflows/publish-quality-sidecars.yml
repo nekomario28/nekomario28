@@ -35,7 +35,7 @@ jobs:
     permissions:
       contents: write
     env:
-      IPM_QUALITY_TOOLS_REF: 884e5631537888d4876036bc91f0c4fc84d8fb5b
+      IPM_QUALITY_TOOLS_REF: 62870393d022646d1e356713d17d20d9dea11ef2
     steps:
       - name: Checkout profile repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -100,6 +100,7 @@ jobs:
             'nekomario28/ftbpublicclaims',
             'nekomario28/buyclaimchunks',
             'nekomario28/freetoken',
+            'nekomario28/offhandcombat',
             'nekomario28/gz-sim',
             'nekomario28/turing-smart-screen-python-owl',
           ]);
@@ -110,9 +111,10 @@ jobs:
             'nekomario28/ftbpublicclaims',
             'nekomario28/buyclaimchunks',
             'nekomario28/freetoken',
+            'nekomario28/offhandcombat',
             'nekomario28/turing-smart-screen-python-owl',
           ]);
-          const expectedSnapshotDates = ['2026-07-25', '2026-08-24', '2026-08-25'];
+          const expectedSnapshotDates = ['2026-07-25', '2026-08-04', '2026-08-24', '2026-08-25'];
           const expectedAvailableSnapshotDate = new Map([
             ['nekomario28/interactive-project-map', '2026-08-25'],
             ['nekomario28/projexd_group10', '2026-08-25'],
@@ -120,6 +122,7 @@ jobs:
             ['nekomario28/ftbpublicclaims', '2026-08-25'],
             ['nekomario28/buyclaimchunks', '2026-07-25'],
             ['nekomario28/freetoken', '2026-08-24'],
+            ['nekomario28/offhandcombat', '2026-08-04'],
             ['nekomario28/turing-smart-screen-python-owl', '2026-08-25'],
           ]);
           const available = presentation.repositories.filter((entry) => entry.overlayState === 'available');
@@ -249,6 +252,20 @@ jobs:
           if (freeTokenSecurity?.findingState !== 'unknown') throw new Error('FreeToken Security/Safety must remain unknown');
           if (freeTokenStewardship?.findingState !== 'unknown') throw new Error('FreeToken Stewardship must remain unknown');
           if (freeToken?.evidenceFreshness?.snapshotDate !== '2026-08-24') throw new Error('FreeToken evidence date was laundered to publication date');
+
+          const offhandSource = sourceByKey.get('nekomario28/offhandcombat');
+          const offhand = availableByKey.get('nekomario28/offhandcombat');
+          if (offhandSource?.mode !== 'fork-local-delta' || offhandSource?.qualityAttributionScope !== 'local-delta') throw new Error('OffHandCombat assessment source lost fork local-delta attribution');
+          if (offhandSource?.presentationExpected !== 'available' || offhandSource?.fixtureSnapshotDate !== '2026-08-04') throw new Error('OffHandCombat source freshness/presentation expectation mismatch');
+          if (offhandSource?.calibratedRevision !== '317c2ec2e40325d8dd41f6dc5e730e95c97ae7e1') throw new Error('OffHandCombat calibrated default-master revision mismatch');
+          if (offhand?.qualityAttributionScope !== 'local-delta' || offhand?.overlayState !== 'available') throw new Error('OffHandCombat presentation scope/state mismatch');
+          if (offhand?.overlay?.coverage?.targetDimensions !== 6 || offhand?.overlay?.coverage?.inspectedDimensions !== 5) throw new Error('OffHandCombat target coverage mismatch');
+          if (offhand?.overlay?.targetFindingCounts?.supports !== 5 || offhand?.overlay?.targetFindingCounts?.unknown !== 1) throw new Error('OffHandCombat finding distribution mismatch');
+          const offhandMaintainability = offhand?.overlay?.segments?.find((segment) => segment.id === 'maintainability');
+          const offhandSecurity = offhand?.overlay?.segments?.find((segment) => segment.id === 'security-safety');
+          if (offhandMaintainability?.findingState !== 'unknown') throw new Error('OffHandCombat Maintainability must remain unknown');
+          if (offhandSecurity?.applicability !== 'optional' || offhandSecurity?.findingState !== 'supports') throw new Error('OffHandCombat optional Security/Safety contract mismatch');
+          if (offhand?.evidenceFreshness?.snapshotDate !== '2026-08-04') throw new Error('OffHandCombat evidence date was laundered to publication date');
 
           const gzSource = sourceByKey.get('nekomario28/gz-sim');
           const gzPresentation = presentation.repositories.find((entry) => normalizeKey(entry.repositoryKey) === 'nekomario28/gz-sim');
