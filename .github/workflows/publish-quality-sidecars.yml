@@ -35,7 +35,7 @@ jobs:
     permissions:
       contents: write
     env:
-      IPM_QUALITY_TOOLS_REF: a05e1cc31a0a82b42af16e6e2c13c584577792be
+      IPM_QUALITY_TOOLS_REF: 841df60a605afca5989916214957c29b5dbff3da
     steps:
       - name: Checkout profile repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -96,12 +96,14 @@ jobs:
           const expectedAssessmentSources = new Set([
             'nekomario28/interactive-project-map',
             'nekomario28/projexd_group10',
+            'nekomario28/antifullbright',
             'nekomario28/gz-sim',
             'nekomario28/turing-smart-screen-python-owl',
           ]);
           const expectedAvailable = new Set([
             'nekomario28/interactive-project-map',
             'nekomario28/projexd_group10',
+            'nekomario28/antifullbright',
             'nekomario28/turing-smart-screen-python-owl',
           ]);
           const expectedSnapshotDates = ['2026-08-25'];
@@ -181,7 +183,15 @@ jobs:
           const turingStewardship = turing?.views?.detail?.segments?.find((segment) => segment.id === 'stewardship');
           if (!turingStewardship || turingStewardship.findingState !== 'unknown') throw new Error('inherited turing stewardship leaked into local-delta Quality');
 
-          for (const key of ['nekomario28/interactive-project-map', 'nekomario28/projexd_group10']) {
+          const antifullbright = availableByKey.get('nekomario28/antifullbright');
+          if (antifullbright?.qualityAttributionScope !== 'repository-snapshot') throw new Error('AntiFullbright presentation must use repository-snapshot Quality');
+          if (antifullbright?.overlay?.coverage?.targetDimensions !== 6 || antifullbright?.overlay?.coverage?.inspectedDimensions !== 5) throw new Error('AntiFullbright Quality coverage mismatch');
+          const antifullbrightMaintainability = antifullbright?.views?.detail?.segments?.find((segment) => segment.id === 'maintainability');
+          if (!antifullbrightMaintainability || antifullbrightMaintainability.findingState !== 'unknown') throw new Error('AntiFullbright Maintainability must remain unknown');
+          const antifullbrightSecurity = antifullbright?.views?.detail?.segments?.find((segment) => segment.id === 'security-safety');
+          if (!antifullbrightSecurity || antifullbrightSecurity.applicability !== 'optional' || antifullbrightSecurity.findingState !== 'supports') throw new Error('AntiFullbright optional Security/Safety evidence mismatch');
+
+          for (const key of ['nekomario28/interactive-project-map', 'nekomario28/projexd_group10', 'nekomario28/antifullbright']) {
             if (availableByKey.get(key)?.qualityAttributionScope !== 'repository-snapshot') throw new Error(`unexpected non-fork Quality scope: ${key}`);
           }
 
