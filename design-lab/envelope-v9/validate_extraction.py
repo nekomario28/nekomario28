@@ -266,9 +266,11 @@ def main() -> int:
         f"repository_creation={readiness['repository_creation']}"
     )
     print(
-        "PUBLIC_REPO_CREATE=DEFERRED donor_producer=donor-bound "
-        "second_consumer=FIXTURE_ONLY independent_consumer=NOT_ESTABLISHED "
-        "concrete_reuse_request=NOT_ESTABLISHED license_selection=UNSELECTED new_skill=DEFERRED"
+        f"PUBLIC_REPO_CREATE={readiness['repository_creation']} donor_producer=donor-bound "
+        "second_consumer=FIXTURE_ONLY "
+        f"independent_consumer={readiness['independent_consumer']} "
+        f"concrete_reuse_request={readiness['concrete_reuse_request']} "
+        f"license_selection={readiness['license_selection']} new_skill=DEFERRED"
     )
     return 0
 
