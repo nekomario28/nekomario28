@@ -14,7 +14,7 @@ jobs:
   generate:
     permissions:
       contents: read
-    uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@889cb85d8280d91067bc83865e9ee5d86481edaf
+    uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@452a197889cf83cdddf779a70102188056bc5f36
     with:
       theme: dark
       style: galaxy-systems
