@@ -38,35 +38,28 @@ jobs:
         run: |
           set -euxo pipefail
           python3 - <<'PY'
+          import re
           from pathlib import Path
+
           p = Path('crates/rerobot-core/src/action_interpolator.rs')
           s = p.read_text()
-          old = '''    buffer: Vec<Vec<T>>,
-              idx: usize,
-          }'''
-          new = '''    buffer: Vec<Vec<T>>,
-              idx: usize,
-              emitted_policy_action: bool,
-          }'''
-          assert old in s
-          s = s.replace(old, new, 1)
 
-          old = '''            buffer: Vec::new(),
-              idx: 0,
-          })'''
-          new = '''            buffer: Vec::new(),
-              idx: 0,
-              emitted_policy_action: false,
-          })'''
-          assert old in s
-          s = s.replace(old, new, 1)
+          def one(pattern: str, replacement: str) -> None:
+              global s
+              s, n = re.subn(pattern, replacement, s, count=1, flags=re.S)
+              assert n == 1, (pattern, n)
 
-          old = '''        self.buffer.clear();
-              self.idx = 0;
-          }
-
-              /// Whether a new action is needed from the queue.'''
-          new = '''        self.buffer.clear();
+          one(
+              r'(    buffer: Vec<Vec<T>>,\n    idx: usize,\n)\}',
+              r'\1    emitted_policy_action: bool,\n}',
+          )
+          one(
+              r'(            buffer: Vec::new\(\),\n            idx: 0,\n        )\}\)',
+              r'\1    emitted_policy_action: false,\n        })',
+          )
+          one(
+              r'        self\.buffer\.clear\(\);\n        self\.idx = 0;\n    \}\n\n    /// Whether a new action is needed from the queue\.',
+              '''        self.buffer.clear();
               self.idx = 0;
               self.emitted_policy_action = false;
           }
@@ -76,46 +69,30 @@ jobs:
                   self.emitted_policy_action
               }
 
-              /// Whether a new action is needed from the queue.'''
-          assert old in s
-          s = s.replace(old, new, 1)
-
-          old = '''                for i in 1..=steps {
-                      let t = T::from_f64(i as f64 / steps as f64);
-                      let step = (0..width)
-                          .map(|k| T::lerp(prev[k * prev_stride], t, action[k * action_stride]))
-                          .collect();
-                      self.buffer.push(step);
-                  }'''
-          new = '''                for i in 1..steps {
+              /// Whether a new action is needed from the queue.''',
+          )
+          one(
+              r'                for i in 1\.\.=steps \{\n                    let t = T::from_f64\(i as f64 / steps as f64\);\n                    let step = \(0\.\.width\)\n                        \.map\(\|k\| T::lerp\(prev\[k \* prev_stride\], t, action\[k \* action_stride\]\)\)\n                        \.collect\(\);\n                    self\.buffer\.push\(step\);\n                \}',
+              '''                for i in 1..steps {
                       let t = T::from_f64(i as f64 / steps as f64);
                       let step = (0..width)
                           .map(|k| T::lerp(prev[k * prev_stride], t, action[k * action_stride]))
                           .collect();
                       self.buffer.push(step);
                   }
-                  // Current LeRobot contract: the cycle-end value is the policy action itself,
-                  // not a lerp recomputation that can differ by an ULP or broadcast its shape.
-                  self.buffer.push(action.to_vec());'''
-          assert old in s
-          s = s.replace(old, new, 1)
-
-          old = '''        if self.idx >= self.buffer.len() {
-                  return None;
-              }
-              let i = self.idx;
-              self.idx += 1;
-              Some(&self.buffer[i])'''
-          new = '''        if self.idx >= self.buffer.len() {
-                  self.emitted_policy_action = false;
-                  return None;
-              }
-              let i = self.idx;
-              self.idx += 1;
-              self.emitted_policy_action = self.idx == self.buffer.len();
-              Some(&self.buffer[i])'''
-          assert old in s
-          s = s.replace(old, new, 1)
+                  self.buffer.push(action.to_vec());''',
+          )
+          one(
+              r'        if self\.idx >= self\.buffer\.len\(\) \{\n            return None;\n        \}\n        let i = self\.idx;\n        self\.idx \+= 1;\n        Some\(&self\.buffer\[i\]\)',
+              '''        if self.idx >= self.buffer.len() {
+              self.emitted_policy_action = false;
+              return None;
+          }
+          let i = self.idx;
+          self.idx += 1;
+          self.emitted_policy_action = self.idx == self.buffer.len();
+          Some(&self.buffer[i])''',
+          )
           p.write_text(s)
           PY
 
@@ -148,7 +125,10 @@ jobs:
 
               let end = i.get().unwrap().to_vec();
               assert!(i.emitted_policy_action());
-              assert_eq!(end.iter().map(|v| v.to_bits()).collect::<Vec<_>>(), action.iter().map(|v| v.to_bits()).collect::<Vec<_>>());
+              assert_eq!(
+                  end.iter().map(|v| v.to_bits()).collect::<Vec<_>>(),
+                  action.iter().map(|v| v.to_bits()).collect::<Vec<_>>()
+              );
               assert_eq!(i.get(), None);
               assert!(!i.emitted_policy_action());
           }
@@ -166,6 +146,7 @@ jobs:
           }
           RS
 
+          cargo fmt --all
           git diff -- crates/rerobot-core/src/action_interpolator.rs crates/rerobot-core/tests/action_interpolator_current_contract_probe.rs
 
       - name: Current 0.6.2 contract probe goes green
