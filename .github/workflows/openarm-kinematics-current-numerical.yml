@@ -1,0 +1,178 @@
+name: OpenArm kinematics current numerical revalidation
+
+on:
+  push:
+    branches:
+      - research/openarm-kinematics-current-numerical-20260825
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  numerical-revalidation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      RUST_SHA: 5d79eb5ecf6b3654ef34c8222fb27b24cea182cb
+      CONTROL_SHA: 8462f93547972cd9af2910bd7263d7127231b6db
+
+    steps:
+      - name: Create exact detached checkouts
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="$RUNNER_TEMP/openarm-kin-current-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          RR="$ROOT/rust"
+          CTRL="$ROOT/openarm_control"
+          mkdir -p "$ROOT"
+          clone_exact() {
+            local url="$1" sha="$2" dest="$3"
+            git init -q "$dest"
+            git -C "$dest" remote add origin "$url"
+            git -C "$dest" fetch -q --depth=1 origin "$sha"
+            git -C "$dest" checkout -q --detach FETCH_HEAD
+            test "$(git -C "$dest" rev-parse HEAD)" = "$sha"
+          }
+          clone_exact https://github.com/k1000dai/dora-openarm-kinematics-rust.git "$RUST_SHA" "$RR"
+          clone_exact https://github.com/enactic/openarm_control.git "$CONTROL_SHA" "$CTRL"
+          printf 'ROOT=%s\nRR=%s\nCTRL=%s\n' "$ROOT" "$RR" "$CTRL" >> "$GITHUB_ENV"
+          echo "EXACT_AUTHORITIES_PASS rust=$RUST_SHA control=$CONTROL_SHA"
+
+      - name: Install exact current semantic provider
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m venv "$ROOT/venv"
+          "$ROOT/venv/bin/python" -m pip install -q --upgrade pip
+          "$ROOT/venv/bin/python" -m pip install -q -e "$CTRL"
+          "$ROOT/venv/bin/python" - <<'PY'
+          import openarm_control
+          from openarm_control import IKParams
+          p = IKParams()
+          print('CURRENT_PROVIDER_IMPORT_PASS')
+          print('CURRENT_DEFAULTS', p)
+          PY
+
+      - name: Regenerate fixtures from current provider
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$RR"
+          rm -rf /tmp/openarm_kin_golden
+          "$ROOT/venv/bin/python" dev/gen_fixtures.py | tee "$ROOT/current-generator.log"
+          mkdir -p "$ROOT/current-default"
+          cp /tmp/openarm_kin_golden/fixtures/*.json "$ROOT/current-default/"
+          test -s "$ROOT/current-default/model_structure.json"
+          test -s "$ROOT/current-default/fk_cases.json"
+          test -s "$ROOT/current-default/ik_cases.json"
+          echo 'CURRENT_PROVIDER_FIXTURE_GENERATION_PASS'
+
+      - name: Generate legacy-overlap provider profile
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$RR"
+          cp dev/gen_fixtures.py "$ROOT/gen_fixtures_legacy_overlap.py"
+          GEN="$ROOT/gen_fixtures_legacy_overlap.py" "$ROOT/venv/bin/python" - <<'PY'
+          import os
+          from pathlib import Path
+          p = Path(os.environ['GEN'])
+          s = p.read_text()
+          needle = '        args = parser_with_defaults(extra_args)\n'
+          replacement = '''        provider_args = list(extra_args) + [\n            "--pos-cost", "1.0",\n            "--ori-cost", "1.0",\n            "--frame-position-error-limit", "0",\n            "--frame-orientation-error-limit", "0",\n            "--nullspace-cost", "0",\n            "--singularity-max-approach-rate", "0",\n            "--kinetic-energy-cost", "0",\n            "--no-joint-braking",\n        ]\n        args = parser_with_defaults(provider_args)\n'''
+          if s.count(needle) != 1:
+              raise SystemExit(f'expected one run_case parser site, found {s.count(needle)}')
+          p.write_text(s.replace(needle, replacement))
+          print('LEGACY_PROFILE_PATCH_PASS')
+          PY
+          rm -rf /tmp/openarm_kin_golden
+          PYTHONPATH="$RR" "$ROOT/venv/bin/python" "$ROOT/gen_fixtures_legacy_overlap.py" | tee "$ROOT/legacy-generator.log"
+          mkdir -p "$ROOT/legacy-overlap"
+          cp /tmp/openarm_kin_golden/fixtures/*.json "$ROOT/legacy-overlap/"
+          echo 'LEGACY_OVERLAP_FIXTURE_GENERATION_PASS'
+
+      - name: Quantify provider output drift
+        shell: bash
+        run: |
+          set -euo pipefail
+          RR="$RR" ROOT="$ROOT" python3 - <<'PY'
+          import json, math, os
+          from pathlib import Path
+          rr = Path(os.environ['RR'])
+          root = Path(os.environ['ROOT'])
+          old = json.loads((rr/'tests/golden/ik_cases.json').read_text())
+          by_old = {c['name']: c for c in old}
+          for label in ('current-default', 'legacy-overlap'):
+              new = json.loads((root/label/'ik_cases.json').read_text())
+              max_abs = 0.0
+              worst = None
+              compared = 0
+              none_mismatch = []
+              for c in new:
+                  o = by_old[c['name']]
+                  a, b = o.get('result'), c.get('result')
+                  if (a is None) != (b is None):
+                      none_mismatch.append(c['name'])
+                      continue
+                  if a is None:
+                      continue
+                  diff = max(abs(float(x)-float(y)) for x,y in zip(a,b))
+                  compared += 1
+                  if diff > max_abs:
+                      max_abs = diff; worst = c['name']
+              print(f'PROVIDER_DRIFT label={label} compared={compared} max_abs={max_abs:.9g} worst={worst} none_mismatch={none_mismatch}')
+          PY
+
+      - name: Execute Rust golden tests against current provider fixtures
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$RR"
+          mkdir -p "$ROOT/historical"
+          cp tests/golden/*.json "$ROOT/historical/"
+
+          run_case() {
+            local label="$1" testname="$2" logfile="$3"
+            set +e
+            cargo test --locked --test golden "$testname" -- --exact --nocapture >"$logfile" 2>&1
+            local rc=$?
+            set -e
+            echo "RUST_GOLDEN_RESULT label=$label test=$testname rc=$rc"
+            if [ "$rc" -ne 0 ]; then tail -n 80 "$logfile"; fi
+            return 0
+          }
+
+          cp "$ROOT/current-default/model_structure.json" tests/golden/model_structure.json
+          cp "$ROOT/current-default/fk_cases.json" tests/golden/fk_cases.json
+          run_case current-provider parsed_model_matches_compiled_mujoco_structure "$ROOT/model.log"
+          run_case current-provider fk_matches_upstream_mj_forward "$ROOT/fk.log"
+
+          cp "$ROOT/current-default/ik_cases.json" tests/golden/ik_cases.json
+          run_case current-default-ik ik_matches_upstream_mink_qp_solve_within_tolerance "$ROOT/ik-current.log"
+
+          cp "$ROOT/legacy-overlap/ik_cases.json" tests/golden/ik_cases.json
+          run_case legacy-overlap-ik ik_matches_upstream_mink_qp_solve_within_tolerance "$ROOT/ik-legacy.log"
+
+          cp "$ROOT/historical/"*.json tests/golden/
+          git checkout -- tests/golden
+          test -z "$(git status --porcelain=v1 --untracked-files=no)"
+          echo 'EPHEMERAL_RUST_TREE_RESTORED'
+
+      - name: Summarize exact result
+        shell: bash
+        run: |
+          set -euo pipefail
+          for f in "$ROOT/model.log" "$ROOT/fk.log" "$ROOT/ik-current.log" "$ROOT/ik-legacy.log"; do
+            echo "===== $(basename "$f") ====="
+            grep -E 'test result:|FAILED|panicked|actual=|expected=' "$f" | tail -n 20 || true
+          done
+          echo "REMOTE_MUTATION=false"
+          echo "PHYSICAL_HARDWARE=false"
+          echo "NUMERICAL_REVALIDATION_EXECUTED=true"
+
+      - name: Cleanup
+        if: always()
+        shell: bash
+        run: |
+          rm -rf "${ROOT:-}" /tmp/openarm_kin_golden
