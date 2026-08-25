@@ -1,0 +1,77 @@
+name: Rerobot current episode selector contract
+
+on:
+  push:
+    branches: [research/rerobot-current-episode-contract]
+
+permissions:
+  contents: read
+
+jobs:
+  receipt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Freeze authorities
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'REROBOT_SHA=f6c36c7da5326886fb6eb6e83d8a2d87283b31ec'
+          echo 'LEROBOT_SHA=8b256a6c0d4769c3cc3e7e98f04940126398a391'
+          git clone --filter=blob:none https://github.com/k1000dai/Rerobot.git rerobot
+          git -C rerobot checkout --detach f6c36c7da5326886fb6eb6e83d8a2d87283b31ec
+          test "$(git -C rerobot rev-parse HEAD)" = f6c36c7da5326886fb6eb6e83d8a2d87283b31ec
+
+      - name: Inject current-upstream episode-selector discriminator
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > rerobot/crates/rerobot-train/tests/current_episode_selector_contract.rs <<'RS'
+          mod common;
+
+          use common::fixture_dataset;
+          use indexmap::IndexMap;
+          use rerobot_core::dataset::delta::action_delta_timestamps;
+          use rerobot_train::data::dataset::StateOnlyDataset;
+
+          fn action_window(chunk_size: i64) -> IndexMap<String, Vec<f64>> {
+              IndexMap::from([("action".to_owned(), action_delta_timestamps(chunk_size, 10))])
+          }
+
+          #[test]
+          fn current_lerobot_invalid_episode_filtering_contract_is_missing() {
+              // Current LeRobot 0.6.2 resolve_episode_indices([0, 0, 99], 1)
+              // returns [0, 0]: invalid 99 is removed, valid duplicate/order are preserved.
+              let current_expected_num_episodes = 2usize;
+              let requested = [0i64, 0, 99];
+              let dataset = StateOnlyDataset::load_for_episodes(
+                  &fixture_dataset(),
+                  &action_window(2),
+                  1e-4,
+                  Some(&requested),
+              )
+              .expect("Rerobot fixture should still load");
+
+              println!("CURRENT_EXPECTED_RESOLVED_EPISODES=[0, 0]");
+              println!("CURRENT_EXPECTED_NUM_EPISODES={current_expected_num_episodes}");
+              println!("REROBOT_NUM_EPISODES={}", dataset.num_episodes());
+              println!("REROBOT_SELECTED_FRAME_COUNT={}", dataset.len());
+
+              assert_ne!(
+                  dataset.num_episodes(),
+                  current_expected_num_episodes,
+                  "fixture stopped discriminating current episode-selection contract",
+              );
+              assert_eq!(dataset.num_episodes(), 3, "Rerobot currently retains the raw requested episode list");
+              assert_eq!(dataset.len(), 4, "row selection deduplicates through the valid-episode HashSet");
+              println!("CURRENT_EPISODE_SELECTOR_CONTRACT_RED_CONFIRMED");
+          }
+          RS
+
+      - name: Execute exact Rerobot against current episode-selector contract
+        shell: bash
+        working-directory: rerobot
+        run: |
+          set -euo pipefail
+          cargo test -p rerobot-train --test current_episode_selector_contract -- --nocapture
+          echo 'EPISODE_SELECTOR_EXECUTABLE_DRIFT_RECEIPT_PASS'
