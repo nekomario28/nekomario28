@@ -1,0 +1,91 @@
+name: Rerobot current LeRobot consumer one-shot
+
+on:
+  push:
+    branches:
+      - research/rerobot-current-consumer-one-shot
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      REROBOT_SHA: f6c36c7da5326886fb6eb6e83d8a2d87283b31ec
+      LEROBOT_SHA: 8b256a6c0d4769c3cc3e7e98f04940126398a391
+    steps:
+      - name: Record carrier and toolchain
+        shell: bash
+        run: |
+          set -euxo pipefail
+          uname -a
+          python3 --version
+          rustc --version
+          cargo --version
+          git --version
+
+      - name: Clone exact Rerobot and current LeRobot
+        shell: bash
+        run: |
+          set -euxo pipefail
+          git clone --filter=blob:none https://github.com/k1000dai/Rerobot.git /tmp/Rerobot
+          git -C /tmp/Rerobot checkout --detach "$REROBOT_SHA"
+          test "$(git -C /tmp/Rerobot rev-parse HEAD)" = "$REROBOT_SHA"
+          git clone --filter=blob:none https://github.com/huggingface/lerobot.git /tmp/lerobot
+          git -C /tmp/lerobot checkout --detach "$LEROBOT_SHA"
+          test "$(git -C /tmp/lerobot rev-parse HEAD)" = "$LEROBOT_SHA"
+
+      - name: Build Rerobot trainer
+        shell: bash
+        working-directory: /tmp/Rerobot
+        run: |
+          set -euxo pipefail
+          cargo build --release --locked -p rerobot-cli --bin lerobot-train
+
+      - name: Generate one-step Rerobot checkpoint
+        shell: bash
+        working-directory: /tmp/Rerobot
+        run: |
+          set -euxo pipefail
+          rm -rf /tmp/rr-run
+          ./target/release/lerobot-train \
+            --dataset.repo_id=rerobot/state_only_slice \
+            --dataset.root=crates/rerobot-train/tests/fixtures/state_only \
+            --output_dir=/tmp/rr-run --policy.type=act \
+            --steps=1 --batch_size=2 \
+            --policy.chunk_size=2 --policy.n_action_steps=2 \
+            --policy.dim_model=32 --policy.n_heads=4 --policy.dim_feedforward=64 \
+            --policy.n_encoder_layers=1 --policy.n_decoder_layers=1 \
+            --policy.n_vae_encoder_layers=1 --policy.latent_dim=8 | tee /tmp/rerobot-train.log
+          grep -q '^End of training$' /tmp/rerobot-train.log
+          test -s /tmp/rr-run/checkpoints/000001/pretrained_model/config.json
+          test -s /tmp/rr-run/checkpoints/000001/pretrained_model/model.safetensors
+          test -s /tmp/rr-run/checkpoints/000001/training_state/optimizer_state.safetensors
+
+      - name: Install exact current LeRobot
+        shell: bash
+        run: |
+          set -euxo pipefail
+          python3 -m venv /tmp/lerobot-venv
+          /tmp/lerobot-venv/bin/python -m pip install --upgrade pip
+          /tmp/lerobot-venv/bin/python -m pip install -e /tmp/lerobot
+
+      - name: Current LeRobot consumes Rerobot checkpoint
+        shell: bash
+        working-directory: /tmp/Rerobot
+        run: |
+          set -euxo pipefail
+          /tmp/lerobot-venv/bin/python tools/goldens/verify_checkpoint_upstream.py \
+            /tmp/rr-run/checkpoints/000001 | tee /tmp/current-consumer.log
+          grep -q 'upstream lerobot can read this checkpoint.' /tmp/current-consumer.log
+          echo 'REROBOT_CURRENT_LEROBOT_CONSUMER_PASS'
+
+      - name: Confirm source checkouts remained clean
+        if: always()
+        shell: bash
+        run: |
+          set -euxo pipefail
+          git -C /tmp/Rerobot diff --exit-code
+          git -C /tmp/lerobot diff --exit-code
