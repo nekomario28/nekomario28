@@ -18,8 +18,12 @@
     "source_sha": "bf3960dc85eebf8e25c5e8a015e968322a984597",
     "initial_filtered_history_head": "ee0a07b9e85f7a57c6b2146149e68420202f4fe5",
     "current_bootstrap_main_sha": "d916b057ec897ceef94bdee293d4e02f42e46d1b",
+    "current_working_main_sha": "7cc093b00b0f37883951000693714b0a76e96276",
     "bootstrap_carrier_run": 32868834661,
     "exact_head_validation_run": 32869436824,
+    "portable_regression_run": 32871700639,
+    "portable_regression_job": 97880025443,
+    "portable_regression_tests": 7,
     "public_release": "DEFERRED"
   },
   "layers": {
