@@ -6,9 +6,21 @@
   "publication_readiness": {
     "technical_copy_set": "PASS",
     "independent_consumer": "NOT_ESTABLISHED",
-    "concrete_reuse_request": "NOT_ESTABLISHED",
+    "concrete_reuse_request": "ESTABLISHED",
     "license_selection": "UNSELECTED",
     "repository_creation": "DEFERRED"
+  },
+  "working_repository": {
+    "repository": "nekomario28/profile-envelope",
+    "visibility": "private",
+    "state": "CREATED",
+    "source_repository": "nekomario28/nekomario28",
+    "source_sha": "bf3960dc85eebf8e25c5e8a015e968322a984597",
+    "initial_filtered_history_head": "ee0a07b9e85f7a57c6b2146149e68420202f4fe5",
+    "current_bootstrap_main_sha": "d916b057ec897ceef94bdee293d4e02f42e46d1b",
+    "bootstrap_carrier_run": 32868834661,
+    "exact_head_validation_run": 32869436824,
+    "public_release": "DEFERRED"
   },
   "layers": {
     "portable_core": [
@@ -85,7 +97,8 @@
     "contract v1 intentionally names github-profile-readme as its only target adapter; do not invent a universal host IR before a second host exists",
     "vector safe text covers the proven glyph set and fails closed for unsupported visible glyphs",
     "the standalone GitHub transformer consumes a complete donor SVG bundle but does not define how arbitrary semantic source data becomes that bundle",
-    "the P6 second consumer is a structurally different synthetic fixture, not an independent external consumer"
+    "the P6 second consumer is a structurally different synthetic fixture, not an independent external consumer",
+    "the private working repository is an extraction/development surface and does not itself authorize public redistribution"
   ],
   "promotion_gates": {
     "create_public_repository": [

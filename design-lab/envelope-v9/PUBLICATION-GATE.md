@@ -1,41 +1,49 @@
 # Envelope v9 publication gate
 
-Status: **P7 merged / publication DEFERRED / public repository NOT_CREATED**  
-Reviewed: **2026-08-25 JST**
+Status: **technical copy set PASS / private working repository CREATED / public publication DEFERRED**  
+Reviewed: **2026-08-26 JST**
 
-This receipt separates two claims that must not be conflated:
+This receipt separates three claims that must not be conflated:
 
 1. **technical extraction readiness** — the declared package can be copied and validated outside the donor repository;
-2. **publication authority/readiness** — there is a justified external demand signal and an explicit license choice for a new public repository.
+2. **private working extraction** — an authorized working repository may exist for continued development without making the package publicly redistributable;
+3. **public publication authority/readiness** — external demand exists and an explicit license choice authorizes the intended public copy set.
 
-Envelope v9 has the first claim. It does not yet have the second.
+Envelope v9 has the first claim. On 2026-08-26 the repository owner explicitly requested extraction and continued work, so a private working repository now establishes the second claim. The third claim remains deferred because the publication license is still unselected.
 
-## Canonical implementation
+## Current working repository
 
-P7 merged through PR #71 as:
+- repository: `nekomario28/profile-envelope`;
+- visibility: **private**;
+- donor source: `nekomario28/nekomario28@bf3960dc85eebf8e25c5e8a015e968322a984597`;
+- retained filtered-history head before path normalization: `ee0a07b9e85f7a57c6b2146149e68420202f4fe5`;
+- current extracted main after bootstrap validation cleanup: `d916b057ec897ceef94bdee293d4e02f42e46d1b`;
+- one-shot bootstrap carrier: ShotFork run `32868834661` on `MeguminDesktop` / `shotroute` — **SUCCESS**;
+- exact-head validation after `.gitignore` hygiene repair: ShotFork run `32869436824` — **SUCCESS**;
+- retained donor history: eight path-filtered commits plus one path-normalization/bootstrap commit and subsequent validation-boundary/hygiene commits;
+- public license: **not selected**;
+- public release: **DEFERRED**.
 
-- merge commit: `0a6fb92240a85f1ee36c36cca27eeef413ef8ce8`;
-- accepted clean head: `d0ea3525e794924338a2df0f0fa51518853f9e5c`;
-- accepted base main: `c1bd7f255cfa7e0ac372731cad9d5f49e31f9142`;
-- accepted workflow run: `32814044647`;
-- accepted job: `97698734935`;
-- clean head shape: one commit directly over the accepted base, changing only `portable-package-manifest.json` and `validate_extraction.py`.
+The extraction preserved retained donor Author/Committer metadata through path-filtered Git history rather than copying the six files into an unrelated root commit. Commit object IDs necessarily changed because filtering changes trees and parent topology.
 
-The merge commit tree is the exact clean-head tree used for the accepted P7 validation.
+The initial repository-local hosted `ubuntu-latest` validation run `32868886581` failed before repository steps were assigned a runner. It is classified as provider/executor failure rather than a portable-core failure. The same extracted code passed `compileall` and unit tests on the bounded self-hosted carrier. The carrier is not promoted to permanent unattended CI because its pre-existing host `gh` credential is broader than the new repository's least-privilege requirement.
 
-## Machine gate
+## Current machine gate
 
 `portable-package-manifest.json` now records:
 
 ```text
 technical_copy_set=PASS
 independent_consumer=NOT_ESTABLISHED
-concrete_reuse_request=NOT_ESTABLISHED
+concrete_reuse_request=ESTABLISHED
 license_selection=UNSELECTED
 repository_creation=DEFERRED
+working_repository=CREATED_PRIVATE
 ```
 
-`validate_extraction.py` derives repository readiness with this rule:
+`repository_creation=DEFERRED` remains the **public publication/repository gate**. It no longer means that no private development repository exists.
+
+The validator derives public repository readiness with this rule:
 
 ```text
 READY =
@@ -47,70 +55,66 @@ READY =
 
 Every other state is `DEFERRED`.
 
-The validator includes discriminating state checks proving that:
+The 2026-08-26 explicit extraction request satisfies the concrete reuse/demand term, but it does not select a redistribution license. Therefore the public gate correctly remains `DEFERRED`.
 
-- technical copyability plus a selected license but no external demand is still `DEFERRED`;
-- an independent consumer without a selected license is still `DEFERRED`;
-- a concrete reuse request plus technical PASS plus selected license can become `READY`;
-- external demand and license selection cannot override a failed technical copy set.
+## Canonical P7 implementation
 
-This prevents a future automation or maintainer from treating `EXTRACTION PASS` as publication authorization.
+P7 originally merged through PR #71 as:
 
-## Accepted P7 evidence
+- merge commit: `0a6fb92240a85f1ee36c36cca27eeef413ef8ce8`;
+- accepted clean head: `d0ea3525e794924338a2df0f0fa51518853f9e5c`;
+- accepted base main: `c1bd7f255cfa7e0ac372731cad9d5f49e31f9142`;
+- accepted workflow run: `32814044647`;
+- accepted job: `97698734935`.
 
-The clean exact head reported:
+That P7 receipt established the fail-closed public-publication rule. The later private extraction does not invalidate it; it only clarifies that a private development surface can be created without satisfying the public redistribution gate.
 
-```text
-PUBLICATION_GATE=PASS technical_copy_set=PASS independent_consumer=NOT_ESTABLISHED concrete_reuse_request=NOT_ESTABLISHED license_selection=UNSELECTED repository_creation=DEFERRED
-PUBLIC_REPO_CREATE=DEFERRED donor_producer=donor-bound second_consumer=FIXTURE_ONLY independent_consumer=NOT_ESTABLISHED concrete_reuse_request=NOT_ESTABLISHED license_selection=UNSELECTED new_skill=DEFERRED
-```
+## Technical evidence retained from P7/P8
 
-Existing technical evidence remained unchanged:
+The portable donor remains backed by:
 
 - `ENVELOPE_V9_EXTRACTION_TRANSFORM_PASS`;
 - `SECOND_CONSUMER_FIXTURE_PASS donor_identity=v8-independent geometry=heterogeneous generic_markers=3`;
 - nine-case Chrome matrix: **PASS**;
 - target layout/text/transparency: **PASS**;
-- render target: `62d68a97a354ffc3c82efdbe2396730f5ca90cafdfa5579c59504b7df9c35b4f`;
-- motion-on: left **7**, right **12** changed pairs over 13 samples;
-- browser-wide reduced motion: **0/0**;
-- motion-off: **0/0**;
-- v8 -> v9 motion-subtree equivalence: 15 generated assets;
+- motion-on and reduced-motion evidence bound to the tested donor target;
+- exact v8 -> v9 inherited motion-subtree equivalence across 15 generated assets;
 - public GitHub-profile v9 playback: `NOT_RUN`;
-- cross-document hard synchronization: not claimed.
+- cross-document hard synchronization: not claimed;
+- P8 six-file repository-history provenance audit.
 
-The unchanged render-target fingerprint confirms P7 changed publication metadata/validation only, not the rendered v9 target.
+These donor proofs do not automatically transfer to arbitrary future renderer changes. The extracted repository must re-earn the evidence affected by each implementation or release change.
 
-## Why the P6 fixture does not satisfy demand
+## Why private was selected
 
-The P6 second donor is a deliberately heterogeneous **synthetic fixture** executed from the copied package tree. It proves that the portable transformer no longer requires v8/Project Map implementation identity.
-
-It is not an external user, repository, integration, or concrete reuse request. Counting a fixture manufactured by the donor project as an independent consumer would make the publication gate circular, so the manifest keeps:
+Creating the new repository as public would have turned a development-organization action into a redistribution/publication action while `license_selection=UNSELECTED` remained authoritative. The requested work could proceed without weakening that boundary, so the least-claim option was:
 
 ```text
-independent_consumer=NOT_ESTABLISHED
-concrete_reuse_request=NOT_ESTABLISHED
+create private working repository
+-> preserve audited provenance/history
+-> validate exact extracted head
+-> continue development
+-> select publication license explicitly later
+-> revalidate intended public release
+-> only then consider public visibility
 ```
 
-## License snapshot and claim boundary
+Private visibility is therefore a staging/publication-boundary decision, not a statement that the project should remain private permanently.
 
-Immediately before P7, GitHub repository metadata for `nekomario28/nekomario28` reported no detected repository license (`license: null`), and the root tree contained no root `LICENSE`/`COPYING` file. P7 therefore records `license_selection=UNSELECTED` and does **not** choose MIT, Apache-2.0, or another license automatically.
+## Public publication trigger
 
-This is a publication-readiness snapshot, not a legal conclusion about copyright ownership or every historical file's provenance. Before external publication, the chosen copy set still needs an explicit license decision appropriate to its actual ownership/provenance.
+Reconsider public visibility only when all of the following are true in one current-authority review:
 
-## Publication trigger
+1. the explicit reuse request remains applicable or an independent consumer exists;
+2. the intended public copy set still passes standalone structure/extraction and the browser/motion evidence required by its claims;
+3. a publication license has been selected explicitly for that exact copy set;
+4. provenance/ownership review covers any files added after the P8 six-file boundary;
+5. the target `profile-envelope` revision and visibility transition are recorded as one bounded publication event.
 
-Do not create `profile-envelope` merely because the package is technically copyable.
-
-Reconsider repository creation only when all of the following are true in one current-authority review:
-
-1. an independent consumer exists **or** a concrete reuse request is present;
-2. the declared extracted package still passes standalone structure/extraction and required browser evidence;
-3. a publication license has been selected explicitly for the intended copy set;
-4. the manifest is updated to the current evidence rather than inheriting an old PASS after source/package changes.
-
-At that point, change the readiness fields in one reviewed change and let the validator derive `repository_creation=READY`. Do not bypass or delete the gate just to create the repository.
+Do not make the repository public merely because it already exists privately.
 
 ## Skill boundary
 
-A standalone `profile-envelope` Skill remains **DEFERRED**. The current reusable guidance continues to belong primarily to `readme-visual-design`, `animation-composition`, and project-incubator reuse evidence. A new Skill still requires recurrence outside this donor plus a discriminating evaluation showing that existing guidance is insufficient.
+A standalone `profile-envelope` Skill remains **DEFERRED**. The implementation now has a real extracted working repository, but a new Skill still needs recurrence outside this profile donor plus a discriminating evaluation showing that existing `readme-visual-design` and `animation-composition` guidance is insufficient.
+
+The repository-creation execution lesson is different: it is a general alternate-execution/authority pattern and should be fed back into `alternate-execution-routing`, not promoted as a Profile Envelope-specific Skill.

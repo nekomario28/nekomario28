@@ -1,80 +1,60 @@
 # Profile Design Lab
 
-Experimental visual directions and reusable-contract work for the `nekomario28` GitHub profile.
+Experimental visual directions, evidence lineage, and reusable-contract work for the `nekomario28` GitHub profile.
 
 ## Current authority
 
-The **live profile is currently the direct IPM surface**, not Envelope v8. The root README owns the live composition and references:
+The **live public profile is the direct IPM surface**, not Envelope v9. The root README owns the live composition and references the profile hero, the external character image by reference, `project-map/galaxy.svg`, and the contribution SVG.
 
-- `assets/sakura-profile-hero.svg`;
-- the external character image by reference;
-- `project-map/galaxy.svg` generated from Interactive Project Map;
-- `assets/github-contributions-dark.svg`.
+Envelope v4-v8 remains historical/proven donor evidence. Envelope v9 is the portable donor/extraction lineage. None of those Design Lab generations should be described as currently live unless the root README is explicitly promoted back to an Envelope presentation.
 
-Envelope v4-v8 remains in this Design Lab as donor implementation/evidence. It must not be described as live unless the root README is explicitly promoted back to an Envelope presentation.
+As of **2026-08-26 JST**, the reusable six-file core has also been extracted into a dedicated **private working repository**:
 
-This separation is intentional: the live profile can stay simple while the reusable profile-surface contract is designed, validated, and later extracted without silently changing the public page.
+- repository: `nekomario28/profile-envelope`;
+- donor source: `nekomario28/nekomario28@bf3960dc85eebf8e25c5e8a015e968322a984597`;
+- extracted working main: `d916b057ec897ceef94bdee293d4e02f42e46d1b`;
+- visibility: private;
+- public license: unselected;
+- public release/public visibility: deferred.
 
-## Active reusable work
+The private repository is now the working home for the reusable core. This Design Lab remains the historical donor, profile-specific renderer/evidence source, and publication/provenance authority until the extracted repository earns its own release evidence.
 
-The current reusable boundary is documented in:
+## Why private extraction is allowed while public publication remains deferred
 
-- `profile-envelope-portability.md` — architecture, IPM lessons, failure lineage, migration phases and evidence contract;
-- `profile-envelope-config.schema.json` — bounded public configuration schema;
-- `profile-envelope-config.example.json` — opaque + safe-text example;
-- `profile-envelope-config.transparent.example.json` — transparent + safe-text example;
-- `scripts/profile_envelope_contract.py` — dependency-free contract normalizer/resolver.
+These are separate claims:
 
-The normalizer turns the small user-facing config into explicit internal policy:
+1. the portable copy set can technically be extracted and validated;
+2. an authorized private working repository may be created for continued development;
+3. public redistribution requires an explicit license and release evidence.
 
-- visible fixed text vs dynamic data labels vs accessibility metadata;
-- host-font independence requirements;
-- opaque vs transparent host participation;
-- required desktop/mobile/light/dark verification cases;
-- motion/static proof requirements;
-- publication authority/source-provenance invariants;
-- a deterministic normalized-contract SHA-256 for evidence binding.
+The repository owner explicitly requested extraction on 2026-08-26, so `concrete_reuse_request=ESTABLISHED`. The publication license is still `UNSELECTED`; therefore the public publication gate remains `DEFERRED` even though the private working repository now exists.
 
-This is **P1 contract extraction**, not a public API or a live-profile renderer yet.
+See `envelope-v9/PUBLICATION-GATE.md` and `envelope-v9/portable-package-manifest.json` for the current machine/document authority.
 
-## Current live text audit
+## Portable core boundary
 
-The current direct profile still has visible client-font dependencies:
+The extracted boundary remains deliberately small:
 
-- `assets/sakura-profile-hero.svg` renders the visible `nekomario28` handle with SVG `<text>` and a system-font stack;
-- `project-map/galaxy.svg` is a dynamic IPM projection whose repository/category/legend labels are generator-owned visible text;
-- `assets/github-contributions-dark.svg` uses SVG `<text>` for its heading, total, y-axis values and dates.
+```text
+profile-envelope/
+├── src/profile_envelope/
+│   ├── contract.py
+│   ├── vector_text.py
+│   └── github_profile_transform.py
+├── schema/
+│   └── profile-envelope-config.schema.json
+└── examples/
+    ├── opaque-safe.json
+    └── transparent-safe.json
+```
 
-Accessibility `<title>` / `<desc>` metadata is a separate role and should remain textual even when visible glyphs become deterministic outlines.
+Profile-specific artwork, v7/v8 renderer code, Project Map data, Activity data, character media, fonts, and donor presentation assets are intentionally excluded.
 
-Do not treat every visible text defect as one failure class. Missing glyphs, host-font metric drift, dense-label overlap, clipping and insufficient contrast require different remedies. The portable contract therefore exposes `profile.text = safe | native | minimal` rather than one global “convert all text” switch.
+The extracted history was produced by filtering the donor Git history to the six audited files and then normalizing paths in the new repository. This preserves retained donor Author/Committer metadata better than recreating the files in an unrelated root commit, while acknowledging that filtered commit object IDs necessarily change with their trees and parents.
 
-### Text modes
+## Current bounded public controls
 
-`safe`
-: Essential fixed UI text is deterministic and font-independent. Dynamic labels use a deterministic vector/fallback policy where available; when density is too high, reduce visible labels without removing semantic repositories/data. This mode can earn a font-independent `TEXT PASS`.
-
-`native`
-: Visible SVG `<text>` is allowed. Smaller output is possible, but the result is deliberately host-font-dependent and cannot be reported as font-independent `TEXT PASS`.
-
-`minimal`
-: Essential fixed text remains deterministic, while non-essential dynamic visible labels may be suppressed. Semantic data and accessibility metadata remain present.
-
-The first portable implementation should prefer small deterministic glyph strategies and pre-outlined fixed labels over shipping font files or introducing a large typography runtime solely for a README surface.
-
-## Transparency is two independent decisions
-
-`profile.background = opaque | transparent` controls only the envelope-owned outer surface.
-
-`surface.mounted_source_background = inherit | preserve` controls whether a known presentation background inside mounted Project Map/Activity content is removed or kept.
-
-These must not be merged into one switch. A transparent outer surface with preserved mounted-source backgrounds is valid but may create opaque islands and therefore receives an explicit warning from the contract resolver.
-
-Transparent mode requires actual target proof on both GitHub light and dark appearances. Opaque dark-first output does not inherit that requirement merely because transparent mode exists.
-
-## Recommended bounded public controls
-
-Keep the first public API deliberately small:
+The contract remains intentionally small:
 
 ```yaml
 profile:
@@ -84,54 +64,49 @@ profile:
   motion: on                # on | off
 ```
 
-Advanced/internal policy may additionally expose:
+Advanced/internal policy may additionally control:
 
 - mounted source background: `inherit | preserve`;
-- frame: `rail | none`, outer caps only;
+- frame: `rail | none`, with outer caps only;
 - label density: `auto | full | minimal`;
 - packing: `auto | off`;
 - external media: `reference-only | none`.
 
-Do not add speed sliders, particle counts, arbitrary animation timelines, a style DSL, installer/app infrastructure, or a universal rendering IR until a real second consumer demonstrates the need.
+Do not add speed sliders, particle-count knobs, arbitrary animation timelines, a style DSL, installer infrastructure, or a universal rendering IR until a real consumer requires them.
 
-## IPM lessons carried forward
+## Text policy
 
-The future public profile-surface repository should intentionally preserve the parts of Interactive Project Map that worked:
+`safe`
+: Essential fixed visible text is deterministic and font-independent. The proven implementation uses repository-owned vector strokes rather than redistributing a font. Unsupported glyphs fail closed. Dynamic labels use the bounded transformation/density policy.
 
-- static-first, user-owned checked-in/generated artifacts;
-- one canonical semantic model with separate visual projections;
-- small bounded public inputs and safe defaults;
-- risky/heavier optional behavior default-off;
-- read-only generation separated from write publication;
-- stable release channel plus exact implementation/evidence identity;
-- real browser target gates rather than syntax-only claims;
-- bounded validation and fail-closed recovery;
-- provenance/fingerprint checks for derived artifacts.
+`native`
+: Visible SVG `<text>` remains allowed. The result is intentionally host-font-dependent and cannot claim font-independent `TEXT PASS`.
 
-Failures and near-failures that should remain explicit:
+`minimal`
+: Essential fixed text stays deterministic while non-essential dynamic visible labels may be suppressed. Semantic data and accessibility metadata remain present.
 
-- do not add presets merely because ideas exist;
-- do not build installer infrastructure before measured onboarding friction exists;
-- do not maintain duplicate setup surfaces that drift;
-- do not let presentation mutate ownership/semantic truth;
-- do not use small fixtures as evidence that dense labels are readable;
-- do not rely on a second `GITHUB_TOKEN` workflow to refresh derivatives;
-- do not validate geometry while ignoring stale source fingerprints;
-- do not inject into nested SVG/XML by replacing the first matching closing tag;
-- do not preserve a render/playback PASS after its visible target fingerprint changes;
-- do not extract a universal adapter/IR before a second consumer exists.
+Accessibility `<title>`, `<desc>`, and equivalent metadata are not the same role as visible glyph rendering and should remain textual.
+
+## Transparency policy
+
+Two independent decisions remain explicit:
+
+- `profile.background = opaque | transparent` controls the Envelope-owned outer surface;
+- `surface.mounted_source_background = inherit | preserve` controls known presentation backgrounds inside mounted content.
+
+A transparent outer surface with preserved mounted backgrounds is valid but may create opaque islands. Transparent mode requires real light/dark target proof rather than source-only assumptions.
 
 ## Evidence vocabulary
 
-Keep proof claims separate:
+Keep claims separated:
 
 1. **STRUCTURE PASS** — config/SVG/XML invariants.
 2. **SOURCE SYNC PASS** — generated derivatives match authoritative source fingerprints.
-3. **TARGET LAYOUT PASS** — real target page geometry/seams pass required viewport/appearance cases.
-4. **TEXT PASS** — selected text policy satisfies its declared font/degradation contract without tofu/overflow in target proof.
-5. **PLAYBACK PASS** — optional motion visibly runs on the actual target and the reduced-motion/static path remains complete.
+3. **TARGET LAYOUT PASS** — real target geometry/seams pass required viewport/appearance cases.
+4. **TEXT PASS** — selected text policy satisfies its declared font/degradation contract.
+5. **PLAYBACK PASS** — optional motion visibly runs on the actual target and reduced-motion/static behavior remains complete.
 
-`Actions success` alone is never equivalent to rendered/public success.
+Actions success alone is never equivalent to rendered/public success. An Actions job that fails before any repository steps execute is an executor/provider result, not code-test evidence.
 
 ## Historical Envelope lineage
 
@@ -141,25 +116,75 @@ Keep proof claims separate:
 | v3 | historical donor | static-first seasonal motion and reduced-motion fallback |
 | v4 | evidence donor | actual GitHub rendering exposed Japanese missing-glyph failure and table-frame drawbacks |
 | v5-v6 | motion donor | continuous-flow experiments and shared logical coordinate space |
-| v7 | proven donor | source fingerprints, root-level nested-SVG injection safety, atomic derived refresh, scoped public playback proof |
-| v8 | proven donor / not live | seamless zero-gap packing, unified surface, target fingerprinting, broader public rail playback evidence |
+| v7 | proven donor | source fingerprints, safe nested-SVG injection, atomic refresh, scoped public playback proof |
+| v8 | proven donor / previously live | seamless zero-gap packing, unified surface, target fingerprinting, broad public rail playback evidence |
+| v9 | portable donor / extracted core | safe/native/minimal text, opaque/transparent policy, generic markers, standalone-copyable transformer, publication gate |
 
-Historical details remain under `envelope-v4/` through `envelope-v8/`; keep generation-specific evidence there instead of duplicating it into this overview.
+v8 established that the segmented README surface can visually behave as one continuous profile canvas on the real GitHub target. It did **not** claim one shared runtime clock or frame-perfect synchronization across independent SVG image documents.
 
-## Extraction order
+## v9 progression
 
-- **P0 — donor freeze:** keep v8 evidence and the current direct-IPM live profile separate.
-- **P1 — contract extraction:** normalize bounded configuration, derive verification policy, fingerprint the normalized contract, and validate representative examples.
-- **P2 — donor implementation revision:** implement safe/native/minimal text and opaque/transparent behavior without silently reusing old render proof.
-- **P3 — matrix proof:** desktop/mobile; transparent light/dark; safe/native/minimal text cases; dense labels; motion/reduced-motion; source-refresh atomicity.
-- **P4 — public extraction:** move the stable core only after the donor plus one structurally different consumer/configuration prove the same contract.
+- **P0 — donor freeze:** preserve v8 evidence separately from the live direct-IPM profile.
+- **P1 — contract extraction:** bounded config, verification policy, contract fingerprint.
+- **P2 — donor implementation:** portable text/background/motion/frame behavior.
+- **P3 — browser matrix:** desktop/mobile, light/dark, text modes, transparency, motion/reduced-motion.
+- **P4 — extraction readiness:** standalone-copyable kernel and provenance-aware package boundary.
+- **P5 — adapter decoupling:** portable GitHub transformer separated from donor producer.
+- **P6 — second-consumer fixture:** v8-independent synthetic donor proves the generic marker boundary without pretending to be an independent external consumer.
+- **P7 — publication gate:** technical copyability cannot silently authorize public publication.
+- **P8 — six-file provenance audit:** repository-local introduction history and copy boundary recorded without making a legal conclusion.
+- **P9 — private working extraction:** explicit reuse request, history-preserving extraction to `nekomario28/profile-envelope`, exact-head validation, public release still deferred pending license.
+
+## Extracted-repository bootstrap evidence
+
+The first repository-creation route was not exposed by the connected GitHub mutation surface. An already-authorized self-hosted ShotFork carrier on `MeguminDesktop` used the host's existing `gh` authentication as a bounded one-shot alternate.
+
+Bootstrap run `32868834661`:
+
+- created `nekomario28/profile-envelope` as private;
+- filtered exact donor `bf3960dc85eebf8e25c5e8a015e968322a984597` to the six audited files;
+- verified all six donor blob identities;
+- normalized paths and added minimal README/provenance/tests;
+- ran `compileall` and unit tests;
+- pushed and independently re-read the new repository head.
+
+A first exact-head hygiene probe found that `compileall` generated ignored-by-intent but not-yet-ignored `__pycache__` files. After adding a minimal `.gitignore`, exact-head carrier run `32869436824` passed compile, tests, and clean-worktree verification. The validated candidate was then force-free fast-forwarded to `profile-envelope/main` at `d916b057ec897ceef94bdee293d4e02f42e46d1b`.
+
+The broad host-auth carrier is **not** permanent CI. A permanent execution lane should use a repository-scoped runner/token or equivalent narrower identity.
+
+## IPM lessons carried forward
+
+Preserve the parts of Interactive Project Map and Envelope that worked:
+
+- static-first, user-owned generated artifacts;
+- one semantic source model with separate visual projections;
+- small bounded public inputs and safe defaults;
+- risky/heavier optional behavior default-off;
+- read-only generation separated from write publication;
+- stable release channel plus exact implementation/evidence identity;
+- real-browser target gates rather than syntax-only claims;
+- bounded validation and fail-closed recovery;
+- provenance/fingerprint checks for derived artifacts;
+- exact source revision and copy-set identity when extracting across repositories.
+
+Failures/near-failures to keep explicit:
+
+- do not add presets merely because ideas exist;
+- do not build installer infrastructure before measured onboarding friction exists;
+- do not let presentation mutate semantic ownership/truth;
+- do not treat dense-label fixture success as readability proof;
+- do not rely on a second automation-token workflow to recursively refresh derivatives;
+- do not inject nested SVG/XML by replacing the first closing tag;
+- do not preserve render/playback PASS after its visible target fingerprint changes;
+- do not create a public repository or choose a license merely because extraction is technically possible;
+- do not promote a broad host-credential carrier into unattended permanent CI solely because a bounded run succeeded.
 
 ## Skill decision
 
-Do not create a standalone `profile-envelope` Skill from one donor project yet. The reusable **way of working** belongs first in existing skills/candidates:
+Do **not** create a standalone `profile-envelope` Skill merely because the code now has a dedicated repository. The reusable visual-design workflow still belongs primarily to:
 
-- `readme-visual-design`: text-role/font-independence policy, transparent-host verification, target layout proof and generated-source provenance;
-- `animation-composition`: target-native motion, reduced-motion and playback claim scope;
-- project-incubator reusable-task candidate: portable generated README/profile surface contract and extraction gate.
+- `readme-visual-design` — text-role/font-independence, transparent-host verification, target-layout proof, generated-source provenance;
+- `animation-composition` — target-native motion, reduced-motion, playback claim scope;
+- project-incubator reuse evidence — portable generated README/profile surface contract and extraction gates.
 
-A standalone Skill or shared runtime component becomes justified only after a second independent consumer demonstrates the same workflow/contract.
+The repository-creation fallback learned during P9 is a general execution/authority pattern and belongs in `alternate-execution-routing` / repository-workbench guidance instead of a Profile Envelope-specific Skill.
