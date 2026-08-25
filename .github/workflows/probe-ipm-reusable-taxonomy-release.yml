@@ -1,0 +1,68 @@
+name: Probe exact IPM reusable taxonomy release
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/probe-ipm-reusable-taxonomy-release.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    permissions:
+      contents: read
+    uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@72ead19e8c49354af2bcbfa9144404c7a8d6ff9f
+    with:
+      theme: dark
+      style: galaxy-systems
+      max_repos: "100"
+      forks: true
+      archived: true
+      contributed: true
+
+  validate:
+    needs: generate
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - name: Checkout exact probe revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Download generated files
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: project-map-generated
+          path: .tmp/project-map-release
+
+      - name: Validate exact reusable release output
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s .tmp/project-map-release/graph.json
+          test -s .tmp/project-map-release/galaxy.svg
+          node <<'NODE'
+          const fs = require('node:fs');
+          const graph = JSON.parse(fs.readFileSync('.tmp/project-map-release/graph.json', 'utf8'));
+          const repositories = graph.nodes.filter((node) => node?.type === 'repository');
+          const lime = repositories.find((node) => String(node.label).toLowerCase() === 'lime_tidyup');
+          if (!lime) throw new Error('lime_tidyup missing from reusable-release profile graph');
+          const tags = lime.taxonomyAssignment?.secondaryTags ?? [];
+          if (lime.taxonomyAssignment?.categoryId !== 'robotics-automation') throw new Error(`unexpected lime category: ${lime.taxonomyAssignment?.categoryId}`);
+          if (!tags.includes('artifact:service')) throw new Error(`lime service facet missing: ${JSON.stringify(tags)}`);
+          if (tags.includes('artifact:documentation')) throw new Error(`incidental documentation facet survived: ${JSON.stringify(tags)}`);
+          if (!tags.includes('ecosystem:ros2')) throw new Error(`ROS2 ecosystem facet missing: ${JSON.stringify(tags)}`);
+          if (!tags.includes('topic:gazebo')) throw new Error(`Gazebo topic facet missing: ${JSON.stringify(tags)}`);
+          if (repositories.length < 15) throw new Error(`unexpected profile repository count: ${repositories.length}`);
+          const contributed = repositories.filter((node) => node?.relation === 'contributed');
+          if (contributed.length < 1) throw new Error('accepted Contributed repository disappeared');
+          console.log(`EXACT_REUSABLE_RELEASE_PROFILE_PASS repositories=${repositories.length} contributed=${contributed.length} lime=${tags.join(',')}`);
+          NODE
+          git diff --check
+          test "${{ github.event_name }}" = "pull_request"
+          echo "READ_ONLY_REUSABLE_RELEASE_CALLER_PASS"
