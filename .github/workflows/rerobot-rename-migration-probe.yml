@@ -1,0 +1,183 @@
+name: Rerobot rename processor migration probe
+
+on:
+  push:
+    branches:
+      - research/rerobot-rename-migration-probe
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      REROBOT_SHA: f6c36c7da5326886fb6eb6e83d8a2d87283b31ec
+    steps:
+      - name: Clone exact Rerobot
+        shell: bash
+        run: |
+          set -euxo pipefail
+          git clone --filter=blob:none https://github.com/k1000dai/Rerobot.git /tmp/Rerobot
+          git -C /tmp/Rerobot checkout --detach "$REROBOT_SHA"
+          test "$(git -C /tmp/Rerobot rev-parse HEAD)" = "$REROBOT_SHA"
+
+      - name: Baseline pinned rename suite
+        shell: bash
+        working-directory: /tmp/Rerobot
+        run: |
+          set -euxo pipefail
+          cargo test --locked -p rerobot-core --test rename_processor | tee /tmp/rename-baseline.log
+          grep -q 'test result: ok.' /tmp/rename-baseline.log
+          echo REROBOT_PINNED_RENAME_BASELINE_PASS
+
+      - name: Apply disposable current metadata-suffix migration
+        shell: bash
+        working-directory: /tmp/Rerobot
+        run: |
+          set -euxo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('crates/rerobot-core/src/processor/rename.rs')
+          s = p.read_text()
+
+          anchor = '''impl RenameObservationsProcessorStep {'''
+          helper = r'''fn rename_key_with_metadata(key: &str, rename_map: &IndexMap<String, String>) -> String {
+              if let Some(mapped) = rename_map.get(key) {
+                  return mapped.clone();
+              }
+              for suffix in ["_is_pad", "_padding_mask"] {
+                  if let Some(base) = key.strip_suffix(suffix) {
+                      if let Some(mapped) = rename_map.get(base) {
+                          return format!("{mapped}{suffix}");
+                      }
+                  }
+              }
+              key.to_string()
+          }
+
+          impl RenameObservationsProcessorStep {'''
+          assert anchor in s
+          s = s.replace(anchor, helper, 1)
+
+          old = '''            let new_key = self.rename_map.get(key).unwrap_or(key);
+                      processed.insert(new_key.clone(), value.clone());'''
+          new = '''            let new_key = rename_key_with_metadata(key, &self.rename_map);
+                      processed.insert(new_key, value.clone());'''
+          assert old in s
+          s = s.replace(old, new, 1)
+
+          anchor = '''/// Rename the top-level keys of a statistics dict, port of `rename_stats`.'''
+          batch_fn = r'''/// Canonicalize raw dataset keys before transition grouping using the same
+          /// metadata-suffix rule as current upstream observation renaming.
+          pub fn rename_batch_keys(batch: &Observation, rename_map: &IndexMap<String, String>) -> Observation {
+              let mut renamed = Observation::with_capacity(batch.len());
+              for (key, value) in batch {
+                  renamed.insert(rename_key_with_metadata(key, rename_map), value.clone());
+              }
+              renamed
+          }
+
+          /// Rename the top-level keys of a statistics dict, port of `rename_stats`.'''
+          assert anchor in s
+          s = s.replace(anchor, batch_fn, 1)
+          p.write_text(s)
+          PY
+
+          cat > crates/rerobot-core/tests/rename_processor_current_contract_probe.rs <<'RS'
+          use indexmap::IndexMap;
+          use rerobot_core::processor::rename::{
+              rename_batch_keys, Observation, RenameObservationsProcessorStep,
+          };
+          use serde_json::json;
+
+          fn obs(pairs: &[(&str, serde_json::Value)]) -> Observation {
+              pairs
+                  .iter()
+                  .map(|(k, v)| ((*k).to_string(), v.clone()))
+                  .collect()
+          }
+
+          fn map(pairs: &[(&str, &str)]) -> IndexMap<String, String> {
+              pairs
+                  .iter()
+                  .map(|(k, v)| ((*k).to_string(), (*v).to_string()))
+                  .collect()
+          }
+
+          #[test]
+          fn current_observation_rename_preserves_temporal_padding_suffixes() {
+              let step = RenameObservationsProcessorStep::new([
+                  ("image", "observation.images.camera1"),
+              ]);
+              let out = step.observation(&obs(&[
+                  ("image", json!([0])),
+                  ("image_is_pad", json!(true)),
+                  ("image_padding_mask", json!(true)),
+              ]));
+              assert_eq!(
+                  out.keys().map(String::as_str).collect::<Vec<_>>(),
+                  vec![
+                      "observation.images.camera1",
+                      "observation.images.camera1_is_pad",
+                      "observation.images.camera1_padding_mask",
+                  ]
+              );
+          }
+
+          #[test]
+          fn current_raw_batch_keys_are_canonicalized_before_grouping() {
+              let input = obs(&[
+                  ("image", json!([0])),
+                  ("image_is_pad", json!(true)),
+                  ("actions", json!([1, 2])),
+              ]);
+              let out = rename_batch_keys(
+                  &input,
+                  &map(&[
+                      ("image", "observation.images.camera1"),
+                      ("actions", "action"),
+                  ]),
+              );
+              assert_eq!(
+                  out.keys().map(String::as_str).collect::<Vec<_>>(),
+                  vec![
+                      "observation.images.camera1",
+                      "observation.images.camera1_is_pad",
+                      "action",
+                  ]
+              );
+          }
+          RS
+
+          cargo fmt --all
+          git diff -- crates/rerobot-core/src/processor/rename.rs crates/rerobot-core/tests/rename_processor_current_contract_probe.rs
+
+      - name: Current 0.6.2 rename contract probe goes green
+        shell: bash
+        working-directory: /tmp/Rerobot
+        run: |
+          set -euxo pipefail
+          cargo test --locked -p rerobot-core --test rename_processor_current_contract_probe | tee /tmp/current-rename.log
+          grep -q '2 passed; 0 failed' /tmp/current-rename.log
+          echo CURRENT_RENAME_METADATA_MIGRATION_GREEN
+
+      - name: Pinned 0.6.1-derived suite remains green
+        shell: bash
+        working-directory: /tmp/Rerobot
+        run: |
+          set -euxo pipefail
+          cargo test --locked -p rerobot-core --test rename_processor | tee /tmp/pinned-rename-after.log
+          grep -q 'test result: ok.' /tmp/pinned-rename-after.log
+          echo PINNED_0_6_1_RENAME_SUITE_STILL_GREEN
+
+      - name: Confirm only disposable checkout changed
+        if: always()
+        shell: bash
+        run: |
+          set -euxo pipefail
+          test "$(git -C /tmp/Rerobot rev-parse HEAD)" = "$REROBOT_SHA"
+          git -C /tmp/Rerobot status --short
+          echo SOURCE_REMOTE_MUTATION=false
