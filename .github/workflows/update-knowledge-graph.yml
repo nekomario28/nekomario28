@@ -26,9 +26,9 @@ jobs:
   generate:
     permissions:
       contents: read
-    # Stable pre-profile-import IPM visual release.
-    # v1 R 36828be099e1cd160476b1be4ba32a2b9601911c resolves immutable
-    # Action F c871a6e5e47b11dad5cd82ec940ca2d6efa7199e (Verify #874/#881; direct-profile proof #190).
+    # Stable native-IPM profile visual release with inherited static SVG sans fallback.
+    # v1 R 02a41b480cfa01801ba5e6089d126364bdb7c841 resolves immutable
+    # Action F d405d85a5882bcf196c8b76977bd1d33c3a9ae2a (Verify #932/#944; Chromium + WebKit).
     uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@v1
     with:
       theme: dark
@@ -69,6 +69,7 @@ jobs:
             exit 1
           fi
           grep -q 'data-galaxy-preset="systems"' project-map/galaxy.svg
+          grep -q 'font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif"' project-map/galaxy.svg
           grep -q 'id="galaxy-family-bg"' project-map/galaxy.svg
           grep -q '#E69F00' project-map/galaxy.svg
           grep -q 'data-galaxy-external="true"' project-map/galaxy.svg
@@ -143,7 +144,7 @@ jobs:
             }
           };
           visit(graph);
-          console.log(`Direct native IPM profile validated: ${graph.repositoryCount} owned + ${contributed.length} Contributed; native background + external rail`);
+          console.log(`Direct native IPM profile validated: ${graph.repositoryCount} owned + ${contributed.length} Contributed; native background + external rail + inherited sans font`);
           NODE
 
       - name: Verify direct publish diff on pull requests
