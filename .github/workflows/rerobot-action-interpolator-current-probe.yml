@@ -1,6 +1,9 @@
 name: Rerobot ActionInterpolator current-contract probe
 
 on:
+  push:
+    branches:
+      - research/rerobot-action-interpolator-current-probe
   pull_request:
     paths:
       - ".github/workflows/rerobot-action-interpolator-current-probe.yml"
