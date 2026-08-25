@@ -60,7 +60,7 @@ Accepted extraction marker:
 
 ## P5 adapter decoupling
 
-PR #65 moves portable presentation policy out of the donor producer.
+PR #65 moved portable presentation policy out of the donor producer and was squash-merged as `6fb4bdf1ef33402ad5635ad188410d5dbed2eb51`.
 
 New boundary:
 
@@ -68,13 +68,15 @@ New boundary:
 - `render_portable_surface.py` — thin donor producer that creates this repository's v8 bundle and delegates policy;
 - donor bundle boundary — always preserves mounted-source backgrounds; the transformer alone owns `inherit|preserve`.
 
-Accepted pre-clean P5 receipt:
+Accepted clean P5 receipt:
 
-- head `dc03e3ec6ab031b5d8460307e4d8dac8148ee1e4`;
-- run `32774003358`;
-- job `97580723143`;
-- result: **SUCCESS**;
-- render target remained `71797c18a43efc3aac75c6769f57284c1dda2a38d0685ad037f3f11e23009e94`.
+- base main `44a38610983720ee3fb91f9bb7fb22c81278746d`;
+- head `8556064b5978ec16807aeaa98306994e4b037bb2` — one commit directly over main;
+- full v9 run `32811886780`, job `97692641775`: **SUCCESS**;
+- portable contract run `32811886796`, job `97692641886`: **SUCCESS**;
+- render target `62d68a97a354ffc3c82efdbe2396730f5ca90cafdfa5579c59504b7df9c35b4f`.
+
+The render-target SHA changed from the earlier P5 proof because main's Activity / Project Map-derived inputs changed. The clean exact-head rerun re-earned browser and playback evidence on the new target instead of reusing the stale receipt.
 
 Structural/extraction markers:
 
@@ -89,16 +91,18 @@ The equivalence check renders both boundary shapes:
 
 Both are passed through the standalone transformer under `inherit`; every final SVG byte and the render-target fingerprint must be identical to the normal current v9 path. This proves the architectural boundary moved without changing the visible target.
 
-The standalone extraction smoke now also copies the GitHub transformer into a temporary repository and applies it to a synthetic complete 15-SVG donor bundle. It proves the transformer runs without reading this profile repository, contains no donor-specific forbidden tokens, uses only standard-library/extracted-package dependencies, applies safe transparent text, removes the declared outer and mounted backgrounds, and produces a shared render-target fingerprint across all 15 outputs.
+The standalone extraction smoke copies the GitHub transformer into a temporary repository and applies it to a synthetic complete 15-SVG donor bundle. It proves the transformer runs without reading this profile repository, contains no donor-specific forbidden tokens, uses only standard-library/extracted-package dependencies, applies safe transparent text, removes the declared outer and mounted backgrounds, and produces a shared render-target fingerprint across all 15 outputs.
 
-The same P5 exact head re-ran the real-Chrome matrix and motion proof successfully:
+The same clean P5 exact head re-ran the rendered gates successfully:
 
 - nine-case Chrome matrix: **PASS**;
 - `TARGET_LAYOUT=PASS TEXT_RENDER=PASS TRANSPARENCY_RENDER=PASS NATIVE_RENDER=OBSERVED MINIMAL_DYNAMIC_TEXT=PASS`;
-- motion-on: left **7**, right **12** changed pairs;
+- motion-on: 6.0s / 13 samples / left **7**, right **12** changed pairs;
 - browser-wide reduced motion: left **0**, right **0**;
 - motion-off: left **0**, right **0**;
-- exact v8 -> v9 motion-subtree equivalence: 15 generated assets.
+- exact v8 -> v9 motion-subtree equivalence: 15 generated assets;
+- `LOCAL_RENDER_TARGET_PLAYBACK=PASS REDUCED_MOTION=PASS MOTION_OFF=PASS`;
+- public GitHub v9 playback remains `NOT_RUN` and cross-document hard synchronization is not claimed.
 
 ## Negative proof lineage retained
 
@@ -140,4 +144,4 @@ Not established:
 
 ## Next safe action
 
-Clean and merge P5 after one final exact-head CI on current main. After that, the technical extraction boundary is sufficient for a first public package candidate, but **publication remains deferred** until an independent consumer or concrete reuse request exists. The next useful work is packaging/evaluation design: license/release surface, a second structurally different consumer fixture, and a discriminating Skill evaluation. Do not create a new Skill solely because the code is now copyable.
+P5 is merged. The next useful milestone is **P6 second-consumer evaluation**: exercise the extracted core + GitHub transformer with a structurally different donor fixture and use the result to distinguish genuine reusable assumptions from profile-specific ones. Public repository publication remains deferred until an independent consumer or concrete reuse request exists. Keep the new-Skill decision deferred until a discriminating evaluation shows existing README/animation skills are insufficient.
