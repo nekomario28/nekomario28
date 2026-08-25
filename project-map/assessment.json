@@ -3,7 +3,7 @@
   "contractId": "ipm-repository-assessment-artifact-v1",
   "owner": "nekomario28",
   "generatedAt": "2026-08-25T02:43:55.466Z",
-  "generatorRevision": "a05e1cc31a0a82b42af16e6e2c13c584577792be",
+  "generatorRevision": "841df60a605afca5989916214957c29b5dbff3da",
   "taxonomyId": "ipm-standard-v1",
   "assessmentPolicyId": "ipm-repository-assessment-v1",
   "productionScoring": false,
@@ -418,12 +418,227 @@
         }
       },
       "acquisition": {
-        "level": "L0",
+        "level": "L1",
         "observedAt": "2026-08-25T02:43:55.466Z"
       },
       "quality": {
-        "state": "not-collected",
-        "value": null
+        "state": "partial",
+        "value": {
+          "schemaVersion": 1,
+          "artifacts": [
+            "game-mod"
+          ],
+          "claimBoundaries": [],
+          "dimensions": {
+            "understandability": {
+              "applicability": "recommended",
+              "authority": "repository-native",
+              "evidenceState": "observed",
+              "findingState": "supports",
+              "findingCounts": {
+                "supports": 1,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "evidenced",
+              "evidenceCount": 1,
+              "evidence": [
+                {
+                  "authority": "repository-native",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "C",
+                  "sourceId": "README.md@154bd1a1085412ca7a5abe797abf253a43dd29a8",
+                  "claim": "README documents the Minecraft/NeoForge target, build and installation paths, server behavior, configuration, client scanner, privacy and enforcement limits, data-pack extension points, administrator commands, persistence, evidence logs, and security limitations."
+                }
+              ]
+            },
+            "verification": {
+              "applicability": "recommended",
+              "authority": "project-owned",
+              "evidenceState": "observed",
+              "findingState": "supports",
+              "findingCounts": {
+                "supports": 2,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "evidenced",
+              "evidenceCount": 2,
+              "evidence": [
+                {
+                  "authority": "project-owned",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "B",
+                  "sourceId": "docs/release-gate-evidence-1.1.0.md@154bd1a1085412ca7a5abe797abf253a43dd29a8",
+                  "claim": "The stable candidate records one exact-head gate spanning Build, GameTest, Packaged Server, External Runtime, and Ubuntu/Windows/macOS scanner checks; all required workflows succeeded and all 24 required GameTests passed."
+                },
+                {
+                  "authority": "project-owned",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "B",
+                  "sourceId": "external-runtime:break-event-enforcement@154bd1a1085412ca7a5abe797abf253a43dd29a8",
+                  "claim": "A packaged NeoForge server and real Minecraft protocol client exercised a real block-break packet through BlockEvent.BreakEvent, production warning progression, JSONL evidence logging, and actual connection termination with action=kick."
+                }
+              ]
+            },
+            "reproducibility": {
+              "applicability": "recommended",
+              "authority": "mixed",
+              "evidenceState": "observed",
+              "findingState": "supports",
+              "findingCounts": {
+                "supports": 2,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "evidenced",
+              "evidenceCount": 2,
+              "evidence": [
+                {
+                  "authority": "repository-native",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "C",
+                  "sourceId": "build.gradle+gradle.properties@154bd1a1085412ca7a5abe797abf253a43dd29a8",
+                  "claim": "The build records Java 21, Minecraft 1.21.1, NeoForge 21.1.235, mod version 1.1.0, test dependencies, production/gameTest source separation, and the Gradle build path."
+                },
+                {
+                  "authority": "project-owned",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "B",
+                  "sourceId": "offline-rebuild@154bd1a1085412ca7a5abe797abf253a43dd29a8",
+                  "claim": "An isolated offline clean build succeeded and produced a JAR byte-for-byte identical to the GitHub-built stable candidate with SHA-256 4cc843c0c39348203e3ffe30ab4dbd6c33a9eb0f6d2907913d005b89a80588fe."
+                }
+              ]
+            },
+            "maintainability": {
+              "applicability": "recommended",
+              "authority": "unknown",
+              "evidenceState": "unknown",
+              "findingState": "unknown",
+              "findingCounts": {
+                "supports": 0,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "unevidenced",
+              "evidenceCount": 0,
+              "evidence": []
+            },
+            "integrity": {
+              "applicability": "optional",
+              "authority": "unknown",
+              "evidenceState": "unknown",
+              "findingState": "unknown",
+              "findingCounts": {
+                "supports": 0,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "unevidenced",
+              "evidenceCount": 0,
+              "evidence": []
+            },
+            "interoperability": {
+              "applicability": "recommended",
+              "authority": "mixed",
+              "evidenceState": "observed",
+              "findingState": "supports",
+              "findingCounts": {
+                "supports": 2,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "evidenced",
+              "evidenceCount": 2,
+              "evidence": [
+                {
+                  "authority": "repository-native",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "C",
+                  "sourceId": "README.md@154bd1a1085412ca7a5abe797abf253a43dd29a8",
+                  "claim": "The repository defines exact Minecraft/NeoForge compatibility, separate server-only and optional client installation modes, behavior with FakePlayers and tools from other mods, and data-pack tags that other content can extend."
+                },
+                {
+                  "authority": "project-owned",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "B",
+                  "sourceId": "cross-platform-scanner@154bd1a1085412ca7a5abe797abf253a43dd29a8",
+                  "claim": "Scanner and recursive filesystem-watcher behavior passed on Ubuntu, Windows, and macOS; this evidence is bounded to scanner/watcher behavior and does not claim a complete graphical Minecraft runtime on all three platforms."
+                }
+              ]
+            },
+            "security-safety": {
+              "applicability": "optional",
+              "authority": "repository-native",
+              "evidenceState": "observed",
+              "findingState": "supports",
+              "findingCounts": {
+                "supports": 1,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "evidenced",
+              "evidenceCount": 1,
+              "evidence": [
+                {
+                  "authority": "repository-native",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "C",
+                  "sourceId": "README.md@154bd1a1085412ca7a5abe797abf253a43dd29a8",
+                  "claim": "The client scanner explicitly documents fail-open/fail-closed policy, high-confidence blocking boundaries, privacy behavior, non-attestation, false-positive limits, and that it is not a tamper-proof or server-enforced anti-cheat."
+                }
+              ]
+            },
+            "stewardship": {
+              "applicability": "recommended",
+              "authority": "mixed",
+              "evidenceState": "observed",
+              "findingState": "supports",
+              "findingCounts": {
+                "supports": 2,
+                "weakens": 0,
+                "neutral": 0,
+                "unknown": 0
+              },
+              "disposition": "evidenced",
+              "evidenceCount": 2,
+              "evidence": [
+                {
+                  "authority": "repository-native",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "C",
+                  "sourceId": "gradle.properties@154bd1a1085412ca7a5abe797abf253a43dd29a8",
+                  "claim": "Repository build metadata records MIT licensing and stable version 1.1.0."
+                },
+                {
+                  "authority": "project-owned",
+                  "state": "observed",
+                  "finding": "supports",
+                  "evidenceClass": "B",
+                  "sourceId": "docs/release-gate-evidence-1.1.0.md@154bd1a1085412ca7a5abe797abf253a43dd29a8",
+                  "claim": "The release receipt freezes exact artifact identity and requires publication from the reviewed stable-candidate JAR without rebuilding it after approval."
+                }
+              ]
+            }
+          },
+          "compositeQualityScore": null
+        }
       },
       "impact": {
         "state": "partial",
