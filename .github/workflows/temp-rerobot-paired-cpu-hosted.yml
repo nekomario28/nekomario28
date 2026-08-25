@@ -144,7 +144,7 @@ jobs:
           grep -q '^End of training$' "$WORK_ROOT/warm-rust.log"
           echo 'RUST_WARMUP_PASS'
 
-          "$WORK_ROOT/venv/bin/lerobot-train" \
+          if ! "$WORK_ROOT/venv/bin/lerobot-train" \
             --dataset.repo_id=rerobot/state_only_slice --dataset.root="$FIXTURE" \
             --policy.type=act --steps=5 --batch_size=2 --num_workers=0 --persistent_workers=false \
             --policy.chunk_size=2 --policy.n_action_steps=2 \
@@ -153,7 +153,11 @@ jobs:
             --policy.n_vae_encoder_layers=1 --policy.latent_dim=8 \
             --policy.device=cpu --seed=1000 --log_freq=1000 --save_checkpoint=false \
             --env_eval_freq=0 --eval_steps=0 --wandb.enable=false \
-            --output_dir="$WORK_ROOT/warm-python" > "$WORK_ROOT/warm-python.log" 2>&1
+            --output_dir="$WORK_ROOT/warm-python" > "$WORK_ROOT/warm-python.log" 2>&1; then
+            echo 'PYTHON_WARMUP_FIRST_FAILURE'
+            cat "$WORK_ROOT/warm-python.log"
+            exit 1
+          fi
           grep -q 'End of training' "$WORK_ROOT/warm-python.log"
           echo 'PYTHON_WARMUP_PASS'
           echo 'PAIRING_WARMUP_PASS'
