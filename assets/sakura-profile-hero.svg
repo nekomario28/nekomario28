@@ -31,7 +31,7 @@
 
   <style>
     .name {
-      font: 600 42px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font: 600 42px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       letter-spacing: 3px;
       fill: #f7f3ea;
     }
