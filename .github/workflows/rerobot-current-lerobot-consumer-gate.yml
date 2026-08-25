@@ -1,0 +1,128 @@
+name: Rerobot current LeRobot consumer gate
+
+on:
+  push:
+    branches:
+      - research/rerobot-current-consumer-gate
+
+permissions:
+  contents: read
+
+jobs:
+  current-consumer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      REROBOT_SHA: f6c36c7da5326886fb6eb6e83d8a2d87283b31ec
+      LEROBOT_SHA: 8b256a6c0d4769c3cc3e7e98f04940126398a391
+      CARGO_TERM_COLOR: always
+    steps:
+      - name: Runner identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 --version
+          cargo --version
+          rustc --version
+          free -h
+          df -h /
+
+      - name: Clone exact authorities
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --quiet https://github.com/k1000dai/Rerobot.git rerobot
+          git -C rerobot checkout --quiet --detach "$REROBOT_SHA"
+          test "$(git -C rerobot rev-parse HEAD)" = "$REROBOT_SHA"
+
+          git clone --quiet https://github.com/huggingface/lerobot.git lerobot
+          git -C lerobot checkout --quiet --detach "$LEROBOT_SHA"
+          test "$(git -C lerobot rev-parse HEAD)" = "$LEROBOT_SHA"
+
+          echo "REROBOT_EXACT_HEAD=$REROBOT_SHA"
+          echo "LEROBOT_EXACT_HEAD=$LEROBOT_SHA"
+
+      - name: Build Rerobot and train one ACT step
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd rerobot
+          cargo run --locked -p rerobot-cli --bin lerobot-train -- \
+            --dataset.repo_id=rerobot/state_only_slice \
+            --dataset.root=crates/rerobot-train/tests/fixtures/state_only \
+            --output_dir=/tmp/rr-run --policy.type=act \
+            --steps=1 --batch_size=2 \
+            --policy.chunk_size=2 --policy.n_action_steps=2 \
+            --policy.dim_model=32 --policy.n_heads=4 --policy.dim_feedforward=64 \
+            --policy.n_encoder_layers=1 --policy.n_decoder_layers=1 \
+            --policy.n_vae_encoder_layers=1 --policy.latent_dim=8 | tee /tmp/rerobot-train.log
+          grep -q '^End of training$' /tmp/rerobot-train.log
+          grep -q '^step:1 loss:' /tmp/rerobot-train.log
+          test -s /tmp/rr-run/checkpoints/000001/pretrained_model/config.json
+          test -s /tmp/rr-run/checkpoints/000001/pretrained_model/model.safetensors
+          test -s /tmp/rr-run/checkpoints/000001/training_state/optimizer_state.safetensors
+          echo REROBOT_ONE_STEP_CHECKPOINT_PASS
+
+      - name: Install exact current LeRobot
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import sys
+          if sys.version_info < (3, 12):
+              raise SystemExit(f"Python >=3.12 required by current LeRobot, got {sys.version}")
+          print('PYTHON_VERSION_GATE_PASS', sys.version.split()[0])
+          PY
+          python3 -m venv /tmp/lerobot-venv
+          . /tmp/lerobot-venv/bin/activate
+          python -m pip install --upgrade pip
+          python -m pip install -e ./lerobot
+          python - <<'PY'
+          import lerobot
+          print('CURRENT_LEROBOT_IMPORT_PASS', getattr(lerobot, '__version__', '<no-version-attr>'))
+          PY
+
+      - name: Current LeRobot basic strict consumer
+        shell: bash
+        run: |
+          set -euo pipefail
+          . /tmp/lerobot-venv/bin/activate
+          python - <<'PY'
+          from pathlib import Path
+          import torch
+          from safetensors.torch import load_file
+          from lerobot.policies.act.configuration_act import ACTConfig
+          from lerobot.policies.act.modeling_act import ACTPolicy
+
+          pretrained = Path('/tmp/rr-run/checkpoints/000001/pretrained_model')
+          config = ACTConfig.from_pretrained(str(pretrained))
+          print('CURRENT_CONFIG_LOAD_PASS', config.chunk_size, config.dim_model, config.latent_dim)
+
+          policy = ACTPolicy(config)
+          weights = load_file(str(pretrained / 'model.safetensors'))
+          result = policy.load_state_dict(weights, strict=True)
+          print('CURRENT_STRICT_WEIGHT_LOAD_PASS', result)
+
+          state_dim = config.input_features['observation.state'].shape[0]
+          env_dim = config.input_features['observation.environment_state'].shape[0]
+          batch = {
+              'observation.state': torch.zeros(2, state_dim),
+              'observation.environment_state': torch.zeros(2, env_dim),
+          }
+          policy.eval()
+          with torch.no_grad():
+              actions = policy.predict_action_chunk(batch)
+          if not bool(torch.isfinite(actions).all()):
+              raise SystemExit('current LeRobot produced non-finite actions')
+          print('CURRENT_FORWARD_PASS', tuple(actions.shape), 'all_finite=True')
+          PY
+
+      - name: Rerobot full upstream verifier against current LeRobot
+        shell: bash
+        run: |
+          set -euo pipefail
+          . /tmp/lerobot-venv/bin/activate
+          python rerobot/tools/goldens/verify_checkpoint_upstream.py \
+            /tmp/rr-run/checkpoints/000001 | tee /tmp/current-consumer.log
+          grep -q 'upstream lerobot can read this checkpoint.' /tmp/current-consumer.log
+          echo CURRENT_FULL_ARTIFACT_CONSUMER_PASS
