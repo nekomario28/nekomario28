@@ -35,7 +35,7 @@ jobs:
     permissions:
       contents: write
     env:
-      IPM_QUALITY_TOOLS_REF: 841df60a605afca5989916214957c29b5dbff3da
+      IPM_QUALITY_TOOLS_REF: 05cf48bcb7669d450f97cbd3cc4dc35e5e60f2ea
     steps:
       - name: Checkout profile repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -97,6 +97,7 @@ jobs:
             'nekomario28/interactive-project-map',
             'nekomario28/projexd_group10',
             'nekomario28/antifullbright',
+            'nekomario28/buyclaimchunks',
             'nekomario28/gz-sim',
             'nekomario28/turing-smart-screen-python-owl',
           ]);
@@ -104,9 +105,17 @@ jobs:
             'nekomario28/interactive-project-map',
             'nekomario28/projexd_group10',
             'nekomario28/antifullbright',
+            'nekomario28/buyclaimchunks',
             'nekomario28/turing-smart-screen-python-owl',
           ]);
-          const expectedSnapshotDates = ['2026-08-25'];
+          const expectedSnapshotDates = ['2026-07-25', '2026-08-25'];
+          const expectedAvailableSnapshotDate = new Map([
+            ['nekomario28/interactive-project-map', '2026-08-25'],
+            ['nekomario28/projexd_group10', '2026-08-25'],
+            ['nekomario28/antifullbright', '2026-08-25'],
+            ['nekomario28/buyclaimchunks', '2026-07-25'],
+            ['nekomario28/turing-smart-screen-python-owl', '2026-08-25'],
+          ]);
           const available = presentation.repositories.filter((entry) => entry.overlayState === 'available');
           const unavailable = presentation.repositories.filter((entry) => entry.overlayState !== 'available');
 
@@ -148,6 +157,7 @@ jobs:
           for (const key of expectedAssessmentSources) if (!sourceByKey.has(key)) throw new Error(`expected assessment source missing: ${key}`);
 
           if (available.length !== expectedAvailable.size) throw new Error(`Quality available count mismatch: ${available.length}`);
+          if (unavailable.length !== graphRepositories.length - expectedAvailable.size) throw new Error(`Quality unavailable count mismatch: ${unavailable.length}`);
           const availableByKey = new Map(available.map((entry) => [normalizeKey(entry.repositoryKey), entry]));
           for (const key of expectedAvailable) if (!availableByKey.has(key)) throw new Error(`expected Quality presentation missing: ${key}`);
 
@@ -157,16 +167,21 @@ jobs:
           if (assessmentFreshness.automaticRefresh !== false || assessmentFreshness.sourceCount !== expectedAssessmentSources.size) throw new Error('assessment freshness cardinality/refresh mismatch');
           if (!assessmentFreshness.snapshotDates?.every(validSnapshotDate)) throw new Error('assessment freshness contains invalid snapshot date');
           if (JSON.stringify(assessmentFreshness.snapshotDates) !== JSON.stringify(expectedSnapshotDates)) throw new Error('assessment freshness snapshot dates mismatch');
+          if (assessmentFreshness.oldestSnapshotDate !== '2026-07-25' || assessmentFreshness.newestSnapshotDate !== '2026-08-25') throw new Error('assessment freshness range mismatch');
           if (presentationFreshness?.mode !== 'bounded-frozen-snapshots' || presentationFreshness.scope !== 'portfolio-quality-presented-sources') throw new Error('presentation freshness contract mismatch');
           if (presentationFreshness.automaticRefresh !== false || presentationFreshness.sourceCount !== expectedAvailable.size) throw new Error('presentation freshness cardinality/refresh mismatch');
           if (!presentationFreshness.snapshotDates?.every(validSnapshotDate)) throw new Error('presentation freshness contains invalid snapshot date');
           if (JSON.stringify(presentationFreshness.snapshotDates) !== JSON.stringify(expectedSnapshotDates)) throw new Error('presentation freshness snapshot dates mismatch');
+          if (presentationFreshness.oldestSnapshotDate !== '2026-07-25' || presentationFreshness.newestSnapshotDate !== '2026-08-25') throw new Error('presentation freshness range mismatch');
           if (JSON.stringify(presentation.evidenceFreshness) !== JSON.stringify(presentationFreshness)) throw new Error('published presentation freshness diverges from diagnostics');
 
           for (const entry of available) {
+            const key = normalizeKey(entry.repositoryKey);
+            const expectedDate = expectedAvailableSnapshotDate.get(key);
+            if (!expectedDate) throw new Error(`available Quality source is not explicitly freshness-bound: ${entry.repositoryKey}`);
             if (entry.evidenceFreshness?.state !== 'frozen-snapshot') throw new Error(`available Quality freshness state missing: ${entry.repositoryKey}`);
             if (!validSnapshotDate(entry.evidenceFreshness?.snapshotDate)) throw new Error(`available Quality snapshot date invalid: ${entry.repositoryKey}`);
-            if (entry.evidenceFreshness?.snapshotDate !== '2026-08-25') throw new Error(`available Quality snapshot date mismatch: ${entry.repositoryKey}`);
+            if (entry.evidenceFreshness?.snapshotDate !== expectedDate) throw new Error(`available Quality snapshot date mismatch: ${entry.repositoryKey}`);
             if (entry.evidenceFreshness?.automaticRefresh !== false) throw new Error(`available Quality automatic refresh unexpectedly enabled: ${entry.repositoryKey}`);
           }
           if (unavailable.some((entry) => entry.evidenceFreshness != null)) throw new Error('unavailable repository must not receive portfolio evidence freshness');
@@ -182,6 +197,20 @@ jobs:
           const antifullbrightSecurity = antifullbright?.overlay?.segments?.find((segment) => segment.id === 'security-safety');
           if (antifullbrightMaintainability?.findingState !== 'unknown') throw new Error('AntiFullbright Maintainability must remain unknown');
           if (antifullbrightSecurity?.applicability !== 'optional' || antifullbrightSecurity?.findingState !== 'supports') throw new Error('AntiFullbright optional Security/Safety contract mismatch');
+
+          const buyClaimSource = sourceByKey.get('nekomario28/buyclaimchunks');
+          const buyClaim = availableByKey.get('nekomario28/buyclaimchunks');
+          if (buyClaimSource?.mode !== 'fork-local-delta' || buyClaimSource?.qualityAttributionScope !== 'local-delta') throw new Error('BuyClaimChunks assessment source lost fork local-delta attribution');
+          if (buyClaimSource?.presentationExpected !== 'available' || buyClaimSource?.fixtureSnapshotDate !== '2026-07-25') throw new Error('BuyClaimChunks source freshness/presentation expectation mismatch');
+          if (buyClaimSource?.calibratedRevision !== '22d7adcbe5f711a3bc7e2cb8593c60e19838dce1') throw new Error('BuyClaimChunks calibrated default-main revision mismatch');
+          if (buyClaim?.qualityAttributionScope !== 'local-delta' || buyClaim?.overlayState !== 'available') throw new Error('BuyClaimChunks presentation scope/state mismatch');
+          if (buyClaim?.overlay?.coverage?.targetDimensions !== 6 || buyClaim?.overlay?.coverage?.inspectedDimensions !== 5) throw new Error('BuyClaimChunks target coverage mismatch');
+          if (buyClaim?.overlay?.targetFindingCounts?.supports !== 5 || buyClaim?.overlay?.targetFindingCounts?.unknown !== 1) throw new Error('BuyClaimChunks finding distribution mismatch');
+          const buyClaimMaintainability = buyClaim?.overlay?.segments?.find((segment) => segment.id === 'maintainability');
+          const buyClaimSecurity = buyClaim?.overlay?.segments?.find((segment) => segment.id === 'security-safety');
+          if (buyClaimMaintainability?.findingState !== 'unknown') throw new Error('BuyClaimChunks Maintainability must remain unknown');
+          if (buyClaimSecurity?.applicability !== 'optional' || buyClaimSecurity?.findingState !== 'supports') throw new Error('BuyClaimChunks optional Security/Safety contract mismatch');
+          if (buyClaim?.evidenceFreshness?.snapshotDate !== '2026-07-25') throw new Error('BuyClaimChunks evidence date was laundered to publication date');
 
           const gzSource = sourceByKey.get('nekomario28/gz-sim');
           const gzPresentation = presentation.repositories.find((entry) => normalizeKey(entry.repositoryKey) === 'nekomario28/gz-sim');
@@ -206,7 +235,7 @@ jobs:
               if (policy[key] !== 'none') throw new Error(`Quality exceeded visual authority for ${entry.repositoryKey}: ${key}`);
             }
           }
-          console.log(`Quality sidecars validated: ${graphIds.size} joined; ${available.length} available; ${unavailable.length} unavailable; frozen evidence ${presentationFreshness.newestSnapshotDate}`);
+          console.log(`Quality sidecars validated: ${graphIds.size} joined; ${available.length} available; ${unavailable.length} unavailable; frozen evidence ${presentationFreshness.oldestSnapshotDate}..${presentationFreshness.newestSnapshotDate}`);
           NODE
 
       - name: Remove temporary assessment tools
