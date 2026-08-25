@@ -3,7 +3,7 @@
   "contractId": "ipm-repository-assessment-artifact-v1",
   "owner": "nekomario28",
   "generatedAt": "2026-08-25T02:43:55.466Z",
-  "generatorRevision": "d6b4b36b531b005795bb3b24ee3383b741bd8a56",
+  "generatorRevision": "c2ae67b85d211d8edb7cc928d5839d6d67d00015",
   "taxonomyId": "ipm-standard-v1",
   "assessmentPolicyId": "ipm-repository-assessment-v1",
   "productionScoring": false,
@@ -1203,160 +1203,243 @@
         "state": "partial",
         "value": {
           "schemaVersion": 1,
+          "contractId": "ipm-repository-fork-quality-v1",
+          "relation": {
+            "ownership": "owned",
+            "collaboration": "unknown",
+            "lineage": "fork"
+          },
           "artifacts": [
             "library"
           ],
-          "claimBoundaries": [],
-          "dimensions": {
-            "understandability": {
-              "applicability": "recommended",
-              "authority": "repository-native",
-              "evidenceState": "observed",
-              "findingState": "supports",
-              "findingCounts": {
-                "supports": 1,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "evidenced",
-              "evidenceCount": 1,
-              "evidence": [
-                {
+          "upstreamContext": {
+            "repositoryKey": "gazebosim/gz-sim",
+            "role": "context-only",
+            "projectQualityAttribution": "upstream-context-only",
+            "projectImpactAttribution": "upstream-context-only"
+          },
+          "snapshotQuality": {
+            "state": "partial",
+            "value": {
+              "schemaVersion": 1,
+              "artifacts": [
+                "library"
+              ],
+              "claimBoundaries": [],
+              "dimensions": {
+                "understandability": {
+                  "applicability": "recommended",
                   "authority": "repository-native",
-                  "state": "observed",
-                  "finding": "supports",
-                  "evidenceClass": "C",
-                  "sourceId": "README.md@baeb72f5d7382850dba8e72df391a77655139b73",
-                  "claim": "Current fork snapshot documents project purpose, features, install/usage, documentation, testing, contribution and versioning paths; provenance is inherited upstream project content and is project-side evidence only."
+                  "evidenceState": "observed",
+                  "findingState": "supports",
+                  "findingCounts": {
+                    "supports": 1,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "evidenced",
+                  "evidenceCount": 1,
+                  "evidence": [
+                    {
+                      "authority": "repository-native",
+                      "state": "observed",
+                      "finding": "supports",
+                      "evidenceClass": "C",
+                      "sourceId": "README.md@baeb72f5d7382850dba8e72df391a77655139b73",
+                      "claim": "Current fork snapshot contains the upstream project documentation; this supports current artifact understandability but is inherited provenance."
+                    }
+                  ]
+                },
+                "verification": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "reproducibility": {
+                  "applicability": "recommended",
+                  "authority": "repository-native",
+                  "evidenceState": "observed",
+                  "findingState": "supports",
+                  "findingCounts": {
+                    "supports": 1,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "evidenced",
+                  "evidenceCount": 1,
+                  "evidence": [
+                    {
+                      "authority": "repository-native",
+                      "state": "observed",
+                      "finding": "supports",
+                      "evidenceClass": "C",
+                      "sourceId": "CMakeLists.txt@283ee05db0ee82798fe6ee9af8c4c8807158fcb9",
+                      "claim": "Current fork snapshot contains the upstream build contract; this supports current artifact reproducibility but is inherited provenance."
+                    }
+                  ]
+                },
+                "maintainability": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "integrity": {
+                  "applicability": "optional",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "interoperability": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "security-safety": {
+                  "applicability": "optional",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "stewardship": {
+                  "applicability": "recommended",
+                  "authority": "repository-native",
+                  "evidenceState": "observed",
+                  "findingState": "supports",
+                  "findingCounts": {
+                    "supports": 1,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "evidenced",
+                  "evidenceCount": 1,
+                  "evidence": [
+                    {
+                      "authority": "repository-native",
+                      "state": "observed",
+                      "finding": "supports",
+                      "evidenceClass": "C",
+                      "sourceId": "github-repository-metadata:license",
+                      "claim": "Apache-2.0 stewardship is present on the current fork snapshot but inherited from upstream."
+                    }
+                  ]
+                }
+              },
+              "compositeQualityScore": null
+            },
+            "evidenceProvenance": {
+              "understandability": [
+                {
+                  "origin": "upstream-inherited",
+                  "sourceId": "README.md@baeb72f5d7382850dba8e72df391a77655139b73"
+                }
+              ],
+              "reproducibility": [
+                {
+                  "origin": "upstream-inherited",
+                  "sourceId": "CMakeLists.txt@283ee05db0ee82798fe6ee9af8c4c8807158fcb9"
+                }
+              ],
+              "stewardship": [
+                {
+                  "origin": "upstream-inherited",
+                  "sourceId": "github-repository-metadata:license"
                 }
               ]
             },
-            "verification": {
-              "applicability": "recommended",
-              "authority": "unknown",
-              "evidenceState": "unknown",
-              "findingState": "unknown",
-              "findingCounts": {
-                "supports": 0,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "unevidenced",
-              "evidenceCount": 0,
-              "evidence": []
+            "evidenceOriginState": "upstream-inherited",
+            "evidenceOriginCounts": {
+              "local": 0,
+              "upstream-inherited": 3,
+              "upstream-accepted": 0,
+              "mixed": 0,
+              "unknown": 0
             },
-            "reproducibility": {
-              "applicability": "recommended",
-              "authority": "repository-native",
-              "evidenceState": "observed",
-              "findingState": "supports",
-              "findingCounts": {
-                "supports": 1,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "evidenced",
-              "evidenceCount": 1,
-              "evidence": [
-                {
-                  "authority": "repository-native",
-                  "state": "observed",
-                  "finding": "supports",
-                  "evidenceClass": "C",
-                  "sourceId": "CMakeLists.txt@283ee05db0ee82798fe6ee9af8c4c8807158fcb9",
-                  "claim": "Current fork snapshot declares CMake >=3.22.1, project version/distribution, C++17 and build options/dependency discovery."
-                }
-              ]
+            "personSideEligible": false
+          },
+          "localDelta": {
+            "observation": {
+              "state": "observed",
+              "presence": "absent",
+              "scope": "gazebosim/main...nekomario28/main",
+              "evidence": "0 commits ahead; 2 behind; no local-ahead changed files"
             },
-            "maintainability": {
-              "applicability": "recommended",
-              "authority": "unknown",
-              "evidenceState": "unknown",
-              "findingState": "unknown",
-              "findingCounts": {
-                "supports": 0,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "unevidenced",
-              "evidenceCount": 0,
-              "evidence": []
+            "quality": {
+              "state": "not-applicable",
+              "value": null,
+              "reason": "no-local-delta-observed-in-comparison-scope",
+              "evidenceProvenance": {}
             },
-            "integrity": {
-              "applicability": "optional",
-              "authority": "unknown",
-              "evidenceState": "unknown",
-              "findingState": "unknown",
-              "findingCounts": {
-                "supports": 0,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "unevidenced",
-              "evidenceCount": 0,
-              "evidence": []
-            },
-            "interoperability": {
-              "applicability": "recommended",
-              "authority": "unknown",
-              "evidenceState": "unknown",
-              "findingState": "unknown",
-              "findingCounts": {
-                "supports": 0,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "unevidenced",
-              "evidenceCount": 0,
-              "evidence": []
-            },
-            "security-safety": {
-              "applicability": "optional",
-              "authority": "unknown",
-              "evidenceState": "unknown",
-              "findingState": "unknown",
-              "findingCounts": {
-                "supports": 0,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "unevidenced",
-              "evidenceCount": 0,
-              "evidence": []
-            },
-            "stewardship": {
-              "applicability": "recommended",
-              "authority": "repository-native",
-              "evidenceState": "observed",
-              "findingState": "supports",
-              "findingCounts": {
-                "supports": 1,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "evidenced",
-              "evidenceCount": 1,
-              "evidence": [
-                {
-                  "authority": "repository-native",
-                  "state": "observed",
-                  "finding": "supports",
-                  "evidenceClass": "C",
-                  "sourceId": "github-repository-metadata:license",
-                  "claim": "Current fork metadata declares Apache-2.0; this is project-side stewardship evidence, not authored personal merit."
-                }
-              ]
+            "evidenceOriginState": "unknown",
+            "evidenceOriginCounts": {
+              "local": 0,
+              "upstream-inherited": 0,
+              "upstream-accepted": 0,
+              "mixed": 0,
+              "unknown": 0
             }
           },
-          "compositeQualityScore": null
+          "personalAttribution": {
+            "qualitySource": "local-delta-only",
+            "snapshotQualityEligible": false,
+            "upstreamInheritedEvidenceEligible": false,
+            "upstreamAcceptedEvidenceEligible": true,
+            "localDeltaRequired": true,
+            "localDeltaState": "observed",
+            "localDeltaPresence": "absent"
+          },
+          "compositeForkQualityScore": null,
+          "productionRankingAllowed": false
         }
       },
       "impact": {
@@ -1897,160 +1980,403 @@
         "state": "partial",
         "value": {
           "schemaVersion": 1,
+          "contractId": "ipm-repository-fork-quality-v1",
+          "relation": {
+            "ownership": "owned",
+            "collaboration": "unknown",
+            "lineage": "fork"
+          },
           "artifacts": [
             "library"
           ],
-          "claimBoundaries": [],
-          "dimensions": {
-            "understandability": {
-              "applicability": "recommended",
-              "authority": "repository-native",
-              "evidenceState": "observed",
-              "findingState": "supports",
-              "findingCounts": {
-                "supports": 1,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "evidenced",
-              "evidenceCount": 1,
-              "evidence": [
-                {
+          "upstreamContext": {
+            "repositoryKey": "mathoudebine/turing-smart-screen-python",
+            "role": "context-only",
+            "projectQualityAttribution": "upstream-context-only",
+            "projectImpactAttribution": "upstream-context-only"
+          },
+          "snapshotQuality": {
+            "state": "partial",
+            "value": {
+              "schemaVersion": 1,
+              "artifacts": [
+                "library"
+              ],
+              "claimBoundaries": [],
+              "dimensions": {
+                "understandability": {
+                  "applicability": "recommended",
                   "authority": "repository-native",
-                  "state": "observed",
-                  "finding": "supports",
-                  "evidenceClass": "C",
-                  "sourceId": "README.md@ddedac6db0f51c95027107029507de6fe76db402",
-                  "claim": "Current fork README explicitly documents the OWL CPU COOLER DISPLAY fork purpose, Rev. C protocol, ImageOnly theme setup, supported environments and library usage."
+                  "evidenceState": "observed",
+                  "findingState": "supports",
+                  "findingCounts": {
+                    "supports": 1,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "evidenced",
+                  "evidenceCount": 1,
+                  "evidence": [
+                    {
+                      "authority": "repository-native",
+                      "state": "observed",
+                      "finding": "supports",
+                      "evidenceClass": "C",
+                      "sourceId": "README.md@ddedac6db0f51c95027107029507de6fe76db402",
+                      "claim": "Local fork README documents the OWL CPU COOLER DISPLAY purpose, Rev. C protocol and ImageOnly setup."
+                    }
+                  ]
+                },
+                "verification": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "reproducibility": {
+                  "applicability": "recommended",
+                  "authority": "repository-native",
+                  "evidenceState": "observed",
+                  "findingState": "supports",
+                  "findingCounts": {
+                    "supports": 1,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "evidenced",
+                  "evidenceCount": 1,
+                  "evidence": [
+                    {
+                      "authority": "repository-native",
+                      "state": "observed",
+                      "finding": "supports",
+                      "evidenceClass": "C",
+                      "sourceId": "requirements.txt@4ec6abb85948bb498e6fc6494b4df77205b87544",
+                      "claim": "Local fork requirements record bounded dependency versions and platform/Python-version conditions."
+                    }
+                  ]
+                },
+                "maintainability": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "integrity": {
+                  "applicability": "optional",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "interoperability": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "security-safety": {
+                  "applicability": "optional",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "stewardship": {
+                  "applicability": "recommended",
+                  "authority": "repository-native",
+                  "evidenceState": "observed",
+                  "findingState": "supports",
+                  "findingCounts": {
+                    "supports": 1,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "evidenced",
+                  "evidenceCount": 1,
+                  "evidence": [
+                    {
+                      "authority": "repository-native",
+                      "state": "observed",
+                      "finding": "supports",
+                      "evidenceClass": "C",
+                      "sourceId": "github-repository-metadata:license",
+                      "claim": "GPL-3.0 stewardship is present on the fork snapshot but is not treated as locally authored evidence."
+                    }
+                  ]
+                }
+              },
+              "compositeQualityScore": null
+            },
+            "evidenceProvenance": {
+              "understandability": [
+                {
+                  "origin": "local",
+                  "sourceId": "README.md@ddedac6db0f51c95027107029507de6fe76db402"
+                }
+              ],
+              "reproducibility": [
+                {
+                  "origin": "local",
+                  "sourceId": "requirements.txt@4ec6abb85948bb498e6fc6494b4df77205b87544"
+                }
+              ],
+              "stewardship": [
+                {
+                  "origin": "upstream-inherited",
+                  "sourceId": "github-repository-metadata:license"
                 }
               ]
             },
-            "verification": {
-              "applicability": "recommended",
-              "authority": "unknown",
-              "evidenceState": "unknown",
-              "findingState": "unknown",
-              "findingCounts": {
-                "supports": 0,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "unevidenced",
-              "evidenceCount": 0,
-              "evidence": []
+            "evidenceOriginState": "mixed",
+            "evidenceOriginCounts": {
+              "local": 2,
+              "upstream-inherited": 1,
+              "upstream-accepted": 0,
+              "mixed": 0,
+              "unknown": 0
             },
-            "reproducibility": {
-              "applicability": "recommended",
-              "authority": "repository-native",
-              "evidenceState": "observed",
-              "findingState": "supports",
-              "findingCounts": {
-                "supports": 1,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "evidenced",
-              "evidenceCount": 1,
-              "evidence": [
-                {
-                  "authority": "repository-native",
-                  "state": "observed",
-                  "finding": "supports",
-                  "evidenceClass": "C",
-                  "sourceId": "requirements.txt@4ec6abb85948bb498e6fc6494b4df77205b87544",
-                  "claim": "Current fork snapshot records bounded Python dependency versions and platform/Python-version conditions."
-                }
-              ]
+            "personSideEligible": false
+          },
+          "localDelta": {
+            "observation": {
+              "state": "observed",
+              "presence": "present",
+              "scope": "mathoudebine/main...nekomario28/main",
+              "evidence": "3 commits ahead; 24 behind; local changes include Rev. C display communication, config, requirements, README and workflow adjustments"
             },
-            "maintainability": {
-              "applicability": "recommended",
-              "authority": "unknown",
-              "evidenceState": "unknown",
-              "findingState": "unknown",
-              "findingCounts": {
-                "supports": 0,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
+            "quality": {
+              "state": "partial",
+              "value": {
+                "schemaVersion": 1,
+                "artifacts": [
+                  "library"
+                ],
+                "claimBoundaries": [],
+                "dimensions": {
+                  "understandability": {
+                    "applicability": "recommended",
+                    "authority": "repository-native",
+                    "evidenceState": "observed",
+                    "findingState": "supports",
+                    "findingCounts": {
+                      "supports": 1,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "evidenced",
+                    "evidenceCount": 1,
+                    "evidence": [
+                      {
+                        "authority": "repository-native",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "C",
+                        "sourceId": "local-ahead:README.md",
+                        "claim": "The local-ahead README changes document the fork-specific hardware/protocol behavior and setup."
+                      }
+                    ]
+                  },
+                  "verification": {
+                    "applicability": "recommended",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  },
+                  "reproducibility": {
+                    "applicability": "recommended",
+                    "authority": "repository-native",
+                    "evidenceState": "observed",
+                    "findingState": "supports",
+                    "findingCounts": {
+                      "supports": 1,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "evidenced",
+                    "evidenceCount": 1,
+                    "evidence": [
+                      {
+                        "authority": "repository-native",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "C",
+                        "sourceId": "local-ahead:requirements.txt",
+                        "claim": "The local-ahead dependency changes bound the environment needed by the fork-specific implementation."
+                      }
+                    ]
+                  },
+                  "maintainability": {
+                    "applicability": "recommended",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  },
+                  "integrity": {
+                    "applicability": "optional",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  },
+                  "interoperability": {
+                    "applicability": "recommended",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  },
+                  "security-safety": {
+                    "applicability": "optional",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  },
+                  "stewardship": {
+                    "applicability": "recommended",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  }
+                },
+                "compositeQualityScore": null
               },
-              "disposition": "unevidenced",
-              "evidenceCount": 0,
-              "evidence": []
+              "reason": null,
+              "evidenceProvenance": {
+                "understandability": [
+                  {
+                    "origin": "local",
+                    "sourceId": "local-ahead:README.md"
+                  }
+                ],
+                "reproducibility": [
+                  {
+                    "origin": "local",
+                    "sourceId": "local-ahead:requirements.txt"
+                  }
+                ]
+              }
             },
-            "integrity": {
-              "applicability": "optional",
-              "authority": "unknown",
-              "evidenceState": "unknown",
-              "findingState": "unknown",
-              "findingCounts": {
-                "supports": 0,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "unevidenced",
-              "evidenceCount": 0,
-              "evidence": []
-            },
-            "interoperability": {
-              "applicability": "recommended",
-              "authority": "unknown",
-              "evidenceState": "unknown",
-              "findingState": "unknown",
-              "findingCounts": {
-                "supports": 0,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "unevidenced",
-              "evidenceCount": 0,
-              "evidence": []
-            },
-            "security-safety": {
-              "applicability": "optional",
-              "authority": "unknown",
-              "evidenceState": "unknown",
-              "findingState": "unknown",
-              "findingCounts": {
-                "supports": 0,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "unevidenced",
-              "evidenceCount": 0,
-              "evidence": []
-            },
-            "stewardship": {
-              "applicability": "recommended",
-              "authority": "repository-native",
-              "evidenceState": "observed",
-              "findingState": "supports",
-              "findingCounts": {
-                "supports": 1,
-                "weakens": 0,
-                "neutral": 0,
-                "unknown": 0
-              },
-              "disposition": "evidenced",
-              "evidenceCount": 1,
-              "evidence": [
-                {
-                  "authority": "repository-native",
-                  "state": "observed",
-                  "finding": "supports",
-                  "evidenceClass": "C",
-                  "sourceId": "github-repository-metadata:license",
-                  "claim": "Current fork metadata declares GPL-3.0; this is project-side stewardship evidence, not proof that inherited repository quality was authored locally."
-                }
-              ]
+            "evidenceOriginState": "local",
+            "evidenceOriginCounts": {
+              "local": 2,
+              "upstream-inherited": 0,
+              "upstream-accepted": 0,
+              "mixed": 0,
+              "unknown": 0
             }
           },
-          "compositeQualityScore": null
+          "personalAttribution": {
+            "qualitySource": "local-delta-only",
+            "snapshotQualityEligible": false,
+            "upstreamInheritedEvidenceEligible": false,
+            "upstreamAcceptedEvidenceEligible": true,
+            "localDeltaRequired": true,
+            "localDeltaState": "observed",
+            "localDeltaPresence": "present"
+          },
+          "compositeForkQualityScore": null,
+          "productionRankingAllowed": false
         }
       },
       "impact": {
