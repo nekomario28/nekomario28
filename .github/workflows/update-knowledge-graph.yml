@@ -26,10 +26,11 @@ jobs:
   generate:
     permissions:
       contents: read
-    # Stable native-IPM profile visual release with inherited static SVG sans fallback.
-    # v1 R 02a41b480cfa01801ba5e6089d126364bdb7c841 resolves immutable
-    # Action F d405d85a5882bcf196c8b76977bd1d33c3a9ae2a (Verify #932/#944; Chromium + WebKit).
-    uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@v1
+    # Exact implementation proof for the Contributed world-coherence repair.
+    # F 37500d3e3b231452b7281a78374f32d04c6445ea passed IPM Verify #968,
+    # including full verify, twelve-preset rendering, Chromium and iPhone WebKit.
+    # This PR proof intentionally bypasses @v1 until the exact real-profile output is accepted.
+    uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@37500d3e3b231452b7281a78374f32d04c6445ea
     with:
       theme: dark
       style: galaxy-systems
@@ -73,13 +74,12 @@ jobs:
           grep -q 'id="galaxy-family-bg"' project-map/galaxy.svg
           grep -q '#E69F00' project-map/galaxy.svg
           grep -q 'data-galaxy-external="true"' project-map/galaxy.svg
-          grep -q 'data-galaxy-external-layout="rail"' project-map/galaxy.svg
-          grep -q 'data-galaxy-external-backdrop="true"' project-map/galaxy.svg
+          grep -q 'data-galaxy-external-layout="halo"' project-map/galaxy.svg
           grep -q 'data-galaxy-orbit="contributed"' project-map/galaxy.svg
-          grep -q 'data-galaxy-placement="external-rail"' project-map/galaxy.svg
+          grep -q 'data-galaxy-placement="external-halo-orbit"' project-map/galaxy.svg
           grep -q '>Contributed</text>' project-map/galaxy.svg
-          if grep -Eq 'data-profile-galaxy-|profile-galaxy-(ring|association|nucleus|arm)|data-galaxy-external-layout="halo"|data-galaxy-placement="external-halo-orbit"' project-map/galaxy.svg; then
-            echo 'Profile-local donor decoration or halo placement leaked into native IPM output.' >&2
+          if grep -Eq 'data-profile-galaxy-|profile-galaxy-(ring|association|nucleus|arm)|data-galaxy-external-layout="rail"|data-galaxy-placement="external-rail"|data-galaxy-external-backdrop="true"|>external repositories</text>' project-map/galaxy.svg; then
+            echo 'Detached Contributed rail or profile-local donor decoration leaked into native IPM output.' >&2
             exit 1
           fi
           grep -q '"taxonomy"' project-map/graph.json
@@ -113,26 +113,31 @@ jobs:
             throw new Error('profile-local historical donor markers survived the rollback');
           }
           if (/parallax|meteor/i.test(svg)) throw new Error('interactive screen-space background decoration leaked into static SVG output');
+          if (/data-galaxy-external-layout="rail"|data-galaxy-placement="external-rail"|data-galaxy-external-backdrop/.test(svg)) {
+            throw new Error('detached Contributed rail survived the world-coherence repair');
+          }
 
-          const railStart = svg.indexOf('data-galaxy-external-layout="rail"');
-          if (railStart < 0) throw new Error('Galaxy Systems external rail is missing');
-          const railSlice = svg.slice(railStart);
-          const placements = [...railSlice.matchAll(/data-galaxy-orbit="contributed" data-galaxy-placement="external-rail" transform="translate\(([0-9.]+) ([0-9.]+)\)"/g)];
-          if (placements.length !== contributed.length) throw new Error(`external rail placement mismatch: ${placements.length} SVG vs ${contributed.length} graph`);
-          if (/<animateTransform\b/.test(railSlice)) throw new Error('stationary external rail unexpectedly contains orbit animation');
+          const haloStart = svg.indexOf('data-galaxy-external-layout="halo"');
+          if (haloStart < 0) throw new Error('Galaxy Systems external halo is missing');
+          const haloSlice = svg.slice(haloStart);
+          const placements = [...haloSlice.matchAll(/data-galaxy-orbit="contributed" data-galaxy-placement="external-halo-orbit" data-galaxy-lane="([0-9]+)" data-galaxy-radius="([0-9.]+)"/g)];
+          if (placements.length !== contributed.length) throw new Error(`external halo placement mismatch: ${placements.length} SVG vs ${contributed.length} graph`);
+          if (!/<animateTransform\b/.test(haloSlice)) throw new Error('Contributed halo is not part of the living Galaxy motion language');
 
-          const root = svg.match(/<svg\b[^>]*\bwidth="([0-9.]+)"[^>]*\bheight="([0-9.]+)"/);
-          if (!root) throw new Error('unable to read SVG geometry');
-          const width = Number(root[1]);
-          const height = Number(root[2]);
-          const xs = placements.map((match) => Number(match[1]));
-          const ys = placements.map((match) => Number(match[2]));
-          if (Math.min(...xs) <= width * 0.75) throw new Error(`external rail entered owned canvas: x=${Math.min(...xs)}`);
-          if (Math.min(...ys) < 54 || Math.max(...ys) > height - 44) throw new Error('external rail violated top/legend clearance');
-          if (ys.length > 1) {
-            const sorted = [...ys].sort((a, b) => a - b);
-            const minGap = Math.min(...sorted.slice(1).map((value, index) => value - sorted[index]));
-            if (minGap < 24) throw new Error(`external rail spacing collapsed: ${minGap}`);
+          const lanes = new Map();
+          for (const match of placements) {
+            const lane = Number(match[1]);
+            const radius = Number(match[2]);
+            if (!Number.isInteger(lane) || lane < 0 || !Number.isFinite(radius) || radius <= 0) throw new Error('invalid Contributed halo geometry');
+            const values = lanes.get(lane) || [];
+            values.push(radius);
+            lanes.set(lane, values);
+          }
+          const orderedLanes = [...lanes.keys()].sort((a, b) => a - b);
+          for (let index = 1; index < orderedLanes.length; index += 1) {
+            const previous = lanes.get(orderedLanes[index - 1]);
+            const current = lanes.get(orderedLanes[index]);
+            if (Math.min(...current) <= Math.max(...previous)) throw new Error('later Contributed halo lane did not expand outward');
           }
 
           const forbiddenKeys = new Set(['private', 'isPrivate', 'restricted', 'isRestricted']);
@@ -144,7 +149,7 @@ jobs:
             }
           };
           visit(graph);
-          console.log(`Direct native IPM profile validated: ${graph.repositoryCount} owned + ${contributed.length} Contributed; native background + external rail + inherited sans font`);
+          console.log(`Direct native IPM profile validated: ${graph.repositoryCount} owned + ${contributed.length} Contributed; native background + shared external halo + inherited sans font`);
           NODE
 
       - name: Verify direct publish diff on pull requests
