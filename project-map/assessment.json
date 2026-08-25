@@ -3,7 +3,7 @@
   "contractId": "ipm-repository-assessment-artifact-v1",
   "owner": "nekomario28",
   "generatedAt": "2026-08-25T14:25:48.617Z",
-  "generatorRevision": "62870393d022646d1e356713d17d20d9dea11ef2",
+  "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
   "taxonomyId": "ipm-standard-v1",
   "assessmentPolicyId": "ipm-repository-assessment-v1",
   "productionScoring": false,
@@ -906,12 +906,437 @@
         }
       },
       "acquisition": {
-        "level": "L0",
+        "level": "L1",
         "observedAt": "2026-08-25T14:25:48.617Z"
       },
       "quality": {
-        "state": "not-collected",
-        "value": null
+        "state": "partial",
+        "value": {
+          "schemaVersion": 1,
+          "contractId": "ipm-repository-fork-quality-v1",
+          "relation": {
+            "ownership": "owned",
+            "collaboration": "unknown",
+            "lineage": "fork"
+          },
+          "artifacts": [
+            "game-mod"
+          ],
+          "upstreamContext": {
+            "repositoryKey": "ryanhcode/sable",
+            "role": "context-only",
+            "projectQualityAttribution": "upstream-context-only",
+            "projectImpactAttribution": "upstream-context-only"
+          },
+          "snapshotQuality": {
+            "state": "partial",
+            "value": {
+              "schemaVersion": 1,
+              "artifacts": [
+                "game-mod"
+              ],
+              "claimBoundaries": [],
+              "dimensions": {
+                "understandability": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "verification": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "reproducibility": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "maintainability": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "integrity": {
+                  "applicability": "optional",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "interoperability": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "security-safety": {
+                  "applicability": "optional",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "stewardship": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                }
+              },
+              "compositeQualityScore": null
+            },
+            "evidenceProvenance": {},
+            "evidenceOriginState": "unknown",
+            "evidenceOriginCounts": {
+              "local": 0,
+              "upstream-inherited": 0,
+              "upstream-accepted": 0,
+              "mixed": 0,
+              "unknown": 0
+            },
+            "personSideEligible": false
+          },
+          "localDelta": {
+            "observation": {
+              "state": "observed",
+              "presence": "present",
+              "scope": "ryanhcode/sable@6966d2928340de7631abcecf8549904b877df0a8...nekomario28/sable@14397866926b06770da05c0c0304fae32d6e26b7",
+              "evidence": "The current fork default main is 97 commits ahead and 11 behind the current upstream main, with merge base 8ec2afab2253a2e2a6854cbef1ea815551cb4c88. Local-ahead work adds a staged transactional SubLevel reconstruction program, exact rollbac"
+            },
+            "quality": {
+              "state": "partial",
+              "value": {
+                "schemaVersion": 1,
+                "artifacts": [
+                  "game-mod"
+                ],
+                "claimBoundaries": [],
+                "dimensions": {
+                  "understandability": {
+                    "applicability": "recommended",
+                    "authority": "repository-native",
+                    "evidenceState": "observed",
+                    "findingState": "supports",
+                    "findingCounts": {
+                      "supports": 1,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "evidenced",
+                    "evidenceCount": 1,
+                    "evidence": [
+                      {
+                        "authority": "repository-native",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "C",
+                        "sourceId": "AGENTS.md+docs/transactional-sublevel-reconstruction.md@14397866926b06770da05c0c0304fae32d6e26b7",
+                        "claim": "Current default documentation defines Sable's intrusive-library scope, the rollback-first reconstruction authority, provisional resource ownership, pre-mutation validation, commit and rollback boundaries, failure injection, required GameTests, and the rule that unmerged reconstruction stages must not be promoted into current-default claims."
+                      }
+                    ]
+                  },
+                  "verification": {
+                    "applicability": "recommended",
+                    "authority": "project-owned",
+                    "evidenceState": "observed",
+                    "findingState": "supports",
+                    "findingCounts": {
+                      "supports": 2,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "evidenced",
+                    "evidenceCount": 2,
+                    "evidence": [
+                      {
+                        "authority": "project-owned",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "B",
+                        "sourceId": "github-actions:build#451:32501210866@d15a5ddccae399ae1e46cceea70c3e80e3111406;tree=d96d98dcf1df8d870d6f33483c92b2c6daa94964",
+                        "claim": "The final code-bearing PR head passed the repository Gradle build and NeoForge GameTests. That head was merged as 069d88fdceee399827e2eab0b3652c11a83c9e65 with the same Git tree d96d98dcf1df8d870d6f33483c92b2c6daa94964. Current default main differs from that merged code state only by adding AGENTS.md; this is code-equivalence evidence, not a claim that Actions directly executed current commit 14397866926b06770da05c0c0304fae32d6e26b7."
+                      },
+                      {
+                        "authority": "project-owned",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "B",
+                        "sourceId": "github-actions:Verify-Rust-Native-PR#54:32501210848@d15a5ddccae399ae1e46cceea70c3e80e3111406;tree=d96d98dcf1df8d870d6f33483c92b2c6daa94964",
+                        "claim": "The same validated code tree rebuilt all Rapier natives and then ran NeoForge GameTests against the rebuilt native bundle successfully, closing the committed-native versus edited-Rust validation gap for that code-bearing state."
+                      }
+                    ]
+                  },
+                  "reproducibility": {
+                    "applicability": "recommended",
+                    "authority": "repository-native",
+                    "evidenceState": "observed",
+                    "findingState": "supports",
+                    "findingCounts": {
+                      "supports": 1,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "evidenced",
+                    "evidenceCount": 1,
+                    "evidence": [
+                      {
+                        "authority": "repository-native",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "C",
+                        "sourceId": "README.md+.github/workflows/build-rust.yml+.github/workflows/verify-rust-native-pr.yml@14397866926b06770da05c0c0304fae32d6e26b7",
+                        "claim": "The current default tree documents the Docker/Gradle native build path and retains automated workflows that rebuild Rapier natives before runtime GameTests. This supports reconstruction of the tested build/runtime path but does not claim byte-identical native rebuild determinism."
+                      }
+                    ]
+                  },
+                  "maintainability": {
+                    "applicability": "recommended",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  },
+                  "integrity": {
+                    "applicability": "optional",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  },
+                  "interoperability": {
+                    "applicability": "recommended",
+                    "authority": "repository-native",
+                    "evidenceState": "observed",
+                    "findingState": "supports",
+                    "findingCounts": {
+                      "supports": 1,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "evidenced",
+                    "evidenceCount": 1,
+                    "evidence": [
+                      {
+                        "authority": "repository-native",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "C",
+                        "sourceId": "fabric+neoforge platform adapters+sable_rapier JNI bridge@14397866926b06770da05c0c0304fae32d6e26b7",
+                        "claim": "The local reconstruction delta preserves explicit Fabric and NeoForge platform adapters while adding Java/Rapier JNI reconstruction boundaries. The README also keeps Sable's broad compatibility warning instead of presenting intrusive mixin behavior as universally compatible."
+                      }
+                    ]
+                  },
+                  "security-safety": {
+                    "applicability": "optional",
+                    "authority": "mixed",
+                    "evidenceState": "observed",
+                    "findingState": "supports",
+                    "findingCounts": {
+                      "supports": 1,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "evidenced",
+                    "evidenceCount": 1,
+                    "evidence": [
+                      {
+                        "authority": "mixed",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "B",
+                        "sourceId": "PR#85+docs/transactional-sublevel-reconstruction.md@069d88fdceee399827e2eab0b3652c11a83c9e65",
+                        "claim": "The merged local delta fails closed when native acquisition cleanup cannot prove ownership release, refuses runtime-ID rollback while body ownership remains open, rejects invalid/non-finite reconstruction inputs in the local reconstruction program, and specifies exact inverse cleanup before a failed transaction may report rollback success."
+                      }
+                    ]
+                  },
+                  "stewardship": {
+                    "applicability": "recommended",
+                    "authority": "repository-native",
+                    "evidenceState": "observed",
+                    "findingState": "supports",
+                    "findingCounts": {
+                      "supports": 1,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "evidenced",
+                    "evidenceCount": 1,
+                    "evidence": [
+                      {
+                        "authority": "repository-native",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "C",
+                        "sourceId": "AGENTS.md+README.md@14397866926b06770da05c0c0304fae32d6e26b7",
+                        "claim": "The fork explicitly preserves upstream ownership and licensing, requires narrow reviewable deviations rather than blank-slate attribution, records real validation and failure-injection expectations, and keeps current PR/base state distinct from historical merged evidence."
+                      }
+                    ]
+                  }
+                },
+                "compositeQualityScore": null
+              },
+              "reason": null,
+              "evidenceProvenance": {
+                "understandability": [
+                  {
+                    "origin": "local",
+                    "sourceId": "AGENTS.md+docs/transactional-sublevel-reconstruction.md@14397866926b06770da05c0c0304fae32d6e26b7"
+                  }
+                ],
+                "verification": [
+                  {
+                    "origin": "local",
+                    "sourceId": "github-actions:build#451:32501210866@d15a5ddccae399ae1e46cceea70c3e80e3111406;tree=d96d98dcf1df8d870d6f33483c92b2c6daa94964"
+                  },
+                  {
+                    "origin": "local",
+                    "sourceId": "github-actions:Verify-Rust-Native-PR#54:32501210848@d15a5ddccae399ae1e46cceea70c3e80e3111406;tree=d96d98dcf1df8d870d6f33483c92b2c6daa94964"
+                  }
+                ],
+                "reproducibility": [
+                  {
+                    "origin": "local",
+                    "sourceId": "README.md+.github/workflows/build-rust.yml+.github/workflows/verify-rust-native-pr.yml@14397866926b06770da05c0c0304fae32d6e26b7"
+                  }
+                ],
+                "interoperability": [
+                  {
+                    "origin": "local",
+                    "sourceId": "fabric+neoforge platform adapters+sable_rapier JNI bridge@14397866926b06770da05c0c0304fae32d6e26b7"
+                  }
+                ],
+                "security-safety": [
+                  {
+                    "origin": "local",
+                    "sourceId": "PR#85+docs/transactional-sublevel-reconstruction.md@069d88fdceee399827e2eab0b3652c11a83c9e65"
+                  }
+                ],
+                "stewardship": [
+                  {
+                    "origin": "local",
+                    "sourceId": "AGENTS.md+README.md@14397866926b06770da05c0c0304fae32d6e26b7"
+                  }
+                ]
+              }
+            },
+            "evidenceOriginState": "local",
+            "evidenceOriginCounts": {
+              "local": 7,
+              "upstream-inherited": 0,
+              "upstream-accepted": 0,
+              "mixed": 0,
+              "unknown": 0
+            }
+          },
+          "personalAttribution": {
+            "qualitySource": "local-delta-only",
+            "snapshotQualityEligible": false,
+            "upstreamInheritedEvidenceEligible": false,
+            "upstreamAcceptedEvidenceEligible": true,
+            "localDeltaRequired": true,
+            "localDeltaState": "observed",
+            "localDeltaPresence": "present"
+          },
+          "compositeForkQualityScore": null,
+          "productionRankingAllowed": false
+        }
       },
       "impact": {
         "state": "partial",
