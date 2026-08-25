@@ -1,0 +1,204 @@
+name: Rerobot ActionInterpolator migration probe
+
+on:
+  push:
+    branches:
+      - research/rerobot-action-interpolator-migration-probe
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      REROBOT_SHA: f6c36c7da5326886fb6eb6e83d8a2d87283b31ec
+    steps:
+      - name: Clone exact Rerobot
+        shell: bash
+        run: |
+          set -euxo pipefail
+          git clone --filter=blob:none https://github.com/k1000dai/Rerobot.git /tmp/Rerobot
+          git -C /tmp/Rerobot checkout --detach "$REROBOT_SHA"
+          test "$(git -C /tmp/Rerobot rev-parse HEAD)" = "$REROBOT_SHA"
+
+      - name: Baseline pinned 0.6.1-derived ActionInterpolator tests
+        shell: bash
+        working-directory: /tmp/Rerobot
+        run: |
+          set -euxo pipefail
+          cargo test --locked -p rerobot-core --test action_interpolator | tee /tmp/baseline.log
+          grep -q 'test result: ok.' /tmp/baseline.log
+          echo REROBOT_PINNED_BASELINE_PASS
+
+      - name: Apply disposable current-contract migration prototype
+        shell: bash
+        working-directory: /tmp/Rerobot
+        run: |
+          set -euxo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('crates/rerobot-core/src/action_interpolator.rs')
+          s = p.read_text()
+          old = '''    buffer: Vec<Vec<T>>,
+              idx: usize,
+          }'''
+          new = '''    buffer: Vec<Vec<T>>,
+              idx: usize,
+              emitted_policy_action: bool,
+          }'''
+          assert old in s
+          s = s.replace(old, new, 1)
+
+          old = '''            buffer: Vec::new(),
+              idx: 0,
+          })'''
+          new = '''            buffer: Vec::new(),
+              idx: 0,
+              emitted_policy_action: false,
+          })'''
+          assert old in s
+          s = s.replace(old, new, 1)
+
+          old = '''        self.buffer.clear();
+              self.idx = 0;
+          }
+
+              /// Whether a new action is needed from the queue.'''
+          new = '''        self.buffer.clear();
+              self.idx = 0;
+              self.emitted_policy_action = false;
+          }
+
+              /// Whether the action most recently returned by `get` was the policy action itself.
+              pub fn emitted_policy_action(&self) -> bool {
+                  self.emitted_policy_action
+              }
+
+              /// Whether a new action is needed from the queue.'''
+          assert old in s
+          s = s.replace(old, new, 1)
+
+          old = '''                for i in 1..=steps {
+                      let t = T::from_f64(i as f64 / steps as f64);
+                      let step = (0..width)
+                          .map(|k| T::lerp(prev[k * prev_stride], t, action[k * action_stride]))
+                          .collect();
+                      self.buffer.push(step);
+                  }'''
+          new = '''                for i in 1..steps {
+                      let t = T::from_f64(i as f64 / steps as f64);
+                      let step = (0..width)
+                          .map(|k| T::lerp(prev[k * prev_stride], t, action[k * action_stride]))
+                          .collect();
+                      self.buffer.push(step);
+                  }
+                  // Current LeRobot contract: the cycle-end value is the policy action itself,
+                  // not a lerp recomputation that can differ by an ULP or broadcast its shape.
+                  self.buffer.push(action.to_vec());'''
+          assert old in s
+          s = s.replace(old, new, 1)
+
+          old = '''        if self.idx >= self.buffer.len() {
+                  return None;
+              }
+              let i = self.idx;
+              self.idx += 1;
+              Some(&self.buffer[i])'''
+          new = '''        if self.idx >= self.buffer.len() {
+                  self.emitted_policy_action = false;
+                  return None;
+              }
+              let i = self.idx;
+              self.idx += 1;
+              self.emitted_policy_action = self.idx == self.buffer.len();
+              Some(&self.buffer[i])'''
+          assert old in s
+          s = s.replace(old, new, 1)
+          p.write_text(s)
+          PY
+
+          cat > crates/rerobot-core/tests/action_interpolator_current_contract_probe.rs <<'RS'
+          use rerobot_core::action_interpolator::ActionInterpolator;
+
+          fn interp(multiplier: i64) -> ActionInterpolator<f32> {
+              ActionInterpolator::new(multiplier).unwrap()
+          }
+
+          #[test]
+          fn current_bit_exact_cycle_end_and_emission_flag() {
+              let prev = [-8.56674575805664f32, 0.6271883249282837f32];
+              let action = [11.006041526794434f32, -7.663063049316406f32];
+              let old = [
+                  prev[0] + 1.0f32 * (action[0] - prev[0]),
+                  prev[1] + 1.0f32 * (action[1] - prev[1]),
+              ];
+              assert_ne!(old.map(f32::to_bits), action.map(f32::to_bits), "fixture stopped discriminating");
+
+              let mut i = interp(2);
+              i.add(&prev).unwrap();
+              assert_eq!(i.get(), Some(prev.as_slice()));
+              assert!(i.emitted_policy_action());
+
+              i.add(&action).unwrap();
+              let mid = i.get().unwrap().to_vec();
+              assert!(!i.emitted_policy_action());
+              assert_ne!(mid.as_slice(), action.as_slice());
+
+              let end = i.get().unwrap().to_vec();
+              assert!(i.emitted_policy_action());
+              assert_eq!(end.iter().map(|v| v.to_bits()).collect::<Vec<_>>(), action.iter().map(|v| v.to_bits()).collect::<Vec<_>>());
+              assert_eq!(i.get(), None);
+              assert!(!i.emitted_policy_action());
+          }
+
+          #[test]
+          fn current_cycle_end_preserves_policy_action_shape_after_broadcast_intermediate() {
+              let mut i = interp(2);
+              i.add(&[0.0, 10.0]).unwrap();
+              i.get();
+              i.add(&[4.0]).unwrap();
+              assert_eq!(i.get(), Some([2.0f32, 7.0].as_slice()));
+              assert!(!i.emitted_policy_action());
+              assert_eq!(i.get(), Some([4.0f32].as_slice()));
+              assert!(i.emitted_policy_action());
+          }
+          RS
+
+          git diff -- crates/rerobot-core/src/action_interpolator.rs crates/rerobot-core/tests/action_interpolator_current_contract_probe.rs
+
+      - name: Current 0.6.2 contract probe goes green
+        shell: bash
+        working-directory: /tmp/Rerobot
+        run: |
+          set -euxo pipefail
+          cargo test --locked -p rerobot-core --test action_interpolator_current_contract_probe | tee /tmp/current.log
+          grep -q '2 passed; 0 failed' /tmp/current.log
+          echo CURRENT_ACTION_INTERPOLATOR_MIGRATION_GREEN
+
+      - name: Pinned 0.6.1-derived suite detects compatibility-target conflict
+        shell: bash
+        working-directory: /tmp/Rerobot
+        run: |
+          set -uo pipefail
+          set +e
+          cargo test --locked -p rerobot-core --test action_interpolator 2>&1 | tee /tmp/pinned-after.log
+          status=${PIPESTATUS[0]}
+          set -e
+          if [ "$status" -eq 0 ]; then
+            echo 'expected the pinned suite to expose at least one changed observable contract' >&2
+            exit 1
+          fi
+          grep -q 'a_length_n_previous_broadcasts_against_a_length_one_action' /tmp/pinned-after.log
+          grep -q 'an_empty_previous_against_a_length_one_action_yields_empty_steps' /tmp/pinned-after.log
+          echo PINNED_0_6_1_CONTRACT_CONFLICT_CONFIRMED
+
+      - name: Confirm only disposable checkout changed
+        if: always()
+        shell: bash
+        run: |
+          set -euxo pipefail
+          test "$(git -C /tmp/Rerobot rev-parse HEAD)" = "$REROBOT_SHA"
+          git -C /tmp/Rerobot status --short
+          echo SOURCE_REMOTE_MUTATION=false
