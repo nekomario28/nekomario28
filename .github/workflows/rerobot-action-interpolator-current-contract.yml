@@ -1,0 +1,84 @@
+name: Rerobot current ActionInterpolator contract
+
+on:
+  push:
+    branches:
+      - research/rerobot-current-consumer-gate
+
+permissions:
+  contents: read
+
+jobs:
+  semantic-drift:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      REROBOT_SHA: f6c36c7da5326886fb6eb6e83d8a2d87283b31ec
+      LEROBOT_SHA: 8b256a6c0d4769c3cc3e7e98f04940126398a391
+    steps:
+      - name: Clone exact Rerobot
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --quiet https://github.com/k1000dai/Rerobot.git rerobot
+          git -C rerobot checkout --quiet --detach "$REROBOT_SHA"
+          test "$(git -C rerobot rev-parse HEAD)" = "$REROBOT_SHA"
+          echo "REROBOT_EXACT_HEAD=$REROBOT_SHA"
+          echo "CURRENT_LEROBOT_AUTHORITY=$LEROBOT_SHA"
+
+      - name: Inject current-upstream discriminating contract test
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > rerobot/crates/rerobot-core/tests/current_upstream_action_interpolator.rs <<'RS'
+          use rerobot_core::action_interpolator::ActionInterpolator;
+
+          #[test]
+          fn current_upstream_cycle_end_bit_exact_contract_is_not_met() {
+              // Exact float32 discriminator from current LeRobot
+              // tests/policies/rtc/test_action_interpolator.py at
+              // 8b256a6c0d4769c3cc3e7e98f04940126398a391.
+              let prev = [-8.56674575805664_f32, 0.6271883249282837_f32];
+              let action = [11.006041526794434_f32, -7.663063049316406_f32];
+
+              // Guard the guard: the old lerp endpoint is not bit-exactly action.
+              let old_endpoint = [
+                  prev[0] + 1.0_f32 * (action[0] - prev[0]),
+                  prev[1] + 1.0_f32 * (action[1] - prev[1]),
+              ];
+              assert_ne!(old_endpoint, action, "fixture became vacuous");
+
+              let mut interp = ActionInterpolator::<f32>::new(2).unwrap();
+              interp.add(&prev).unwrap();
+              assert_eq!(interp.get(), Some(prev.as_slice()));
+
+              interp.add(&action).unwrap();
+              let _intermediate = interp.get().unwrap().to_vec();
+              let endpoint = interp.get().unwrap().to_vec();
+
+              println!("CURRENT_EXPECTED_ACTION={action:?}");
+              println!("REROBOT_CYCLE_END={endpoint:?}");
+              println!(
+                  "CURRENT_EXPECTED_BITS={:?}",
+                  action.map(f32::to_bits)
+              );
+              println!(
+                  "REROBOT_CYCLE_END_BITS={:?}",
+                  endpoint.iter().copied().map(f32::to_bits).collect::<Vec<_>>()
+              );
+
+              // This test is an evidence probe: it succeeds only if the known
+              // current-upstream semantic mismatch is observable on exact Rerobot master.
+              assert_ne!(endpoint.as_slice(), action.as_slice());
+              println!("CURRENT_ACTION_INTERPOLATOR_CONTRACT_RED_CONFIRMED");
+          }
+          RS
+
+      - name: Execute Rerobot against current contract discriminator
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd rerobot
+          cargo test --locked -p rerobot-core --test current_upstream_action_interpolator -- --nocapture | tee /tmp/interpolator.log
+          grep -q 'CURRENT_ACTION_INTERPOLATOR_CONTRACT_RED_CONFIRMED' /tmp/interpolator.log
+          echo ACTION_INTERPOLATOR_EXECUTABLE_DRIFT_RECEIPT_PASS
