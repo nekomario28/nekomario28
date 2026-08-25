@@ -1,8 +1,8 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-08-25T08:50:34.255Z",
-  "repositoryCount": 14,
-  "groupCount": 6,
+  "generatedAt": "2026-08-25T14:25:48.617Z",
+  "repositoryCount": 15,
+  "groupCount": 7,
   "nodes": [
     {
       "id": "user:nekomario28",
@@ -15,6 +15,80 @@
       "label": "Game Modding",
       "type": "group",
       "repositoryCount": 7
+    },
+    {
+      "id": "repository:OffHandCombat",
+      "label": "OffHandCombat",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/OffHandCombat",
+      "description": "Allows for double handed fighting styles without breaking the combat\"",
+      "language": "Java",
+      "topics": [
+        "minecraft"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-07-26T05:18:26Z",
+      "updatedAt": "2026-08-25T14:06:01Z",
+      "groupId": "game-modding",
+      "groupLabel": "Game Modding",
+      "classification": {
+        "categoryId": "minecraft",
+        "categoryLabel": "Minecraft Modding",
+        "secondaryTags": [
+          "minecraft"
+        ],
+        "confidence": 0.927,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "minecraft",
+            "source": "topic",
+            "value": "minecraft",
+            "weight": 1
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "readme",
+            "value": "minecraft",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "readme",
+            "value": "neoforge",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "game-modding",
+        "categoryLabel": "Game Modding",
+        "secondaryTags": [
+          "artifact:game-mod",
+          "platform:game",
+          "ecosystem:minecraft",
+          "platform:server"
+        ],
+        "confidence": 0.906,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "game-modding",
+            "source": "description",
+            "value": "P1 exact taxonomy category game-modding",
+            "weight": 0.906
+          }
+        ]
+      }
     },
     {
       "id": "repository:FTBPublicClaims",
@@ -150,80 +224,6 @@
             "source": "description",
             "value": "P1 exact taxonomy category game-modding",
             "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:OffHandCombat",
-      "label": "OffHandCombat",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/OffHandCombat",
-      "description": "Allows for double handed fighting styles without breaking the combat\"",
-      "language": "Java",
-      "topics": [
-        "minecraft"
-      ],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-07-26T05:18:26Z",
-      "updatedAt": "2026-08-07T06:33:33Z",
-      "groupId": "game-modding",
-      "groupLabel": "Game Modding",
-      "classification": {
-        "categoryId": "minecraft",
-        "categoryLabel": "Minecraft Modding",
-        "secondaryTags": [
-          "minecraft"
-        ],
-        "confidence": 0.927,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "minecraft",
-            "source": "topic",
-            "value": "minecraft",
-            "weight": 1
-          },
-          {
-            "categoryId": "minecraft",
-            "source": "readme",
-            "value": "minecraft",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "minecraft",
-            "source": "readme",
-            "value": "neoforge",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "api",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "game-modding",
-        "categoryLabel": "Game Modding",
-        "secondaryTags": [
-          "artifact:game-mod",
-          "platform:game",
-          "ecosystem:minecraft",
-          "platform:server"
-        ],
-        "confidence": 0.906,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "game-modding",
-            "source": "description",
-            "value": "P1 exact taxonomy category game-modding",
-            "weight": 0.906
           }
         ]
       }
@@ -557,7 +557,7 @@
       "fork": true,
       "archived": false,
       "createdAt": "2026-07-03T07:45:19Z",
-      "updatedAt": "2026-08-15T14:38:08Z",
+      "updatedAt": "2026-08-25T12:39:56Z",
       "groupId": "robotics-automation",
       "groupLabel": "Robotics & Automation",
       "classification": {
@@ -942,6 +942,74 @@
       }
     },
     {
+      "id": "group:applications-services",
+      "label": "Applications & Services",
+      "type": "group",
+      "repositoryCount": 1
+    },
+    {
+      "id": "repository:wiki",
+      "label": "wiki",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/wiki",
+      "description": "Wiki for CachyOS",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-08-25T10:31:18Z",
+      "updatedAt": "2026-08-25T10:31:18Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "web",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "website",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:application",
+          "platform:web"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
       "id": "group:game-development",
       "label": "Game Development",
       "type": "group",
@@ -1116,7 +1184,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-08-25T08:46:08Z",
+      "updatedAt": "2026-08-25T14:06:17Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -1205,17 +1273,17 @@
     },
     {
       "source": "group:game-modding",
+      "target": "repository:OffHandCombat",
+      "type": "membership"
+    },
+    {
+      "source": "group:game-modding",
       "target": "repository:FTBPublicClaims",
       "type": "membership"
     },
     {
       "source": "group:game-modding",
       "target": "repository:sable",
-      "type": "membership"
-    },
-    {
-      "source": "group:game-modding",
-      "target": "repository:OffHandCombat",
       "type": "membership"
     },
     {
@@ -1270,6 +1338,16 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "group:applications-services",
+      "type": "ownership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:wiki",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "group:game-development",
       "type": "ownership"
     },
@@ -1307,7 +1385,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "dd4022ee570f543d7c5401ee769ce8f54c9fa9b8242a7ce563ad6c4e0d8717f5",
+    "corpusFingerprint": "0f4c9d9633a7c562174624ddcaafe6b1c52ef3c7e55cc6946d282878ffad790e",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -1378,6 +1456,11 @@
         "repoId": 1344034354,
         "name": "FreeToken",
         "contentHash": "7b09fbc6a22040bc747da90451f59775688b0eb40fa21a1e67022cb9e2164ee4"
+      },
+      {
+        "repoId": 1345987403,
+        "name": "wiki",
+        "contentHash": "a99d5a974758fde9f65a81b07ebcd7777590850397e62156ee55f7d653c448c6"
       }
     ],
     "categories": [
@@ -1614,13 +1697,13 @@
   "contributedRepositoryCount": 1,
   "externalContributions": {
     "window": {
-      "from": "2025-08-25T08:50:35.509Z",
-      "to": "2026-08-25T08:50:35.509Z"
+      "from": "2025-08-25T14:25:49.929Z",
+      "to": "2026-08-25T14:25:49.929Z"
     },
-    "cap": 7,
-    "candidateRepositories": 7,
+    "cap": 8,
+    "candidateRepositories": 8,
     "includedRepositories": 1,
-    "omittedRepositories": 6,
+    "omittedRepositories": 7,
     "truncatedRepositories": 0
   }
 }
