@@ -18,12 +18,23 @@
     "source_sha": "bf3960dc85eebf8e25c5e8a015e968322a984597",
     "initial_filtered_history_head": "ee0a07b9e85f7a57c6b2146149e68420202f4fe5",
     "current_bootstrap_main_sha": "d916b057ec897ceef94bdee293d4e02f42e46d1b",
-    "current_working_main_sha": "7cc093b00b0f37883951000693714b0a76e96276",
+    "current_working_main_sha": "23f9b3d546a9ca29435de3741f8bee848450a937",
     "bootstrap_carrier_run": 32868834661,
     "exact_head_validation_run": 32869436824,
     "portable_regression_run": 32871700639,
     "portable_regression_job": 97880025443,
     "portable_regression_tests": 7,
+    "design_grammar": {
+      "phase": "P9",
+      "mode": "measured-reference-detection-only",
+      "grammar_sha256": "24ee74fdb9ae669390244af16463220e0f9b0f9e0661159c19b0ced0a69a4ced",
+      "exact_head_validation_run": 32876973365,
+      "exact_head_validation_job": 97897147907,
+      "tests": 14,
+      "donor_bundle_lint": "PASS",
+      "donor_bundle_assets": 15,
+      "renderer_authority": false
+    },
     "public_release": "DEFERRED"
   },
   "layers": {
@@ -102,13 +113,20 @@
     "vector safe text covers the proven glyph set and fails closed for unsupported visible glyphs",
     "the standalone GitHub transformer consumes a complete donor SVG bundle but does not define how arbitrary semantic source data becomes that bundle",
     "the P6 second consumer is a structurally different synthetic fixture, not an independent external consumer",
-    "the private working repository is an extraction/development surface and does not itself authorize public redistribution"
+    "the private working repository is an extraction/development surface and does not itself authorize public redistribution",
+    "P9 design grammar is detection-only measured reference; it does not become renderer authority until migration equivalence and rendered evidence are re-earned"
   ],
   "promotion_gates": {
     "create_public_repository": [
       "an independent consumer or concrete reuse request exists",
       "the extracted package passes structure and browser evidence without reading this profile repository",
       "publication/licensing metadata for the new repository is chosen explicitly"
+    ],
+    "promote_design_grammar_to_renderer_authority": [
+      "the measured grammar passes against the proven donor bundle",
+      "tokenizing each renderer-owned value preserves byte-equivalent output or receives explicit visual review",
+      "browser/static/reduced-motion evidence is re-earned on the migrated renderer",
+      "optical or data-derived exceptions are recorded by reason rather than hidden raw literals"
     ],
     "create_new_skill": [
       "a discriminating evaluation shows existing readme-visual-design and animation-composition guidance is insufficient",
