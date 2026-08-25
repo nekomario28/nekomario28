@@ -3,7 +3,7 @@
   "contractId": "ipm-repository-assessment-artifact-v1",
   "owner": "nekomario28",
   "generatedAt": "2026-08-25T08:50:34.255Z",
-  "generatorRevision": "1c426da42b63f8ce322251bf7fefeb562ef1d9c6",
+  "generatorRevision": "884e5631537888d4876036bc91f0c4fc84d8fb5b",
   "taxonomyId": "ipm-standard-v1",
   "assessmentPolicyId": "ipm-repository-assessment-v1",
   "productionScoring": false,
@@ -2414,12 +2414,392 @@
         }
       },
       "acquisition": {
-        "level": "L0",
+        "level": "L1",
         "observedAt": "2026-08-25T08:50:34.255Z"
       },
       "quality": {
-        "state": "not-collected",
-        "value": null
+        "state": "partial",
+        "value": {
+          "schemaVersion": 1,
+          "contractId": "ipm-repository-fork-quality-v1",
+          "relation": {
+            "ownership": "owned",
+            "collaboration": "unknown",
+            "lineage": "fork"
+          },
+          "artifacts": [
+            "application"
+          ],
+          "upstreamContext": {
+            "repositoryKey": "flashml-org/freetoken",
+            "role": "context-only",
+            "projectQualityAttribution": "upstream-context-only",
+            "projectImpactAttribution": "upstream-context-only"
+          },
+          "snapshotQuality": {
+            "state": "partial",
+            "value": {
+              "schemaVersion": 1,
+              "artifacts": [
+                "application"
+              ],
+              "claimBoundaries": [],
+              "dimensions": {
+                "understandability": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "verification": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "reproducibility": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "maintainability": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "integrity": {
+                  "applicability": "optional",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "interoperability": {
+                  "applicability": "optional",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "security-safety": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "stewardship": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                }
+              },
+              "compositeQualityScore": null
+            },
+            "evidenceProvenance": {},
+            "evidenceOriginState": "unknown",
+            "evidenceOriginCounts": {
+              "local": 0,
+              "upstream-inherited": 0,
+              "upstream-accepted": 0,
+              "mixed": 0,
+              "unknown": 0
+            },
+            "personSideEligible": false
+          },
+          "localDelta": {
+            "observation": {
+              "state": "observed",
+              "presence": "present",
+              "scope": "FlashML-org/FreeToken@2757bb5f91156fc8a44d88ec4b302a81f10c9e81...nekomario28/FreeToken@b2c0f162ae74c22898fb61b7369b4d7a3474bbfa",
+              "evidence": "The current default heads are diverged: the fork main is 2 commits ahead and 7 behind upstream main, with merge base f0abe587a11cca53bb3c37a9596fad24973ace62. The meaningful local delta is feature commit 3ab9469657d83b02da6fd1fcd28f2b2f4b29"
+            },
+            "quality": {
+              "state": "partial",
+              "value": {
+                "schemaVersion": 1,
+                "artifacts": [
+                  "application"
+                ],
+                "claimBoundaries": [],
+                "dimensions": {
+                  "understandability": {
+                    "applicability": "recommended",
+                    "authority": "repository-native",
+                    "evidenceState": "observed",
+                    "findingState": "supports",
+                    "findingCounts": {
+                      "supports": 1,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "evidenced",
+                    "evidenceCount": 1,
+                    "evidence": [
+                      {
+                        "authority": "repository-native",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "C",
+                        "sourceId": "docs/cli.md@3ab9469657d83b02da6fd1fcd28f2b2f4b297355",
+                        "claim": "The local delta documents --moe-collect-stats as opt-in telemetry and states that the exposed H2D value is logical payload rather than measured PCIe bandwidth; the control CLI uses the same bounded terminology."
+                      }
+                    ]
+                  },
+                  "verification": {
+                    "applicability": "recommended",
+                    "authority": "mixed",
+                    "evidenceState": "observed",
+                    "findingState": "supports",
+                    "findingCounts": {
+                      "supports": 2,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "evidenced",
+                    "evidenceCount": 2,
+                    "evidence": [
+                      {
+                        "authority": "project-owned",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "B",
+                        "sourceId": "pull-request:nekomario28/FreeToken#1@3ab9469657d83b02da6fd1fcd28f2b2f4b297355",
+                        "claim": "The merged local PR freezes exact base f0abe587a11cca53bb3c37a9596fad24973ace62 and exact feature head 3ab9469657d83b02da6fd1fcd28f2b2f4b297355, records the focused CPU regression command as 98 passed with one expected fallback warning, records compileall and git diff --check as passed, and reports a bounded RX 7800 XT-class ROCm counter-path check whose ACTIVE/MISS/CALLS values matched the test vectors."
+                      },
+                      {
+                        "authority": "repository-native",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "C",
+                        "sourceId": "tests/server/test_moe_stats.py+tests/server/test_message_wire.py+tests/scheduler/test_scheduler_status.py@3ab9469657d83b02da6fd1fcd28f2b2f4b297355",
+                        "claim": "The local delta adds focused tests for hit/miss and logical-payload derivation, missing-snapshot behavior, regular-LRU versus hybrid fetch semantics, payload-not-bandwidth labeling, wire round trips, and throttled scheduler status propagation."
+                      }
+                    ]
+                  },
+                  "reproducibility": {
+                    "applicability": "recommended",
+                    "authority": "project-owned",
+                    "evidenceState": "observed",
+                    "findingState": "supports",
+                    "findingCounts": {
+                      "supports": 1,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "evidenced",
+                    "evidenceCount": 1,
+                    "evidence": [
+                      {
+                        "authority": "project-owned",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "B",
+                        "sourceId": "pull-request:nekomario28/FreeToken#1:validation-recipe@3ab9469657d83b02da6fd1fcd28f2b2f4b297355",
+                        "claim": "The local PR records exact base/head identities and an explicit PYTHONPATH/TVM_FFI_CACHE_DIR pytest recipe covering scheduler, message-wire and MoE-stats tests, plus compileall and diff-check commands. This supports reproduction of the bounded feature validation, not full application or artifact determinism."
+                      }
+                    ]
+                  },
+                  "maintainability": {
+                    "applicability": "recommended",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  },
+                  "integrity": {
+                    "applicability": "optional",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  },
+                  "interoperability": {
+                    "applicability": "optional",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  },
+                  "security-safety": {
+                    "applicability": "recommended",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  },
+                  "stewardship": {
+                    "applicability": "recommended",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  }
+                },
+                "compositeQualityScore": null
+              },
+              "reason": null,
+              "evidenceProvenance": {
+                "understandability": [
+                  {
+                    "origin": "local",
+                    "sourceId": "docs/cli.md@3ab9469657d83b02da6fd1fcd28f2b2f4b297355"
+                  }
+                ],
+                "verification": [
+                  {
+                    "origin": "local",
+                    "sourceId": "pull-request:nekomario28/FreeToken#1@3ab9469657d83b02da6fd1fcd28f2b2f4b297355"
+                  },
+                  {
+                    "origin": "local",
+                    "sourceId": "tests/server/test_moe_stats.py+tests/server/test_message_wire.py+tests/scheduler/test_scheduler_status.py@3ab9469657d83b02da6fd1fcd28f2b2f4b297355"
+                  }
+                ],
+                "reproducibility": [
+                  {
+                    "origin": "local",
+                    "sourceId": "pull-request:nekomario28/FreeToken#1:validation-recipe@3ab9469657d83b02da6fd1fcd28f2b2f4b297355"
+                  }
+                ]
+              }
+            },
+            "evidenceOriginState": "local",
+            "evidenceOriginCounts": {
+              "local": 4,
+              "upstream-inherited": 0,
+              "upstream-accepted": 0,
+              "mixed": 0,
+              "unknown": 0
+            }
+          },
+          "personalAttribution": {
+            "qualitySource": "local-delta-only",
+            "snapshotQualityEligible": false,
+            "upstreamInheritedEvidenceEligible": false,
+            "upstreamAcceptedEvidenceEligible": true,
+            "localDeltaRequired": true,
+            "localDeltaState": "observed",
+            "localDeltaPresence": "present"
+          },
+          "compositeForkQualityScore": null,
+          "productionRankingAllowed": false
+        }
       },
       "impact": {
         "state": "partial",

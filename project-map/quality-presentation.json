@@ -9,7 +9,7 @@
       "contractId": "ipm-repository-assessment-artifact-v1",
       "owner": "nekomario28",
       "generatedAt": "2026-08-25T08:50:34.255Z",
-      "generatorRevision": "1c426da42b63f8ce322251bf7fefeb562ef1d9c6",
+      "generatorRevision": "884e5631537888d4876036bc91f0c4fc84d8fb5b",
       "assessmentPolicyId": "ipm-repository-assessment-v1"
     }
   },
@@ -1563,25 +1563,351 @@
           "lineage": "fork"
         }
       },
-      "qualitySectionState": "not-collected",
-      "qualityAttributionScope": null,
-      "overlayState": "unavailable",
-      "unavailableReason": "not-collected",
-      "overlay": null,
+      "qualitySectionState": "partial",
+      "qualityAttributionScope": "local-delta",
+      "overlayState": "available",
+      "unavailableReason": null,
+      "overlay": {
+        "schemaVersion": 1,
+        "mode": "quality-evidence-overlay",
+        "dimensionOrder": [
+          "understandability",
+          "verification",
+          "reproducibility",
+          "maintainability",
+          "integrity",
+          "interoperability",
+          "security-safety",
+          "stewardship"
+        ],
+        "segments": [
+          {
+            "id": "understandability",
+            "slot": 0,
+            "applicability": "recommended",
+            "target": true,
+            "findingState": "supports",
+            "evidenceState": "observed",
+            "inspected": true,
+            "directional": true,
+            "token": "quality-supports"
+          },
+          {
+            "id": "verification",
+            "slot": 1,
+            "applicability": "recommended",
+            "target": true,
+            "findingState": "supports",
+            "evidenceState": "observed",
+            "inspected": true,
+            "directional": true,
+            "token": "quality-supports"
+          },
+          {
+            "id": "reproducibility",
+            "slot": 2,
+            "applicability": "recommended",
+            "target": true,
+            "findingState": "supports",
+            "evidenceState": "observed",
+            "inspected": true,
+            "directional": true,
+            "token": "quality-supports"
+          },
+          {
+            "id": "maintainability",
+            "slot": 3,
+            "applicability": "recommended",
+            "target": true,
+            "findingState": "unknown",
+            "evidenceState": "unknown",
+            "inspected": false,
+            "directional": false,
+            "token": "quality-unknown"
+          },
+          {
+            "id": "integrity",
+            "slot": 4,
+            "applicability": "optional",
+            "target": false,
+            "findingState": "unknown",
+            "evidenceState": "unknown",
+            "inspected": false,
+            "directional": false,
+            "token": "quality-optional"
+          },
+          {
+            "id": "interoperability",
+            "slot": 5,
+            "applicability": "optional",
+            "target": false,
+            "findingState": "unknown",
+            "evidenceState": "unknown",
+            "inspected": false,
+            "directional": false,
+            "token": "quality-optional"
+          },
+          {
+            "id": "security-safety",
+            "slot": 6,
+            "applicability": "recommended",
+            "target": true,
+            "findingState": "unknown",
+            "evidenceState": "unknown",
+            "inspected": false,
+            "directional": false,
+            "token": "quality-unknown"
+          },
+          {
+            "id": "stewardship",
+            "slot": 7,
+            "applicability": "recommended",
+            "target": true,
+            "findingState": "unknown",
+            "evidenceState": "unknown",
+            "inspected": false,
+            "directional": false,
+            "token": "quality-unknown"
+          }
+        ],
+        "targetFindingCounts": {
+          "supports": 3,
+          "weakens": 0,
+          "neutral": 0,
+          "mixed": 0,
+          "unknown": 3
+        },
+        "compactDistribution": {
+          "mode": "target-finding-distribution",
+          "denominator": 6,
+          "findingOrder": [
+            "supports",
+            "neutral",
+            "weakens",
+            "mixed",
+            "unknown"
+          ],
+          "segments": [
+            {
+              "findingState": "supports",
+              "count": 3,
+              "ratio": 0.5,
+              "token": "quality-supports"
+            },
+            {
+              "findingState": "neutral",
+              "count": 0,
+              "ratio": 0,
+              "token": "quality-neutral"
+            },
+            {
+              "findingState": "weakens",
+              "count": 0,
+              "ratio": 0,
+              "token": "quality-weakens"
+            },
+            {
+              "findingState": "mixed",
+              "count": 0,
+              "ratio": 0,
+              "token": "quality-mixed"
+            },
+            {
+              "findingState": "unknown",
+              "count": 3,
+              "ratio": 0.5,
+              "token": "quality-unknown"
+            }
+          ],
+          "dimensionIdentityPreserved": false,
+          "requiresDetailForDimensionIdentity": true,
+          "compositeQualityScore": null
+        },
+        "coverage": {
+          "targetDimensions": 6,
+          "inspectedDimensions": 3,
+          "directionalDimensions": 3,
+          "inspectedCoverageRatio": 0.5,
+          "directionalCoverageRatio": 0.5,
+          "label": "3/6 interpreted"
+        },
+        "attentionState": "incomplete-evidence",
+        "visualContract": {
+          "slotCount": 8,
+          "fixedGlobalDimensionSlots": true,
+          "targetUnknownRemainsVisible": true,
+          "optionalDimensionsDoNotInflateCoverage": true,
+          "notApplicableUsesGapSemantic": true,
+          "nodeSizeEffect": "none",
+          "labelPriorityEffect": "none",
+          "impactHaloEffect": "none",
+          "fullRingEncoding": "fixed-dimension-semantic-segments",
+          "compactRingEncoding": "target-finding-distribution",
+          "compactRingPreservesDimensionIdentity": false,
+          "compactRingRequiresDetailForDimensionIdentity": true
+        },
+        "compositeQualityScore": null,
+        "productionRankingAllowed": false
+      },
       "views": {
         "detail": {
-          "mode": "unavailable",
-          "token": "quality-unavailable",
-          "reason": "not-collected",
+          "mode": "full-fixed-dimension-ring",
+          "segments": [
+            {
+              "id": "understandability",
+              "slot": 0,
+              "applicability": "recommended",
+              "target": true,
+              "findingState": "supports",
+              "evidenceState": "observed",
+              "inspected": true,
+              "directional": true,
+              "token": "quality-supports"
+            },
+            {
+              "id": "verification",
+              "slot": 1,
+              "applicability": "recommended",
+              "target": true,
+              "findingState": "supports",
+              "evidenceState": "observed",
+              "inspected": true,
+              "directional": true,
+              "token": "quality-supports"
+            },
+            {
+              "id": "reproducibility",
+              "slot": 2,
+              "applicability": "recommended",
+              "target": true,
+              "findingState": "supports",
+              "evidenceState": "observed",
+              "inspected": true,
+              "directional": true,
+              "token": "quality-supports"
+            },
+            {
+              "id": "maintainability",
+              "slot": 3,
+              "applicability": "recommended",
+              "target": true,
+              "findingState": "unknown",
+              "evidenceState": "unknown",
+              "inspected": false,
+              "directional": false,
+              "token": "quality-unknown"
+            },
+            {
+              "id": "integrity",
+              "slot": 4,
+              "applicability": "optional",
+              "target": false,
+              "findingState": "unknown",
+              "evidenceState": "unknown",
+              "inspected": false,
+              "directional": false,
+              "token": "quality-optional"
+            },
+            {
+              "id": "interoperability",
+              "slot": 5,
+              "applicability": "optional",
+              "target": false,
+              "findingState": "unknown",
+              "evidenceState": "unknown",
+              "inspected": false,
+              "directional": false,
+              "token": "quality-optional"
+            },
+            {
+              "id": "security-safety",
+              "slot": 6,
+              "applicability": "recommended",
+              "target": true,
+              "findingState": "unknown",
+              "evidenceState": "unknown",
+              "inspected": false,
+              "directional": false,
+              "token": "quality-unknown"
+            },
+            {
+              "id": "stewardship",
+              "slot": 7,
+              "applicability": "recommended",
+              "target": true,
+              "findingState": "unknown",
+              "evidenceState": "unknown",
+              "inspected": false,
+              "directional": false,
+              "token": "quality-unknown"
+            }
+          ],
+          "coverage": {
+            "targetDimensions": 6,
+            "inspectedDimensions": 3,
+            "directionalDimensions": 3,
+            "inspectedCoverageRatio": 0.5,
+            "directionalCoverageRatio": 0.5,
+            "label": "3/6 interpreted"
+          },
+          "attentionState": "incomplete-evidence",
           "compositeQualityScore": null,
-          "dimensionIdentityPreserved": false
+          "dimensionIdentityPreserved": true
         },
         "compact": {
-          "mode": "unavailable",
-          "token": "quality-unavailable",
-          "reason": "not-collected",
+          "mode": "target-finding-distribution",
+          "denominator": 6,
+          "findingOrder": [
+            "supports",
+            "neutral",
+            "weakens",
+            "mixed",
+            "unknown"
+          ],
+          "segments": [
+            {
+              "findingState": "supports",
+              "count": 3,
+              "ratio": 0.5,
+              "token": "quality-supports"
+            },
+            {
+              "findingState": "neutral",
+              "count": 0,
+              "ratio": 0,
+              "token": "quality-neutral"
+            },
+            {
+              "findingState": "weakens",
+              "count": 0,
+              "ratio": 0,
+              "token": "quality-weakens"
+            },
+            {
+              "findingState": "mixed",
+              "count": 0,
+              "ratio": 0,
+              "token": "quality-mixed"
+            },
+            {
+              "findingState": "unknown",
+              "count": 3,
+              "ratio": 0.5,
+              "token": "quality-unknown"
+            }
+          ],
+          "dimensionIdentityPreserved": false,
+          "requiresDetailForDimensionIdentity": true,
           "compositeQualityScore": null,
-          "dimensionIdentityPreserved": false
+          "coverage": {
+            "targetDimensions": 6,
+            "inspectedDimensions": 3,
+            "directionalDimensions": 3,
+            "inspectedCoverageRatio": 0.5,
+            "directionalCoverageRatio": 0.5,
+            "label": "3/6 interpreted"
+          },
+          "attentionState": "incomplete-evidence"
         }
       },
       "visualPolicy": {
@@ -1590,6 +1916,11 @@
         "nodeSizeEffect": "none",
         "labelPriorityEffect": "none",
         "impactHaloEffect": "none"
+      },
+      "evidenceFreshness": {
+        "state": "frozen-snapshot",
+        "snapshotDate": "2026-08-24",
+        "automaticRefresh": false
       }
     },
     {
@@ -2796,8 +3127,8 @@
     "graphRepositories": 15,
     "assessmentRepositories": 15,
     "joinedRepositories": 15,
-    "available": 6,
-    "unavailable": 9,
+    "available": 7,
+    "unavailable": 8,
     "missingAssessmentGraphNodeIds": [],
     "orphanAssessmentGraphNodeIds": [],
     "strictJoin": true
@@ -2815,9 +3146,10 @@
     "mode": "bounded-frozen-snapshots",
     "scope": "portfolio-quality-presented-sources",
     "automaticRefresh": false,
-    "sourceCount": 6,
+    "sourceCount": 7,
     "snapshotDates": [
       "2026-07-25",
+      "2026-08-24",
       "2026-08-25"
     ],
     "oldestSnapshotDate": "2026-07-25",
