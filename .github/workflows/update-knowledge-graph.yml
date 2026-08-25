@@ -1,181 +1,65 @@
 name: Update project map
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/update-knowledge-graph.yml"
   pull_request:
     branches: [main]
     paths:
       - ".github/workflows/update-knowledge-graph.yml"
-      - "README.md"
-  schedule:
-    # Twice-daily refresh; push/manual triggers handle immediate updates.
-    - cron: "41 1,13 * * *"
-  workflow_dispatch:
 
 permissions:
   contents: read
 
-concurrency:
-  group: interactive-project-map-${{ github.ref }}
-  cancel-in-progress: false
-
 jobs:
-  generate:
-    permissions:
-      contents: read
-    # Stable native-IPM Contributed world-coherence release.
-    # v1 R 452a197889cf83cdddf779a70102188056bc5f36 resolves immutable
-    # Action F 37500d3e3b231452b7281a78374f32d04c6445ea.
-    # F, exact reusable R, Chromium/WebKit, and real-profile halo proofs passed before promotion.
-    uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@v1
-    with:
-      theme: dark
-      style: galaxy-systems
-      max_repos: "100"
-      forks: true
-      archived: true
-      contributed: true
-
-  publish:
-    needs: generate
+  probe-exact-action-f:
     runs-on: ubuntu-latest
     permissions:
-      actions: read
-      contents: write
+      contents: read
     steps:
       - name: Checkout exact profile revision
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
-          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Download generated files
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+      - name: Generate project map with exact taxonomy implementation F
+        uses: nekomario28/interactive-project-map@9d018370d7b22d82d8974ae1ac018de5589dd85a
         with:
-          name: project-map-generated
-          path: project-map
+          github_token: ${{ github.token }}
+          username: nekomario28
+          theme: dark
+          style: galaxy-systems
+          max_repos: "100"
+          forks: "true"
+          archived: "true"
+          contributed: "true"
+          output_dir: .tmp/project-map-f
 
-      - name: Validate direct native IPM profile surface
+      - name: Validate real-profile artifact identity boundary
         shell: bash
         run: |
           set -euo pipefail
-          test -s project-map/galaxy.svg
-          test -s project-map/graph.json
-          grep -q 'src="project-map/galaxy.svg"' README.md
-          if grep -Eq 'active-profile-envelope|profile-projects-canvas\.svg|profile-activity-canvas\.svg|profile-(attribution-projects-transition|activity-header|footer-transition)\.svg' README.md; then
-            echo 'README still mounts Envelope-derived presentation SVGs.' >&2
-            exit 1
-          fi
-          grep -q 'data-galaxy-preset="systems"' project-map/galaxy.svg
-          grep -q 'font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif"' project-map/galaxy.svg
-          grep -q 'id="galaxy-family-bg"' project-map/galaxy.svg
-          grep -q '#E69F00' project-map/galaxy.svg
-          grep -q 'data-galaxy-external="true"' project-map/galaxy.svg
-          grep -q 'data-galaxy-external-layout="halo"' project-map/galaxy.svg
-          grep -q 'data-galaxy-orbit="contributed"' project-map/galaxy.svg
-          grep -q 'data-galaxy-placement="external-halo-orbit"' project-map/galaxy.svg
-          grep -q '>Contributed</text>' project-map/galaxy.svg
-          if grep -Eq 'data-galaxy-external-layout="rail"|data-galaxy-placement="external-rail"|data-galaxy-external-backdrop="true"|>external repositories</text>' project-map/galaxy.svg; then
-            echo 'Detached Contributed rail leaked into native IPM output.' >&2
-            exit 1
-          fi
-          if grep -Eq 'data-profile-galaxy-|profile-galaxy-(ring|association|nucleus|arm)' project-map/galaxy.svg; then
-            echo 'Profile-local donor decoration leaked into native IPM output.' >&2
-            exit 1
-          fi
-          grep -q '"taxonomy"' project-map/graph.json
+          test -s .tmp/project-map-f/graph.json
           node <<'NODE'
           const fs = require('node:fs');
-          const svg = fs.readFileSync('project-map/galaxy.svg', 'utf8');
-          const graph = JSON.parse(fs.readFileSync('project-map/graph.json', 'utf8'));
-          const owner = 'nekomario28';
-          const contributed = graph.nodes.filter((node) => node?.type === 'repository' && node?.relation === 'contributed');
-          const contributedIds = new Set(contributed.map((node) => node.id));
-
-          if (contributed.length < 1) throw new Error('canonical map has no accepted Contributed repositories');
-          if (graph.contributedRepositoryCount !== contributed.length) throw new Error('Contributed count mismatch');
-          if (graph.externalContributions?.includedRepositories !== contributed.length) throw new Error('Contributed diagnostics mismatch');
-          for (const node of contributed) {
-            if (!node.repositoryOwner || !node.repositoryName || String(node.repositoryOwner).toLowerCase() === owner) throw new Error('invalid external repository identity');
-            if ('groupId' in node || 'groupLabel' in node) throw new Error('Contributed repository gained owned category membership');
-            const commits = Number(node.contribution?.commits || 0);
-            const merged = Number(node.contribution?.mergedPullRequests || 0);
-            if (commits < 1 && merged < 1) throw new Error(`pending-only repository admitted as Contributed: ${node.label}`);
-          }
-          if (graph.edges.some((edge) => ['ownership', 'membership'].includes(edge?.type) && contributedIds.has(edge?.target))) throw new Error('ownership path reaches Contributed repository');
-          const contributionTargets = new Set(graph.edges.filter((edge) => edge?.type === 'contribution').map((edge) => edge.target));
-          for (const id of contributedIds) if (!contributionTargets.has(id)) throw new Error(`missing canonical contribution edge for ${id}`);
-          if ((graph.semanticEdges || []).some((edge) => contributedIds.has(edge?.source) || contributedIds.has(edge?.target))) throw new Error('Contributed repository entered owned semantic graph');
-
-          if (!svg.includes('id="galaxy-family-bg"') || !svg.includes('fill="url(#galaxy-family-bg)"')) {
-            throw new Error('native IPM Galaxy background is missing');
-          }
-          if (/data-profile-galaxy-|ead72debca2a16608ebc5b799993c0234ea10cab/.test(svg)) {
-            throw new Error('profile-local historical donor markers survived the rollback');
-          }
-          if (/parallax|meteor/i.test(svg)) throw new Error('interactive screen-space background decoration leaked into static SVG output');
-
-          const haloStart = svg.indexOf('data-galaxy-external-layout="halo"');
-          if (haloStart < 0) throw new Error('Galaxy Systems external halo is missing');
-          const haloSlice = svg.slice(haloStart);
-          const placements = [...haloSlice.matchAll(/data-galaxy-orbit="contributed" data-galaxy-placement="external-halo-orbit" data-galaxy-lane="([0-9]+)" data-galaxy-radius="([0-9.]+)"/g)];
-          if (placements.length !== contributed.length) throw new Error(`external halo placement mismatch: ${placements.length} SVG vs ${contributed.length} graph`);
-          if (!/<animateTransform\b/.test(haloSlice)) throw new Error('living external halo is missing orbit animation');
-
-          const byLane = new Map();
-          for (const match of placements) {
-            const lane = Number(match[1]);
-            const radius = Number(match[2]);
-            if (!Number.isFinite(lane) || !Number.isFinite(radius)) throw new Error('invalid Contributed halo geometry');
-            if (!byLane.has(lane)) byLane.set(lane, []);
-            byLane.get(lane).push(radius);
-          }
-          const lanes = [...byLane.keys()].sort((a, b) => a - b);
-          for (let index = 1; index < lanes.length; index += 1) {
-            const previous = byLane.get(lanes[index - 1]);
-            const current = byLane.get(lanes[index]);
-            if (Math.min(...current) <= Math.max(...previous)) throw new Error('later Contributed halo lane did not expand outward');
-          }
-
-          const forbiddenKeys = new Set(['private', 'isPrivate', 'restricted', 'isRestricted']);
-          const visit = (value) => {
-            if (!value || typeof value !== 'object') return;
-            for (const [key, child] of Object.entries(value)) {
-              if (forbiddenKeys.has(key)) throw new Error(`forbidden privacy key serialized: ${key}`);
-              visit(child);
-            }
-          };
-          visit(graph);
-          console.log(`Direct native IPM profile validated: ${graph.repositoryCount} owned + ${contributed.length} Contributed; native background + shared external halo + inherited sans font`);
+          const graph = JSON.parse(fs.readFileSync('.tmp/project-map-f/graph.json', 'utf8'));
+          const repositories = graph.nodes.filter((node) => node?.type === 'repository');
+          const lime = repositories.find((node) => String(node.label).toLowerCase() === 'lime_tidyup');
+          if (!lime) throw new Error('lime_tidyup missing from exact-F real profile graph');
+          const tags = lime.taxonomyAssignment?.secondaryTags ?? [];
+          if (lime.taxonomyAssignment?.categoryId !== 'robotics-automation') throw new Error(`unexpected lime category: ${lime.taxonomyAssignment?.categoryId}`);
+          if (!tags.includes('artifact:service')) throw new Error(`lime service facet missing: ${JSON.stringify(tags)}`);
+          if (tags.includes('artifact:documentation')) throw new Error(`incidental documentation facet survived: ${JSON.stringify(tags)}`);
+          if (!tags.includes('ecosystem:ros2')) throw new Error(`ROS2 ecosystem facet missing: ${JSON.stringify(tags)}`);
+          if (!tags.includes('topic:gazebo')) throw new Error(`Gazebo topic facet missing: ${JSON.stringify(tags)}`);
+          if (repositories.length < 15) throw new Error(`unexpected profile repository count: ${repositories.length}`);
+          const contributed = repositories.filter((node) => node?.relation === 'contributed');
+          if (contributed.length < 1) throw new Error('accepted Contributed repository disappeared in exact-F probe');
+          console.log(`EXACT_ACTION_F_PROFILE_PASS repositories=${repositories.length} lime=${tags.join(',')} contributed=${contributed.length}`);
           NODE
 
-      - name: Verify direct publish diff on pull requests
-        if: github.event_name == 'pull_request'
+      - name: Prove probe cannot publish
         shell: bash
         run: |
           set -euo pipefail
+          test "${{ github.event_name }}" = "pull_request"
           git diff --check
-          if test -n "$(git status --short -- assets/profile-*.svg design-lab/live-theme.json)"; then
-            echo 'Project Map refresh unexpectedly modified retired Envelope derivatives.' >&2
-            git status --short -- assets/profile-*.svg design-lab/live-theme.json >&2
-            exit 1
-          fi
-          echo "DIRECT_NATIVE_IPM_PROFILE_REFRESH_PR_PASS"
-
-      - name: Commit project map
-        if: github.event_name != 'pull_request'
-        shell: bash
-        run: |
-          set -euo pipefail
-          git add -- project-map/galaxy.svg project-map/graph.json
-          if git diff --cached --quiet; then
-            echo "Project map is already up to date."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "update project map"
-          git push origin HEAD:main
+          echo "READ_ONLY_EXACT_F_PROFILE_PROBE_PASS"
