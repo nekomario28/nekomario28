@@ -146,7 +146,8 @@ jobs:
 
           if ! "$WORK_ROOT/venv/bin/lerobot-train" \
             --dataset.repo_id=rerobot/state_only_slice --dataset.root="$FIXTURE" \
-            --policy.type=act --steps=5 --batch_size=2 --num_workers=0 --persistent_workers=false \
+            --policy.type=act --policy.push_to_hub=false \
+            --steps=5 --batch_size=2 --num_workers=0 --persistent_workers=false \
             --policy.chunk_size=2 --policy.n_action_steps=2 \
             --policy.dim_model=32 --policy.n_heads=4 --policy.dim_feedforward=64 \
             --policy.n_encoder_layers=1 --policy.n_decoder_layers=1 \
@@ -218,7 +219,8 @@ jobs:
             /usr/bin/time -f '%e %M %x' -o "$WORK_ROOT/metrics/python-$idx.txt" \
               "$WORK_ROOT/venv/bin/lerobot-train" \
               --dataset.repo_id=rerobot/state_only_slice --dataset.root="$FIXTURE" \
-              --policy.type=act --steps=50 --batch_size=2 --num_workers=0 --persistent_workers=false \
+              --policy.type=act --policy.push_to_hub=false \
+              --steps=50 --batch_size=2 --num_workers=0 --persistent_workers=false \
               --policy.chunk_size=2 --policy.n_action_steps=2 \
               --policy.dim_model=32 --policy.n_heads=4 --policy.dim_feedforward=64 \
               --policy.n_encoder_layers=1 --policy.n_decoder_layers=1 \
