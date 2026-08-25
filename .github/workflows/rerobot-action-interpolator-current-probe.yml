@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - research/rerobot-action-interpolator-current-probe
-  pull_request:
-    paths:
-      - ".github/workflows/rerobot-action-interpolator-current-probe.yml"
 
 permissions:
   contents: read
@@ -80,7 +77,7 @@ jobs:
           cargo test --locked -p rerobot-core --test current_action_interpolator_probe -- --nocapture | tee "$ROOT/rust-probe.log"
           grep -q 'REROBOT_CURRENT_ACTION_INTERPOLATOR=RED_CONFIRMED' "$ROOT/rust-probe.log"
 
-      - name: Execute current LeRobot on same fixture
+      - name: Execute current LeRobot module on same fixture
         shell: bash
         run: |
           set -euo pipefail
@@ -89,9 +86,18 @@ jobs:
           "$ROOT/venv/bin/python" -m pip install --disable-pip-version-check -q --upgrade pip
           "$ROOT/venv/bin/python" -m pip install --disable-pip-version-check -q \
             --index-url https://download.pytorch.org/whl/cpu 'torch==2.11.0'
-          PYTHONPATH="$ROOT/lerobot/src" "$ROOT/venv/bin/python" - <<'PY' | tee "$ROOT/python-probe.log"
+          "$ROOT/venv/bin/python" - <<'PY' | tee "$ROOT/python-probe.log"
+          import importlib.util
+          import os
+          from pathlib import Path
           import torch
-          from lerobot.utils.action_interpolator import ActionInterpolator
+
+          module_path = Path(os.environ['ROOT']) / 'lerobot/src/lerobot/utils/action_interpolator.py'
+          spec = importlib.util.spec_from_file_location('current_lerobot_action_interpolator', module_path)
+          module = importlib.util.module_from_spec(spec)
+          assert spec.loader is not None
+          spec.loader.exec_module(module)
+          ActionInterpolator = module.ActionInterpolator
 
           prev = torch.tensor([-8.56674575805664, 0.6271883249282837], dtype=torch.float32)
           action = torch.tensor([11.006041526794434, -7.663063049316406], dtype=torch.float32)
@@ -132,7 +138,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          # The Rust probe is intentionally an untracked temporary test; tracked source must stay untouched.
           test -z "$(git -C "$ROOT/Rerobot" diff --name-only)"
           test -z "$(git -C "$ROOT/lerobot" diff --name-only)"
           echo 'SOURCE_TRACKED_MUTATION=FALSE'
