@@ -1,0 +1,100 @@
+name: Prove IPM Contributed halo exact implementation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/prove-ipm-contributed-halo-exact.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout profile repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Generate profile map with exact implementation F
+        uses: nekomario28/interactive-project-map@37500d3e3b231452b7281a78374f32d04c6445ea
+        with:
+          github_token: ${{ github.token }}
+          username: ${{ github.repository_owner }}
+          theme: dark
+          style: galaxy-systems
+          max_repos: "100"
+          forks: true
+          archived: true
+          contributed: true
+          output_dir: project-map
+
+      - name: Validate exact profile artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s project-map/galaxy.svg
+          test -s project-map/graph.json
+          grep -q 'data-galaxy-preset="systems"' project-map/galaxy.svg
+          grep -q 'data-galaxy-external="true"' project-map/galaxy.svg
+          grep -q 'data-galaxy-external-layout="halo"' project-map/galaxy.svg
+          grep -q 'data-galaxy-placement="external-halo-orbit"' project-map/galaxy.svg
+          grep -q '#E69F00' project-map/galaxy.svg
+          if grep -Eq 'data-galaxy-external-layout="rail"|data-galaxy-placement="external-rail"|data-galaxy-external-backdrop="true"|>external repositories</text>' project-map/galaxy.svg; then
+            echo 'Detached Contributed rail leaked into exact implementation output.' >&2
+            exit 1
+          fi
+          node <<'NODE'
+          const fs = require('node:fs');
+          const svg = fs.readFileSync('project-map/galaxy.svg', 'utf8');
+          const graph = JSON.parse(fs.readFileSync('project-map/graph.json', 'utf8'));
+          const owner = 'nekomario28';
+          const contributed = graph.nodes.filter((node) => node?.type === 'repository' && node?.relation === 'contributed');
+          const contributedIds = new Set(contributed.map((node) => node.id));
+          if (contributed.length < 1) throw new Error('real profile has no accepted Contributed repositories');
+          if (graph.contributedRepositoryCount !== contributed.length) throw new Error('Contributed count mismatch');
+          if (graph.externalContributions?.includedRepositories !== contributed.length) throw new Error('Contributed diagnostics mismatch');
+          for (const node of contributed) {
+            if (!node.repositoryOwner || !node.repositoryName || String(node.repositoryOwner).toLowerCase() === owner) throw new Error('invalid external identity');
+            if ('groupId' in node || 'groupLabel' in node) throw new Error('Contributed gained owned category membership');
+          }
+          if (graph.edges.some((edge) => ['ownership', 'membership'].includes(edge?.type) && contributedIds.has(edge?.target))) throw new Error('ownership path reaches Contributed');
+          const targets = new Set(graph.edges.filter((edge) => edge?.type === 'contribution').map((edge) => edge.target));
+          for (const id of contributedIds) if (!targets.has(id)) throw new Error(`missing contribution edge for ${id}`);
+          if ((graph.semanticEdges || []).some((edge) => contributedIds.has(edge?.source) || contributedIds.has(edge?.target))) throw new Error('Contributed entered owned semantic graph');
+          const placements = [...svg.matchAll(/data-galaxy-orbit="contributed" data-galaxy-placement="external-halo-orbit" data-galaxy-lane="([0-9]+)" data-galaxy-radius="([0-9.]+)"/g)];
+          if (placements.length !== contributed.length) throw new Error(`halo placement mismatch: ${placements.length} SVG vs ${contributed.length} graph`);
+          const byLane = new Map();
+          for (const match of placements) {
+            const lane = Number(match[1]);
+            const radius = Number(match[2]);
+            if (!byLane.has(lane)) byLane.set(lane, []);
+            byLane.get(lane).push(radius);
+          }
+          const lanes = [...byLane.keys()].sort((a, b) => a - b);
+          for (let i = 1; i < lanes.length; i += 1) {
+            const previous = byLane.get(lanes[i - 1]);
+            const current = byLane.get(lanes[i]);
+            if (Math.min(...current) <= Math.max(...previous)) throw new Error('later Contributed halo lane did not expand outward');
+          }
+          if (!/<animateTransform\b/.test(svg.slice(svg.indexOf('data-galaxy-external-layout="halo"')))) throw new Error('Contributed halo is not part of the living Galaxy motion');
+          const forbiddenKeys = new Set(['private', 'isPrivate', 'restricted', 'isRestricted']);
+          const visit = (value) => {
+            if (!value || typeof value !== 'object') return;
+            for (const [key, child] of Object.entries(value)) {
+              if (forbiddenKeys.has(key)) throw new Error(`forbidden privacy key serialized: ${key}`);
+              visit(child);
+            }
+          };
+          visit(graph);
+          console.log(`EXACT_IPM_HALO_PROFILE_PROOF_PASS: ${graph.repositoryCount} owned + ${contributed.length} Contributed`);
+          NODE
+
+      - name: Upload exact proof artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: ipm-contributed-halo-exact-proof
+          path: project-map
+          if-no-files-found: error
+          retention-days: 3
