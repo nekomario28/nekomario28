@@ -24,20 +24,40 @@ concurrency:
 
 jobs:
   generate:
+    runs-on: ubuntu-latest
     permissions:
       contents: read
-    # Exact implementation proof for the Contributed world-coherence repair.
-    # F 37500d3e3b231452b7281a78374f32d04c6445ea passed IPM Verify #968,
-    # including full verify, twelve-preset rendering, Chromium and iPhone WebKit.
-    # This PR proof intentionally bypasses @v1 until the exact real-profile output is accepted.
-    uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@37500d3e3b231452b7281a78374f32d04c6445ea
-    with:
-      theme: dark
-      style: galaxy-systems
-      max_repos: "100"
-      forks: true
-      archived: true
-      contributed: true
+    steps:
+      - name: Checkout exact profile revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Generate project map with exact IPM Action implementation
+        uses: nekomario28/interactive-project-map@37500d3e3b231452b7281a78374f32d04c6445ea
+        with:
+          github_token: ${{ github.token }}
+          username: nekomario28
+          theme: dark
+          style: galaxy-systems
+          max_repos: "100"
+          forks: true
+          archived: true
+          contributed: true
+          output_dir: project-map
+
+      - name: Transfer generated files to publish job
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v4.6.2
+        with:
+          name: project-map-generated
+          path: |
+            project-map/galaxy.svg
+            project-map/graph.json
+            project-map/taxonomy.json
+            project-map/assessment.json
+            project-map/quality-presentation.json
+          if-no-files-found: error
+          retention-days: 1
 
   publish:
     needs: generate
