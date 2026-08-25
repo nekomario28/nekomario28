@@ -35,7 +35,7 @@ jobs:
     permissions:
       contents: write
     env:
-      IPM_QUALITY_TOOLS_REF: 62870393d022646d1e356713d17d20d9dea11ef2
+      IPM_QUALITY_TOOLS_REF: 24460c1d28c5f90634b7aa0eb2156127971c0927
     steps:
       - name: Checkout profile repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -101,6 +101,7 @@ jobs:
             'nekomario28/buyclaimchunks',
             'nekomario28/freetoken',
             'nekomario28/offhandcombat',
+            'nekomario28/sable',
             'nekomario28/gz-sim',
             'nekomario28/turing-smart-screen-python-owl',
           ]);
@@ -112,9 +113,10 @@ jobs:
             'nekomario28/buyclaimchunks',
             'nekomario28/freetoken',
             'nekomario28/offhandcombat',
+            'nekomario28/sable',
             'nekomario28/turing-smart-screen-python-owl',
           ]);
-          const expectedSnapshotDates = ['2026-07-25', '2026-08-04', '2026-08-24', '2026-08-25'];
+          const expectedSnapshotDates = ['2026-07-25', '2026-08-04', '2026-08-21', '2026-08-24', '2026-08-25'];
           const expectedAvailableSnapshotDate = new Map([
             ['nekomario28/interactive-project-map', '2026-08-25'],
             ['nekomario28/projexd_group10', '2026-08-25'],
@@ -123,6 +125,7 @@ jobs:
             ['nekomario28/buyclaimchunks', '2026-07-25'],
             ['nekomario28/freetoken', '2026-08-24'],
             ['nekomario28/offhandcombat', '2026-08-04'],
+            ['nekomario28/sable', '2026-08-21'],
             ['nekomario28/turing-smart-screen-python-owl', '2026-08-25'],
           ]);
           const available = presentation.repositories.filter((entry) => entry.overlayState === 'available');
@@ -266,6 +269,20 @@ jobs:
           if (offhandMaintainability?.findingState !== 'unknown') throw new Error('OffHandCombat Maintainability must remain unknown');
           if (offhandSecurity?.applicability !== 'optional' || offhandSecurity?.findingState !== 'supports') throw new Error('OffHandCombat optional Security/Safety contract mismatch');
           if (offhand?.evidenceFreshness?.snapshotDate !== '2026-08-04') throw new Error('OffHandCombat evidence date was laundered to publication date');
+
+          const sableSource = sourceByKey.get('nekomario28/sable');
+          const sable = availableByKey.get('nekomario28/sable');
+          if (sableSource?.mode !== 'fork-local-delta' || sableSource?.qualityAttributionScope !== 'local-delta') throw new Error('Sable assessment source lost fork local-delta attribution');
+          if (sableSource?.presentationExpected !== 'available' || sableSource?.fixtureSnapshotDate !== '2026-08-21') throw new Error('Sable source freshness/presentation expectation mismatch');
+          if (sableSource?.calibratedRevision !== '14397866926b06770da05c0c0304fae32d6e26b7') throw new Error('Sable calibrated default-main revision mismatch');
+          if (sable?.qualityAttributionScope !== 'local-delta' || sable?.overlayState !== 'available') throw new Error('Sable presentation scope/state mismatch');
+          if (sable?.overlay?.coverage?.targetDimensions !== 6 || sable?.overlay?.coverage?.inspectedDimensions !== 5) throw new Error('Sable target coverage mismatch');
+          if (sable?.overlay?.targetFindingCounts?.supports !== 5 || sable?.overlay?.targetFindingCounts?.unknown !== 1) throw new Error('Sable finding distribution mismatch');
+          const sableMaintainability = sable?.overlay?.segments?.find((segment) => segment.id === 'maintainability');
+          const sableSecurity = sable?.overlay?.segments?.find((segment) => segment.id === 'security-safety');
+          if (sableMaintainability?.findingState !== 'unknown') throw new Error('Sable Maintainability must remain unknown');
+          if (sableSecurity?.applicability !== 'optional' || sableSecurity?.findingState !== 'supports') throw new Error('Sable optional Security/Safety contract mismatch');
+          if (sable?.evidenceFreshness?.snapshotDate !== '2026-08-21') throw new Error('Sable evidence date was laundered to publication date');
 
           const gzSource = sourceByKey.get('nekomario28/gz-sim');
           const gzPresentation = presentation.repositories.find((entry) => normalizeKey(entry.repositoryKey) === 'nekomario28/gz-sim');
