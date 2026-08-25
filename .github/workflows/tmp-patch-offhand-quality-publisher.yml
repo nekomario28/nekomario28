@@ -1,0 +1,124 @@
+name: Temporary OffHandCombat Quality publisher patch
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact PR head
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Patch publisher validator only
+        shell: bash
+        env:
+          HEAD_BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('.github/workflows/publish-quality-sidecars.yml')
+          s = p.read_text()
+
+          def replace_once(old, new, label):
+              global s
+              if old in s:
+                  s = s.replace(old, new, 1)
+                  return
+              if new in s:
+                  return
+              raise SystemExit(f'missing patch anchor: {label}')
+
+          replace_once(
+              'IPM_QUALITY_TOOLS_REF: 884e5631537888d4876036bc91f0c4fc84d8fb5b',
+              'IPM_QUALITY_TOOLS_REF: 62870393d022646d1e356713d17d20d9dea11ef2',
+              'producer pin',
+          )
+
+          replace_once(
+              "            'nekomario28/freetoken',\n            'nekomario28/gz-sim',",
+              "            'nekomario28/freetoken',\n            'nekomario28/offhandcombat',\n            'nekomario28/gz-sim',",
+              'assessment source set',
+          )
+          replace_once(
+              "            'nekomario28/freetoken',\n            'nekomario28/turing-smart-screen-python-owl',",
+              "            'nekomario28/freetoken',\n            'nekomario28/offhandcombat',\n            'nekomario28/turing-smart-screen-python-owl',",
+              'available source set',
+          )
+          replace_once(
+              "          const expectedSnapshotDates = ['2026-07-25', '2026-08-24', '2026-08-25'];",
+              "          const expectedSnapshotDates = ['2026-07-25', '2026-08-04', '2026-08-24', '2026-08-25'];",
+              'freshness dates',
+          )
+          replace_once(
+              "            ['nekomario28/freetoken', '2026-08-24'],\n            ['nekomario28/turing-smart-screen-python-owl', '2026-08-25'],",
+              "            ['nekomario28/freetoken', '2026-08-24'],\n            ['nekomario28/offhandcombat', '2026-08-04'],\n            ['nekomario28/turing-smart-screen-python-owl', '2026-08-25'],",
+              'freshness map',
+          )
+
+          offhand_block = '''          const offhandSource = sourceByKey.get('nekomario28/offhandcombat');
+          const offhand = availableByKey.get('nekomario28/offhandcombat');
+          if (offhandSource?.mode !== 'fork-local-delta' || offhandSource?.qualityAttributionScope !== 'local-delta') throw new Error('OffHandCombat assessment source lost fork local-delta attribution');
+          if (offhandSource?.presentationExpected !== 'available' || offhandSource?.fixtureSnapshotDate !== '2026-08-04') throw new Error('OffHandCombat source freshness/presentation expectation mismatch');
+          if (offhandSource?.calibratedRevision !== '317c2ec2e40325d8dd41f6dc5e730e95c97ae7e1') throw new Error('OffHandCombat calibrated default-master revision mismatch');
+          if (offhand?.qualityAttributionScope !== 'local-delta' || offhand?.overlayState !== 'available') throw new Error('OffHandCombat presentation scope/state mismatch');
+          if (offhand?.overlay?.coverage?.targetDimensions !== 6 || offhand?.overlay?.coverage?.inspectedDimensions !== 5) throw new Error('OffHandCombat target coverage mismatch');
+          if (offhand?.overlay?.targetFindingCounts?.supports !== 5 || offhand?.overlay?.targetFindingCounts?.unknown !== 1) throw new Error('OffHandCombat finding distribution mismatch');
+          const offhandMaintainability = offhand?.overlay?.segments?.find((segment) => segment.id === 'maintainability');
+          const offhandSecurity = offhand?.overlay?.segments?.find((segment) => segment.id === 'security-safety');
+          if (offhandMaintainability?.findingState !== 'unknown') throw new Error('OffHandCombat Maintainability must remain unknown');
+          if (offhandSecurity?.applicability !== 'optional' || offhandSecurity?.findingState !== 'supports') throw new Error('OffHandCombat optional Security/Safety contract mismatch');
+          if (offhand?.evidenceFreshness?.snapshotDate !== '2026-08-04') throw new Error('OffHandCombat evidence date was laundered to publication date');
+
+'''
+          marker = "          const gzSource = sourceByKey.get('nekomario28/gz-sim');"
+          if offhand_block not in s:
+              if marker not in s:
+                  raise SystemExit('missing patch anchor: gz block')
+              s = s.replace(marker, offhand_block + marker, 1)
+
+          # Preserve production mechanics exactly: fail closed if these canonical fragments disappear.
+          required = [
+              'on:\n  workflow_run:',
+              '  workflow_dispatch:',
+              '  push:\n    branches: [main]',
+              '  pull_request:\n    branches: [main]',
+              'permissions:\n  contents: read',
+              '    permissions:\n      contents: write',
+              "if: github.event_name != 'pull_request'",
+              'git commit -m "update experimental Quality sidecars"',
+              'git push origin HEAD:main',
+              'IPM_QUALITY_TOOLS_REF: 62870393d022646d1e356713d17d20d9dea11ef2',
+              "'nekomario28/offhandcombat'",
+              "['nekomario28/offhandcombat', '2026-08-04']",
+          ]
+          for fragment in required:
+              if fragment not in s:
+                  raise SystemExit(f'publisher invariant missing after patch: {fragment}')
+
+          p.write_text(s)
+          PY
+
+          git diff --check
+          grep -F 'IPM_QUALITY_TOOLS_REF: 62870393d022646d1e356713d17d20d9dea11ef2' .github/workflows/publish-quality-sidecars.yml
+          grep -F "'nekomario28/offhandcombat'" .github/workflows/publish-quality-sidecars.yml
+          grep -F "['nekomario28/offhandcombat', '2026-08-04']" .github/workflows/publish-quality-sidecars.yml
+
+          if git diff --quiet; then
+            echo 'Publisher patch already applied.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/workflows/publish-quality-sidecars.yml
+          git commit -m 'Validate OffHandCombat in Quality sidecar publisher'
+          git push origin "HEAD:${HEAD_BRANCH}"
