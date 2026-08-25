@@ -67,6 +67,9 @@ def assert_markers(root: Path, *, background: str, text: str, motion: str, contr
         assert f'data-profile-background="{background}"' in svg, rel
         assert f'data-profile-text="{text}"' in svg, rel
         assert f'data-profile-motion="{motion}"' in svg, rel
+        assert "data-profile-envelope-surface-base=" not in svg, rel
+        assert "data-profile-envelope-frame=" not in svg, rel
+        assert "data-profile-envelope-mounted-background=" not in svg, rel
 
 
 def render_case(work: Path, name: str, config: Path) -> tuple[Path, dict, dict]:
@@ -86,7 +89,7 @@ def render_case(work: Path, name: str, config: Path) -> tuple[Path, dict, dict]:
 
 
 def assert_donor_boundary_equivalence(work: Path, expected: Path) -> None:
-    """Moving mounted-background policy across the donor boundary must not alter inherit output."""
+    """Generic marker normalization must preserve the accepted inherit output bytes."""
     contract, resolved = R.CONTRACT.load_and_resolve(OPAQUE_SAFE)
     stripped_donor = work / "donor-default-stripped"
     preserved_donor = work / "donor-preserved"
@@ -95,17 +98,16 @@ def assert_donor_boundary_equivalence(work: Path, expected: Path) -> None:
     for path in (stripped_donor, preserved_donor, legacy_equivalent, decoupled):
         path.mkdir()
 
-    # Old boundary shape: v8 already removed mounted presentation backgrounds.
     R.V8.render("summer", stripped_donor)
+    R.normalize_donor_bundle(stripped_donor)
 
-    # New normalized boundary: v8 always preserves them; the standalone transformer
-    # alone owns `inherit | preserve`.
     original_strip = R.V8._strip_mounted_source_backgrounds
     R.V8._strip_mounted_source_backgrounds = lambda text: text
     try:
         R.V8.render("summer", preserved_donor)
     finally:
         R.V8._strip_mounted_source_backgrounds = original_strip
+    R.normalize_donor_bundle(preserved_donor)
 
     legacy_receipt = R.TRANSFORM.transform_bundle(
         stripped_donor,
@@ -132,7 +134,6 @@ def assert_donor_boundary_equivalence(work: Path, expected: Path) -> None:
 def main() -> int:
     with tempfile.TemporaryDirectory() as tmp:
         work = Path(tmp)
-
         opaque, opaque_contract, opaque_resolved = render_case(work, "opaque-safe", OPAQUE_SAFE)
         transparent, transparent_contract, transparent_resolved = render_case(work, "transparent-safe", TRANSPARENT_SAFE)
         transparent_repeat, _, transparent_repeat_resolved = render_case(work, "transparent-safe-repeat", TRANSPARENT_SAFE)
@@ -144,9 +145,6 @@ def main() -> int:
         preserve, _, preserve_resolved = render_case(work, "transparent-preserve", preserve_cfg)
 
         assert_donor_boundary_equivalence(work, opaque)
-
-        # The render-target receipt is deterministic for identical target bytes and
-        # differs when a material presentation contract changes.
         assert transparent_resolved["render_target_sha256"] == transparent_repeat_resolved["render_target_sha256"]
         target_ids = {
             opaque_resolved["render_target_sha256"],
@@ -197,6 +195,7 @@ def main() -> int:
 
     print("ENVELOPE_V9_PORTABLE_STRUCTURE_PASS cases=5 text=safe/native/minimal background=opaque/transparent mounted=inherit/preserve")
     print("DONOR_BOUNDARY_EQUIVALENCE=PASS legacy_prestripped_vs_preserve_first=true")
+    print("GENERIC_DONOR_MARKER_BOUNDARY=PASS portable_transformer_v8_identity=false")
     print("RENDER_TARGET_FINGERPRINT=PASS deterministic=true target_sensitive=true")
     print("TARGET_LAYOUT=NOT_RUN TEXT_RENDER=NOT_RUN PLAYBACK=NOT_RUN")
     return 0

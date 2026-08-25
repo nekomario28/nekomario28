@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Portable GitHub-profile SVG bundle transformer for Envelope v9.
 
-This module does not generate donor artwork and does not import Envelope v7/v8.
-It accepts an already-rendered bundle of known profile SVG surfaces plus a resolved
-portable contract, applies presentation policy, and writes the transformed bundle.
+The transformer consumes a complete pre-rendered SVG bundle plus three bounded
+input markers. It does not know how donor artwork is produced and contains no
+Envelope v7/v8 or Project Map implementation knowledge.
 """
 from __future__ import annotations
 
@@ -57,6 +57,13 @@ DYNAMIC_VISIBLE_TEXT = {
     "assets/profile-activity-canvas.svg",
 }
 
+SURFACE_MARKER = 'data-profile-envelope-surface-base="outer"'
+FRAME_MARKER = 'data-profile-envelope-frame="rail"'
+MOUNTED_BACKGROUND_MARKER = 'data-profile-envelope-mounted-background="presentation"'
+_INTERNAL_MARKER_RE = re.compile(
+    r'\sdata-profile-envelope-(?:surface-base|frame|mounted-background)="[^"]*"'
+)
+
 ADAPTIVE_TEXT_STYLE = """<style data-v9-adaptive-vector-text-style=\"v1\">
 .v9-adaptive-vector-text { color: #f0f6fc; }
 @media (prefers-color-scheme: light) { .v9-adaptive-vector-text { color: #1f2328; } }
@@ -72,35 +79,27 @@ def _clean_output(text: str) -> str:
     return "\n".join(line.rstrip() for line in text.splitlines()).rstrip() + "\n"
 
 
+def _strip_marked_empty_element(svg: str, marker: str) -> str:
+    name, value = marker.split("=", 1)
+    value = value.strip('"')
+    pattern = rf'\s*<rect\b(?=[^>]*\b{re.escape(name)}="{re.escape(value)}")[^>]*/>\s*'
+    return re.sub(pattern, "\n", svg)
+
+
 def _strip_mounted_source_backgrounds(svg: str) -> str:
-    """Remove only the known Project Map / Activity presentation backgrounds."""
-    svg = re.sub(
-        r'\s*<rect\b(?=[^>]*\bwidth="100%")(?=[^>]*\bheight="100%")'
-        r'(?=[^>]*\bfill="url\(#galaxy-family-bg\)")[^>]*/>\s*',
-        "\n",
-        svg,
-        count=1,
-    )
-    svg = re.sub(
-        r'\s*<rect\b(?=[^>]*\bwidth="760")(?=[^>]*\bheight="220")'
-        r'(?=[^>]*\bfill="#0d1117")[^>]*/>\s*',
-        "\n",
-        svg,
-        count=1,
-    )
-    return svg
+    return _strip_marked_empty_element(svg, MOUNTED_BACKGROUND_MARKER)
 
 
 def _strip_surface_base(svg: str) -> str:
-    return re.sub(
-        r'\s*<rect\b(?=[^>]*\bid="v8-[^"]+-surface-base")[^>]*/>\s*',
-        "\n",
-        svg,
-    )
+    return _strip_marked_empty_element(svg, SURFACE_MARKER)
+
+
+def _frame_pattern() -> str:
+    return r'<g\b(?=[^>]*\bdata-profile-envelope-frame="rail")[^>]*>.*?</g>'
 
 
 def _strip_frame(svg: str) -> str:
-    return re.sub(r'\s*<g\b[^>]*\bid="v8-frame"[^>]*>.*?</g>\s*', "\n", svg, flags=re.S)
+    return re.sub(r'\s*' + _frame_pattern() + r'\s*', "\n", svg, flags=re.S)
 
 
 def _through_rails(svg: str, *, rel: str) -> str:
@@ -123,7 +122,7 @@ def _through_rails(svg: str, *, rel: str) -> str:
         group = match.group(0)
         return re.sub(r'(<path\b[^>]*\bd=")[^"]+("[^>]*?/?>)', rf'\1{d}\2', group, count=1)
 
-    return re.sub(r'<g\b[^>]*\bid="v8-frame"[^>]*>.*?</g>', rewrite, svg, flags=re.S)
+    return re.sub(_frame_pattern(), rewrite, svg, flags=re.S)
 
 
 def _disable_motion(svg: str) -> str:
@@ -174,19 +173,13 @@ def _render_target_fingerprint(rendered: dict[str, str], *, contract_sha256: str
 
 
 def _add_render_target_marker(svg: str, fingerprint: str) -> str:
-    return re.sub(
-        r'<svg\b',
-        f'<svg data-profile-render-target-sha256="{fingerprint}"',
-        svg,
-        count=1,
-    )
+    return re.sub(r'<svg\b', f'<svg data-profile-render-target-sha256="{fingerprint}"', svg, count=1)
 
 
 def _apply_text(svg: str, *, rel: str, contract: dict) -> str:
     text_mode = contract["profile"]["text"]
     density = contract["labels"]["density"]
     suppress_dynamic = rel in DYNAMIC_VISIBLE_TEXT and (text_mode == "minimal" or density == "minimal")
-
     if suppress_dynamic:
         svg, _ = VECTOR.suppress_visible_text(svg)
         return svg
@@ -198,6 +191,10 @@ def _apply_text(svg: str, *, rel: str, contract: dict) -> str:
     return svg
 
 
+def _drop_internal_markers(svg: str) -> str:
+    return _INTERNAL_MARKER_RE.sub("", svg)
+
+
 def transform_bundle(
     input_root: Path,
     output_root: Path,
@@ -206,7 +203,7 @@ def transform_bundle(
     resolved: dict,
     season: str,
 ) -> dict:
-    """Apply portable policy to a complete donor bundle and return resolved receipt data."""
+    """Apply portable policy to a complete marked donor bundle."""
     resolved_out = dict(resolved)
     source: dict[str, str] = {}
     for rel in ASSET_PATHS:
@@ -227,8 +224,8 @@ def transform_bundle(
             svg = _through_rails(svg, rel=rel)
         if contract["profile"]["motion"] == "off":
             svg = _disable_motion(svg)
-
         svg = _apply_text(svg, rel=rel, contract=contract)
+        svg = _drop_internal_markers(svg)
         svg = _mark_root_base(svg, contract=contract, resolved=resolved_out)
         rendered[rel] = _clean_output(svg)
 
