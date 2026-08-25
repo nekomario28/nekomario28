@@ -17,16 +17,20 @@ Envelope v9 has the first claim. On 2026-08-26 the repository owner explicitly r
 - visibility: **private**;
 - donor source: `nekomario28/nekomario28@bf3960dc85eebf8e25c5e8a015e968322a984597`;
 - retained filtered-history head before path normalization: `ee0a07b9e85f7a57c6b2146149e68420202f4fe5`;
-- current extracted main after bootstrap validation cleanup: `d916b057ec897ceef94bdee293d4e02f42e46d1b`;
+- first post-bootstrap working main: `d916b057ec897ceef94bdee293d4e02f42e46d1b`;
+- current working main: `7cc093b00b0f37883951000693714b0a76e96276`;
 - one-shot bootstrap carrier: ShotFork run `32868834661` on `MeguminDesktop` / `shotroute` — **SUCCESS**;
 - exact-head validation after `.gitignore` hygiene repair: ShotFork run `32869436824` — **SUCCESS**;
-- retained donor history: eight path-filtered commits plus one path-normalization/bootstrap commit and subsequent validation-boundary/hygiene commits;
+- portable regression exact-head validation: ShotFork run `32871700639`, job `97880025443` — **SUCCESS**, 7 tests;
+- retained donor history: eight path-filtered commits plus one path-normalization/bootstrap commit and subsequent validation-boundary/hygiene/regression commits;
 - public license: **not selected**;
 - public release: **DEFERRED**.
 
 The extraction preserved retained donor Author/Committer metadata through path-filtered Git history rather than copying the six files into an unrelated root commit. Commit object IDs necessarily changed because filtering changes trees and parent topology.
 
-The initial repository-local hosted `ubuntu-latest` validation run `32868886581` failed before repository steps were assigned a runner. It is classified as provider/executor failure rather than a portable-core failure. The same extracted code passed `compileall` and unit tests on the bounded self-hosted carrier. The carrier is not promoted to permanent unattended CI because its pre-existing host `gh` credential is broader than the new repository's least-privilege requirement.
+The initial repository-local hosted `ubuntu-latest` validation run `32868886581` failed before repository steps were assigned a runner. It is classified as provider/executor failure rather than a portable-core failure. The extracted code is now covered by a seven-test repository-local deterministic suite, validated at exact head through the bounded self-hosted carrier. The carrier is not promoted to permanent unattended CI because its pre-existing host `gh` credential is broader than the new repository's least-privilege requirement.
+
+The seven-test suite directly covers schema/contract alignment, fail-closed contract keys, deterministic safe vector text, unsupported-glyph fail-closed behavior, and a structurally different synthetic 15-SVG second consumer whose outputs are deterministic and stripped of donor-only input markers/background state. This protects the portable mechanism; it does not replace GitHub target-render/browser or live-playback evidence.
 
 ## Current machine gate
 
@@ -39,6 +43,8 @@ concrete_reuse_request=ESTABLISHED
 license_selection=UNSELECTED
 repository_creation=DEFERRED
 working_repository=CREATED_PRIVATE
+current_working_main_sha=7cc093b00b0f37883951000693714b0a76e96276
+portable_regression_tests=7
 ```
 
 `repository_creation=DEFERRED` remains the **public publication/repository gate**. It no longer means that no private development repository exists.
