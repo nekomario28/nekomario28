@@ -1,8 +1,15 @@
 {
   "version": 1,
   "candidate_public_repository": "profile-envelope",
-  "public_repo_creation": "defer-until-independent-consumer",
+  "public_repo_creation": "defer-until-external-demand-and-license",
   "readiness_claim": "standalone-core-and-marker-github-transformer",
+  "publication_readiness": {
+    "technical_copy_set": "PASS",
+    "independent_consumer": "NOT_ESTABLISHED",
+    "concrete_reuse_request": "NOT_ESTABLISHED",
+    "license_selection": "UNSELECTED",
+    "repository_creation": "DEFERRED"
+  },
   "layers": {
     "portable_core": [
       {
