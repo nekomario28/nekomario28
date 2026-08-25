@@ -35,7 +35,7 @@ jobs:
     permissions:
       contents: write
     env:
-      IPM_QUALITY_TOOLS_REF: a05e1cc31a0a82b42af16e6e2c13c584577792be
+      IPM_QUALITY_TOOLS_REF: 841df60a605afca5989916214957c29b5dbff3da
     steps:
       - name: Checkout profile repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -96,12 +96,14 @@ jobs:
           const expectedAssessmentSources = new Set([
             'nekomario28/interactive-project-map',
             'nekomario28/projexd_group10',
+            'nekomario28/antifullbright',
             'nekomario28/gz-sim',
             'nekomario28/turing-smart-screen-python-owl',
           ]);
           const expectedAvailable = new Set([
             'nekomario28/interactive-project-map',
             'nekomario28/projexd_group10',
+            'nekomario28/antifullbright',
             'nekomario28/turing-smart-screen-python-owl',
           ]);
           const expectedSnapshotDates = ['2026-08-25'];
@@ -169,6 +171,18 @@ jobs:
           }
           if (unavailable.some((entry) => entry.evidenceFreshness != null)) throw new Error('unavailable repository must not receive portfolio evidence freshness');
 
+          const antifullbrightSource = sourceByKey.get('nekomario28/antifullbright');
+          const antifullbright = availableByKey.get('nekomario28/antifullbright');
+          if (antifullbrightSource?.mode !== 'repository-snapshot' || antifullbrightSource?.qualityAttributionScope !== 'repository-snapshot') throw new Error('AntiFullbright assessment source lost repository-snapshot attribution');
+          if (antifullbrightSource?.presentationExpected !== 'available' || antifullbrightSource?.fixtureSnapshotDate !== '2026-08-25') throw new Error('AntiFullbright source freshness/presentation expectation mismatch');
+          if (antifullbright?.qualityAttributionScope !== 'repository-snapshot' || antifullbright?.overlayState !== 'available') throw new Error('AntiFullbright presentation scope/state mismatch');
+          if (antifullbright?.overlay?.coverage?.targetDimensions !== 6 || antifullbright?.overlay?.coverage?.inspectedDimensions !== 5) throw new Error('AntiFullbright target coverage mismatch');
+          if (antifullbright?.overlay?.targetFindingCounts?.supports !== 5 || antifullbright?.overlay?.targetFindingCounts?.unknown !== 1) throw new Error('AntiFullbright finding distribution mismatch');
+          const antifullbrightMaintainability = antifullbright?.overlay?.segments?.find((segment) => segment.id === 'maintainability');
+          const antifullbrightSecurity = antifullbright?.overlay?.segments?.find((segment) => segment.id === 'security-safety');
+          if (antifullbrightMaintainability?.findingState !== 'unknown') throw new Error('AntiFullbright Maintainability must remain unknown');
+          if (antifullbrightSecurity?.applicability !== 'optional' || antifullbrightSecurity?.findingState !== 'supports') throw new Error('AntiFullbright optional Security/Safety contract mismatch');
+
           const gzSource = sourceByKey.get('nekomario28/gz-sim');
           const gzPresentation = presentation.repositories.find((entry) => normalizeKey(entry.repositoryKey) === 'nekomario28/gz-sim');
           if (gzSource?.mode !== 'fork-local-delta' || gzSource?.qualityAttributionScope !== 'local-delta') throw new Error('gz-sim assessment source lost fork local-delta attribution');
@@ -181,7 +195,7 @@ jobs:
           const turingStewardship = turing?.views?.detail?.segments?.find((segment) => segment.id === 'stewardship');
           if (!turingStewardship || turingStewardship.findingState !== 'unknown') throw new Error('inherited turing stewardship leaked into local-delta Quality');
 
-          for (const key of ['nekomario28/interactive-project-map', 'nekomario28/projexd_group10']) {
+          for (const key of ['nekomario28/interactive-project-map', 'nekomario28/projexd_group10', 'nekomario28/antifullbright']) {
             if (availableByKey.get(key)?.qualityAttributionScope !== 'repository-snapshot') throw new Error(`unexpected non-fork Quality scope: ${key}`);
           }
 
