@@ -1,0 +1,115 @@
+name: OpenArm kinematics current default contract
+
+on:
+  push:
+    branches: [research/openarm-kinematics-current-defaults]
+
+permissions:
+  contents: read
+
+jobs:
+  receipt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Freeze exact authorities
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --filter=blob:none https://github.com/k1000dai/dora-openarm-kinematics-rust.git rust-port
+          git -C rust-port checkout --detach 5d79eb5ecf6b3654ef34c8222fb27b24cea182cb
+          git clone --filter=blob:none https://github.com/enactic/openarm_control.git openarm-control
+          git -C openarm-control checkout --detach 8462f93547972cd9af2910bd7263d7127231b6db
+          git clone --filter=blob:none https://github.com/enactic/dora-openarm-kinematics.git dora-kinematics
+          git -C dora-kinematics checkout --detach 357eb4f0a43a0af5e92aceb7148d04c67163d13c
+          test "$(git -C rust-port rev-parse HEAD)" = 5d79eb5ecf6b3654ef34c8222fb27b24cea182cb
+          test "$(git -C openarm-control rev-parse HEAD)" = 8462f93547972cd9af2910bd7263d7127231b6db
+          test "$(git -C dora-kinematics rev-parse HEAD)" = 357eb4f0a43a0af5e92aceb7148d04c67163d13c
+
+      - name: Install current Python authority and execute defaults
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check ./openarm-control >/tmp/openarm-install.log
+          python - <<'PY'
+          from openarm_control import IKParams
+          p = IKParams()
+          observed = {
+              'position_cost': p.position_cost,
+              'orientation_cost': p.orientation_cost,
+              'lm_damping': p.lm_damping,
+              'damping': p.damping,
+              'posture_cost': p.posture_cost,
+              'dt': p.dt,
+              'max_iters': p.max_iters,
+              'frame_position_error_limit': p.frame_position_error_limit,
+              'frame_orientation_error_limit': p.frame_orientation_error_limit,
+              'nullspace_cost': p.nullspace_cost,
+              'singularity_max_approach_rate': p.singularity_max_approach_rate,
+              'kinetic_energy_cost': p.kinetic_energy_cost,
+          }
+          print('CURRENT_PYTHON_IK_DEFAULTS=' + repr(observed))
+          expected = {
+              'position_cost': 12.0,
+              'orientation_cost': 1.5,
+              'lm_damping': 0.01,
+              'damping': 0.1,
+              'posture_cost': 0.0,
+              'dt': 0.004,
+              'max_iters': 5,
+              'frame_position_error_limit': 0.02,
+              'frame_orientation_error_limit': 0.25,
+              'nullspace_cost': 8.5,
+              'singularity_max_approach_rate': 0.25,
+              'kinetic_energy_cost': 2e-5,
+          }
+          assert observed == expected, (observed, expected)
+          print('CURRENT_PYTHON_DEFAULT_AUTHORITY_PASS')
+          PY
+
+      - name: Execute exact Rust port CLI defaults
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > rust-port/tests/current_default_contract.rs <<'RS'
+          use clap::Parser;
+          use kinematics_core::cli::IkArgs;
+
+          #[derive(Debug, Parser)]
+          struct Wrapper {
+              #[command(flatten)]
+              ik: IkArgs,
+          }
+
+          #[test]
+          fn rust_defaults_are_the_old_authority_contract_not_current() {
+              let args = Wrapper::try_parse_from(["probe"]).expect("default parse").ik;
+              println!("RUST_IK_DEFAULTS={{pos:{}, ori:{}, lm:{}, damping:{}, posture:{}, dt:{}, max_iters:{}}}",
+                  args.pos_cost, args.ori_cost, args.lm_damping, args.damping,
+                  args.posture_cost, args.dt, args.max_iters);
+              assert_eq!(args.pos_cost, 1.0);
+              assert_eq!(args.ori_cost, 1.0);
+              assert_eq!(args.lm_damping, 0.01);
+              assert_eq!(args.damping, 0.25);
+              assert_eq!(args.posture_cost, 0.01);
+              assert_eq!(args.dt, 0.1);
+              assert_eq!(args.max_iters, 5);
+              assert_ne!(args.pos_cost, 12.0);
+              assert_ne!(args.ori_cost, 1.5);
+              assert_ne!(args.damping, 0.1);
+              assert_ne!(args.dt, 0.004);
+              println!("CURRENT_KINEMATICS_DEFAULT_CONTRACT_RED_CONFIRMED");
+          }
+          RS
+          cd rust-port
+          cargo test --test current_default_contract -- --nocapture
+          echo 'KINEMATICS_CURRENT_DEFAULT_EXECUTABLE_DRIFT_RECEIPT_PASS'
+
+      - name: Confirm current Dora node delegates to current authority parser
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'register_ik_args' dora-kinematics/src/dora_openarm_kinematics/ik.py
+          grep -q 'ik_params_from_args' dora-kinematics/src/dora_openarm_kinematics/ik.py
+          grep -q 'openarm-control>=0.2.0' dora-kinematics/pyproject.toml
+          echo 'CURRENT_DORA_DELEGATION_PASS'
