@@ -87,6 +87,12 @@ jobs:
           const assessmentIds = new Set(assessment.repositories.map((entry) => entry.identity.graphNodeId));
           const presentationIds = new Set(presentation.repositories.map((entry) => entry.graphNodeId));
           const normalizeKey = (value) => String(value || '').toLowerCase();
+          const validSnapshotDate = (value) => {
+            const date = String(value || '');
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return false;
+            const parsed = new Date(`${date}T00:00:00Z`);
+            return !Number.isNaN(parsed.valueOf()) && parsed.toISOString().slice(0, 10) === date;
+          };
           const expectedAssessmentSources = new Set([
             'nekomario28/interactive-project-map',
             'nekomario28/projexd_group10',
@@ -118,6 +124,7 @@ jobs:
           if (diagnostics.expectedPresentationAvailable !== expectedAvailable.size) throw new Error('manifest presentation-available expectation mismatch');
           if (diagnostics.enrichmentSources?.length !== expectedAssessmentSources.size) throw new Error('bounded assessment source count mismatch');
           if (diagnostics.assessment?.quality?.applied !== expectedAssessmentSources.size) throw new Error('bounded assessment enrichment count mismatch');
+          if (!diagnostics.enrichmentSources.every((entry) => validSnapshotDate(entry.fixtureSnapshotDate))) throw new Error('bounded assessment source has invalid frozen snapshot date');
           if (diagnostics.invariants?.forkQualityUsesProvenanceAwareBundle !== true) throw new Error('fork provenance bundle invariant missing');
           if (diagnostics.invariants?.forkPortfolioQualityUsesLocalDeltaOnly !== true) throw new Error('fork local-delta presentation invariant missing');
           if (diagnostics.invariants?.frozenEvidenceFreshnessIsPublished !== true) throw new Error('frozen evidence freshness invariant missing');
@@ -146,14 +153,17 @@ jobs:
           const presentationFreshness = diagnostics.evidenceFreshness?.portfolioPresentation;
           if (assessmentFreshness?.mode !== 'bounded-frozen-snapshots' || assessmentFreshness.scope !== 'all-bounded-assessment-sources') throw new Error('assessment freshness contract mismatch');
           if (assessmentFreshness.automaticRefresh !== false || assessmentFreshness.sourceCount !== expectedAssessmentSources.size) throw new Error('assessment freshness cardinality/refresh mismatch');
+          if (!assessmentFreshness.snapshotDates?.every(validSnapshotDate)) throw new Error('assessment freshness contains invalid snapshot date');
           if (JSON.stringify(assessmentFreshness.snapshotDates) !== JSON.stringify(expectedSnapshotDates)) throw new Error('assessment freshness snapshot dates mismatch');
           if (presentationFreshness?.mode !== 'bounded-frozen-snapshots' || presentationFreshness.scope !== 'portfolio-quality-presented-sources') throw new Error('presentation freshness contract mismatch');
           if (presentationFreshness.automaticRefresh !== false || presentationFreshness.sourceCount !== expectedAvailable.size) throw new Error('presentation freshness cardinality/refresh mismatch');
+          if (!presentationFreshness.snapshotDates?.every(validSnapshotDate)) throw new Error('presentation freshness contains invalid snapshot date');
           if (JSON.stringify(presentationFreshness.snapshotDates) !== JSON.stringify(expectedSnapshotDates)) throw new Error('presentation freshness snapshot dates mismatch');
           if (JSON.stringify(presentation.evidenceFreshness) !== JSON.stringify(presentationFreshness)) throw new Error('published presentation freshness diverges from diagnostics');
 
           for (const entry of available) {
             if (entry.evidenceFreshness?.state !== 'frozen-snapshot') throw new Error(`available Quality freshness state missing: ${entry.repositoryKey}`);
+            if (!validSnapshotDate(entry.evidenceFreshness?.snapshotDate)) throw new Error(`available Quality snapshot date invalid: ${entry.repositoryKey}`);
             if (entry.evidenceFreshness?.snapshotDate !== '2026-08-25') throw new Error(`available Quality snapshot date mismatch: ${entry.repositoryKey}`);
             if (entry.evidenceFreshness?.automaticRefresh !== false) throw new Error(`available Quality automatic refresh unexpectedly enabled: ${entry.repositoryKey}`);
           }
@@ -168,6 +178,12 @@ jobs:
 
           const turing = availableByKey.get('nekomario28/turing-smart-screen-python-owl');
           if (turing?.qualityAttributionScope !== 'local-delta') throw new Error('turing presentation must remain local-delta Quality');
+          const turingStewardship = turing?.views?.detail?.segments?.find((segment) => segment.id === 'stewardship');
+          if (!turingStewardship || turingStewardship.findingState !== 'unknown') throw new Error('inherited turing stewardship leaked into local-delta Quality');
+
+          for (const key of ['nekomario28/interactive-project-map', 'nekomario28/projexd_group10']) {
+            if (availableByKey.get(key)?.qualityAttributionScope !== 'repository-snapshot') throw new Error(`unexpected non-fork Quality scope: ${key}`);
+          }
 
           for (const entry of presentation.repositories) {
             const policy = entry.visualPolicy;
