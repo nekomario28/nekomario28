@@ -1,1 +1,0 @@
-Temporary one-shot research carrier plan. No source repository mutation. Exact Rerobot and LeRobot SHAs are read-only inputs; results will be recorded separately.
