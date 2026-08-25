@@ -18,16 +18,16 @@
     "source_sha": "bf3960dc85eebf8e25c5e8a015e968322a984597",
     "initial_filtered_history_head": "ee0a07b9e85f7a57c6b2146149e68420202f4fe5",
     "current_bootstrap_main_sha": "d916b057ec897ceef94bdee293d4e02f42e46d1b",
-    "current_working_main_sha": "369b88eec6bed0fc360bc0671b9da94d35324d54",
+    "current_working_main_sha": "072798e0bae46850891b37981be863c639309c3a",
     "bootstrap_carrier_run": 32868834661,
     "exact_head_validation_run": 32869436824,
     "portable_regression_run": 32871700639,
     "portable_regression_job": 97880025443,
     "portable_regression_tests": 7,
     "design_grammar": {
-      "phase": "P11",
-      "mode": "measured-reference-bounded-opt-in-projections",
-      "grammar_sha256": "24ee74fdb9ae669390244af16463220e0f9b0f9e0661159c19b0ced0a69a4ced",
+      "phase": "P12",
+      "mode": "measured-reference-bounded-opt-in-projections-plus-typography-lint",
+      "grammar_sha256": "1fcbe5a785fe33d28f1c9eb8f2186f9d35c044afdfb6abde85fd2c4ea3455fd4",
       "exact_head_validation_run": 32876973365,
       "exact_head_validation_job": 97897147907,
       "tests": 14,
@@ -87,14 +87,33 @@
         ],
         "legacy_default_preserved": true,
         "global_renderer_authority": false
+      },
+      "typography_role_lint": {
+        "phase": "P12",
+        "mode": "detection-only-eight-measured-style-pairs",
+        "product_content_revision": "6d70547fe8afebd47d0262b705a6bdd2b96ae7e1",
+        "evidence_head": "072798e0bae46850891b37981be863c639309c3a",
+        "census_run": 32895523828,
+        "census_job": 97957202674,
+        "build_run": 32895817718,
+        "build_job": 97958144553,
+        "exact_head_validation_run": 32896240037,
+        "exact_head_validation_job": 97959489280,
+        "tests": 26,
+        "donor_sha": "9b0ecc2000543fbbf16cbab6b56dd90148c2684e",
+        "visible_text_nodes": 34,
+        "measured_style_pairs": 8,
+        "donor_bundle_lint": "PASS",
+        "renderer_projection": "NOT_IMPLEMENTED",
+        "global_renderer_authority": false
       }
     },
     "release_copy_set": {
-      "phase": "P11",
+      "phase": "P12",
       "boundary_kind": "product-copy-set",
       "product_file_count": 8,
-      "product_content_revision": "0a2bbdc5e8f19ffc43483c947c129d0996b9679c",
-      "provenance_head": "379e8cc5d0587e83b0574834bf04f61f58e786d3",
+      "product_content_revision": "6d70547fe8afebd47d0262b705a6bdd2b96ae7e1",
+      "provenance_head": "072798e0bae46850891b37981be863c639309c3a",
       "technical_standalone": "PASS",
       "release_closure_run": 32883641201,
       "release_closure_job": 97918842614,
@@ -119,7 +138,13 @@
       "p11_delta_repository_history_audit": "PASS",
       "p11_all_season_local_browser": "PASS",
       "p11_summer_local_playback": "PASS",
-      "p11_public_github_profile": "NOT_RUN"
+      "p11_public_github_profile": "NOT_RUN",
+      "p12_exact_head_validation_run": 32896240037,
+      "p12_exact_head_validation_job": 97959489280,
+      "p12_tests": 26,
+      "p12_donor_sha": "9b0ecc2000543fbbf16cbab6b56dd90148c2684e",
+      "p12_donor_bundle_lint": "PASS",
+      "p12_delta_repository_history_audit": "PASS"
     },
     "public_release": "DEFERRED"
   },
@@ -205,7 +230,8 @@
     "P9 design grammar remains the measured reference; P10 gives only frame-rail geometry an explicit opt-in projection path and does not make the grammar global renderer authority",
     "P10 exact donor byte equivalence covers the frame-caps-none transform case and does not replace browser, responsive, playback or public-target evidence",
     "P11 gives only frame-rail geometry plus the four measured seasonal surface/accent roles an explicit opt-in grammar projection path; typography, spacing, motion, arbitrary decorative colors and global renderer authority remain outside this migration",
-    "P11 all-season local browser evidence and summer local playback/reduced-motion evidence are established by exact rendered-byte equivalence to the donor harness; public GitHub-profile P11 acceptance remains NOT_ESTABLISHED"
+    "P11 all-season local browser evidence and summer local playback/reduced-motion evidence are established by exact rendered-byte equivalence to the donor harness; public GitHub-profile P11 acceptance remains NOT_ESTABLISHED",
+    "P12 typography authority is detection-only: eight measured visible-text size/weight roles are linted, while typography renderer projection and global renderer authority remain unimplemented"
   ],
   "promotion_gates": {
     "create_public_repository": [
