@@ -3,7 +3,7 @@
   "contractId": "ipm-repository-assessment-artifact-v1",
   "owner": "nekomario28",
   "generatedAt": "2026-08-25T08:50:34.255Z",
-  "generatorRevision": "884e5631537888d4876036bc91f0c4fc84d8fb5b",
+  "generatorRevision": "62870393d022646d1e356713d17d20d9dea11ef2",
   "taxonomyId": "ipm-standard-v1",
   "assessmentPolicyId": "ipm-repository-assessment-v1",
   "productionScoring": false,
@@ -469,12 +469,449 @@
         }
       },
       "acquisition": {
-        "level": "L0",
+        "level": "L1",
         "observedAt": "2026-08-25T08:50:34.255Z"
       },
       "quality": {
-        "state": "not-collected",
-        "value": null
+        "state": "partial",
+        "value": {
+          "schemaVersion": 1,
+          "contractId": "ipm-repository-fork-quality-v1",
+          "relation": {
+            "ownership": "owned",
+            "collaboration": "unknown",
+            "lineage": "fork"
+          },
+          "artifacts": [
+            "game-mod"
+          ],
+          "upstreamContext": {
+            "repositoryKey": "bunnycinnamon/offhandcombat",
+            "role": "context-only",
+            "projectQualityAttribution": "upstream-context-only",
+            "projectImpactAttribution": "upstream-context-only"
+          },
+          "snapshotQuality": {
+            "state": "partial",
+            "value": {
+              "schemaVersion": 1,
+              "artifacts": [
+                "game-mod"
+              ],
+              "claimBoundaries": [],
+              "dimensions": {
+                "understandability": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "verification": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "reproducibility": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "maintainability": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "integrity": {
+                  "applicability": "optional",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "interoperability": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "security-safety": {
+                  "applicability": "optional",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "stewardship": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                }
+              },
+              "compositeQualityScore": null
+            },
+            "evidenceProvenance": {},
+            "evidenceOriginState": "unknown",
+            "evidenceOriginCounts": {
+              "local": 0,
+              "upstream-inherited": 0,
+              "upstream-accepted": 0,
+              "mixed": 0,
+              "unknown": 0
+            },
+            "personSideEligible": false
+          },
+          "localDelta": {
+            "observation": {
+              "state": "observed",
+              "presence": "present",
+              "scope": "BunnyCinnamon/OffHandCombat@e7df3ad2eec858407dd371cdfde574b35d0322c4...nekomario28/OffHandCombat@317c2ec2e40325d8dd41f6dc5e730e95c97ae7e1",
+              "evidence": "The fork default master is six commits ahead and zero behind the upstream master baseline. The local-ahead delta ports the mod to NeoForge 1.21.1, replaces unsafe combat/network behavior with server-authoritative state and custom payloads, "
+            },
+            "quality": {
+              "state": "partial",
+              "value": {
+                "schemaVersion": 1,
+                "artifacts": [
+                  "game-mod"
+                ],
+                "claimBoundaries": [],
+                "dimensions": {
+                  "understandability": {
+                    "applicability": "recommended",
+                    "authority": "repository-native",
+                    "evidenceState": "observed",
+                    "findingState": "supports",
+                    "findingCounts": {
+                      "supports": 1,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "evidenced",
+                    "evidenceCount": 1,
+                    "evidence": [
+                      {
+                        "authority": "repository-native",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "C",
+                        "sourceId": "README.md+TEST_MATRIX.md@317c2ec2e40325d8dd41f6dc5e730e95c97ae7e1",
+                        "claim": "The local-ahead documentation records the Minecraft 1.21.1 / NeoForge 21.1 / Java 21 target, dual-wield interaction model, authoritative off-hand attack flow, cooldown/HUD behavior, compatibility limitations, acceptance commands, and explicit automated-versus-manual evidence boundaries."
+                      }
+                    ]
+                  },
+                  "verification": {
+                    "applicability": "recommended",
+                    "authority": "mixed",
+                    "evidenceState": "observed",
+                    "findingState": "supports",
+                    "findingCounts": {
+                      "supports": 2,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "evidenced",
+                    "evidenceCount": 2,
+                    "evidence": [
+                      {
+                        "authority": "project-owned",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "B",
+                        "sourceId": "github-actions:Build-and-audit#498:30934082130@5633ab1e6d4482a015192e81b8b7c7789537dd63;tree=a5b60f6c9af607be5ecba3d678a0e4bb665cb7a7",
+                        "claim": "The final PR-head release gate passed build/audit, ten required NeoForge GameTests, dedicated-server and physical-client bootstrap, integrated real-input/HUD checks, modded-client-to-vanilla-server and vanilla-client-to-modded-server paths, two-client multiplayer, lifecycle, network-stress, release-resource audit, and JAR audit. The tested head and current default commit have the identical Git tree a5b60f6c9af607be5ecba3d678a0e4bb665cb7a7; this is content-equivalence evidence, not a claim that Actions directly executed current merge commit 317c2ec2e40325d8dd41f6dc5e730e95c97ae7e1."
+                      },
+                      {
+                        "authority": "repository-native",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "C",
+                        "sourceId": "TEST_MATRIX.md+.github/workflows/build.yml@317c2ec2e40325d8dd41f6dc5e730e95c97ae7e1",
+                        "claim": "The current default tree keeps the same executable release matrix and harnesses used by the successful validated tree, including 10/10 GameTest acceptance plus dedicated, physical-client, real-input/HUD, vanilla-peer, multiplayer lifecycle, and network-stress paths."
+                      }
+                    ]
+                  },
+                  "reproducibility": {
+                    "applicability": "recommended",
+                    "authority": "repository-native",
+                    "evidenceState": "observed",
+                    "findingState": "supports",
+                    "findingCounts": {
+                      "supports": 1,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "evidenced",
+                    "evidenceCount": 1,
+                    "evidence": [
+                      {
+                        "authority": "repository-native",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "C",
+                        "sourceId": "README.md+build.gradle+gradle.properties+gradle/wrapper+PORT_MANIFEST.sha256@317c2ec2e40325d8dd41f6dc5e730e95c97ae7e1",
+                        "claim": "The local delta records the Java 21, Minecraft 1.21.1 and NeoForge 21.1 build/runtime contract, Gradle wrapper/bootstrap path, source-integrity manifest, and commands used for build, GameTest and runtime acceptance. This supports reconstruction of the tested environment but does not claim byte-identical rebuild determinism."
+                      }
+                    ]
+                  },
+                  "maintainability": {
+                    "applicability": "recommended",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  },
+                  "integrity": {
+                    "applicability": "optional",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  },
+                  "interoperability": {
+                    "applicability": "recommended",
+                    "authority": "mixed",
+                    "evidenceState": "observed",
+                    "findingState": "supports",
+                    "findingCounts": {
+                      "supports": 2,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "evidenced",
+                    "evidenceCount": 2,
+                    "evidence": [
+                      {
+                        "authority": "repository-native",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "C",
+                        "sourceId": "README.md+docs/COMPATIBILITY.md+docs/PROTOCOL.md@317c2ec2e40325d8dd41f6dc5e730e95c97ae7e1",
+                        "claim": "The local delta defines NeoForge/client-server protocol boundaries, explicitly discourages overlapping combat-authority mods without claiming compatibility, and documents optional-peer behavior and the custom payload state machine instead of modifying vanilla packet serialization."
+                      },
+                      {
+                        "authority": "project-owned",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "B",
+                        "sourceId": "github-actions:Build-and-audit#498:vanilla-peer+two-client@5633ab1e6d4482a015192e81b8b7c7789537dd63;tree=a5b60f6c9af607be5ecba3d678a0e4bb665cb7a7",
+                        "claim": "The validated tree passed a modded NeoForge client against a Mojang vanilla server, a vanilla Mojang client against the NeoForge server with the mod installed, and two-client multiplayer/lifecycle paths."
+                      }
+                    ]
+                  },
+                  "security-safety": {
+                    "applicability": "optional",
+                    "authority": "repository-native",
+                    "evidenceState": "observed",
+                    "findingState": "supports",
+                    "findingCounts": {
+                      "supports": 1,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "evidenced",
+                    "evidenceCount": 1,
+                    "evidence": [
+                      {
+                        "authority": "repository-native",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "C",
+                        "sourceId": "AUDIT_1.21.1.md+README.md@317c2ec2e40325d8dd41f6dc5e730e95c97ae7e1",
+                        "claim": "The local port rejects vanilla packet-format mutation, live inventory/attribute swapping, hurt-immunity clearing and early interaction theft; it uses server-authoritative off-hand state, ordered custom-payload sequences, held-state/target validation, replay hardening, vanilla attack semantics, and excludes GameTest-only resources from the release JAR."
+                      }
+                    ]
+                  },
+                  "stewardship": {
+                    "applicability": "recommended",
+                    "authority": "repository-native",
+                    "evidenceState": "observed",
+                    "findingState": "supports",
+                    "findingCounts": {
+                      "supports": 1,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "evidenced",
+                    "evidenceCount": 1,
+                    "evidence": [
+                      {
+                        "authority": "repository-native",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "C",
+                        "sourceId": "LICENSE+THIRD_PARTY_NOTICES.md+AUDIT_1.21.1.md+TEST_MATRIX.md@317c2ec2e40325d8dd41f6dc5e730e95c97ae7e1",
+                        "claim": "The local delta retains the upstream MIT notice, records 2026 fork contributions and third-party provenance, documents excluded/independently adapted sources and asset licensing, and maintains an explicit audit/test matrix for the port."
+                      }
+                    ]
+                  }
+                },
+                "compositeQualityScore": null
+              },
+              "reason": null,
+              "evidenceProvenance": {
+                "understandability": [
+                  {
+                    "origin": "local",
+                    "sourceId": "README.md+TEST_MATRIX.md@317c2ec2e40325d8dd41f6dc5e730e95c97ae7e1"
+                  }
+                ],
+                "verification": [
+                  {
+                    "origin": "local",
+                    "sourceId": "github-actions:Build-and-audit#498:30934082130@5633ab1e6d4482a015192e81b8b7c7789537dd63;tree=a5b60f6c9af607be5ecba3d678a0e4bb665cb7a7"
+                  },
+                  {
+                    "origin": "local",
+                    "sourceId": "TEST_MATRIX.md+.github/workflows/build.yml@317c2ec2e40325d8dd41f6dc5e730e95c97ae7e1"
+                  }
+                ],
+                "reproducibility": [
+                  {
+                    "origin": "local",
+                    "sourceId": "README.md+build.gradle+gradle.properties+gradle/wrapper+PORT_MANIFEST.sha256@317c2ec2e40325d8dd41f6dc5e730e95c97ae7e1"
+                  }
+                ],
+                "interoperability": [
+                  {
+                    "origin": "local",
+                    "sourceId": "README.md+docs/COMPATIBILITY.md+docs/PROTOCOL.md@317c2ec2e40325d8dd41f6dc5e730e95c97ae7e1"
+                  },
+                  {
+                    "origin": "local",
+                    "sourceId": "github-actions:Build-and-audit#498:vanilla-peer+two-client@5633ab1e6d4482a015192e81b8b7c7789537dd63;tree=a5b60f6c9af607be5ecba3d678a0e4bb665cb7a7"
+                  }
+                ],
+                "security-safety": [
+                  {
+                    "origin": "local",
+                    "sourceId": "AUDIT_1.21.1.md+README.md@317c2ec2e40325d8dd41f6dc5e730e95c97ae7e1"
+                  }
+                ],
+                "stewardship": [
+                  {
+                    "origin": "local",
+                    "sourceId": "LICENSE+THIRD_PARTY_NOTICES.md+AUDIT_1.21.1.md+TEST_MATRIX.md@317c2ec2e40325d8dd41f6dc5e730e95c97ae7e1"
+                  }
+                ]
+              }
+            },
+            "evidenceOriginState": "local",
+            "evidenceOriginCounts": {
+              "local": 8,
+              "upstream-inherited": 0,
+              "upstream-accepted": 0,
+              "mixed": 0,
+              "unknown": 0
+            }
+          },
+          "personalAttribution": {
+            "qualitySource": "local-delta-only",
+            "snapshotQualityEligible": false,
+            "upstreamInheritedEvidenceEligible": false,
+            "upstreamAcceptedEvidenceEligible": true,
+            "localDeltaRequired": true,
+            "localDeltaState": "observed",
+            "localDeltaPresence": "present"
+          },
+          "compositeForkQualityScore": null,
+          "productionRankingAllowed": false
+        }
       },
       "impact": {
         "state": "partial",
