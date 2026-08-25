@@ -35,7 +35,7 @@ jobs:
     permissions:
       contents: write
     env:
-      IPM_QUALITY_TOOLS_REF: 1c426da42b63f8ce322251bf7fefeb562ef1d9c6
+      IPM_QUALITY_TOOLS_REF: 884e5631537888d4876036bc91f0c4fc84d8fb5b
     steps:
       - name: Checkout profile repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -99,6 +99,7 @@ jobs:
             'nekomario28/antifullbright',
             'nekomario28/ftbpublicclaims',
             'nekomario28/buyclaimchunks',
+            'nekomario28/freetoken',
             'nekomario28/gz-sim',
             'nekomario28/turing-smart-screen-python-owl',
           ]);
@@ -108,15 +109,17 @@ jobs:
             'nekomario28/antifullbright',
             'nekomario28/ftbpublicclaims',
             'nekomario28/buyclaimchunks',
+            'nekomario28/freetoken',
             'nekomario28/turing-smart-screen-python-owl',
           ]);
-          const expectedSnapshotDates = ['2026-07-25', '2026-08-25'];
+          const expectedSnapshotDates = ['2026-07-25', '2026-08-24', '2026-08-25'];
           const expectedAvailableSnapshotDate = new Map([
             ['nekomario28/interactive-project-map', '2026-08-25'],
             ['nekomario28/projexd_group10', '2026-08-25'],
             ['nekomario28/antifullbright', '2026-08-25'],
             ['nekomario28/ftbpublicclaims', '2026-08-25'],
             ['nekomario28/buyclaimchunks', '2026-07-25'],
+            ['nekomario28/freetoken', '2026-08-24'],
             ['nekomario28/turing-smart-screen-python-owl', '2026-08-25'],
           ]);
           const available = presentation.repositories.filter((entry) => entry.overlayState === 'available');
@@ -230,6 +233,22 @@ jobs:
           if (buyClaimMaintainability?.findingState !== 'unknown') throw new Error('BuyClaimChunks Maintainability must remain unknown');
           if (buyClaimSecurity?.applicability !== 'optional' || buyClaimSecurity?.findingState !== 'supports') throw new Error('BuyClaimChunks optional Security/Safety contract mismatch');
           if (buyClaim?.evidenceFreshness?.snapshotDate !== '2026-07-25') throw new Error('BuyClaimChunks evidence date was laundered to publication date');
+
+          const freeTokenSource = sourceByKey.get('nekomario28/freetoken');
+          const freeToken = availableByKey.get('nekomario28/freetoken');
+          if (freeTokenSource?.mode !== 'fork-local-delta' || freeTokenSource?.qualityAttributionScope !== 'local-delta') throw new Error('FreeToken assessment source lost fork local-delta attribution');
+          if (freeTokenSource?.presentationExpected !== 'available' || freeTokenSource?.fixtureSnapshotDate !== '2026-08-24') throw new Error('FreeToken source freshness/presentation expectation mismatch');
+          if (freeTokenSource?.calibratedRevision !== 'b2c0f162ae74c22898fb61b7369b4d7a3474bbfa') throw new Error('FreeToken calibrated default-main revision mismatch');
+          if (freeToken?.qualityAttributionScope !== 'local-delta' || freeToken?.overlayState !== 'available') throw new Error('FreeToken presentation scope/state mismatch');
+          if (freeToken?.overlay?.coverage?.targetDimensions !== 6 || freeToken?.overlay?.coverage?.inspectedDimensions !== 3) throw new Error('FreeToken target coverage mismatch');
+          if (freeToken?.overlay?.targetFindingCounts?.supports !== 3 || freeToken?.overlay?.targetFindingCounts?.unknown !== 3) throw new Error('FreeToken finding distribution mismatch');
+          const freeTokenMaintainability = freeToken?.overlay?.segments?.find((segment) => segment.id === 'maintainability');
+          const freeTokenSecurity = freeToken?.overlay?.segments?.find((segment) => segment.id === 'security-safety');
+          const freeTokenStewardship = freeToken?.overlay?.segments?.find((segment) => segment.id === 'stewardship');
+          if (freeTokenMaintainability?.findingState !== 'unknown') throw new Error('FreeToken Maintainability must remain unknown');
+          if (freeTokenSecurity?.findingState !== 'unknown') throw new Error('FreeToken Security/Safety must remain unknown');
+          if (freeTokenStewardship?.findingState !== 'unknown') throw new Error('FreeToken Stewardship must remain unknown');
+          if (freeToken?.evidenceFreshness?.snapshotDate !== '2026-08-24') throw new Error('FreeToken evidence date was laundered to publication date');
 
           const gzSource = sourceByKey.get('nekomario28/gz-sim');
           const gzPresentation = presentation.repositories.find((entry) => normalizeKey(entry.repositoryKey) === 'nekomario28/gz-sim');
