@@ -35,16 +35,9 @@ jobs:
 
           path = Path('rerobot/crates/rerobot-core/src/action_interpolator.rs')
           text = path.read_text()
-
           replacements = [
-              (
-                  "    idx: usize,\n}\n",
-                  "    idx: usize,\n    emitted_policy_action: bool,\n}\n",
-              ),
-              (
-                  "            idx: 0,\n        })\n",
-                  "            idx: 0,\n            emitted_policy_action: false,\n        })\n",
-              ),
+              ("    idx: usize,\n}\n", "    idx: usize,\n    emitted_policy_action: bool,\n}\n"),
+              ("            idx: 0,\n        })\n", "            idx: 0,\n            emitted_policy_action: false,\n        })\n"),
               (
                   "    pub fn reset(&mut self) {\n        self.prev = None;\n        self.buffer.clear();\n        self.idx = 0;\n    }\n",
                   "    pub fn reset(&mut self) {\n        self.prev = None;\n        self.buffer.clear();\n        self.idx = 0;\n        self.emitted_policy_action = false;\n    }\n",
@@ -55,26 +48,22 @@ jobs:
               ),
               (
                   "                for i in 1..=steps {\n                    let t = T::from_f64(i as f64 / steps as f64);\n                    let step = (0..width)\n                        .map(|k| T::lerp(prev[k * prev_stride], t, action[k * action_stride]))\n                        .collect();\n                    self.buffer.push(step);\n                }\n",
-                  "                for i in 1..steps {\n                    let t = T::from_f64(i as f64 / steps as f64);\n                    let step = (0..width)\n                        .map(|k| T::lerp(prev[k * prev_stride], t, action[k * action_stride]))\n                        .collect();\n                    self.buffer.push(step);\n                }\n                // Current LeRobot contract: the cycle-end command is the exact\n                // policy action, not a t=1 recomputation that can differ by an ULP.\n                self.buffer.push(action.to_vec());\n",
+                  "                for i in 1..steps {\n                    let t = T::from_f64(i as f64 / steps as f64);\n                    let step = (0..width)\n                        .map(|k| T::lerp(prev[k * prev_stride], t, action[k * action_stride]))\n                        .collect();\n                    self.buffer.push(step);\n                }\n                self.buffer.push(action.to_vec());\n",
               ),
               (
                   "    pub fn get(&mut self) -> Option<&[T]> {\n        if self.idx >= self.buffer.len() {\n            return None;\n        }\n        let i = self.idx;\n        self.idx += 1;\n        Some(&self.buffer[i])\n    }\n",
                   "    pub fn get(&mut self) -> Option<&[T]> {\n        if self.idx >= self.buffer.len() {\n            self.emitted_policy_action = false;\n            return None;\n        }\n        let i = self.idx;\n        self.idx += 1;\n        self.emitted_policy_action = self.idx == self.buffer.len();\n        Some(&self.buffer[i])\n    }\n",
               ),
           ]
-
           for old, new in replacements:
               count = text.count(old)
               if count != 1:
                   raise SystemExit(f'patch anchor count {count}, expected 1: {old[:80]!r}')
               text = text.replace(old, new, 1)
-
           path.write_text(text)
           print('MINIMAL_MIGRATION_PATCH_APPLIED')
           PY
-
           git -C rerobot diff --check
-          git -C rerobot diff -- crates/rerobot-core/src/action_interpolator.rs
 
       - name: Add current-contract regression tests
         shell: bash
@@ -82,7 +71,6 @@ jobs:
           set -euo pipefail
           cat > rerobot/crates/rerobot-core/tests/current_upstream_action_interpolator_migration.rs <<'RS'
           //! Current LeRobot ActionInterpolator migration feasibility probes.
-
           use rerobot_core::action_interpolator::ActionInterpolator;
 
           #[test]
@@ -94,14 +82,12 @@ jobs:
                   prev[1] + 1.0_f32 * (action[1] - prev[1]),
               ];
               assert_ne!(old_endpoint, action, "fixture became vacuous");
-
               let mut interp = ActionInterpolator::<f32>::new(2).unwrap();
               interp.add(&prev).unwrap();
               assert_eq!(interp.get(), Some(prev.as_slice()));
               interp.add(&action).unwrap();
               let _ = interp.get().unwrap();
               let endpoint = interp.get().unwrap().to_vec();
-
               assert_eq!(endpoint.as_slice(), action.as_slice());
               assert_eq!(
                   endpoint.iter().copied().map(f32::to_bits).collect::<Vec<_>>(),
@@ -115,30 +101,54 @@ jobs:
               let mut interp = ActionInterpolator::<f32>::new(2).unwrap();
               let a0 = [0.0_f32];
               let a1 = [2.0_f32];
-
               interp.add(&a0).unwrap();
               assert_eq!(interp.get(), Some(a0.as_slice()));
               assert!(interp.emitted_policy_action());
-
               interp.add(&a1).unwrap();
               assert_eq!(interp.get(), Some([1.0_f32].as_slice()));
               assert!(!interp.emitted_policy_action());
-
               assert_eq!(interp.get(), Some(a1.as_slice()));
               assert!(interp.emitted_policy_action());
-
               assert_eq!(interp.get(), None);
               assert!(!interp.emitted_policy_action());
               println!("CURRENT_EMITTED_POLICY_ACTION_CADENCE_PASS");
           }
           RS
 
-      - name: Run existing rerobot-core regression suite plus current contract
+      - name: Prove current contract passes after minimal migration
         shell: bash
         run: |
           set -euo pipefail
           cd rerobot
-          cargo test --locked -p rerobot-core -- --nocapture | tee /tmp/migration.log
-          grep -q 'CURRENT_BIT_EXACT_ENDPOINT_MIGRATION_PASS' /tmp/migration.log
-          grep -q 'CURRENT_EMITTED_POLICY_ACTION_CADENCE_PASS' /tmp/migration.log
-          echo MINIMAL_MIGRATION_EXISTING_CORE_SUITE_PASS
+          cargo test --locked -p rerobot-core --test current_upstream_action_interpolator_migration -- --nocapture | tee /tmp/current.log
+          grep -q 'CURRENT_BIT_EXACT_ENDPOINT_MIGRATION_PASS' /tmp/current.log
+          grep -q 'CURRENT_EMITTED_POLICY_ACTION_CADENCE_PASS' /tmp/current.log
+          echo CURRENT_ACTION_INTERPOLATOR_MIGRATION_PASS
+
+      - name: Prove only known old broadcast contracts conflict
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd rerobot
+
+          # All core tests except the three now-known authority conflicts must remain green.
+          cargo test --locked -p rerobot-core -- --nocapture \
+            --skip a_length_n_previous_broadcasts_against_a_length_one_action \
+            --skip a_failed_add_leaves_the_previous_action_untouched \
+            --skip an_empty_previous_against_a_length_one_action_yields_empty_steps \
+            | tee /tmp/nonconflicting.log
+
+          # Then run the historical ActionInterpolator suite without skips and assert
+          # that it fails in exactly the known contract-conflict set.
+          set +e
+          cargo test --locked -p rerobot-core --test action_interpolator -- --nocapture > /tmp/old-contract.log 2>&1
+          status=$?
+          set -e
+          test "$status" -ne 0
+          grep -q '47 passed; 3 failed' /tmp/old-contract.log
+          grep -q 'a_length_n_previous_broadcasts_against_a_length_one_action' /tmp/old-contract.log
+          grep -q 'a_failed_add_leaves_the_previous_action_untouched' /tmp/old-contract.log
+          grep -q 'an_empty_previous_against_a_length_one_action_yields_empty_steps' /tmp/old-contract.log
+          cat /tmp/old-contract.log
+          echo OLD_BROADCAST_CONTRACT_CONFLICT_SET_CONFIRMED
+          echo MINIMAL_MIGRATION_FEASIBILITY_CLASSIFIED
