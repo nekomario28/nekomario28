@@ -18,15 +18,15 @@
     "source_sha": "bf3960dc85eebf8e25c5e8a015e968322a984597",
     "initial_filtered_history_head": "ee0a07b9e85f7a57c6b2146149e68420202f4fe5",
     "current_bootstrap_main_sha": "d916b057ec897ceef94bdee293d4e02f42e46d1b",
-    "current_working_main_sha": "072798e0bae46850891b37981be863c639309c3a",
+    "current_working_main_sha": "05ac8f4edd6ef10778f1ba8487dca5e32574fd6b",
     "bootstrap_carrier_run": 32868834661,
     "exact_head_validation_run": 32869436824,
     "portable_regression_run": 32871700639,
     "portable_regression_job": 97880025443,
     "portable_regression_tests": 7,
     "design_grammar": {
-      "phase": "P12",
-      "mode": "measured-reference-bounded-opt-in-projections-plus-typography-lint",
+      "phase": "P13",
+      "mode": "measured-reference-bounded-opt-in-projections-plus-typography-lint-and-single-role-projection",
       "grammar_sha256": "1fcbe5a785fe33d28f1c9eb8f2186f9d35c044afdfb6abde85fd2c4ea3455fd4",
       "exact_head_validation_run": 32876973365,
       "exact_head_validation_job": 97897147907,
@@ -106,14 +106,37 @@
         "donor_bundle_lint": "PASS",
         "renderer_projection": "NOT_IMPLEMENTED",
         "global_renderer_authority": false
+      },
+      "typography_role_projection": {
+        "phase": "P13",
+        "mode": "opt-in-semantic-marker-single-role-byte-equivalent",
+        "marker": "data-profile-envelope-type-role",
+        "promoted_roles": [
+          "hero_display"
+        ],
+        "product_content_revision": "c1f8ee6bd60f88f5540077bb30fe82583db63bba",
+        "evidence_head": "05ac8f4edd6ef10778f1ba8487dca5e32574fd6b",
+        "build_run": 32935624372,
+        "build_job": 98076173944,
+        "exact_head_validation_run": 32935845204,
+        "exact_head_validation_job": 98076786162,
+        "tests": 30,
+        "donor_sha": "7de5ed8e4481b6d53bad294cedb75c02547bbce7",
+        "byte_equivalence_cases": 4,
+        "assets_per_case": 15,
+        "byte_equivalent_outputs": 60,
+        "byte_equivalence": "PASS",
+        "source_marker_adoption": "NOT_PERFORMED",
+        "other_measured_roles": "NOT_PROMOTED",
+        "global_renderer_authority": false
       }
     },
     "release_copy_set": {
-      "phase": "P12",
+      "phase": "P13",
       "boundary_kind": "product-copy-set",
       "product_file_count": 8,
-      "product_content_revision": "6d70547fe8afebd47d0262b705a6bdd2b96ae7e1",
-      "provenance_head": "072798e0bae46850891b37981be863c639309c3a",
+      "product_content_revision": "c1f8ee6bd60f88f5540077bb30fe82583db63bba",
+      "provenance_head": "05ac8f4edd6ef10778f1ba8487dca5e32574fd6b",
       "technical_standalone": "PASS",
       "release_closure_run": 32883641201,
       "release_closure_job": 97918842614,
@@ -144,7 +167,16 @@
       "p12_tests": 26,
       "p12_donor_sha": "9b0ecc2000543fbbf16cbab6b56dd90148c2684e",
       "p12_donor_bundle_lint": "PASS",
-      "p12_delta_repository_history_audit": "PASS"
+      "p12_delta_repository_history_audit": "PASS",
+      "p13_exact_head_validation_run": 32935845204,
+      "p13_exact_head_validation_job": 98076786162,
+      "p13_tests": 30,
+      "p13_donor_sha": "7de5ed8e4481b6d53bad294cedb75c02547bbce7",
+      "p13_byte_equivalence_cases": 4,
+      "p13_assets_per_case": 15,
+      "p13_byte_equivalent_outputs": 60,
+      "p13_byte_equivalence": "PASS",
+      "p13_delta_repository_history_audit": "PASS"
     },
     "public_release": "DEFERRED"
   },
@@ -217,7 +249,8 @@
   "generic_input_markers": {
     "outer_surface": "data-profile-envelope-surface-base=outer",
     "frame": "data-profile-envelope-frame=rail",
-    "mounted_presentation_background": "data-profile-envelope-mounted-background=presentation"
+    "mounted_presentation_background": "data-profile-envelope-mounted-background=presentation",
+    "optional_typography_role": "data-profile-envelope-type-role=<explicit-promoted-role>; P13 promotes hero_display only and current public donor does not adopt it"
   },
   "known_non_blocking_constraints": [
     "contract v1 intentionally names github-profile-readme as its only target adapter; do not invent a universal host IR before a second host exists",
@@ -231,7 +264,8 @@
     "P10 exact donor byte equivalence covers the frame-caps-none transform case and does not replace browser, responsive, playback or public-target evidence",
     "P11 gives only frame-rail geometry plus the four measured seasonal surface/accent roles an explicit opt-in grammar projection path; typography, spacing, motion, arbitrary decorative colors and global renderer authority remain outside this migration",
     "P11 all-season local browser evidence and summer local playback/reduced-motion evidence are established by exact rendered-byte equivalence to the donor harness; public GitHub-profile P11 acceptance remains NOT_ESTABLISHED",
-    "P12 typography authority is detection-only: eight measured visible-text size/weight roles are linted, while typography renderer projection and global renderer authority remain unimplemented"
+    "P12 typography authority is detection-only: eight measured visible-text size/weight roles are linted, while typography renderer projection and global renderer authority remain unimplemented",
+    "P13 grants opt-in renderer authority only to explicitly marked hero_display typography; the other seven measured roles remain lint-only, current public donor source-marker adoption is NOT_PERFORMED, and global renderer authority remains false"
   ],
   "promotion_gates": {
     "create_public_repository": [
