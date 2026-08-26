@@ -18,7 +18,7 @@
     "source_sha": "bf3960dc85eebf8e25c5e8a015e968322a984597",
     "initial_filtered_history_head": "ee0a07b9e85f7a57c6b2146149e68420202f4fe5",
     "current_bootstrap_main_sha": "d916b057ec897ceef94bdee293d4e02f42e46d1b",
-    "current_working_main_sha": "180a32003233bcdf6f957790b89c975e854397d5",
+    "current_working_main_sha": "c043e0699c6ff4f080bc04e849b148ce525012b2",
     "bootstrap_carrier_run": 32868834661,
     "exact_head_validation_run": 32869436824,
     "portable_regression_run": 32871700639,
@@ -164,6 +164,31 @@
         "source_marker_adoption": "NOT_PERFORMED",
         "public_producer_adoption": "BLOCKED_BY_PUBLICATION_BOUNDARY",
         "public_profile_acceptance": "NOT_ESTABLISHED",
+        "global_renderer_authority": false
+      },
+      "spacing_rhythm_census": {
+        "phase": "P16-research",
+        "status": "measured-no-promotion",
+        "donor_sha": "dc5bcba80de04dac72e1ffa8aa820a147b4fc403",
+        "census_run": 32940642773,
+        "census_job": 98090752327,
+        "assets": 15,
+        "visible_text_nodes": 34,
+        "scope": "visible-text-baselines-and-explicit-nested-content-bounds",
+        "decorative_geometry_excluded": true,
+        "grid_base_px": 6,
+        "grid_aligned_adjacent_gap_px": 18,
+        "grid_aligned_adjacent_gap_occurrences": 1,
+        "strongest_repeated_role": "activity_axis",
+        "strongest_repeated_role_gap_px": 36.5,
+        "strongest_repeated_role_gap_occurrences": 4,
+        "mounted_content_insets_px": [
+          70,
+          80
+        ],
+        "semantic_roles_established": false,
+        "renderer_projection": "NOT_IMPLEMENTED",
+        "reason": "repeated numeric values do not establish reusable semantic spacing roles",
         "global_renderer_authority": false
       }
     },
@@ -326,7 +351,8 @@
     "P12 typography authority is detection-only: eight measured visible-text size/weight roles are linted, while typography renderer projection and global renderer authority remain unimplemented",
     "P13 grants opt-in renderer authority only to explicitly marked hero_display typography; the other seven measured roles remain lint-only, current public donor source-marker adoption is NOT_PERFORMED, and global renderer authority remains false",
     "P14 establishes private explicit-marker renderer capability for all eight measured typography roles; current public donor source-marker adoption remains NOT_PERFORMED and public producer adoption is BLOCKED_BY_PUBLICATION_BOUNDARY until publication/licensing authority changes",
-    "P15 establishes private explicit-marker renderer capability for ambient_continuity duration only; local/decorative motion, phase, travel geometry, easing and global renderer authority remain outside; current public donor source-marker adoption remains NOT_PERFORMED and public producer adoption is BLOCKED_BY_PUBLICATION_BOUNDARY"
+    "P15 establishes private explicit-marker renderer capability for ambient_continuity duration only; local/decorative motion, phase, travel geometry, easing and global renderer authority remain outside; current public donor source-marker adoption remains NOT_PERFORMED and public producer adoption is BLOCKED_BY_PUBLICATION_BOUNDARY",
+    "P16 spacing/rhythm census does not justify semantic spacing renderer authority: visible-text gaps are mostly irregular, only one adjacent 18px gap lies on the 6px reference grid, the strongest repeated activity-axis step is 36.5px, and mounted content uses distinct 70px/80px insets; keep spacing reference-only until explicit producer roles or stronger independent reuse evidence exists"
   ],
   "promotion_gates": {
     "create_public_repository": [
