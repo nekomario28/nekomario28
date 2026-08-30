@@ -219,7 +219,6 @@
   <circle cx="633.4" cy="613.5" r="1.49" fill="#e8edf7" opacity="0.557" />
   <circle cx="83.6" cy="1040.2" r="1.61" fill="#e8edf7" opacity="0.469" />
   <circle cx="610.4" cy="1379.3" r="2.16" fill="#e8edf7" opacity="0.437" />
-  <g fill="none" stroke="#94a8c8" opacity=".13"><ellipse cx="500" cy="970" rx="360" ry="150" transform="rotate(-17 500 970)" /><ellipse cx="500" cy="970" rx="280" ry="116" transform="rotate(-17 500 970)" /></g>
   <circle cx="510" cy="955" r="4.8" fill="#f3c7d6" opacity=".82" />
   <path class="pe-current" d="M-50,1528.1 L0,1521.1 L50,1513.9 L100,1507.3 L150,1502.0 L200,1498.6 L250,1497.5 L300,1498.8 L350,1502.3 L400,1507.7 L450,1514.3 L500,1521.5 L550,1528.5 L600,1534.4 L650,1538.7 L700,1540.8 L750,1540.6 L800,1538.0 L850,1533.3 L900,1527.1 L950,1520.0" fill="none" stroke="#8fb4d9" stroke-width="1.82" opacity="0.181" stroke-linecap="round" style="animation-delay:-0.00s" />
   <path class="pe-current" d="M-50,1624.9 L0,1622.0 L50,1617.7 L100,1612.5 L150,1607.1 L200,1601.9 L250,1597.6 L300,1594.6 L350,1593.3 L400,1593.8 L450,1596.0 L500,1599.8 L550,1604.7 L600,1610.1 L650,1615.4 L700,1620.2 L750,1623.8 L800,1625.8 L850,1626.1 L900,1624.6 L950,1621.4" fill="none" stroke="#8fb4d9" stroke-width="1.63" opacity="0.165" stroke-linecap="round" style="animation-delay:-0.65s" />
