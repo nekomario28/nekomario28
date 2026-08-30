@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "contractId": "ipm-repository-assessment-artifact-v1",
   "owner": "nekomario28",
-  "generatedAt": "2026-08-29T17:22:04.207Z",
+  "generatedAt": "2026-08-30T07:21:57.699Z",
   "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
   "taxonomyId": "ipm-standard-v1",
   "assessmentPolicyId": "ipm-repository-assessment-v1",
@@ -37,7 +37,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-08-29T17:22:04.207Z"
+        "observedAt": "2026-08-30T07:21:57.699Z"
       },
       "quality": {
         "state": "partial",
@@ -606,7 +606,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-08-29T17:22:04.207Z"
+        "observedAt": "2026-08-30T07:21:57.699Z"
       },
       "quality": {
         "state": "partial",
@@ -907,7 +907,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-08-29T17:22:04.207Z"
+        "observedAt": "2026-08-30T07:21:57.699Z"
       },
       "quality": {
         "state": "partial",
@@ -1464,7 +1464,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-08-29T17:22:04.207Z"
+        "observedAt": "2026-08-30T07:21:57.699Z"
       },
       "quality": {
         "state": "partial",
@@ -1797,7 +1797,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-08-29T17:22:04.207Z"
+        "observedAt": "2026-08-30T07:21:57.699Z"
       },
       "quality": {
         "state": "not-collected",
@@ -1929,7 +1929,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-08-29T17:22:04.207Z"
+        "observedAt": "2026-08-30T07:21:57.699Z"
       },
       "quality": {
         "state": "not-collected",
@@ -2061,7 +2061,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-08-29T17:22:04.207Z"
+        "observedAt": "2026-08-30T07:21:57.699Z"
       },
       "quality": {
         "state": "partial",
@@ -2642,7 +2642,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-08-29T17:22:04.207Z"
+        "observedAt": "2026-08-30T07:21:57.699Z"
       },
       "quality": {
         "state": "not-collected",
@@ -2774,7 +2774,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-08-29T17:22:04.207Z"
+        "observedAt": "2026-08-30T07:21:57.699Z"
       },
       "quality": {
         "state": "partial",
@@ -3145,7 +3145,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-08-29T17:22:04.207Z"
+        "observedAt": "2026-08-30T07:21:57.699Z"
       },
       "quality": {
         "state": "not-collected",
@@ -3277,7 +3277,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-08-29T17:22:04.207Z"
+        "observedAt": "2026-08-30T07:21:57.699Z"
       },
       "quality": {
         "state": "partial",
@@ -3789,7 +3789,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-08-29T17:22:04.207Z"
+        "observedAt": "2026-08-30T07:21:57.699Z"
       },
       "quality": {
         "state": "not-collected",
@@ -3921,7 +3921,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-08-29T17:22:04.207Z"
+        "observedAt": "2026-08-30T07:21:57.699Z"
       },
       "quality": {
         "state": "partial",
@@ -4195,7 +4195,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-08-29T17:22:04.207Z"
+        "observedAt": "2026-08-30T07:21:57.699Z"
       },
       "quality": {
         "state": "partial",
@@ -4726,7 +4726,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-08-29T17:22:04.207Z"
+        "observedAt": "2026-08-30T07:21:57.699Z"
       },
       "quality": {
         "state": "partial",
@@ -5007,7 +5007,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-08-29T17:22:04.207Z"
+        "observedAt": "2026-08-30T07:21:57.699Z"
       },
       "quality": {
         "state": "not-collected",
