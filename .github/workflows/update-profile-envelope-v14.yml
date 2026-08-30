@@ -1,0 +1,43 @@
+name: Update Profile Envelope v1.4 Sources
+
+on:
+  push:
+    paths:
+      - "project-map/galaxy.svg"
+      - "assets/github-contributions-dark.svg"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-envelope-v14-source-refresh
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    if: github.event_name != 'push' || github.event.head_commit.message != 'chore: refresh profile envelope v1.4'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate sources and refresh bounded presentation wrapper
+        run: python scripts/sync_profile_v14_sources.py --repo-root .
+
+      - name: Commit presentation refresh if needed
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- assets/profile-v16-overlay-00.svg; then
+            echo "No generated wrapper change required."
+            exit 0
+          fi
+          git diff --exit-code -- project-map/galaxy.svg assets/github-contributions-dark.svg
+          git add assets/profile-v16-overlay-00.svg
+          git diff --cached --name-only | grep -qx 'assets/profile-v16-overlay-00.svg'
+          git -c user.name='github-actions[bot]' \
+              -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              commit -m 'chore: refresh profile envelope v1.4'
+          git push
