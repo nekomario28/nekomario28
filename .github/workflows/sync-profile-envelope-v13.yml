@@ -46,6 +46,34 @@ jobs:
           ! grep -q 'PROJECT CONSTELLATION' assets/profile-v12-projects.svg
           ! grep -q 'ACTIVITY CURRENT' assets/profile-v12-activity.svg
 
+      - name: Prove a future source update refreshes presentation without source rewrite
+        shell: bash
+        run: |
+          set -euo pipefail
+          probe="$RUNNER_TEMP/profile-v13-sync-probe"
+          rm -rf "$probe"
+          mkdir -p "$probe"
+          cp -a scripts assets project-map "$probe/"
+          python - "$probe/project-map/galaxy.svg" <<'PY'
+          import sys, xml.etree.ElementTree as ET
+          from pathlib import Path
+          path=Path(sys.argv[1])
+          root=ET.fromstring(path.read_text(encoding='utf-8'))
+          ns=root.tag.split('}')[0].strip('{') if '}' in root.tag else ''
+          tag=f'{{{ns}}}text' if ns else 'text'
+          probe=ET.Element(tag, {'x':'8','y':'414','font-size':'7','data-v13-sync-probe':'true'})
+          probe.text='PROFILE-V13-SYNC-PROBE'
+          root.append(probe)
+          path.write_text(ET.tostring(root,encoding='unicode')+'\n',encoding='utf-8')
+          PY
+          before="$(sha256sum "$probe/project-map/galaxy.svg" | cut -d' ' -f1)"
+          python "$probe/scripts/sync_profile_v13_sources.py" --repo "$probe"
+          after="$(sha256sum "$probe/project-map/galaxy.svg" | cut -d' ' -f1)"
+          test "$before" = "$after"
+          grep -q 'PROFILE-V13-SYNC-PROBE' "$probe/assets/profile-v12-projects.svg"
+          grep -q 'font-size="7"' "$probe/assets/profile-v12-projects.svg"
+          echo PROFILE_ENVELOPE_V13_WORKFLOW_COMPATIBILITY_PASS
+
       - name: Commit presentation refresh
         if: github.event_name != 'pull_request'
         shell: bash
