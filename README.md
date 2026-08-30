@@ -1,32 +1,6 @@
-<!-- live-profile: direct-ipm | Envelope experiments remain under design-lab -->
-<p align="center">
-  <img src="assets/sakura-profile-hero.svg" width="900" alt="桜を配した nekomario28 のプロフィールバナー">
-</p>
-
-<br>
-
-<p align="center">
-  <a href="https://konosuba.com/bakuen/story/?mode=story4">
-    <img src="https://konosuba.com/bakuen/story/img/pdsfi4/05.jpg" width="700" alt="めぐみん">
-  </a>
-</p>
-
-<p align="center">
-  <sub>©2023 暁なつめ・三嶋くろね／KADOKAWA／このすば爆焔製作委員会</sub>
-</p>
-
-<br>
-
-<h2 align="center">プロジェクト</h2>
-
+<!-- live-profile: supernatural-envelope-v1 -->
 <p align="center">
   <a href="https://nekomario28.github.io/interactive-project-map/u/?username=nekomario28&style=galaxy-systems">
-    <img width="740" src="project-map/galaxy.svg" alt="nekomario28 の公開プロジェクトマップ">
+    <img src="assets/profile-supernatural-v1.svg" width="900" alt="nekomario28 のプロフィール、プロジェクト星図、GitHub活動を一つの連続した夜空として表現したプロフィール">
   </a>
-</p>
-
-<br>
-
-<p align="center">
-  <img width="760" src="assets/github-contributions-dark.svg" alt="直近31日間の GitHub コントリビューション">
 </p>
