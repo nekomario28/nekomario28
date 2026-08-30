@@ -38,42 +38,41 @@
   .pe-twinkle-a { animation: peTwinkle 3.6s ease-in-out infinite alternate; }
   .pe-twinkle-b { animation: peTwinkle 5.2s ease-in-out 1.1s infinite alternate; }
   .pe-current { stroke-dasharray: 10 16; animation: peCurrent 8s linear infinite; }
-  .pe-nebula { animation: peNebula 14s ease-in-out infinite alternate; }
   @keyframes peDriftA { from { transform: translate(0px,0px); } to { transform: translate(-42px,62px); } }
   @keyframes peDriftB { from { transform: translate(0px,0px); } to { transform: translate(34px,78px); } }
   @keyframes peTwinkle { from { opacity:.24; } to { opacity:.92; } }
   @keyframes peCurrent { to { stroke-dashoffset:-52; } }
   @keyframes peNebula { from { opacity:.72; } to { opacity:1; } }
   @media (prefers-reduced-motion: reduce) {
-    .pe-drift-a,.pe-drift-b,.pe-twinkle-a,.pe-twinkle-b,.pe-current,.pe-nebula { animation:none !important; }
+    .pe-drift-a,.pe-drift-b,.pe-twinkle-a,.pe-twinkle-b,.pe-current { animation:none !important; }
     .pe-motion { display:none; }
   }
 </style>
 
   <rect data-profile-envelope-surface-base="true" width="900" height="2240" fill="url(#world)" />
-  <g class="pe-nebula"><rect width="900" height="2240" fill="url(#nebulaA)" /><rect width="900" height="2240" fill="url(#nebulaB)" /></g>
+  <g><rect width="900" height="2240" fill="url(#nebulaA)" /><rect width="900" height="2240" fill="url(#nebulaB)" /></g>
   <rect y="1450" width="900" height="790" fill="url(#activityGlow)" />
   <rect width="900" height="2240" filter="url(#grain)" opacity=".8" />
   <g fill="none" stroke="#2b1b2a" stroke-linecap="round" opacity=".65"><path d="M940 55 C860 85 805 132 742 192 C702 230 666 264 614 310" stroke-width="10" /><path d="M827 113 C802 83 777 62 746 43" stroke-width="5" /><path d="M758 176 C730 145 705 127 675 113" stroke-width="4" /></g>
-  <g class="pe-drift-a"><use href="#petal" transform="translate(572.4 699.4) rotate(38.9) scale(0.913)" fill="#eaaabd" opacity="0.255" /></g>
-  <g class="pe-drift-b"><use href="#petal" transform="translate(719.5 252.1) rotate(-30.7) scale(1.085)" fill="#eaaabd" opacity="0.684" /></g>
+  <g><use href="#petal" transform="translate(572.4 699.4) rotate(38.9) scale(0.913)" fill="#eaaabd" opacity="0.255" /></g>
+  <g><use href="#petal" transform="translate(719.5 252.1) rotate(-30.7) scale(1.085)" fill="#eaaabd" opacity="0.684" /></g>
   <g class="pe-drift-a"><use href="#petal" transform="translate(610.9 520.8) rotate(-22.1) scale(1.030)" fill="#f3c7d6" opacity="0.241" /></g>
   <g class="pe-drift-b"><use href="#petal" transform="translate(665.7 201.3) rotate(38.7) scale(0.957)" fill="#f3c7d6" opacity="0.572" /></g>
   <g class="pe-drift-a"><use href="#petal" transform="translate(715.0 370.8) rotate(43.4) scale(0.472)" fill="#f3c7d6" opacity="0.434" /></g>
   <g class="pe-drift-b"><use href="#petal" transform="translate(504.3 354.8) rotate(-60.9) scale(0.650)" fill="#f3c7d6" opacity="0.532" /></g>
-  <g class="pe-drift-a"><use href="#petal" transform="translate(641.1 318.3) rotate(-28.8) scale(0.553)" fill="#eaaabd" opacity="0.541" /></g>
+  <g><use href="#petal" transform="translate(641.1 318.3) rotate(-28.8) scale(0.553)" fill="#eaaabd" opacity="0.541" /></g>
   <g class="pe-drift-b"><use href="#petal" transform="translate(762.2 417.4) rotate(-17.6) scale(0.564)" fill="#eaaabd" opacity="0.425" /></g>
-  <g class="pe-drift-a"><use href="#petal" transform="translate(715.0 717.4) rotate(31.5) scale(0.485)" fill="#eaaabd" opacity="0.731" /></g>
+  <g><use href="#petal" transform="translate(715.0 717.4) rotate(31.5) scale(0.485)" fill="#eaaabd" opacity="0.731" /></g>
   <g class="pe-drift-b"><use href="#petal" transform="translate(815.9 461.4) rotate(4.9) scale(0.617)" fill="#eaaabd" opacity="0.755" /></g>
   <g class="pe-drift-a"><use href="#petal" transform="translate(502.8 504.6) rotate(-23.7) scale(0.568)" fill="#f3c7d6" opacity="0.494" /></g>
   <g class="pe-drift-b"><use href="#petal" transform="translate(771.7 458.9) rotate(27.1) scale(0.717)" fill="#eaaabd" opacity="0.418" /></g>
   <g class="pe-drift-a"><use href="#petal" transform="translate(537.0 173.9) rotate(-35.3) scale(0.686)" fill="#f3c7d6" opacity="0.510" /></g>
-  <g class="pe-drift-b"><use href="#petal" transform="translate(730.1 344.1) rotate(-30.2) scale(1.136)" fill="#eaaabd" opacity="0.703" /></g>
-  <g class="pe-drift-a"><use href="#petal" transform="translate(714.0 317.8) rotate(33.4) scale(1.196)" fill="#f3c7d6" opacity="0.509" /></g>
-  <g class="pe-drift-b"><use href="#petal" transform="translate(682.2 238.4) rotate(-9.3) scale(0.515)" fill="#f3c7d6" opacity="0.333" /></g>
-  <g class="pe-drift-a"><use href="#petal" transform="translate(802.4 320.7) rotate(6.8) scale(0.905)" fill="#eaaabd" opacity="0.433" /></g>
-  <g class="pe-drift-b"><use href="#petal" transform="translate(655.8 222.5) rotate(9.8) scale(0.878)" fill="#eaaabd" opacity="0.493" /></g>
-  <g class="pe-drift-a"><use href="#petal" transform="translate(815.5 290.9) rotate(-18.5) scale(1.184)" fill="#f3c7d6" opacity="0.243" /></g>
+  <g><use href="#petal" transform="translate(730.1 344.1) rotate(-30.2) scale(1.136)" fill="#eaaabd" opacity="0.703" /></g>
+  <g><use href="#petal" transform="translate(714.0 317.8) rotate(33.4) scale(1.196)" fill="#f3c7d6" opacity="0.509" /></g>
+  <g><use href="#petal" transform="translate(682.2 238.4) rotate(-9.3) scale(0.515)" fill="#f3c7d6" opacity="0.333" /></g>
+  <g><use href="#petal" transform="translate(802.4 320.7) rotate(6.8) scale(0.905)" fill="#eaaabd" opacity="0.433" /></g>
+  <g><use href="#petal" transform="translate(655.8 222.5) rotate(9.8) scale(0.878)" fill="#eaaabd" opacity="0.493" /></g>
+  <g><use href="#petal" transform="translate(815.5 290.9) rotate(-18.5) scale(1.184)" fill="#f3c7d6" opacity="0.243" /></g>
   <g class="pe-drift-b"><use href="#petal" transform="translate(647.6 369.3) rotate(46.9) scale(0.484)" fill="#f3c7d6" opacity="0.317" /></g>
   <g class="pe-drift-a"><use href="#petal" transform="translate(847.4 221.9) rotate(-54.9) scale(0.757)" fill="#f3c7d6" opacity="0.492" /></g>
   <g class="pe-drift-b"><use href="#petal" transform="translate(796.6 40.0) rotate(-66.4) scale(1.072)" fill="#f3c7d6" opacity="0.552" /></g>
@@ -81,7 +80,7 @@
   <g class="pe-drift-b"><use href="#petal" transform="translate(734.8 465.7) rotate(-36.9) scale(0.719)" fill="#f3c7d6" opacity="0.753" /></g>
   <g class="pe-drift-a"><use href="#petal" transform="translate(535.1 521.9) rotate(7.0) scale(0.842)" fill="#eaaabd" opacity="0.640" /></g>
   <g class="pe-drift-b"><use href="#petal" transform="translate(552.2 40.0) rotate(39.2) scale(0.664)" fill="#f3c7d6" opacity="0.322" /></g>
-  <g class="pe-drift-a"><use href="#petal" transform="translate(654.8 305.4) rotate(68.3) scale(0.842)" fill="#eaaabd" opacity="0.289" /></g>
+  <g><use href="#petal" transform="translate(654.8 305.4) rotate(68.3) scale(0.842)" fill="#eaaabd" opacity="0.289" /></g>
   <g class="pe-drift-b"><use href="#petal" transform="translate(840.2 586.1) rotate(-30.5) scale(0.501)" fill="#f3c7d6" opacity="0.742" /></g>
   <g class="pe-drift-a"><use href="#petal" transform="translate(539.0 430.3) rotate(30.9) scale(0.816)" fill="#eaaabd" opacity="0.684" /></g>
   <g class="pe-drift-b"><use href="#petal" transform="translate(896.8 411.6) rotate(-59.4) scale(1.168)" fill="#f3c7d6" opacity="0.682" /></g>
@@ -143,7 +142,7 @@
   <circle cx="117.1" cy="1185.9" r="0.60" fill="#e8edf7" opacity="0.716" />
   <circle class="pe-twinkle-b" cx="872.7" cy="1180.5" r="1.18" fill="#e8edf7" opacity="0.641" />
   <circle cx="424.4" cy="1368.7" r="1.11" fill="#e8edf7" opacity="0.433" />
-  <circle class="pe-twinkle-a" cx="153.3" cy="725.8" r="2.37" fill="#e8edf7" opacity="0.365" />
+  <circle cx="153.3" cy="725.8" r="2.37" fill="#e8edf7" opacity="0.365" />
   <circle cx="853.1" cy="1694.0" r="1.53" fill="#e8edf7" opacity="0.621" />
   <circle cx="308.3" cy="484.8" r="0.89" fill="#e8edf7" opacity="0.607" />
   <circle cx="510.8" cy="552.8" r="1.73" fill="#e8edf7" opacity="0.340" />
@@ -251,7 +250,7 @@
   <circle cx="462.4" cy="1738.1" r="0.90" fill="#a9c8e6" opacity="0.176" />
   <circle cx="298.4" cy="1852.7" r="1.53" fill="#a9c8e6" opacity="0.254" />
   <circle cx="68.6" cy="1878.1" r="1.24" fill="#a9c8e6" opacity="0.107" />
-  <g class="pe-motion" opacity=".42"><circle cx="120" cy="1280" r="3.2" fill="#e8edf7"><animateTransform data-profile-envelope-motion-role="ambient_continuity" attributeName="transform" type="translate" values="0 0;650 420" dur="32s" repeatCount="indefinite" /></circle><circle cx="720" cy="380" r="3.0" fill="#f3c7d6"><animateTransform data-profile-envelope-motion-role="ambient_continuity" attributeName="transform" type="translate" values="0 0;-310 520" dur="32s" repeatCount="indefinite" /></circle></g>
+  <g class="pe-motion" opacity=".42"><circle cx="150" cy="150" r="3.2" fill="#e8edf7"><animateTransform data-profile-envelope-motion-role="ambient_continuity" attributeName="transform" type="translate" values="0 0;360 70" dur="32s" repeatCount="indefinite" /></circle><circle cx="620" cy="1690" r="3.0" fill="#f3c7d6"><animateTransform data-profile-envelope-motion-role="ambient_continuity" attributeName="transform" type="translate" values="0 0;-260 150" dur="32s" repeatCount="indefinite" /></circle></g>
   <g data-profile-envelope-frame="rail" fill="none"><path d="M18 0V2240 M882 0V2240" stroke="#86aa94" stroke-opacity=".18" stroke-width="1.2" /></g>
   <g data-supernatural-content="identity">
     <rect x="58" y="112" width="3" height="110" rx="1.5" fill="#b7282e" />
