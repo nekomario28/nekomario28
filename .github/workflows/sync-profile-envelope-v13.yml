@@ -1,0 +1,62 @@
+name: Sync Profile Envelope v1.3 sources
+
+on:
+  push:
+    branches:
+      - main
+      - production/supernatural-envelope-v1.3
+    paths:
+      - "project-map/galaxy.svg"
+      - "assets/github-contributions-dark.svg"
+      - "scripts/sync_profile_v13_sources.py"
+      - ".github/workflows/sync-profile-envelope-v13.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-envelope-v13-source-sync-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out profile repository
+        uses: actions/checkout@v6
+
+      - name: Sync source-authoritative SVGs into presentation only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/sync_profile_v13_sources.py
+          python scripts/sync_profile_v13_sources.py --repo .
+          git diff --check
+
+      - name: Verify source files were not rewritten
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff -- project-map/galaxy.svg assets/github-contributions-dark.svg > "$RUNNER_TEMP/source.diff"
+          test ! -s "$RUNNER_TEMP/source.diff"
+          grep -q 'font-size="9.2"' assets/profile-v12-projects.svg
+          grep -q 'dur="360s"' assets/profile-v12-projects.svg
+          ! grep -q 'PROJECT CONSTELLATION' assets/profile-v12-projects.svg
+          ! grep -q 'ACTIVITY CURRENT' assets/profile-v12-activity.svg
+
+      - name: Commit presentation refresh
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/profile-v12-projects.svg assets/profile-v12-activity.svg
+          if git diff --cached --quiet; then
+            echo "Profile presentation already matches current source SVGs."
+            exit 0
+          fi
+          git commit -m "sync profile envelope v1.3 sources"
+          git push
