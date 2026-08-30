@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   refresh:
-    if: github.event_name != 'push' || github.event.head_commit.message != 'chore: refresh profile envelope v1.4'
+    if: "github.event_name != 'push' || github.event.head_commit.message != 'chore: refresh profile envelope v1.4'"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
