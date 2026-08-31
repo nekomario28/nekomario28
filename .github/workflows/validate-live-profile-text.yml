@@ -6,7 +6,8 @@ on:
     paths:
       - ".github/workflows/validate-live-profile-text.yml"
       - "README.md"
-      - "assets/sakura-profile-hero.svg"
+      - "assets/profile-v12-top.svg"
+      - "assets/profile-v16-overlay-00.svg"
       - "assets/github-contributions-dark.svg"
       - "project-map/galaxy.svg"
   push:
@@ -14,7 +15,8 @@ on:
     paths:
       - ".github/workflows/validate-live-profile-text.yml"
       - "README.md"
-      - "assets/sakura-profile-hero.svg"
+      - "assets/profile-v12-top.svg"
+      - "assets/profile-v16-overlay-00.svg"
       - "assets/github-contributions-dark.svg"
       - "project-map/galaxy.svg"
 
@@ -27,11 +29,11 @@ jobs:
     timeout-minutes: 3
     steps:
       - name: Checkout exact revision
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
-      - name: Validate mounted SVG font fallback contract
+      - name: Validate v1.4 mounted SVG font fallback contract
         shell: bash
         run: |
           set -euo pipefail
@@ -41,11 +43,6 @@ jobs:
           import xml.etree.ElementTree as ET
 
           EXPECTED = "system-ui,-apple-system,BlinkMacSystemFont,SegoeUI,sans-serif"
-          mounted = (
-              "assets/sakura-profile-hero.svg",
-              "project-map/galaxy.svg",
-              "assets/github-contributions-dark.svg",
-          )
 
           def normalized(value: str | None) -> str:
               return re.sub(r"\s+", "", (value or "").replace('"', "").replace("'", ""))
@@ -54,28 +51,24 @@ jobs:
               return tag.rsplit("}", 1)[-1]
 
           readme = Path("README.md").read_text(encoding="utf-8")
-          assert "<!-- live-profile: direct-ipm" in readme, "live authority marker changed"
+          assert "<!-- profile-envelope-adapter:v1 -->" in readme, "v1.4 profile authority marker changed"
+          mounted = (
+              "assets/profile-v12-top.svg",
+              "project-map/galaxy.svg",
+              "assets/profile-v16-overlay-00.svg",
+          )
           for path in mounted:
               assert f'src="{path}"' in readme, f"README no longer mounts {path}"
               ET.parse(path)
 
-          # Hero: one fixed visible username label, intentionally native-font-dependent,
-          # but with an explicit system-ui-first sans fallback instead of browser-default text.
-          hero_source = Path(mounted[0]).read_text(encoding="utf-8")
-          hero_root = ET.fromstring(hero_source)
-          hero_text = [node for node in hero_root.iter() if local_name(node.tag) == "text"]
-          assert hero_text, "hero has no visible text"
-          assert all("name" in (node.attrib.get("class") or "").split() for node in hero_text), "hero gained an ungoverned visible text role"
-          assert EXPECTED in normalized(hero_source), "hero system-ui-first font declaration missing"
+          top_root = ET.parse(mounted[0]).getroot()
+          assert normalized(top_root.attrib.get("font-family")) == EXPECTED, "v1.4 top font family drifted"
 
-          # Project Map: all dynamic text inherits one reviewed root family.
           map_root = ET.parse(mounted[1]).getroot()
           assert normalized(map_root.attrib.get("font-family")) == EXPECTED, "Project Map root font family drifted"
           assert any(local_name(node.tag) == "text" for node in map_root.iter()), "Project Map has no visible text"
 
-          # Activity: every visible text node must have the reviewed family either directly
-          # or from an ancestor group. This covers headings, totals, axes, and dates.
-          activity_root = ET.parse(mounted[2]).getroot()
+          activity_root = ET.parse("assets/github-contributions-dark.svg").getroot()
           activity_text_count = [0]
 
           def walk(node, inherited_family=None):
@@ -89,10 +82,14 @@ jobs:
           walk(activity_root)
           assert activity_text_count[0] > 0, "Activity has no visible text"
 
+          overlay = Path("assets/profile-v16-overlay-00.svg").read_text(encoding="utf-8")
+          assert 'data-source-policy="embedded-adapted-copy-static-self-contained"' in overlay
+          assert 'data-adaptation-policy="exact-direct-root-rect-removal-v1"' in overlay
+
           print(
-              "LIVE_PROFILE_TEXT_FALLBACK_PASS "
+              "LIVE_PROFILE_TEXT_FALLBACK_V14_PASS "
               f"mounted={len(mounted)} activity_text={activity_text_count[0]} "
-              "policy=system-ui-first native_font_independence=false"
+              "policy=system-ui-first source-owned-text-preserved"
           )
           PY
           git diff --check
