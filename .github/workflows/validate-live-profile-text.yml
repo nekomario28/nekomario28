@@ -7,6 +7,8 @@ on:
       - ".github/workflows/validate-live-profile-text.yml"
       - "README.md"
       - "assets/profile-v12-top.svg"
+      - "assets/profile-v12-portal-left.svg"
+      - "assets/profile-v12-portal-right.svg"
       - "assets/profile-v16-overlay-00.svg"
       - "assets/github-contributions-dark.svg"
       - "project-map/galaxy.svg"
@@ -16,6 +18,8 @@ on:
       - ".github/workflows/validate-live-profile-text.yml"
       - "README.md"
       - "assets/profile-v12-top.svg"
+      - "assets/profile-v12-portal-left.svg"
+      - "assets/profile-v12-portal-right.svg"
       - "assets/profile-v16-overlay-00.svg"
       - "assets/github-contributions-dark.svg"
       - "project-map/galaxy.svg"
@@ -33,7 +37,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
-      - name: Validate v1.4 mounted SVG font fallback contract
+      - name: Validate v1.4 mounted SVG font and portal fallback contract
         shell: bash
         run: |
           set -euo pipefail
@@ -43,6 +47,7 @@ jobs:
           import xml.etree.ElementTree as ET
 
           EXPECTED = "system-ui,-apple-system,BlinkMacSystemFont,SegoeUI,sans-serif"
+          PORTAL_MEDIA = "https://konosuba.com/bakuen/story/img/pdsfi4/05.jpg"
 
           def normalized(value: str | None) -> str:
               return re.sub(r"\s+", "", (value or "").replace('"', "").replace("'", ""))
@@ -61,12 +66,25 @@ jobs:
               assert f'src="{path}"' in readme, f"README no longer mounts {path}"
               ET.parse(path)
 
+          portal_frames = (
+              "assets/profile-v12-portal-left.svg",
+              "assets/profile-v12-portal-right.svg",
+          )
+          for path in portal_frames:
+              assert f'src="{path}"' in readme, f"README no longer mounts {path}"
+              ET.parse(path)
+          assert f'src="{PORTAL_MEDIA}"' in readme, "direct remote portal media reference missing"
+          assert 'src="assets/profile-v13-portal.svg"' not in readme, "nested-remote combined portal must remain retired"
+          assert not Path("assets/profile-v13-portal.svg").exists(), "retired combined portal asset unexpectedly present"
+
           top_root = ET.parse(mounted[0]).getroot()
           assert normalized(top_root.attrib.get("font-family")) == EXPECTED, "v1.4 top font family drifted"
 
           map_root = ET.parse(mounted[1]).getroot()
           assert normalized(map_root.attrib.get("font-family")) == EXPECTED, "Project Map root font family drifted"
           assert any(local_name(node.tag) == "text" for node in map_root.iter()), "Project Map has no visible text"
+          assert any(local_name(node.tag) == "animateTransform" and node.attrib.get("dur") == "360s" for node in map_root.iter()), "Project Map 360s source motion drifted"
+          assert any(local_name(node.tag) == "text" and node.attrib.get("font-size") == "9.2" for node in map_root.iter()), "Project Map 9.2px source text drifted"
 
           activity_root = ET.parse("assets/github-contributions-dark.svg").getroot()
           activity_text_count = [0]
@@ -88,8 +106,8 @@ jobs:
 
           print(
               "LIVE_PROFILE_TEXT_FALLBACK_V14_PASS "
-              f"mounted={len(mounted)} activity_text={activity_text_count[0]} "
-              "policy=system-ui-first source-owned-text-preserved"
+              f"mounted={len(mounted)} portal_frames={len(portal_frames)} activity_text={activity_text_count[0]} "
+              "portal=direct-remote-reference policy=system-ui-first source-owned-text-preserved"
           )
           PY
           git diff --check
