@@ -6,7 +6,7 @@
 </defs>
 <rect width="760" height="220" rx="8" fill="#0d1117"/>
 <text x="38" y="24" fill="#f0f6fc" font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="14" font-weight="600">Contributions · last 31 days</text>
-<text x="742" y="24" text-anchor="end" fill="#8b949e" font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11">9754 contributions</text>
+<text x="742" y="24" text-anchor="end" fill="#8b949e" font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11">10185 contributions</text>
 <g font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
 <line x1="38" y1="188.00" x2="742" y2="188.00" stroke="#21262d" stroke-width="1" opacity="0.55"/>
 <text x="30" y="192.00" text-anchor="end" fill="#8b949e" font-size="10">0</text>
@@ -18,43 +18,43 @@
 <text x="30" y="82.50" text-anchor="end" fill="#8b949e" font-size="10">1500</text>
 <line x1="38" y1="42.00" x2="742" y2="42.00" stroke="#21262d" stroke-width="1" opacity="0.55"/>
 <text x="30" y="46.00" text-anchor="end" fill="#8b949e" font-size="10">2000</text>
-<path d="M 38.00 186.10 L 61.47 174.57 L 84.93 178.88 L 108.40 182.89 L 131.87 186.03 L 155.33 182.23 L 178.80 187.85 L 202.27 179.24 L 225.73 182.53 L 249.20 179.24 L 272.67 185.23 L 296.13 178.58 L 319.60 181.36 L 343.07 184.35 L 366.53 186.39 L 390.00 187.34 L 413.47 188.00 L 436.93 172.52 L 460.40 168.07 L 483.87 170.48 L 507.33 160.84 L 530.80 158.07 L 554.27 156.90 L 577.73 111.64 L 601.20 111.42 L 624.67 73.46 L 648.13 126.53 L 671.60 169.75 L 695.07 164.13 L 718.53 148.80 L 742.00 112.52 L 742.00 188.00 L 38.00 188.00 Z" fill="url(#area)"/>
-<path d="M 38.00 186.10 L 61.47 174.57 L 84.93 178.88 L 108.40 182.89 L 131.87 186.03 L 155.33 182.23 L 178.80 187.85 L 202.27 179.24 L 225.73 182.53 L 249.20 179.24 L 272.67 185.23 L 296.13 178.58 L 319.60 181.36 L 343.07 184.35 L 366.53 186.39 L 390.00 187.34 L 413.47 188.00 L 436.93 172.52 L 460.40 168.07 L 483.87 170.48 L 507.33 160.84 L 530.80 158.07 L 554.27 156.90 L 577.73 111.64 L 601.20 111.42 L 624.67 73.46 L 648.13 126.53 L 671.60 169.75 L 695.07 164.13 L 718.53 148.80 L 742.00 112.52" fill="none" stroke="#58a6ff" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<circle cx="38.00" cy="186.10" r="2.15" fill="#79c0ff"/>
-<circle cx="61.47" cy="174.57" r="2.15" fill="#79c0ff"/>
-<circle cx="84.93" cy="178.88" r="2.15" fill="#79c0ff"/>
-<circle cx="108.40" cy="182.89" r="2.15" fill="#79c0ff"/>
-<circle cx="131.87" cy="186.03" r="2.15" fill="#79c0ff"/>
-<circle cx="155.33" cy="182.23" r="2.15" fill="#79c0ff"/>
-<circle cx="178.80" cy="187.85" r="2.15" fill="#79c0ff"/>
-<circle cx="202.27" cy="179.24" r="2.15" fill="#79c0ff"/>
-<circle cx="225.73" cy="182.53" r="2.15" fill="#79c0ff"/>
-<circle cx="249.20" cy="179.24" r="2.15" fill="#79c0ff"/>
-<circle cx="272.67" cy="185.23" r="2.15" fill="#79c0ff"/>
-<circle cx="296.13" cy="178.58" r="2.15" fill="#79c0ff"/>
-<circle cx="319.60" cy="181.36" r="2.15" fill="#79c0ff"/>
-<circle cx="343.07" cy="184.35" r="2.15" fill="#79c0ff"/>
-<circle cx="366.53" cy="186.39" r="2.15" fill="#79c0ff"/>
-<circle cx="390.00" cy="187.34" r="2.15" fill="#79c0ff"/>
-<circle cx="413.47" cy="188.00" r="2.15" fill="#79c0ff"/>
-<circle cx="436.93" cy="172.52" r="2.15" fill="#79c0ff"/>
-<circle cx="460.40" cy="168.07" r="2.15" fill="#79c0ff"/>
-<circle cx="483.87" cy="170.48" r="2.15" fill="#79c0ff"/>
-<circle cx="507.33" cy="160.84" r="2.15" fill="#79c0ff"/>
-<circle cx="530.80" cy="158.07" r="2.15" fill="#79c0ff"/>
-<circle cx="554.27" cy="156.90" r="2.15" fill="#79c0ff"/>
-<circle cx="577.73" cy="111.64" r="2.15" fill="#79c0ff"/>
-<circle cx="601.20" cy="111.42" r="2.15" fill="#79c0ff"/>
-<circle cx="624.67" cy="73.46" r="2.15" fill="#79c0ff"/>
-<circle cx="648.13" cy="126.53" r="2.15" fill="#79c0ff"/>
-<circle cx="671.60" cy="169.75" r="2.15" fill="#79c0ff"/>
-<circle cx="695.07" cy="164.13" r="2.15" fill="#79c0ff"/>
-<circle cx="718.53" cy="148.80" r="2.15" fill="#79c0ff"/>
-<circle cx="742.00" cy="112.52" r="2.15" fill="#79c0ff"/>
-<text x="38.00" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Jul 31</text>
-<text x="202.27" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 7</text>
-<text x="390.00" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 15</text>
-<text x="577.73" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 23</text>
-<text x="742.00" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 30</text>
+<path d="M 38.00 174.57 L 61.47 178.88 L 84.93 182.89 L 108.40 186.03 L 131.87 182.23 L 155.33 187.85 L 178.80 179.24 L 202.27 182.53 L 225.73 179.24 L 249.20 185.23 L 272.67 178.58 L 296.13 181.36 L 319.60 184.35 L 343.07 186.39 L 366.53 187.34 L 390.00 188.00 L 413.47 172.52 L 436.93 168.07 L 460.40 170.48 L 483.87 160.84 L 507.33 158.07 L 530.80 156.90 L 554.27 111.64 L 577.73 111.42 L 601.20 73.46 L 624.67 126.53 L 648.13 169.75 L 671.60 164.13 L 695.07 148.80 L 718.53 112.52 L 742.00 154.64 L 742.00 188.00 L 38.00 188.00 Z" fill="url(#area)"/>
+<path d="M 38.00 174.57 L 61.47 178.88 L 84.93 182.89 L 108.40 186.03 L 131.87 182.23 L 155.33 187.85 L 178.80 179.24 L 202.27 182.53 L 225.73 179.24 L 249.20 185.23 L 272.67 178.58 L 296.13 181.36 L 319.60 184.35 L 343.07 186.39 L 366.53 187.34 L 390.00 188.00 L 413.47 172.52 L 436.93 168.07 L 460.40 170.48 L 483.87 160.84 L 507.33 158.07 L 530.80 156.90 L 554.27 111.64 L 577.73 111.42 L 601.20 73.46 L 624.67 126.53 L 648.13 169.75 L 671.60 164.13 L 695.07 148.80 L 718.53 112.52 L 742.00 154.64" fill="none" stroke="#58a6ff" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="38.00" cy="174.57" r="2.15" fill="#79c0ff"/>
+<circle cx="61.47" cy="178.88" r="2.15" fill="#79c0ff"/>
+<circle cx="84.93" cy="182.89" r="2.15" fill="#79c0ff"/>
+<circle cx="108.40" cy="186.03" r="2.15" fill="#79c0ff"/>
+<circle cx="131.87" cy="182.23" r="2.15" fill="#79c0ff"/>
+<circle cx="155.33" cy="187.85" r="2.15" fill="#79c0ff"/>
+<circle cx="178.80" cy="179.24" r="2.15" fill="#79c0ff"/>
+<circle cx="202.27" cy="182.53" r="2.15" fill="#79c0ff"/>
+<circle cx="225.73" cy="179.24" r="2.15" fill="#79c0ff"/>
+<circle cx="249.20" cy="185.23" r="2.15" fill="#79c0ff"/>
+<circle cx="272.67" cy="178.58" r="2.15" fill="#79c0ff"/>
+<circle cx="296.13" cy="181.36" r="2.15" fill="#79c0ff"/>
+<circle cx="319.60" cy="184.35" r="2.15" fill="#79c0ff"/>
+<circle cx="343.07" cy="186.39" r="2.15" fill="#79c0ff"/>
+<circle cx="366.53" cy="187.34" r="2.15" fill="#79c0ff"/>
+<circle cx="390.00" cy="188.00" r="2.15" fill="#79c0ff"/>
+<circle cx="413.47" cy="172.52" r="2.15" fill="#79c0ff"/>
+<circle cx="436.93" cy="168.07" r="2.15" fill="#79c0ff"/>
+<circle cx="460.40" cy="170.48" r="2.15" fill="#79c0ff"/>
+<circle cx="483.87" cy="160.84" r="2.15" fill="#79c0ff"/>
+<circle cx="507.33" cy="158.07" r="2.15" fill="#79c0ff"/>
+<circle cx="530.80" cy="156.90" r="2.15" fill="#79c0ff"/>
+<circle cx="554.27" cy="111.64" r="2.15" fill="#79c0ff"/>
+<circle cx="577.73" cy="111.42" r="2.15" fill="#79c0ff"/>
+<circle cx="601.20" cy="73.46" r="2.15" fill="#79c0ff"/>
+<circle cx="624.67" cy="126.53" r="2.15" fill="#79c0ff"/>
+<circle cx="648.13" cy="169.75" r="2.15" fill="#79c0ff"/>
+<circle cx="671.60" cy="164.13" r="2.15" fill="#79c0ff"/>
+<circle cx="695.07" cy="148.80" r="2.15" fill="#79c0ff"/>
+<circle cx="718.53" cy="112.52" r="2.15" fill="#79c0ff"/>
+<circle cx="742.00" cy="154.64" r="2.15" fill="#79c0ff"/>
+<text x="38.00" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 1</text>
+<text x="202.27" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 8</text>
+<text x="390.00" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 16</text>
+<text x="577.73" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 24</text>
+<text x="742.00" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 31</text>
 </g>
 </svg>
