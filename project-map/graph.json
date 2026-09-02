@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-09-02T06:24:35.305Z",
+  "generatedAt": "2026-09-02T17:19:21.444Z",
   "repositoryCount": 15,
   "groupCount": 7,
   "nodes": [
@@ -1184,14 +1184,14 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-09-01T17:38:18Z",
+      "updatedAt": "2026-09-02T16:41:52Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
         "categoryId": "web-apps",
         "categoryLabel": "Web / Apps",
         "secondaryTags": [],
-        "confidence": 0.778,
+        "confidence": 0.9,
         "method": "deterministic",
         "evidence": [
           {
@@ -1204,6 +1204,12 @@
             "categoryId": "web-apps",
             "source": "readme",
             "value": "app",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "backend",
             "weight": 0.7
           }
         ]
@@ -1385,7 +1391,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "571d01536442d0822edf96cec49a9fa787cf64b9c72dbef8ba13ce43fc1eeaf0",
+    "corpusFingerprint": "b5c9eed5dda3121f4d48421ea0cf2f59f6a5aaf44afe1da27afb0f3558b1be00",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -1440,7 +1446,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "1d0f61e5f775289fd680e8a722581b09c0a3e74d673bd803f87ff6e6c8325d40"
+        "contentHash": "7fef90050c70102f59e164089ad419f761d41e4db8ac2cbe07dd18b9741815df"
       },
       {
         "repoId": 1340281422,
@@ -1697,8 +1703,8 @@
   "contributedRepositoryCount": 1,
   "externalContributions": {
     "window": {
-      "from": "2025-09-02T06:24:36.668Z",
-      "to": "2026-09-02T06:24:36.668Z"
+      "from": "2025-09-02T17:19:22.716Z",
+      "to": "2026-09-02T17:19:22.716Z"
     },
     "cap": 8,
     "candidateRepositories": 9,
