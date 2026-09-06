@@ -6,7 +6,7 @@
 </defs>
 <rect width="760" height="220" rx="8" fill="#0d1117"/>
 <text x="38" y="24" fill="#f0f6fc" font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="14" font-weight="600">Contributions · last 31 days</text>
-<text x="742" y="24" text-anchor="end" fill="#8b949e" font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11">12442 contributions</text>
+<text x="742" y="24" text-anchor="end" fill="#8b949e" font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11">12506 contributions</text>
 <g font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
 <line x1="38" y1="188.00" x2="742" y2="188.00" stroke="#21262d" stroke-width="1" opacity="0.55"/>
 <text x="30" y="192.00" text-anchor="end" fill="#8b949e" font-size="10">0</text>
@@ -18,8 +18,8 @@
 <text x="30" y="82.50" text-anchor="end" fill="#8b949e" font-size="10">1500</text>
 <line x1="38" y1="42.00" x2="742" y2="42.00" stroke="#21262d" stroke-width="1" opacity="0.55"/>
 <text x="30" y="46.00" text-anchor="end" fill="#8b949e" font-size="10">2000</text>
-<path d="M 38.00 179.24 L 61.47 182.53 L 84.93 179.24 L 108.40 185.23 L 131.87 178.58 L 155.33 181.36 L 178.80 184.35 L 202.27 186.39 L 225.73 187.34 L 249.20 188.00 L 272.67 172.52 L 296.13 168.07 L 319.60 170.48 L 343.07 160.84 L 366.53 158.07 L 390.00 156.90 L 413.47 111.64 L 436.93 111.42 L 460.40 73.46 L 483.87 126.39 L 507.33 169.75 L 530.80 164.13 L 554.27 148.80 L 577.73 112.52 L 601.20 136.75 L 624.67 129.02 L 648.13 152.45 L 671.60 119.23 L 695.07 169.68 L 718.53 188.00 L 742.00 187.34 L 742.00 188.00 L 38.00 188.00 Z" fill="url(#area)"/>
-<path d="M 38.00 179.24 L 61.47 182.53 L 84.93 179.24 L 108.40 185.23 L 131.87 178.58 L 155.33 181.36 L 178.80 184.35 L 202.27 186.39 L 225.73 187.34 L 249.20 188.00 L 272.67 172.52 L 296.13 168.07 L 319.60 170.48 L 343.07 160.84 L 366.53 158.07 L 390.00 156.90 L 413.47 111.64 L 436.93 111.42 L 460.40 73.46 L 483.87 126.39 L 507.33 169.75 L 530.80 164.13 L 554.27 148.80 L 577.73 112.52 L 601.20 136.75 L 624.67 129.02 L 648.13 152.45 L 671.60 119.23 L 695.07 169.68 L 718.53 188.00 L 742.00 187.34" fill="none" stroke="#58a6ff" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 38.00 179.24 L 61.47 182.53 L 84.93 179.24 L 108.40 185.23 L 131.87 178.58 L 155.33 181.36 L 178.80 184.35 L 202.27 186.39 L 225.73 187.34 L 249.20 188.00 L 272.67 172.52 L 296.13 168.07 L 319.60 170.48 L 343.07 160.84 L 366.53 158.07 L 390.00 156.90 L 413.47 111.64 L 436.93 111.42 L 460.40 73.46 L 483.87 126.39 L 507.33 169.75 L 530.80 164.13 L 554.27 148.80 L 577.73 112.52 L 601.20 136.75 L 624.67 129.02 L 648.13 152.45 L 671.60 119.23 L 695.07 169.68 L 718.53 187.12 L 742.00 183.55 L 742.00 188.00 L 38.00 188.00 Z" fill="url(#area)"/>
+<path d="M 38.00 179.24 L 61.47 182.53 L 84.93 179.24 L 108.40 185.23 L 131.87 178.58 L 155.33 181.36 L 178.80 184.35 L 202.27 186.39 L 225.73 187.34 L 249.20 188.00 L 272.67 172.52 L 296.13 168.07 L 319.60 170.48 L 343.07 160.84 L 366.53 158.07 L 390.00 156.90 L 413.47 111.64 L 436.93 111.42 L 460.40 73.46 L 483.87 126.39 L 507.33 169.75 L 530.80 164.13 L 554.27 148.80 L 577.73 112.52 L 601.20 136.75 L 624.67 129.02 L 648.13 152.45 L 671.60 119.23 L 695.07 169.68 L 718.53 187.12 L 742.00 183.55" fill="none" stroke="#58a6ff" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <circle cx="38.00" cy="179.24" r="2.15" fill="#79c0ff"/>
 <circle cx="61.47" cy="182.53" r="2.15" fill="#79c0ff"/>
 <circle cx="84.93" cy="179.24" r="2.15" fill="#79c0ff"/>
@@ -49,8 +49,8 @@
 <circle cx="648.13" cy="152.45" r="2.15" fill="#79c0ff"/>
 <circle cx="671.60" cy="119.23" r="2.15" fill="#79c0ff"/>
 <circle cx="695.07" cy="169.68" r="2.15" fill="#79c0ff"/>
-<circle cx="718.53" cy="188.00" r="2.15" fill="#79c0ff"/>
-<circle cx="742.00" cy="187.34" r="2.15" fill="#79c0ff"/>
+<circle cx="718.53" cy="187.12" r="2.15" fill="#79c0ff"/>
+<circle cx="742.00" cy="183.55" r="2.15" fill="#79c0ff"/>
 <text x="38.00" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 7</text>
 <text x="202.27" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 14</text>
 <text x="390.00" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Aug 22</text>
