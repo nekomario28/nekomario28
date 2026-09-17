@@ -1,7 +1,7 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-09-17T06:37:28.543Z",
-  "repositoryCount": 15,
+  "generatedAt": "2026-09-17T17:44:33.723Z",
+  "repositoryCount": 16,
   "groupCount": 7,
   "nodes": [
     {
@@ -846,6 +846,126 @@
       }
     },
     {
+      "id": "group:applications-services",
+      "label": "Applications & Services",
+      "type": "group",
+      "repositoryCount": 2
+    },
+    {
+      "id": "repository:mobile-webcam-bridge",
+      "label": "mobile-webcam-bridge",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/mobile-webcam-bridge",
+      "description": "Use an Android phone as a Linux webcam over USB or Wi-Fi",
+      "language": "C++",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-09-17T14:36:33Z",
+      "updatedAt": "2026-09-17T15:30:18Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.564,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:application",
+          "platform:web",
+          "platform:desktop",
+          "platform:mobile"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:wiki",
+      "label": "wiki",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/wiki",
+      "description": "Wiki for CachyOS",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-08-25T10:31:18Z",
+      "updatedAt": "2026-08-25T10:31:18Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "web",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "website",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:application",
+          "platform:web"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
       "id": "group:ai-ml",
       "label": "AI & Machine Learning",
       "type": "group",
@@ -937,74 +1057,6 @@
             "source": "description",
             "value": "P1 exact taxonomy category ai-ml",
             "weight": 0.948
-          }
-        ]
-      }
-    },
-    {
-      "id": "group:applications-services",
-      "label": "Applications & Services",
-      "type": "group",
-      "repositoryCount": 1
-    },
-    {
-      "id": "repository:wiki",
-      "label": "wiki",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/wiki",
-      "description": "Wiki for CachyOS",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-08-25T10:31:18Z",
-      "updatedAt": "2026-08-25T10:31:18Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "next",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "web",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "website",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:application",
-          "platform:web"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
           }
         ]
       }
@@ -1334,22 +1386,27 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "group:applications-services",
+      "type": "ownership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:mobile-webcam-bridge",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:wiki",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "group:ai-ml",
       "type": "ownership"
     },
     {
       "source": "group:ai-ml",
       "target": "repository:FreeToken",
-      "type": "membership"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "group:applications-services",
-      "type": "ownership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:wiki",
       "type": "membership"
     },
     {
@@ -1391,7 +1448,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "b5c9eed5dda3121f4d48421ea0cf2f59f6a5aaf44afe1da27afb0f3558b1be00",
+    "corpusFingerprint": "57fbfc63b5dc3666aa65e2360d657af0c7389b84e334f0af6492e040c2bdc706",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -1467,6 +1524,11 @@
         "repoId": 1345987403,
         "name": "wiki",
         "contentHash": "a99d5a974758fde9f65a81b07ebcd7777590850397e62156ee55f7d653c448c6"
+      },
+      {
+        "repoId": 1374579782,
+        "name": "mobile-webcam-bridge",
+        "contentHash": "1fe42e07751afa5ac8f8f79f8d7d5075a228d0d950249c8675b34747fa62c236"
       }
     ],
     "categories": [
@@ -1703,8 +1765,8 @@
   "contributedRepositoryCount": 1,
   "externalContributions": {
     "window": {
-      "from": "2025-09-17T06:37:29.637Z",
-      "to": "2026-09-17T06:37:29.637Z"
+      "from": "2025-09-17T17:44:35.068Z",
+      "to": "2026-09-17T17:44:35.068Z"
     },
     "cap": 8,
     "candidateRepositories": 9,
