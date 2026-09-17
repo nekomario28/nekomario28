@@ -4,11 +4,11 @@
   "status": "experimental-non-default",
   "source": {
     "graphOwner": "nekomario28",
-    "graphGeneratedAt": "2026-09-17T06:37:28.543Z",
+    "graphGeneratedAt": "2026-09-17T17:44:33.723Z",
     "assessment": {
       "contractId": "ipm-repository-assessment-artifact-v1",
       "owner": "nekomario28",
-      "generatedAt": "2026-09-17T06:37:28.543Z",
+      "generatedAt": "2026-09-17T17:44:33.723Z",
       "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
       "assessmentPolicyId": "ipm-repository-assessment-v1"
     }
@@ -2203,6 +2203,110 @@
       }
     },
     {
+      "graphNodeId": "repository:mobile-webcam-bridge",
+      "repositoryKey": "nekomario28/mobile-webcam-bridge",
+      "label": "mobile-webcam-bridge",
+      "graphRelation": null,
+      "context": {
+        "category": {
+          "state": "observed",
+          "id": "applications-services"
+        },
+        "artifacts": {
+          "state": "observed",
+          "values": [
+            "application"
+          ]
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "owned",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "qualitySectionState": "not-collected",
+      "qualityAttributionScope": null,
+      "overlayState": "unavailable",
+      "unavailableReason": "not-collected",
+      "overlay": null,
+      "views": {
+        "detail": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        },
+        "compact": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        }
+      },
+      "visualPolicy": {
+        "repositoryCore": "inherit-structure-renderer",
+        "placementEffect": "none",
+        "nodeSizeEffect": "none",
+        "labelPriorityEffect": "none",
+        "impactHaloEffect": "none"
+      }
+    },
+    {
+      "graphNodeId": "repository:wiki",
+      "repositoryKey": "nekomario28/wiki",
+      "label": "wiki",
+      "graphRelation": null,
+      "context": {
+        "category": {
+          "state": "observed",
+          "id": "applications-services"
+        },
+        "artifacts": {
+          "state": "observed",
+          "values": [
+            "application"
+          ]
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "owned",
+          "collaboration": "unknown",
+          "lineage": "fork"
+        }
+      },
+      "qualitySectionState": "not-collected",
+      "qualityAttributionScope": null,
+      "overlayState": "unavailable",
+      "unavailableReason": "not-collected",
+      "overlay": null,
+      "views": {
+        "detail": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        },
+        "compact": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        }
+      },
+      "visualPolicy": {
+        "repositoryCore": "inherit-structure-renderer",
+        "placementEffect": "none",
+        "nodeSizeEffect": "none",
+        "labelPriorityEffect": "none",
+        "impactHaloEffect": "none"
+      }
+    },
+    {
       "graphNodeId": "repository:FreeToken",
       "repositoryKey": "nekomario28/freetoken",
       "label": "FreeToken",
@@ -2583,58 +2687,6 @@
         "state": "frozen-snapshot",
         "snapshotDate": "2026-08-24",
         "automaticRefresh": false
-      }
-    },
-    {
-      "graphNodeId": "repository:wiki",
-      "repositoryKey": "nekomario28/wiki",
-      "label": "wiki",
-      "graphRelation": null,
-      "context": {
-        "category": {
-          "state": "observed",
-          "id": "applications-services"
-        },
-        "artifacts": {
-          "state": "observed",
-          "values": [
-            "application"
-          ]
-        },
-        "lifecycle": "unknown",
-        "relation": {
-          "ownership": "owned",
-          "collaboration": "unknown",
-          "lineage": "fork"
-        }
-      },
-      "qualitySectionState": "not-collected",
-      "qualityAttributionScope": null,
-      "overlayState": "unavailable",
-      "unavailableReason": "not-collected",
-      "overlay": null,
-      "views": {
-        "detail": {
-          "mode": "unavailable",
-          "token": "quality-unavailable",
-          "reason": "not-collected",
-          "compositeQualityScore": null,
-          "dimensionIdentityPreserved": false
-        },
-        "compact": {
-          "mode": "unavailable",
-          "token": "quality-unavailable",
-          "reason": "not-collected",
-          "compositeQualityScore": null,
-          "dimensionIdentityPreserved": false
-        }
-      },
-      "visualPolicy": {
-        "repositoryCore": "inherit-structure-renderer",
-        "placementEffect": "none",
-        "nodeSizeEffect": "none",
-        "labelPriorityEffect": "none",
-        "impactHaloEffect": "none"
       }
     },
     {
@@ -3838,11 +3890,11 @@
     }
   ],
   "diagnostics": {
-    "graphRepositories": 16,
-    "assessmentRepositories": 16,
-    "joinedRepositories": 16,
+    "graphRepositories": 17,
+    "assessmentRepositories": 17,
+    "joinedRepositories": 17,
     "available": 9,
-    "unavailable": 7,
+    "unavailable": 8,
     "missingAssessmentGraphNodeIds": [],
     "orphanAssessmentGraphNodeIds": [],
     "strictJoin": true
