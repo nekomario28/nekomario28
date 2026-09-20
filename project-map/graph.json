@@ -1,7 +1,7 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-09-19T16:47:31.028Z",
-  "repositoryCount": 16,
+  "generatedAt": "2026-09-20T06:58:45.545Z",
+  "repositoryCount": 17,
   "groupCount": 7,
   "nodes": [
     {
@@ -539,6 +539,191 @@
       }
     },
     {
+      "id": "group:applications-services",
+      "label": "Applications & Services",
+      "type": "group",
+      "repositoryCount": 3
+    },
+    {
+      "id": "repository:cline-desktop-linux",
+      "label": "cline-desktop-linux",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/cline-desktop-linux",
+      "description": "",
+      "language": "Shell",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-09-19T18:28:01Z",
+      "updatedAt": "2026-09-20T04:44:45Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "frontend",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:library",
+          "platform:web",
+          "platform:desktop",
+          "platform:cli",
+          "platform:server"
+        ],
+        "confidence": 0.925,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.925
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:mobile-webcam-bridge",
+      "label": "mobile-webcam-bridge",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/mobile-webcam-bridge",
+      "description": "Use an Android phone as a Linux webcam over USB or Wi-Fi",
+      "language": "C++",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-09-17T14:36:33Z",
+      "updatedAt": "2026-09-17T15:30:18Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.564,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:application",
+          "platform:web",
+          "platform:desktop",
+          "platform:mobile"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:wiki",
+      "label": "wiki",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/wiki",
+      "description": "Wiki for CachyOS",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-08-25T10:31:18Z",
+      "updatedAt": "2026-08-25T10:31:18Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "web",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "website",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:application",
+          "platform:web"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
       "id": "group:robotics-automation",
       "label": "Robotics & Automation",
       "type": "group",
@@ -841,126 +1026,6 @@
             "source": "description",
             "value": "P1 exact taxonomy category robotics-automation",
             "weight": 0.99
-          }
-        ]
-      }
-    },
-    {
-      "id": "group:applications-services",
-      "label": "Applications & Services",
-      "type": "group",
-      "repositoryCount": 2
-    },
-    {
-      "id": "repository:mobile-webcam-bridge",
-      "label": "mobile-webcam-bridge",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/mobile-webcam-bridge",
-      "description": "Use an Android phone as a Linux webcam over USB or Wi-Fi",
-      "language": "C++",
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2026-09-17T14:36:33Z",
-      "updatedAt": "2026-09-17T15:30:18Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.564,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "app",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:application",
-          "platform:web",
-          "platform:desktop",
-          "platform:mobile"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:wiki",
-      "label": "wiki",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/wiki",
-      "description": "Wiki for CachyOS",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-08-25T10:31:18Z",
-      "updatedAt": "2026-08-25T10:31:18Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "next",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "web",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "website",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:application",
-          "platform:web"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
           }
         ]
       }
@@ -1366,6 +1431,26 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "group:applications-services",
+      "type": "ownership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:cline-desktop-linux",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:mobile-webcam-bridge",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:wiki",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "group:robotics-automation",
       "type": "ownership"
     },
@@ -1382,21 +1467,6 @@
     {
       "source": "group:robotics-automation",
       "target": "repository:ros_gz",
-      "type": "membership"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "group:applications-services",
-      "type": "ownership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:mobile-webcam-bridge",
-      "type": "membership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:wiki",
       "type": "membership"
     },
     {
@@ -1448,7 +1518,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "57fbfc63b5dc3666aa65e2360d657af0c7389b84e334f0af6492e040c2bdc706",
+    "corpusFingerprint": "d0605a886e7eb4e684b8a21eb378670d19e48e73c40574cb332fbbca12029073",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -1529,6 +1599,11 @@
         "repoId": 1374579782,
         "name": "mobile-webcam-bridge",
         "contentHash": "1fe42e07751afa5ac8f8f79f8d7d5075a228d0d950249c8675b34747fa62c236"
+      },
+      {
+        "repoId": 1377492522,
+        "name": "cline-desktop-linux",
+        "contentHash": "34a9c726dbeea38bea0a78bd3c1be7ae59e5e783a3f83525ece849803c365443"
       }
     ],
     "categories": [
@@ -1765,10 +1840,10 @@
   "contributedRepositoryCount": 1,
   "externalContributions": {
     "window": {
-      "from": "2025-09-19T16:47:32.340Z",
-      "to": "2026-09-19T16:47:32.340Z"
+      "from": "2025-09-20T06:58:46.927Z",
+      "to": "2026-09-20T06:58:46.927Z"
     },
-    "cap": 8,
+    "cap": 9,
     "candidateRepositories": 9,
     "includedRepositories": 1,
     "omittedRepositories": 8,
