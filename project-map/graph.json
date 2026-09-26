@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-09-25T18:04:03.717Z",
+  "generatedAt": "2026-09-26T06:35:49.262Z",
   "repositoryCount": 17,
   "groupCount": 7,
   "nodes": [
@@ -1386,6 +1386,57 @@
         "method": "deterministic",
         "evidence": []
       }
+    },
+    {
+      "id": "repository:flashml-org/freetoken",
+      "label": "FlashML-org/FreeToken",
+      "type": "repository",
+      "relation": "contributed",
+      "repositoryOwner": "FlashML-org",
+      "repositoryName": "FreeToken",
+      "url": "https://github.com/FlashML-org/FreeToken",
+      "description": "FreeToken brings datacenter-scale model serving to your desktop. Run massive models locally, fast and efficiently.",
+      "language": "Python",
+      "topics": [
+        "deepseek-v4",
+        "edge",
+        "glm",
+        "inference",
+        "minimax",
+        "moe",
+        "qwen",
+        "transformer"
+      ],
+      "stars": 13813,
+      "forks": 1361,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-07-20T20:44:11Z",
+      "updatedAt": "2026-09-26T06:32:33Z",
+      "contribution": {
+        "commits": 1,
+        "pullRequests": 1,
+        "mergedPullRequests": 0,
+        "commitsTruncated": false,
+        "pullRequestsTruncated": false
+      },
+      "classification": {
+        "categoryId": "ai-ml",
+        "categoryLabel": "AI / Machine Learning",
+        "secondaryTags": [
+          "transformer"
+        ],
+        "confidence": 0.656,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "topic",
+            "value": "transformer",
+            "weight": 1
+          }
+        ]
+      }
     }
   ],
   "edges": [
@@ -1512,6 +1563,11 @@
     {
       "source": "user:nekomario28",
       "target": "repository:c0c25034/projexd_4",
+      "type": "contribution"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:flashml-org/freetoken",
       "type": "contribution"
     }
   ],
@@ -1837,16 +1893,16 @@
     }
   },
   "taxonomyAssignmentVersion": 1,
-  "contributedRepositoryCount": 1,
+  "contributedRepositoryCount": 2,
   "externalContributions": {
     "window": {
-      "from": "2025-09-25T18:04:04.915Z",
-      "to": "2026-09-25T18:04:04.915Z"
+      "from": "2025-09-26T06:35:50.636Z",
+      "to": "2026-09-26T06:35:50.636Z"
     },
     "cap": 9,
     "candidateRepositories": 9,
-    "includedRepositories": 1,
-    "omittedRepositories": 8,
+    "includedRepositories": 2,
+    "omittedRepositories": 7,
     "truncatedRepositories": 0
   }
 }
