@@ -4,11 +4,11 @@
   "status": "experimental-non-default",
   "source": {
     "graphOwner": "nekomario28",
-    "graphGeneratedAt": "2026-09-25T18:04:03.717Z",
+    "graphGeneratedAt": "2026-09-26T06:35:49.262Z",
     "assessment": {
       "contractId": "ipm-repository-assessment-artifact-v1",
       "owner": "nekomario28",
-      "generatedAt": "2026-09-25T18:04:03.717Z",
+      "generatedAt": "2026-09-26T06:35:49.262Z",
       "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
       "assessmentPolicyId": "ipm-repository-assessment-v1"
     }
@@ -3939,14 +3939,64 @@
         "labelPriorityEffect": "none",
         "impactHaloEffect": "none"
       }
+    },
+    {
+      "graphNodeId": "repository:flashml-org/freetoken",
+      "repositoryKey": "flashml-org/freetoken",
+      "label": "FlashML-org/FreeToken",
+      "graphRelation": "contributed",
+      "context": {
+        "category": {
+          "state": "observed",
+          "id": "ai-ml"
+        },
+        "artifacts": {
+          "state": "unknown",
+          "values": []
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "contributed",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "qualitySectionState": "not-collected",
+      "qualityAttributionScope": null,
+      "overlayState": "unavailable",
+      "unavailableReason": "not-collected",
+      "overlay": null,
+      "views": {
+        "detail": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        },
+        "compact": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        }
+      },
+      "visualPolicy": {
+        "repositoryCore": "inherit-structure-renderer",
+        "placementEffect": "none",
+        "nodeSizeEffect": "none",
+        "labelPriorityEffect": "none",
+        "impactHaloEffect": "none"
+      }
     }
   ],
   "diagnostics": {
-    "graphRepositories": 18,
-    "assessmentRepositories": 18,
-    "joinedRepositories": 18,
+    "graphRepositories": 19,
+    "assessmentRepositories": 19,
+    "joinedRepositories": 19,
     "available": 9,
-    "unavailable": 9,
+    "unavailable": 10,
     "missingAssessmentGraphNodeIds": [],
     "orphanAssessmentGraphNodeIds": [],
     "strictJoin": true
