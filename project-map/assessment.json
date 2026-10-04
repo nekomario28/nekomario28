@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "contractId": "ipm-repository-assessment-artifact-v1",
   "owner": "nekomario28",
-  "generatedAt": "2026-10-04T07:21:49.424Z",
+  "generatedAt": "2026-10-04T10:43:46.724Z",
   "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
   "taxonomyId": "ipm-standard-v1",
   "assessmentPolicyId": "ipm-repository-assessment-v1",
@@ -37,7 +37,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-04T07:21:49.424Z"
+        "observedAt": "2026-10-04T10:43:46.724Z"
       },
       "quality": {
         "state": "partial",
@@ -606,7 +606,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-04T07:21:49.424Z"
+        "observedAt": "2026-10-04T10:43:46.724Z"
       },
       "quality": {
         "state": "partial",
@@ -907,7 +907,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-04T07:21:49.424Z"
+        "observedAt": "2026-10-04T10:43:46.724Z"
       },
       "quality": {
         "state": "partial",
@@ -1464,7 +1464,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-04T07:21:49.424Z"
+        "observedAt": "2026-10-04T10:43:46.724Z"
       },
       "quality": {
         "state": "partial",
@@ -1797,7 +1797,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-04T07:21:49.424Z"
+        "observedAt": "2026-10-04T10:43:46.724Z"
       },
       "quality": {
         "state": "not-collected",
@@ -1929,7 +1929,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-04T07:21:49.424Z"
+        "observedAt": "2026-10-04T10:43:46.724Z"
       },
       "quality": {
         "state": "not-collected",
@@ -2061,7 +2061,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-04T07:21:49.424Z"
+        "observedAt": "2026-10-04T10:43:46.724Z"
       },
       "quality": {
         "state": "partial",
@@ -2616,374 +2616,6 @@
     },
     {
       "identity": {
-        "repositoryKey": "nekomario28/cline-desktop-linux",
-        "graphNodeId": "repository:cline-desktop-linux",
-        "owner": "nekomario28",
-        "name": "cline-desktop-linux",
-        "githubRepositoryId": null
-      },
-      "context": {
-        "category": {
-          "state": "observed",
-          "id": "applications-services"
-        },
-        "artifacts": {
-          "state": "observed",
-          "values": [
-            "library"
-          ]
-        },
-        "lifecycle": "unknown",
-        "relation": {
-          "ownership": "owned",
-          "collaboration": "unknown",
-          "lineage": "original"
-        }
-      },
-      "acquisition": {
-        "level": "L0",
-        "observedAt": "2026-10-04T07:21:49.424Z"
-      },
-      "quality": {
-        "state": "not-collected",
-        "value": null
-      },
-      "impact": {
-        "state": "partial",
-        "value": {
-          "schemaVersion": 1,
-          "relation": {
-            "ownership": "owned",
-            "collaboration": "unknown",
-            "lineage": "original"
-          },
-          "projectSide": {
-            "recognition": {
-              "state": "observed",
-              "raw": 1,
-              "transformed": 0.6931471805599453,
-              "source": "stars",
-              "directQualityEffect": false
-            },
-            "reuseDerivativeInterest": {
-              "state": "observed",
-              "raw": 1,
-              "transformed": 0.6931471805599453,
-              "source": "forks",
-              "interpretation": "reuse-derivative-interest",
-              "independentAdopterCount": null,
-              "directQualityEffect": false
-            },
-            "adoption": {
-              "dependents": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              },
-              "downloads": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              }
-            },
-            "researchDomainUptake": {
-              "citations": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              }
-            },
-            "collaborationContext": {
-              "contributors": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              },
-              "personalContributionInferred": false
-            }
-          },
-          "upstreamContext": null,
-          "attribution": {
-            "profile": "unresolved",
-            "requiresPersonalContributionGate": true,
-            "upstreamMetricsAreContextOnly": false,
-            "collaborationState": "unknown",
-            "lineageState": "original"
-          },
-          "compositeImpact": null,
-          "portfolioProminenceEffect": null
-        }
-      },
-      "scale": {
-        "state": "not-collected",
-        "value": null
-      },
-      "lifecycle": {
-        "state": "not-collected",
-        "value": null
-      },
-      "personalContribution": {
-        "state": "not-collected",
-        "value": null
-      },
-      "prominence": {
-        "state": "not-collected",
-        "value": null
-      },
-      "productionScore": null
-    },
-    {
-      "identity": {
-        "repositoryKey": "nekomario28/mobile-webcam-bridge",
-        "graphNodeId": "repository:mobile-webcam-bridge",
-        "owner": "nekomario28",
-        "name": "mobile-webcam-bridge",
-        "githubRepositoryId": null
-      },
-      "context": {
-        "category": {
-          "state": "observed",
-          "id": "applications-services"
-        },
-        "artifacts": {
-          "state": "observed",
-          "values": [
-            "application"
-          ]
-        },
-        "lifecycle": "unknown",
-        "relation": {
-          "ownership": "owned",
-          "collaboration": "unknown",
-          "lineage": "original"
-        }
-      },
-      "acquisition": {
-        "level": "L0",
-        "observedAt": "2026-10-04T07:21:49.424Z"
-      },
-      "quality": {
-        "state": "not-collected",
-        "value": null
-      },
-      "impact": {
-        "state": "partial",
-        "value": {
-          "schemaVersion": 1,
-          "relation": {
-            "ownership": "owned",
-            "collaboration": "unknown",
-            "lineage": "original"
-          },
-          "projectSide": {
-            "recognition": {
-              "state": "observed",
-              "raw": 0,
-              "transformed": 0,
-              "source": "stars",
-              "directQualityEffect": false
-            },
-            "reuseDerivativeInterest": {
-              "state": "observed",
-              "raw": 0,
-              "transformed": 0,
-              "source": "forks",
-              "interpretation": "reuse-derivative-interest",
-              "independentAdopterCount": null,
-              "directQualityEffect": false
-            },
-            "adoption": {
-              "dependents": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              },
-              "downloads": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              }
-            },
-            "researchDomainUptake": {
-              "citations": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              }
-            },
-            "collaborationContext": {
-              "contributors": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              },
-              "personalContributionInferred": false
-            }
-          },
-          "upstreamContext": null,
-          "attribution": {
-            "profile": "unresolved",
-            "requiresPersonalContributionGate": true,
-            "upstreamMetricsAreContextOnly": false,
-            "collaborationState": "unknown",
-            "lineageState": "original"
-          },
-          "compositeImpact": null,
-          "portfolioProminenceEffect": null
-        }
-      },
-      "scale": {
-        "state": "not-collected",
-        "value": null
-      },
-      "lifecycle": {
-        "state": "not-collected",
-        "value": null
-      },
-      "personalContribution": {
-        "state": "not-collected",
-        "value": null
-      },
-      "prominence": {
-        "state": "not-collected",
-        "value": null
-      },
-      "productionScore": null
-    },
-    {
-      "identity": {
-        "repositoryKey": "nekomario28/wiki",
-        "graphNodeId": "repository:wiki",
-        "owner": "nekomario28",
-        "name": "wiki",
-        "githubRepositoryId": null
-      },
-      "context": {
-        "category": {
-          "state": "observed",
-          "id": "applications-services"
-        },
-        "artifacts": {
-          "state": "observed",
-          "values": [
-            "application"
-          ]
-        },
-        "lifecycle": "unknown",
-        "relation": {
-          "ownership": "owned",
-          "collaboration": "unknown",
-          "lineage": "fork"
-        }
-      },
-      "acquisition": {
-        "level": "L0",
-        "observedAt": "2026-10-04T07:21:49.424Z"
-      },
-      "quality": {
-        "state": "not-collected",
-        "value": null
-      },
-      "impact": {
-        "state": "partial",
-        "value": {
-          "schemaVersion": 1,
-          "relation": {
-            "ownership": "owned",
-            "collaboration": "unknown",
-            "lineage": "fork"
-          },
-          "projectSide": {
-            "recognition": {
-              "state": "observed",
-              "raw": 0,
-              "transformed": 0,
-              "source": "stars",
-              "directQualityEffect": false
-            },
-            "reuseDerivativeInterest": {
-              "state": "observed",
-              "raw": 0,
-              "transformed": 0,
-              "source": "forks",
-              "interpretation": "reuse-derivative-interest",
-              "independentAdopterCount": null,
-              "directQualityEffect": false
-            },
-            "adoption": {
-              "dependents": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              },
-              "downloads": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              }
-            },
-            "researchDomainUptake": {
-              "citations": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              }
-            },
-            "collaborationContext": {
-              "contributors": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              },
-              "personalContributionInferred": false
-            }
-          },
-          "upstreamContext": {
-            "state": "unknown",
-            "contextOnly": true,
-            "eligibleForLocalImpact": false,
-            "recognition": {
-              "state": "unknown",
-              "raw": null,
-              "transformed": null
-            },
-            "reuseDerivativeInterest": {
-              "state": "unknown",
-              "raw": null,
-              "transformed": null
-            }
-          },
-          "attribution": {
-            "profile": "fork",
-            "requiresPersonalContributionGate": true,
-            "upstreamMetricsAreContextOnly": true,
-            "collaborationState": "unknown",
-            "lineageState": "fork"
-          },
-          "compositeImpact": null,
-          "portfolioProminenceEffect": null
-        }
-      },
-      "scale": {
-        "state": "not-collected",
-        "value": null
-      },
-      "lifecycle": {
-        "state": "not-collected",
-        "value": null
-      },
-      "personalContribution": {
-        "state": "not-collected",
-        "value": null
-      },
-      "prominence": {
-        "state": "not-collected",
-        "value": null
-      },
-      "productionScore": null
-    },
-    {
-      "identity": {
         "repositoryKey": "nekomario28/lime_tidyup",
         "graphNodeId": "repository:lime_tidyup",
         "owner": "nekomario28",
@@ -3010,7 +2642,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-04T07:21:49.424Z"
+        "observedAt": "2026-10-04T10:43:46.724Z"
       },
       "quality": {
         "state": "not-collected",
@@ -3142,7 +2774,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-04T07:21:49.424Z"
+        "observedAt": "2026-10-04T10:43:46.724Z"
       },
       "quality": {
         "state": "partial",
@@ -3513,11 +3145,910 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-04T07:21:49.424Z"
+        "observedAt": "2026-10-04T10:43:46.724Z"
       },
       "quality": {
         "state": "not-collected",
         "value": null
+      },
+      "impact": {
+        "state": "partial",
+        "value": {
+          "schemaVersion": 1,
+          "relation": {
+            "ownership": "owned",
+            "collaboration": "unknown",
+            "lineage": "fork"
+          },
+          "projectSide": {
+            "recognition": {
+              "state": "observed",
+              "raw": 0,
+              "transformed": 0,
+              "source": "stars",
+              "directQualityEffect": false
+            },
+            "reuseDerivativeInterest": {
+              "state": "observed",
+              "raw": 0,
+              "transformed": 0,
+              "source": "forks",
+              "interpretation": "reuse-derivative-interest",
+              "independentAdopterCount": null,
+              "directQualityEffect": false
+            },
+            "adoption": {
+              "dependents": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "downloads": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "researchDomainUptake": {
+              "citations": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "collaborationContext": {
+              "contributors": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "personalContributionInferred": false
+            }
+          },
+          "upstreamContext": {
+            "state": "unknown",
+            "contextOnly": true,
+            "eligibleForLocalImpact": false,
+            "recognition": {
+              "state": "unknown",
+              "raw": null,
+              "transformed": null
+            },
+            "reuseDerivativeInterest": {
+              "state": "unknown",
+              "raw": null,
+              "transformed": null
+            }
+          },
+          "attribution": {
+            "profile": "fork",
+            "requiresPersonalContributionGate": true,
+            "upstreamMetricsAreContextOnly": true,
+            "collaborationState": "unknown",
+            "lineageState": "fork"
+          },
+          "compositeImpact": null,
+          "portfolioProminenceEffect": null
+        }
+      },
+      "scale": {
+        "state": "not-collected",
+        "value": null
+      },
+      "lifecycle": {
+        "state": "not-collected",
+        "value": null
+      },
+      "personalContribution": {
+        "state": "not-collected",
+        "value": null
+      },
+      "prominence": {
+        "state": "not-collected",
+        "value": null
+      },
+      "productionScore": null
+    },
+    {
+      "identity": {
+        "repositoryKey": "nekomario28/cline-desktop-linux",
+        "graphNodeId": "repository:cline-desktop-linux",
+        "owner": "nekomario28",
+        "name": "cline-desktop-linux",
+        "githubRepositoryId": null
+      },
+      "context": {
+        "category": {
+          "state": "observed",
+          "id": "applications-services"
+        },
+        "artifacts": {
+          "state": "observed",
+          "values": [
+            "library"
+          ]
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "owned",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "acquisition": {
+        "level": "L0",
+        "observedAt": "2026-10-04T10:43:46.724Z"
+      },
+      "quality": {
+        "state": "not-collected",
+        "value": null
+      },
+      "impact": {
+        "state": "partial",
+        "value": {
+          "schemaVersion": 1,
+          "relation": {
+            "ownership": "owned",
+            "collaboration": "unknown",
+            "lineage": "original"
+          },
+          "projectSide": {
+            "recognition": {
+              "state": "observed",
+              "raw": 1,
+              "transformed": 0.6931471805599453,
+              "source": "stars",
+              "directQualityEffect": false
+            },
+            "reuseDerivativeInterest": {
+              "state": "observed",
+              "raw": 1,
+              "transformed": 0.6931471805599453,
+              "source": "forks",
+              "interpretation": "reuse-derivative-interest",
+              "independentAdopterCount": null,
+              "directQualityEffect": false
+            },
+            "adoption": {
+              "dependents": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "downloads": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "researchDomainUptake": {
+              "citations": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "collaborationContext": {
+              "contributors": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "personalContributionInferred": false
+            }
+          },
+          "upstreamContext": null,
+          "attribution": {
+            "profile": "unresolved",
+            "requiresPersonalContributionGate": true,
+            "upstreamMetricsAreContextOnly": false,
+            "collaborationState": "unknown",
+            "lineageState": "original"
+          },
+          "compositeImpact": null,
+          "portfolioProminenceEffect": null
+        }
+      },
+      "scale": {
+        "state": "not-collected",
+        "value": null
+      },
+      "lifecycle": {
+        "state": "not-collected",
+        "value": null
+      },
+      "personalContribution": {
+        "state": "not-collected",
+        "value": null
+      },
+      "prominence": {
+        "state": "not-collected",
+        "value": null
+      },
+      "productionScore": null
+    },
+    {
+      "identity": {
+        "repositoryKey": "nekomario28/wiki",
+        "graphNodeId": "repository:wiki",
+        "owner": "nekomario28",
+        "name": "wiki",
+        "githubRepositoryId": null
+      },
+      "context": {
+        "category": {
+          "state": "observed",
+          "id": "applications-services"
+        },
+        "artifacts": {
+          "state": "observed",
+          "values": [
+            "application"
+          ]
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "owned",
+          "collaboration": "unknown",
+          "lineage": "fork"
+        }
+      },
+      "acquisition": {
+        "level": "L0",
+        "observedAt": "2026-10-04T10:43:46.724Z"
+      },
+      "quality": {
+        "state": "not-collected",
+        "value": null
+      },
+      "impact": {
+        "state": "partial",
+        "value": {
+          "schemaVersion": 1,
+          "relation": {
+            "ownership": "owned",
+            "collaboration": "unknown",
+            "lineage": "fork"
+          },
+          "projectSide": {
+            "recognition": {
+              "state": "observed",
+              "raw": 0,
+              "transformed": 0,
+              "source": "stars",
+              "directQualityEffect": false
+            },
+            "reuseDerivativeInterest": {
+              "state": "observed",
+              "raw": 0,
+              "transformed": 0,
+              "source": "forks",
+              "interpretation": "reuse-derivative-interest",
+              "independentAdopterCount": null,
+              "directQualityEffect": false
+            },
+            "adoption": {
+              "dependents": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "downloads": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "researchDomainUptake": {
+              "citations": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "collaborationContext": {
+              "contributors": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "personalContributionInferred": false
+            }
+          },
+          "upstreamContext": {
+            "state": "unknown",
+            "contextOnly": true,
+            "eligibleForLocalImpact": false,
+            "recognition": {
+              "state": "unknown",
+              "raw": null,
+              "transformed": null
+            },
+            "reuseDerivativeInterest": {
+              "state": "unknown",
+              "raw": null,
+              "transformed": null
+            }
+          },
+          "attribution": {
+            "profile": "fork",
+            "requiresPersonalContributionGate": true,
+            "upstreamMetricsAreContextOnly": true,
+            "collaborationState": "unknown",
+            "lineageState": "fork"
+          },
+          "compositeImpact": null,
+          "portfolioProminenceEffect": null
+        }
+      },
+      "scale": {
+        "state": "not-collected",
+        "value": null
+      },
+      "lifecycle": {
+        "state": "not-collected",
+        "value": null
+      },
+      "personalContribution": {
+        "state": "not-collected",
+        "value": null
+      },
+      "prominence": {
+        "state": "not-collected",
+        "value": null
+      },
+      "productionScore": null
+    },
+    {
+      "identity": {
+        "repositoryKey": "nekomario28/mobile-webcam-bridge",
+        "graphNodeId": "repository:mobile-webcam-bridge",
+        "owner": "nekomario28",
+        "name": "mobile-webcam-bridge",
+        "githubRepositoryId": null
+      },
+      "context": {
+        "category": {
+          "state": "observed",
+          "id": "hardware-embedded"
+        },
+        "artifacts": {
+          "state": "observed",
+          "values": [
+            "application"
+          ]
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "owned",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "acquisition": {
+        "level": "L0",
+        "observedAt": "2026-10-04T10:43:46.724Z"
+      },
+      "quality": {
+        "state": "not-collected",
+        "value": null
+      },
+      "impact": {
+        "state": "partial",
+        "value": {
+          "schemaVersion": 1,
+          "relation": {
+            "ownership": "owned",
+            "collaboration": "unknown",
+            "lineage": "original"
+          },
+          "projectSide": {
+            "recognition": {
+              "state": "observed",
+              "raw": 0,
+              "transformed": 0,
+              "source": "stars",
+              "directQualityEffect": false
+            },
+            "reuseDerivativeInterest": {
+              "state": "observed",
+              "raw": 0,
+              "transformed": 0,
+              "source": "forks",
+              "interpretation": "reuse-derivative-interest",
+              "independentAdopterCount": null,
+              "directQualityEffect": false
+            },
+            "adoption": {
+              "dependents": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "downloads": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "researchDomainUptake": {
+              "citations": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "collaborationContext": {
+              "contributors": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "personalContributionInferred": false
+            }
+          },
+          "upstreamContext": null,
+          "attribution": {
+            "profile": "unresolved",
+            "requiresPersonalContributionGate": true,
+            "upstreamMetricsAreContextOnly": false,
+            "collaborationState": "unknown",
+            "lineageState": "original"
+          },
+          "compositeImpact": null,
+          "portfolioProminenceEffect": null
+        }
+      },
+      "scale": {
+        "state": "not-collected",
+        "value": null
+      },
+      "lifecycle": {
+        "state": "not-collected",
+        "value": null
+      },
+      "personalContribution": {
+        "state": "not-collected",
+        "value": null
+      },
+      "prominence": {
+        "state": "not-collected",
+        "value": null
+      },
+      "productionScore": null
+    },
+    {
+      "identity": {
+        "repositoryKey": "nekomario28/turing-smart-screen-python-owl",
+        "graphNodeId": "repository:turing-smart-screen-python-owl",
+        "owner": "nekomario28",
+        "name": "turing-smart-screen-python-owl",
+        "githubRepositoryId": null
+      },
+      "context": {
+        "category": {
+          "state": "observed",
+          "id": "hardware-embedded"
+        },
+        "artifacts": {
+          "state": "observed",
+          "values": [
+            "library"
+          ]
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "owned",
+          "collaboration": "unknown",
+          "lineage": "fork"
+        }
+      },
+      "acquisition": {
+        "level": "L1",
+        "observedAt": "2026-10-04T10:43:46.724Z"
+      },
+      "quality": {
+        "state": "partial",
+        "value": {
+          "schemaVersion": 1,
+          "contractId": "ipm-repository-fork-quality-v1",
+          "relation": {
+            "ownership": "owned",
+            "collaboration": "unknown",
+            "lineage": "fork"
+          },
+          "artifacts": [
+            "library"
+          ],
+          "upstreamContext": {
+            "repositoryKey": "mathoudebine/turing-smart-screen-python",
+            "role": "context-only",
+            "projectQualityAttribution": "upstream-context-only",
+            "projectImpactAttribution": "upstream-context-only"
+          },
+          "snapshotQuality": {
+            "state": "partial",
+            "value": {
+              "schemaVersion": 1,
+              "artifacts": [
+                "library"
+              ],
+              "claimBoundaries": [],
+              "dimensions": {
+                "understandability": {
+                  "applicability": "recommended",
+                  "authority": "repository-native",
+                  "evidenceState": "observed",
+                  "findingState": "supports",
+                  "findingCounts": {
+                    "supports": 1,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "evidenced",
+                  "evidenceCount": 1,
+                  "evidence": [
+                    {
+                      "authority": "repository-native",
+                      "state": "observed",
+                      "finding": "supports",
+                      "evidenceClass": "C",
+                      "sourceId": "README.md@ddedac6db0f51c95027107029507de6fe76db402",
+                      "claim": "Local fork README documents the OWL CPU COOLER DISPLAY purpose, Rev. C protocol and ImageOnly setup."
+                    }
+                  ]
+                },
+                "verification": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "reproducibility": {
+                  "applicability": "recommended",
+                  "authority": "repository-native",
+                  "evidenceState": "observed",
+                  "findingState": "supports",
+                  "findingCounts": {
+                    "supports": 1,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "evidenced",
+                  "evidenceCount": 1,
+                  "evidence": [
+                    {
+                      "authority": "repository-native",
+                      "state": "observed",
+                      "finding": "supports",
+                      "evidenceClass": "C",
+                      "sourceId": "requirements.txt@4ec6abb85948bb498e6fc6494b4df77205b87544",
+                      "claim": "Local fork requirements record bounded dependency versions and platform/Python-version conditions."
+                    }
+                  ]
+                },
+                "maintainability": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "integrity": {
+                  "applicability": "optional",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "interoperability": {
+                  "applicability": "recommended",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "security-safety": {
+                  "applicability": "optional",
+                  "authority": "unknown",
+                  "evidenceState": "unknown",
+                  "findingState": "unknown",
+                  "findingCounts": {
+                    "supports": 0,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "unevidenced",
+                  "evidenceCount": 0,
+                  "evidence": []
+                },
+                "stewardship": {
+                  "applicability": "recommended",
+                  "authority": "repository-native",
+                  "evidenceState": "observed",
+                  "findingState": "supports",
+                  "findingCounts": {
+                    "supports": 1,
+                    "weakens": 0,
+                    "neutral": 0,
+                    "unknown": 0
+                  },
+                  "disposition": "evidenced",
+                  "evidenceCount": 1,
+                  "evidence": [
+                    {
+                      "authority": "repository-native",
+                      "state": "observed",
+                      "finding": "supports",
+                      "evidenceClass": "C",
+                      "sourceId": "github-repository-metadata:license",
+                      "claim": "GPL-3.0 stewardship is present on the fork snapshot but is not treated as locally authored evidence."
+                    }
+                  ]
+                }
+              },
+              "compositeQualityScore": null
+            },
+            "evidenceProvenance": {
+              "understandability": [
+                {
+                  "origin": "local",
+                  "sourceId": "README.md@ddedac6db0f51c95027107029507de6fe76db402"
+                }
+              ],
+              "reproducibility": [
+                {
+                  "origin": "local",
+                  "sourceId": "requirements.txt@4ec6abb85948bb498e6fc6494b4df77205b87544"
+                }
+              ],
+              "stewardship": [
+                {
+                  "origin": "upstream-inherited",
+                  "sourceId": "github-repository-metadata:license"
+                }
+              ]
+            },
+            "evidenceOriginState": "mixed",
+            "evidenceOriginCounts": {
+              "local": 2,
+              "upstream-inherited": 1,
+              "upstream-accepted": 0,
+              "mixed": 0,
+              "unknown": 0
+            },
+            "personSideEligible": false
+          },
+          "localDelta": {
+            "observation": {
+              "state": "observed",
+              "presence": "present",
+              "scope": "mathoudebine/main...nekomario28/main",
+              "evidence": "3 commits ahead; 24 behind; local changes include Rev. C display communication, config, requirements, README and workflow adjustments"
+            },
+            "quality": {
+              "state": "partial",
+              "value": {
+                "schemaVersion": 1,
+                "artifacts": [
+                  "library"
+                ],
+                "claimBoundaries": [],
+                "dimensions": {
+                  "understandability": {
+                    "applicability": "recommended",
+                    "authority": "repository-native",
+                    "evidenceState": "observed",
+                    "findingState": "supports",
+                    "findingCounts": {
+                      "supports": 1,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "evidenced",
+                    "evidenceCount": 1,
+                    "evidence": [
+                      {
+                        "authority": "repository-native",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "C",
+                        "sourceId": "local-ahead:README.md",
+                        "claim": "The local-ahead README changes document the fork-specific hardware/protocol behavior and setup."
+                      }
+                    ]
+                  },
+                  "verification": {
+                    "applicability": "recommended",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  },
+                  "reproducibility": {
+                    "applicability": "recommended",
+                    "authority": "repository-native",
+                    "evidenceState": "observed",
+                    "findingState": "supports",
+                    "findingCounts": {
+                      "supports": 1,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "evidenced",
+                    "evidenceCount": 1,
+                    "evidence": [
+                      {
+                        "authority": "repository-native",
+                        "state": "observed",
+                        "finding": "supports",
+                        "evidenceClass": "C",
+                        "sourceId": "local-ahead:requirements.txt",
+                        "claim": "The local-ahead dependency changes bound the environment needed by the fork-specific implementation."
+                      }
+                    ]
+                  },
+                  "maintainability": {
+                    "applicability": "recommended",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  },
+                  "integrity": {
+                    "applicability": "optional",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  },
+                  "interoperability": {
+                    "applicability": "recommended",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  },
+                  "security-safety": {
+                    "applicability": "optional",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  },
+                  "stewardship": {
+                    "applicability": "recommended",
+                    "authority": "unknown",
+                    "evidenceState": "unknown",
+                    "findingState": "unknown",
+                    "findingCounts": {
+                      "supports": 0,
+                      "weakens": 0,
+                      "neutral": 0,
+                      "unknown": 0
+                    },
+                    "disposition": "unevidenced",
+                    "evidenceCount": 0,
+                    "evidence": []
+                  }
+                },
+                "compositeQualityScore": null
+              },
+              "reason": null,
+              "evidenceProvenance": {
+                "understandability": [
+                  {
+                    "origin": "local",
+                    "sourceId": "local-ahead:README.md"
+                  }
+                ],
+                "reproducibility": [
+                  {
+                    "origin": "local",
+                    "sourceId": "local-ahead:requirements.txt"
+                  }
+                ]
+              }
+            },
+            "evidenceOriginState": "local",
+            "evidenceOriginCounts": {
+              "local": 2,
+              "upstream-inherited": 0,
+              "upstream-accepted": 0,
+              "mixed": 0,
+              "unknown": 0
+            }
+          },
+          "personalAttribution": {
+            "qualitySource": "local-delta-only",
+            "snapshotQualityEligible": false,
+            "upstreamInheritedEvidenceEligible": false,
+            "upstreamAcceptedEvidenceEligible": true,
+            "localDeltaRequired": true,
+            "localDeltaState": "observed",
+            "localDeltaPresence": "present"
+          },
+          "compositeForkQualityScore": null,
+          "productionRankingAllowed": false
+        }
       },
       "impact": {
         "state": "partial",
@@ -3645,7 +4176,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-04T07:21:49.424Z"
+        "observedAt": "2026-10-04T10:43:46.724Z"
       },
       "quality": {
         "state": "partial",
@@ -4157,7 +4688,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-04T07:21:49.424Z"
+        "observedAt": "2026-10-04T10:43:46.724Z"
       },
       "quality": {
         "state": "partial",
@@ -4405,537 +4936,6 @@
     },
     {
       "identity": {
-        "repositoryKey": "nekomario28/turing-smart-screen-python-owl",
-        "graphNodeId": "repository:turing-smart-screen-python-owl",
-        "owner": "nekomario28",
-        "name": "turing-smart-screen-python-owl",
-        "githubRepositoryId": null
-      },
-      "context": {
-        "category": {
-          "state": "observed",
-          "id": "hardware-embedded"
-        },
-        "artifacts": {
-          "state": "observed",
-          "values": [
-            "library"
-          ]
-        },
-        "lifecycle": "unknown",
-        "relation": {
-          "ownership": "owned",
-          "collaboration": "unknown",
-          "lineage": "fork"
-        }
-      },
-      "acquisition": {
-        "level": "L1",
-        "observedAt": "2026-10-04T07:21:49.424Z"
-      },
-      "quality": {
-        "state": "partial",
-        "value": {
-          "schemaVersion": 1,
-          "contractId": "ipm-repository-fork-quality-v1",
-          "relation": {
-            "ownership": "owned",
-            "collaboration": "unknown",
-            "lineage": "fork"
-          },
-          "artifacts": [
-            "library"
-          ],
-          "upstreamContext": {
-            "repositoryKey": "mathoudebine/turing-smart-screen-python",
-            "role": "context-only",
-            "projectQualityAttribution": "upstream-context-only",
-            "projectImpactAttribution": "upstream-context-only"
-          },
-          "snapshotQuality": {
-            "state": "partial",
-            "value": {
-              "schemaVersion": 1,
-              "artifacts": [
-                "library"
-              ],
-              "claimBoundaries": [],
-              "dimensions": {
-                "understandability": {
-                  "applicability": "recommended",
-                  "authority": "repository-native",
-                  "evidenceState": "observed",
-                  "findingState": "supports",
-                  "findingCounts": {
-                    "supports": 1,
-                    "weakens": 0,
-                    "neutral": 0,
-                    "unknown": 0
-                  },
-                  "disposition": "evidenced",
-                  "evidenceCount": 1,
-                  "evidence": [
-                    {
-                      "authority": "repository-native",
-                      "state": "observed",
-                      "finding": "supports",
-                      "evidenceClass": "C",
-                      "sourceId": "README.md@ddedac6db0f51c95027107029507de6fe76db402",
-                      "claim": "Local fork README documents the OWL CPU COOLER DISPLAY purpose, Rev. C protocol and ImageOnly setup."
-                    }
-                  ]
-                },
-                "verification": {
-                  "applicability": "recommended",
-                  "authority": "unknown",
-                  "evidenceState": "unknown",
-                  "findingState": "unknown",
-                  "findingCounts": {
-                    "supports": 0,
-                    "weakens": 0,
-                    "neutral": 0,
-                    "unknown": 0
-                  },
-                  "disposition": "unevidenced",
-                  "evidenceCount": 0,
-                  "evidence": []
-                },
-                "reproducibility": {
-                  "applicability": "recommended",
-                  "authority": "repository-native",
-                  "evidenceState": "observed",
-                  "findingState": "supports",
-                  "findingCounts": {
-                    "supports": 1,
-                    "weakens": 0,
-                    "neutral": 0,
-                    "unknown": 0
-                  },
-                  "disposition": "evidenced",
-                  "evidenceCount": 1,
-                  "evidence": [
-                    {
-                      "authority": "repository-native",
-                      "state": "observed",
-                      "finding": "supports",
-                      "evidenceClass": "C",
-                      "sourceId": "requirements.txt@4ec6abb85948bb498e6fc6494b4df77205b87544",
-                      "claim": "Local fork requirements record bounded dependency versions and platform/Python-version conditions."
-                    }
-                  ]
-                },
-                "maintainability": {
-                  "applicability": "recommended",
-                  "authority": "unknown",
-                  "evidenceState": "unknown",
-                  "findingState": "unknown",
-                  "findingCounts": {
-                    "supports": 0,
-                    "weakens": 0,
-                    "neutral": 0,
-                    "unknown": 0
-                  },
-                  "disposition": "unevidenced",
-                  "evidenceCount": 0,
-                  "evidence": []
-                },
-                "integrity": {
-                  "applicability": "optional",
-                  "authority": "unknown",
-                  "evidenceState": "unknown",
-                  "findingState": "unknown",
-                  "findingCounts": {
-                    "supports": 0,
-                    "weakens": 0,
-                    "neutral": 0,
-                    "unknown": 0
-                  },
-                  "disposition": "unevidenced",
-                  "evidenceCount": 0,
-                  "evidence": []
-                },
-                "interoperability": {
-                  "applicability": "recommended",
-                  "authority": "unknown",
-                  "evidenceState": "unknown",
-                  "findingState": "unknown",
-                  "findingCounts": {
-                    "supports": 0,
-                    "weakens": 0,
-                    "neutral": 0,
-                    "unknown": 0
-                  },
-                  "disposition": "unevidenced",
-                  "evidenceCount": 0,
-                  "evidence": []
-                },
-                "security-safety": {
-                  "applicability": "optional",
-                  "authority": "unknown",
-                  "evidenceState": "unknown",
-                  "findingState": "unknown",
-                  "findingCounts": {
-                    "supports": 0,
-                    "weakens": 0,
-                    "neutral": 0,
-                    "unknown": 0
-                  },
-                  "disposition": "unevidenced",
-                  "evidenceCount": 0,
-                  "evidence": []
-                },
-                "stewardship": {
-                  "applicability": "recommended",
-                  "authority": "repository-native",
-                  "evidenceState": "observed",
-                  "findingState": "supports",
-                  "findingCounts": {
-                    "supports": 1,
-                    "weakens": 0,
-                    "neutral": 0,
-                    "unknown": 0
-                  },
-                  "disposition": "evidenced",
-                  "evidenceCount": 1,
-                  "evidence": [
-                    {
-                      "authority": "repository-native",
-                      "state": "observed",
-                      "finding": "supports",
-                      "evidenceClass": "C",
-                      "sourceId": "github-repository-metadata:license",
-                      "claim": "GPL-3.0 stewardship is present on the fork snapshot but is not treated as locally authored evidence."
-                    }
-                  ]
-                }
-              },
-              "compositeQualityScore": null
-            },
-            "evidenceProvenance": {
-              "understandability": [
-                {
-                  "origin": "local",
-                  "sourceId": "README.md@ddedac6db0f51c95027107029507de6fe76db402"
-                }
-              ],
-              "reproducibility": [
-                {
-                  "origin": "local",
-                  "sourceId": "requirements.txt@4ec6abb85948bb498e6fc6494b4df77205b87544"
-                }
-              ],
-              "stewardship": [
-                {
-                  "origin": "upstream-inherited",
-                  "sourceId": "github-repository-metadata:license"
-                }
-              ]
-            },
-            "evidenceOriginState": "mixed",
-            "evidenceOriginCounts": {
-              "local": 2,
-              "upstream-inherited": 1,
-              "upstream-accepted": 0,
-              "mixed": 0,
-              "unknown": 0
-            },
-            "personSideEligible": false
-          },
-          "localDelta": {
-            "observation": {
-              "state": "observed",
-              "presence": "present",
-              "scope": "mathoudebine/main...nekomario28/main",
-              "evidence": "3 commits ahead; 24 behind; local changes include Rev. C display communication, config, requirements, README and workflow adjustments"
-            },
-            "quality": {
-              "state": "partial",
-              "value": {
-                "schemaVersion": 1,
-                "artifacts": [
-                  "library"
-                ],
-                "claimBoundaries": [],
-                "dimensions": {
-                  "understandability": {
-                    "applicability": "recommended",
-                    "authority": "repository-native",
-                    "evidenceState": "observed",
-                    "findingState": "supports",
-                    "findingCounts": {
-                      "supports": 1,
-                      "weakens": 0,
-                      "neutral": 0,
-                      "unknown": 0
-                    },
-                    "disposition": "evidenced",
-                    "evidenceCount": 1,
-                    "evidence": [
-                      {
-                        "authority": "repository-native",
-                        "state": "observed",
-                        "finding": "supports",
-                        "evidenceClass": "C",
-                        "sourceId": "local-ahead:README.md",
-                        "claim": "The local-ahead README changes document the fork-specific hardware/protocol behavior and setup."
-                      }
-                    ]
-                  },
-                  "verification": {
-                    "applicability": "recommended",
-                    "authority": "unknown",
-                    "evidenceState": "unknown",
-                    "findingState": "unknown",
-                    "findingCounts": {
-                      "supports": 0,
-                      "weakens": 0,
-                      "neutral": 0,
-                      "unknown": 0
-                    },
-                    "disposition": "unevidenced",
-                    "evidenceCount": 0,
-                    "evidence": []
-                  },
-                  "reproducibility": {
-                    "applicability": "recommended",
-                    "authority": "repository-native",
-                    "evidenceState": "observed",
-                    "findingState": "supports",
-                    "findingCounts": {
-                      "supports": 1,
-                      "weakens": 0,
-                      "neutral": 0,
-                      "unknown": 0
-                    },
-                    "disposition": "evidenced",
-                    "evidenceCount": 1,
-                    "evidence": [
-                      {
-                        "authority": "repository-native",
-                        "state": "observed",
-                        "finding": "supports",
-                        "evidenceClass": "C",
-                        "sourceId": "local-ahead:requirements.txt",
-                        "claim": "The local-ahead dependency changes bound the environment needed by the fork-specific implementation."
-                      }
-                    ]
-                  },
-                  "maintainability": {
-                    "applicability": "recommended",
-                    "authority": "unknown",
-                    "evidenceState": "unknown",
-                    "findingState": "unknown",
-                    "findingCounts": {
-                      "supports": 0,
-                      "weakens": 0,
-                      "neutral": 0,
-                      "unknown": 0
-                    },
-                    "disposition": "unevidenced",
-                    "evidenceCount": 0,
-                    "evidence": []
-                  },
-                  "integrity": {
-                    "applicability": "optional",
-                    "authority": "unknown",
-                    "evidenceState": "unknown",
-                    "findingState": "unknown",
-                    "findingCounts": {
-                      "supports": 0,
-                      "weakens": 0,
-                      "neutral": 0,
-                      "unknown": 0
-                    },
-                    "disposition": "unevidenced",
-                    "evidenceCount": 0,
-                    "evidence": []
-                  },
-                  "interoperability": {
-                    "applicability": "recommended",
-                    "authority": "unknown",
-                    "evidenceState": "unknown",
-                    "findingState": "unknown",
-                    "findingCounts": {
-                      "supports": 0,
-                      "weakens": 0,
-                      "neutral": 0,
-                      "unknown": 0
-                    },
-                    "disposition": "unevidenced",
-                    "evidenceCount": 0,
-                    "evidence": []
-                  },
-                  "security-safety": {
-                    "applicability": "optional",
-                    "authority": "unknown",
-                    "evidenceState": "unknown",
-                    "findingState": "unknown",
-                    "findingCounts": {
-                      "supports": 0,
-                      "weakens": 0,
-                      "neutral": 0,
-                      "unknown": 0
-                    },
-                    "disposition": "unevidenced",
-                    "evidenceCount": 0,
-                    "evidence": []
-                  },
-                  "stewardship": {
-                    "applicability": "recommended",
-                    "authority": "unknown",
-                    "evidenceState": "unknown",
-                    "findingState": "unknown",
-                    "findingCounts": {
-                      "supports": 0,
-                      "weakens": 0,
-                      "neutral": 0,
-                      "unknown": 0
-                    },
-                    "disposition": "unevidenced",
-                    "evidenceCount": 0,
-                    "evidence": []
-                  }
-                },
-                "compositeQualityScore": null
-              },
-              "reason": null,
-              "evidenceProvenance": {
-                "understandability": [
-                  {
-                    "origin": "local",
-                    "sourceId": "local-ahead:README.md"
-                  }
-                ],
-                "reproducibility": [
-                  {
-                    "origin": "local",
-                    "sourceId": "local-ahead:requirements.txt"
-                  }
-                ]
-              }
-            },
-            "evidenceOriginState": "local",
-            "evidenceOriginCounts": {
-              "local": 2,
-              "upstream-inherited": 0,
-              "upstream-accepted": 0,
-              "mixed": 0,
-              "unknown": 0
-            }
-          },
-          "personalAttribution": {
-            "qualitySource": "local-delta-only",
-            "snapshotQualityEligible": false,
-            "upstreamInheritedEvidenceEligible": false,
-            "upstreamAcceptedEvidenceEligible": true,
-            "localDeltaRequired": true,
-            "localDeltaState": "observed",
-            "localDeltaPresence": "present"
-          },
-          "compositeForkQualityScore": null,
-          "productionRankingAllowed": false
-        }
-      },
-      "impact": {
-        "state": "partial",
-        "value": {
-          "schemaVersion": 1,
-          "relation": {
-            "ownership": "owned",
-            "collaboration": "unknown",
-            "lineage": "fork"
-          },
-          "projectSide": {
-            "recognition": {
-              "state": "observed",
-              "raw": 0,
-              "transformed": 0,
-              "source": "stars",
-              "directQualityEffect": false
-            },
-            "reuseDerivativeInterest": {
-              "state": "observed",
-              "raw": 0,
-              "transformed": 0,
-              "source": "forks",
-              "interpretation": "reuse-derivative-interest",
-              "independentAdopterCount": null,
-              "directQualityEffect": false
-            },
-            "adoption": {
-              "dependents": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              },
-              "downloads": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              }
-            },
-            "researchDomainUptake": {
-              "citations": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              }
-            },
-            "collaborationContext": {
-              "contributors": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              },
-              "personalContributionInferred": false
-            }
-          },
-          "upstreamContext": {
-            "state": "unknown",
-            "contextOnly": true,
-            "eligibleForLocalImpact": false,
-            "recognition": {
-              "state": "unknown",
-              "raw": null,
-              "transformed": null
-            },
-            "reuseDerivativeInterest": {
-              "state": "unknown",
-              "raw": null,
-              "transformed": null
-            }
-          },
-          "attribution": {
-            "profile": "fork",
-            "requiresPersonalContributionGate": true,
-            "upstreamMetricsAreContextOnly": true,
-            "collaborationState": "unknown",
-            "lineageState": "fork"
-          },
-          "compositeImpact": null,
-          "portfolioProminenceEffect": null
-        }
-      },
-      "scale": {
-        "state": "not-collected",
-        "value": null
-      },
-      "lifecycle": {
-        "state": "not-collected",
-        "value": null
-      },
-      "personalContribution": {
-        "state": "not-collected",
-        "value": null
-      },
-      "prominence": {
-        "state": "not-collected",
-        "value": null
-      },
-      "productionScore": null
-    },
-    {
-      "identity": {
         "repositoryKey": "nekomario28/interactive-project-map",
         "graphNodeId": "repository:interactive-project-map",
         "owner": "nekomario28",
@@ -4962,7 +4962,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-04T07:21:49.424Z"
+        "observedAt": "2026-10-04T10:43:46.724Z"
       },
       "quality": {
         "state": "partial",
@@ -5243,7 +5243,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-04T07:21:49.424Z"
+        "observedAt": "2026-10-04T10:43:46.724Z"
       },
       "quality": {
         "state": "not-collected",
@@ -5431,7 +5431,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-04T07:21:49.424Z"
+        "observedAt": "2026-10-04T10:43:46.724Z"
       },
       "quality": {
         "state": "not-collected",
@@ -5449,15 +5449,15 @@
           "projectSide": {
             "recognition": {
               "state": "observed",
-              "raw": 14136,
-              "transformed": 9.556550752867032,
+              "raw": 14143,
+              "transformed": 9.557045784877424,
               "source": "stars",
               "directQualityEffect": false
             },
             "reuseDerivativeInterest": {
               "state": "observed",
-              "raw": 1411,
-              "transformed": 7.252762418053187,
+              "raw": 1412,
+              "transformed": 7.253470382684528,
               "source": "forks",
               "interpretation": "reuse-derivative-interest",
               "independentAdopterCount": null,
