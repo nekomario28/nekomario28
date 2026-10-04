@@ -4,11 +4,11 @@
   "status": "experimental-non-default",
   "source": {
     "graphOwner": "nekomario28",
-    "graphGeneratedAt": "2026-10-04T10:43:46.724Z",
+    "graphGeneratedAt": "2026-10-04T17:49:04.109Z",
     "assessment": {
       "contractId": "ipm-repository-assessment-artifact-v1",
       "owner": "nekomario28",
-      "generatedAt": "2026-10-04T10:43:46.724Z",
+      "generatedAt": "2026-10-04T17:49:04.109Z",
       "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
       "assessmentPolicyId": "ipm-repository-assessment-v1"
     }
@@ -3125,6 +3125,58 @@
       }
     },
     {
+      "graphNodeId": "repository:ruff",
+      "repositoryKey": "nekomario28/ruff",
+      "label": "ruff",
+      "graphRelation": null,
+      "context": {
+        "category": {
+          "state": "observed",
+          "id": "developer-tools"
+        },
+        "artifacts": {
+          "state": "observed",
+          "values": [
+            "tool"
+          ]
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "owned",
+          "collaboration": "unknown",
+          "lineage": "fork"
+        }
+      },
+      "qualitySectionState": "not-collected",
+      "qualityAttributionScope": null,
+      "overlayState": "unavailable",
+      "unavailableReason": "not-collected",
+      "overlay": null,
+      "views": {
+        "detail": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        },
+        "compact": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        }
+      },
+      "visualPolicy": {
+        "repositoryCore": "inherit-structure-renderer",
+        "placementEffect": "none",
+        "nodeSizeEffect": "none",
+        "labelPriorityEffect": "none",
+        "impactHaloEffect": "none"
+      }
+    },
+    {
       "graphNodeId": "repository:ProjExD_Group10",
       "repositoryKey": "nekomario28/projexd_group10",
       "label": "ProjExD_Group10",
@@ -3992,11 +4044,11 @@
     }
   ],
   "diagnostics": {
-    "graphRepositories": 19,
-    "assessmentRepositories": 19,
-    "joinedRepositories": 19,
+    "graphRepositories": 20,
+    "assessmentRepositories": 20,
+    "joinedRepositories": 20,
     "available": 9,
-    "unavailable": 10,
+    "unavailable": 11,
     "missingAssessmentGraphNodeIds": [],
     "orphanAssessmentGraphNodeIds": [],
     "strictJoin": true
