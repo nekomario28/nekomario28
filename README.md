@@ -17,7 +17,7 @@
 
 <br>
 
-<h2 align="center">プロジェクト</h2>
+<h2 align="center">Projects Click below↓</h2>
 
 <p align="center">
   <a href="https://nekomario28.github.io/interactive-project-map/u/?username=nekomario28&style=galaxy-systems">
