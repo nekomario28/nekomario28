@@ -1,8 +1,8 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-04T10:43:46.724Z",
-  "repositoryCount": 17,
-  "groupCount": 7,
+  "generatedAt": "2026-10-04T17:49:04.109Z",
+  "repositoryCount": 18,
+  "groupCount": 8,
   "nodes": [
     {
       "id": "user:nekomario28",
@@ -1240,6 +1240,78 @@
       }
     },
     {
+      "id": "group:developer-tools",
+      "label": "Developer Tools",
+      "type": "group",
+      "repositoryCount": 1
+    },
+    {
+      "id": "repository:ruff",
+      "label": "ruff",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/ruff",
+      "description": "An extremely fast Python linter and code formatter, written in Rust.",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-04T14:10:38Z",
+      "updatedAt": "2026-10-04T14:10:38Z",
+      "groupId": "developer-tools",
+      "groupLabel": "Developer Tools",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [
+          "next"
+        ],
+        "confidence": 1,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "dependency",
+            "value": "next",
+            "weight": 0.9
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "fastapi",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "developer-tools",
+        "categoryLabel": "Developer Tools",
+        "secondaryTags": [
+          "artifact:tool",
+          "platform:web",
+          "platform:cli",
+          "platform:api"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "developer-tools",
+            "source": "description",
+            "value": "P1 exact taxonomy category developer-tools",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
       "id": "group:game-development",
       "label": "Game Development",
       "type": "group",
@@ -1415,12 +1487,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14143,
-      "forks": 1412,
+      "stars": 14160,
+      "forks": 1413,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-04T10:33:52Z",
+      "updatedAt": "2026-10-04T17:37:15Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -1550,6 +1622,16 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "group:developer-tools",
+      "type": "ownership"
+    },
+    {
+      "source": "group:developer-tools",
+      "target": "repository:ruff",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "group:game-development",
       "type": "ownership"
     },
@@ -1582,7 +1664,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "c43876a2dc622b440c7c6bb11b904e5f050aef60fcb7305fa9beb142791aeff3",
+    "corpusFingerprint": "b1dd43e32dfb8588c358a88b842207fac585640c0859cc6b25b322394f5d7f96",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -1668,6 +1750,11 @@
         "repoId": 1377492522,
         "name": "cline-desktop-linux",
         "contentHash": "34a9c726dbeea38bea0a78bd3c1be7ae59e5e783a3f83525ece849803c365443"
+      },
+      {
+        "repoId": 1404489164,
+        "name": "ruff",
+        "contentHash": "e49962e709b240b50e1155ee6b3f9927d720a10e1e2975d9c193ebbd0a500acd"
       }
     ],
     "categories": [
@@ -1904,13 +1991,13 @@
   "contributedRepositoryCount": 2,
   "externalContributions": {
     "window": {
-      "from": "2025-10-04T10:43:48.149Z",
-      "to": "2026-10-04T10:43:48.149Z"
+      "from": "2025-10-04T17:49:05.692Z",
+      "to": "2026-10-04T17:49:05.692Z"
     },
     "cap": 9,
-    "candidateRepositories": 9,
+    "candidateRepositories": 10,
     "includedRepositories": 2,
-    "omittedRepositories": 7,
+    "omittedRepositories": 8,
     "truncatedRepositories": 0
   }
 }
