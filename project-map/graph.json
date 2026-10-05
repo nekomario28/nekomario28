@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-05T07:40:12.198Z",
+  "generatedAt": "2026-10-05T21:13:37.061Z",
   "repositoryCount": 18,
   "groupCount": 8,
   "nodes": [
@@ -539,6 +539,191 @@
       }
     },
     {
+      "id": "group:applications-services",
+      "label": "Applications & Services",
+      "type": "group",
+      "repositoryCount": 3
+    },
+    {
+      "id": "repository:cline-desktop-linux",
+      "label": "cline-desktop-linux",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/cline-desktop-linux",
+      "description": "",
+      "language": "Shell",
+      "topics": [],
+      "stars": 1,
+      "forks": 1,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-09-19T18:28:01Z",
+      "updatedAt": "2026-09-21T10:42:21Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "frontend",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:library",
+          "platform:web",
+          "platform:desktop",
+          "platform:cli",
+          "platform:server"
+        ],
+        "confidence": 0.925,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.925
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:mobile-webcam-bridge",
+      "label": "mobile-webcam-bridge",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/mobile-webcam-bridge",
+      "description": "Use an Android phone as a Linux webcam over USB or Wi-Fi",
+      "language": "C++",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-09-17T14:36:33Z",
+      "updatedAt": "2026-10-05T16:39:53Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.564,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:application",
+          "platform:web",
+          "platform:desktop",
+          "platform:mobile"
+        ],
+        "confidence": 0.908,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.908
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:wiki",
+      "label": "wiki",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/wiki",
+      "description": "Wiki for CachyOS",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-08-25T10:31:18Z",
+      "updatedAt": "2026-08-25T10:31:18Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "web",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "website",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:application",
+          "platform:web"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
       "id": "group:robotics-automation",
       "label": "Robotics & Automation",
       "type": "group",
@@ -846,304 +1031,6 @@
       }
     },
     {
-      "id": "group:applications-services",
-      "label": "Applications & Services",
-      "type": "group",
-      "repositoryCount": 2
-    },
-    {
-      "id": "repository:cline-desktop-linux",
-      "label": "cline-desktop-linux",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/cline-desktop-linux",
-      "description": "",
-      "language": "Shell",
-      "topics": [],
-      "stars": 1,
-      "forks": 1,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2026-09-19T18:28:01Z",
-      "updatedAt": "2026-09-21T10:42:21Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "app",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "frontend",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "next",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:library",
-          "platform:web",
-          "platform:desktop",
-          "platform:cli",
-          "platform:server"
-        ],
-        "confidence": 0.925,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.925
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:wiki",
-      "label": "wiki",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/wiki",
-      "description": "Wiki for CachyOS",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-08-25T10:31:18Z",
-      "updatedAt": "2026-08-25T10:31:18Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "next",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "web",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "website",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:application",
-          "platform:web"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
-      "id": "group:hardware-embedded",
-      "label": "Hardware & Embedded",
-      "type": "group",
-      "repositoryCount": 2
-    },
-    {
-      "id": "repository:mobile-webcam-bridge",
-      "label": "mobile-webcam-bridge",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/mobile-webcam-bridge",
-      "description": "Use an Android phone as a Linux webcam over USB or Wi-Fi",
-      "language": "C++",
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2026-09-17T14:36:33Z",
-      "updatedAt": "2026-10-04T17:59:27Z",
-      "groupId": "hardware-embedded",
-      "groupLabel": "Hardware & Embedded",
-      "classification": {
-        "categoryId": "hardware",
-        "categoryLabel": "Hardware / Embedded",
-        "secondaryTags": [],
-        "confidence": 0.314,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "hardware",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "app",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "hardware-embedded",
-        "categoryLabel": "Hardware & Embedded",
-        "secondaryTags": [
-          "artifact:application",
-          "topic:device-integration",
-          "platform:web",
-          "platform:desktop",
-          "platform:mobile",
-          "platform:embedded"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "hardware-embedded",
-            "source": "description",
-            "value": "P1 exact taxonomy category hardware-embedded",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:turing-smart-screen-python-owl",
-      "label": "turing-smart-screen-python-owl",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/turing-smart-screen-python-owl",
-      "description": "Unofficial Python system monitor and library for small IPS USB-C displays like Turing Smart Screen / TURZX",
-      "language": "Rich Text Format",
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-07-02T07:38:37Z",
-      "updatedAt": "2026-08-25T16:53:45Z",
-      "groupId": "hardware-embedded",
-      "groupLabel": "Hardware & Embedded",
-      "classification": {
-        "categoryId": "hardware",
-        "categoryLabel": "Hardware / Embedded",
-        "secondaryTags": [],
-        "confidence": 0.969,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "hardware",
-            "source": "description",
-            "value": "usb-c",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "firmware",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "hardware",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "raspberry",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "raspberry-pi",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "sensor",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "serial",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "usb-c",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "app",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "hardware-embedded",
-        "categoryLabel": "Hardware & Embedded",
-        "secondaryTags": [
-          "artifact:library",
-          "topic:device-integration",
-          "platform:embedded"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "hardware-embedded",
-            "source": "description",
-            "value": "P1 exact taxonomy category hardware-embedded",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
       "id": "group:ai-ml",
       "label": "AI & Machine Learning",
       "type": "group",
@@ -1363,6 +1250,111 @@
       }
     },
     {
+      "id": "group:hardware-embedded",
+      "label": "Hardware & Embedded",
+      "type": "group",
+      "repositoryCount": 1
+    },
+    {
+      "id": "repository:turing-smart-screen-python-owl",
+      "label": "turing-smart-screen-python-owl",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/turing-smart-screen-python-owl",
+      "description": "Unofficial Python system monitor and library for small IPS USB-C displays like Turing Smart Screen / TURZX",
+      "language": "Rich Text Format",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-07-02T07:38:37Z",
+      "updatedAt": "2026-08-25T16:53:45Z",
+      "groupId": "hardware-embedded",
+      "groupLabel": "Hardware & Embedded",
+      "classification": {
+        "categoryId": "hardware",
+        "categoryLabel": "Hardware / Embedded",
+        "secondaryTags": [],
+        "confidence": 0.969,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "hardware",
+            "source": "description",
+            "value": "usb-c",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "firmware",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "hardware",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "raspberry",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "raspberry-pi",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "sensor",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "serial",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "usb-c",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "hardware-embedded",
+        "categoryLabel": "Hardware & Embedded",
+        "secondaryTags": [
+          "artifact:library",
+          "topic:device-integration",
+          "platform:embedded"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "hardware-embedded",
+            "source": "description",
+            "value": "P1 exact taxonomy category hardware-embedded",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
       "id": "group:visualization-knowledge",
       "label": "Visualization & Knowledge",
       "type": "group",
@@ -1487,12 +1479,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14187,
+      "stars": 14201,
       "forks": 1420,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-05T07:24:45Z",
+      "updatedAt": "2026-10-05T20:42:07Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -1562,6 +1554,26 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "group:applications-services",
+      "type": "ownership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:cline-desktop-linux",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:mobile-webcam-bridge",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:wiki",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "group:robotics-automation",
       "type": "ownership"
     },
@@ -1578,36 +1590,6 @@
     {
       "source": "group:robotics-automation",
       "target": "repository:ros_gz",
-      "type": "membership"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "group:applications-services",
-      "type": "ownership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:cline-desktop-linux",
-      "type": "membership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:wiki",
-      "type": "membership"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "group:hardware-embedded",
-      "type": "ownership"
-    },
-    {
-      "source": "group:hardware-embedded",
-      "target": "repository:mobile-webcam-bridge",
-      "type": "membership"
-    },
-    {
-      "source": "group:hardware-embedded",
-      "target": "repository:turing-smart-screen-python-owl",
       "type": "membership"
     },
     {
@@ -1642,6 +1624,16 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "group:hardware-embedded",
+      "type": "ownership"
+    },
+    {
+      "source": "group:hardware-embedded",
+      "target": "repository:turing-smart-screen-python-owl",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "group:visualization-knowledge",
       "type": "ownership"
     },
@@ -1664,7 +1656,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "b1dd43e32dfb8588c358a88b842207fac585640c0859cc6b25b322394f5d7f96",
+    "corpusFingerprint": "103f92c3828deb72a66a109257448e14c47a0afdc3810943f863fc961b295c2b",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -1744,7 +1736,7 @@
       {
         "repoId": 1374579782,
         "name": "mobile-webcam-bridge",
-        "contentHash": "6ea62d3a2314a787a618a9fcb7ac187ee5bd2ed3555668038ecbc27e323a8cf1"
+        "contentHash": "6b9cd428f1b5aebdbfbf4a56882a6691fe91ce287685169a506817286088b1ad"
       },
       {
         "repoId": 1377492522,
@@ -1991,8 +1983,8 @@
   "contributedRepositoryCount": 2,
   "externalContributions": {
     "window": {
-      "from": "2025-10-05T07:40:13.797Z",
-      "to": "2026-10-05T07:40:13.797Z"
+      "from": "2025-10-05T21:13:38.623Z",
+      "to": "2026-10-05T21:13:38.623Z"
     },
     "cap": 9,
     "candidateRepositories": 10,
