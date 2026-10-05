@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-04T17:49:04.109Z",
+  "generatedAt": "2026-10-05T07:40:12.198Z",
   "repositoryCount": 18,
   "groupCount": 8,
   "nodes": [
@@ -997,7 +997,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-17T14:36:33Z",
-      "updatedAt": "2026-10-04T10:06:03Z",
+      "updatedAt": "2026-10-04T17:59:27Z",
       "groupId": "hardware-embedded",
       "groupLabel": "Hardware & Embedded",
       "classification": {
@@ -1487,12 +1487,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14160,
-      "forks": 1413,
+      "stars": 14187,
+      "forks": 1420,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-04T17:37:15Z",
+      "updatedAt": "2026-10-05T07:24:45Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -1991,8 +1991,8 @@
   "contributedRepositoryCount": 2,
   "externalContributions": {
     "window": {
-      "from": "2025-10-04T17:49:05.692Z",
-      "to": "2026-10-04T17:49:05.692Z"
+      "from": "2025-10-05T07:40:13.797Z",
+      "to": "2026-10-05T07:40:13.797Z"
     },
     "cap": 9,
     "candidateRepositories": 10,
