@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-06T08:06:15.195Z",
+  "generatedAt": "2026-10-06T19:02:31.227Z",
   "repositoryCount": 18,
   "groupCount": 8,
   "nodes": [
@@ -1427,6 +1427,51 @@
       }
     },
     {
+      "id": "repository:astral-sh/ruff",
+      "label": "astral-sh/ruff",
+      "type": "repository",
+      "relation": "contributed",
+      "repositoryOwner": "astral-sh",
+      "repositoryName": "ruff",
+      "url": "https://github.com/astral-sh/ruff",
+      "description": "An extremely fast Python linter and code formatter, written in Rust.",
+      "language": "Rust",
+      "topics": [
+        "linter",
+        "pep8",
+        "python",
+        "python3",
+        "rust",
+        "rustpython",
+        "static-analysis",
+        "static-code-analysis",
+        "style-guide",
+        "styleguide",
+        "ruff"
+      ],
+      "stars": 49926,
+      "forks": 2478,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2022-08-09T17:17:44Z",
+      "updatedAt": "2026-10-06T18:45:24Z",
+      "contribution": {
+        "commits": 1,
+        "pullRequests": 1,
+        "mergedPullRequests": 1,
+        "commitsTruncated": false,
+        "pullRequestsTruncated": false
+      },
+      "classification": {
+        "categoryId": "uncategorized",
+        "categoryLabel": "Uncategorized",
+        "secondaryTags": [],
+        "confidence": 0,
+        "method": "deterministic",
+        "evidence": []
+      }
+    },
+    {
       "id": "repository:c0c25034/projexd_4",
       "label": "c0c25034/ProjExD_4",
       "type": "repository",
@@ -1479,12 +1524,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14212,
-      "forks": 1423,
+      "stars": 14227,
+      "forks": 1427,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-06T06:35:16Z",
+      "updatedAt": "2026-10-06T18:14:11Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -1641,6 +1686,11 @@
       "source": "group:visualization-knowledge",
       "target": "repository:interactive-project-map",
       "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:astral-sh/ruff",
+      "type": "contribution"
     },
     {
       "source": "user:nekomario28",
@@ -1980,16 +2030,16 @@
     }
   },
   "taxonomyAssignmentVersion": 1,
-  "contributedRepositoryCount": 2,
+  "contributedRepositoryCount": 3,
   "externalContributions": {
     "window": {
-      "from": "2025-10-06T08:06:16.750Z",
-      "to": "2026-10-06T08:06:16.750Z"
+      "from": "2025-10-06T19:02:32.935Z",
+      "to": "2026-10-06T19:02:32.935Z"
     },
     "cap": 9,
     "candidateRepositories": 10,
-    "includedRepositories": 2,
-    "omittedRepositories": 8,
+    "includedRepositories": 3,
+    "omittedRepositories": 7,
     "truncatedRepositories": 0
   }
 }
