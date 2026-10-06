@@ -4,11 +4,11 @@
   "status": "experimental-non-default",
   "source": {
     "graphOwner": "nekomario28",
-    "graphGeneratedAt": "2026-10-06T08:06:15.195Z",
+    "graphGeneratedAt": "2026-10-06T19:02:31.227Z",
     "assessment": {
       "contractId": "ipm-repository-assessment-artifact-v1",
       "owner": "nekomario28",
-      "generatedAt": "2026-10-06T08:06:15.195Z",
+      "generatedAt": "2026-10-06T19:02:31.227Z",
       "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
       "assessmentPolicyId": "ipm-repository-assessment-v1"
     }
@@ -3943,6 +3943,56 @@
       }
     },
     {
+      "graphNodeId": "repository:astral-sh/ruff",
+      "repositoryKey": "astral-sh/ruff",
+      "label": "astral-sh/ruff",
+      "graphRelation": "contributed",
+      "context": {
+        "category": {
+          "state": "unknown",
+          "id": null
+        },
+        "artifacts": {
+          "state": "unknown",
+          "values": []
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "contributed",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "qualitySectionState": "not-collected",
+      "qualityAttributionScope": null,
+      "overlayState": "unavailable",
+      "unavailableReason": "not-collected",
+      "overlay": null,
+      "views": {
+        "detail": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        },
+        "compact": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        }
+      },
+      "visualPolicy": {
+        "repositoryCore": "inherit-structure-renderer",
+        "placementEffect": "none",
+        "nodeSizeEffect": "none",
+        "labelPriorityEffect": "none",
+        "impactHaloEffect": "none"
+      }
+    },
+    {
       "graphNodeId": "repository:c0c25034/projexd_4",
       "repositoryKey": "c0c25034/projexd_4",
       "label": "c0c25034/ProjExD_4",
@@ -4044,11 +4094,11 @@
     }
   ],
   "diagnostics": {
-    "graphRepositories": 20,
-    "assessmentRepositories": 20,
-    "joinedRepositories": 20,
+    "graphRepositories": 21,
+    "assessmentRepositories": 21,
+    "joinedRepositories": 21,
     "available": 9,
-    "unavailable": 11,
+    "unavailable": 12,
     "missingAssessmentGraphNodeIds": [],
     "orphanAssessmentGraphNodeIds": [],
     "strictJoin": true
