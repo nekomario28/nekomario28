@@ -6,7 +6,7 @@
 </defs>
 <rect width="760" height="220" rx="8" fill="#0d1117"/>
 <text x="38" y="24" fill="#f0f6fc" font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="14" font-weight="600">Contributions · last 31 days</text>
-<text x="742" y="24" text-anchor="end" fill="#8b949e" font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11">3498 contributions</text>
+<text x="742" y="24" text-anchor="end" fill="#8b949e" font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11">3500 contributions</text>
 <g font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
 <line x1="38" y1="188.00" x2="742" y2="188.00" stroke="#21262d" stroke-width="1" opacity="0.55"/>
 <text x="30" y="192.00" text-anchor="end" fill="#8b949e" font-size="10">0</text>
@@ -18,8 +18,8 @@
 <text x="30" y="82.50" text-anchor="end" fill="#8b949e" font-size="10">375</text>
 <line x1="38" y1="42.00" x2="742" y2="42.00" stroke="#21262d" stroke-width="1" opacity="0.55"/>
 <text x="30" y="46.00" text-anchor="end" fill="#8b949e" font-size="10">500</text>
-<path d="M 38.00 184.79 L 61.47 185.08 L 84.93 181.58 L 108.40 184.50 L 131.87 187.71 L 155.33 185.96 L 178.80 187.12 L 202.27 185.08 L 225.73 183.33 L 249.20 157.63 L 272.67 164.35 L 296.13 89.01 L 319.60 105.95 L 343.07 154.71 L 366.53 150.92 L 390.00 152.08 L 413.47 99.23 L 436.93 46.67 L 460.40 46.09 L 483.87 79.38 L 507.33 102.44 L 530.80 145.95 L 554.27 184.50 L 577.73 179.24 L 601.20 185.08 L 624.67 188.00 L 648.13 187.71 L 671.60 180.12 L 695.07 180.12 L 718.53 175.74 L 742.00 186.54 L 742.00 188.00 L 38.00 188.00 Z" fill="url(#area)"/>
-<path d="M 38.00 184.79 L 61.47 185.08 L 84.93 181.58 L 108.40 184.50 L 131.87 187.71 L 155.33 185.96 L 178.80 187.12 L 202.27 185.08 L 225.73 183.33 L 249.20 157.63 L 272.67 164.35 L 296.13 89.01 L 319.60 105.95 L 343.07 154.71 L 366.53 150.92 L 390.00 152.08 L 413.47 99.23 L 436.93 46.67 L 460.40 46.09 L 483.87 79.38 L 507.33 102.44 L 530.80 145.95 L 554.27 184.50 L 577.73 179.24 L 601.20 185.08 L 624.67 188.00 L 648.13 187.71 L 671.60 180.12 L 695.07 180.12 L 718.53 175.74 L 742.00 186.54" fill="none" stroke="#58a6ff" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 38.00 184.79 L 61.47 185.08 L 84.93 181.58 L 108.40 184.50 L 131.87 187.71 L 155.33 185.96 L 178.80 187.12 L 202.27 185.08 L 225.73 183.33 L 249.20 157.63 L 272.67 164.35 L 296.13 89.01 L 319.60 105.95 L 343.07 154.71 L 366.53 150.92 L 390.00 152.08 L 413.47 99.23 L 436.93 46.67 L 460.40 46.09 L 483.87 79.38 L 507.33 102.44 L 530.80 145.95 L 554.27 184.50 L 577.73 179.24 L 601.20 185.08 L 624.67 188.00 L 648.13 187.71 L 671.60 180.12 L 695.07 180.12 L 718.53 175.74 L 742.00 185.96 L 742.00 188.00 L 38.00 188.00 Z" fill="url(#area)"/>
+<path d="M 38.00 184.79 L 61.47 185.08 L 84.93 181.58 L 108.40 184.50 L 131.87 187.71 L 155.33 185.96 L 178.80 187.12 L 202.27 185.08 L 225.73 183.33 L 249.20 157.63 L 272.67 164.35 L 296.13 89.01 L 319.60 105.95 L 343.07 154.71 L 366.53 150.92 L 390.00 152.08 L 413.47 99.23 L 436.93 46.67 L 460.40 46.09 L 483.87 79.38 L 507.33 102.44 L 530.80 145.95 L 554.27 184.50 L 577.73 179.24 L 601.20 185.08 L 624.67 188.00 L 648.13 187.71 L 671.60 180.12 L 695.07 180.12 L 718.53 175.74 L 742.00 185.96" fill="none" stroke="#58a6ff" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <circle cx="38.00" cy="184.79" r="2.15" fill="#79c0ff"/>
 <circle cx="61.47" cy="185.08" r="2.15" fill="#79c0ff"/>
 <circle cx="84.93" cy="181.58" r="2.15" fill="#79c0ff"/>
@@ -50,7 +50,7 @@
 <circle cx="671.60" cy="180.12" r="2.15" fill="#79c0ff"/>
 <circle cx="695.07" cy="180.12" r="2.15" fill="#79c0ff"/>
 <circle cx="718.53" cy="175.74" r="2.15" fill="#79c0ff"/>
-<circle cx="742.00" cy="186.54" r="2.15" fill="#79c0ff"/>
+<circle cx="742.00" cy="185.96" r="2.15" fill="#79c0ff"/>
 <text x="38.00" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Sep 7</text>
 <text x="202.27" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Sep 14</text>
 <text x="390.00" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Sep 22</text>
