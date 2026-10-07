@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-06T19:02:31.227Z",
+  "generatedAt": "2026-10-07T07:42:12.875Z",
   "repositoryCount": 18,
   "groupCount": 8,
   "nodes": [
@@ -1373,7 +1373,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-10-04T10:37:10Z",
+      "updatedAt": "2026-10-07T05:56:58Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -1449,12 +1449,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 49926,
-      "forks": 2478,
+      "stars": 49930,
+      "forks": 2479,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-06T18:45:24Z",
+      "updatedAt": "2026-10-07T06:26:18Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -1524,12 +1524,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14227,
+      "stars": 14239,
       "forks": 1427,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-06T18:14:11Z",
+      "updatedAt": "2026-10-07T07:31:45Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -1706,7 +1706,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "103f92c3828deb72a66a109257448e14c47a0afdc3810943f863fc961b295c2b",
+    "corpusFingerprint": "c1eedb5013763a5696c2b8d041ff4e5a687f7d26557a99e0527bfd92e6ca027a",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -1761,7 +1761,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "00d7d3605f2f2fb72afdd1fa1e3efa75a8b407ed3405dca9f3b34e0ce6b839c3"
+        "contentHash": "60a1d6d84af7c4f35f675393ea9d2027edba4874ccff87f6369f0db5fde91da2"
       },
       {
         "repoId": 1340281422,
@@ -2033,8 +2033,8 @@
   "contributedRepositoryCount": 3,
   "externalContributions": {
     "window": {
-      "from": "2025-10-06T19:02:32.935Z",
-      "to": "2026-10-06T19:02:32.935Z"
+      "from": "2025-10-07T07:42:14.138Z",
+      "to": "2026-10-07T07:42:14.138Z"
     },
     "cap": 9,
     "candidateRepositories": 10,
