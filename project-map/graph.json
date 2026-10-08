@@ -1,7 +1,7 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-08T07:58:01.149Z",
-  "repositoryCount": 18,
+  "generatedAt": "2026-10-08T19:25:09.569Z",
+  "repositoryCount": 19,
   "groupCount": 8,
   "nodes": [
     {
@@ -542,7 +542,7 @@
       "id": "group:applications-services",
       "label": "Applications & Services",
       "type": "group",
-      "repositoryCount": 3
+      "repositoryCount": 4
     },
     {
       "id": "repository:cline-desktop-linux",
@@ -555,9 +555,9 @@
       "stars": 1,
       "forks": 1,
       "fork": false,
-      "archived": false,
+      "archived": true,
       "createdAt": "2026-09-19T18:28:01Z",
-      "updatedAt": "2026-09-21T10:42:21Z",
+      "updatedAt": "2026-10-08T16:11:30Z",
       "groupId": "applications-services",
       "groupLabel": "Applications & Services",
       "classification": {
@@ -605,6 +605,94 @@
             "source": "description",
             "value": "P1 exact taxonomy category applications-services",
             "weight": 0.925
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:Strata",
+      "label": "Strata",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/Strata",
+      "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-08T09:57:04Z",
+      "updatedAt": "2026-10-08T09:57:04Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.95,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "readme",
+            "value": "ai",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "description",
+            "value": "hardware",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "description",
+            "value": "api",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "description",
+            "value": "next",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:service",
+          "platform:web",
+          "platform:cli",
+          "platform:server"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
           }
         ]
       }
@@ -1427,6 +1515,108 @@
       }
     },
     {
+      "id": "repository:gazebosim/ros_gz",
+      "label": "gazebosim/ros_gz",
+      "type": "repository",
+      "relation": "contributed",
+      "repositoryOwner": "gazebosim",
+      "repositoryName": "ros_gz",
+      "url": "https://github.com/gazebosim/ros_gz",
+      "description": "Integration between ROS (1 and 2) and Gazebo simulation",
+      "language": "C++",
+      "topics": [
+        "ros",
+        "ignition",
+        "ignition-transport",
+        "ignition-gazebo",
+        "ros2",
+        "robotics",
+        "simulation",
+        "cpp",
+        "transport",
+        "pubsub",
+        "robotics-simulation",
+        "hacktoberfest",
+        "gazebo",
+        "gazebosim"
+      ],
+      "stars": 541,
+      "forks": 235,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2018-08-01T22:42:46Z",
+      "updatedAt": "2026-10-08T09:13:58Z",
+      "contribution": {
+        "commits": 2,
+        "pullRequests": 3,
+        "mergedPullRequests": 2,
+        "commitsTruncated": false,
+        "pullRequestsTruncated": false
+      },
+      "classification": {
+        "categoryId": "robotics",
+        "categoryLabel": "Robotics / ROS 2",
+        "secondaryTags": [
+          "ros",
+          "ros2",
+          "robotics",
+          "gazebo"
+        ],
+        "confidence": 1,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "robotics",
+            "source": "topic",
+            "value": "gazebo",
+            "weight": 1
+          },
+          {
+            "categoryId": "robotics",
+            "source": "topic",
+            "value": "robotics",
+            "weight": 1
+          },
+          {
+            "categoryId": "robotics",
+            "source": "topic",
+            "value": "ros",
+            "weight": 1
+          },
+          {
+            "categoryId": "robotics",
+            "source": "topic",
+            "value": "ros2",
+            "weight": 1
+          },
+          {
+            "categoryId": "robotics",
+            "source": "description",
+            "value": "gazebo",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "description",
+            "value": "ros",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "name",
+            "value": "ros",
+            "weight": 0.5
+          },
+          {
+            "categoryId": "robotics",
+            "source": "name",
+            "value": "ros-gz",
+            "weight": 0.5
+          }
+        ]
+      }
+    },
+    {
       "id": "repository:astral-sh/ruff",
       "label": "astral-sh/ruff",
       "type": "repository",
@@ -1449,12 +1639,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 49932,
-      "forks": 2483,
+      "stars": 49937,
+      "forks": 2485,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-08T04:28:04Z",
+      "updatedAt": "2026-10-08T18:47:56Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -1524,12 +1714,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14265,
-      "forks": 1428,
+      "stars": 14284,
+      "forks": 1429,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-08T07:37:10Z",
+      "updatedAt": "2026-10-08T18:43:37Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -1605,6 +1795,11 @@
     {
       "source": "group:applications-services",
       "target": "repository:cline-desktop-linux",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:Strata",
       "type": "membership"
     },
     {
@@ -1689,6 +1884,11 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "repository:gazebosim/ros_gz",
+      "type": "contribution"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "repository:astral-sh/ruff",
       "type": "contribution"
     },
@@ -1706,7 +1906,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "22c655b003f279807b17b6f2acd7cb10d9f862d160fe1619da82aa5039e48540",
+    "corpusFingerprint": "21dbeafe9d1f23df451a81316b9321140cd23acd372c37ebdd4798569138dee4",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -1797,6 +1997,11 @@
         "repoId": 1404489164,
         "name": "ruff",
         "contentHash": "e49962e709b240b50e1155ee6b3f9927d720a10e1e2975d9c193ebbd0a500acd"
+      },
+      {
+        "repoId": 1410106412,
+        "name": "Strata",
+        "contentHash": "3d8856f87db605d422bbe7ece3938f634152b4684a3c275df9eed003e918dc34"
       }
     ],
     "categories": [
@@ -2030,15 +2235,15 @@
     }
   },
   "taxonomyAssignmentVersion": 1,
-  "contributedRepositoryCount": 3,
+  "contributedRepositoryCount": 4,
   "externalContributions": {
     "window": {
-      "from": "2025-10-08T07:58:02.715Z",
-      "to": "2026-10-08T07:58:02.715Z"
+      "from": "2025-10-08T19:25:11.155Z",
+      "to": "2026-10-08T19:25:11.155Z"
     },
-    "cap": 9,
-    "candidateRepositories": 10,
-    "includedRepositories": 3,
+    "cap": 10,
+    "candidateRepositories": 11,
+    "includedRepositories": 4,
     "omittedRepositories": 7,
     "truncatedRepositories": 0
   }
