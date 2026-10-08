@@ -4,11 +4,11 @@
   "status": "experimental-non-default",
   "source": {
     "graphOwner": "nekomario28",
-    "graphGeneratedAt": "2026-10-08T07:58:01.149Z",
+    "graphGeneratedAt": "2026-10-08T19:25:09.569Z",
     "assessment": {
       "contractId": "ipm-repository-assessment-artifact-v1",
       "owner": "nekomario28",
-      "generatedAt": "2026-10-08T07:58:01.149Z",
+      "generatedAt": "2026-10-08T19:25:09.569Z",
       "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
       "assessmentPolicyId": "ipm-repository-assessment-v1"
     }
@@ -2062,11 +2062,63 @@
             "library"
           ]
         },
-        "lifecycle": "unknown",
+        "lifecycle": "archived",
         "relation": {
           "ownership": "owned",
           "collaboration": "unknown",
           "lineage": "original"
+        }
+      },
+      "qualitySectionState": "not-collected",
+      "qualityAttributionScope": null,
+      "overlayState": "unavailable",
+      "unavailableReason": "not-collected",
+      "overlay": null,
+      "views": {
+        "detail": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        },
+        "compact": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        }
+      },
+      "visualPolicy": {
+        "repositoryCore": "inherit-structure-renderer",
+        "placementEffect": "none",
+        "nodeSizeEffect": "none",
+        "labelPriorityEffect": "none",
+        "impactHaloEffect": "none"
+      }
+    },
+    {
+      "graphNodeId": "repository:Strata",
+      "repositoryKey": "nekomario28/strata",
+      "label": "Strata",
+      "graphRelation": null,
+      "context": {
+        "category": {
+          "state": "observed",
+          "id": "applications-services"
+        },
+        "artifacts": {
+          "state": "observed",
+          "values": [
+            "service"
+          ]
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "owned",
+          "collaboration": "unknown",
+          "lineage": "fork"
         }
       },
       "qualitySectionState": "not-collected",
@@ -3943,6 +3995,56 @@
       }
     },
     {
+      "graphNodeId": "repository:gazebosim/ros_gz",
+      "repositoryKey": "gazebosim/ros_gz",
+      "label": "gazebosim/ros_gz",
+      "graphRelation": "contributed",
+      "context": {
+        "category": {
+          "state": "unknown",
+          "id": null
+        },
+        "artifacts": {
+          "state": "unknown",
+          "values": []
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "contributed",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "qualitySectionState": "not-collected",
+      "qualityAttributionScope": null,
+      "overlayState": "unavailable",
+      "unavailableReason": "not-collected",
+      "overlay": null,
+      "views": {
+        "detail": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        },
+        "compact": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        }
+      },
+      "visualPolicy": {
+        "repositoryCore": "inherit-structure-renderer",
+        "placementEffect": "none",
+        "nodeSizeEffect": "none",
+        "labelPriorityEffect": "none",
+        "impactHaloEffect": "none"
+      }
+    },
+    {
       "graphNodeId": "repository:astral-sh/ruff",
       "repositoryKey": "astral-sh/ruff",
       "label": "astral-sh/ruff",
@@ -4094,11 +4196,11 @@
     }
   ],
   "diagnostics": {
-    "graphRepositories": 21,
-    "assessmentRepositories": 21,
-    "joinedRepositories": 21,
+    "graphRepositories": 23,
+    "assessmentRepositories": 23,
+    "joinedRepositories": 23,
     "available": 9,
-    "unavailable": 12,
+    "unavailable": 14,
     "missingAssessmentGraphNodeIds": [],
     "orphanAssessmentGraphNodeIds": [],
     "strictJoin": true
