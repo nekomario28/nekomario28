@@ -1,7 +1,7 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-09T07:59:06.923Z",
-  "repositoryCount": 19,
+  "generatedAt": "2026-10-09T18:59:01.113Z",
+  "repositoryCount": 20,
   "groupCount": 8,
   "nodes": [
     {
@@ -1122,7 +1122,105 @@
       "id": "group:ai-ml",
       "label": "AI & Machine Learning",
       "type": "group",
-      "repositoryCount": 1
+      "repositoryCount": 2
+    },
+    {
+      "id": "repository:ik_llama.cpp",
+      "label": "ik_llama.cpp",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/ik_llama.cpp",
+      "description": "llama.cpp fork with additional SOTA quants and improved performance",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-09T09:19:12Z",
+      "updatedAt": "2026-10-09T09:19:12Z",
+      "groupId": "ai-ml",
+      "groupLabel": "AI & Machine Learning",
+      "classification": {
+        "categoryId": "ai-ml",
+        "categoryLabel": "AI / Machine Learning",
+        "secondaryTags": [
+          "torch",
+          "transformers"
+        ],
+        "confidence": 0.836,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "dependency",
+            "value": "torch",
+            "weight": 0.9
+          },
+          {
+            "categoryId": "ai-ml",
+            "source": "dependency",
+            "value": "transformers",
+            "weight": 0.9
+          },
+          {
+            "categoryId": "ai-ml",
+            "source": "readme",
+            "value": "llm",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "ai-ml",
+            "source": "readme",
+            "value": "vision",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "hardware",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "backend",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "ai-ml",
+        "categoryLabel": "AI & Machine Learning",
+        "secondaryTags": [
+          "artifact:model",
+          "platform:web",
+          "platform:mobile",
+          "platform:cli",
+          "platform:server"
+        ],
+        "confidence": 0.972,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "description",
+            "value": "P1 exact taxonomy category ai-ml",
+            "weight": 0.972
+          }
+        ]
+      }
     },
     {
       "id": "repository:FreeToken",
@@ -1515,6 +1613,39 @@
       }
     },
     {
+      "id": "repository:ikawrakow/ik_llama.cpp",
+      "label": "ikawrakow/ik_llama.cpp",
+      "type": "repository",
+      "relation": "contributed",
+      "repositoryOwner": "ikawrakow",
+      "repositoryName": "ik_llama.cpp",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp",
+      "description": "llama.cpp fork with additional SOTA quants and improved performance",
+      "language": "C++",
+      "topics": [],
+      "stars": 3288,
+      "forks": 483,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2024-06-27T06:01:47Z",
+      "updatedAt": "2026-10-09T15:53:49Z",
+      "contribution": {
+        "commits": 4,
+        "pullRequests": 6,
+        "mergedPullRequests": 4,
+        "commitsTruncated": false,
+        "pullRequestsTruncated": false
+      },
+      "classification": {
+        "categoryId": "uncategorized",
+        "categoryLabel": "Uncategorized",
+        "secondaryTags": [],
+        "confidence": 0,
+        "method": "deterministic",
+        "evidence": []
+      }
+    },
+    {
       "id": "repository:gazebosim/ros_gz",
       "label": "gazebosim/ros_gz",
       "type": "repository",
@@ -1540,12 +1671,12 @@
         "gazebo",
         "gazebosim"
       ],
-      "stars": 541,
+      "stars": 543,
       "forks": 235,
       "fork": false,
       "archived": false,
       "createdAt": "2018-08-01T22:42:46Z",
-      "updatedAt": "2026-10-08T09:13:58Z",
+      "updatedAt": "2026-10-09T14:10:28Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -1639,12 +1770,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 49943,
-      "forks": 2486,
+      "stars": 49965,
+      "forks": 2492,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-09T07:52:42Z",
+      "updatedAt": "2026-10-09T18:48:34Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -1714,12 +1845,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14299,
-      "forks": 1430,
+      "stars": 14319,
+      "forks": 1432,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-09T07:43:38Z",
+      "updatedAt": "2026-10-09T18:29:45Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -1839,6 +1970,11 @@
     },
     {
       "source": "group:ai-ml",
+      "target": "repository:ik_llama.cpp",
+      "type": "membership"
+    },
+    {
+      "source": "group:ai-ml",
       "target": "repository:FreeToken",
       "type": "membership"
     },
@@ -1884,6 +2020,11 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "repository:ikawrakow/ik_llama.cpp",
+      "type": "contribution"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "repository:gazebosim/ros_gz",
       "type": "contribution"
     },
@@ -1906,7 +2047,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "f81deb7579b3b99e0aa57a303622017585a8e12b102c16983d4e0d4f1429e629",
+    "corpusFingerprint": "9e8530a50aa47ccf56497275b642de21c882403cccd2a9b56dfe9a61918c6b07",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -2002,6 +2143,11 @@
         "repoId": 1410106412,
         "name": "Strata",
         "contentHash": "3d8856f87db605d422bbe7ece3938f634152b4684a3c275df9eed003e918dc34"
+      },
+      {
+        "repoId": 1411589596,
+        "name": "ik_llama.cpp",
+        "contentHash": "293066a2b428a07e3d34d2d3a3d315aa00b2b1f1888d6f0a42d0f04d098a5d8a"
       }
     ],
     "categories": [
@@ -2235,15 +2381,15 @@
     }
   },
   "taxonomyAssignmentVersion": 1,
-  "contributedRepositoryCount": 4,
+  "contributedRepositoryCount": 5,
   "externalContributions": {
     "window": {
-      "from": "2025-10-09T07:59:08.733Z",
-      "to": "2026-10-09T07:59:08.733Z"
+      "from": "2025-10-09T18:59:02.799Z",
+      "to": "2026-10-09T18:59:02.799Z"
     },
     "cap": 10,
-    "candidateRepositories": 11,
-    "includedRepositories": 4,
+    "candidateRepositories": 12,
+    "includedRepositories": 5,
     "omittedRepositories": 7,
     "truncatedRepositories": 0
   }
