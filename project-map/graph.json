@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-10T07:43:39.265Z",
+  "generatedAt": "2026-10-10T17:59:31.870Z",
   "repositoryCount": 22,
   "groupCount": 8,
   "nodes": [
@@ -1709,7 +1709,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-10-09T06:06:28Z",
+      "updatedAt": "2026-10-10T16:01:24Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -1773,12 +1773,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3289,
+      "stars": 3290,
       "forks": 485,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-10T06:32:11Z",
+      "updatedAt": "2026-10-10T14:08:05Z",
       "contribution": {
         "commits": 5,
         "pullRequests": 10,
@@ -1821,12 +1821,12 @@
         "gazebo",
         "gazebosim"
       ],
-      "stars": 543,
+      "stars": 544,
       "forks": 235,
       "fork": false,
       "archived": false,
       "createdAt": "2018-08-01T22:42:46Z",
-      "updatedAt": "2026-10-09T14:10:28Z",
+      "updatedAt": "2026-10-10T11:30:07Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 5,
@@ -1920,12 +1920,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 49974,
-      "forks": 2497,
+      "stars": 49983,
+      "forks": 2496,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-10T07:05:55Z",
+      "updatedAt": "2026-10-10T17:42:36Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 3,
@@ -1976,6 +1976,58 @@
       }
     },
     {
+      "id": "repository:niko1221/strata",
+      "label": "Niko1221/Strata",
+      "type": "repository",
+      "relation": "contributed",
+      "repositoryOwner": "Niko1221",
+      "repositoryName": "Strata",
+      "url": "https://github.com/Niko1221/Strata",
+      "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
+      "language": "C++",
+      "topics": [],
+      "stars": 20504,
+      "forks": 1895,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-09-24T16:40:20Z",
+      "updatedAt": "2026-10-10T17:59:25Z",
+      "contribution": {
+        "commits": 8,
+        "pullRequests": 16,
+        "mergedPullRequests": 0,
+        "commitsTruncated": false,
+        "pullRequestsTruncated": false
+      },
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.653,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "hardware",
+            "source": "description",
+            "value": "hardware",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "description",
+            "value": "api",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "description",
+            "value": "next",
+            "weight": 0.7
+          }
+        ]
+      }
+    },
+    {
       "id": "repository:flashml-org/freetoken",
       "label": "FlashML-org/FreeToken",
       "type": "repository",
@@ -1995,12 +2047,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14336,
-      "forks": 1434,
+      "stars": 14354,
+      "forks": 1435,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-10T07:39:50Z",
+      "updatedAt": "2026-10-10T17:51:15Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2200,6 +2252,11 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "repository:niko1221/strata",
+      "type": "contribution"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "repository:flashml-org/freetoken",
       "type": "contribution"
     }
@@ -2207,7 +2264,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "bf438ce38eded4029f7791d66af278d87c2dc7a74304dd65f5ea0044a4019033",
+    "corpusFingerprint": "9564f8b84ff0ba3a5483edcfa04699d90158c70ee48a0151fc22f1868e966152",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -2262,7 +2319,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "948e3c7da6fdf204f25a42d7b6916e0e39796425d7c37e55c4e22c90a39c8484"
+        "contentHash": "a6a3cdbee3bb7737869fc9e30ae1d2cc1d302a7fb1b57d0ffa72207b55f03a85"
       },
       {
         "repoId": 1340281422,
@@ -2551,16 +2608,16 @@
     }
   },
   "taxonomyAssignmentVersion": 1,
-  "contributedRepositoryCount": 5,
+  "contributedRepositoryCount": 6,
   "externalContributions": {
     "window": {
-      "from": "2025-10-10T07:43:41.750Z",
-      "to": "2026-10-10T07:43:41.750Z"
+      "from": "2025-10-10T17:59:34.359Z",
+      "to": "2026-10-10T17:59:34.359Z"
     },
     "cap": 11,
     "candidateRepositories": 14,
-    "includedRepositories": 5,
-    "omittedRepositories": 9,
+    "includedRepositories": 6,
+    "omittedRepositories": 8,
     "truncatedRepositories": 0
   }
 }
