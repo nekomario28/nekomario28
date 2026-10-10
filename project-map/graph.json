@@ -1,7 +1,7 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-09T18:59:01.113Z",
-  "repositoryCount": 20,
+  "generatedAt": "2026-10-10T07:43:39.265Z",
+  "repositoryCount": 22,
   "groupCount": 8,
   "nodes": [
     {
@@ -542,7 +542,7 @@
       "id": "group:applications-services",
       "label": "Applications & Services",
       "type": "group",
-      "repositoryCount": 4
+      "repositoryCount": 5
     },
     {
       "id": "repository:cline-desktop-linux",
@@ -605,6 +605,69 @@
             "source": "description",
             "value": "P1 exact taxonomy category applications-services",
             "weight": 0.925
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:jj",
+      "label": "jj",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/jj",
+      "description": "A Git-compatible VCS that is both simple and powerful",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-10T05:12:36Z",
+      "updatedAt": "2026-10-10T05:12:36Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.653,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "coursework",
+            "source": "readme",
+            "value": "tutorial",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "backend",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "website",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:library",
+          "platform:web",
+          "platform:mobile"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
           }
         ]
       }
@@ -815,7 +878,7 @@
       "id": "group:robotics-automation",
       "label": "Robotics & Automation",
       "type": "group",
-      "repositoryCount": 3
+      "repositoryCount": 4
     },
     {
       "id": "repository:lime_tidyup",
@@ -914,6 +977,93 @@
             "source": "description",
             "value": "P1 exact taxonomy category robotics-automation",
             "weight": 0.96
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:microduck",
+      "label": "microduck",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/microduck",
+      "description": "A Tiny biped duck robot 🦆",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-10T04:29:12Z",
+      "updatedAt": "2026-10-10T04:29:12Z",
+      "groupId": "robotics-automation",
+      "groupLabel": "Robotics & Automation",
+      "classification": {
+        "categoryId": "robotics",
+        "categoryLabel": "Robotics / ROS 2",
+        "secondaryTags": [],
+        "confidence": 0.833,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "coursework",
+            "source": "readme",
+            "value": "learning",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "sensor",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "description",
+            "value": "robot",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "mujoco",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "robot",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "robotics-automation",
+        "categoryLabel": "Robotics & Automation",
+        "secondaryTags": [
+          "artifact:framework",
+          "ecosystem:ros2",
+          "platform:mobile"
+        ],
+        "confidence": 0.962,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "robotics-automation",
+            "source": "description",
+            "value": "P1 exact taxonomy category robotics-automation",
+            "weight": 0.962
           }
         ]
       }
@@ -1623,16 +1773,16 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3288,
-      "forks": 483,
+      "stars": 3289,
+      "forks": 485,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-09T15:53:49Z",
+      "updatedAt": "2026-10-10T06:32:11Z",
       "contribution": {
-        "commits": 4,
-        "pullRequests": 6,
-        "mergedPullRequests": 4,
+        "commits": 5,
+        "pullRequests": 10,
+        "mergedPullRequests": 5,
         "commitsTruncated": false,
         "pullRequestsTruncated": false
       },
@@ -1679,7 +1829,7 @@
       "updatedAt": "2026-10-09T14:10:28Z",
       "contribution": {
         "commits": 2,
-        "pullRequests": 3,
+        "pullRequests": 5,
         "mergedPullRequests": 2,
         "commitsTruncated": false,
         "pullRequestsTruncated": false
@@ -1770,15 +1920,15 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 49965,
-      "forks": 2492,
+      "stars": 49974,
+      "forks": 2497,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-09T18:48:34Z",
+      "updatedAt": "2026-10-10T07:05:55Z",
       "contribution": {
         "commits": 1,
-        "pullRequests": 1,
+        "pullRequests": 3,
         "mergedPullRequests": 1,
         "commitsTruncated": false,
         "pullRequestsTruncated": false
@@ -1845,12 +1995,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14319,
-      "forks": 1432,
+      "stars": 14336,
+      "forks": 1434,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-09T18:29:45Z",
+      "updatedAt": "2026-10-10T07:39:50Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -1930,6 +2080,11 @@
     },
     {
       "source": "group:applications-services",
+      "target": "repository:jj",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
       "target": "repository:Strata",
       "type": "membership"
     },
@@ -1951,6 +2106,11 @@
     {
       "source": "group:robotics-automation",
       "target": "repository:lime_tidyup",
+      "type": "membership"
+    },
+    {
+      "source": "group:robotics-automation",
+      "target": "repository:microduck",
       "type": "membership"
     },
     {
@@ -2047,7 +2207,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "9e8530a50aa47ccf56497275b642de21c882403cccd2a9b56dfe9a61918c6b07",
+    "corpusFingerprint": "bf438ce38eded4029f7791d66af278d87c2dc7a74304dd65f5ea0044a4019033",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -2148,6 +2308,16 @@
         "repoId": 1411589596,
         "name": "ik_llama.cpp",
         "contentHash": "293066a2b428a07e3d34d2d3a3d315aa00b2b1f1888d6f0a42d0f04d098a5d8a"
+      },
+      {
+        "repoId": 1412749545,
+        "name": "microduck",
+        "contentHash": "69b05681b1aeb8a6d0dd9c6787c2f13bce221ceab7707f8c38ecbe0ccf4d6c5a"
+      },
+      {
+        "repoId": 1412782385,
+        "name": "jj",
+        "contentHash": "4527a45e81d4be78c6d9f5ae00e5b897f7f458f757c20c154f21a5f188eb0953"
       }
     ],
     "categories": [
@@ -2384,13 +2554,13 @@
   "contributedRepositoryCount": 5,
   "externalContributions": {
     "window": {
-      "from": "2025-10-09T18:59:02.799Z",
-      "to": "2026-10-09T18:59:02.799Z"
+      "from": "2025-10-10T07:43:41.750Z",
+      "to": "2026-10-10T07:43:41.750Z"
     },
-    "cap": 10,
-    "candidateRepositories": 12,
+    "cap": 11,
+    "candidateRepositories": 14,
     "includedRepositories": 5,
-    "omittedRepositories": 7,
+    "omittedRepositories": 9,
     "truncatedRepositories": 0
   }
 }
