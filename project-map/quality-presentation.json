@@ -4,11 +4,11 @@
   "status": "experimental-non-default",
   "source": {
     "graphOwner": "nekomario28",
-    "graphGeneratedAt": "2026-10-10T07:43:39.265Z",
+    "graphGeneratedAt": "2026-10-10T17:59:31.870Z",
     "assessment": {
       "contractId": "ipm-repository-assessment-artifact-v1",
       "owner": "nekomario28",
-      "generatedAt": "2026-10-10T07:43:39.265Z",
+      "generatedAt": "2026-10-10T17:59:31.870Z",
       "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
       "assessmentPolicyId": "ipm-repository-assessment-v1"
     }
@@ -4351,6 +4351,56 @@
       }
     },
     {
+      "graphNodeId": "repository:niko1221/strata",
+      "repositoryKey": "niko1221/strata",
+      "label": "Niko1221/Strata",
+      "graphRelation": "contributed",
+      "context": {
+        "category": {
+          "state": "unknown",
+          "id": null
+        },
+        "artifacts": {
+          "state": "unknown",
+          "values": []
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "contributed",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "qualitySectionState": "not-collected",
+      "qualityAttributionScope": null,
+      "overlayState": "unavailable",
+      "unavailableReason": "not-collected",
+      "overlay": null,
+      "views": {
+        "detail": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        },
+        "compact": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        }
+      },
+      "visualPolicy": {
+        "repositoryCore": "inherit-structure-renderer",
+        "placementEffect": "none",
+        "nodeSizeEffect": "none",
+        "labelPriorityEffect": "none",
+        "impactHaloEffect": "none"
+      }
+    },
+    {
       "graphNodeId": "repository:flashml-org/freetoken",
       "repositoryKey": "flashml-org/freetoken",
       "label": "FlashML-org/FreeToken",
@@ -4402,11 +4452,11 @@
     }
   ],
   "diagnostics": {
-    "graphRepositories": 27,
-    "assessmentRepositories": 27,
-    "joinedRepositories": 27,
+    "graphRepositories": 28,
+    "assessmentRepositories": 28,
+    "joinedRepositories": 28,
     "available": 9,
-    "unavailable": 18,
+    "unavailable": 19,
     "missingAssessmentGraphNodeIds": [],
     "orphanAssessmentGraphNodeIds": [],
     "strictJoin": true
