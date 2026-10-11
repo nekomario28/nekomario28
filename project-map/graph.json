@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-11T07:47:52.422Z",
+  "generatedAt": "2026-10-11T18:26:54.190Z",
   "repositoryCount": 23,
   "groupCount": 8,
   "nodes": [
@@ -557,7 +557,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-17T14:36:33Z",
-      "updatedAt": "2026-10-11T00:25:50Z",
+      "updatedAt": "2026-10-11T14:18:52Z",
       "groupId": "applications-services",
       "groupLabel": "Applications & Services",
       "classification": {
@@ -1761,7 +1761,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-10-11T04:11:27Z",
+      "updatedAt": "2026-10-11T18:02:46Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -1825,12 +1825,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3292,
+      "stars": 3293,
       "forks": 485,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-11T07:38:10Z",
+      "updatedAt": "2026-10-11T10:56:25Z",
       "contribution": {
         "commits": 5,
         "pullRequests": 10,
@@ -1972,12 +1972,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 49990,
+      "stars": 50000,
       "forks": 2497,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-11T07:06:37Z",
+      "updatedAt": "2026-10-11T17:44:16Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 3,
@@ -2038,12 +2038,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 20975,
-      "forks": 1964,
+      "stars": 21436,
+      "forks": 2015,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-11T07:47:42Z",
+      "updatedAt": "2026-10-11T18:25:48Z",
       "contribution": {
         "commits": 8,
         "pullRequests": 16,
@@ -2099,12 +2099,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14376,
+      "stars": 14396,
       "forks": 1435,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-11T07:36:10Z",
+      "updatedAt": "2026-10-11T18:02:09Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2673,8 +2673,8 @@
   "contributedRepositoryCount": 6,
   "externalContributions": {
     "window": {
-      "from": "2025-10-11T07:47:53.956Z",
-      "to": "2026-10-11T07:47:53.956Z"
+      "from": "2025-10-11T18:26:56.803Z",
+      "to": "2026-10-11T18:26:56.803Z"
     },
     "cap": 12,
     "candidateRepositories": 14,
