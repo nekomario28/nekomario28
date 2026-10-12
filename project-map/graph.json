@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-11T18:26:54.190Z",
+  "generatedAt": "2026-10-12T07:57:19.664Z",
   "repositoryCount": 23,
   "groupCount": 8,
   "nodes": [
@@ -1761,7 +1761,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-10-11T18:02:46Z",
+      "updatedAt": "2026-10-12T05:54:39Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -1830,11 +1830,11 @@
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-11T10:56:25Z",
+      "updatedAt": "2026-10-12T07:23:13Z",
       "contribution": {
-        "commits": 5,
+        "commits": 8,
         "pullRequests": 10,
-        "mergedPullRequests": 5,
+        "mergedPullRequests": 8,
         "commitsTruncated": false,
         "pullRequestsTruncated": false
       },
@@ -1972,12 +1972,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50000,
-      "forks": 2497,
+      "stars": 50005,
+      "forks": 2496,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-11T17:44:16Z",
+      "updatedAt": "2026-10-12T07:39:29Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 3,
@@ -2028,6 +2028,73 @@
       }
     },
     {
+      "id": "repository:souta-lab/minecraft-jev-agent",
+      "label": "souta-lab/minecraft-jev-agent",
+      "type": "repository",
+      "relation": "contributed",
+      "repositoryOwner": "souta-lab",
+      "repositoryName": "minecraft-jev-agent",
+      "url": "https://github.com/souta-lab/minecraft-jev-agent",
+      "description": "Embodied Minecraft Java agent: a Typed Decision Plane (Jev / Liquid d1) chooses among grounded transitions, a V4.1.2 kernel owns authority, leases and VERIFY, and Mineflayer is the motor layer. Bun-only.",
+      "language": "TypeScript",
+      "topics": [
+        "ai-agent",
+        "autonomy",
+        "bun",
+        "llm",
+        "minecraft",
+        "mineflayer"
+      ],
+      "stars": 1,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-09-17T15:18:46Z",
+      "updatedAt": "2026-10-12T07:29:56Z",
+      "contribution": {
+        "commits": 18,
+        "pullRequests": 3,
+        "mergedPullRequests": 0,
+        "commitsTruncated": false,
+        "pullRequestsTruncated": false
+      },
+      "classification": {
+        "categoryId": "minecraft",
+        "categoryLabel": "Minecraft Modding",
+        "secondaryTags": [
+          "minecraft"
+        ],
+        "confidence": 0.886,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "topic",
+            "value": "llm",
+            "weight": 1
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "topic",
+            "value": "minecraft",
+            "weight": 1
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "description",
+            "value": "minecraft",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "minecraft",
+            "source": "name",
+            "value": "minecraft",
+            "weight": 0.5
+          }
+        ]
+      }
+    },
+    {
       "id": "repository:niko1221/strata",
       "label": "Niko1221/Strata",
       "type": "repository",
@@ -2038,12 +2105,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 21436,
-      "forks": 2015,
+      "stars": 22018,
+      "forks": 2108,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-11T18:25:48Z",
+      "updatedAt": "2026-10-12T07:56:04Z",
       "contribution": {
         "commits": 8,
         "pullRequests": 16,
@@ -2099,12 +2166,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14396,
-      "forks": 1435,
+      "stars": 14410,
+      "forks": 1437,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-11T18:02:09Z",
+      "updatedAt": "2026-10-12T07:52:55Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2309,6 +2376,11 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "repository:souta-lab/minecraft-jev-agent",
+      "type": "contribution"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "repository:niko1221/strata",
       "type": "contribution"
     },
@@ -2321,7 +2393,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "f1ced120a4efe2127f70399a2b05eb1066420063563edaddce15884069a8daf7",
+    "corpusFingerprint": "cf4762b3036efec7007b9c62b106c542cdf8a9d4f1eeb887c22b653c6c06f7b7",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -2376,7 +2448,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "8cbb1298045cb4e3038ffd0f1d8b9aeeecfc0afca66c6df80c8dc49b0fb98517"
+        "contentHash": "12e52c1b96459ed64e2dfcb9c4e8c0394239925465c9cab8abf59981773a174f"
       },
       {
         "repoId": 1340281422,
@@ -2670,15 +2742,15 @@
     }
   },
   "taxonomyAssignmentVersion": 1,
-  "contributedRepositoryCount": 6,
+  "contributedRepositoryCount": 7,
   "externalContributions": {
     "window": {
-      "from": "2025-10-11T18:26:56.803Z",
-      "to": "2026-10-11T18:26:56.803Z"
+      "from": "2025-10-12T07:57:21.888Z",
+      "to": "2026-10-12T07:57:21.888Z"
     },
     "cap": 12,
-    "candidateRepositories": 14,
-    "includedRepositories": 6,
+    "candidateRepositories": 15,
+    "includedRepositories": 7,
     "omittedRepositories": 8,
     "truncatedRepositories": 0
   }
