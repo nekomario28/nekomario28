@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-12T07:57:19.664Z",
+  "generatedAt": "2026-10-12T21:51:28.937Z",
   "repositoryCount": 23,
   "groupCount": 8,
   "nodes": [
@@ -557,7 +557,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-17T14:36:33Z",
-      "updatedAt": "2026-10-11T14:18:52Z",
+      "updatedAt": "2026-10-12T12:56:18Z",
       "groupId": "applications-services",
       "groupLabel": "Applications & Services",
       "classification": {
@@ -584,14 +584,14 @@
           "platform:desktop",
           "platform:mobile"
         ],
-        "confidence": 0.908,
+        "confidence": 0.9,
         "method": "deterministic",
         "evidence": [
           {
             "categoryId": "applications-services",
             "source": "description",
             "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.908
+            "weight": 0.9
           }
         ]
       }
@@ -1825,12 +1825,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3293,
-      "forks": 485,
+      "stars": 3294,
+      "forks": 486,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-12T07:23:13Z",
+      "updatedAt": "2026-10-12T13:31:33Z",
       "contribution": {
         "commits": 8,
         "pullRequests": 10,
@@ -1873,12 +1873,12 @@
         "gazebo",
         "gazebosim"
       ],
-      "stars": 544,
+      "stars": 545,
       "forks": 235,
       "fork": false,
       "archived": false,
       "createdAt": "2018-08-01T22:42:46Z",
-      "updatedAt": "2026-10-10T11:30:07Z",
+      "updatedAt": "2026-10-12T20:57:13Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 5,
@@ -1972,12 +1972,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50005,
-      "forks": 2496,
+      "stars": 50030,
+      "forks": 2494,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-12T07:39:29Z",
+      "updatedAt": "2026-10-12T21:41:10Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 3,
@@ -2045,12 +2045,12 @@
         "minecraft",
         "mineflayer"
       ],
-      "stars": 1,
+      "stars": 2,
       "forks": 0,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-17T15:18:46Z",
-      "updatedAt": "2026-10-12T07:29:56Z",
+      "updatedAt": "2026-10-12T08:43:10Z",
       "contribution": {
         "commits": 18,
         "pullRequests": 3,
@@ -2105,12 +2105,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 22018,
-      "forks": 2108,
+      "stars": 22647,
+      "forks": 2211,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-12T07:56:04Z",
+      "updatedAt": "2026-10-12T21:50:05Z",
       "contribution": {
         "commits": 8,
         "pullRequests": 16,
@@ -2166,12 +2166,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14410,
-      "forks": 1437,
+      "stars": 14436,
+      "forks": 1443,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-12T07:52:55Z",
+      "updatedAt": "2026-10-12T21:51:26Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2393,7 +2393,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "cf4762b3036efec7007b9c62b106c542cdf8a9d4f1eeb887c22b653c6c06f7b7",
+    "corpusFingerprint": "653c1eaa1e274e2e80ba736611bad52ad18e0ee3b626bd1e58f32c69d29dd7fd",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -2473,7 +2473,7 @@
       {
         "repoId": 1374579782,
         "name": "mobile-webcam-bridge",
-        "contentHash": "6b9cd428f1b5aebdbfbf4a56882a6691fe91ce287685169a506817286088b1ad"
+        "contentHash": "36eb2b89a2b71e69b77123ea013bf275889dd6d4048c50637f8f3aa803600f91"
       },
       {
         "repoId": 1377492522,
@@ -2745,8 +2745,8 @@
   "contributedRepositoryCount": 7,
   "externalContributions": {
     "window": {
-      "from": "2025-10-12T07:57:21.888Z",
-      "to": "2026-10-12T07:57:21.888Z"
+      "from": "2025-10-12T21:51:30.969Z",
+      "to": "2026-10-12T21:51:30.969Z"
     },
     "cap": 12,
     "candidateRepositories": 15,
