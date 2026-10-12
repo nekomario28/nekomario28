@@ -4,11 +4,11 @@
   "status": "experimental-non-default",
   "source": {
     "graphOwner": "nekomario28",
-    "graphGeneratedAt": "2026-10-11T18:26:54.190Z",
+    "graphGeneratedAt": "2026-10-12T07:57:19.664Z",
     "assessment": {
       "contractId": "ipm-repository-assessment-artifact-v1",
       "owner": "nekomario28",
-      "generatedAt": "2026-10-11T18:26:54.190Z",
+      "generatedAt": "2026-10-12T07:57:19.664Z",
       "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
       "assessmentPolicyId": "ipm-repository-assessment-v1"
     }
@@ -4403,6 +4403,56 @@
       }
     },
     {
+      "graphNodeId": "repository:souta-lab/minecraft-jev-agent",
+      "repositoryKey": "souta-lab/minecraft-jev-agent",
+      "label": "souta-lab/minecraft-jev-agent",
+      "graphRelation": "contributed",
+      "context": {
+        "category": {
+          "state": "unknown",
+          "id": null
+        },
+        "artifacts": {
+          "state": "unknown",
+          "values": []
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "contributed",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "qualitySectionState": "not-collected",
+      "qualityAttributionScope": null,
+      "overlayState": "unavailable",
+      "unavailableReason": "not-collected",
+      "overlay": null,
+      "views": {
+        "detail": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        },
+        "compact": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        }
+      },
+      "visualPolicy": {
+        "repositoryCore": "inherit-structure-renderer",
+        "placementEffect": "none",
+        "nodeSizeEffect": "none",
+        "labelPriorityEffect": "none",
+        "impactHaloEffect": "none"
+      }
+    },
+    {
       "graphNodeId": "repository:niko1221/strata",
       "repositoryKey": "niko1221/strata",
       "label": "Niko1221/Strata",
@@ -4504,11 +4554,11 @@
     }
   ],
   "diagnostics": {
-    "graphRepositories": 29,
-    "assessmentRepositories": 29,
-    "joinedRepositories": 29,
+    "graphRepositories": 30,
+    "assessmentRepositories": 30,
+    "joinedRepositories": 30,
     "available": 9,
-    "unavailable": 20,
+    "unavailable": 21,
     "missingAssessmentGraphNodeIds": [],
     "orphanAssessmentGraphNodeIds": [],
     "strictJoin": true
