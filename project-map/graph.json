@@ -1,8 +1,8 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-13T08:24:40.729Z",
-  "repositoryCount": 23,
-  "groupCount": 8,
+  "generatedAt": "2026-10-13T19:57:10.637Z",
+  "repositoryCount": 27,
+  "groupCount": 9,
   "nodes": [
     {
       "id": "user:nekomario28",
@@ -542,7 +542,7 @@
       "id": "group:applications-services",
       "label": "Applications & Services",
       "type": "group",
-      "repositoryCount": 5
+      "repositoryCount": 6
     },
     {
       "id": "repository:mobile-webcam-bridge",
@@ -657,6 +657,82 @@
             "source": "description",
             "value": "P1 exact taxonomy category applications-services",
             "weight": 0.925
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:try-omarchy",
+      "label": "try-omarchy",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/try-omarchy",
+      "description": "Run Omarchy on MacOS without any setup.",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-13T15:01:27Z",
+      "updatedAt": "2026-10-13T15:01:27Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.838,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "hardware",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "backend",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:framework",
+          "platform:web",
+          "platform:desktop",
+          "platform:cli"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
           }
         ]
       }
@@ -1324,7 +1400,70 @@
       "id": "group:ai-ml",
       "label": "AI & Machine Learning",
       "type": "group",
-      "repositoryCount": 2
+      "repositoryCount": 3
+    },
+    {
+      "id": "repository:omarchy",
+      "label": "omarchy",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/omarchy",
+      "description": "Beautiful, Modern & Opinionated Linux",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-13T13:10:11Z",
+      "updatedAt": "2026-10-13T13:10:11Z",
+      "groupId": "ai-ml",
+      "groupLabel": "AI & Machine Learning",
+      "classification": {
+        "categoryId": "ai-ml",
+        "categoryLabel": "AI / Machine Learning",
+        "secondaryTags": [],
+        "confidence": 0.314,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "readme",
+            "value": "ai",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "hardware",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "web",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "ai-ml",
+        "categoryLabel": "AI & Machine Learning",
+        "secondaryTags": [
+          "artifact:application",
+          "platform:web",
+          "platform:cli"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "description",
+            "value": "P1 exact taxonomy category ai-ml",
+            "weight": 0.9
+          }
+        ]
+      }
     },
     {
       "id": "repository:ik_llama.cpp",
@@ -1515,6 +1654,175 @@
       }
     },
     {
+      "id": "group:hardware-embedded",
+      "label": "Hardware & Embedded",
+      "type": "group",
+      "repositoryCount": 2
+    },
+    {
+      "id": "repository:omarchy-iso",
+      "label": "omarchy-iso",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/omarchy-iso",
+      "description": "",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-13T15:11:08Z",
+      "updatedAt": "2026-10-13T15:11:08Z",
+      "groupId": "hardware-embedded",
+      "groupLabel": "Hardware & Embedded",
+      "classification": {
+        "categoryId": "hardware",
+        "categoryLabel": "Hardware / Embedded",
+        "secondaryTags": [],
+        "confidence": 0.653,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "firmware",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "serial",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "hardware-embedded",
+        "categoryLabel": "Hardware & Embedded",
+        "secondaryTags": [
+          "artifact:firmware",
+          "topic:device-integration",
+          "platform:mobile",
+          "platform:embedded"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "hardware-embedded",
+            "source": "description",
+            "value": "P1 exact taxonomy category hardware-embedded",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:turing-smart-screen-python-owl",
+      "label": "turing-smart-screen-python-owl",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/turing-smart-screen-python-owl",
+      "description": "Unofficial Python system monitor and library for small IPS USB-C displays like Turing Smart Screen / TURZX",
+      "language": "Rich Text Format",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-07-02T07:38:37Z",
+      "updatedAt": "2026-08-25T16:53:45Z",
+      "groupId": "hardware-embedded",
+      "groupLabel": "Hardware & Embedded",
+      "classification": {
+        "categoryId": "hardware",
+        "categoryLabel": "Hardware / Embedded",
+        "secondaryTags": [],
+        "confidence": 0.969,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "hardware",
+            "source": "description",
+            "value": "usb-c",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "firmware",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "hardware",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "raspberry",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "raspberry-pi",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "sensor",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "serial",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "usb-c",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "hardware-embedded",
+        "categoryLabel": "Hardware & Embedded",
+        "secondaryTags": [
+          "artifact:library",
+          "topic:device-integration",
+          "platform:embedded"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "hardware-embedded",
+            "source": "description",
+            "value": "P1 exact taxonomy category hardware-embedded",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
       "id": "group:developer-tools",
       "label": "Developer Tools",
       "type": "group",
@@ -1638,108 +1946,34 @@
       }
     },
     {
-      "id": "group:hardware-embedded",
-      "label": "Hardware & Embedded",
+      "id": "group:uncategorized",
+      "label": "Uncategorized",
       "type": "group",
       "repositoryCount": 1
     },
     {
-      "id": "repository:turing-smart-screen-python-owl",
-      "label": "turing-smart-screen-python-owl",
+      "id": "repository:gxkit",
+      "label": "gxkit",
       "type": "repository",
-      "url": "https://github.com/nekomario28/turing-smart-screen-python-owl",
-      "description": "Unofficial Python system monitor and library for small IPS USB-C displays like Turing Smart Screen / TURZX",
-      "language": "Rich Text Format",
+      "url": "https://github.com/nekomario28/gxkit",
+      "description": "",
+      "language": "Python",
       "topics": [],
       "stars": 0,
       "forks": 0,
-      "fork": true,
+      "fork": false,
       "archived": false,
-      "createdAt": "2026-07-02T07:38:37Z",
-      "updatedAt": "2026-08-25T16:53:45Z",
-      "groupId": "hardware-embedded",
-      "groupLabel": "Hardware & Embedded",
+      "createdAt": "2026-10-13T13:13:07Z",
+      "updatedAt": "2026-10-13T18:24:58Z",
+      "groupId": "uncategorized",
+      "groupLabel": "Uncategorized",
       "classification": {
-        "categoryId": "hardware",
-        "categoryLabel": "Hardware / Embedded",
+        "categoryId": "uncategorized",
+        "categoryLabel": "Uncategorized",
         "secondaryTags": [],
-        "confidence": 0.969,
+        "confidence": 0,
         "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "hardware",
-            "source": "description",
-            "value": "usb-c",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "firmware",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "hardware",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "raspberry",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "raspberry-pi",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "sensor",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "serial",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "usb-c",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "app",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "hardware-embedded",
-        "categoryLabel": "Hardware & Embedded",
-        "secondaryTags": [
-          "artifact:library",
-          "topic:device-integration",
-          "platform:embedded"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "hardware-embedded",
-            "source": "description",
-            "value": "P1 exact taxonomy category hardware-embedded",
-            "weight": 0.9
-          }
-        ]
+        "evidence": []
       }
     },
     {
@@ -1825,12 +2059,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3295,
-      "forks": 486,
+      "stars": 3298,
+      "forks": 487,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-13T07:36:14Z",
+      "updatedAt": "2026-10-13T19:29:16Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -1873,16 +2107,16 @@
         "gazebo",
         "gazebosim"
       ],
-      "stars": 545,
-      "forks": 235,
+      "stars": 546,
+      "forks": 236,
       "fork": false,
       "archived": false,
       "createdAt": "2018-08-01T22:42:46Z",
-      "updatedAt": "2026-10-12T20:57:13Z",
+      "updatedAt": "2026-10-13T12:20:30Z",
       "contribution": {
-        "commits": 2,
+        "commits": 4,
         "pullRequests": 5,
-        "mergedPullRequests": 2,
+        "mergedPullRequests": 4,
         "commitsTruncated": false,
         "pullRequestsTruncated": false
       },
@@ -1972,16 +2206,16 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50036,
-      "forks": 2495,
+      "stars": 50047,
+      "forks": 2506,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-13T07:36:06Z",
+      "updatedAt": "2026-10-13T19:53:00Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 3,
-        "mergedPullRequests": 1,
+        "mergedPullRequests": 2,
         "commitsTruncated": false,
         "pullRequestsTruncated": false
       },
@@ -2105,12 +2339,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 23128,
-      "forks": 2278,
+      "stars": 23621,
+      "forks": 2342,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-13T08:22:20Z",
+      "updatedAt": "2026-10-13T19:55:12Z",
       "contribution": {
         "commits": 8,
         "pullRequests": 19,
@@ -2166,12 +2400,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14454,
+      "stars": 14473,
       "forks": 1446,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-13T08:24:20Z",
+      "updatedAt": "2026-10-13T19:48:32Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2256,6 +2490,11 @@
     },
     {
       "source": "group:applications-services",
+      "target": "repository:try-omarchy",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
       "target": "repository:jj",
       "type": "membership"
     },
@@ -2306,12 +2545,32 @@
     },
     {
       "source": "group:ai-ml",
+      "target": "repository:omarchy",
+      "type": "membership"
+    },
+    {
+      "source": "group:ai-ml",
       "target": "repository:ik_llama.cpp",
       "type": "membership"
     },
     {
       "source": "group:ai-ml",
       "target": "repository:FreeToken",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "group:hardware-embedded",
+      "type": "ownership"
+    },
+    {
+      "source": "group:hardware-embedded",
+      "target": "repository:omarchy-iso",
+      "type": "membership"
+    },
+    {
+      "source": "group:hardware-embedded",
+      "target": "repository:turing-smart-screen-python-owl",
       "type": "membership"
     },
     {
@@ -2336,12 +2595,12 @@
     },
     {
       "source": "user:nekomario28",
-      "target": "group:hardware-embedded",
+      "target": "group:uncategorized",
       "type": "ownership"
     },
     {
-      "source": "group:hardware-embedded",
-      "target": "repository:turing-smart-screen-python-owl",
+      "source": "group:uncategorized",
+      "target": "repository:gxkit",
       "type": "membership"
     },
     {
@@ -2393,7 +2652,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "5bd7ad00adf1ab2bc11cfcb73cf71156c234b8e3daa5c011d58a121cde05da0c",
+    "corpusFingerprint": "01d82a2728637ef854ac5a9ce5b23a8657dd2542e73692eccd3961ec4f7a4543",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -2509,6 +2768,26 @@
         "repoId": 1413889119,
         "name": "tamap",
         "contentHash": "ca8a26566d785a8c048960743b729db77f02ad0c016c61c50a644686e8984f2e"
+      },
+      {
+        "repoId": 1417081564,
+        "name": "omarchy",
+        "contentHash": "6439b2981ba2752e3150f98cbd8e2b74e3f15ef19f14a71cffdb28729cac93d5"
+      },
+      {
+        "repoId": 1417087344,
+        "name": "gxkit",
+        "contentHash": "5c9ccc1dc83efb5a22347967e9df9aa9a7299748bcb391430a6b4856461b5549"
+      },
+      {
+        "repoId": 1417298110,
+        "name": "try-omarchy",
+        "contentHash": "036226ed067f12a79dcb74d314107fdf232eea502cba5331e5e516544920c154"
+      },
+      {
+        "repoId": 1417317762,
+        "name": "omarchy-iso",
+        "contentHash": "f24bae924377ab33dfd70f3499ea0372a9befb7d9a76d56b98625da6f229cd9d"
       }
     ],
     "categories": [
@@ -2745,13 +3024,13 @@
   "contributedRepositoryCount": 7,
   "externalContributions": {
     "window": {
-      "from": "2025-10-13T08:24:43.291Z",
-      "to": "2026-10-13T08:24:43.291Z"
+      "from": "2025-10-13T19:57:13.865Z",
+      "to": "2026-10-13T19:57:13.865Z"
     },
     "cap": 12,
-    "candidateRepositories": 15,
+    "candidateRepositories": 16,
     "includedRepositories": 7,
-    "omittedRepositories": 8,
+    "omittedRepositories": 9,
     "truncatedRepositories": 0
   }
 }
