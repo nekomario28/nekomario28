@@ -1,7 +1,7 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-14T06:41:00.639Z",
-  "repositoryCount": 28,
+  "generatedAt": "2026-10-14T18:09:43.822Z",
+  "repositoryCount": 29,
   "groupCount": 8,
   "nodes": [
     {
@@ -14,7 +14,7 @@
       "id": "group:applications-services",
       "label": "Applications & Services",
       "type": "group",
-      "repositoryCount": 7
+      "repositoryCount": 8
     },
     {
       "id": "repository:mobile-webcam-bridge",
@@ -29,7 +29,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-17T14:36:33Z",
-      "updatedAt": "2026-10-12T12:56:18Z",
+      "updatedAt": "2026-10-14T09:36:30Z",
       "groupId": "applications-services",
       "groupLabel": "Applications & Services",
       "classification": {
@@ -129,6 +129,101 @@
             "source": "description",
             "value": "P1 exact taxonomy category applications-services",
             "weight": 0.925
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:solidcraft",
+      "label": "solidcraft",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/solidcraft",
+      "description": "SolidCraft: an open-source parametric 3D CAD application built in pure Rust. Desktop, web, and automation through MCP.",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-14T11:20:32Z",
+      "updatedAt": "2026-10-14T11:20:32Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.875,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "readme",
+            "value": "ai",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "raspberry",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "raspberry-pi",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "robot",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "description",
+            "value": "web",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "web",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "web-app",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:service",
+          "platform:web",
+          "platform:desktop",
+          "platform:cli",
+          "platform:server"
+        ],
+        "confidence": 0.904,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.904
           }
         ]
       }
@@ -1479,25 +1574,31 @@
         "static-analysis",
         "testing"
       ],
-      "stars": 0,
+      "stars": 1,
       "forks": 0,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-13T22:33:44Z",
-      "updatedAt": "2026-10-14T06:05:03Z",
+      "updatedAt": "2026-10-14T15:08:50Z",
       "groupId": "ai-ml",
       "groupLabel": "AI & Machine Learning",
       "classification": {
         "categoryId": "ai-ml",
         "categoryLabel": "AI / Machine Learning",
         "secondaryTags": [],
-        "confidence": 0.564,
+        "confidence": 0.314,
         "method": "deterministic",
         "evidence": [
           {
             "categoryId": "ai-ml",
             "source": "readme",
             "value": "ai",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
             "weight": 0.7
           }
         ]
@@ -2147,12 +2248,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3301,
-      "forks": 487,
+      "stars": 3302,
+      "forks": 489,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-14T06:30:04Z",
+      "updatedAt": "2026-10-14T18:09:21Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2294,12 +2395,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50058,
-      "forks": 2507,
+      "stars": 50075,
+      "forks": 2513,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-14T06:16:15Z",
+      "updatedAt": "2026-10-14T18:08:51Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2314,6 +2415,56 @@
         "confidence": 0,
         "method": "deterministic",
         "evidence": []
+      }
+    },
+    {
+      "id": "repository:bherbruck/solidcraft",
+      "label": "bherbruck/solidcraft",
+      "type": "repository",
+      "relation": "contributed",
+      "repositoryOwner": "bherbruck",
+      "repositoryName": "solidcraft",
+      "url": "https://github.com/bherbruck/solidcraft",
+      "description": "SolidCraft: an open-source parametric 3D CAD application built in pure Rust. Desktop, web, and automation through MCP.",
+      "language": "Rust",
+      "topics": [
+        "3d-modeling",
+        "brep",
+        "cad",
+        "egui",
+        "mcp",
+        "parametric-cad",
+        "rust",
+        "step",
+        "wasm"
+      ],
+      "stars": 2244,
+      "forks": 215,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-10-07T18:57:48Z",
+      "updatedAt": "2026-10-14T18:09:44Z",
+      "contribution": {
+        "commits": 0,
+        "pullRequests": 7,
+        "mergedPullRequests": 2,
+        "commitsTruncated": false,
+        "pullRequestsTruncated": false
+      },
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.564,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "description",
+            "value": "web",
+            "weight": 0.7
+          }
+        ]
       }
     },
     {
@@ -2333,6 +2484,51 @@
       "archived": false,
       "createdAt": "2026-06-30T04:24:51Z",
       "updatedAt": "2026-06-30T08:52:44Z",
+      "contribution": {
+        "commits": 1,
+        "pullRequests": 1,
+        "mergedPullRequests": 1,
+        "commitsTruncated": false,
+        "pullRequestsTruncated": false
+      },
+      "classification": {
+        "categoryId": "uncategorized",
+        "categoryLabel": "Uncategorized",
+        "secondaryTags": [],
+        "confidence": 0,
+        "method": "deterministic",
+        "evidence": []
+      }
+    },
+    {
+      "id": "repository:omacom/try-omarchy",
+      "label": "omacom/try-omarchy",
+      "type": "repository",
+      "relation": "contributed",
+      "repositoryOwner": "omacom",
+      "repositoryName": "try-omarchy",
+      "url": "https://github.com/omacom/try-omarchy",
+      "description": "Run Omarchy on MacOS without any setup.",
+      "language": "Swift",
+      "topics": [
+        "apple-silicon",
+        "archlinux",
+        "community",
+        "linux",
+        "macos",
+        "omarchy",
+        "qemu",
+        "virtualization",
+        "aarch64",
+        "arm",
+        "arm64"
+      ],
+      "stars": 2606,
+      "forks": 149,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-08-23T21:55:30Z",
+      "updatedAt": "2026-10-14T18:00:19Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2427,12 +2623,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 23959,
-      "forks": 2399,
+      "stars": 24443,
+      "forks": 2476,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-14T06:40:56Z",
+      "updatedAt": "2026-10-14T18:08:56Z",
       "contribution": {
         "commits": 9,
         "pullRequests": 24,
@@ -2488,12 +2684,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14480,
-      "forks": 1446,
+      "stars": 14489,
+      "forks": 1449,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-14T06:40:38Z",
+      "updatedAt": "2026-10-14T17:31:35Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2534,6 +2730,11 @@
     {
       "source": "group:applications-services",
       "target": "repository:cline-desktop-linux",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:solidcraft",
       "type": "membership"
     },
     {
@@ -2718,7 +2919,17 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "repository:bherbruck/solidcraft",
+      "type": "contribution"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "repository:c0c25034/projexd_4",
+      "type": "contribution"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:omacom/try-omarchy",
       "type": "contribution"
     },
     {
@@ -2740,7 +2951,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "86d3d0d1981f3fa7f1252082128c0b6eba9024c4a9d899bd2aeb4a6890381580",
+    "corpusFingerprint": "c5b0dab48e9879ed35e8ac1923e0e4100a6f396640b6bdca150759896e6fec6f",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -2875,12 +3086,17 @@
       {
         "repoId": 1418091543,
         "name": "gxkit",
-        "contentHash": "17ec4ed282933bc263a41eeb2bb7334e14611f333ff828ddecec3e20bcea4a77"
+        "contentHash": "466113600de5ee714a11d46337d7e51c53429a4b31dade20b5e6436facc12cfa"
       },
       {
         "repoId": 1418340636,
         "name": "omarchy-pkgs",
         "contentHash": "2a75ccd7e004366c00ea2cd2da2b0680b42abbbb90367343aa5864ccda6fd941"
+      },
+      {
+        "repoId": 1418788154,
+        "name": "solidcraft",
+        "contentHash": "759a405851e2ff99988885ad21cde36740b8daa7835b31e8ce8ab7b99066aaa7"
       }
     ],
     "categories": [
@@ -3114,16 +3330,16 @@
     }
   },
   "taxonomyAssignmentVersion": 1,
-  "contributedRepositoryCount": 7,
+  "contributedRepositoryCount": 9,
   "externalContributions": {
     "window": {
-      "from": "2025-10-14T06:41:03.737Z",
-      "to": "2026-10-14T06:41:03.737Z"
+      "from": "2025-10-14T18:09:46.918Z",
+      "to": "2026-10-14T18:09:46.918Z"
     },
     "cap": 12,
-    "candidateRepositories": 19,
-    "includedRepositories": 7,
-    "omittedRepositories": 12,
+    "candidateRepositories": 20,
+    "includedRepositories": 9,
+    "omittedRepositories": 11,
     "truncatedRepositories": 0
   }
 }
