@@ -1,14 +1,483 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-13T19:57:10.637Z",
-  "repositoryCount": 27,
-  "groupCount": 9,
+  "generatedAt": "2026-10-14T06:41:00.639Z",
+  "repositoryCount": 28,
+  "groupCount": 8,
   "nodes": [
     {
       "id": "user:nekomario28",
       "label": "nekomario28",
       "type": "owner",
       "url": "https://github.com/nekomario28"
+    },
+    {
+      "id": "group:applications-services",
+      "label": "Applications & Services",
+      "type": "group",
+      "repositoryCount": 7
+    },
+    {
+      "id": "repository:mobile-webcam-bridge",
+      "label": "mobile-webcam-bridge",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/mobile-webcam-bridge",
+      "description": "Use an Android phone as a Linux webcam over USB or Wi-Fi",
+      "language": "C++",
+      "topics": [],
+      "stars": 1,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-09-17T14:36:33Z",
+      "updatedAt": "2026-10-12T12:56:18Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.564,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:application",
+          "platform:web",
+          "platform:desktop",
+          "platform:mobile"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:cline-desktop-linux",
+      "label": "cline-desktop-linux",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/cline-desktop-linux",
+      "description": "",
+      "language": "Shell",
+      "topics": [],
+      "stars": 1,
+      "forks": 1,
+      "fork": false,
+      "archived": true,
+      "createdAt": "2026-09-19T18:28:01Z",
+      "updatedAt": "2026-10-08T16:11:30Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "frontend",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:library",
+          "platform:web",
+          "platform:desktop",
+          "platform:cli",
+          "platform:server"
+        ],
+        "confidence": 0.925,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.925
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:omarchy-pkgs",
+      "label": "omarchy-pkgs",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/omarchy-pkgs",
+      "description": "",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-14T04:05:23Z",
+      "updatedAt": "2026-10-14T04:05:23Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.778,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:library",
+          "platform:web",
+          "platform:desktop"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:try-omarchy",
+      "label": "try-omarchy",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/try-omarchy",
+      "description": "Run Omarchy on MacOS without any setup.",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-13T15:01:27Z",
+      "updatedAt": "2026-10-13T15:01:27Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.838,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "hardware",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "backend",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:framework",
+          "platform:web",
+          "platform:desktop",
+          "platform:cli"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:jj",
+      "label": "jj",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/jj",
+      "description": "A Git-compatible VCS that is both simple and powerful",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-10T05:12:36Z",
+      "updatedAt": "2026-10-10T05:12:36Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.653,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "coursework",
+            "source": "readme",
+            "value": "tutorial",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "backend",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "website",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:library",
+          "platform:web",
+          "platform:mobile"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:Strata",
+      "label": "Strata",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/Strata",
+      "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-08T09:57:04Z",
+      "updatedAt": "2026-10-08T09:57:04Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.95,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "readme",
+            "value": "ai",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "description",
+            "value": "hardware",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "description",
+            "value": "api",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "description",
+            "value": "next",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:service",
+          "platform:web",
+          "platform:cli",
+          "platform:server"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:wiki",
+      "label": "wiki",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/wiki",
+      "description": "Wiki for CachyOS",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-08-25T10:31:18Z",
+      "updatedAt": "2026-08-25T10:31:18Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "web",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "website",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:application",
+          "platform:web"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
     },
     {
       "id": "group:game-modding",
@@ -539,418 +1008,6 @@
       }
     },
     {
-      "id": "group:applications-services",
-      "label": "Applications & Services",
-      "type": "group",
-      "repositoryCount": 6
-    },
-    {
-      "id": "repository:mobile-webcam-bridge",
-      "label": "mobile-webcam-bridge",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/mobile-webcam-bridge",
-      "description": "Use an Android phone as a Linux webcam over USB or Wi-Fi",
-      "language": "C++",
-      "topics": [],
-      "stars": 1,
-      "forks": 0,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2026-09-17T14:36:33Z",
-      "updatedAt": "2026-10-12T12:56:18Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.564,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "app",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:application",
-          "platform:web",
-          "platform:desktop",
-          "platform:mobile"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:cline-desktop-linux",
-      "label": "cline-desktop-linux",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/cline-desktop-linux",
-      "description": "",
-      "language": "Shell",
-      "topics": [],
-      "stars": 1,
-      "forks": 1,
-      "fork": false,
-      "archived": true,
-      "createdAt": "2026-09-19T18:28:01Z",
-      "updatedAt": "2026-10-08T16:11:30Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "app",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "frontend",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "next",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:library",
-          "platform:web",
-          "platform:desktop",
-          "platform:cli",
-          "platform:server"
-        ],
-        "confidence": 0.925,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.925
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:try-omarchy",
-      "label": "try-omarchy",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/try-omarchy",
-      "description": "Run Omarchy on MacOS without any setup.",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-10-13T15:01:27Z",
-      "updatedAt": "2026-10-13T15:01:27Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.838,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "hardware",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "api",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "app",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "backend",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "next",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:framework",
-          "platform:web",
-          "platform:desktop",
-          "platform:cli"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:jj",
-      "label": "jj",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/jj",
-      "description": "A Git-compatible VCS that is both simple and powerful",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-10-10T05:12:36Z",
-      "updatedAt": "2026-10-10T05:12:36Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.653,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "coursework",
-            "source": "readme",
-            "value": "tutorial",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "backend",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "website",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:library",
-          "platform:web",
-          "platform:mobile"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:Strata",
-      "label": "Strata",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/Strata",
-      "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-10-08T09:57:04Z",
-      "updatedAt": "2026-10-08T09:57:04Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.95,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "ai-ml",
-            "source": "readme",
-            "value": "ai",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "description",
-            "value": "hardware",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "description",
-            "value": "api",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "description",
-            "value": "next",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "api",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "app",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "next",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:service",
-          "platform:web",
-          "platform:cli",
-          "platform:server"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:wiki",
-      "label": "wiki",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/wiki",
-      "description": "Wiki for CachyOS",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-08-25T10:31:18Z",
-      "updatedAt": "2026-08-25T10:31:18Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "next",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "web",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "website",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:application",
-          "platform:web"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
       "id": "group:robotics-automation",
       "label": "Robotics & Automation",
       "type": "group",
@@ -1400,7 +1457,69 @@
       "id": "group:ai-ml",
       "label": "AI & Machine Learning",
       "type": "group",
-      "repositoryCount": 3
+      "repositoryCount": 4
+    },
+    {
+      "id": "repository:gxkit",
+      "label": "gxkit",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/gxkit",
+      "description": "Agent-native review loops for creative artifacts: inspect code-as-artifacts (charts, game levels, state machines, schemas, shaders, rendered video) with stable codes, exit codes and a storyboard.",
+      "language": "Python",
+      "topics": [
+        "agent-native",
+        "agents",
+        "ai-agents",
+        "ci",
+        "code-review",
+        "developer-tools",
+        "linter",
+        "python",
+        "quality-assurance",
+        "static-analysis",
+        "testing"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-10-13T22:33:44Z",
+      "updatedAt": "2026-10-14T06:05:03Z",
+      "groupId": "ai-ml",
+      "groupLabel": "AI & Machine Learning",
+      "classification": {
+        "categoryId": "ai-ml",
+        "categoryLabel": "AI / Machine Learning",
+        "secondaryTags": [],
+        "confidence": 0.564,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "readme",
+            "value": "ai",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "ai-ml",
+        "categoryLabel": "AI & Machine Learning",
+        "secondaryTags": [
+          "artifact:tool",
+          "platform:cli"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "description",
+            "value": "P1 exact taxonomy category ai-ml",
+            "weight": 0.9
+          }
+        ]
+      }
     },
     {
       "id": "repository:omarchy",
@@ -1946,37 +2065,6 @@
       }
     },
     {
-      "id": "group:uncategorized",
-      "label": "Uncategorized",
-      "type": "group",
-      "repositoryCount": 1
-    },
-    {
-      "id": "repository:gxkit",
-      "label": "gxkit",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/gxkit",
-      "description": "",
-      "language": "Python",
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2026-10-13T13:13:07Z",
-      "updatedAt": "2026-10-13T18:24:58Z",
-      "groupId": "uncategorized",
-      "groupLabel": "Uncategorized",
-      "classification": {
-        "categoryId": "uncategorized",
-        "categoryLabel": "Uncategorized",
-        "secondaryTags": [],
-        "confidence": 0,
-        "method": "deterministic",
-        "evidence": []
-      }
-    },
-    {
       "id": "group:visualization-knowledge",
       "label": "Visualization & Knowledge",
       "type": "group",
@@ -1995,7 +2083,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-10-13T06:46:09Z",
+      "updatedAt": "2026-10-14T04:50:52Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -2059,12 +2147,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3298,
+      "stars": 3301,
       "forks": 487,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-13T19:29:16Z",
+      "updatedAt": "2026-10-14T06:30:04Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2206,14 +2294,14 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50047,
-      "forks": 2506,
+      "stars": 50058,
+      "forks": 2507,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-13T19:53:00Z",
+      "updatedAt": "2026-10-14T06:16:15Z",
       "contribution": {
-        "commits": 1,
+        "commits": 2,
         "pullRequests": 3,
         "mergedPullRequests": 2,
         "commitsTruncated": false,
@@ -2339,15 +2427,15 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 23621,
-      "forks": 2342,
+      "stars": 23959,
+      "forks": 2399,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-13T19:55:12Z",
+      "updatedAt": "2026-10-14T06:40:56Z",
       "contribution": {
-        "commits": 8,
-        "pullRequests": 19,
+        "commits": 9,
+        "pullRequests": 24,
         "mergedPullRequests": 0,
         "commitsTruncated": false,
         "pullRequestsTruncated": false
@@ -2400,12 +2488,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14473,
+      "stars": 14480,
       "forks": 1446,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-13T19:48:32Z",
+      "updatedAt": "2026-10-14T06:40:38Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2433,6 +2521,46 @@
     }
   ],
   "edges": [
+    {
+      "source": "user:nekomario28",
+      "target": "group:applications-services",
+      "type": "ownership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:mobile-webcam-bridge",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:cline-desktop-linux",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:omarchy-pkgs",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:try-omarchy",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:jj",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:Strata",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:wiki",
+      "type": "membership"
+    },
     {
       "source": "user:nekomario28",
       "target": "group:game-modding",
@@ -2475,41 +2603,6 @@
     },
     {
       "source": "user:nekomario28",
-      "target": "group:applications-services",
-      "type": "ownership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:mobile-webcam-bridge",
-      "type": "membership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:cline-desktop-linux",
-      "type": "membership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:try-omarchy",
-      "type": "membership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:jj",
-      "type": "membership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:Strata",
-      "type": "membership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:wiki",
-      "type": "membership"
-    },
-    {
-      "source": "user:nekomario28",
       "target": "group:robotics-automation",
       "type": "ownership"
     },
@@ -2542,6 +2635,11 @@
       "source": "user:nekomario28",
       "target": "group:ai-ml",
       "type": "ownership"
+    },
+    {
+      "source": "group:ai-ml",
+      "target": "repository:gxkit",
+      "type": "membership"
     },
     {
       "source": "group:ai-ml",
@@ -2595,16 +2693,6 @@
     },
     {
       "source": "user:nekomario28",
-      "target": "group:uncategorized",
-      "type": "ownership"
-    },
-    {
-      "source": "group:uncategorized",
-      "target": "repository:gxkit",
-      "type": "membership"
-    },
-    {
-      "source": "user:nekomario28",
       "target": "group:visualization-knowledge",
       "type": "ownership"
     },
@@ -2652,7 +2740,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "01d82a2728637ef854ac5a9ce5b23a8657dd2542e73692eccd3961ec4f7a4543",
+    "corpusFingerprint": "86d3d0d1981f3fa7f1252082128c0b6eba9024c4a9d899bd2aeb4a6890381580",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -2707,7 +2795,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "1104f35d633a75aac3e9d923665b015d8b24ce25cdbc059b61710d88207bc177"
+        "contentHash": "3c9af9bcf339db6b14b4a22282e3a95046a06f175ac244b0bbc9b65f8e109ac5"
       },
       {
         "repoId": 1340281422,
@@ -2775,11 +2863,6 @@
         "contentHash": "6439b2981ba2752e3150f98cbd8e2b74e3f15ef19f14a71cffdb28729cac93d5"
       },
       {
-        "repoId": 1417087344,
-        "name": "gxkit",
-        "contentHash": "5c9ccc1dc83efb5a22347967e9df9aa9a7299748bcb391430a6b4856461b5549"
-      },
-      {
         "repoId": 1417298110,
         "name": "try-omarchy",
         "contentHash": "036226ed067f12a79dcb74d314107fdf232eea502cba5331e5e516544920c154"
@@ -2788,6 +2871,16 @@
         "repoId": 1417317762,
         "name": "omarchy-iso",
         "contentHash": "f24bae924377ab33dfd70f3499ea0372a9befb7d9a76d56b98625da6f229cd9d"
+      },
+      {
+        "repoId": 1418091543,
+        "name": "gxkit",
+        "contentHash": "17ec4ed282933bc263a41eeb2bb7334e14611f333ff828ddecec3e20bcea4a77"
+      },
+      {
+        "repoId": 1418340636,
+        "name": "omarchy-pkgs",
+        "contentHash": "2a75ccd7e004366c00ea2cd2da2b0680b42abbbb90367343aa5864ccda6fd941"
       }
     ],
     "categories": [
@@ -3024,13 +3117,13 @@
   "contributedRepositoryCount": 7,
   "externalContributions": {
     "window": {
-      "from": "2025-10-13T19:57:13.865Z",
-      "to": "2026-10-13T19:57:13.865Z"
+      "from": "2025-10-14T06:41:03.737Z",
+      "to": "2026-10-14T06:41:03.737Z"
     },
     "cap": 12,
-    "candidateRepositories": 16,
+    "candidateRepositories": 19,
     "includedRepositories": 7,
-    "omittedRepositories": 9,
+    "omittedRepositories": 12,
     "truncatedRepositories": 0
   }
 }
