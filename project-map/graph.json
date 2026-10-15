@@ -1,8 +1,8 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-15T06:25:27.082Z",
-  "repositoryCount": 29,
-  "groupCount": 8,
+  "generatedAt": "2026-10-15T17:52:27.701Z",
+  "repositoryCount": 32,
+  "groupCount": 9,
   "nodes": [
     {
       "id": "user:nekomario28",
@@ -14,7 +14,7 @@
       "id": "group:applications-services",
       "label": "Applications & Services",
       "type": "group",
-      "repositoryCount": 8
+      "repositoryCount": 10
     },
     {
       "id": "repository:mobile-webcam-bridge",
@@ -129,6 +129,126 @@
             "source": "description",
             "value": "P1 exact taxonomy category applications-services",
             "weight": 0.925
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:figspec",
+      "label": "figspec",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/figspec",
+      "description": "A figure as data: declare it, render it with Rust, inspect the same model.",
+      "language": "Rust",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-10-15T15:42:24Z",
+      "updatedAt": "2026-10-15T17:45:26Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.564,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:library",
+          "platform:web",
+          "platform:cli"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:trellis",
+      "label": "trellis",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/trellis",
+      "description": "",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-15T12:07:32Z",
+      "updatedAt": "2026-10-15T12:07:32Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "frontend",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "react",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "web",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:application",
+          "platform:web",
+          "platform:cli"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
           }
         ]
       }
@@ -1579,7 +1699,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-13T22:33:44Z",
-      "updatedAt": "2026-10-15T05:16:28Z",
+      "updatedAt": "2026-10-15T17:32:07Z",
       "groupId": "ai-ml",
       "groupLabel": "AI & Machine Learning",
       "classification": {
@@ -2166,6 +2286,37 @@
       }
     },
     {
+      "id": "group:uncategorized",
+      "label": "Uncategorized",
+      "type": "group",
+      "repositoryCount": 1
+    },
+    {
+      "id": "repository:io-budget",
+      "label": "io-budget",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/io-budget",
+      "description": "One wall-clock budget for socket I/O, enforced below buffering layers, plus partial-frame retention that never loses a frame boundary",
+      "language": "Rust",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-10-15T07:02:06Z",
+      "updatedAt": "2026-10-15T07:02:15Z",
+      "groupId": "uncategorized",
+      "groupLabel": "Uncategorized",
+      "classification": {
+        "categoryId": "uncategorized",
+        "categoryLabel": "Uncategorized",
+        "secondaryTags": [],
+        "confidence": 0,
+        "method": "deterministic",
+        "evidence": []
+      }
+    },
+    {
       "id": "group:visualization-knowledge",
       "label": "Visualization & Knowledge",
       "type": "group",
@@ -2248,12 +2399,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3303,
-      "forks": 489,
+      "stars": 3304,
+      "forks": 490,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-15T06:03:00Z",
+      "updatedAt": "2026-10-15T17:52:22Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2296,12 +2447,12 @@
         "gazebo",
         "gazebosim"
       ],
-      "stars": 545,
+      "stars": 546,
       "forks": 236,
       "fork": false,
       "archived": false,
       "createdAt": "2018-08-01T22:42:46Z",
-      "updatedAt": "2026-10-15T02:11:00Z",
+      "updatedAt": "2026-10-15T09:41:48Z",
       "contribution": {
         "commits": 4,
         "pullRequests": 5,
@@ -2395,12 +2546,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50098,
-      "forks": 2516,
+      "stars": 50099,
+      "forks": 2519,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-15T06:24:49Z",
+      "updatedAt": "2026-10-15T17:19:18Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2438,12 +2589,12 @@
         "step",
         "wasm"
       ],
-      "stars": 2495,
-      "forks": 248,
+      "stars": 2653,
+      "forks": 277,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-10-15T06:25:13Z",
+      "updatedAt": "2026-10-15T17:48:12Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -2523,12 +2674,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2613,
+      "stars": 2617,
       "forks": 149,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-10-15T06:20:01Z",
+      "updatedAt": "2026-10-15T15:24:32Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2623,12 +2774,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 24833,
-      "forks": 2545,
+      "stars": 25283,
+      "forks": 2602,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-15T06:25:15Z",
+      "updatedAt": "2026-10-15T17:51:02Z",
       "contribution": {
         "commits": 9,
         "pullRequests": 24,
@@ -2684,12 +2835,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14499,
-      "forks": 1452,
+      "stars": 14510,
+      "forks": 1457,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-15T06:08:50Z",
+      "updatedAt": "2026-10-15T16:17:23Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2730,6 +2881,16 @@
     {
       "source": "group:applications-services",
       "target": "repository:cline-desktop-linux",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:figspec",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:trellis",
       "type": "membership"
     },
     {
@@ -2894,6 +3055,16 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "group:uncategorized",
+      "type": "ownership"
+    },
+    {
+      "source": "group:uncategorized",
+      "target": "repository:io-budget",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "group:visualization-knowledge",
       "type": "ownership"
     },
@@ -2951,7 +3122,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "335922e85cd7b52505b0f9da366320887d76840413d41eb9d63e4f9a45be416a",
+    "corpusFingerprint": "f5593c6278c8163d60c58eab1caf9d678cf30db2d439996e30199150ab632b8c",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3086,7 +3257,7 @@
       {
         "repoId": 1418091543,
         "name": "gxkit",
-        "contentHash": "0eb38efb9eda9a59334e32f8e17c7b6fd752b4b30bfe03862e08e811a630f607"
+        "contentHash": "64058b7a358218fd034af8456977c215ef5d3467fb8dea0988713819573ed180"
       },
       {
         "repoId": 1418340636,
@@ -3097,6 +3268,21 @@
         "repoId": 1418788154,
         "name": "solidcraft",
         "contentHash": "759a405851e2ff99988885ad21cde36740b8daa7835b31e8ce8ab7b99066aaa7"
+      },
+      {
+        "repoId": 1420314973,
+        "name": "io-budget",
+        "contentHash": "20beca57cabc7e8e16f36b4ca031bc0180ec4f66ac3f70e91b079f7fc64bdcfa"
+      },
+      {
+        "repoId": 1420661152,
+        "name": "trellis",
+        "contentHash": "c1ab4d6b4a90a4e60773e22acb6d5c05700b28c3edaa3900d41a088b78209ee8"
+      },
+      {
+        "repoId": 1420962769,
+        "name": "figspec",
+        "contentHash": "08d9e56d93fd51d18160693a34ed715e73e44f30b541b606e1fafa2b157718a9"
       }
     ],
     "categories": [
@@ -3333,13 +3519,13 @@
   "contributedRepositoryCount": 9,
   "externalContributions": {
     "window": {
-      "from": "2025-10-15T06:25:29.282Z",
-      "to": "2026-10-15T06:25:29.282Z"
+      "from": "2025-10-15T17:52:31.949Z",
+      "to": "2026-10-15T17:52:31.949Z"
     },
     "cap": 12,
-    "candidateRepositories": 20,
+    "candidateRepositories": 21,
     "includedRepositories": 9,
-    "omittedRepositories": 11,
+    "omittedRepositories": 12,
     "truncatedRepositories": 0
   }
 }
