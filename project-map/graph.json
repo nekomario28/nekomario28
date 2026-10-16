@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-15T17:52:27.701Z",
+  "generatedAt": "2026-10-16T06:20:20.250Z",
   "repositoryCount": 32,
   "groupCount": 9,
   "nodes": [
@@ -146,7 +146,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-15T15:42:24Z",
-      "updatedAt": "2026-10-15T17:45:26Z",
+      "updatedAt": "2026-10-15T18:35:11Z",
       "groupId": "applications-services",
       "groupLabel": "Applications & Services",
       "classification": {
@@ -1699,7 +1699,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-13T22:33:44Z",
-      "updatedAt": "2026-10-15T17:32:07Z",
+      "updatedAt": "2026-10-15T19:08:17Z",
       "groupId": "ai-ml",
       "groupLabel": "AI & Machine Learning",
       "classification": {
@@ -2399,12 +2399,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3304,
-      "forks": 490,
+      "stars": 3305,
+      "forks": 491,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-15T17:52:22Z",
+      "updatedAt": "2026-10-15T19:53:48Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2546,12 +2546,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50099,
-      "forks": 2519,
+      "stars": 50108,
+      "forks": 2520,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-15T17:19:18Z",
+      "updatedAt": "2026-10-16T04:55:48Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2589,12 +2589,12 @@
         "step",
         "wasm"
       ],
-      "stars": 2653,
-      "forks": 277,
+      "stars": 2818,
+      "forks": 299,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-10-15T17:48:12Z",
+      "updatedAt": "2026-10-16T06:19:59Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -2674,12 +2674,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2617,
+      "stars": 2620,
       "forks": 149,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-10-15T15:24:32Z",
+      "updatedAt": "2026-10-16T03:23:26Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2774,12 +2774,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 25283,
-      "forks": 2602,
+      "stars": 25686,
+      "forks": 2656,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-15T17:51:02Z",
+      "updatedAt": "2026-10-16T06:19:49Z",
       "contribution": {
         "commits": 9,
         "pullRequests": 24,
@@ -2835,12 +2835,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14510,
-      "forks": 1457,
+      "stars": 14531,
+      "forks": 1462,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-15T16:17:23Z",
+      "updatedAt": "2026-10-16T06:05:34Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3122,7 +3122,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "f5593c6278c8163d60c58eab1caf9d678cf30db2d439996e30199150ab632b8c",
+    "corpusFingerprint": "2a152e10bf71316c75e49869f11bfb181968ed378b8cce694e0aa2c31fd37335",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3257,7 +3257,7 @@
       {
         "repoId": 1418091543,
         "name": "gxkit",
-        "contentHash": "64058b7a358218fd034af8456977c215ef5d3467fb8dea0988713819573ed180"
+        "contentHash": "044824e70cbcee7277e583953c51140e20aa859f2c4194f5d4ede71e0d4f0946"
       },
       {
         "repoId": 1418340636,
@@ -3282,7 +3282,7 @@
       {
         "repoId": 1420962769,
         "name": "figspec",
-        "contentHash": "08d9e56d93fd51d18160693a34ed715e73e44f30b541b606e1fafa2b157718a9"
+        "contentHash": "2f61c42ed5156f89cfde2d34bc49e2f28194b1e2aacd1e0d57fa7d7cef8ac221"
       }
     ],
     "categories": [
@@ -3519,8 +3519,8 @@
   "contributedRepositoryCount": 9,
   "externalContributions": {
     "window": {
-      "from": "2025-10-15T17:52:31.949Z",
-      "to": "2026-10-15T17:52:31.949Z"
+      "from": "2025-10-16T06:20:24.522Z",
+      "to": "2026-10-16T06:20:24.522Z"
     },
     "cap": 12,
     "candidateRepositories": 21,
