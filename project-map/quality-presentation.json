@@ -4,11 +4,11 @@
   "status": "experimental-non-default",
   "source": {
     "graphOwner": "nekomario28",
-    "graphGeneratedAt": "2026-10-16T06:20:20.250Z",
+    "graphGeneratedAt": "2026-10-16T17:41:16.916Z",
     "assessment": {
       "contractId": "ipm-repository-assessment-artifact-v1",
       "owner": "nekomario28",
-      "generatedAt": "2026-10-16T06:20:20.250Z",
+      "generatedAt": "2026-10-16T17:41:16.916Z",
       "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
       "assessmentPolicyId": "ipm-repository-assessment-v1"
     }
@@ -132,6 +132,58 @@
       }
     },
     {
+      "graphNodeId": "repository:solidcraft",
+      "repositoryKey": "nekomario28/solidcraft",
+      "label": "solidcraft",
+      "graphRelation": null,
+      "context": {
+        "category": {
+          "state": "observed",
+          "id": "applications-services"
+        },
+        "artifacts": {
+          "state": "observed",
+          "values": [
+            "service"
+          ]
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "owned",
+          "collaboration": "unknown",
+          "lineage": "fork"
+        }
+      },
+      "qualitySectionState": "not-collected",
+      "qualityAttributionScope": null,
+      "overlayState": "unavailable",
+      "unavailableReason": "not-collected",
+      "overlay": null,
+      "views": {
+        "detail": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        },
+        "compact": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        }
+      },
+      "visualPolicy": {
+        "repositoryCore": "inherit-structure-renderer",
+        "placementEffect": "none",
+        "nodeSizeEffect": "none",
+        "labelPriorityEffect": "none",
+        "impactHaloEffect": "none"
+      }
+    },
+    {
       "graphNodeId": "repository:figspec",
       "repositoryKey": "nekomario28/figspec",
       "label": "figspec",
@@ -184,9 +236,9 @@
       }
     },
     {
-      "graphNodeId": "repository:trellis",
-      "repositoryKey": "nekomario28/trellis",
-      "label": "trellis",
+      "graphNodeId": "repository:predifi",
+      "repositoryKey": "nekomario28/predifi",
+      "label": "predifi",
       "graphRelation": null,
       "context": {
         "category": {
@@ -196,7 +248,7 @@
         "artifacts": {
           "state": "observed",
           "values": [
-            "application"
+            "library"
           ]
         },
         "lifecycle": "unknown",
@@ -236,9 +288,9 @@
       }
     },
     {
-      "graphNodeId": "repository:solidcraft",
-      "repositoryKey": "nekomario28/solidcraft",
-      "label": "solidcraft",
+      "graphNodeId": "repository:trellis",
+      "repositoryKey": "nekomario28/trellis",
+      "label": "trellis",
       "graphRelation": null,
       "context": {
         "category": {
@@ -248,7 +300,7 @@
         "artifacts": {
           "state": "observed",
           "values": [
-            "service"
+            "application"
           ]
         },
         "lifecycle": "unknown",
@@ -4819,9 +4871,9 @@
       }
     },
     {
-      "graphNodeId": "repository:bherbruck/solidcraft",
-      "repositoryKey": "bherbruck/solidcraft",
-      "label": "bherbruck/solidcraft",
+      "graphNodeId": "repository:tangency-labs/solidcraft",
+      "repositoryKey": "tangency-labs/solidcraft",
+      "label": "tangency-labs/solidcraft",
       "graphRelation": "contributed",
       "context": {
         "category": {
@@ -5120,11 +5172,11 @@
     }
   ],
   "diagnostics": {
-    "graphRepositories": 41,
-    "assessmentRepositories": 41,
-    "joinedRepositories": 41,
+    "graphRepositories": 42,
+    "assessmentRepositories": 42,
+    "joinedRepositories": 42,
     "available": 9,
-    "unavailable": 32,
+    "unavailable": 33,
     "missingAssessmentGraphNodeIds": [],
     "orphanAssessmentGraphNodeIds": [],
     "strictJoin": true
