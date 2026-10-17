@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-16T17:41:16.916Z",
+  "generatedAt": "2026-10-17T06:09:31.706Z",
   "repositoryCount": 33,
   "groupCount": 9,
   "nodes": [
@@ -29,7 +29,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-17T14:36:33Z",
-      "updatedAt": "2026-10-16T16:52:20Z",
+      "updatedAt": "2026-10-17T04:29:16Z",
       "groupId": "applications-services",
       "groupLabel": "Applications & Services",
       "classification": {
@@ -134,6 +134,57 @@
       }
     },
     {
+      "id": "repository:figspec",
+      "label": "figspec",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/figspec",
+      "description": "A figure as data: declare it, render it with Rust, inspect the same model.",
+      "language": "Rust",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-10-15T15:42:24Z",
+      "updatedAt": "2026-10-17T03:43:49Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.564,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:library",
+          "platform:web",
+          "platform:cli"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
       "id": "repository:solidcraft",
       "label": "solidcraft",
       "type": "repository",
@@ -224,57 +275,6 @@
             "source": "description",
             "value": "P1 exact taxonomy category applications-services",
             "weight": 0.904
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:figspec",
-      "label": "figspec",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/figspec",
-      "description": "A figure as data: declare it, render it with Rust, inspect the same model.",
-      "language": "Rust",
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2026-10-15T15:42:24Z",
-      "updatedAt": "2026-10-16T13:27:24Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.564,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "api",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:library",
-          "platform:web",
-          "platform:cli"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
           }
         ]
       }
@@ -1768,7 +1768,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-13T22:33:44Z",
-      "updatedAt": "2026-10-16T16:55:32Z",
+      "updatedAt": "2026-10-17T06:00:50Z",
       "groupId": "ai-ml",
       "groupLabel": "AI & Machine Learning",
       "classification": {
@@ -2468,12 +2468,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3306,
-      "forks": 491,
+      "stars": 3304,
+      "forks": 490,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-16T15:40:37Z",
+      "updatedAt": "2026-10-17T01:29:41Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2615,12 +2615,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50120,
-      "forks": 2521,
+      "stars": 50129,
+      "forks": 2520,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-16T17:07:38Z",
+      "updatedAt": "2026-10-17T04:26:39Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2658,12 +2658,12 @@
         "step",
         "wasm"
       ],
-      "stars": 3015,
-      "forks": 324,
+      "stars": 3146,
+      "forks": 355,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-10-16T17:41:21Z",
+      "updatedAt": "2026-10-17T06:07:42Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -2743,12 +2743,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2626,
+      "stars": 2632,
       "forks": 150,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-10-16T17:02:50Z",
+      "updatedAt": "2026-10-17T04:12:13Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2843,12 +2843,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 26121,
-      "forks": 2710,
+      "stars": 26403,
+      "forks": 2749,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-16T17:32:21Z",
+      "updatedAt": "2026-10-17T06:08:08Z",
       "contribution": {
         "commits": 9,
         "pullRequests": 24,
@@ -2885,6 +2885,46 @@
       }
     },
     {
+      "id": "repository:syun88/sim-agent",
+      "label": "syun88/Sim-Agent",
+      "type": "repository",
+      "relation": "contributed",
+      "repositoryOwner": "syun88",
+      "repositoryName": "Sim-Agent",
+      "url": "https://github.com/syun88/Sim-Agent",
+      "description": "Embodied AI Agent ",
+      "language": "Python",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-10-17T01:35:14Z",
+      "updatedAt": "2026-10-17T05:35:27Z",
+      "contribution": {
+        "commits": 5,
+        "pullRequests": 0,
+        "mergedPullRequests": 0,
+        "commitsTruncated": false,
+        "pullRequestsTruncated": false
+      },
+      "classification": {
+        "categoryId": "ai-ml",
+        "categoryLabel": "AI / Machine Learning",
+        "secondaryTags": [],
+        "confidence": 0.564,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "description",
+            "value": "ai",
+            "weight": 0.7
+          }
+        ]
+      }
+    },
+    {
       "id": "repository:flashml-org/freetoken",
       "label": "FlashML-org/FreeToken",
       "type": "repository",
@@ -2904,12 +2944,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14539,
-      "forks": 1466,
+      "stars": 14543,
+      "forks": 1468,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-16T17:19:44Z",
+      "updatedAt": "2026-10-17T05:36:31Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2954,12 +2994,12 @@
     },
     {
       "source": "group:applications-services",
-      "target": "repository:solidcraft",
+      "target": "repository:figspec",
       "type": "membership"
     },
     {
       "source": "group:applications-services",
-      "target": "repository:figspec",
+      "target": "repository:solidcraft",
       "type": "membership"
     },
     {
@@ -3189,6 +3229,11 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "repository:syun88/sim-agent",
+      "type": "contribution"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "repository:flashml-org/freetoken",
       "type": "contribution"
     }
@@ -3196,7 +3241,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "3c83d5fa5dfa2045185932da6c2563f9ecdf00ba94faf401a7248875d71ded9e",
+    "corpusFingerprint": "6b86169e495546c357eca478bc401a37eb63b1ac8158073df2182dbbbae1cbe6",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3356,7 +3401,7 @@
       {
         "repoId": 1420962769,
         "name": "figspec",
-        "contentHash": "3cb701c6c6ec184ff12c5b8fa88f72dedef39327d1d948598d3da97afd49270a"
+        "contentHash": "67378f9e010e94ffb1607f3aa92609b4007e857459514eb6eb191affd5218467"
       },
       {
         "repoId": 1421881500,
@@ -3595,15 +3640,15 @@
     }
   },
   "taxonomyAssignmentVersion": 1,
-  "contributedRepositoryCount": 9,
+  "contributedRepositoryCount": 10,
   "externalContributions": {
     "window": {
-      "from": "2025-10-16T17:41:21.709Z",
-      "to": "2026-10-16T17:41:21.709Z"
+      "from": "2025-10-17T06:09:36.151Z",
+      "to": "2026-10-17T06:09:36.151Z"
     },
     "cap": 12,
-    "candidateRepositories": 22,
-    "includedRepositories": 9,
+    "candidateRepositories": 23,
+    "includedRepositories": 10,
     "omittedRepositories": 13,
     "truncatedRepositories": 0
   }
