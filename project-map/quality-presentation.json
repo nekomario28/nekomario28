@@ -4,11 +4,11 @@
   "status": "experimental-non-default",
   "source": {
     "graphOwner": "nekomario28",
-    "graphGeneratedAt": "2026-10-16T17:41:16.916Z",
+    "graphGeneratedAt": "2026-10-17T06:09:31.706Z",
     "assessment": {
       "contractId": "ipm-repository-assessment-artifact-v1",
       "owner": "nekomario28",
-      "generatedAt": "2026-10-16T17:41:16.916Z",
+      "generatedAt": "2026-10-17T06:09:31.706Z",
       "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
       "assessmentPolicyId": "ipm-repository-assessment-v1"
     }
@@ -132,9 +132,9 @@
       }
     },
     {
-      "graphNodeId": "repository:solidcraft",
-      "repositoryKey": "nekomario28/solidcraft",
-      "label": "solidcraft",
+      "graphNodeId": "repository:figspec",
+      "repositoryKey": "nekomario28/figspec",
+      "label": "figspec",
       "graphRelation": null,
       "context": {
         "category": {
@@ -144,14 +144,14 @@
         "artifacts": {
           "state": "observed",
           "values": [
-            "service"
+            "library"
           ]
         },
         "lifecycle": "unknown",
         "relation": {
           "ownership": "owned",
           "collaboration": "unknown",
-          "lineage": "fork"
+          "lineage": "original"
         }
       },
       "qualitySectionState": "not-collected",
@@ -184,9 +184,9 @@
       }
     },
     {
-      "graphNodeId": "repository:figspec",
-      "repositoryKey": "nekomario28/figspec",
-      "label": "figspec",
+      "graphNodeId": "repository:solidcraft",
+      "repositoryKey": "nekomario28/solidcraft",
+      "label": "solidcraft",
       "graphRelation": null,
       "context": {
         "category": {
@@ -196,14 +196,14 @@
         "artifacts": {
           "state": "observed",
           "values": [
-            "library"
+            "service"
           ]
         },
         "lifecycle": "unknown",
         "relation": {
           "ownership": "owned",
           "collaboration": "unknown",
-          "lineage": "original"
+          "lineage": "fork"
         }
       },
       "qualitySectionState": "not-collected",
@@ -5121,6 +5121,56 @@
       }
     },
     {
+      "graphNodeId": "repository:syun88/sim-agent",
+      "repositoryKey": "syun88/sim-agent",
+      "label": "syun88/Sim-Agent",
+      "graphRelation": "contributed",
+      "context": {
+        "category": {
+          "state": "observed",
+          "id": "ai-ml"
+        },
+        "artifacts": {
+          "state": "unknown",
+          "values": []
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "contributed",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "qualitySectionState": "not-collected",
+      "qualityAttributionScope": null,
+      "overlayState": "unavailable",
+      "unavailableReason": "not-collected",
+      "overlay": null,
+      "views": {
+        "detail": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        },
+        "compact": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        }
+      },
+      "visualPolicy": {
+        "repositoryCore": "inherit-structure-renderer",
+        "placementEffect": "none",
+        "nodeSizeEffect": "none",
+        "labelPriorityEffect": "none",
+        "impactHaloEffect": "none"
+      }
+    },
+    {
       "graphNodeId": "repository:flashml-org/freetoken",
       "repositoryKey": "flashml-org/freetoken",
       "label": "FlashML-org/FreeToken",
@@ -5172,11 +5222,11 @@
     }
   ],
   "diagnostics": {
-    "graphRepositories": 42,
-    "assessmentRepositories": 42,
-    "joinedRepositories": 42,
+    "graphRepositories": 43,
+    "assessmentRepositories": 43,
+    "joinedRepositories": 43,
     "available": 9,
-    "unavailable": 33,
+    "unavailable": 34,
     "missingAssessmentGraphNodeIds": [],
     "orphanAssessmentGraphNodeIds": [],
     "strictJoin": true
