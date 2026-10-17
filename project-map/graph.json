@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-17T06:09:31.706Z",
+  "generatedAt": "2026-10-17T16:39:01.466Z",
   "repositoryCount": 33,
   "groupCount": 9,
   "nodes": [
@@ -29,7 +29,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-17T14:36:33Z",
-      "updatedAt": "2026-10-17T04:29:16Z",
+      "updatedAt": "2026-10-17T16:16:19Z",
       "groupId": "applications-services",
       "groupLabel": "Applications & Services",
       "classification": {
@@ -1768,7 +1768,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-13T22:33:44Z",
-      "updatedAt": "2026-10-17T06:00:50Z",
+      "updatedAt": "2026-10-17T08:09:12Z",
       "groupId": "ai-ml",
       "groupLabel": "AI & Machine Learning",
       "classification": {
@@ -2473,7 +2473,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-17T01:29:41Z",
+      "updatedAt": "2026-10-17T16:02:08Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2615,12 +2615,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50129,
-      "forks": 2520,
+      "stars": 50131,
+      "forks": 2521,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-17T04:26:39Z",
+      "updatedAt": "2026-10-17T14:12:17Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2658,12 +2658,12 @@
         "step",
         "wasm"
       ],
-      "stars": 3146,
-      "forks": 355,
+      "stars": 3848,
+      "forks": 432,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-10-17T06:07:42Z",
+      "updatedAt": "2026-10-17T16:38:37Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -2743,12 +2743,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2632,
+      "stars": 2644,
       "forks": 150,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-10-17T04:12:13Z",
+      "updatedAt": "2026-10-17T16:32:09Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2843,14 +2843,14 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 26403,
-      "forks": 2749,
+      "stars": 26726,
+      "forks": 2804,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-17T06:08:08Z",
+      "updatedAt": "2026-10-17T16:36:43Z",
       "contribution": {
-        "commits": 9,
+        "commits": 13,
         "pullRequests": 24,
         "mergedPullRequests": 0,
         "commitsTruncated": false,
@@ -2900,10 +2900,10 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-17T01:35:14Z",
-      "updatedAt": "2026-10-17T05:35:27Z",
+      "updatedAt": "2026-10-17T07:17:58Z",
       "contribution": {
-        "commits": 5,
-        "pullRequests": 0,
+        "commits": 10,
+        "pullRequests": 1,
         "mergedPullRequests": 0,
         "commitsTruncated": false,
         "pullRequestsTruncated": false
@@ -2944,12 +2944,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14543,
-      "forks": 1468,
+      "stars": 14554,
+      "forks": 1470,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-17T05:36:31Z",
+      "updatedAt": "2026-10-17T16:30:01Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3643,8 +3643,8 @@
   "contributedRepositoryCount": 10,
   "externalContributions": {
     "window": {
-      "from": "2025-10-17T06:09:36.151Z",
-      "to": "2026-10-17T06:09:36.151Z"
+      "from": "2025-10-17T16:39:05.891Z",
+      "to": "2026-10-17T16:39:05.891Z"
     },
     "cap": 12,
     "candidateRepositories": 23,
