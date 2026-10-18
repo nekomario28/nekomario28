@@ -4,11 +4,11 @@
   "status": "experimental-non-default",
   "source": {
     "graphOwner": "nekomario28",
-    "graphGeneratedAt": "2026-10-17T16:39:01.466Z",
+    "graphGeneratedAt": "2026-10-18T06:34:21.400Z",
     "assessment": {
       "contractId": "ipm-repository-assessment-artifact-v1",
       "owner": "nekomario28",
-      "generatedAt": "2026-10-17T16:39:01.466Z",
+      "generatedAt": "2026-10-18T06:34:21.400Z",
       "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
       "assessmentPolicyId": "ipm-repository-assessment-v1"
     }
@@ -4771,6 +4771,56 @@
       }
     },
     {
+      "graphNodeId": "repository:syun88/devday_hackathon_search_home",
+      "repositoryKey": "syun88/devday_hackathon_search_home",
+      "label": "syun88/DevDay_Hackathon_search_home",
+      "graphRelation": "contributed",
+      "context": {
+        "category": {
+          "state": "unknown",
+          "id": null
+        },
+        "artifacts": {
+          "state": "unknown",
+          "values": []
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "contributed",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "qualitySectionState": "not-collected",
+      "qualityAttributionScope": null,
+      "overlayState": "unavailable",
+      "unavailableReason": "not-collected",
+      "overlay": null,
+      "views": {
+        "detail": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        },
+        "compact": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        }
+      },
+      "visualPolicy": {
+        "repositoryCore": "inherit-structure-renderer",
+        "placementEffect": "none",
+        "nodeSizeEffect": "none",
+        "labelPriorityEffect": "none",
+        "impactHaloEffect": "none"
+      }
+    },
+    {
       "graphNodeId": "repository:gazebosim/ros_gz",
       "repositoryKey": "gazebosim/ros_gz",
       "label": "gazebosim/ros_gz",
@@ -5222,11 +5272,11 @@
     }
   ],
   "diagnostics": {
-    "graphRepositories": 43,
-    "assessmentRepositories": 43,
-    "joinedRepositories": 43,
+    "graphRepositories": 44,
+    "assessmentRepositories": 44,
+    "joinedRepositories": 44,
     "available": 9,
-    "unavailable": 34,
+    "unavailable": 35,
     "missingAssessmentGraphNodeIds": [],
     "orphanAssessmentGraphNodeIds": [],
     "strictJoin": true
