@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-17T16:39:01.466Z",
+  "generatedAt": "2026-10-18T06:34:21.400Z",
   "repositoryCount": 33,
   "groupCount": 9,
   "nodes": [
@@ -29,7 +29,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-17T14:36:33Z",
-      "updatedAt": "2026-10-17T16:16:19Z",
+      "updatedAt": "2026-10-17T18:49:17Z",
       "groupId": "applications-services",
       "groupLabel": "Applications & Services",
       "classification": {
@@ -146,7 +146,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-15T15:42:24Z",
-      "updatedAt": "2026-10-17T03:43:49Z",
+      "updatedAt": "2026-10-17T17:58:50Z",
       "groupId": "applications-services",
       "groupLabel": "Applications & Services",
       "classification": {
@@ -1768,7 +1768,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-13T22:33:44Z",
-      "updatedAt": "2026-10-17T08:09:12Z",
+      "updatedAt": "2026-10-17T17:22:38Z",
       "groupId": "ai-ml",
       "groupLabel": "AI & Machine Learning",
       "classification": {
@@ -2404,7 +2404,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-10-14T04:50:52Z",
+      "updatedAt": "2026-10-18T04:29:42Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -2468,16 +2468,49 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3304,
-      "forks": 490,
+      "stars": 3305,
+      "forks": 492,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-17T16:02:08Z",
+      "updatedAt": "2026-10-17T16:49:29Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
         "mergedPullRequests": 9,
+        "commitsTruncated": false,
+        "pullRequestsTruncated": false
+      },
+      "classification": {
+        "categoryId": "uncategorized",
+        "categoryLabel": "Uncategorized",
+        "secondaryTags": [],
+        "confidence": 0,
+        "method": "deterministic",
+        "evidence": []
+      }
+    },
+    {
+      "id": "repository:syun88/devday_hackathon_search_home",
+      "label": "syun88/DevDay_Hackathon_search_home",
+      "type": "repository",
+      "relation": "contributed",
+      "repositoryOwner": "syun88",
+      "repositoryName": "DevDay_Hackathon_search_home",
+      "url": "https://github.com/syun88/DevDay_Hackathon_search_home",
+      "description": "",
+      "language": "Python",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-10-18T04:23:01Z",
+      "updatedAt": "2026-10-18T06:29:46Z",
+      "contribution": {
+        "commits": 5,
+        "pullRequests": 4,
+        "mergedPullRequests": 4,
         "commitsTruncated": false,
         "pullRequestsTruncated": false
       },
@@ -2615,12 +2648,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50131,
-      "forks": 2521,
+      "stars": 50138,
+      "forks": 2522,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-17T14:12:17Z",
+      "updatedAt": "2026-10-18T05:13:52Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2658,12 +2691,12 @@
         "step",
         "wasm"
       ],
-      "stars": 3848,
-      "forks": 432,
+      "stars": 4476,
+      "forks": 531,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-10-17T16:38:37Z",
+      "updatedAt": "2026-10-18T06:34:10Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -2743,12 +2776,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2644,
-      "forks": 150,
+      "stars": 2664,
+      "forks": 151,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-10-17T16:32:09Z",
+      "updatedAt": "2026-10-18T05:41:59Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2843,12 +2876,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 26726,
-      "forks": 2804,
+      "stars": 27021,
+      "forks": 2846,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-17T16:36:43Z",
+      "updatedAt": "2026-10-18T06:34:12Z",
       "contribution": {
         "commits": 13,
         "pullRequests": 24,
@@ -2944,12 +2977,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14554,
+      "stars": 14564,
       "forks": 1470,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-17T16:30:01Z",
+      "updatedAt": "2026-10-18T06:25:23Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3194,6 +3227,11 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "repository:syun88/devday_hackathon_search_home",
+      "type": "contribution"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "repository:gazebosim/ros_gz",
       "type": "contribution"
     },
@@ -3241,7 +3279,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "6b86169e495546c357eca478bc401a37eb63b1ac8158073df2182dbbbae1cbe6",
+    "corpusFingerprint": "72212b32e79b97473d5e3851dd66866bac5c864bc3b0896579088c187e2203f3",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3296,7 +3334,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "3c9af9bcf339db6b14b4a22282e3a95046a06f175ac244b0bbc9b65f8e109ac5"
+        "contentHash": "515ae875a2eb1cc0d43dc32f7d405445057d24b65f54554b4b9fdd9e4ed23009"
       },
       {
         "repoId": 1340281422,
@@ -3401,7 +3439,7 @@
       {
         "repoId": 1420962769,
         "name": "figspec",
-        "contentHash": "67378f9e010e94ffb1607f3aa92609b4007e857459514eb6eb191affd5218467"
+        "contentHash": "7f9433886de0d6f66cbaffe5b518e11e74714f2f9a403b7ad002d36b0cb1cc86"
       },
       {
         "repoId": 1421881500,
@@ -3640,15 +3678,15 @@
     }
   },
   "taxonomyAssignmentVersion": 1,
-  "contributedRepositoryCount": 10,
+  "contributedRepositoryCount": 11,
   "externalContributions": {
     "window": {
-      "from": "2025-10-17T16:39:05.891Z",
-      "to": "2026-10-17T16:39:05.891Z"
+      "from": "2025-10-18T06:34:24.127Z",
+      "to": "2026-10-18T06:34:24.127Z"
     },
     "cap": 12,
-    "candidateRepositories": 23,
-    "includedRepositories": 10,
+    "candidateRepositories": 24,
+    "includedRepositories": 11,
     "omittedRepositories": 13,
     "truncatedRepositories": 0
   }
