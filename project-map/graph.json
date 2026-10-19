@@ -1,7 +1,7 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-18T16:52:39.977Z",
-  "repositoryCount": 33,
+  "generatedAt": "2026-10-19T06:47:02.247Z",
+  "repositoryCount": 35,
   "groupCount": 9,
   "nodes": [
     {
@@ -29,7 +29,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-17T14:36:33Z",
-      "updatedAt": "2026-10-18T16:18:21Z",
+      "updatedAt": "2026-10-19T05:51:28Z",
       "groupId": "applications-services",
       "groupLabel": "Applications & Services",
       "classification": {
@@ -146,7 +146,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-15T15:42:24Z",
-      "updatedAt": "2026-10-18T16:22:36Z",
+      "updatedAt": "2026-10-18T18:01:48Z",
       "groupId": "applications-services",
       "groupLabel": "Applications & Services",
       "classification": {
@@ -1295,7 +1295,7 @@
       "id": "group:robotics-automation",
       "label": "Robotics & Automation",
       "type": "group",
-      "repositoryCount": 5
+      "repositoryCount": 7
     },
     {
       "id": "repository:lime_tidyup",
@@ -1394,6 +1394,180 @@
             "source": "description",
             "value": "P1 exact taxonomy category robotics-automation",
             "weight": 0.96
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:ros_actor",
+      "label": "ros_actor",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/ros_actor",
+      "description": "a simple framework for ROS/Python",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-19T04:55:05Z",
+      "updatedAt": "2026-10-19T04:55:05Z",
+      "groupId": "robotics-automation",
+      "groupLabel": "Robotics & Automation",
+      "classification": {
+        "categoryId": "robotics",
+        "categoryLabel": "Robotics / ROS 2",
+        "secondaryTags": [],
+        "confidence": 1,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "robotics",
+            "source": "description",
+            "value": "ros",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "ros",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "name",
+            "value": "ros",
+            "weight": 0.5
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "robotics-automation",
+        "categoryLabel": "Robotics & Automation",
+        "secondaryTags": [
+          "artifact:library",
+          "ecosystem:ros2"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "robotics-automation",
+            "source": "description",
+            "value": "P1 exact taxonomy category robotics-automation",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:actor_demo",
+      "label": "actor_demo",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/actor_demo",
+      "description": "demo and tutorial for ros_actor",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-19T04:46:00Z",
+      "updatedAt": "2026-10-19T04:46:00Z",
+      "groupId": "robotics-automation",
+      "groupLabel": "Robotics & Automation",
+      "classification": {
+        "categoryId": "robotics",
+        "categoryLabel": "Robotics / ROS 2",
+        "secondaryTags": [],
+        "confidence": 0.929,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "readme",
+            "value": "ai",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "ai-ml",
+            "source": "readme",
+            "value": "opencv",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "coursework",
+            "source": "description",
+            "value": "tutorial",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "description",
+            "value": "ros",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "gazebo",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "moveit2",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "nav2",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "robot",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "ros",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "robotics",
+            "source": "readme",
+            "value": "ros2",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "robotics-automation",
+        "categoryLabel": "Robotics & Automation",
+        "secondaryTags": [
+          "artifact:application",
+          "ecosystem:ros2",
+          "topic:gazebo",
+          "topic:manipulation"
+        ],
+        "confidence": 0.986,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "robotics-automation",
+            "source": "description",
+            "value": "P1 exact taxonomy category robotics-automation",
+            "weight": 0.986
           }
         ]
       }
@@ -1768,7 +1942,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-13T22:33:44Z",
-      "updatedAt": "2026-10-17T17:22:38Z",
+      "updatedAt": "2026-10-19T04:32:08Z",
       "groupId": "ai-ml",
       "groupLabel": "AI & Machine Learning",
       "classification": {
@@ -2468,12 +2642,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3306,
-      "forks": 493,
+      "stars": 3309,
+      "forks": 494,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-18T11:15:47Z",
+      "updatedAt": "2026-10-19T04:43:37Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2648,12 +2822,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50138,
-      "forks": 2523,
+      "stars": 50155,
+      "forks": 2527,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-18T16:44:11Z",
+      "updatedAt": "2026-10-19T05:36:24Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2691,12 +2865,12 @@
         "step",
         "wasm"
       ],
-      "stars": 5160,
-      "forks": 614,
+      "stars": 6057,
+      "forks": 702,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-10-18T16:52:45Z",
+      "updatedAt": "2026-10-19T06:47:07Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -2776,12 +2950,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2672,
+      "stars": 2683,
       "forks": 151,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-10-18T16:30:32Z",
+      "updatedAt": "2026-10-19T06:45:22Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2876,12 +3050,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 27326,
-      "forks": 2886,
+      "stars": 27659,
+      "forks": 2933,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-18T16:52:03Z",
+      "updatedAt": "2026-10-19T06:45:10Z",
       "contribution": {
         "commits": 13,
         "pullRequests": 24,
@@ -2977,12 +3151,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14574,
-      "forks": 1468,
+      "stars": 14582,
+      "forks": 1469,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-18T16:00:36Z",
+      "updatedAt": "2026-10-19T06:16:48Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3118,6 +3292,16 @@
     {
       "source": "group:robotics-automation",
       "target": "repository:lime_tidyup",
+      "type": "membership"
+    },
+    {
+      "source": "group:robotics-automation",
+      "target": "repository:ros_actor",
+      "type": "membership"
+    },
+    {
+      "source": "group:robotics-automation",
+      "target": "repository:actor_demo",
       "type": "membership"
     },
     {
@@ -3279,7 +3463,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "c6b6bf507d372f9a069982ef69d20704eb8b2d3b42a658753ca7cbf97ba59dfb",
+    "corpusFingerprint": "175348fadac467ce3161d756238b14eaf30713f4abe0e03a0460852d50b66ea8",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3439,12 +3623,22 @@
       {
         "repoId": 1420962769,
         "name": "figspec",
-        "contentHash": "f403a01092cd3b017a20ee6e37a1cad44cbd78c004bc3e7f3adca75242fac1d6"
+        "contentHash": "4372e4ac5073b452616cc72f4b250c6ebc1d5f1f156e77d7ace0587f549a2103"
       },
       {
         "repoId": 1421881500,
         "name": "predifi",
         "contentHash": "40e7d666d9046e3c921d6e99a395d2b8a335479aa4aa1c005a824da2e76900a5"
+      },
+      {
+        "repoId": 1425120103,
+        "name": "actor_demo",
+        "contentHash": "30561671039714c142445cdff754389c1f165a18167c8ecaa361d4bb06eae606"
+      },
+      {
+        "repoId": 1425126628,
+        "name": "ros_actor",
+        "contentHash": "7b26b34752b11313300241e6f345dd1b974ba882c953582aeb6831df7c411409"
       }
     ],
     "categories": [
@@ -3681,8 +3875,8 @@
   "contributedRepositoryCount": 11,
   "externalContributions": {
     "window": {
-      "from": "2025-10-18T16:52:44.381Z",
-      "to": "2026-10-18T16:52:44.381Z"
+      "from": "2025-10-19T06:47:06.759Z",
+      "to": "2026-10-19T06:47:06.759Z"
     },
     "cap": 12,
     "candidateRepositories": 24,
