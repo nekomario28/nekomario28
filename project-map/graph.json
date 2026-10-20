@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-20T06:34:33.025Z",
+  "generatedAt": "2026-10-20T18:06:11.737Z",
   "repositoryCount": 35,
   "groupCount": 9,
   "nodes": [
@@ -29,7 +29,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-17T14:36:33Z",
-      "updatedAt": "2026-10-20T05:56:32Z",
+      "updatedAt": "2026-10-20T16:56:12Z",
       "groupId": "applications-services",
       "groupLabel": "Applications & Services",
       "classification": {
@@ -2642,12 +2642,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3312,
+      "stars": 3314,
       "forks": 494,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-20T06:08:45Z",
+      "updatedAt": "2026-10-20T14:20:55Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2723,12 +2723,12 @@
         "gazebo",
         "gazebosim"
       ],
-      "stars": 546,
+      "stars": 547,
       "forks": 236,
       "fork": false,
       "archived": false,
       "createdAt": "2018-08-01T22:42:46Z",
-      "updatedAt": "2026-10-20T01:47:25Z",
+      "updatedAt": "2026-10-20T07:25:55Z",
       "contribution": {
         "commits": 4,
         "pullRequests": 5,
@@ -2822,12 +2822,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50170,
-      "forks": 2532,
+      "stars": 50183,
+      "forks": 2534,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-20T06:32:14Z",
+      "updatedAt": "2026-10-20T17:57:10Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2865,12 +2865,12 @@
         "step",
         "wasm"
       ],
-      "stars": 7581,
-      "forks": 858,
+      "stars": 8075,
+      "forks": 929,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-10-20T06:34:18Z",
+      "updatedAt": "2026-10-20T18:05:13Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -2950,14 +2950,47 @@
         "arm",
         "arm64"
       ],
-      "stars": 2706,
-      "forks": 151,
+      "stars": 2716,
+      "forks": 152,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-10-20T06:25:04Z",
+      "updatedAt": "2026-10-20T16:34:39Z",
       "contribution": {
         "commits": 1,
+        "pullRequests": 1,
+        "mergedPullRequests": 1,
+        "commitsTruncated": false,
+        "pullRequestsTruncated": false
+      },
+      "classification": {
+        "categoryId": "uncategorized",
+        "categoryLabel": "Uncategorized",
+        "secondaryTags": [],
+        "confidence": 0,
+        "method": "deterministic",
+        "evidence": []
+      }
+    },
+    {
+      "id": "repository:onipinsaiye/predifi",
+      "label": "Onipinsaiye/predifi",
+      "type": "repository",
+      "relation": "contributed",
+      "repositoryOwner": "Onipinsaiye",
+      "repositoryName": "predifi",
+      "url": "https://github.com/Onipinsaiye/predifi",
+      "description": "Predi? - Decentralized prediction market platform",
+      "language": "Rust",
+      "topics": [],
+      "stars": 3,
+      "forks": 45,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-10-08T14:40:06Z",
+      "updatedAt": "2026-10-20T16:38:11Z",
+      "contribution": {
+        "commits": 0,
         "pullRequests": 1,
         "mergedPullRequests": 1,
         "commitsTruncated": false,
@@ -3050,12 +3083,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 28544,
-      "forks": 3020,
+      "stars": 29050,
+      "forks": 3072,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-20T06:33:24Z",
+      "updatedAt": "2026-10-20T18:04:17Z",
       "contribution": {
         "commits": 13,
         "pullRequests": 24,
@@ -3102,12 +3135,12 @@
       "description": "Embodied AI Agent ",
       "language": "Python",
       "topics": [],
-      "stars": 0,
+      "stars": 1,
       "forks": 0,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-17T01:35:14Z",
-      "updatedAt": "2026-10-17T07:17:58Z",
+      "updatedAt": "2026-10-20T11:06:28Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 1,
@@ -3151,12 +3184,12 @@
         "qwen",
         "transformer"
       ],
-      "stars": 14618,
+      "stars": 14647,
       "forks": 1472,
       "fork": false,
       "archived": false,
       "createdAt": "2026-07-20T20:44:11Z",
-      "updatedAt": "2026-10-20T06:22:42Z",
+      "updatedAt": "2026-10-20T18:00:34Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3441,6 +3474,11 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "repository:onipinsaiye/predifi",
+      "type": "contribution"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "repository:souta-lab/minecraft-jev-agent",
       "type": "contribution"
     },
@@ -3463,7 +3501,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "175348fadac467ce3161d756238b14eaf30713f4abe0e03a0460852d50b66ea8",
+    "corpusFingerprint": "95eff0420d4e8c25d934158839600c8333adb389271837c96b5f82d04aa2e1b5",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3543,7 +3581,7 @@
       {
         "repoId": 1374579782,
         "name": "mobile-webcam-bridge",
-        "contentHash": "6c3744e311bb1ebe974cba3c00b3b1a9f8e7a04a68ed187cbc568182ecb2c642"
+        "contentHash": "7509b4f328884e853028d4192165c0308420dc9cf216e3b5549c294628ef561c"
       },
       {
         "repoId": 1377492522,
@@ -3872,16 +3910,16 @@
     }
   },
   "taxonomyAssignmentVersion": 1,
-  "contributedRepositoryCount": 11,
+  "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-10-20T06:34:37.552Z",
-      "to": "2026-10-20T06:34:37.552Z"
+      "from": "2025-10-20T18:06:16.240Z",
+      "to": "2026-10-20T18:06:16.240Z"
     },
     "cap": 12,
     "candidateRepositories": 24,
-    "includedRepositories": 11,
-    "omittedRepositories": 13,
+    "includedRepositories": 12,
+    "omittedRepositories": 12,
     "truncatedRepositories": 0
   }
 }
