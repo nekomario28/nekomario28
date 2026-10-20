@@ -4,11 +4,11 @@
   "status": "experimental-non-default",
   "source": {
     "graphOwner": "nekomario28",
-    "graphGeneratedAt": "2026-10-20T06:34:33.025Z",
+    "graphGeneratedAt": "2026-10-20T18:06:11.737Z",
     "assessment": {
       "contractId": "ipm-repository-assessment-artifact-v1",
       "owner": "nekomario28",
-      "generatedAt": "2026-10-20T06:34:33.025Z",
+      "generatedAt": "2026-10-20T18:06:11.737Z",
       "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
       "assessmentPolicyId": "ipm-repository-assessment-v1"
     }
@@ -5175,6 +5175,56 @@
       }
     },
     {
+      "graphNodeId": "repository:onipinsaiye/predifi",
+      "repositoryKey": "onipinsaiye/predifi",
+      "label": "Onipinsaiye/predifi",
+      "graphRelation": "contributed",
+      "context": {
+        "category": {
+          "state": "unknown",
+          "id": null
+        },
+        "artifacts": {
+          "state": "unknown",
+          "values": []
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "contributed",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "qualitySectionState": "not-collected",
+      "qualityAttributionScope": null,
+      "overlayState": "unavailable",
+      "unavailableReason": "not-collected",
+      "overlay": null,
+      "views": {
+        "detail": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        },
+        "compact": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        }
+      },
+      "visualPolicy": {
+        "repositoryCore": "inherit-structure-renderer",
+        "placementEffect": "none",
+        "nodeSizeEffect": "none",
+        "labelPriorityEffect": "none",
+        "impactHaloEffect": "none"
+      }
+    },
+    {
       "graphNodeId": "repository:souta-lab/minecraft-jev-agent",
       "repositoryKey": "souta-lab/minecraft-jev-agent",
       "label": "souta-lab/minecraft-jev-agent",
@@ -5376,11 +5426,11 @@
     }
   ],
   "diagnostics": {
-    "graphRepositories": 46,
-    "assessmentRepositories": 46,
-    "joinedRepositories": 46,
+    "graphRepositories": 47,
+    "assessmentRepositories": 47,
+    "joinedRepositories": 47,
     "available": 9,
-    "unavailable": 37,
+    "unavailable": 38,
     "missingAssessmentGraphNodeIds": [],
     "orphanAssessmentGraphNodeIds": [],
     "strictJoin": true
