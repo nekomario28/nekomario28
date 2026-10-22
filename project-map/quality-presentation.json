@@ -4,11 +4,11 @@
   "status": "experimental-non-default",
   "source": {
     "graphOwner": "nekomario28",
-    "graphGeneratedAt": "2026-10-22T06:33:40.319Z",
+    "graphGeneratedAt": "2026-10-22T18:09:30.963Z",
     "assessment": {
       "contractId": "ipm-repository-assessment-artifact-v1",
       "owner": "nekomario28",
-      "generatedAt": "2026-10-22T06:33:40.319Z",
+      "generatedAt": "2026-10-22T18:09:30.963Z",
       "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
       "assessmentPolicyId": "ipm-repository-assessment-v1"
     }
@@ -5375,14 +5375,14 @@
       }
     },
     {
-      "graphNodeId": "repository:flashml-org/freetoken",
-      "repositoryKey": "flashml-org/freetoken",
-      "label": "FlashML-org/FreeToken",
+      "graphNodeId": "repository:omacom/omarchy",
+      "repositoryKey": "omacom/omarchy",
+      "label": "omacom/omarchy",
       "graphRelation": "contributed",
       "context": {
         "category": {
-          "state": "observed",
-          "id": "ai-ml"
+          "state": "unknown",
+          "id": null
         },
         "artifacts": {
           "state": "unknown",
