@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-22T18:09:30.963Z",
+  "generatedAt": "2026-10-23T06:27:47.830Z",
   "repositoryCount": 35,
   "groupCount": 9,
   "nodes": [
@@ -29,7 +29,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-17T14:36:33Z",
-      "updatedAt": "2026-10-22T11:19:43Z",
+      "updatedAt": "2026-10-23T05:21:26Z",
       "groupId": "applications-services",
       "groupLabel": "Applications & Services",
       "classification": {
@@ -2642,12 +2642,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3321,
+      "stars": 3324,
       "forks": 495,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-22T16:56:39Z",
+      "updatedAt": "2026-10-23T06:06:27Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2728,7 +2728,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2018-08-01T22:42:46Z",
-      "updatedAt": "2026-10-20T07:25:55Z",
+      "updatedAt": "2026-10-22T20:17:43Z",
       "contribution": {
         "commits": 4,
         "pullRequests": 5,
@@ -2822,12 +2822,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50223,
-      "forks": 2543,
+      "stars": 50232,
+      "forks": 2548,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-22T18:08:02Z",
+      "updatedAt": "2026-10-23T06:17:58Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2865,12 +2865,12 @@
         "step",
         "wasm"
       ],
-      "stars": 9206,
-      "forks": 1095,
+      "stars": 9418,
+      "forks": 1132,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-10-22T18:08:34Z",
+      "updatedAt": "2026-10-23T06:27:38Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -2950,12 +2950,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2737,
-      "forks": 157,
+      "stars": 2744,
+      "forks": 158,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-10-22T15:26:01Z",
+      "updatedAt": "2026-10-23T05:34:21Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2988,7 +2988,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-08T14:40:06Z",
-      "updatedAt": "2026-10-22T12:55:27Z",
+      "updatedAt": "2026-10-22T18:11:58Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3083,12 +3083,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 30473,
-      "forks": 3241,
+      "stars": 30755,
+      "forks": 3282,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-22T18:05:45Z",
+      "updatedAt": "2026-10-23T06:27:31Z",
       "contribution": {
         "commits": 13,
         "pullRequests": 24,
@@ -3135,12 +3135,12 @@
       "description": "Embodied AI Agent ",
       "language": "Python",
       "topics": [],
-      "stars": 1,
+      "stars": 2,
       "forks": 0,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-17T01:35:14Z",
-      "updatedAt": "2026-10-22T11:55:44Z",
+      "updatedAt": "2026-10-23T06:13:50Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 1,
@@ -3175,12 +3175,12 @@
       "description": "Beautiful, Modern & Opinionated Linux",
       "language": "Shell",
       "topics": [],
-      "stars": 45479,
-      "forks": 5653,
+      "stars": 45511,
+      "forks": 5658,
       "fork": false,
       "archived": false,
       "createdAt": "2025-06-01T07:26:22Z",
-      "updatedAt": "2026-10-22T17:32:52Z",
+      "updatedAt": "2026-10-23T06:16:58Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 19,
@@ -3895,8 +3895,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-10-22T18:09:35.710Z",
-      "to": "2026-10-22T18:09:35.710Z"
+      "from": "2025-10-23T06:27:52.928Z",
+      "to": "2026-10-23T06:27:52.928Z"
     },
     "cap": 12,
     "candidateRepositories": 24,
