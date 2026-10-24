@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-24T06:26:47.678Z",
+  "generatedAt": "2026-10-24T16:56:19.293Z",
   "repositoryCount": 36,
   "groupCount": 9,
   "nodes": [
@@ -29,7 +29,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-17T14:36:33Z",
-      "updatedAt": "2026-10-23T19:18:40Z",
+      "updatedAt": "2026-10-24T16:29:28Z",
       "groupId": "applications-services",
       "groupLabel": "Applications & Services",
       "classification": {
@@ -2731,12 +2731,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3328,
+      "stars": 3331,
       "forks": 496,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-23T15:27:16Z",
+      "updatedAt": "2026-10-24T12:55:52Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2889,6 +2889,46 @@
       }
     },
     {
+      "id": "repository:syun88/sim-agent",
+      "label": "syun88/Sim-Agent",
+      "type": "repository",
+      "relation": "contributed",
+      "repositoryOwner": "syun88",
+      "repositoryName": "Sim-Agent",
+      "url": "https://github.com/syun88/Sim-Agent",
+      "description": "Embodied AI Agent ",
+      "language": "Python",
+      "topics": [],
+      "stars": 3,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-10-17T01:35:14Z",
+      "updatedAt": "2026-10-23T16:32:55Z",
+      "contribution": {
+        "commits": 10,
+        "pullRequests": 3,
+        "mergedPullRequests": 2,
+        "commitsTruncated": false,
+        "pullRequestsTruncated": false
+      },
+      "classification": {
+        "categoryId": "ai-ml",
+        "categoryLabel": "AI / Machine Learning",
+        "secondaryTags": [],
+        "confidence": 0.564,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "description",
+            "value": "ai",
+            "weight": 0.7
+          }
+        ]
+      }
+    },
+    {
       "id": "repository:astral-sh/ruff",
       "label": "astral-sh/ruff",
       "type": "repository",
@@ -2911,12 +2951,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50248,
-      "forks": 2550,
+      "stars": 50254,
+      "forks": 2549,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-24T05:46:45Z",
+      "updatedAt": "2026-10-24T16:54:59Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2954,12 +2994,12 @@
         "step",
         "wasm"
       ],
-      "stars": 9786,
-      "forks": 1188,
+      "stars": 9959,
+      "forks": 1224,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-10-24T06:23:23Z",
+      "updatedAt": "2026-10-24T16:54:52Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -3039,12 +3079,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2757,
+      "stars": 2763,
       "forks": 159,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-10-23T23:58:02Z",
+      "updatedAt": "2026-10-24T13:27:42Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3172,12 +3212,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 31325,
-      "forks": 3361,
+      "stars": 31792,
+      "forks": 3409,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-24T06:26:03Z",
+      "updatedAt": "2026-10-24T16:55:20Z",
       "contribution": {
         "commits": 13,
         "pullRequests": 24,
@@ -3214,46 +3254,6 @@
       }
     },
     {
-      "id": "repository:syun88/sim-agent",
-      "label": "syun88/Sim-Agent",
-      "type": "repository",
-      "relation": "contributed",
-      "repositoryOwner": "syun88",
-      "repositoryName": "Sim-Agent",
-      "url": "https://github.com/syun88/Sim-Agent",
-      "description": "Embodied AI Agent ",
-      "language": "Python",
-      "topics": [],
-      "stars": 3,
-      "forks": 0,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2026-10-17T01:35:14Z",
-      "updatedAt": "2026-10-23T16:32:55Z",
-      "contribution": {
-        "commits": 10,
-        "pullRequests": 1,
-        "mergedPullRequests": 0,
-        "commitsTruncated": false,
-        "pullRequestsTruncated": false
-      },
-      "classification": {
-        "categoryId": "ai-ml",
-        "categoryLabel": "AI / Machine Learning",
-        "secondaryTags": [],
-        "confidence": 0.564,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "ai-ml",
-            "source": "description",
-            "value": "ai",
-            "weight": 0.7
-          }
-        ]
-      }
-    },
-    {
       "id": "repository:omacom/omarchy",
       "label": "omacom/omarchy",
       "type": "repository",
@@ -3264,12 +3264,12 @@
       "description": "Beautiful, Modern & Opinionated Linux",
       "language": "Shell",
       "topics": [],
-      "stars": 45562,
-      "forks": 5679,
+      "stars": 45601,
+      "forks": 5687,
       "fork": false,
       "archived": false,
       "createdAt": "2025-06-01T07:26:22Z",
-      "updatedAt": "2026-10-24T06:25:52Z",
+      "updatedAt": "2026-10-24T16:52:19Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 19,
@@ -3530,6 +3530,11 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "repository:syun88/sim-agent",
+      "type": "contribution"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "repository:astral-sh/ruff",
       "type": "contribution"
     },
@@ -3561,11 +3566,6 @@
     {
       "source": "user:nekomario28",
       "target": "repository:niko1221/strata",
-      "type": "contribution"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:syun88/sim-agent",
       "type": "contribution"
     },
     {
@@ -3994,8 +3994,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-10-24T06:26:50.573Z",
-      "to": "2026-10-24T06:26:50.573Z"
+      "from": "2025-10-24T16:56:22.191Z",
+      "to": "2026-10-24T16:56:22.191Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
