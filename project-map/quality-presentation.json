@@ -4,11 +4,11 @@
   "status": "experimental-non-default",
   "source": {
     "graphOwner": "nekomario28",
-    "graphGeneratedAt": "2026-10-24T06:26:47.678Z",
+    "graphGeneratedAt": "2026-10-24T16:56:19.293Z",
     "assessment": {
       "contractId": "ipm-repository-assessment-artifact-v1",
       "owner": "nekomario28",
-      "generatedAt": "2026-10-24T06:26:47.678Z",
+      "generatedAt": "2026-10-24T16:56:19.293Z",
       "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
       "assessmentPolicyId": "ipm-repository-assessment-v1"
     }
@@ -5027,6 +5027,56 @@
       }
     },
     {
+      "graphNodeId": "repository:syun88/sim-agent",
+      "repositoryKey": "syun88/sim-agent",
+      "label": "syun88/Sim-Agent",
+      "graphRelation": "contributed",
+      "context": {
+        "category": {
+          "state": "observed",
+          "id": "ai-ml"
+        },
+        "artifacts": {
+          "state": "unknown",
+          "values": []
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "contributed",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "qualitySectionState": "not-collected",
+      "qualityAttributionScope": null,
+      "overlayState": "unavailable",
+      "unavailableReason": "not-collected",
+      "overlay": null,
+      "views": {
+        "detail": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        },
+        "compact": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        }
+      },
+      "visualPolicy": {
+        "repositoryCore": "inherit-structure-renderer",
+        "placementEffect": "none",
+        "nodeSizeEffect": "none",
+        "labelPriorityEffect": "none",
+        "impactHaloEffect": "none"
+      }
+    },
+    {
       "graphNodeId": "repository:astral-sh/ruff",
       "repositoryKey": "astral-sh/ruff",
       "label": "astral-sh/ruff",
@@ -5335,56 +5385,6 @@
         "category": {
           "state": "unknown",
           "id": null
-        },
-        "artifacts": {
-          "state": "unknown",
-          "values": []
-        },
-        "lifecycle": "unknown",
-        "relation": {
-          "ownership": "contributed",
-          "collaboration": "unknown",
-          "lineage": "original"
-        }
-      },
-      "qualitySectionState": "not-collected",
-      "qualityAttributionScope": null,
-      "overlayState": "unavailable",
-      "unavailableReason": "not-collected",
-      "overlay": null,
-      "views": {
-        "detail": {
-          "mode": "unavailable",
-          "token": "quality-unavailable",
-          "reason": "not-collected",
-          "compositeQualityScore": null,
-          "dimensionIdentityPreserved": false
-        },
-        "compact": {
-          "mode": "unavailable",
-          "token": "quality-unavailable",
-          "reason": "not-collected",
-          "compositeQualityScore": null,
-          "dimensionIdentityPreserved": false
-        }
-      },
-      "visualPolicy": {
-        "repositoryCore": "inherit-structure-renderer",
-        "placementEffect": "none",
-        "nodeSizeEffect": "none",
-        "labelPriorityEffect": "none",
-        "impactHaloEffect": "none"
-      }
-    },
-    {
-      "graphNodeId": "repository:syun88/sim-agent",
-      "repositoryKey": "syun88/sim-agent",
-      "label": "syun88/Sim-Agent",
-      "graphRelation": "contributed",
-      "context": {
-        "category": {
-          "state": "observed",
-          "id": "ai-ml"
         },
         "artifacts": {
           "state": "unknown",
