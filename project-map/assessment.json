@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "contractId": "ipm-repository-assessment-artifact-v1",
   "owner": "nekomario28",
-  "generatedAt": "2026-10-26T06:55:48.001Z",
+  "generatedAt": "2026-10-26T19:32:30.096Z",
   "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
   "taxonomyId": "ipm-standard-v1",
   "assessmentPolicyId": "ipm-repository-assessment-v1",
@@ -37,7 +37,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -155,7 +155,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -273,7 +273,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -405,7 +405,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -523,7 +523,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -655,7 +655,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -787,7 +787,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -919,7 +919,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -1051,7 +1051,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -1183,7 +1183,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -1315,7 +1315,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -1447,7 +1447,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -1579,7 +1579,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "partial",
@@ -2148,7 +2148,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "partial",
@@ -2449,7 +2449,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "partial",
@@ -3006,7 +3006,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "partial",
@@ -3339,7 +3339,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -3471,7 +3471,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -3603,7 +3603,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "partial",
@@ -4184,7 +4184,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -4316,7 +4316,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -4448,7 +4448,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -4580,7 +4580,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -4698,7 +4698,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -4830,7 +4830,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "partial",
@@ -5201,7 +5201,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -5333,7 +5333,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -5451,7 +5451,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -5583,7 +5583,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -5715,7 +5715,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "partial",
@@ -6201,6 +6201,124 @@
     },
     {
       "identity": {
+        "repositoryKey": "nekomario28/melba",
+        "graphNodeId": "repository:melba",
+        "owner": "nekomario28",
+        "name": "melba",
+        "githubRepositoryId": null
+      },
+      "context": {
+        "category": {
+          "state": "observed",
+          "id": "hardware-embedded"
+        },
+        "artifacts": {
+          "state": "observed",
+          "values": [
+            "library"
+          ]
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "owned",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "acquisition": {
+        "level": "L0",
+        "observedAt": "2026-10-26T19:32:30.096Z"
+      },
+      "quality": {
+        "state": "not-collected",
+        "value": null
+      },
+      "impact": {
+        "state": "partial",
+        "value": {
+          "schemaVersion": 1,
+          "relation": {
+            "ownership": "owned",
+            "collaboration": "unknown",
+            "lineage": "original"
+          },
+          "projectSide": {
+            "recognition": {
+              "state": "observed",
+              "raw": 0,
+              "transformed": 0,
+              "source": "stars",
+              "directQualityEffect": false
+            },
+            "reuseDerivativeInterest": {
+              "state": "observed",
+              "raw": 0,
+              "transformed": 0,
+              "source": "forks",
+              "interpretation": "reuse-derivative-interest",
+              "independentAdopterCount": null,
+              "directQualityEffect": false
+            },
+            "adoption": {
+              "dependents": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "downloads": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "researchDomainUptake": {
+              "citations": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "collaborationContext": {
+              "contributors": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "personalContributionInferred": false
+            }
+          },
+          "upstreamContext": null,
+          "attribution": {
+            "profile": "unresolved",
+            "requiresPersonalContributionGate": true,
+            "upstreamMetricsAreContextOnly": false,
+            "collaborationState": "unknown",
+            "lineageState": "original"
+          },
+          "compositeImpact": null,
+          "portfolioProminenceEffect": null
+        }
+      },
+      "scale": {
+        "state": "not-collected",
+        "value": null
+      },
+      "lifecycle": {
+        "state": "not-collected",
+        "value": null
+      },
+      "personalContribution": {
+        "state": "not-collected",
+        "value": null
+      },
+      "prominence": {
+        "state": "not-collected",
+        "value": null
+      },
+      "productionScore": null
+    },
+    {
+      "identity": {
         "repositoryKey": "nekomario28/omarchy-iso",
         "graphNodeId": "repository:omarchy-iso",
         "owner": "nekomario28",
@@ -6227,7 +6345,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -6359,7 +6477,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "partial",
@@ -6864,6 +6982,238 @@
     },
     {
       "identity": {
+        "repositoryKey": "nekomario28/melba-wrapper-bootstrap",
+        "graphNodeId": "repository:melba-wrapper-bootstrap",
+        "owner": "nekomario28",
+        "name": "melba-wrapper-bootstrap",
+        "githubRepositoryId": null
+      },
+      "context": {
+        "category": {
+          "state": "unknown",
+          "id": null
+        },
+        "artifacts": {
+          "state": "unknown",
+          "values": []
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "owned",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "acquisition": {
+        "level": "L0",
+        "observedAt": "2026-10-26T19:32:30.096Z"
+      },
+      "quality": {
+        "state": "not-collected",
+        "value": null
+      },
+      "impact": {
+        "state": "partial",
+        "value": {
+          "schemaVersion": 1,
+          "relation": {
+            "ownership": "owned",
+            "collaboration": "unknown",
+            "lineage": "original"
+          },
+          "projectSide": {
+            "recognition": {
+              "state": "observed",
+              "raw": 0,
+              "transformed": 0,
+              "source": "stars",
+              "directQualityEffect": false
+            },
+            "reuseDerivativeInterest": {
+              "state": "observed",
+              "raw": 0,
+              "transformed": 0,
+              "source": "forks",
+              "interpretation": "reuse-derivative-interest",
+              "independentAdopterCount": null,
+              "directQualityEffect": false
+            },
+            "adoption": {
+              "dependents": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "downloads": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "researchDomainUptake": {
+              "citations": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "collaborationContext": {
+              "contributors": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "personalContributionInferred": false
+            }
+          },
+          "upstreamContext": null,
+          "attribution": {
+            "profile": "unresolved",
+            "requiresPersonalContributionGate": true,
+            "upstreamMetricsAreContextOnly": false,
+            "collaborationState": "unknown",
+            "lineageState": "original"
+          },
+          "compositeImpact": null,
+          "portfolioProminenceEffect": null
+        }
+      },
+      "scale": {
+        "state": "not-collected",
+        "value": null
+      },
+      "lifecycle": {
+        "state": "not-collected",
+        "value": null
+      },
+      "personalContribution": {
+        "state": "not-collected",
+        "value": null
+      },
+      "prominence": {
+        "state": "not-collected",
+        "value": null
+      },
+      "productionScore": null
+    },
+    {
+      "identity": {
+        "repositoryKey": "nekomario28/io-budget",
+        "graphNodeId": "repository:io-budget",
+        "owner": "nekomario28",
+        "name": "io-budget",
+        "githubRepositoryId": null
+      },
+      "context": {
+        "category": {
+          "state": "unknown",
+          "id": null
+        },
+        "artifacts": {
+          "state": "unknown",
+          "values": []
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "owned",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "acquisition": {
+        "level": "L0",
+        "observedAt": "2026-10-26T19:32:30.096Z"
+      },
+      "quality": {
+        "state": "not-collected",
+        "value": null
+      },
+      "impact": {
+        "state": "partial",
+        "value": {
+          "schemaVersion": 1,
+          "relation": {
+            "ownership": "owned",
+            "collaboration": "unknown",
+            "lineage": "original"
+          },
+          "projectSide": {
+            "recognition": {
+              "state": "observed",
+              "raw": 0,
+              "transformed": 0,
+              "source": "stars",
+              "directQualityEffect": false
+            },
+            "reuseDerivativeInterest": {
+              "state": "observed",
+              "raw": 0,
+              "transformed": 0,
+              "source": "forks",
+              "interpretation": "reuse-derivative-interest",
+              "independentAdopterCount": null,
+              "directQualityEffect": false
+            },
+            "adoption": {
+              "dependents": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "downloads": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "researchDomainUptake": {
+              "citations": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              }
+            },
+            "collaborationContext": {
+              "contributors": {
+                "state": "unknown",
+                "raw": null,
+                "transformed": null
+              },
+              "personalContributionInferred": false
+            }
+          },
+          "upstreamContext": null,
+          "attribution": {
+            "profile": "unresolved",
+            "requiresPersonalContributionGate": true,
+            "upstreamMetricsAreContextOnly": false,
+            "collaborationState": "unknown",
+            "lineageState": "original"
+          },
+          "compositeImpact": null,
+          "portfolioProminenceEffect": null
+        }
+      },
+      "scale": {
+        "state": "not-collected",
+        "value": null
+      },
+      "lifecycle": {
+        "state": "not-collected",
+        "value": null
+      },
+      "personalContribution": {
+        "state": "not-collected",
+        "value": null
+      },
+      "prominence": {
+        "state": "not-collected",
+        "value": null
+      },
+      "productionScore": null
+    },
+    {
+      "identity": {
         "repositoryKey": "nekomario28/ruff",
         "graphNodeId": "repository:ruff",
         "owner": "nekomario28",
@@ -6890,7 +7240,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -7022,7 +7372,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "partial",
@@ -7270,122 +7620,6 @@
     },
     {
       "identity": {
-        "repositoryKey": "nekomario28/io-budget",
-        "graphNodeId": "repository:io-budget",
-        "owner": "nekomario28",
-        "name": "io-budget",
-        "githubRepositoryId": null
-      },
-      "context": {
-        "category": {
-          "state": "unknown",
-          "id": null
-        },
-        "artifacts": {
-          "state": "unknown",
-          "values": []
-        },
-        "lifecycle": "unknown",
-        "relation": {
-          "ownership": "owned",
-          "collaboration": "unknown",
-          "lineage": "original"
-        }
-      },
-      "acquisition": {
-        "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
-      },
-      "quality": {
-        "state": "not-collected",
-        "value": null
-      },
-      "impact": {
-        "state": "partial",
-        "value": {
-          "schemaVersion": 1,
-          "relation": {
-            "ownership": "owned",
-            "collaboration": "unknown",
-            "lineage": "original"
-          },
-          "projectSide": {
-            "recognition": {
-              "state": "observed",
-              "raw": 0,
-              "transformed": 0,
-              "source": "stars",
-              "directQualityEffect": false
-            },
-            "reuseDerivativeInterest": {
-              "state": "observed",
-              "raw": 0,
-              "transformed": 0,
-              "source": "forks",
-              "interpretation": "reuse-derivative-interest",
-              "independentAdopterCount": null,
-              "directQualityEffect": false
-            },
-            "adoption": {
-              "dependents": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              },
-              "downloads": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              }
-            },
-            "researchDomainUptake": {
-              "citations": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              }
-            },
-            "collaborationContext": {
-              "contributors": {
-                "state": "unknown",
-                "raw": null,
-                "transformed": null
-              },
-              "personalContributionInferred": false
-            }
-          },
-          "upstreamContext": null,
-          "attribution": {
-            "profile": "unresolved",
-            "requiresPersonalContributionGate": true,
-            "upstreamMetricsAreContextOnly": false,
-            "collaborationState": "unknown",
-            "lineageState": "original"
-          },
-          "compositeImpact": null,
-          "portfolioProminenceEffect": null
-        }
-      },
-      "scale": {
-        "state": "not-collected",
-        "value": null
-      },
-      "lifecycle": {
-        "state": "not-collected",
-        "value": null
-      },
-      "personalContribution": {
-        "state": "not-collected",
-        "value": null
-      },
-      "prominence": {
-        "state": "not-collected",
-        "value": null
-      },
-      "productionScore": null
-    },
-    {
-      "identity": {
         "repositoryKey": "nekomario28/interactive-project-map",
         "graphNodeId": "repository:interactive-project-map",
         "owner": "nekomario28",
@@ -7412,7 +7646,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "partial",
@@ -7693,7 +7927,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -7711,15 +7945,15 @@
           "projectSide": {
             "recognition": {
               "state": "observed",
-              "raw": 3340,
-              "transformed": 8.114025442356757,
+              "raw": 3342,
+              "transformed": 8.114623886420098,
               "source": "stars",
               "directQualityEffect": false
             },
             "reuseDerivativeInterest": {
               "state": "observed",
-              "raw": 498,
-              "transformed": 6.212606095751519,
+              "raw": 500,
+              "transformed": 6.2166061010848646,
               "source": "forks",
               "interpretation": "reuse-derivative-interest",
               "independentAdopterCount": null,
@@ -7881,7 +8115,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -8069,7 +8303,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -8161,7 +8395,7 @@
           "activity": {
             "mergedPullRequests": {
               "state": "observed",
-              "raw": 6
+              "raw": 7
             },
             "commits": {
               "state": "observed",
@@ -8257,7 +8491,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -8275,8 +8509,8 @@
           "projectSide": {
             "recognition": {
               "state": "observed",
-              "raw": 546,
-              "transformed": 6.304448802421981,
+              "raw": 547,
+              "transformed": 6.306275286948016,
               "source": "stars",
               "directQualityEffect": false
             },
@@ -8445,7 +8679,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -8463,15 +8697,15 @@
           "projectSide": {
             "recognition": {
               "state": "observed",
-              "raw": 50294,
-              "transformed": 10.825660947568439,
+              "raw": 50303,
+              "transformed": 10.825839875788878,
               "source": "stars",
               "directQualityEffect": false
             },
             "reuseDerivativeInterest": {
               "state": "observed",
-              "raw": 2552,
-              "transformed": 7.845024417241484,
+              "raw": 2554,
+              "transformed": 7.845807502637805,
               "source": "forks",
               "interpretation": "reuse-derivative-interest",
               "independentAdopterCount": null,
@@ -8633,7 +8867,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -8651,15 +8885,15 @@
           "projectSide": {
             "recognition": {
               "state": "observed",
-              "raw": 10550,
-              "transformed": 9.263975921142093,
+              "raw": 10764,
+              "transformed": 9.284055409798464,
               "source": "stars",
               "directQualityEffect": false
             },
             "reuseDerivativeInterest": {
               "state": "observed",
-              "raw": 1311,
-              "transformed": 7.179307969504034,
+              "raw": 1351,
+              "transformed": 7.20934025660291,
               "source": "forks",
               "interpretation": "reuse-derivative-interest",
               "independentAdopterCount": null,
@@ -8820,7 +9054,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -9008,7 +9242,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -9196,7 +9430,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -9214,8 +9448,8 @@
           "projectSide": {
             "recognition": {
               "state": "observed",
-              "raw": 2770,
-              "transformed": 7.9269635448629785,
+              "raw": 2778,
+              "transformed": 7.929846429742503,
               "source": "stars",
               "directQualityEffect": false
             },
@@ -9384,7 +9618,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -9572,7 +9806,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -9759,7 +9993,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-26T06:55:48.001Z"
+        "observedAt": "2026-10-26T19:32:30.096Z"
       },
       "quality": {
         "state": "not-collected",
@@ -9777,15 +10011,15 @@
           "projectSide": {
             "recognition": {
               "state": "observed",
-              "raw": 32995,
-              "transformed": 10.404141620980623,
+              "raw": 33583,
+              "transformed": 10.421805042060415,
               "source": "stars",
               "directQualityEffect": false
             },
             "reuseDerivativeInterest": {
               "state": "observed",
-              "raw": 3523,
-              "transformed": 8.16735198705607,
+              "raw": 3591,
+              "transformed": 8.18646442942209,
               "source": "forks",
               "interpretation": "reuse-derivative-interest",
               "independentAdopterCount": null,

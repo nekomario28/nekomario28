@@ -4,11 +4,11 @@
   "status": "experimental-non-default",
   "source": {
     "graphOwner": "nekomario28",
-    "graphGeneratedAt": "2026-10-26T06:55:48.001Z",
+    "graphGeneratedAt": "2026-10-26T19:32:30.096Z",
     "assessment": {
       "contractId": "ipm-repository-assessment-artifact-v1",
       "owner": "nekomario28",
-      "generatedAt": "2026-10-26T06:55:48.001Z",
+      "generatedAt": "2026-10-26T19:32:30.096Z",
       "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
       "assessmentPolicyId": "ipm-repository-assessment-v1"
     }
@@ -3574,6 +3574,58 @@
       }
     },
     {
+      "graphNodeId": "repository:melba",
+      "repositoryKey": "nekomario28/melba",
+      "label": "melba",
+      "graphRelation": null,
+      "context": {
+        "category": {
+          "state": "observed",
+          "id": "hardware-embedded"
+        },
+        "artifacts": {
+          "state": "observed",
+          "values": [
+            "library"
+          ]
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "owned",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "qualitySectionState": "not-collected",
+      "qualityAttributionScope": null,
+      "overlayState": "unavailable",
+      "unavailableReason": "not-collected",
+      "overlay": null,
+      "views": {
+        "detail": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        },
+        "compact": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        }
+      },
+      "visualPolicy": {
+        "repositoryCore": "inherit-structure-renderer",
+        "placementEffect": "none",
+        "nodeSizeEffect": "none",
+        "labelPriorityEffect": "none",
+        "impactHaloEffect": "none"
+      }
+    },
+    {
       "graphNodeId": "repository:omarchy-iso",
       "repositoryKey": "nekomario28/omarchy-iso",
       "label": "omarchy-iso",
@@ -4009,6 +4061,106 @@
       }
     },
     {
+      "graphNodeId": "repository:melba-wrapper-bootstrap",
+      "repositoryKey": "nekomario28/melba-wrapper-bootstrap",
+      "label": "melba-wrapper-bootstrap",
+      "graphRelation": null,
+      "context": {
+        "category": {
+          "state": "unknown",
+          "id": null
+        },
+        "artifacts": {
+          "state": "unknown",
+          "values": []
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "owned",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "qualitySectionState": "not-collected",
+      "qualityAttributionScope": null,
+      "overlayState": "unavailable",
+      "unavailableReason": "not-collected",
+      "overlay": null,
+      "views": {
+        "detail": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        },
+        "compact": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        }
+      },
+      "visualPolicy": {
+        "repositoryCore": "inherit-structure-renderer",
+        "placementEffect": "none",
+        "nodeSizeEffect": "none",
+        "labelPriorityEffect": "none",
+        "impactHaloEffect": "none"
+      }
+    },
+    {
+      "graphNodeId": "repository:io-budget",
+      "repositoryKey": "nekomario28/io-budget",
+      "label": "io-budget",
+      "graphRelation": null,
+      "context": {
+        "category": {
+          "state": "unknown",
+          "id": null
+        },
+        "artifacts": {
+          "state": "unknown",
+          "values": []
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "owned",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "qualitySectionState": "not-collected",
+      "qualityAttributionScope": null,
+      "overlayState": "unavailable",
+      "unavailableReason": "not-collected",
+      "overlay": null,
+      "views": {
+        "detail": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        },
+        "compact": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        }
+      },
+      "visualPolicy": {
+        "repositoryCore": "inherit-structure-renderer",
+        "placementEffect": "none",
+        "nodeSizeEffect": "none",
+        "labelPriorityEffect": "none",
+        "impactHaloEffect": "none"
+      }
+    },
+    {
       "graphNodeId": "repository:ruff",
       "repositoryKey": "nekomario28/ruff",
       "label": "ruff",
@@ -4441,56 +4593,6 @@
         "state": "frozen-snapshot",
         "snapshotDate": "2026-08-25",
         "automaticRefresh": false
-      }
-    },
-    {
-      "graphNodeId": "repository:io-budget",
-      "repositoryKey": "nekomario28/io-budget",
-      "label": "io-budget",
-      "graphRelation": null,
-      "context": {
-        "category": {
-          "state": "unknown",
-          "id": null
-        },
-        "artifacts": {
-          "state": "unknown",
-          "values": []
-        },
-        "lifecycle": "unknown",
-        "relation": {
-          "ownership": "owned",
-          "collaboration": "unknown",
-          "lineage": "original"
-        }
-      },
-      "qualitySectionState": "not-collected",
-      "qualityAttributionScope": null,
-      "overlayState": "unavailable",
-      "unavailableReason": "not-collected",
-      "overlay": null,
-      "views": {
-        "detail": {
-          "mode": "unavailable",
-          "token": "quality-unavailable",
-          "reason": "not-collected",
-          "compositeQualityScore": null,
-          "dimensionIdentityPreserved": false
-        },
-        "compact": {
-          "mode": "unavailable",
-          "token": "quality-unavailable",
-          "reason": "not-collected",
-          "compositeQualityScore": null,
-          "dimensionIdentityPreserved": false
-        }
-      },
-      "visualPolicy": {
-        "repositoryCore": "inherit-structure-renderer",
-        "placementEffect": "none",
-        "nodeSizeEffect": "none",
-        "labelPriorityEffect": "none",
-        "impactHaloEffect": "none"
       }
     },
     {
@@ -5478,11 +5580,11 @@
     }
   ],
   "diagnostics": {
-    "graphRepositories": 48,
-    "assessmentRepositories": 48,
-    "joinedRepositories": 48,
+    "graphRepositories": 50,
+    "assessmentRepositories": 50,
+    "joinedRepositories": 50,
     "available": 9,
-    "unavailable": 39,
+    "unavailable": 41,
     "missingAssessmentGraphNodeIds": [],
     "orphanAssessmentGraphNodeIds": [],
     "strictJoin": true
