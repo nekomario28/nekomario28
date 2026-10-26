@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-25T17:13:01.344Z",
+  "generatedAt": "2026-10-26T06:55:48.001Z",
   "repositoryCount": 36,
   "groupCount": 9,
   "nodes": [
@@ -29,7 +29,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-17T14:36:33Z",
-      "updatedAt": "2026-10-25T16:20:08Z",
+      "updatedAt": "2026-10-26T04:15:49Z",
       "groupId": "applications-services",
       "groupLabel": "Applications & Services",
       "classification": {
@@ -2031,7 +2031,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-13T22:33:44Z",
-      "updatedAt": "2026-10-21T03:42:25Z",
+      "updatedAt": "2026-10-26T01:42:03Z",
       "groupId": "ai-ml",
       "groupLabel": "AI & Machine Learning",
       "classification": {
@@ -2667,7 +2667,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-10-25T04:38:18Z",
+      "updatedAt": "2026-10-26T04:47:44Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -2731,12 +2731,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3339,
+      "stars": 3340,
       "forks": 498,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-25T16:50:34Z",
+      "updatedAt": "2026-10-26T06:38:58Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2787,6 +2787,46 @@
       }
     },
     {
+      "id": "repository:syun88/sim-agent",
+      "label": "syun88/Sim-Agent",
+      "type": "repository",
+      "relation": "contributed",
+      "repositoryOwner": "syun88",
+      "repositoryName": "Sim-Agent",
+      "url": "https://github.com/syun88/Sim-Agent",
+      "description": "Embodied AI Agent ",
+      "language": "Python",
+      "topics": [],
+      "stars": 4,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-10-17T01:35:14Z",
+      "updatedAt": "2026-10-25T00:24:54Z",
+      "contribution": {
+        "commits": 10,
+        "pullRequests": 14,
+        "mergedPullRequests": 6,
+        "commitsTruncated": false,
+        "pullRequestsTruncated": false
+      },
+      "classification": {
+        "categoryId": "ai-ml",
+        "categoryLabel": "AI / Machine Learning",
+        "secondaryTags": [],
+        "confidence": 0.564,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "description",
+            "value": "ai",
+            "weight": 0.7
+          }
+        ]
+      }
+    },
+    {
       "id": "repository:gazebosim/ros_gz",
       "label": "gazebosim/ros_gz",
       "type": "repository",
@@ -2812,12 +2852,12 @@
         "gazebo",
         "gazebosim"
       ],
-      "stars": 547,
+      "stars": 546,
       "forks": 236,
       "fork": false,
       "archived": false,
       "createdAt": "2018-08-01T22:42:46Z",
-      "updatedAt": "2026-10-22T20:17:43Z",
+      "updatedAt": "2026-10-26T04:22:41Z",
       "contribution": {
         "commits": 4,
         "pullRequests": 5,
@@ -2889,46 +2929,6 @@
       }
     },
     {
-      "id": "repository:syun88/sim-agent",
-      "label": "syun88/Sim-Agent",
-      "type": "repository",
-      "relation": "contributed",
-      "repositoryOwner": "syun88",
-      "repositoryName": "Sim-Agent",
-      "url": "https://github.com/syun88/Sim-Agent",
-      "description": "Embodied AI Agent ",
-      "language": "Python",
-      "topics": [],
-      "stars": 4,
-      "forks": 0,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2026-10-17T01:35:14Z",
-      "updatedAt": "2026-10-25T00:24:54Z",
-      "contribution": {
-        "commits": 10,
-        "pullRequests": 8,
-        "mergedPullRequests": 3,
-        "commitsTruncated": false,
-        "pullRequestsTruncated": false
-      },
-      "classification": {
-        "categoryId": "ai-ml",
-        "categoryLabel": "AI / Machine Learning",
-        "secondaryTags": [],
-        "confidence": 0.564,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "ai-ml",
-            "source": "description",
-            "value": "ai",
-            "weight": 0.7
-          }
-        ]
-      }
-    },
-    {
       "id": "repository:astral-sh/ruff",
       "label": "astral-sh/ruff",
       "type": "repository",
@@ -2951,12 +2951,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50270,
-      "forks": 2548,
+      "stars": 50294,
+      "forks": 2552,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-25T12:46:03Z",
+      "updatedAt": "2026-10-26T06:34:33Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2994,12 +2994,12 @@
         "step",
         "wasm"
       ],
-      "stars": 10382,
-      "forks": 1284,
+      "stars": 10550,
+      "forks": 1311,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-10-25T17:08:20Z",
+      "updatedAt": "2026-10-26T06:54:27Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -3018,6 +3018,46 @@
             "categoryId": "web-apps",
             "source": "description",
             "value": "web",
+            "weight": 0.7
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:aiandlabs/aiand-cli",
+      "label": "aiandlabs/aiand-cli",
+      "type": "repository",
+      "relation": "contributed",
+      "repositoryOwner": "aiandlabs",
+      "repositoryName": "aiand-cli",
+      "url": "https://github.com/aiandlabs/aiand-cli",
+      "description": "ai& CLI",
+      "language": "JavaScript",
+      "topics": [],
+      "stars": 5,
+      "forks": 2,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-09-07T05:49:16Z",
+      "updatedAt": "2026-10-26T06:11:36Z",
+      "contribution": {
+        "commits": 3,
+        "pullRequests": 1,
+        "mergedPullRequests": 1,
+        "commitsTruncated": false,
+        "pullRequestsTruncated": false
+      },
+      "classification": {
+        "categoryId": "ai-ml",
+        "categoryLabel": "AI / Machine Learning",
+        "secondaryTags": [],
+        "confidence": 0.564,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "description",
+            "value": "ai",
             "weight": 0.7
           }
         ]
@@ -3079,12 +3119,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2767,
+      "stars": 2770,
       "forks": 159,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-10-25T15:08:36Z",
+      "updatedAt": "2026-10-26T04:43:38Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3212,12 +3252,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 32595,
-      "forks": 3488,
+      "stars": 32995,
+      "forks": 3523,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-25T17:09:22Z",
+      "updatedAt": "2026-10-26T06:55:10Z",
       "contribution": {
         "commits": 13,
         "pullRequests": 24,
@@ -3251,39 +3291,6 @@
             "weight": 0.7
           }
         ]
-      }
-    },
-    {
-      "id": "repository:omacom/omarchy",
-      "label": "omacom/omarchy",
-      "type": "repository",
-      "relation": "contributed",
-      "repositoryOwner": "omacom",
-      "repositoryName": "omarchy",
-      "url": "https://github.com/omacom/omarchy",
-      "description": "Beautiful, Modern & Opinionated Linux",
-      "language": "Shell",
-      "topics": [],
-      "stars": 45669,
-      "forks": 5706,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2025-06-01T07:26:22Z",
-      "updatedAt": "2026-10-25T17:11:18Z",
-      "contribution": {
-        "commits": 1,
-        "pullRequests": 19,
-        "mergedPullRequests": 0,
-        "commitsTruncated": false,
-        "pullRequestsTruncated": false
-      },
-      "classification": {
-        "categoryId": "uncategorized",
-        "categoryLabel": "Uncategorized",
-        "secondaryTags": [],
-        "confidence": 0,
-        "method": "deterministic",
-        "evidence": []
       }
     }
   ],
@@ -3525,12 +3532,12 @@
     },
     {
       "source": "user:nekomario28",
-      "target": "repository:gazebosim/ros_gz",
+      "target": "repository:syun88/sim-agent",
       "type": "contribution"
     },
     {
       "source": "user:nekomario28",
-      "target": "repository:syun88/sim-agent",
+      "target": "repository:gazebosim/ros_gz",
       "type": "contribution"
     },
     {
@@ -3541,6 +3548,11 @@
     {
       "source": "user:nekomario28",
       "target": "repository:tangency-labs/solidcraft",
+      "type": "contribution"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:aiandlabs/aiand-cli",
       "type": "contribution"
     },
     {
@@ -3567,17 +3579,12 @@
       "source": "user:nekomario28",
       "target": "repository:niko1221/strata",
       "type": "contribution"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:omacom/omarchy",
-      "type": "contribution"
     }
   ],
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "c058866152ce1d385accda2a32c5b76ba95bcd067350f4fddaeb697e633760a1",
+    "corpusFingerprint": "cfcac0c5b85cd16ed803c3fc1ac30bee1a85b7aae31383d704707e121d18154a",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3632,7 +3639,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "580092ee8072a546b911036e229e6090bd92ce3beb2a989dd51ddc1dc1c62011"
+        "contentHash": "17ad8918047ec12871942b98541b36793754c8c4737d7013234c057bed91f3d5"
       },
       {
         "repoId": 1340281422,
@@ -3657,7 +3664,7 @@
       {
         "repoId": 1374579782,
         "name": "mobile-webcam-bridge",
-        "contentHash": "7509b4f328884e853028d4192165c0308420dc9cf216e3b5549c294628ef561c"
+        "contentHash": "4a49da689a352822f3a7071bea07a0d14f7c9e292feed41af45095e9782cf212"
       },
       {
         "repoId": 1377492522,
@@ -3712,7 +3719,7 @@
       {
         "repoId": 1418091543,
         "name": "gxkit",
-        "contentHash": "044824e70cbcee7277e583953c51140e20aa859f2c4194f5d4ede71e0d4f0946"
+        "contentHash": "31f23fddaba8f235a83be2c8ac31ebece3a0962402d0d30c6965b5f4f5da8a2b"
       },
       {
         "repoId": 1418340636,
@@ -3994,8 +4001,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-10-25T17:13:04.283Z",
-      "to": "2026-10-25T17:13:04.283Z"
+      "from": "2025-10-26T06:55:52.039Z",
+      "to": "2026-10-26T06:55:52.039Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
