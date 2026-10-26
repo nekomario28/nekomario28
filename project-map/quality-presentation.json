@@ -4,11 +4,11 @@
   "status": "experimental-non-default",
   "source": {
     "graphOwner": "nekomario28",
-    "graphGeneratedAt": "2026-10-25T17:13:01.344Z",
+    "graphGeneratedAt": "2026-10-26T06:55:48.001Z",
     "assessment": {
       "contractId": "ipm-repository-assessment-artifact-v1",
       "owner": "nekomario28",
-      "generatedAt": "2026-10-25T17:13:01.344Z",
+      "generatedAt": "2026-10-26T06:55:48.001Z",
       "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
       "assessmentPolicyId": "ipm-repository-assessment-v1"
     }
@@ -4977,14 +4977,14 @@
       }
     },
     {
-      "graphNodeId": "repository:gazebosim/ros_gz",
-      "repositoryKey": "gazebosim/ros_gz",
-      "label": "gazebosim/ros_gz",
+      "graphNodeId": "repository:syun88/sim-agent",
+      "repositoryKey": "syun88/sim-agent",
+      "label": "syun88/Sim-Agent",
       "graphRelation": "contributed",
       "context": {
         "category": {
-          "state": "unknown",
-          "id": null
+          "state": "observed",
+          "id": "ai-ml"
         },
         "artifacts": {
           "state": "unknown",
@@ -5027,14 +5027,14 @@
       }
     },
     {
-      "graphNodeId": "repository:syun88/sim-agent",
-      "repositoryKey": "syun88/sim-agent",
-      "label": "syun88/Sim-Agent",
+      "graphNodeId": "repository:gazebosim/ros_gz",
+      "repositoryKey": "gazebosim/ros_gz",
+      "label": "gazebosim/ros_gz",
       "graphRelation": "contributed",
       "context": {
         "category": {
-          "state": "observed",
-          "id": "ai-ml"
+          "state": "unknown",
+          "id": null
         },
         "artifacts": {
           "state": "unknown",
@@ -5135,6 +5135,56 @@
         "category": {
           "state": "unknown",
           "id": null
+        },
+        "artifacts": {
+          "state": "unknown",
+          "values": []
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "contributed",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "qualitySectionState": "not-collected",
+      "qualityAttributionScope": null,
+      "overlayState": "unavailable",
+      "unavailableReason": "not-collected",
+      "overlay": null,
+      "views": {
+        "detail": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        },
+        "compact": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        }
+      },
+      "visualPolicy": {
+        "repositoryCore": "inherit-structure-renderer",
+        "placementEffect": "none",
+        "nodeSizeEffect": "none",
+        "labelPriorityEffect": "none",
+        "impactHaloEffect": "none"
+      }
+    },
+    {
+      "graphNodeId": "repository:aiandlabs/aiand-cli",
+      "repositoryKey": "aiandlabs/aiand-cli",
+      "label": "aiandlabs/aiand-cli",
+      "graphRelation": "contributed",
+      "context": {
+        "category": {
+          "state": "observed",
+          "id": "ai-ml"
         },
         "artifacts": {
           "state": "unknown",
@@ -5380,56 +5430,6 @@
       "graphNodeId": "repository:niko1221/strata",
       "repositoryKey": "niko1221/strata",
       "label": "Niko1221/Strata",
-      "graphRelation": "contributed",
-      "context": {
-        "category": {
-          "state": "unknown",
-          "id": null
-        },
-        "artifacts": {
-          "state": "unknown",
-          "values": []
-        },
-        "lifecycle": "unknown",
-        "relation": {
-          "ownership": "contributed",
-          "collaboration": "unknown",
-          "lineage": "original"
-        }
-      },
-      "qualitySectionState": "not-collected",
-      "qualityAttributionScope": null,
-      "overlayState": "unavailable",
-      "unavailableReason": "not-collected",
-      "overlay": null,
-      "views": {
-        "detail": {
-          "mode": "unavailable",
-          "token": "quality-unavailable",
-          "reason": "not-collected",
-          "compositeQualityScore": null,
-          "dimensionIdentityPreserved": false
-        },
-        "compact": {
-          "mode": "unavailable",
-          "token": "quality-unavailable",
-          "reason": "not-collected",
-          "compositeQualityScore": null,
-          "dimensionIdentityPreserved": false
-        }
-      },
-      "visualPolicy": {
-        "repositoryCore": "inherit-structure-renderer",
-        "placementEffect": "none",
-        "nodeSizeEffect": "none",
-        "labelPriorityEffect": "none",
-        "impactHaloEffect": "none"
-      }
-    },
-    {
-      "graphNodeId": "repository:omacom/omarchy",
-      "repositoryKey": "omacom/omarchy",
-      "label": "omacom/omarchy",
       "graphRelation": "contributed",
       "context": {
         "category": {
