@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-26T19:32:30.096Z",
+  "generatedAt": "2026-10-27T06:48:59.390Z",
   "repositoryCount": 38,
   "groupCount": 9,
   "nodes": [
@@ -29,7 +29,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-17T14:36:33Z",
-      "updatedAt": "2026-10-26T19:14:03Z",
+      "updatedAt": "2026-10-26T20:25:12Z",
       "groupId": "applications-services",
       "groupLabel": "Applications & Services",
       "classification": {
@@ -2326,8 +2326,8 @@
       }
     },
     {
-      "id": "group:hardware-embedded",
-      "label": "Hardware & Embedded",
+      "id": "group:uncategorized",
+      "label": "Uncategorized",
       "type": "group",
       "repositoryCount": 3
     },
@@ -2344,22 +2344,16 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-26T06:21:09Z",
-      "updatedAt": "2026-10-26T18:58:28Z",
-      "groupId": "hardware-embedded",
-      "groupLabel": "Hardware & Embedded",
+      "updatedAt": "2026-10-27T04:59:05Z",
+      "groupId": "uncategorized",
+      "groupLabel": "Uncategorized",
       "classification": {
-        "categoryId": "hardware",
-        "categoryLabel": "Hardware / Embedded",
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
         "secondaryTags": [],
-        "confidence": 0.528,
+        "confidence": 0.653,
         "method": "deterministic",
         "evidence": [
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "embedded",
-            "weight": 0.7
-          },
           {
             "categoryId": "hardware",
             "source": "readme",
@@ -2369,40 +2363,73 @@
           {
             "categoryId": "web-apps",
             "source": "readme",
-            "value": "api",
+            "value": "app",
             "weight": 0.7
           },
           {
             "categoryId": "web-apps",
             "source": "readme",
-            "value": "app",
+            "value": "frontend",
             "weight": 0.7
           }
         ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "hardware-embedded",
-        "categoryLabel": "Hardware & Embedded",
-        "secondaryTags": [
-          "artifact:library",
-          "topic:device-integration",
-          "platform:web",
-          "platform:desktop",
-          "platform:cli",
-          "platform:server",
-          "platform:embedded"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "hardware-embedded",
-            "source": "description",
-            "value": "P1 exact taxonomy category hardware-embedded",
-            "weight": 0.9
-          }
-        ]
       }
+    },
+    {
+      "id": "repository:melba-wrapper-bootstrap",
+      "label": "melba-wrapper-bootstrap",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/melba-wrapper-bootstrap",
+      "description": "Source-only bootstrap for the user-supplied ALAC decrypt service used by Melba",
+      "language": "Shell",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-10-26T05:20:33Z",
+      "updatedAt": "2026-10-26T14:16:14Z",
+      "groupId": "uncategorized",
+      "groupLabel": "Uncategorized",
+      "classification": {
+        "categoryId": "uncategorized",
+        "categoryLabel": "Uncategorized",
+        "secondaryTags": [],
+        "confidence": 0,
+        "method": "deterministic",
+        "evidence": []
+      }
+    },
+    {
+      "id": "repository:io-budget",
+      "label": "io-budget",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/io-budget",
+      "description": "One wall-clock budget for socket I/O, enforced below buffering layers, plus partial-frame retention that never loses a frame boundary",
+      "language": "Rust",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-10-15T07:02:06Z",
+      "updatedAt": "2026-10-18T12:50:55Z",
+      "groupId": "uncategorized",
+      "groupLabel": "Uncategorized",
+      "classification": {
+        "categoryId": "uncategorized",
+        "categoryLabel": "Uncategorized",
+        "secondaryTags": [],
+        "confidence": 0,
+        "method": "deterministic",
+        "evidence": []
+      }
+    },
+    {
+      "id": "group:hardware-embedded",
+      "label": "Hardware & Embedded",
+      "type": "group",
+      "repositoryCount": 2
     },
     {
       "id": "repository:omarchy-iso",
@@ -2568,62 +2595,6 @@
       }
     },
     {
-      "id": "group:uncategorized",
-      "label": "Uncategorized",
-      "type": "group",
-      "repositoryCount": 2
-    },
-    {
-      "id": "repository:melba-wrapper-bootstrap",
-      "label": "melba-wrapper-bootstrap",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/melba-wrapper-bootstrap",
-      "description": "Source-only bootstrap for the user-supplied ALAC decrypt service used by Melba",
-      "language": "Shell",
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2026-10-26T05:20:33Z",
-      "updatedAt": "2026-10-26T14:16:14Z",
-      "groupId": "uncategorized",
-      "groupLabel": "Uncategorized",
-      "classification": {
-        "categoryId": "uncategorized",
-        "categoryLabel": "Uncategorized",
-        "secondaryTags": [],
-        "confidence": 0,
-        "method": "deterministic",
-        "evidence": []
-      }
-    },
-    {
-      "id": "repository:io-budget",
-      "label": "io-budget",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/io-budget",
-      "description": "One wall-clock budget for socket I/O, enforced below buffering layers, plus partial-frame retention that never loses a frame boundary",
-      "language": "Rust",
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2026-10-15T07:02:06Z",
-      "updatedAt": "2026-10-18T12:50:55Z",
-      "groupId": "uncategorized",
-      "groupLabel": "Uncategorized",
-      "classification": {
-        "categoryId": "uncategorized",
-        "categoryLabel": "Uncategorized",
-        "secondaryTags": [],
-        "confidence": 0,
-        "method": "deterministic",
-        "evidence": []
-      }
-    },
-    {
       "id": "group:developer-tools",
       "label": "Developer Tools",
       "type": "group",
@@ -2765,7 +2736,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-10-26T04:47:44Z",
+      "updatedAt": "2026-10-27T05:03:08Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -2951,7 +2922,7 @@
         "gazebosim"
       ],
       "stars": 547,
-      "forks": 236,
+      "forks": 237,
       "fork": false,
       "archived": false,
       "createdAt": "2018-08-01T22:42:46Z",
@@ -3049,12 +3020,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50303,
-      "forks": 2554,
+      "stars": 50320,
+      "forks": 2557,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-26T19:07:55Z",
+      "updatedAt": "2026-10-27T06:15:05Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -3092,12 +3063,12 @@
         "step",
         "wasm"
       ],
-      "stars": 10764,
-      "forks": 1351,
+      "stars": 10877,
+      "forks": 1367,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-10-26T19:32:15Z",
+      "updatedAt": "2026-10-27T06:41:39Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -3217,12 +3188,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2778,
-      "forks": 159,
+      "stars": 2782,
+      "forks": 160,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-10-26T15:12:54Z",
+      "updatedAt": "2026-10-27T06:02:05Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3350,12 +3321,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 33583,
-      "forks": 3591,
+      "stars": 33975,
+      "forks": 3641,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-26T19:32:33Z",
+      "updatedAt": "2026-10-27T06:46:49Z",
       "contribution": {
         "commits": 13,
         "pullRequests": 24,
@@ -3565,28 +3536,13 @@
     },
     {
       "source": "user:nekomario28",
-      "target": "group:hardware-embedded",
-      "type": "ownership"
-    },
-    {
-      "source": "group:hardware-embedded",
-      "target": "repository:melba",
-      "type": "membership"
-    },
-    {
-      "source": "group:hardware-embedded",
-      "target": "repository:omarchy-iso",
-      "type": "membership"
-    },
-    {
-      "source": "group:hardware-embedded",
-      "target": "repository:turing-smart-screen-python-owl",
-      "type": "membership"
-    },
-    {
-      "source": "user:nekomario28",
       "target": "group:uncategorized",
       "type": "ownership"
+    },
+    {
+      "source": "group:uncategorized",
+      "target": "repository:melba",
+      "type": "membership"
     },
     {
       "source": "group:uncategorized",
@@ -3596,6 +3552,21 @@
     {
       "source": "group:uncategorized",
       "target": "repository:io-budget",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "group:hardware-embedded",
+      "type": "ownership"
+    },
+    {
+      "source": "group:hardware-embedded",
+      "target": "repository:omarchy-iso",
+      "type": "membership"
+    },
+    {
+      "source": "group:hardware-embedded",
+      "target": "repository:turing-smart-screen-python-owl",
       "type": "membership"
     },
     {
@@ -3692,7 +3663,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "75f58b6051c23b0e9239344667a79406bd9cf00c184f7a9786afc9af38568e42",
+    "corpusFingerprint": "4ce1920b992f059d2f4e1e44566255b8933fc14c4386ef66ef37144741eeb892",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3747,7 +3718,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "17ad8918047ec12871942b98541b36793754c8c4737d7013234c057bed91f3d5"
+        "contentHash": "e8643a5bf8f3f9ad03a3a8e948eeb069ec5b5e68782830a4cfa217ac0a2335ea"
       },
       {
         "repoId": 1340281422,
@@ -3882,7 +3853,7 @@
       {
         "repoId": 1433983984,
         "name": "melba",
-        "contentHash": "6924d6af22be7e9fc3e571abbc380a4ba38766041bc6718a28bfb80214c86d38"
+        "contentHash": "7ea4dad9fcecd14059251b800d22965a369bcc3b093b006769b4e1ac4f074429"
       }
     ],
     "categories": [
@@ -4119,8 +4090,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-10-26T19:32:35.617Z",
-      "to": "2026-10-26T19:32:35.617Z"
+      "from": "2025-10-27T06:49:04.350Z",
+      "to": "2026-10-27T06:49:04.350Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
