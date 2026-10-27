@@ -6,7 +6,7 @@
 </defs>
 <rect width="760" height="220" rx="8" fill="#0d1117"/>
 <text x="38" y="24" fill="#f0f6fc" font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="14" font-weight="600">Contributions · last 31 days</text>
-<text x="742" y="24" text-anchor="end" fill="#8b949e" font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11">3758 contributions</text>
+<text x="742" y="24" text-anchor="end" fill="#8b949e" font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11">3833 contributions</text>
 <g font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
 <line x1="38" y1="188.00" x2="742" y2="188.00" stroke="#21262d" stroke-width="1" opacity="0.55"/>
 <text x="30" y="192.00" text-anchor="end" fill="#8b949e" font-size="10">0</text>
@@ -18,8 +18,8 @@
 <text x="30" y="82.50" text-anchor="end" fill="#8b949e" font-size="10">375</text>
 <line x1="38" y1="42.00" x2="742" y2="42.00" stroke="#21262d" stroke-width="1" opacity="0.55"/>
 <text x="30" y="46.00" text-anchor="end" fill="#8b949e" font-size="10">500</text>
-<path d="M 38.00 123.47 L 61.47 143.91 L 84.93 182.45 L 108.40 178.07 L 131.87 180.41 L 155.33 178.95 L 178.80 187.12 L 202.27 176.32 L 225.73 171.65 L 249.20 170.48 L 272.67 180.99 L 296.13 178.36 L 319.60 177.20 L 343.07 180.70 L 366.53 166.68 L 390.00 158.51 L 413.47 141.57 L 436.93 91.93 L 460.40 133.10 L 483.87 137.19 L 507.33 105.95 L 530.80 147.70 L 554.27 119.38 L 577.73 121.72 L 601.20 159.09 L 624.67 168.44 L 648.13 148.00 L 671.60 154.71 L 695.07 91.64 L 718.53 112.96 L 742.00 162.01 L 742.00 188.00 L 38.00 188.00 Z" fill="url(#area)"/>
-<path d="M 38.00 123.47 L 61.47 143.91 L 84.93 182.45 L 108.40 178.07 L 131.87 180.41 L 155.33 178.95 L 178.80 187.12 L 202.27 176.32 L 225.73 171.65 L 249.20 170.48 L 272.67 180.99 L 296.13 178.36 L 319.60 177.20 L 343.07 180.70 L 366.53 166.68 L 390.00 158.51 L 413.47 141.57 L 436.93 91.93 L 460.40 133.10 L 483.87 137.19 L 507.33 105.95 L 530.80 147.70 L 554.27 119.38 L 577.73 121.72 L 601.20 159.09 L 624.67 168.44 L 648.13 148.00 L 671.60 154.71 L 695.07 91.64 L 718.53 112.96 L 742.00 162.01" fill="none" stroke="#58a6ff" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 38.00 123.47 L 61.47 143.91 L 84.93 182.45 L 108.40 178.07 L 131.87 180.41 L 155.33 178.95 L 178.80 187.12 L 202.27 176.32 L 225.73 171.65 L 249.20 170.48 L 272.67 180.99 L 296.13 178.36 L 319.60 177.20 L 343.07 180.70 L 366.53 166.68 L 390.00 158.51 L 413.47 141.57 L 436.93 91.93 L 460.40 133.10 L 483.87 137.19 L 507.33 105.95 L 530.80 147.70 L 554.27 119.38 L 577.73 121.72 L 601.20 159.09 L 624.67 168.44 L 648.13 148.00 L 671.60 154.71 L 695.07 90.76 L 718.53 108.87 L 742.00 145.08 L 742.00 188.00 L 38.00 188.00 Z" fill="url(#area)"/>
+<path d="M 38.00 123.47 L 61.47 143.91 L 84.93 182.45 L 108.40 178.07 L 131.87 180.41 L 155.33 178.95 L 178.80 187.12 L 202.27 176.32 L 225.73 171.65 L 249.20 170.48 L 272.67 180.99 L 296.13 178.36 L 319.60 177.20 L 343.07 180.70 L 366.53 166.68 L 390.00 158.51 L 413.47 141.57 L 436.93 91.93 L 460.40 133.10 L 483.87 137.19 L 507.33 105.95 L 530.80 147.70 L 554.27 119.38 L 577.73 121.72 L 601.20 159.09 L 624.67 168.44 L 648.13 148.00 L 671.60 154.71 L 695.07 90.76 L 718.53 108.87 L 742.00 145.08" fill="none" stroke="#58a6ff" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <circle cx="38.00" cy="123.47" r="2.15" fill="#79c0ff"/>
 <circle cx="61.47" cy="143.91" r="2.15" fill="#79c0ff"/>
 <circle cx="84.93" cy="182.45" r="2.15" fill="#79c0ff"/>
@@ -48,9 +48,9 @@
 <circle cx="624.67" cy="168.44" r="2.15" fill="#79c0ff"/>
 <circle cx="648.13" cy="148.00" r="2.15" fill="#79c0ff"/>
 <circle cx="671.60" cy="154.71" r="2.15" fill="#79c0ff"/>
-<circle cx="695.07" cy="91.64" r="2.15" fill="#79c0ff"/>
-<circle cx="718.53" cy="112.96" r="2.15" fill="#79c0ff"/>
-<circle cx="742.00" cy="162.01" r="2.15" fill="#79c0ff"/>
+<circle cx="695.07" cy="90.76" r="2.15" fill="#79c0ff"/>
+<circle cx="718.53" cy="108.87" r="2.15" fill="#79c0ff"/>
+<circle cx="742.00" cy="145.08" r="2.15" fill="#79c0ff"/>
 <text x="38.00" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Sep 27</text>
 <text x="202.27" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Oct 4</text>
 <text x="390.00" y="210" text-anchor="middle" fill="#8b949e" font-size="10">Oct 12</text>
