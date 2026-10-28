@@ -5,18 +5,6 @@
 
 <br>
 
-<p align="center">
-  <a href="https://konosuba.com/bakuen/story/?mode=story4">
-    <img src="https://konosuba.com/bakuen/story/img/pdsfi4/05.jpg" width="700" alt="めぐみん">
-  </a>
-</p>
-
-<p align="center">
-  <sub>©2023 暁なつめ・三嶋くろね／KADOKAWA／このすば爆焔製作委員会</sub>
-</p>
-
-<br>
-
 <h2 align="center">Projects</h2>
 <p align="center">Click this map↓</p>
 
