@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-28T19:05:35.884Z",
+  "generatedAt": "2026-10-29T07:38:51.082Z",
   "repositoryCount": 38,
   "groupCount": 9,
   "nodes": [
@@ -2344,7 +2344,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-26T06:21:09Z",
-      "updatedAt": "2026-10-28T11:58:46Z",
+      "updatedAt": "2026-10-29T05:17:28Z",
       "groupId": "uncategorized",
       "groupLabel": "Uncategorized",
       "classification": {
@@ -2736,7 +2736,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-10-28T05:49:34Z",
+      "updatedAt": "2026-10-29T05:52:44Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -2800,12 +2800,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3345,
-      "forks": 501,
+      "stars": 3349,
+      "forks": 503,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-28T16:26:19Z",
+      "updatedAt": "2026-10-29T06:53:47Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -3020,12 +3020,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50340,
-      "forks": 2561,
+      "stars": 50347,
+      "forks": 2563,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-28T18:23:53Z",
+      "updatedAt": "2026-10-29T06:29:28Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -3063,12 +3063,12 @@
         "step",
         "wasm"
       ],
-      "stars": 11584,
-      "forks": 1483,
+      "stars": 11756,
+      "forks": 1505,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-10-28T19:05:18Z",
+      "updatedAt": "2026-10-29T07:35:55Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -3188,12 +3188,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2792,
+      "stars": 2798,
       "forks": 161,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-10-28T18:40:09Z",
+      "updatedAt": "2026-10-29T04:54:20Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3321,12 +3321,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 35231,
-      "forks": 3781,
+      "stars": 35568,
+      "forks": 3824,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-28T19:05:32Z",
+      "updatedAt": "2026-10-29T07:36:32Z",
       "contribution": {
         "commits": 14,
         "pullRequests": 24,
@@ -3663,7 +3663,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "ec5ffb6d0b30cb1e6c73fcbd72542ef897e49da1e63a110c0e5ae57c7b39df6d",
+    "corpusFingerprint": "24cd9f68401a24d9c749b47af09f6ecc263d1b35d4ceda36bc75fc664f28b350",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3718,7 +3718,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "133441dacc9ff1715d8081eb751be18268586a9554817c8ff3d178a5074a48d0"
+        "contentHash": "1de3a7f2efe41e1a27d2100a6f39f9588d55127efd51edd9a50e9ff2e30421c8"
       },
       {
         "repoId": 1340281422,
@@ -4090,8 +4090,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-10-28T19:05:41.200Z",
-      "to": "2026-10-28T19:05:41.200Z"
+      "from": "2025-10-29T07:38:55.342Z",
+      "to": "2026-10-29T07:38:55.342Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
