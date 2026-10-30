@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-30T07:42:37.371Z",
+  "generatedAt": "2026-10-30T18:49:47.774Z",
   "repositoryCount": 38,
   "groupCount": 9,
   "nodes": [
@@ -14,59 +14,7 @@
       "id": "group:applications-services",
       "label": "Applications & Services",
       "type": "group",
-      "repositoryCount": 12
-    },
-    {
-      "id": "repository:mobile-webcam-bridge",
-      "label": "mobile-webcam-bridge",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/mobile-webcam-bridge",
-      "description": "Use an Android phone as a Linux webcam over USB or Wi-Fi",
-      "language": "Rust",
-      "topics": [],
-      "stars": 1,
-      "forks": 0,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2026-09-17T14:36:33Z",
-      "updatedAt": "2026-10-27T12:28:26Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.564,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "app",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:application",
-          "platform:web",
-          "platform:desktop",
-          "platform:mobile"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
-          }
-        ]
-      }
+      "repositoryCount": 11
     },
     {
       "id": "repository:cline-desktop-linux",
@@ -2326,10 +2274,10 @@
       }
     },
     {
-      "id": "group:uncategorized",
-      "label": "Uncategorized",
+      "id": "group:hardware-embedded",
+      "label": "Hardware & Embedded",
       "type": "group",
-      "repositoryCount": 3
+      "repositoryCount": 4
     },
     {
       "id": "repository:melba",
@@ -2344,16 +2292,22 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-26T06:21:09Z",
-      "updatedAt": "2026-10-30T06:24:08Z",
-      "groupId": "uncategorized",
-      "groupLabel": "Uncategorized",
+      "updatedAt": "2026-10-30T15:53:34Z",
+      "groupId": "hardware-embedded",
+      "groupLabel": "Hardware & Embedded",
       "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
+        "categoryId": "hardware",
+        "categoryLabel": "Hardware / Embedded",
         "secondaryTags": [],
-        "confidence": 0.653,
+        "confidence": 0.528,
         "method": "deterministic",
         "evidence": [
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "embedded",
+            "weight": 0.7
+          },
           {
             "categoryId": "hardware",
             "source": "readme",
@@ -2373,63 +2327,88 @@
             "weight": 0.7
           }
         ]
-      }
-    },
-    {
-      "id": "repository:melba-wrapper-bootstrap",
-      "label": "melba-wrapper-bootstrap",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/melba-wrapper-bootstrap",
-      "description": "Source-only bootstrap for the user-supplied ALAC decrypt service used by Melba",
-      "language": "Shell",
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2026-10-26T05:20:33Z",
-      "updatedAt": "2026-10-26T14:16:14Z",
-      "groupId": "uncategorized",
-      "groupLabel": "Uncategorized",
-      "classification": {
-        "categoryId": "uncategorized",
-        "categoryLabel": "Uncategorized",
-        "secondaryTags": [],
-        "confidence": 0,
+      },
+      "taxonomyAssignment": {
+        "categoryId": "hardware-embedded",
+        "categoryLabel": "Hardware & Embedded",
+        "secondaryTags": [
+          "artifact:library",
+          "topic:device-integration",
+          "platform:web",
+          "platform:desktop",
+          "platform:embedded"
+        ],
+        "confidence": 0.9,
         "method": "deterministic",
-        "evidence": []
+        "evidence": [
+          {
+            "categoryId": "hardware-embedded",
+            "source": "description",
+            "value": "P1 exact taxonomy category hardware-embedded",
+            "weight": 0.9
+          }
+        ]
       }
     },
     {
-      "id": "repository:io-budget",
-      "label": "io-budget",
+      "id": "repository:mobile-webcam-bridge",
+      "label": "mobile-webcam-bridge",
       "type": "repository",
-      "url": "https://github.com/nekomario28/io-budget",
-      "description": "One wall-clock budget for socket I/O, enforced below buffering layers, plus partial-frame retention that never loses a frame boundary",
+      "url": "https://github.com/nekomario28/mobile-webcam-bridge",
+      "description": "Use an Android phone as a Linux webcam over USB or Wi-Fi",
       "language": "Rust",
       "topics": [],
-      "stars": 0,
+      "stars": 1,
       "forks": 0,
       "fork": false,
       "archived": false,
-      "createdAt": "2026-10-15T07:02:06Z",
-      "updatedAt": "2026-10-18T12:50:55Z",
-      "groupId": "uncategorized",
-      "groupLabel": "Uncategorized",
+      "createdAt": "2026-09-17T14:36:33Z",
+      "updatedAt": "2026-10-30T13:34:28Z",
+      "groupId": "hardware-embedded",
+      "groupLabel": "Hardware & Embedded",
       "classification": {
-        "categoryId": "uncategorized",
-        "categoryLabel": "Uncategorized",
+        "categoryId": "hardware",
+        "categoryLabel": "Hardware / Embedded",
         "secondaryTags": [],
-        "confidence": 0,
+        "confidence": 0.314,
         "method": "deterministic",
-        "evidence": []
+        "evidence": [
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "hardware",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "hardware-embedded",
+        "categoryLabel": "Hardware & Embedded",
+        "secondaryTags": [
+          "artifact:application",
+          "topic:device-integration",
+          "platform:desktop",
+          "platform:mobile",
+          "platform:cli",
+          "platform:embedded"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "hardware-embedded",
+            "source": "description",
+            "value": "P1 exact taxonomy category hardware-embedded",
+            "weight": 0.9
+          }
+        ]
       }
-    },
-    {
-      "id": "group:hardware-embedded",
-      "label": "Hardware & Embedded",
-      "type": "group",
-      "repositoryCount": 2
     },
     {
       "id": "repository:omarchy-iso",
@@ -2595,6 +2574,62 @@
       }
     },
     {
+      "id": "group:uncategorized",
+      "label": "Uncategorized",
+      "type": "group",
+      "repositoryCount": 2
+    },
+    {
+      "id": "repository:melba-wrapper-bootstrap",
+      "label": "melba-wrapper-bootstrap",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/melba-wrapper-bootstrap",
+      "description": "Source-only bootstrap for the user-supplied ALAC decrypt service used by Melba",
+      "language": "Shell",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-10-26T05:20:33Z",
+      "updatedAt": "2026-10-26T14:16:14Z",
+      "groupId": "uncategorized",
+      "groupLabel": "Uncategorized",
+      "classification": {
+        "categoryId": "uncategorized",
+        "categoryLabel": "Uncategorized",
+        "secondaryTags": [],
+        "confidence": 0,
+        "method": "deterministic",
+        "evidence": []
+      }
+    },
+    {
+      "id": "repository:io-budget",
+      "label": "io-budget",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/io-budget",
+      "description": "One wall-clock budget for socket I/O, enforced below buffering layers, plus partial-frame retention that never loses a frame boundary",
+      "language": "Rust",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-10-15T07:02:06Z",
+      "updatedAt": "2026-10-18T12:50:55Z",
+      "groupId": "uncategorized",
+      "groupLabel": "Uncategorized",
+      "classification": {
+        "categoryId": "uncategorized",
+        "categoryLabel": "Uncategorized",
+        "secondaryTags": [],
+        "confidence": 0,
+        "method": "deterministic",
+        "evidence": []
+      }
+    },
+    {
       "id": "group:developer-tools",
       "label": "Developer Tools",
       "type": "group",
@@ -2736,14 +2771,14 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-10-30T05:46:57Z",
+      "updatedAt": "2026-10-30T13:34:15Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
         "categoryId": "web-apps",
         "categoryLabel": "Web / Apps",
         "secondaryTags": [],
-        "confidence": 0.9,
+        "confidence": 0.778,
         "method": "deterministic",
         "evidence": [
           {
@@ -2756,12 +2791,6 @@
             "categoryId": "web-apps",
             "source": "readme",
             "value": "app",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "backend",
             "weight": 0.7
           }
         ]
@@ -2801,11 +2830,11 @@
       "language": "C++",
       "topics": [],
       "stars": 3352,
-      "forks": 504,
+      "forks": 506,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-30T07:26:15Z",
+      "updatedAt": "2026-10-30T11:21:28Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2921,12 +2950,12 @@
         "gazebo",
         "gazebosim"
       ],
-      "stars": 547,
+      "stars": 548,
       "forks": 238,
       "fork": false,
       "archived": false,
       "createdAt": "2018-08-01T22:42:46Z",
-      "updatedAt": "2026-10-27T23:37:38Z",
+      "updatedAt": "2026-10-30T15:45:56Z",
       "contribution": {
         "commits": 4,
         "pullRequests": 5,
@@ -3020,12 +3049,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50334,
-      "forks": 2567,
+      "stars": 50336,
+      "forks": 2569,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-30T07:37:20Z",
+      "updatedAt": "2026-10-30T17:23:11Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -3063,12 +3092,12 @@
         "step",
         "wasm"
       ],
-      "stars": 12138,
-      "forks": 1578,
+      "stars": 12317,
+      "forks": 1601,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-10-30T07:40:04Z",
+      "updatedAt": "2026-10-30T18:48:27Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -3188,12 +3217,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2814,
+      "stars": 2818,
       "forks": 161,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-10-30T01:00:31Z",
+      "updatedAt": "2026-10-30T14:22:01Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3321,12 +3350,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 36175,
-      "forks": 3908,
+      "stars": 36434,
+      "forks": 3938,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-30T07:41:36Z",
+      "updatedAt": "2026-10-30T18:48:42Z",
       "contribution": {
         "commits": 14,
         "pullRequests": 24,
@@ -3368,11 +3397,6 @@
       "source": "user:nekomario28",
       "target": "group:applications-services",
       "type": "ownership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:mobile-webcam-bridge",
-      "type": "membership"
     },
     {
       "source": "group:applications-services",
@@ -3536,28 +3560,18 @@
     },
     {
       "source": "user:nekomario28",
-      "target": "group:uncategorized",
+      "target": "group:hardware-embedded",
       "type": "ownership"
     },
     {
-      "source": "group:uncategorized",
+      "source": "group:hardware-embedded",
       "target": "repository:melba",
       "type": "membership"
     },
     {
-      "source": "group:uncategorized",
-      "target": "repository:melba-wrapper-bootstrap",
+      "source": "group:hardware-embedded",
+      "target": "repository:mobile-webcam-bridge",
       "type": "membership"
-    },
-    {
-      "source": "group:uncategorized",
-      "target": "repository:io-budget",
-      "type": "membership"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "group:hardware-embedded",
-      "type": "ownership"
     },
     {
       "source": "group:hardware-embedded",
@@ -3567,6 +3581,21 @@
     {
       "source": "group:hardware-embedded",
       "target": "repository:turing-smart-screen-python-owl",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "group:uncategorized",
+      "type": "ownership"
+    },
+    {
+      "source": "group:uncategorized",
+      "target": "repository:melba-wrapper-bootstrap",
+      "type": "membership"
+    },
+    {
+      "source": "group:uncategorized",
+      "target": "repository:io-budget",
       "type": "membership"
     },
     {
@@ -3663,7 +3692,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "3c822dd3c81b968c339311ae7e5f15c9801ac39d24f04eb0f1c64ef81a5424b7",
+    "corpusFingerprint": "c93b1f27e33900517fd7bcf321e22a1b54c8a5dddeb42811678df91694eed7dd",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3718,7 +3747,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "3ac5c6814d673f37f97bd310765b3c209e520c14b2c8a2780b7ee4969b4b60ca"
+        "contentHash": "7394af79f0d51745fa5e95b9c145112a99034f1dcb050fea0f7589a5ab5a9a00"
       },
       {
         "repoId": 1340281422,
@@ -3743,7 +3772,7 @@
       {
         "repoId": 1374579782,
         "name": "mobile-webcam-bridge",
-        "contentHash": "4a49da689a352822f3a7071bea07a0d14f7c9e292feed41af45095e9782cf212"
+        "contentHash": "993309c6e9061387ba1c948f08ba6855b71236804f13d3f0c48de63623876ac7"
       },
       {
         "repoId": 1377492522,
@@ -3853,7 +3882,7 @@
       {
         "repoId": 1433983984,
         "name": "melba",
-        "contentHash": "b6fef491886fdaf4a92f83c51f55ed557c6c243f5c6abfdb0728dc994801e6da"
+        "contentHash": "545960061e628a0858be95e0d2a050fc16068fe60c8fa5ece10654a1e399a1fa"
       }
     ],
     "categories": [
@@ -4090,8 +4119,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-10-30T07:42:40.450Z",
-      "to": "2026-10-30T07:42:40.450Z"
+      "from": "2025-10-30T18:49:51.807Z",
+      "to": "2026-10-30T18:49:51.807Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
