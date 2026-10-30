@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-29T19:11:51.279Z",
+  "generatedAt": "2026-10-30T07:42:37.371Z",
   "repositoryCount": 38,
   "groupCount": 9,
   "nodes": [
@@ -2339,12 +2339,12 @@
       "description": "Melba — native Linux Apple Music client",
       "language": "Rust",
       "topics": [],
-      "stars": 0,
+      "stars": 1,
       "forks": 0,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-26T06:21:09Z",
-      "updatedAt": "2026-10-29T05:17:28Z",
+      "updatedAt": "2026-10-30T06:24:08Z",
       "groupId": "uncategorized",
       "groupLabel": "Uncategorized",
       "classification": {
@@ -2736,7 +2736,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-10-29T05:52:44Z",
+      "updatedAt": "2026-10-30T05:46:57Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -2800,12 +2800,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3351,
+      "stars": 3352,
       "forks": 504,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-29T17:27:56Z",
+      "updatedAt": "2026-10-30T07:26:15Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -3020,12 +3020,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50328,
-      "forks": 2566,
+      "stars": 50334,
+      "forks": 2567,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-29T18:46:30Z",
+      "updatedAt": "2026-10-30T07:37:20Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -3063,12 +3063,12 @@
         "step",
         "wasm"
       ],
-      "stars": 11940,
-      "forks": 1545,
+      "stars": 12138,
+      "forks": 1578,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-10-29T19:08:41Z",
+      "updatedAt": "2026-10-30T07:40:04Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -3108,7 +3108,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-07T05:49:16Z",
-      "updatedAt": "2026-10-26T13:41:37Z",
+      "updatedAt": "2026-10-30T06:20:06Z",
       "contribution": {
         "commits": 3,
         "pullRequests": 1,
@@ -3188,12 +3188,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2807,
+      "stars": 2814,
       "forks": 161,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-10-29T18:15:28Z",
+      "updatedAt": "2026-10-30T01:00:31Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3321,12 +3321,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 35905,
-      "forks": 3876,
+      "stars": 36175,
+      "forks": 3908,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-29T19:01:17Z",
+      "updatedAt": "2026-10-30T07:41:36Z",
       "contribution": {
         "commits": 14,
         "pullRequests": 24,
@@ -3663,7 +3663,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "24cd9f68401a24d9c749b47af09f6ecc263d1b35d4ceda36bc75fc664f28b350",
+    "corpusFingerprint": "3c822dd3c81b968c339311ae7e5f15c9801ac39d24f04eb0f1c64ef81a5424b7",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3718,7 +3718,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "1de3a7f2efe41e1a27d2100a6f39f9588d55127efd51edd9a50e9ff2e30421c8"
+        "contentHash": "3ac5c6814d673f37f97bd310765b3c209e520c14b2c8a2780b7ee4969b4b60ca"
       },
       {
         "repoId": 1340281422,
@@ -3853,7 +3853,7 @@
       {
         "repoId": 1433983984,
         "name": "melba",
-        "contentHash": "7ea4dad9fcecd14059251b800d22965a369bcc3b093b006769b4e1ac4f074429"
+        "contentHash": "b6fef491886fdaf4a92f83c51f55ed557c6c243f5c6abfdb0728dc994801e6da"
       }
     ],
     "categories": [
@@ -4090,8 +4090,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-10-29T19:11:54.141Z",
-      "to": "2026-10-29T19:11:54.141Z"
+      "from": "2025-10-30T07:42:40.450Z",
+      "to": "2026-10-30T07:42:40.450Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
