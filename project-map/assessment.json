@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "contractId": "ipm-repository-assessment-artifact-v1",
   "owner": "nekomario28",
-  "generatedAt": "2026-10-31T17:55:13.669Z",
+  "generatedAt": "2026-11-01T08:07:37.697Z",
   "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
   "taxonomyId": "ipm-standard-v1",
   "assessmentPolicyId": "ipm-repository-assessment-v1",
@@ -37,7 +37,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -155,7 +155,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -287,7 +287,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -405,7 +405,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -537,7 +537,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -669,7 +669,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -801,7 +801,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -933,7 +933,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -1065,7 +1065,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -1197,7 +1197,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -1329,7 +1329,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -1461,7 +1461,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "partial",
@@ -2030,7 +2030,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "partial",
@@ -2331,7 +2331,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "partial",
@@ -2888,7 +2888,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "partial",
@@ -3221,7 +3221,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -3353,7 +3353,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -3485,7 +3485,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "partial",
@@ -4066,7 +4066,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -4198,7 +4198,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -4330,7 +4330,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -4462,7 +4462,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -4580,7 +4580,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -4712,7 +4712,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "partial",
@@ -5083,7 +5083,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -5215,7 +5215,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -5333,7 +5333,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -5465,7 +5465,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -5597,7 +5597,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "partial",
@@ -6109,7 +6109,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -6127,8 +6127,8 @@
           "projectSide": {
             "recognition": {
               "state": "observed",
-              "raw": 1,
-              "transformed": 0.6931471805599453,
+              "raw": 2,
+              "transformed": 1.0986122886681096,
               "source": "stars",
               "directQualityEffect": false
             },
@@ -6227,7 +6227,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -6345,7 +6345,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -6477,7 +6477,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "partial",
@@ -7006,7 +7006,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -7122,7 +7122,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -7240,7 +7240,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -7372,7 +7372,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "partial",
@@ -7646,7 +7646,7 @@
       },
       "acquisition": {
         "level": "L1",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "partial",
@@ -7927,7 +7927,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -7945,15 +7945,15 @@
           "projectSide": {
             "recognition": {
               "state": "observed",
-              "raw": 3355,
-              "transformed": 8.118505067587098,
+              "raw": 3356,
+              "transformed": 8.118802996980035,
               "source": "stars",
               "directQualityEffect": false
             },
             "reuseDerivativeInterest": {
               "state": "observed",
-              "raw": 506,
-              "transformed": 6.2285110035911835,
+              "raw": 507,
+              "transformed": 6.230481447578482,
               "source": "forks",
               "interpretation": "reuse-derivative-interest",
               "independentAdopterCount": null,
@@ -8115,7 +8115,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -8303,7 +8303,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -8491,7 +8491,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -8679,7 +8679,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -8697,15 +8697,15 @@
           "projectSide": {
             "recognition": {
               "state": "observed",
-              "raw": 50364,
-              "transformed": 10.827051768376782,
+              "raw": 50372,
+              "transformed": 10.827210596227578,
               "source": "stars",
               "directQualityEffect": false
             },
             "reuseDerivativeInterest": {
               "state": "observed",
-              "raw": 2569,
-              "transformed": 7.851661177889265,
+              "raw": 2571,
+              "transformed": 7.85243908535751,
               "source": "forks",
               "interpretation": "reuse-derivative-interest",
               "independentAdopterCount": null,
@@ -8867,7 +8867,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -8885,15 +8885,15 @@
           "projectSide": {
             "recognition": {
               "state": "observed",
-              "raw": 12565,
-              "transformed": 9.438750032962892,
+              "raw": 12687,
+              "transformed": 9.448411943874628,
               "source": "stars",
               "directQualityEffect": false
             },
             "reuseDerivativeInterest": {
               "state": "observed",
-              "raw": 1637,
-              "transformed": 7.401231264413015,
+              "raw": 1663,
+              "transformed": 7.416979621381154,
               "source": "forks",
               "interpretation": "reuse-derivative-interest",
               "independentAdopterCount": null,
@@ -9054,7 +9054,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -9242,7 +9242,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -9430,7 +9430,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -9448,8 +9448,8 @@
           "projectSide": {
             "recognition": {
               "state": "observed",
-              "raw": 2828,
-              "transformed": 7.947678571301568,
+              "raw": 2833,
+              "transformed": 7.949444420250626,
               "source": "stars",
               "directQualityEffect": false
             },
@@ -9618,7 +9618,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -9806,7 +9806,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -9993,7 +9993,7 @@
       },
       "acquisition": {
         "level": "L0",
-        "observedAt": "2026-10-31T17:55:13.669Z"
+        "observedAt": "2026-11-01T08:07:37.697Z"
       },
       "quality": {
         "state": "not-collected",
@@ -10011,15 +10011,15 @@
           "projectSide": {
             "recognition": {
               "state": "observed",
-              "raw": 36936,
-              "transformed": 10.516969037677818,
+              "raw": 37246,
+              "transformed": 10.525326683651683,
               "source": "stars",
               "directQualityEffect": false
             },
             "reuseDerivativeInterest": {
               "state": "observed",
-              "raw": 3996,
-              "transformed": 8.293299358711323,
+              "raw": 4042,
+              "transformed": 8.304742269640771,
               "source": "forks",
               "interpretation": "reuse-derivative-interest",
               "independentAdopterCount": null,
