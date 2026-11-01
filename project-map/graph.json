@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-10-31T17:55:13.669Z",
+  "generatedAt": "2026-11-01T08:07:37.697Z",
   "repositoryCount": 38,
   "groupCount": 9,
   "nodes": [
@@ -2287,12 +2287,12 @@
       "description": "Melba — native Linux Apple Music client",
       "language": "Rust",
       "topics": [],
-      "stars": 1,
+      "stars": 2,
       "forks": 0,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-26T06:21:09Z",
-      "updatedAt": "2026-10-30T15:53:34Z",
+      "updatedAt": "2026-11-01T07:41:29Z",
       "groupId": "hardware-embedded",
       "groupLabel": "Hardware & Embedded",
       "classification": {
@@ -2771,7 +2771,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-10-31T05:40:59Z",
+      "updatedAt": "2026-11-01T06:02:25Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -2829,12 +2829,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3355,
-      "forks": 506,
+      "stars": 3356,
+      "forks": 507,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-10-31T17:35:07Z",
+      "updatedAt": "2026-11-01T07:53:51Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -3049,12 +3049,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50364,
-      "forks": 2569,
+      "stars": 50372,
+      "forks": 2571,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-10-31T17:29:30Z",
+      "updatedAt": "2026-11-01T07:55:20Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -3092,12 +3092,12 @@
         "step",
         "wasm"
       ],
-      "stars": 12565,
-      "forks": 1637,
+      "stars": 12687,
+      "forks": 1663,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-10-31T17:54:45Z",
+      "updatedAt": "2026-11-01T09:04:35Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -3217,12 +3217,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2828,
+      "stars": 2833,
       "forks": 162,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-10-31T15:41:57Z",
+      "updatedAt": "2026-11-01T06:07:19Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3350,12 +3350,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 36936,
-      "forks": 3996,
+      "stars": 37246,
+      "forks": 4042,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-10-31T17:54:05Z",
+      "updatedAt": "2026-11-01T09:06:45Z",
       "contribution": {
         "commits": 14,
         "pullRequests": 24,
@@ -3692,7 +3692,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "6493d3f370463b7452933fb656cedead67577f2907836cf28e78f43fea183eb3",
+    "corpusFingerprint": "be651bd629ab1c5008aefa4ad1c66dbbd96bf6fc9587995191630b200ba6a930",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3747,7 +3747,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "e23570a2c0225f33f9f03d72b8283f4e647d960c20c32238b3db9a5cc60194ba"
+        "contentHash": "c438f282e8f4bd1383c05a0238d68d3caf1000280cabf469948971ac47796e21"
       },
       {
         "repoId": 1340281422,
@@ -4119,8 +4119,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-10-31T17:55:17.744Z",
-      "to": "2026-10-31T17:55:17.744Z"
+      "from": "2025-11-01T08:07:40.716Z",
+      "to": "2026-11-01T08:07:40.716Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
