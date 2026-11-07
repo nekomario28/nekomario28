@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-11-06T20:04:19.183Z",
+  "generatedAt": "2026-11-07T07:44:56.495Z",
   "repositoryCount": 38,
   "groupCount": 9,
   "nodes": [
@@ -2292,7 +2292,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-26T06:21:09Z",
-      "updatedAt": "2026-11-06T18:48:17Z",
+      "updatedAt": "2026-11-07T07:43:20Z",
       "groupId": "hardware-embedded",
       "groupLabel": "Hardware & Embedded",
       "classification": {
@@ -2772,7 +2772,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-11-06T06:41:47Z",
+      "updatedAt": "2026-11-07T06:00:28Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -2830,12 +2830,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3376,
+      "stars": 3378,
       "forks": 511,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-11-06T16:13:20Z",
+      "updatedAt": "2026-11-07T07:06:19Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -3050,12 +3050,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50593,
-      "forks": 2601,
+      "stars": 50764,
+      "forks": 2616,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-11-06T19:55:49Z",
+      "updatedAt": "2026-11-07T07:38:27Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -3093,12 +3093,12 @@
         "step",
         "wasm"
       ],
-      "stars": 14486,
-      "forks": 1934,
+      "stars": 14568,
+      "forks": 1950,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-11-06T19:58:51Z",
+      "updatedAt": "2026-11-07T07:41:40Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -3218,12 +3218,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2900,
-      "forks": 166,
+      "stars": 2906,
+      "forks": 167,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-11-06T19:14:39Z",
+      "updatedAt": "2026-11-07T06:41:20Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3351,12 +3351,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 41005,
-      "forks": 4488,
+      "stars": 41185,
+      "forks": 4505,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-11-06T19:52:31Z",
+      "updatedAt": "2026-11-07T07:44:05Z",
       "contribution": {
         "commits": 14,
         "pullRequests": 24,
@@ -3693,7 +3693,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "fb1de7a1639bad3fec70715916dd08557c888d370e710e65bc607c3d05683fab",
+    "corpusFingerprint": "9a718afad4f8e08eb7a54288440b401b72ce7687dcd86134c3d4d88cf4a243a6",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3748,7 +3748,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "7fe85a252a347de688b46accfef2685aed937bf28ac20df8b6faeaf8c1129bc3"
+        "contentHash": "22d5dd22c343b62cccaaca373310bab1f2874b861d2301ecefa77e3c24981af9"
       },
       {
         "repoId": 1340281422,
@@ -3883,7 +3883,7 @@
       {
         "repoId": 1433983984,
         "name": "melba",
-        "contentHash": "35fac2ba3915cbb6bfe9d98aa34e1b63505d2b60fc65fcceab13ac72de58a2b5"
+        "contentHash": "3550308a277e998b63eec48119a1342b96d483bcee81fd8f50673e5bd0ebab27"
       }
     ],
     "categories": [
@@ -4120,8 +4120,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-11-06T20:04:24.286Z",
-      "to": "2026-11-06T20:04:24.286Z"
+      "from": "2025-11-07T07:45:01.942Z",
+      "to": "2026-11-07T07:45:01.942Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
