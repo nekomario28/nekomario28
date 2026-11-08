@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-11-07T18:17:02.888Z",
+  "generatedAt": "2026-11-08T07:57:06.498Z",
   "repositoryCount": 38,
   "groupCount": 9,
   "nodes": [
@@ -2288,11 +2288,11 @@
       "language": "Rust",
       "topics": [],
       "stars": 2,
-      "forks": 1,
+      "forks": 0,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-26T06:21:09Z",
-      "updatedAt": "2026-11-07T17:37:26Z",
+      "updatedAt": "2026-11-07T19:59:34Z",
       "groupId": "hardware-embedded",
       "groupLabel": "Hardware & Embedded",
       "classification": {
@@ -2772,7 +2772,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-11-07T06:00:28Z",
+      "updatedAt": "2026-11-08T05:58:40Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -2830,12 +2830,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3381,
-      "forks": 510,
+      "stars": 3380,
+      "forks": 512,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-11-07T14:41:40Z",
+      "updatedAt": "2026-11-08T06:46:55Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -3050,12 +3050,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 50901,
-      "forks": 2627,
+      "stars": 51046,
+      "forks": 2634,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-11-07T18:15:46Z",
+      "updatedAt": "2026-11-08T07:56:15Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -3093,12 +3093,12 @@
         "step",
         "wasm"
       ],
-      "stars": 14735,
-      "forks": 1970,
+      "stars": 14852,
+      "forks": 1986,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-11-07T18:15:30Z",
+      "updatedAt": "2026-11-08T07:49:16Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -3218,12 +3218,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2911,
+      "stars": 2920,
       "forks": 168,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-11-07T17:49:48Z",
+      "updatedAt": "2026-11-08T07:53:08Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3351,12 +3351,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 41421,
-      "forks": 4536,
+      "stars": 41652,
+      "forks": 4567,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-11-07T18:13:42Z",
+      "updatedAt": "2026-11-08T07:51:34Z",
       "contribution": {
         "commits": 14,
         "pullRequests": 24,
@@ -3693,7 +3693,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "9a718afad4f8e08eb7a54288440b401b72ce7687dcd86134c3d4d88cf4a243a6",
+    "corpusFingerprint": "3ab7265323be72d06e699a522704b5abac8827aa4f3e06f9f8e48dc5f5b70930",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3748,7 +3748,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "22d5dd22c343b62cccaaca373310bab1f2874b861d2301ecefa77e3c24981af9"
+        "contentHash": "35bf0efa8ba4972966b74143ad5d70747c66e1d657129f3e7145a638ea184161"
       },
       {
         "repoId": 1340281422,
@@ -4120,8 +4120,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-11-07T18:17:06.502Z",
-      "to": "2026-11-07T18:17:06.502Z"
+      "from": "2025-11-08T07:57:11.542Z",
+      "to": "2026-11-08T07:57:11.542Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
