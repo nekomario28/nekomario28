@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-11-09T23:08:32.480Z",
+  "generatedAt": "2026-11-10T08:49:04.425Z",
   "repositoryCount": 38,
   "groupCount": 9,
   "nodes": [
@@ -2292,7 +2292,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-26T06:21:09Z",
-      "updatedAt": "2026-11-09T16:59:13Z",
+      "updatedAt": "2026-11-10T03:24:00Z",
       "groupId": "hardware-embedded",
       "groupLabel": "Hardware & Embedded",
       "classification": {
@@ -2772,7 +2772,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-11-09T06:24:40Z",
+      "updatedAt": "2026-11-10T07:15:35Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -2835,7 +2835,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-11-09T18:15:51Z",
+      "updatedAt": "2026-11-10T08:13:34Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2956,7 +2956,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2018-08-01T22:42:46Z",
-      "updatedAt": "2026-11-09T05:16:20Z",
+      "updatedAt": "2026-11-10T01:45:39Z",
       "contribution": {
         "commits": 4,
         "pullRequests": 5,
@@ -3050,12 +3050,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 51138,
+      "stars": 51147,
       "forks": 2640,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-11-09T22:54:55Z",
+      "updatedAt": "2026-11-10T08:02:49Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -3093,12 +3093,12 @@
         "step",
         "wasm"
       ],
-      "stars": 15285,
-      "forks": 2057,
+      "stars": 15357,
+      "forks": 2072,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-11-09T22:46:19Z",
+      "updatedAt": "2026-11-10T08:43:33Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -3218,12 +3218,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2938,
-      "forks": 169,
+      "stars": 2941,
+      "forks": 170,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-11-09T22:16:47Z",
+      "updatedAt": "2026-11-10T08:49:03Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3351,12 +3351,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 42488,
-      "forks": 4642,
+      "stars": 42657,
+      "forks": 4663,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-11-09T22:52:49Z",
+      "updatedAt": "2026-11-10T08:48:34Z",
       "contribution": {
         "commits": 14,
         "pullRequests": 24,
@@ -3693,7 +3693,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "f6193486e59d23028f8d26356cbd90598254ac34db3fbf42edcfd3e1e014fe61",
+    "corpusFingerprint": "bcf2dde61f3366d5305223da9c5c7f1e4e5db95527b878a76751daa7bd0fe1b6",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3748,7 +3748,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "7ff31c376b32caa0a1357f70f112d218f68a2a5f6d813725e418aaa9495c26b5"
+        "contentHash": "1e38fa3c2cb508a9896a5e4ec8a05ace1b0a83f43d9108fa085ae711ccbd9619"
       },
       {
         "repoId": 1340281422,
@@ -4120,8 +4120,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-11-09T23:08:38.012Z",
-      "to": "2026-11-09T23:08:38.012Z"
+      "from": "2025-11-10T08:49:09.972Z",
+      "to": "2026-11-10T08:49:09.972Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
