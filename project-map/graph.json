@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-11-11T08:21:56.880Z",
+  "generatedAt": "2026-11-12T08:49:16.347Z",
   "repositoryCount": 38,
   "groupCount": 9,
   "nodes": [
@@ -2287,12 +2287,12 @@
       "description": "Melba — native Linux Apple Music client",
       "language": "Rust",
       "topics": [],
-      "stars": 3,
+      "stars": 5,
       "forks": 0,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-26T06:21:09Z",
-      "updatedAt": "2026-11-11T07:49:26Z",
+      "updatedAt": "2026-11-12T08:31:12Z",
       "groupId": "hardware-embedded",
       "groupLabel": "Hardware & Embedded",
       "classification": {
@@ -2364,7 +2364,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-17T14:36:33Z",
-      "updatedAt": "2026-11-11T06:06:39Z",
+      "updatedAt": "2026-11-11T20:38:53Z",
       "groupId": "hardware-embedded",
       "groupLabel": "Hardware & Embedded",
       "classification": {
@@ -2772,7 +2772,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-18T04:50:46Z",
-      "updatedAt": "2026-11-11T07:18:10Z",
+      "updatedAt": "2026-11-12T08:13:16Z",
       "groupId": "visualization-knowledge",
       "groupLabel": "Visualization & Knowledge",
       "classification": {
@@ -2831,11 +2831,11 @@
       "language": "C++",
       "topics": [],
       "stars": 3385,
-      "forks": 511,
+      "forks": 510,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-11-11T07:32:13Z",
+      "updatedAt": "2026-11-12T08:46:48Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2904,7 +2904,7 @@
       "updatedAt": "2026-10-25T00:24:54Z",
       "contribution": {
         "commits": 10,
-        "pullRequests": 16,
+        "pullRequests": 18,
         "mergedPullRequests": 7,
         "commitsTruncated": false,
         "pullRequestsTruncated": false
@@ -3050,12 +3050,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 51196,
-      "forks": 2654,
+      "stars": 51206,
+      "forks": 2666,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-11-11T08:21:11Z",
+      "updatedAt": "2026-11-12T08:12:18Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -3093,12 +3093,12 @@
         "step",
         "wasm"
       ],
-      "stars": 15589,
-      "forks": 2116,
+      "stars": 15873,
+      "forks": 2169,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-11-11T08:21:27Z",
+      "updatedAt": "2026-11-12T08:40:33Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -3218,12 +3218,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2952,
-      "forks": 170,
+      "stars": 2966,
+      "forks": 171,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-11-11T01:06:48Z",
+      "updatedAt": "2026-11-12T08:47:33Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3351,12 +3351,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 43006,
-      "forks": 4703,
+      "stars": 43351,
+      "forks": 4753,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-11-11T08:17:43Z",
+      "updatedAt": "2026-11-12T08:48:47Z",
       "contribution": {
         "commits": 14,
         "pullRequests": 24,
@@ -3693,7 +3693,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "03f720bcae4929fbaabe370c5660bec880d0701133a2a1071b774bbea1d33e2c",
+    "corpusFingerprint": "4d75499aa19e277bee4f3b25e8bf7edb42eb3245d9dbd7d1ad4ff1e18fd30cd4",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3748,7 +3748,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "9005a7bfafa1922dae7f823358044b7a8b0156a6895a4d80554e9f4843923a11"
+        "contentHash": "c8c077d3c804132b21abcd2324728bd2c66b3783746460d774d35707805aa333"
       },
       {
         "repoId": 1340281422,
@@ -3773,7 +3773,7 @@
       {
         "repoId": 1374579782,
         "name": "mobile-webcam-bridge",
-        "contentHash": "993309c6e9061387ba1c948f08ba6855b71236804f13d3f0c48de63623876ac7"
+        "contentHash": "db6c2980e5445128440c9c9e54d831729f02510c923ddb3ad594a638b1b0cd8e"
       },
       {
         "repoId": 1377492522,
@@ -4120,8 +4120,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-11-11T08:22:00.954Z",
-      "to": "2026-11-11T08:22:00.954Z"
+      "from": "2025-11-12T08:49:19.521Z",
+      "to": "2026-11-12T08:49:19.521Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
