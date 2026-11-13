@@ -30,7 +30,7 @@ jobs:
     # v1 R 72ead19e8c49354af2bcbfa9144404c7a8d6ff9f resolves immutable
     # Action F 9d018370d7b22d82d8974ae1ac018de5589dd85a.
     # F, release-chain R, Chromium/WebKit, and exact real-profile proof #203 passed before promotion.
-    uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@38b37bc29b8942f5012c99227cd0f45f14dfd725
+    uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@35d269d8751e661fd776ca718caa6862d03cf219
     with:
       theme: dark
       style: galaxy-systems
