@@ -26,11 +26,10 @@ jobs:
   generate:
     permissions:
       contents: read
-    # Stable native-IPM taxonomy artifact-identity release.
-    # v1 R 72ead19e8c49354af2bcbfa9144404c7a8d6ff9f resolves immutable
-    # Action F 9d018370d7b22d82d8974ae1ac018de5589dd85a.
-    # F, release-chain R, Chromium/WebKit, and exact real-profile proof #203 passed before promotion.
-    uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@35d269d8751e661fd776ca718caa6862d03cf219
+    # Reviewed single-renderer Halo/Rail Action candidate (interactive-project-map #460).
+    # Explicit halo keeps this profile's existing animated external orbits.
+    # Always validate real generated graph and SVG before pin promotion.
+    uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@e7ac937df98e55345cf3118f067a54fe966fc048
     with:
       theme: dark
       style: galaxy-systems
@@ -38,6 +37,7 @@ jobs:
       forks: true
       archived: true
       contributed: true
+      svg_contributed_layout: halo
 
   publish:
     needs: generate
