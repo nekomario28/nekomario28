@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-11-13T08:44:15.711Z",
+  "generatedAt": "2026-11-13T20:38:50.604Z",
   "repositoryCount": 30,
   "groupCount": 8,
   "nodes": [
@@ -2154,12 +2154,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3389,
-      "forks": 511,
+      "stars": 3393,
+      "forks": 512,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-11-13T02:25:19Z",
+      "updatedAt": "2026-11-13T15:04:55Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2376,12 +2376,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 51243,
-      "forks": 2667,
+      "stars": 51229,
+      "forks": 2666,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-11-13T08:30:42Z",
+      "updatedAt": "2026-11-13T20:36:42Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2420,12 +2420,12 @@
         "step",
         "wasm"
       ],
-      "stars": 16053,
-      "forks": 2197,
+      "stars": 16137,
+      "forks": 2212,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-11-13T08:25:34Z",
+      "updatedAt": "2026-11-13T20:37:34Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -2547,12 +2547,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2975,
+      "stars": 2979,
       "forks": 171,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-11-13T08:06:20Z",
+      "updatedAt": "2026-11-13T15:19:37Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2682,12 +2682,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 43678,
-      "forks": 4795,
+      "stars": 43861,
+      "forks": 4815,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-11-13T08:40:32Z",
+      "updatedAt": "2026-11-13T20:34:30Z",
       "contribution": {
         "commits": 14,
         "pullRequests": 24,
@@ -3367,8 +3367,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-11-13T08:44:06.129Z",
-      "to": "2026-11-13T08:44:06.129Z"
+      "from": "2025-11-13T20:38:40.201Z",
+      "to": "2026-11-13T20:38:40.201Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
