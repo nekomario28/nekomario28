@@ -1,803 +1,23 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-11-12T21:05:11.047Z",
-  "repositoryCount": 38,
-  "groupCount": 9,
+  "generatedAt": "2026-11-13T04:00:16.061Z",
+  "repositoryCount": 30,
+  "groupCount": 8,
   "nodes": [
     {
       "id": "user:nekomario28",
       "label": "nekomario28",
       "type": "owner",
-      "url": "https://github.com/nekomario28"
-    },
-    {
-      "id": "group:applications-services",
-      "label": "Applications & Services",
-      "type": "group",
-      "repositoryCount": 11
-    },
-    {
-      "id": "repository:cline-desktop-linux",
-      "label": "cline-desktop-linux",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/cline-desktop-linux",
-      "description": "",
-      "language": "Shell",
-      "topics": [],
-      "stars": 1,
-      "forks": 1,
-      "fork": false,
-      "archived": true,
-      "createdAt": "2026-09-19T18:28:01Z",
-      "updatedAt": "2026-10-08T16:11:30Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "app",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "frontend",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "next",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:library",
-          "platform:web",
-          "platform:desktop",
-          "platform:cli",
-          "platform:server"
-        ],
-        "confidence": 0.925,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.925
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:aiand-cli",
-      "label": "aiand-cli",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/aiand-cli",
-      "description": "ai& CLI",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-10-23T14:22:11Z",
-      "updatedAt": "2026-10-23T14:22:11Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.713,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "ai-ml",
-            "source": "description",
-            "value": "ai",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "ai-ml",
-            "source": "readme",
-            "value": "ai",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "ai-ml",
-            "source": "readme",
-            "value": "vision",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "api",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "app",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "next",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "web",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:application",
-          "platform:web",
-          "platform:desktop",
-          "platform:cli",
-          "platform:server"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:figspec",
-      "label": "figspec",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/figspec",
-      "description": "A figure as data: declare it, render it with Rust, inspect the same model.",
-      "language": "Rust",
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2026-10-15T15:42:24Z",
-      "updatedAt": "2026-10-18T18:01:48Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.564,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "api",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:library",
-          "platform:web",
-          "platform:cli"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:solidcraft",
-      "label": "solidcraft",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/solidcraft",
-      "description": "SolidCraft: an open-source parametric 3D CAD application built in pure Rust. Desktop, web, and automation through MCP.",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-10-14T11:20:32Z",
-      "updatedAt": "2026-10-16T16:47:26Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.875,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "ai-ml",
-            "source": "readme",
-            "value": "ai",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "raspberry",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "raspberry-pi",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "robotics",
-            "source": "readme",
-            "value": "robot",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "description",
-            "value": "web",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "app",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "web",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "web-app",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:service",
-          "platform:web",
-          "platform:desktop",
-          "platform:cli",
-          "platform:server"
-        ],
-        "confidence": 0.904,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.904
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:predifi",
-      "label": "predifi",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/predifi",
-      "description": "Predi? - Decentralized prediction market platform",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-10-16T08:42:27Z",
-      "updatedAt": "2026-10-16T08:42:27Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "app",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "backend",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "frontend",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "next",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:library",
-          "platform:web",
-          "platform:cli"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:trellis",
-      "label": "trellis",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/trellis",
-      "description": "",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-10-15T12:07:32Z",
-      "updatedAt": "2026-10-15T12:07:32Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "app",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "frontend",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "react",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "web",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:application",
-          "platform:web",
-          "platform:cli"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:omarchy-pkgs",
-      "label": "omarchy-pkgs",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/omarchy-pkgs",
-      "description": "",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-10-14T04:05:23Z",
-      "updatedAt": "2026-10-14T04:05:23Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.778,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "api",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "next",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:library",
-          "platform:web",
-          "platform:desktop"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:try-omarchy",
-      "label": "try-omarchy",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/try-omarchy",
-      "description": "Run Omarchy on MacOS without any setup.",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-10-13T15:01:27Z",
-      "updatedAt": "2026-10-13T15:01:27Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.838,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "hardware",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "api",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "app",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "backend",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "next",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:framework",
-          "platform:web",
-          "platform:desktop",
-          "platform:cli"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:jj",
-      "label": "jj",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/jj",
-      "description": "A Git-compatible VCS that is both simple and powerful",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-10-10T05:12:36Z",
-      "updatedAt": "2026-10-10T05:12:36Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.653,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "coursework",
-            "source": "readme",
-            "value": "tutorial",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "backend",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "website",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:library",
-          "platform:web",
-          "platform:mobile"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:Strata",
-      "label": "Strata",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/Strata",
-      "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-10-08T09:57:04Z",
-      "updatedAt": "2026-10-08T09:57:04Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.95,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "ai-ml",
-            "source": "readme",
-            "value": "ai",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "description",
-            "value": "hardware",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "description",
-            "value": "api",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "description",
-            "value": "next",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "api",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "app",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "next",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:service",
-          "platform:web",
-          "platform:cli",
-          "platform:server"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:wiki",
-      "label": "wiki",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/wiki",
-      "description": "Wiki for CachyOS",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-08-25T10:31:18Z",
-      "updatedAt": "2026-08-25T10:31:18Z",
-      "groupId": "applications-services",
-      "groupLabel": "Applications & Services",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "next",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "web",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "website",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "applications-services",
-        "categoryLabel": "Applications & Services",
-        "secondaryTags": [
-          "artifact:application",
-          "platform:web"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "applications-services",
-            "source": "description",
-            "value": "P1 exact taxonomy category applications-services",
-            "weight": 0.9
-          }
-        ]
+      "url": "https://github.com/nekomario28",
+      "profileStats": {
+        "ownedStars": 10,
+        "originalRepositories": 12,
+        "followers": 16,
+        "contributedRepositories": 12,
+        "mergedPullRequests": 35,
+        "commits": 80,
+        "limitedRepositories": false,
+        "limitedContributions": true
       }
     },
     {
@@ -1329,10 +549,383 @@
       }
     },
     {
+      "id": "group:applications-services",
+      "label": "Applications & Services",
+      "type": "group",
+      "repositoryCount": 6
+    },
+    {
+      "id": "repository:cline-desktop-linux",
+      "label": "cline-desktop-linux",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/cline-desktop-linux",
+      "description": "",
+      "language": "Shell",
+      "topics": [],
+      "stars": 1,
+      "forks": 1,
+      "fork": false,
+      "archived": true,
+      "createdAt": "2026-09-19T18:28:01Z",
+      "updatedAt": "2026-10-08T16:11:30Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "frontend",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:library",
+          "platform:web",
+          "platform:desktop",
+          "platform:cli",
+          "platform:server"
+        ],
+        "confidence": 0.925,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.925
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:figspec",
+      "label": "figspec",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/figspec",
+      "description": "A figure as data: declare it, render it with Rust, inspect the same model.",
+      "language": "Rust",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-10-15T15:42:24Z",
+      "updatedAt": "2026-10-18T18:01:48Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.564,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:library",
+          "platform:web",
+          "platform:cli"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:trellis",
+      "label": "trellis",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/trellis",
+      "description": "",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-15T12:07:32Z",
+      "updatedAt": "2026-10-15T12:07:32Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "frontend",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "react",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "web",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:application",
+          "platform:web",
+          "platform:cli"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:omarchy-pkgs",
+      "label": "omarchy-pkgs",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/omarchy-pkgs",
+      "description": "",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-14T04:05:23Z",
+      "updatedAt": "2026-10-14T04:05:23Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.778,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:library",
+          "platform:web",
+          "platform:desktop"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:jj",
+      "label": "jj",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/jj",
+      "description": "A Git-compatible VCS that is both simple and powerful",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-10T05:12:36Z",
+      "updatedAt": "2026-10-10T05:12:36Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.653,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "coursework",
+            "source": "readme",
+            "value": "tutorial",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "backend",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "website",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:library",
+          "platform:web",
+          "platform:mobile"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:wiki",
+      "label": "wiki",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/wiki",
+      "description": "Wiki for CachyOS",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-08-25T10:31:18Z",
+      "updatedAt": "2026-08-25T10:31:18Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "web",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "website",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:application",
+          "platform:web"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
       "id": "group:robotics-automation",
       "label": "Robotics & Automation",
       "type": "group",
-      "repositoryCount": 7
+      "repositoryCount": 6
     },
     {
       "id": "repository:lime_tidyup",
@@ -1850,430 +1443,6 @@
       }
     },
     {
-      "id": "repository:ros_gz",
-      "label": "ros_gz",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/ros_gz",
-      "description": "Integration between ROS (1 and 2) and Gazebo simulation",
-      "language": "C++",
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-08-20T04:31:15Z",
-      "updatedAt": "2026-08-25T15:02:44Z",
-      "groupId": "robotics-automation",
-      "groupLabel": "Robotics & Automation",
-      "classification": {
-        "categoryId": "robotics",
-        "categoryLabel": "Robotics / ROS 2",
-        "secondaryTags": [],
-        "confidence": 1,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "robotics",
-            "source": "description",
-            "value": "gazebo",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "robotics",
-            "source": "description",
-            "value": "ros",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "robotics",
-            "source": "readme",
-            "value": "gazebo",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "robotics",
-            "source": "readme",
-            "value": "ros",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "robotics",
-            "source": "readme",
-            "value": "ros-2",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "robotics",
-            "source": "readme",
-            "value": "ros-gz",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "robotics",
-            "source": "readme",
-            "value": "ros2",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "robotics",
-            "source": "name",
-            "value": "ros",
-            "weight": 0.5
-          },
-          {
-            "categoryId": "robotics",
-            "source": "name",
-            "value": "ros-gz",
-            "weight": 0.5
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "robotics-automation",
-        "categoryLabel": "Robotics & Automation",
-        "secondaryTags": [
-          "artifact:library",
-          "ecosystem:ros2",
-          "topic:gazebo"
-        ],
-        "confidence": 0.99,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "robotics-automation",
-            "source": "description",
-            "value": "P1 exact taxonomy category robotics-automation",
-            "weight": 0.99
-          }
-        ]
-      }
-    },
-    {
-      "id": "group:ai-ml",
-      "label": "AI & Machine Learning",
-      "type": "group",
-      "repositoryCount": 4
-    },
-    {
-      "id": "repository:gxkit",
-      "label": "gxkit",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/gxkit",
-      "description": "Agent-native review loops for creative artifacts: inspect code-as-artifacts (charts, game levels, state machines, schemas, shaders, rendered video) with stable codes, exit codes and a storyboard.",
-      "language": "Python",
-      "topics": [
-        "agent-native",
-        "agents",
-        "ai-agents",
-        "ci",
-        "code-review",
-        "developer-tools",
-        "linter",
-        "python",
-        "quality-assurance",
-        "static-analysis",
-        "testing"
-      ],
-      "stars": 1,
-      "forks": 0,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2026-10-13T22:33:44Z",
-      "updatedAt": "2026-11-10T15:00:06Z",
-      "groupId": "ai-ml",
-      "groupLabel": "AI & Machine Learning",
-      "classification": {
-        "categoryId": "ai-ml",
-        "categoryLabel": "AI / Machine Learning",
-        "secondaryTags": [],
-        "confidence": 0.314,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "ai-ml",
-            "source": "readme",
-            "value": "ai",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "api",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "ai-ml",
-        "categoryLabel": "AI & Machine Learning",
-        "secondaryTags": [
-          "artifact:tool",
-          "platform:cli"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "ai-ml",
-            "source": "description",
-            "value": "P1 exact taxonomy category ai-ml",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:omarchy",
-      "label": "omarchy",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/omarchy",
-      "description": "Beautiful, Modern & Opinionated Linux",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-10-13T13:10:11Z",
-      "updatedAt": "2026-10-13T13:10:11Z",
-      "groupId": "ai-ml",
-      "groupLabel": "AI & Machine Learning",
-      "classification": {
-        "categoryId": "ai-ml",
-        "categoryLabel": "AI / Machine Learning",
-        "secondaryTags": [],
-        "confidence": 0.314,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "ai-ml",
-            "source": "readme",
-            "value": "ai",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "hardware",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "web",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "ai-ml",
-        "categoryLabel": "AI & Machine Learning",
-        "secondaryTags": [
-          "artifact:application",
-          "platform:web",
-          "platform:cli"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "ai-ml",
-            "source": "description",
-            "value": "P1 exact taxonomy category ai-ml",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:ik_llama.cpp",
-      "label": "ik_llama.cpp",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/ik_llama.cpp",
-      "description": "llama.cpp fork with additional SOTA quants and improved performance",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-10-09T09:19:12Z",
-      "updatedAt": "2026-10-09T09:19:12Z",
-      "groupId": "ai-ml",
-      "groupLabel": "AI & Machine Learning",
-      "classification": {
-        "categoryId": "ai-ml",
-        "categoryLabel": "AI / Machine Learning",
-        "secondaryTags": [
-          "torch",
-          "transformers"
-        ],
-        "confidence": 0.836,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "ai-ml",
-            "source": "dependency",
-            "value": "torch",
-            "weight": 0.9
-          },
-          {
-            "categoryId": "ai-ml",
-            "source": "dependency",
-            "value": "transformers",
-            "weight": 0.9
-          },
-          {
-            "categoryId": "ai-ml",
-            "source": "readme",
-            "value": "llm",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "ai-ml",
-            "source": "readme",
-            "value": "vision",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "hardware",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "api",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "backend",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "next",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "ai-ml",
-        "categoryLabel": "AI & Machine Learning",
-        "secondaryTags": [
-          "artifact:model",
-          "platform:web",
-          "platform:mobile",
-          "platform:cli",
-          "platform:server"
-        ],
-        "confidence": 0.972,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "ai-ml",
-            "source": "description",
-            "value": "P1 exact taxonomy category ai-ml",
-            "weight": 0.972
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:FreeToken",
-      "label": "FreeToken",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/FreeToken",
-      "description": "",
-      "language": "Python",
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-08-23T17:29:26Z",
-      "updatedAt": "2026-08-26T12:59:28Z",
-      "groupId": "ai-ml",
-      "groupLabel": "AI & Machine Learning",
-      "classification": {
-        "categoryId": "ai-ml",
-        "categoryLabel": "AI / Machine Learning",
-        "secondaryTags": [
-          "torch",
-          "transformers"
-        ],
-        "confidence": 0.75,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "ai-ml",
-            "source": "dependency",
-            "value": "torch",
-            "weight": 0.9
-          },
-          {
-            "categoryId": "ai-ml",
-            "source": "dependency",
-            "value": "transformers",
-            "weight": 0.9
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "dependency",
-            "value": "fastapi",
-            "weight": 0.9
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "dependency",
-            "value": "next",
-            "weight": 0.9
-          },
-          {
-            "categoryId": "ai-ml",
-            "source": "readme",
-            "value": "ai",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "hardware",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "app",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "ai-ml",
-        "categoryLabel": "AI & Machine Learning",
-        "secondaryTags": [
-          "artifact:application",
-          "platform:desktop",
-          "platform:cli"
-        ],
-        "confidence": 0.948,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "ai-ml",
-            "source": "description",
-            "value": "P1 exact taxonomy category ai-ml",
-            "weight": 0.948
-          }
-        ]
-      }
-    },
-    {
       "id": "group:hardware-embedded",
       "label": "Hardware & Embedded",
       "type": "group",
@@ -2575,6 +1744,233 @@
       }
     },
     {
+      "id": "group:ai-ml",
+      "label": "AI & Machine Learning",
+      "type": "group",
+      "repositoryCount": 3
+    },
+    {
+      "id": "repository:gxkit",
+      "label": "gxkit",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/gxkit",
+      "description": "Agent-native review loops for creative artifacts: inspect code-as-artifacts (charts, game levels, state machines, schemas, shaders, rendered video) with stable codes, exit codes and a storyboard.",
+      "language": "Python",
+      "topics": [
+        "agent-native",
+        "agents",
+        "ai-agents",
+        "ci",
+        "code-review",
+        "developer-tools",
+        "linter",
+        "python",
+        "quality-assurance",
+        "static-analysis",
+        "testing"
+      ],
+      "stars": 1,
+      "forks": 0,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2026-10-13T22:33:44Z",
+      "updatedAt": "2026-11-10T15:00:06Z",
+      "groupId": "ai-ml",
+      "groupLabel": "AI & Machine Learning",
+      "classification": {
+        "categoryId": "ai-ml",
+        "categoryLabel": "AI / Machine Learning",
+        "secondaryTags": [],
+        "confidence": 0.314,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "readme",
+            "value": "ai",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "ai-ml",
+        "categoryLabel": "AI & Machine Learning",
+        "secondaryTags": [
+          "artifact:tool",
+          "platform:cli"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "description",
+            "value": "P1 exact taxonomy category ai-ml",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:omarchy",
+      "label": "omarchy",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/omarchy",
+      "description": "Beautiful, Modern & Opinionated Linux",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-13T13:10:11Z",
+      "updatedAt": "2026-10-13T13:10:11Z",
+      "groupId": "ai-ml",
+      "groupLabel": "AI & Machine Learning",
+      "classification": {
+        "categoryId": "ai-ml",
+        "categoryLabel": "AI / Machine Learning",
+        "secondaryTags": [],
+        "confidence": 0.314,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "readme",
+            "value": "ai",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "hardware",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "web",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "ai-ml",
+        "categoryLabel": "AI & Machine Learning",
+        "secondaryTags": [
+          "artifact:application",
+          "platform:web",
+          "platform:cli"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "description",
+            "value": "P1 exact taxonomy category ai-ml",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:FreeToken",
+      "label": "FreeToken",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/FreeToken",
+      "description": "",
+      "language": "Python",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-08-23T17:29:26Z",
+      "updatedAt": "2026-08-26T12:59:28Z",
+      "groupId": "ai-ml",
+      "groupLabel": "AI & Machine Learning",
+      "classification": {
+        "categoryId": "ai-ml",
+        "categoryLabel": "AI / Machine Learning",
+        "secondaryTags": [
+          "torch",
+          "transformers"
+        ],
+        "confidence": 0.75,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "dependency",
+            "value": "torch",
+            "weight": 0.9
+          },
+          {
+            "categoryId": "ai-ml",
+            "source": "dependency",
+            "value": "transformers",
+            "weight": 0.9
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "dependency",
+            "value": "fastapi",
+            "weight": 0.9
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "dependency",
+            "value": "next",
+            "weight": 0.9
+          },
+          {
+            "categoryId": "ai-ml",
+            "source": "readme",
+            "value": "ai",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
+            "value": "hardware",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "ai-ml",
+        "categoryLabel": "AI & Machine Learning",
+        "secondaryTags": [
+          "artifact:application",
+          "platform:desktop",
+          "platform:cli"
+        ],
+        "confidence": 0.948,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "description",
+            "value": "P1 exact taxonomy category ai-ml",
+            "weight": 0.948
+          }
+        ]
+      }
+    },
+    {
       "id": "group:uncategorized",
       "label": "Uncategorized",
       "type": "group",
@@ -2628,78 +2024,6 @@
         "confidence": 0,
         "method": "deterministic",
         "evidence": []
-      }
-    },
-    {
-      "id": "group:developer-tools",
-      "label": "Developer Tools",
-      "type": "group",
-      "repositoryCount": 1
-    },
-    {
-      "id": "repository:ruff",
-      "label": "ruff",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/ruff",
-      "description": "An extremely fast Python linter and code formatter, written in Rust.",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-10-04T14:10:38Z",
-      "updatedAt": "2026-10-04T14:10:38Z",
-      "groupId": "developer-tools",
-      "groupLabel": "Developer Tools",
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [
-          "next"
-        ],
-        "confidence": 1,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "web-apps",
-            "source": "dependency",
-            "value": "next",
-            "weight": 0.9
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "api",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "fastapi",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "developer-tools",
-        "categoryLabel": "Developer Tools",
-        "secondaryTags": [
-          "artifact:tool",
-          "platform:web",
-          "platform:cli",
-          "platform:api"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "developer-tools",
-            "source": "description",
-            "value": "P1 exact taxonomy category developer-tools",
-            "weight": 0.9
-          }
-        ]
       }
     },
     {
@@ -2830,12 +2154,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3388,
+      "stars": 3389,
       "forks": 510,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-11-12T18:03:17Z",
+      "updatedAt": "2026-11-13T02:25:19Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2850,7 +2174,8 @@
         "confidence": 0,
         "method": "deterministic",
         "evidence": []
-      }
+      },
+      "forkUrl": "https://github.com/nekomario28/ik_llama.cpp"
     },
     {
       "id": "repository:syun88/devday_hackathon_search_home",
@@ -2952,7 +2277,7 @@
         "gazebosim"
       ],
       "stars": 553,
-      "forks": 239,
+      "forks": 240,
       "fork": false,
       "archived": false,
       "createdAt": "2018-08-01T22:42:46Z",
@@ -3025,7 +2350,8 @@
             "weight": 0.5
           }
         ]
-      }
+      },
+      "forkUrl": "https://github.com/nekomario28/ros_gz"
     },
     {
       "id": "repository:astral-sh/ruff",
@@ -3050,12 +2376,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 51230,
-      "forks": 2668,
+      "stars": 51237,
+      "forks": 2667,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-11-12T20:58:33Z",
+      "updatedAt": "2026-11-13T03:40:28Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -3070,7 +2396,8 @@
         "confidence": 0,
         "method": "deterministic",
         "evidence": []
-      }
+      },
+      "forkUrl": "https://github.com/nekomario28/ruff"
     },
     {
       "id": "repository:tangency-labs/solidcraft",
@@ -3093,12 +2420,12 @@
         "step",
         "wasm"
       ],
-      "stars": 15977,
-      "forks": 2187,
+      "stars": 16026,
+      "forks": 2193,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-11-12T21:04:41Z",
+      "updatedAt": "2026-11-13T03:52:19Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -3120,7 +2447,8 @@
             "weight": 0.7
           }
         ]
-      }
+      },
+      "forkUrl": "https://github.com/nekomario28/solidcraft"
     },
     {
       "id": "repository:aiandlabs/aiand-cli",
@@ -3160,7 +2488,8 @@
             "weight": 0.7
           }
         ]
-      }
+      },
+      "forkUrl": "https://github.com/nekomario28/aiand-cli"
     },
     {
       "id": "repository:c0c25034/projexd_4",
@@ -3238,7 +2567,8 @@
         "confidence": 0,
         "method": "deterministic",
         "evidence": []
-      }
+      },
+      "forkUrl": "https://github.com/nekomario28/try-omarchy"
     },
     {
       "id": "repository:onipinsaiye/predifi",
@@ -3271,7 +2601,8 @@
         "confidence": 0,
         "method": "deterministic",
         "evidence": []
-      }
+      },
+      "forkUrl": "https://github.com/nekomario28/predifi"
     },
     {
       "id": "repository:souta-lab/minecraft-jev-agent",
@@ -3351,12 +2682,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 43519,
-      "forks": 4780,
+      "stars": 43609,
+      "forks": 4792,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-11-12T21:04:54Z",
+      "updatedAt": "2026-11-13T03:47:17Z",
       "contribution": {
         "commits": 14,
         "pullRequests": 24,
@@ -3390,70 +2721,11 @@
             "weight": 0.7
           }
         ]
-      }
+      },
+      "forkUrl": "https://github.com/nekomario28/Strata"
     }
   ],
   "edges": [
-    {
-      "source": "user:nekomario28",
-      "target": "group:applications-services",
-      "type": "ownership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:cline-desktop-linux",
-      "type": "membership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:aiand-cli",
-      "type": "membership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:figspec",
-      "type": "membership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:solidcraft",
-      "type": "membership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:predifi",
-      "type": "membership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:trellis",
-      "type": "membership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:omarchy-pkgs",
-      "type": "membership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:try-omarchy",
-      "type": "membership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:jj",
-      "type": "membership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:Strata",
-      "type": "membership"
-    },
-    {
-      "source": "group:applications-services",
-      "target": "repository:wiki",
-      "type": "membership"
-    },
     {
       "source": "user:nekomario28",
       "target": "group:game-modding",
@@ -3496,6 +2768,41 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "group:applications-services",
+      "type": "ownership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:cline-desktop-linux",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:figspec",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:trellis",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:omarchy-pkgs",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:jj",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
+      "target": "repository:wiki",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "group:robotics-automation",
       "type": "ownership"
     },
@@ -3530,36 +2837,6 @@
       "type": "membership"
     },
     {
-      "source": "group:robotics-automation",
-      "target": "repository:ros_gz",
-      "type": "membership"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "group:ai-ml",
-      "type": "ownership"
-    },
-    {
-      "source": "group:ai-ml",
-      "target": "repository:gxkit",
-      "type": "membership"
-    },
-    {
-      "source": "group:ai-ml",
-      "target": "repository:omarchy",
-      "type": "membership"
-    },
-    {
-      "source": "group:ai-ml",
-      "target": "repository:ik_llama.cpp",
-      "type": "membership"
-    },
-    {
-      "source": "group:ai-ml",
-      "target": "repository:FreeToken",
-      "type": "membership"
-    },
-    {
       "source": "user:nekomario28",
       "target": "group:hardware-embedded",
       "type": "ownership"
@@ -3586,6 +2863,26 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "group:ai-ml",
+      "type": "ownership"
+    },
+    {
+      "source": "group:ai-ml",
+      "target": "repository:gxkit",
+      "type": "membership"
+    },
+    {
+      "source": "group:ai-ml",
+      "target": "repository:omarchy",
+      "type": "membership"
+    },
+    {
+      "source": "group:ai-ml",
+      "target": "repository:FreeToken",
+      "type": "membership"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "group:uncategorized",
       "type": "ownership"
     },
@@ -3597,16 +2894,6 @@
     {
       "source": "group:uncategorized",
       "target": "repository:io-budget",
-      "type": "membership"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "group:developer-tools",
-      "type": "ownership"
-    },
-    {
-      "source": "group:developer-tools",
-      "target": "repository:ruff",
       "type": "membership"
     },
     {
@@ -3693,7 +2980,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "79c077d52523f956aa2d097026525d97d0898eee10a5f60eb942adf96f5fc141",
+    "corpusFingerprint": "30f6ac51fd2d376e27a7c8959b20bd507594623823ac041c62a1067fc3ce12c5",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3751,11 +3038,6 @@
         "contentHash": "b12fc1f9e463832f02940159557fa1848500a9f3dc0a7b2bd3b36a0c6b7e15c3"
       },
       {
-        "repoId": 1340281422,
-        "name": "ros_gz",
-        "contentHash": "a7e14e1a30e5874e9340eb21291b9c7b582f7994a7c82c3dddec0c36248de6f4"
-      },
-      {
         "repoId": 1340711269,
         "name": "gz-sim",
         "contentHash": "8722aa9c83aed882615f575b3a4606c5a8c97a4200659537640dee677fbf8ce8"
@@ -3781,21 +3063,6 @@
         "contentHash": "34a9c726dbeea38bea0a78bd3c1be7ae59e5e783a3f83525ece849803c365443"
       },
       {
-        "repoId": 1404489164,
-        "name": "ruff",
-        "contentHash": "e49962e709b240b50e1155ee6b3f9927d720a10e1e2975d9c193ebbd0a500acd"
-      },
-      {
-        "repoId": 1410106412,
-        "name": "Strata",
-        "contentHash": "3d8856f87db605d422bbe7ece3938f634152b4684a3c275df9eed003e918dc34"
-      },
-      {
-        "repoId": 1411589596,
-        "name": "ik_llama.cpp",
-        "contentHash": "293066a2b428a07e3d34d2d3a3d315aa00b2b1f1888d6f0a42d0f04d098a5d8a"
-      },
-      {
         "repoId": 1412749545,
         "name": "microduck",
         "contentHash": "69b05681b1aeb8a6d0dd9c6787c2f13bce221ceab7707f8c38ecbe0ccf4d6c5a"
@@ -3816,11 +3083,6 @@
         "contentHash": "6439b2981ba2752e3150f98cbd8e2b74e3f15ef19f14a71cffdb28729cac93d5"
       },
       {
-        "repoId": 1417298110,
-        "name": "try-omarchy",
-        "contentHash": "036226ed067f12a79dcb74d314107fdf232eea502cba5331e5e516544920c154"
-      },
-      {
         "repoId": 1417317762,
         "name": "omarchy-iso",
         "contentHash": "f24bae924377ab33dfd70f3499ea0372a9befb7d9a76d56b98625da6f229cd9d"
@@ -3834,11 +3096,6 @@
         "repoId": 1418340636,
         "name": "omarchy-pkgs",
         "contentHash": "2a75ccd7e004366c00ea2cd2da2b0680b42abbbb90367343aa5864ccda6fd941"
-      },
-      {
-        "repoId": 1418788154,
-        "name": "solidcraft",
-        "contentHash": "759a405851e2ff99988885ad21cde36740b8daa7835b31e8ce8ab7b99066aaa7"
       },
       {
         "repoId": 1420314973,
@@ -3856,11 +3113,6 @@
         "contentHash": "4372e4ac5073b452616cc72f4b250c6ebc1d5f1f156e77d7ace0587f549a2103"
       },
       {
-        "repoId": 1421881500,
-        "name": "predifi",
-        "contentHash": "40e7d666d9046e3c921d6e99a395d2b8a335479aa4aa1c005a824da2e76900a5"
-      },
-      {
         "repoId": 1425120103,
         "name": "actor_demo",
         "contentHash": "30561671039714c142445cdff754389c1f165a18167c8ecaa361d4bb06eae606"
@@ -3869,11 +3121,6 @@
         "repoId": 1425126628,
         "name": "ros_actor",
         "contentHash": "7b26b34752b11313300241e6f345dd1b974ba882c953582aeb6831df7c411409"
-      },
-      {
-        "repoId": 1431145017,
-        "name": "aiand-cli",
-        "contentHash": "9a1c3dec386a796d7c55e70ace8b4aba41f1377fec2b71cac7d59a502e17168d"
       },
       {
         "repoId": 1433937159,
@@ -4120,8 +3367,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-11-12T21:05:16.094Z",
-      "to": "2026-11-12T21:05:16.094Z"
+      "from": "2025-11-13T04:00:06.787Z",
+      "to": "2026-11-13T04:00:06.787Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
