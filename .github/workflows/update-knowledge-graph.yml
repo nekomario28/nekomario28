@@ -29,7 +29,7 @@ jobs:
     # Reviewed single-renderer Halo/Rail Action candidate (interactive-project-map #460).
     # Explicit halo keeps this profile's existing animated external orbits.
     # Always validate real generated graph and SVG before pin promotion.
-    uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@e7ac937df98e55345cf3118f067a54fe966fc048
+    uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@84395b4a782593e61e994dfddbdea781dab6090f
     with:
       theme: dark
       style: galaxy-systems
