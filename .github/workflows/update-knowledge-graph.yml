@@ -30,7 +30,7 @@ jobs:
     # v1 R 72ead19e8c49354af2bcbfa9144404c7a8d6ff9f resolves immutable
     # Action F 9d018370d7b22d82d8974ae1ac018de5589dd85a.
     # F, release-chain R, Chromium/WebKit, and exact real-profile proof #203 passed before promotion.
-    uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@v1
+    uses: nekomario28/interactive-project-map/.github/workflows/generate-project-map.yml@35d269d8751e661fd776ca718caa6862d03cf219
     with:
       theme: dark
       style: galaxy-systems
@@ -94,6 +94,36 @@ jobs:
           const owner = 'nekomario28';
           const contributed = graph.nodes.filter((node) => node?.type === 'repository' && node?.relation === 'contributed');
           const contributedIds = new Set(contributed.map((node) => node.id));
+          // Release guard: the old v1 generator has neither owner profile metrics nor
+          // parent-verified Fork/Contributed collapse, and must not publish silently.
+          const ownerNode = graph.nodes.find((node) => node.type === 'owner');
+          const stats = ownerNode?.profileStats;
+          if (!stats || !Number.isFinite(stats.ownedStars)
+              || stats.contributedRepositories !== contributed.length) {
+            throw new Error('stale Project Map generator: owner metrics missing or invalid');
+          }
+          const ownedForks = graph.nodes.filter((node) => node?.type === 'repository'
+            && node.relation !== 'contributed' && node.fork === true);
+          const verifiedParents = new Map([
+            ['astral-sh/ruff', 'ruff'],
+            ['aiandlabs/aiand-cli', 'aiand-cli'],
+            ['niko1221/strata', 'Strata'],
+          ]);
+          for (const node of contributed) {
+            const forkName = verifiedParents.get(String(node.label).toLowerCase());
+            if (!forkName) continue;
+            if (ownedForks.some((fork) => String(fork.label).toLowerCase() === forkName.toLowerCase())) {
+              throw new Error('verified Fork and upstream duplicate in graph: ' + node.label);
+            }
+            if (node.forkUrl?.toLowerCase() !== ('https://github.com/' + owner + '/' + forkName).toLowerCase()) {
+              throw new Error('missing verified personal Fork link: ' + node.label);
+            }
+            if (!svg.includes(node.label)) throw new Error('upstream missing from generated SVG: ' + node.label);
+            if (svg.includes('<title>' + forkName + ' · fork</title>')) {
+              throw new Error('duplicate Fork leaked into rendered SVG: ' + forkName);
+            }
+          }
+
 
           if (contributed.length < 1) throw new Error('canonical map has no accepted Contributed repositories');
           if (graph.contributedRepositoryCount !== contributed.length) throw new Error('Contributed count mismatch');
