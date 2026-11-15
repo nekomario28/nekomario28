@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-11-15T08:26:00.336Z",
+  "generatedAt": "2026-11-15T19:27:37.882Z",
   "repositoryCount": 30,
   "groupCount": 8,
   "nodes": [
@@ -2154,12 +2154,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3394,
+      "stars": 3395,
       "forks": 514,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-11-15T06:36:39Z",
+      "updatedAt": "2026-11-15T15:26:24Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2376,12 +2376,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 51261,
-      "forks": 2689,
+      "stars": 51251,
+      "forks": 2701,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-11-15T08:20:22Z",
+      "updatedAt": "2026-11-15T19:04:44Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2420,12 +2420,12 @@
         "step",
         "wasm"
       ],
-      "stars": 16370,
-      "forks": 2244,
+      "stars": 16472,
+      "forks": 2263,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-11-15T08:13:51Z",
+      "updatedAt": "2026-11-15T19:27:04Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -2547,12 +2547,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2988,
+      "stars": 2991,
       "forks": 172,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-11-15T07:38:57Z",
+      "updatedAt": "2026-11-15T13:36:27Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2682,12 +2682,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 44305,
-      "forks": 4878,
+      "stars": 44474,
+      "forks": 4905,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-11-15T08:23:08Z",
+      "updatedAt": "2026-11-15T19:27:08Z",
       "contribution": {
         "commits": 14,
         "pullRequests": 24,
@@ -3367,8 +3367,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-11-15T08:25:52.497Z",
-      "to": "2026-11-15T08:25:52.497Z"
+      "from": "2025-11-15T19:27:29.790Z",
+      "to": "2026-11-15T19:27:29.790Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
