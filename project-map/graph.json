@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-11-15T19:27:37.882Z",
+  "generatedAt": "2026-11-16T08:34:01.250Z",
   "repositoryCount": 30,
   "groupCount": 8,
   "nodes": [
@@ -2154,12 +2154,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3395,
-      "forks": 514,
+      "stars": 3396,
+      "forks": 516,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-11-15T15:26:24Z",
+      "updatedAt": "2026-11-15T23:07:28Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2376,12 +2376,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 51251,
-      "forks": 2701,
+      "stars": 51269,
+      "forks": 2714,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-11-15T19:04:44Z",
+      "updatedAt": "2026-11-16T08:20:20Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2420,12 +2420,12 @@
         "step",
         "wasm"
       ],
-      "stars": 16472,
-      "forks": 2263,
+      "stars": 16565,
+      "forks": 2281,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-11-15T19:27:04Z",
+      "updatedAt": "2026-11-16T08:29:03Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -2547,12 +2547,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2991,
-      "forks": 172,
+      "stars": 2992,
+      "forks": 173,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-11-15T13:36:27Z",
+      "updatedAt": "2026-11-15T23:46:03Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2682,12 +2682,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 44474,
-      "forks": 4905,
+      "stars": 44658,
+      "forks": 4934,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-11-15T19:27:08Z",
+      "updatedAt": "2026-11-16T08:33:46Z",
       "contribution": {
         "commits": 14,
         "pullRequests": 24,
@@ -2980,7 +2980,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "57d65406132a701ae2fa557650132819d50d2e816a9b96a3a31b4f746114c5e8",
+    "corpusFingerprint": "de8b0a94da38e4358b7e0b95d095e28da8a7454f7f782a42f9d5d1cc8accf935",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3035,7 +3035,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "fee554cd86fdd1de6b310ba459373834c93f9b0048a750b9633a383cb75d8e5c"
+        "contentHash": "5a784a8f9a31f8037f728e6eb2d9eacb193fa8b923d17f48add3fad45c781611"
       },
       {
         "repoId": 1340711269,
@@ -3367,8 +3367,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-11-15T19:27:29.790Z",
-      "to": "2026-11-15T19:27:29.790Z"
+      "from": "2025-11-16T08:33:52.268Z",
+      "to": "2026-11-16T08:33:52.268Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
