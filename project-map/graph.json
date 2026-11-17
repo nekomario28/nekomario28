@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-11-17T09:43:18.773Z",
+  "generatedAt": "2026-11-17T21:54:09.357Z",
   "repositoryCount": 30,
   "groupCount": 8,
   "nodes": [
@@ -12,7 +12,7 @@
       "profileStats": {
         "ownedStars": 13,
         "originalRepositories": 12,
-        "followers": 17,
+        "followers": 16,
         "contributedRepositories": 12,
         "mergedPullRequests": 35,
         "commits": 80,
@@ -2154,12 +2154,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3400,
+      "stars": 3401,
       "forks": 516,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-11-16T22:04:27Z",
+      "updatedAt": "2026-11-17T20:01:02Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2276,12 +2276,12 @@
         "gazebo",
         "gazebosim"
       ],
-      "stars": 553,
+      "stars": 552,
       "forks": 241,
       "fork": false,
       "archived": false,
       "createdAt": "2018-08-01T22:42:46Z",
-      "updatedAt": "2026-11-11T06:56:41Z",
+      "updatedAt": "2026-11-17T19:02:09Z",
       "contribution": {
         "commits": 4,
         "pullRequests": 5,
@@ -2376,12 +2376,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 51259,
-      "forks": 2733,
+      "stars": 51413,
+      "forks": 2818,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-11-17T08:58:09Z",
+      "updatedAt": "2026-11-17T21:47:19Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2420,12 +2420,12 @@
         "step",
         "wasm"
       ],
-      "stars": 16753,
-      "forks": 2319,
+      "stars": 16926,
+      "forks": 2339,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-11-17T09:33:02Z",
+      "updatedAt": "2026-11-17T21:45:48Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -2547,12 +2547,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 2998,
+      "stars": 2999,
       "forks": 176,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-11-17T06:23:08Z",
+      "updatedAt": "2026-11-17T11:29:19Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2682,12 +2682,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 45081,
-      "forks": 4988,
+      "stars": 45284,
+      "forks": 5013,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-11-17T09:40:55Z",
+      "updatedAt": "2026-11-17T21:50:00Z",
       "contribution": {
         "commits": 14,
         "pullRequests": 24,
@@ -3367,8 +3367,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-11-17T09:43:09.429Z",
-      "to": "2026-11-17T09:43:09.429Z"
+      "from": "2025-11-17T21:54:01.558Z",
+      "to": "2026-11-17T21:54:01.558Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
