@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-11-20T09:09:40.474Z",
+  "generatedAt": "2026-11-20T21:31:36.926Z",
   "repositoryCount": 30,
   "groupCount": 8,
   "nodes": [
@@ -2154,12 +2154,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3406,
-      "forks": 519,
+      "stars": 3408,
+      "forks": 520,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-11-20T08:33:19Z",
+      "updatedAt": "2026-11-20T15:43:52Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2376,12 +2376,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 51318,
-      "forks": 2774,
+      "stars": 51328,
+      "forks": 2775,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-11-20T08:36:49Z",
+      "updatedAt": "2026-11-20T21:15:40Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2420,12 +2420,12 @@
         "step",
         "wasm"
       ],
-      "stars": 17356,
-      "forks": 2423,
+      "stars": 17450,
+      "forks": 2445,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-11-20T09:01:53Z",
+      "updatedAt": "2026-11-20T21:22:05Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -2548,7 +2548,7 @@
         "arm64"
       ],
       "stars": 3000,
-      "forks": 175,
+      "forks": 176,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
@@ -2582,7 +2582,7 @@
       "language": "Rust",
       "topics": [],
       "stars": 3,
-      "forks": 83,
+      "forks": 86,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-08T14:40:06Z",
@@ -2682,12 +2682,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 46106,
-      "forks": 5129,
+      "stars": 46275,
+      "forks": 5151,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-11-20T09:07:38Z",
+      "updatedAt": "2026-11-20T21:21:00Z",
       "contribution": {
         "commits": 14,
         "pullRequests": 24,
@@ -3367,8 +3367,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-11-20T09:09:31.079Z",
-      "to": "2026-11-20T09:09:31.079Z"
+      "from": "2025-11-20T21:31:27.004Z",
+      "to": "2026-11-20T21:31:27.004Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
