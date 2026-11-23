@@ -4,11 +4,11 @@
   "status": "experimental-non-default",
   "source": {
     "graphOwner": "nekomario28",
-    "graphGeneratedAt": "2026-11-22T20:28:00.610Z",
+    "graphGeneratedAt": "2026-11-23T09:44:44.669Z",
     "assessment": {
       "contractId": "ipm-repository-assessment-artifact-v1",
       "owner": "nekomario28",
-      "generatedAt": "2026-11-22T20:28:00.610Z",
+      "generatedAt": "2026-11-23T09:44:44.669Z",
       "generatorRevision": "24460c1d28c5f90634b7aa0eb2156127971c0927",
       "assessmentPolicyId": "ipm-repository-assessment-v1"
     }
@@ -27,6 +27,58 @@
     "qualityChangesImpactHalo": false
   },
   "repositories": [
+    {
+      "graphNodeId": "repository:megu-mc",
+      "repositoryKey": "nekomario28/megu-mc",
+      "label": "megu-mc",
+      "graphRelation": null,
+      "context": {
+        "category": {
+          "state": "observed",
+          "id": "game-modding"
+        },
+        "artifacts": {
+          "state": "observed",
+          "values": [
+            "game-mod"
+          ]
+        },
+        "lifecycle": "unknown",
+        "relation": {
+          "ownership": "owned",
+          "collaboration": "unknown",
+          "lineage": "original"
+        }
+      },
+      "qualitySectionState": "not-collected",
+      "qualityAttributionScope": null,
+      "overlayState": "unavailable",
+      "unavailableReason": "not-collected",
+      "overlay": null,
+      "views": {
+        "detail": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        },
+        "compact": {
+          "mode": "unavailable",
+          "token": "quality-unavailable",
+          "reason": "not-collected",
+          "compositeQualityScore": null,
+          "dimensionIdentityPreserved": false
+        }
+      },
+      "visualPolicy": {
+        "repositoryCore": "inherit-structure-renderer",
+        "placementEffect": "none",
+        "nodeSizeEffect": "none",
+        "labelPriorityEffect": "none",
+        "impactHaloEffect": "none"
+      }
+    },
     {
       "graphNodeId": "repository:OffHandCombat",
       "repositoryKey": "nekomario28/offhandcombat",
@@ -5164,11 +5216,11 @@
     }
   ],
   "diagnostics": {
-    "graphRepositories": 42,
-    "assessmentRepositories": 42,
-    "joinedRepositories": 42,
+    "graphRepositories": 43,
+    "assessmentRepositories": 43,
+    "joinedRepositories": 43,
     "available": 9,
-    "unavailable": 33,
+    "unavailable": 34,
     "missingAssessmentGraphNodeIds": [],
     "orphanAssessmentGraphNodeIds": [],
     "strictJoin": true
