@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-11-24T01:11:53.084Z",
+  "generatedAt": "2026-11-24T11:35:46.452Z",
   "repositoryCount": 31,
   "groupCount": 8,
   "nodes": [
@@ -77,6 +77,12 @@
           {
             "categoryId": "hardware",
             "source": "readme",
+            "value": "embedded",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "readme",
             "value": "hardware",
             "weight": 0.7
           },
@@ -128,7 +134,8 @@
           "platform:web",
           "platform:desktop",
           "platform:cli",
-          "platform:server"
+          "platform:server",
+          "platform:embedded"
         ],
         "confidence": 0.9,
         "method": "deterministic",
@@ -2270,12 +2277,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3422,
+      "stars": 3423,
       "forks": 519,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-11-23T11:30:13Z",
+      "updatedAt": "2026-11-24T11:17:43Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2392,12 +2399,12 @@
         "gazebo",
         "gazebosim"
       ],
-      "stars": 552,
+      "stars": 553,
       "forks": 241,
       "fork": false,
       "archived": false,
       "createdAt": "2018-08-01T22:42:46Z",
-      "updatedAt": "2026-11-19T22:57:28Z",
+      "updatedAt": "2026-11-24T03:08:35Z",
       "contribution": {
         "commits": 4,
         "pullRequests": 5,
@@ -2492,12 +2499,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 51399,
-      "forks": 2774,
+      "stars": 51403,
+      "forks": 2776,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-11-23T23:35:01Z",
+      "updatedAt": "2026-11-24T11:34:22Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2536,12 +2543,12 @@
         "step",
         "wasm"
       ],
-      "stars": 17929,
-      "forks": 2555,
+      "stars": 18011,
+      "forks": 2563,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-11-24T01:10:21Z",
+      "updatedAt": "2026-11-24T11:32:15Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -2663,12 +2670,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 3009,
-      "forks": 177,
+      "stars": 3010,
+      "forks": 178,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-11-24T00:25:26Z",
+      "updatedAt": "2026-11-24T09:15:04Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2698,7 +2705,7 @@
       "language": "Rust",
       "topics": [],
       "stars": 3,
-      "forks": 102,
+      "forks": 103,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-08T14:40:06Z",
@@ -2798,12 +2805,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 47476,
-      "forks": 5326,
+      "stars": 47646,
+      "forks": 5356,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-11-24T01:11:08Z",
+      "updatedAt": "2026-11-24T11:20:44Z",
       "contribution": {
         "commits": 14,
         "pullRequests": 24,
@@ -3101,7 +3108,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "5509d6cde05d0c606b0a490099576ed993e6321f58c07580ffbf0fa403856cb4",
+    "corpusFingerprint": "a93502d5a4d5890cc7a3fbede11b8e9cd8721624014ed9f60d8d3ad6ef350f60",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3256,7 +3263,7 @@
       {
         "repoId": 1468228899,
         "name": "megu-mc",
-        "contentHash": "aa6b511089a6ffe8e269cca785df0e481b7d959f039761af2e7d59a049a6060c"
+        "contentHash": "d381232b65c3ff8dfdee32519c531f7710ef926ef9c2bcb181dbdc2ac1be9ba9"
       }
     ],
     "categories": [
@@ -3493,8 +3500,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-11-24T01:11:40.538Z",
-      "to": "2026-11-24T01:11:40.538Z"
+      "from": "2025-11-24T11:35:37.071Z",
+      "to": "2026-11-24T11:35:37.071Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
