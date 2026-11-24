@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-11-24T11:35:46.452Z",
+  "generatedAt": "2026-11-24T23:15:41.610Z",
   "repositoryCount": 31,
   "groupCount": 8,
   "nodes": [
@@ -31,7 +31,7 @@
       "label": "megu-mc",
       "type": "repository",
       "url": "https://github.com/nekomario28/megu-mc",
-      "description": "Clean-room Rust engine & pure-wgpu native GPU client for Minecraft: Java Edition 1.21.1 (Protocol 767)",
+      "description": "Fast Rust Minecraft 1.21.1 server & pure-wgpu native GPU client (Vulkan / DX12 / Metal) — zero JVM, zero OpenGL",
       "language": "Rust",
       "topics": [
         "dx12",
@@ -50,7 +50,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2026-11-23T03:13:51Z",
-      "updatedAt": "2026-11-23T04:36:37Z",
+      "updatedAt": "2026-11-24T16:55:01Z",
       "groupId": "game-modding",
       "groupLabel": "Game Modding",
       "classification": {
@@ -59,7 +59,7 @@
         "secondaryTags": [
           "minecraft"
         ],
-        "confidence": 0.908,
+        "confidence": 0.862,
         "method": "deterministic",
         "evidence": [
           {
@@ -119,6 +119,12 @@
           {
             "categoryId": "web-apps",
             "source": "readme",
+            "value": "web",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
             "value": "website",
             "weight": 0.7
           }
@@ -137,14 +143,14 @@
           "platform:server",
           "platform:embedded"
         ],
-        "confidence": 0.9,
+        "confidence": 0.923,
         "method": "deterministic",
         "evidence": [
           {
             "categoryId": "game-modding",
             "source": "description",
             "value": "P1 exact taxonomy category game-modding",
-            "weight": 0.9
+            "weight": 0.923
           }
         ]
       }
@@ -2277,12 +2283,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3423,
+      "stars": 3425,
       "forks": 519,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-11-24T11:17:43Z",
+      "updatedAt": "2026-11-24T18:27:25Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2499,12 +2505,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 51403,
-      "forks": 2776,
+      "stars": 51458,
+      "forks": 2779,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-11-24T11:34:22Z",
+      "updatedAt": "2026-11-24T22:59:00Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2543,12 +2549,12 @@
         "step",
         "wasm"
       ],
-      "stars": 18011,
-      "forks": 2563,
+      "stars": 18091,
+      "forks": 2572,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-11-24T11:32:15Z",
+      "updatedAt": "2026-11-24T23:08:10Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -2805,12 +2811,12 @@
       "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
       "language": "C++",
       "topics": [],
-      "stars": 47646,
-      "forks": 5356,
+      "stars": 47820,
+      "forks": 5374,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-11-24T11:20:44Z",
+      "updatedAt": "2026-11-24T23:08:04Z",
       "contribution": {
         "commits": 14,
         "pullRequests": 24,
@@ -3108,7 +3114,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "a93502d5a4d5890cc7a3fbede11b8e9cd8721624014ed9f60d8d3ad6ef350f60",
+    "corpusFingerprint": "3658d7639f6a362dba8ee4aa0e1e124de21f7df0dfdfb22984eb3f297353a0d3",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3263,7 +3269,7 @@
       {
         "repoId": 1468228899,
         "name": "megu-mc",
-        "contentHash": "d381232b65c3ff8dfdee32519c531f7710ef926ef9c2bcb181dbdc2ac1be9ba9"
+        "contentHash": "5d47fc02448e9ef38e5ed5356b791de6f4cb38c679a77a7cbfcdfbb5e8e13ccc"
       }
     ],
     "categories": [
@@ -3500,8 +3506,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-11-24T11:35:37.071Z",
-      "to": "2026-11-24T11:35:37.071Z"
+      "from": "2025-11-24T23:15:32.275Z",
+      "to": "2026-11-24T23:15:32.275Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
