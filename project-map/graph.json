@@ -1,7 +1,7 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-11-25T10:27:55.276Z",
-  "repositoryCount": 31,
+  "generatedAt": "2026-11-25T22:44:33.939Z",
+  "repositoryCount": 30,
   "groupCount": 8,
   "nodes": [
     {
@@ -14,8 +14,8 @@
         "originalRepositories": 13,
         "followers": 13,
         "contributedRepositories": 12,
-        "mergedPullRequests": 35,
-        "commits": 80,
+        "mergedPullRequests": 37,
+        "commits": 51,
         "limitedRepositories": false,
         "limitedContributions": true
       }
@@ -681,7 +681,7 @@
       "id": "group:applications-services",
       "label": "Applications & Services",
       "type": "group",
-      "repositoryCount": 6
+      "repositoryCount": 7
     },
     {
       "id": "repository:cline-desktop-linux",
@@ -975,6 +975,94 @@
           "artifact:library",
           "platform:web",
           "platform:mobile"
+        ],
+        "confidence": 0.9,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "applications-services",
+            "source": "description",
+            "value": "P1 exact taxonomy category applications-services",
+            "weight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository:Strata",
+      "label": "Strata",
+      "type": "repository",
+      "url": "https://github.com/nekomario28/Strata",
+      "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
+      "language": null,
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "fork": true,
+      "archived": false,
+      "createdAt": "2026-10-08T09:57:04Z",
+      "updatedAt": "2026-10-08T09:57:04Z",
+      "groupId": "applications-services",
+      "groupLabel": "Applications & Services",
+      "classification": {
+        "categoryId": "web-apps",
+        "categoryLabel": "Web / Apps",
+        "secondaryTags": [],
+        "confidence": 0.95,
+        "method": "deterministic",
+        "evidence": [
+          {
+            "categoryId": "ai-ml",
+            "source": "readme",
+            "value": "ai",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "hardware",
+            "source": "description",
+            "value": "hardware",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "description",
+            "value": "api",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "description",
+            "value": "next",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "api",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "app",
+            "weight": 0.7
+          },
+          {
+            "categoryId": "web-apps",
+            "source": "readme",
+            "value": "next",
+            "weight": 0.7
+          }
+        ]
+      },
+      "taxonomyAssignment": {
+        "categoryId": "applications-services",
+        "categoryLabel": "Applications & Services",
+        "secondaryTags": [
+          "artifact:service",
+          "platform:web",
+          "platform:cli",
+          "platform:server"
         ],
         "confidence": 0.9,
         "method": "deterministic",
@@ -1575,7 +1663,7 @@
       "id": "group:hardware-embedded",
       "label": "Hardware & Embedded",
       "type": "group",
-      "repositoryCount": 4
+      "repositoryCount": 3
     },
     {
       "id": "repository:melba",
@@ -1710,70 +1798,6 @@
       }
     },
     {
-      "id": "repository:omarchy-iso",
-      "label": "omarchy-iso",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/omarchy-iso",
-      "description": "",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-10-13T15:11:08Z",
-      "updatedAt": "2026-10-13T15:11:08Z",
-      "groupId": "hardware-embedded",
-      "groupLabel": "Hardware & Embedded",
-      "classification": {
-        "categoryId": "hardware",
-        "categoryLabel": "Hardware / Embedded",
-        "secondaryTags": [],
-        "confidence": 0.653,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "firmware",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "serial",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "next",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "hardware-embedded",
-        "categoryLabel": "Hardware & Embedded",
-        "secondaryTags": [
-          "artifact:firmware",
-          "topic:device-integration",
-          "platform:mobile",
-          "platform:embedded"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "hardware-embedded",
-            "source": "description",
-            "value": "P1 exact taxonomy category hardware-embedded",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
       "id": "repository:turing-smart-screen-python-owl",
       "label": "turing-smart-screen-python-owl",
       "type": "repository",
@@ -1876,7 +1900,7 @@
       "id": "group:ai-ml",
       "label": "AI & Machine Learning",
       "type": "group",
-      "repositoryCount": 3
+      "repositoryCount": 2
     },
     {
       "id": "repository:gxkit",
@@ -1932,69 +1956,6 @@
         "categoryLabel": "AI & Machine Learning",
         "secondaryTags": [
           "artifact:tool",
-          "platform:cli"
-        ],
-        "confidence": 0.9,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "ai-ml",
-            "source": "description",
-            "value": "P1 exact taxonomy category ai-ml",
-            "weight": 0.9
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:omarchy",
-      "label": "omarchy",
-      "type": "repository",
-      "url": "https://github.com/nekomario28/omarchy",
-      "description": "Beautiful, Modern & Opinionated Linux",
-      "language": null,
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "fork": true,
-      "archived": false,
-      "createdAt": "2026-10-13T13:10:11Z",
-      "updatedAt": "2026-10-13T13:10:11Z",
-      "groupId": "ai-ml",
-      "groupLabel": "AI & Machine Learning",
-      "classification": {
-        "categoryId": "ai-ml",
-        "categoryLabel": "AI / Machine Learning",
-        "secondaryTags": [],
-        "confidence": 0.314,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "ai-ml",
-            "source": "readme",
-            "value": "ai",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "hardware",
-            "source": "readme",
-            "value": "hardware",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "readme",
-            "value": "web",
-            "weight": 0.7
-          }
-        ]
-      },
-      "taxonomyAssignment": {
-        "categoryId": "ai-ml",
-        "categoryLabel": "AI & Machine Learning",
-        "secondaryTags": [
-          "artifact:application",
-          "platform:web",
           "platform:cli"
         ],
         "confidence": 0.9,
@@ -2283,12 +2244,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3426,
-      "forks": 519,
+      "stars": 3425,
+      "forks": 520,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-11-25T09:26:59Z",
+      "updatedAt": "2026-11-25T18:13:25Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2505,12 +2466,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 51494,
-      "forks": 2778,
+      "stars": 51534,
+      "forks": 2782,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-11-25T10:27:10Z",
+      "updatedAt": "2026-11-25T22:21:38Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2549,12 +2510,12 @@
         "step",
         "wasm"
       ],
-      "stars": 18169,
-      "forks": 2586,
+      "stars": 18245,
+      "forks": 2597,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-11-25T10:24:32Z",
+      "updatedAt": "2026-11-25T22:14:20Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -2590,12 +2551,12 @@
       "description": "ai& CLI",
       "language": "JavaScript",
       "topics": [],
-      "stars": 5,
-      "forks": 3,
+      "stars": 6,
+      "forks": 4,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-07T05:49:16Z",
-      "updatedAt": "2026-11-06T08:06:42Z",
+      "updatedAt": "2026-11-25T10:42:59Z",
       "contribution": {
         "commits": 3,
         "pullRequests": 1,
@@ -2619,6 +2580,74 @@
         ]
       },
       "forkUrl": "https://github.com/nekomario28/aiand-cli"
+    },
+    {
+      "id": "repository:omacom/omarchy",
+      "label": "omacom/omarchy",
+      "type": "repository",
+      "relation": "contributed",
+      "repositoryOwner": "omacom",
+      "repositoryName": "omarchy",
+      "url": "https://github.com/omacom/omarchy",
+      "description": "Beautiful, Modern & Opinionated Linux",
+      "language": "Shell",
+      "topics": [],
+      "stars": 47602,
+      "forks": 6287,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2025-06-01T07:26:22Z",
+      "updatedAt": "2026-11-25T22:43:27Z",
+      "contribution": {
+        "commits": 2,
+        "pullRequests": 19,
+        "mergedPullRequests": 1,
+        "commitsTruncated": false,
+        "pullRequestsTruncated": false
+      },
+      "classification": {
+        "categoryId": "uncategorized",
+        "categoryLabel": "Uncategorized",
+        "secondaryTags": [],
+        "confidence": 0,
+        "method": "deterministic",
+        "evidence": []
+      },
+      "forkUrl": "https://github.com/nekomario28/omarchy"
+    },
+    {
+      "id": "repository:omacom/omarchy-iso",
+      "label": "omacom/omarchy-iso",
+      "type": "repository",
+      "relation": "contributed",
+      "repositoryOwner": "omacom",
+      "repositoryName": "omarchy-iso",
+      "url": "https://github.com/omacom/omarchy-iso",
+      "description": "",
+      "language": "Shell",
+      "topics": [],
+      "stars": 302,
+      "forks": 216,
+      "fork": false,
+      "archived": false,
+      "createdAt": "2025-07-27T13:21:00Z",
+      "updatedAt": "2026-11-25T14:06:46Z",
+      "contribution": {
+        "commits": 1,
+        "pullRequests": 4,
+        "mergedPullRequests": 1,
+        "commitsTruncated": false,
+        "pullRequestsTruncated": false
+      },
+      "classification": {
+        "categoryId": "uncategorized",
+        "categoryLabel": "Uncategorized",
+        "secondaryTags": [],
+        "confidence": 0,
+        "method": "deterministic",
+        "evidence": []
+      },
+      "forkUrl": "https://github.com/nekomario28/omarchy-iso"
     },
     {
       "id": "repository:c0c25034/projexd_4",
@@ -2676,12 +2705,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 3010,
+      "stars": 3011,
       "forks": 178,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-11-24T09:15:04Z",
+      "updatedAt": "2026-11-25T21:59:58Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -2711,7 +2740,7 @@
       "language": "Rust",
       "topics": [],
       "stars": 3,
-      "forks": 103,
+      "forks": 104,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-08T14:40:06Z",
@@ -2732,126 +2761,6 @@
         "evidence": []
       },
       "forkUrl": "https://github.com/nekomario28/predifi"
-    },
-    {
-      "id": "repository:souta-lab/minecraft-jev-agent",
-      "label": "souta-lab/minecraft-jev-agent",
-      "type": "repository",
-      "relation": "contributed",
-      "repositoryOwner": "souta-lab",
-      "repositoryName": "minecraft-jev-agent",
-      "url": "https://github.com/souta-lab/minecraft-jev-agent",
-      "description": "Embodied Minecraft Java agent: a Typed Decision Plane (Jev / Liquid d1) chooses among grounded transitions, leases and VERIFY, and Mineflayer is the motor layer. Bun-only.",
-      "language": "TypeScript",
-      "topics": [
-        "ai-agent",
-        "autonomy",
-        "bun",
-        "llm",
-        "minecraft",
-        "mineflayer"
-      ],
-      "stars": 2,
-      "forks": 0,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2026-09-17T15:18:46Z",
-      "updatedAt": "2026-11-01T12:20:25Z",
-      "contribution": {
-        "commits": 18,
-        "pullRequests": 3,
-        "mergedPullRequests": 0,
-        "commitsTruncated": false,
-        "pullRequestsTruncated": false
-      },
-      "classification": {
-        "categoryId": "minecraft",
-        "categoryLabel": "Minecraft Modding",
-        "secondaryTags": [
-          "minecraft"
-        ],
-        "confidence": 0.886,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "ai-ml",
-            "source": "topic",
-            "value": "llm",
-            "weight": 1
-          },
-          {
-            "categoryId": "minecraft",
-            "source": "topic",
-            "value": "minecraft",
-            "weight": 1
-          },
-          {
-            "categoryId": "minecraft",
-            "source": "description",
-            "value": "minecraft",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "minecraft",
-            "source": "name",
-            "value": "minecraft",
-            "weight": 0.5
-          }
-        ]
-      }
-    },
-    {
-      "id": "repository:niko1221/strata",
-      "label": "Niko1221/Strata",
-      "type": "repository",
-      "relation": "contributed",
-      "repositoryOwner": "Niko1221",
-      "repositoryName": "Strata",
-      "url": "https://github.com/Niko1221/Strata",
-      "description": "Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
-      "language": "C++",
-      "topics": [],
-      "stars": 47987,
-      "forks": 5397,
-      "fork": false,
-      "archived": false,
-      "createdAt": "2026-09-24T16:40:20Z",
-      "updatedAt": "2026-11-25T10:26:19Z",
-      "contribution": {
-        "commits": 14,
-        "pullRequests": 24,
-        "mergedPullRequests": 0,
-        "commitsTruncated": false,
-        "pullRequestsTruncated": false
-      },
-      "classification": {
-        "categoryId": "web-apps",
-        "categoryLabel": "Web / Apps",
-        "secondaryTags": [],
-        "confidence": 0.653,
-        "method": "deterministic",
-        "evidence": [
-          {
-            "categoryId": "hardware",
-            "source": "description",
-            "value": "hardware",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "description",
-            "value": "api",
-            "weight": 0.7
-          },
-          {
-            "categoryId": "web-apps",
-            "source": "description",
-            "value": "next",
-            "weight": 0.7
-          }
-        ]
-      },
-      "forkUrl": "https://github.com/nekomario28/Strata"
     }
   ],
   "edges": [
@@ -2932,6 +2841,11 @@
     },
     {
       "source": "group:applications-services",
+      "target": "repository:Strata",
+      "type": "membership"
+    },
+    {
+      "source": "group:applications-services",
       "target": "repository:wiki",
       "type": "membership"
     },
@@ -2987,11 +2901,6 @@
     },
     {
       "source": "group:hardware-embedded",
-      "target": "repository:omarchy-iso",
-      "type": "membership"
-    },
-    {
-      "source": "group:hardware-embedded",
       "target": "repository:turing-smart-screen-python-owl",
       "type": "membership"
     },
@@ -3003,11 +2912,6 @@
     {
       "source": "group:ai-ml",
       "target": "repository:gxkit",
-      "type": "membership"
-    },
-    {
-      "source": "group:ai-ml",
-      "target": "repository:omarchy",
       "type": "membership"
     },
     {
@@ -3087,6 +2991,16 @@
     },
     {
       "source": "user:nekomario28",
+      "target": "repository:omacom/omarchy",
+      "type": "contribution"
+    },
+    {
+      "source": "user:nekomario28",
+      "target": "repository:omacom/omarchy-iso",
+      "type": "contribution"
+    },
+    {
+      "source": "user:nekomario28",
       "target": "repository:c0c25034/projexd_4",
       "type": "contribution"
     },
@@ -3099,22 +3013,12 @@
       "source": "user:nekomario28",
       "target": "repository:onipinsaiye/predifi",
       "type": "contribution"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:souta-lab/minecraft-jev-agent",
-      "type": "contribution"
-    },
-    {
-      "source": "user:nekomario28",
-      "target": "repository:niko1221/strata",
-      "type": "contribution"
     }
   ],
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "3658d7639f6a362dba8ee4aa0e1e124de21f7df0dfdfb22984eb3f297353a0d3",
+    "corpusFingerprint": "a027487cf339e2f8f86054a50ae0a05b13b4cba22c404fb5a36316fdea8328d0",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3197,6 +3101,11 @@
         "contentHash": "34a9c726dbeea38bea0a78bd3c1be7ae59e5e783a3f83525ece849803c365443"
       },
       {
+        "repoId": 1410106412,
+        "name": "Strata",
+        "contentHash": "3d8856f87db605d422bbe7ece3938f634152b4684a3c275df9eed003e918dc34"
+      },
+      {
         "repoId": 1412749545,
         "name": "microduck",
         "contentHash": "69b05681b1aeb8a6d0dd9c6787c2f13bce221ceab7707f8c38ecbe0ccf4d6c5a"
@@ -3210,16 +3119,6 @@
         "repoId": 1413889119,
         "name": "tamap",
         "contentHash": "ca8a26566d785a8c048960743b729db77f02ad0c016c61c50a644686e8984f2e"
-      },
-      {
-        "repoId": 1417081564,
-        "name": "omarchy",
-        "contentHash": "6439b2981ba2752e3150f98cbd8e2b74e3f15ef19f14a71cffdb28729cac93d5"
-      },
-      {
-        "repoId": 1417317762,
-        "name": "omarchy-iso",
-        "contentHash": "f24bae924377ab33dfd70f3499ea0372a9befb7d9a76d56b98625da6f229cd9d"
       },
       {
         "repoId": 1418091543,
@@ -3269,7 +3168,7 @@
       {
         "repoId": 1468228899,
         "name": "megu-mc",
-        "contentHash": "5d47fc02448e9ef38e5ed5356b791de6f4cb38c679a77a7cbfcdfbb5e8e13ccc"
+        "contentHash": "4763e00f12deab11fb7a725b182734195807409661fe57242e3734929b012c4a"
       }
     ],
     "categories": [
@@ -3506,8 +3405,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-11-25T10:27:43.505Z",
-      "to": "2026-11-25T10:27:43.505Z"
+      "from": "2025-11-25T22:44:25.110Z",
+      "to": "2026-11-25T22:44:25.110Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
