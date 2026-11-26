@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-11-26T10:01:31.469Z",
+  "generatedAt": "2026-11-26T22:34:27.146Z",
   "repositoryCount": 30,
   "groupCount": 8,
   "nodes": [
@@ -2244,12 +2244,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3425,
+      "stars": 3426,
       "forks": 520,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-11-25T18:13:25Z",
+      "updatedAt": "2026-11-26T17:39:58Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2466,12 +2466,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 51549,
-      "forks": 2784,
+      "stars": 51567,
+      "forks": 2796,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-11-26T09:47:11Z",
+      "updatedAt": "2026-11-26T22:19:30Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2510,12 +2510,12 @@
         "step",
         "wasm"
       ],
-      "stars": 18374,
-      "forks": 2614,
+      "stars": 18528,
+      "forks": 2631,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-11-26T09:54:49Z",
+      "updatedAt": "2026-11-26T22:30:51Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -2552,7 +2552,7 @@
       "language": "JavaScript",
       "topics": [],
       "stars": 6,
-      "forks": 4,
+      "forks": 5,
       "fork": false,
       "archived": false,
       "createdAt": "2026-09-07T05:49:16Z",
@@ -2592,12 +2592,12 @@
       "description": "Beautiful, Modern & Opinionated Linux",
       "language": "Shell",
       "topics": [],
-      "stars": 47627,
-      "forks": 6299,
+      "stars": 47649,
+      "forks": 6310,
       "fork": false,
       "archived": false,
       "createdAt": "2025-06-01T07:26:22Z",
-      "updatedAt": "2026-11-26T09:01:45Z",
+      "updatedAt": "2026-11-26T22:13:39Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 19,
@@ -2623,7 +2623,7 @@
       "repositoryOwner": "omacom",
       "repositoryName": "omarchy-iso",
       "url": "https://github.com/omacom/omarchy-iso",
-      "description": "",
+      "description": "Omarchy installer",
       "language": "Shell",
       "topics": [],
       "stars": 302,
@@ -2631,7 +2631,7 @@
       "fork": false,
       "archived": false,
       "createdAt": "2025-07-27T13:21:00Z",
-      "updatedAt": "2026-11-25T14:06:46Z",
+      "updatedAt": "2026-11-26T19:40:30Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 4,
@@ -2705,12 +2705,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 3013,
+      "stars": 3017,
       "forks": 177,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-11-26T04:17:14Z",
+      "updatedAt": "2026-11-26T19:36:08Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3018,7 +3018,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "36e04823aef74496c346093e6c6978f0995c6000533d1376e6ec5e0d4f9783ed",
+    "corpusFingerprint": "96457061d66d7b8836a7f14aea77a03bf5741b17fcc3c5966cecb8e9caa0c7f4",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3168,7 +3168,7 @@
       {
         "repoId": 1468228899,
         "name": "megu-mc",
-        "contentHash": "4763e00f12deab11fb7a725b182734195807409661fe57242e3734929b012c4a"
+        "contentHash": "293184708200f3fe4a2437cfd776b060e3a3c423e3745321632d160f181ec9e4"
       }
     ],
     "categories": [
@@ -3405,8 +3405,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-11-26T10:01:21.506Z",
-      "to": "2026-11-26T10:01:21.506Z"
+      "from": "2025-11-26T22:34:18.635Z",
+      "to": "2026-11-26T22:34:18.635Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
