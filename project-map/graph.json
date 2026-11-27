@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-11-26T22:34:27.146Z",
+  "generatedAt": "2026-11-27T10:07:05.743Z",
   "repositoryCount": 30,
   "groupCount": 8,
   "nodes": [
@@ -2245,11 +2245,11 @@
       "language": "C++",
       "topics": [],
       "stars": 3426,
-      "forks": 520,
+      "forks": 522,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-11-26T17:39:58Z",
+      "updatedAt": "2026-11-27T10:04:52Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2466,12 +2466,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 51567,
-      "forks": 2796,
+      "stars": 51585,
+      "forks": 2802,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-11-26T22:19:30Z",
+      "updatedAt": "2026-11-27T09:55:47Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2510,12 +2510,12 @@
         "step",
         "wasm"
       ],
-      "stars": 18528,
-      "forks": 2631,
+      "stars": 18635,
+      "forks": 2638,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-11-26T22:30:51Z",
+      "updatedAt": "2026-11-27T10:01:25Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -2592,12 +2592,12 @@
       "description": "Beautiful, Modern & Opinionated Linux",
       "language": "Shell",
       "topics": [],
-      "stars": 47649,
-      "forks": 6310,
+      "stars": 47672,
+      "forks": 6313,
       "fork": false,
       "archived": false,
       "createdAt": "2025-06-01T07:26:22Z",
-      "updatedAt": "2026-11-26T22:13:39Z",
+      "updatedAt": "2026-11-27T10:06:42Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 19,
@@ -2705,12 +2705,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 3017,
+      "stars": 3018,
       "forks": 177,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-11-26T19:36:08Z",
+      "updatedAt": "2026-11-27T07:39:39Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3405,8 +3405,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-11-26T22:34:18.635Z",
-      "to": "2026-11-26T22:34:18.635Z"
+      "from": "2025-11-27T10:06:55.868Z",
+      "to": "2026-11-27T10:06:55.868Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
