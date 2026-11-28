@@ -1,6 +1,6 @@
 {
   "owner": "nekomario28",
-  "generatedAt": "2026-11-27T22:19:00.877Z",
+  "generatedAt": "2026-11-28T09:25:55.696Z",
   "repositoryCount": 30,
   "groupCount": 8,
   "nodes": [
@@ -2244,12 +2244,12 @@
       "description": "llama.cpp fork with additional SOTA quants and improved performance",
       "language": "C++",
       "topics": [],
-      "stars": 3426,
+      "stars": 3428,
       "forks": 523,
       "fork": false,
       "archived": false,
       "createdAt": "2024-06-27T06:01:47Z",
-      "updatedAt": "2026-11-27T10:04:52Z",
+      "updatedAt": "2026-11-28T01:13:23Z",
       "contribution": {
         "commits": 10,
         "pullRequests": 10,
@@ -2466,12 +2466,12 @@
         "styleguide",
         "ruff"
       ],
-      "stars": 51561,
-      "forks": 2817,
+      "stars": 51483,
+      "forks": 2821,
       "fork": false,
       "archived": false,
       "createdAt": "2022-08-09T17:17:44Z",
-      "updatedAt": "2026-11-27T22:00:53Z",
+      "updatedAt": "2026-11-28T08:54:26Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 3,
@@ -2510,12 +2510,12 @@
         "step",
         "wasm"
       ],
-      "stars": 18752,
-      "forks": 2656,
+      "stars": 18837,
+      "forks": 2668,
       "fork": false,
       "archived": false,
       "createdAt": "2026-10-07T18:57:48Z",
-      "updatedAt": "2026-11-27T22:01:07Z",
+      "updatedAt": "2026-11-28T09:18:22Z",
       "contribution": {
         "commits": 0,
         "pullRequests": 7,
@@ -2592,12 +2592,12 @@
       "description": "Beautiful, Modern & Opinionated Linux",
       "language": "Shell",
       "topics": [],
-      "stars": 47697,
-      "forks": 6322,
+      "stars": 47715,
+      "forks": 6329,
       "fork": false,
       "archived": false,
       "createdAt": "2025-06-01T07:26:22Z",
-      "updatedAt": "2026-11-27T22:12:09Z",
+      "updatedAt": "2026-11-28T09:24:33Z",
       "contribution": {
         "commits": 2,
         "pullRequests": 19,
@@ -2623,15 +2623,15 @@
       "repositoryOwner": "omacom",
       "repositoryName": "omarchy-iso",
       "url": "https://github.com/omacom/omarchy-iso",
-      "description": "Omarchy installer",
+      "description": "Omarchy installer aka Gunner",
       "language": "Shell",
       "topics": [],
-      "stars": 302,
-      "forks": 216,
+      "stars": 303,
+      "forks": 218,
       "fork": false,
       "archived": false,
       "createdAt": "2025-07-27T13:21:00Z",
-      "updatedAt": "2026-11-26T19:40:30Z",
+      "updatedAt": "2026-11-28T07:44:57Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 4,
@@ -2705,12 +2705,12 @@
         "arm",
         "arm64"
       ],
-      "stars": 3019,
+      "stars": 3020,
       "forks": 177,
       "fork": false,
       "archived": false,
       "createdAt": "2026-08-23T21:55:30Z",
-      "updatedAt": "2026-11-27T17:19:08Z",
+      "updatedAt": "2026-11-28T00:10:59Z",
       "contribution": {
         "commits": 1,
         "pullRequests": 1,
@@ -3018,7 +3018,7 @@
   "classificationVersion": 1,
   "taxonomy": {
     "schemaVersion": 1,
-    "corpusFingerprint": "d6314ebe7df4aa3fa0ed24176d79e9d671e93755e4d9021227ec087f4c9aca8c",
+    "corpusFingerprint": "eb5e9a442269ddfa6da01afab862cb1460f119fa022ede960b10d51b90a1d9f6",
     "repositories": [
       {
         "repoId": 1286897302,
@@ -3073,7 +3073,7 @@
       {
         "repoId": 1337983299,
         "name": "interactive-project-map",
-        "contentHash": "f8556a92fff14c4fd6e2942d14775395066e119386b345b53fb46bb187975135"
+        "contentHash": "e84aa48bbf6e2fe4e7b157b7d9e61d14b733cf927787cb10a465d8a4186ca310"
       },
       {
         "repoId": 1340711269,
@@ -3168,7 +3168,7 @@
       {
         "repoId": 1468228899,
         "name": "megu-mc",
-        "contentHash": "90d39e6a1a51a197f081a263b48f5b86c0b42e5be067c880cc407af9688e85a3"
+        "contentHash": "1ae8725cb558cd62d141703925a8d1355224f788bfd5036af706c2fd5da44972"
       }
     ],
     "categories": [
@@ -3405,8 +3405,8 @@
   "contributedRepositoryCount": 12,
   "externalContributions": {
     "window": {
-      "from": "2025-11-27T22:18:52.188Z",
-      "to": "2026-11-27T22:18:52.188Z"
+      "from": "2025-11-28T09:25:47.433Z",
+      "to": "2026-11-28T09:25:47.433Z"
     },
     "cap": 12,
     "candidateRepositories": 25,
